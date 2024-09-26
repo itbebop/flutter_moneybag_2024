@@ -49,6 +49,7 @@ dependencies:
 
   # ui
   table_calendar: ^3.0.9
+  flutter_screenutil: ^5.9.3
 
 dev_dependencies:
   flutter_test:
