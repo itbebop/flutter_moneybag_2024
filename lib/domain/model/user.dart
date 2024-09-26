@@ -12,6 +12,4 @@ class User with _$User {
     required String language,
     required UserType userType,
   }) = _User;
-
-  factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 }

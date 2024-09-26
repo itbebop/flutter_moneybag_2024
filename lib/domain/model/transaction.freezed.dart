@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'asset.dart';
+part of 'transaction.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,10 +14,6 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-Transaction _$TransactionFromJson(Map<String, dynamic> json) {
-  return _Asset.fromJson(json);
-}
-
 /// @nodoc
 mixin _$Transaction {
   String get title => throw _privateConstructorUsedError;
@@ -27,7 +23,6 @@ mixin _$Transaction {
   List<User> get user => throw _privateConstructorUsedError;
   AssetType get assetType => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $TransactionCopyWith<Transaction> get copyWith =>
       throw _privateConstructorUsedError;
@@ -98,11 +93,11 @@ class _$TransactionCopyWithImpl<$Res, $Val extends Transaction>
 }
 
 /// @nodoc
-abstract class _$$AssetImplCopyWith<$Res>
+abstract class _$$TransactionImplCopyWith<$Res>
     implements $TransactionCopyWith<$Res> {
-  factory _$$AssetImplCopyWith(
-          _$AssetImpl value, $Res Function(_$AssetImpl) then) =
-      __$$AssetImplCopyWithImpl<$Res>;
+  factory _$$TransactionImplCopyWith(
+          _$TransactionImpl value, $Res Function(_$TransactionImpl) then) =
+      __$$TransactionImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -115,11 +110,11 @@ abstract class _$$AssetImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$AssetImplCopyWithImpl<$Res>
-    extends _$TransactionCopyWithImpl<$Res, _$AssetImpl>
-    implements _$$AssetImplCopyWith<$Res> {
-  __$$AssetImplCopyWithImpl(
-      _$AssetImpl _value, $Res Function(_$AssetImpl) _then)
+class __$$TransactionImplCopyWithImpl<$Res>
+    extends _$TransactionCopyWithImpl<$Res, _$TransactionImpl>
+    implements _$$TransactionImplCopyWith<$Res> {
+  __$$TransactionImplCopyWithImpl(
+      _$TransactionImpl _value, $Res Function(_$TransactionImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -132,7 +127,7 @@ class __$$AssetImplCopyWithImpl<$Res>
     Object? user = null,
     Object? assetType = null,
   }) {
-    return _then(_$AssetImpl(
+    return _then(_$TransactionImpl(
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -162,9 +157,9 @@ class __$$AssetImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
-class _$AssetImpl implements _Asset {
-  const _$AssetImpl(
+
+class _$TransactionImpl implements _Transaction {
+  const _$TransactionImpl(
       {required this.title,
       required this.imgUrl,
       required this.createdAt,
@@ -172,9 +167,6 @@ class _$AssetImpl implements _Asset {
       required final List<User> user,
       required this.assetType})
       : _user = user;
-
-  factory _$AssetImpl.fromJson(Map<String, dynamic> json) =>
-      _$$AssetImplFromJson(json);
 
   @override
   final String title;
@@ -204,7 +196,7 @@ class _$AssetImpl implements _Asset {
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$AssetImpl &&
+            other is _$TransactionImpl &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.imgUrl, imgUrl) || other.imgUrl == imgUrl) &&
             (identical(other.createdAt, createdAt) ||
@@ -216,7 +208,6 @@ class _$AssetImpl implements _Asset {
                 other.assetType == assetType));
   }
 
-  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, title, imgUrl, createdAt,
       updatedAt, const DeepCollectionEquality().hash(_user), assetType);
@@ -224,27 +215,18 @@ class _$AssetImpl implements _Asset {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$AssetImplCopyWith<_$AssetImpl> get copyWith =>
-      __$$AssetImplCopyWithImpl<_$AssetImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$AssetImplToJson(
-      this,
-    );
-  }
+  _$$TransactionImplCopyWith<_$TransactionImpl> get copyWith =>
+      __$$TransactionImplCopyWithImpl<_$TransactionImpl>(this, _$identity);
 }
 
-abstract class _Asset implements Transaction {
-  const factory _Asset(
+abstract class _Transaction implements Transaction {
+  const factory _Transaction(
       {required final String title,
       required final String imgUrl,
       required final DateTime createdAt,
       required final DateTime updatedAt,
       required final List<User> user,
-      required final AssetType assetType}) = _$AssetImpl;
-
-  factory _Asset.fromJson(Map<String, dynamic> json) = _$AssetImpl.fromJson;
+      required final AssetType assetType}) = _$TransactionImpl;
 
   @override
   String get title;
@@ -260,6 +242,6 @@ abstract class _Asset implements Transaction {
   AssetType get assetType;
   @override
   @JsonKey(ignore: true)
-  _$$AssetImplCopyWith<_$AssetImpl> get copyWith =>
+  _$$TransactionImplCopyWith<_$TransactionImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

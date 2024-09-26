@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_moneybag_2024/common/common.dart';
+import 'package:flutter_moneybag_2024/common/theme/ui_config.dart';
 
 class AssetItems extends StatelessWidget {
   final String title;
@@ -15,9 +16,9 @@ class AssetItems extends StatelessWidget {
   static Color _getColorByTitle(String title) {
     switch (title) {
       case '수입':
-        return Colors.green;
+        return UiConfig.secondaryColor;
       case '지출':
-        return Colors.red;
+        return UiConfig.primaryColor;
 
       default:
         return Colors.black;

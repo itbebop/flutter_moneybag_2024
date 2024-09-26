@@ -1,9 +1,7 @@
-import 'dart:math';
-
 import 'package:flutter_moneybag_2024/common/common.dart';
 import 'package:flutter_moneybag_2024/domain/enums/asset_types.dart';
 import 'package:flutter_moneybag_2024/domain/enums/user_types.dart';
-import 'package:flutter_moneybag_2024/domain/model/asset.dart';
+import 'package:flutter_moneybag_2024/domain/model/Transaction.dart';
 import 'package:flutter_moneybag_2024/domain/model/transaction_category.dart';
 import 'package:flutter_moneybag_2024/domain/model/user.dart';
 
