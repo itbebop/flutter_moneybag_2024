@@ -1,6 +1,7 @@
 enum UserType {
   free('Free'),
-  paid('Paid');
+  paid('Paid'),
+  etc('Etc');
 
   final String displayName;
 

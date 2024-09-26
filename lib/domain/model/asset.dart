@@ -5,8 +5,8 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'asset.freezed.dart';
 
 @freezed
-class Asset with _$Asset {
-  const factory Asset({
+class Transaction with _$Transaction {
+  const factory Transaction({
     required String title,
     required String imgUrl,
     required DateTime createdAt,
@@ -15,5 +15,5 @@ class Asset with _$Asset {
     required AssetType assetType,
   }) = _Asset;
 
-  factory Asset.fromJson(Map<String, dynamic> json) => _$AssetFromJson(json);
+  factory Transaction.fromJson(Map<String, dynamic> json) => _$TransactionFromJson(json);
 }

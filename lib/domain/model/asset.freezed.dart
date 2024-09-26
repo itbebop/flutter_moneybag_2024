@@ -14,12 +14,12 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-Asset _$AssetFromJson(Map<String, dynamic> json) {
+Transaction _$TransactionFromJson(Map<String, dynamic> json) {
   return _Asset.fromJson(json);
 }
 
 /// @nodoc
-mixin _$Asset {
+mixin _$Transaction {
   String get title => throw _privateConstructorUsedError;
   String get imgUrl => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
@@ -29,13 +29,15 @@ mixin _$Asset {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $AssetCopyWith<Asset> get copyWith => throw _privateConstructorUsedError;
+  $TransactionCopyWith<Transaction> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $AssetCopyWith<$Res> {
-  factory $AssetCopyWith(Asset value, $Res Function(Asset) then) =
-      _$AssetCopyWithImpl<$Res, Asset>;
+abstract class $TransactionCopyWith<$Res> {
+  factory $TransactionCopyWith(
+          Transaction value, $Res Function(Transaction) then) =
+      _$TransactionCopyWithImpl<$Res, Transaction>;
   @useResult
   $Res call(
       {String title,
@@ -47,9 +49,9 @@ abstract class $AssetCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$AssetCopyWithImpl<$Res, $Val extends Asset>
-    implements $AssetCopyWith<$Res> {
-  _$AssetCopyWithImpl(this._value, this._then);
+class _$TransactionCopyWithImpl<$Res, $Val extends Transaction>
+    implements $TransactionCopyWith<$Res> {
+  _$TransactionCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -96,7 +98,8 @@ class _$AssetCopyWithImpl<$Res, $Val extends Asset>
 }
 
 /// @nodoc
-abstract class _$$AssetImplCopyWith<$Res> implements $AssetCopyWith<$Res> {
+abstract class _$$AssetImplCopyWith<$Res>
+    implements $TransactionCopyWith<$Res> {
   factory _$$AssetImplCopyWith(
           _$AssetImpl value, $Res Function(_$AssetImpl) then) =
       __$$AssetImplCopyWithImpl<$Res>;
@@ -113,7 +116,7 @@ abstract class _$$AssetImplCopyWith<$Res> implements $AssetCopyWith<$Res> {
 
 /// @nodoc
 class __$$AssetImplCopyWithImpl<$Res>
-    extends _$AssetCopyWithImpl<$Res, _$AssetImpl>
+    extends _$TransactionCopyWithImpl<$Res, _$AssetImpl>
     implements _$$AssetImplCopyWith<$Res> {
   __$$AssetImplCopyWithImpl(
       _$AssetImpl _value, $Res Function(_$AssetImpl) _then)
@@ -194,7 +197,7 @@ class _$AssetImpl implements _Asset {
 
   @override
   String toString() {
-    return 'Asset(title: $title, imgUrl: $imgUrl, createdAt: $createdAt, updatedAt: $updatedAt, user: $user, assetType: $assetType)';
+    return 'Transaction(title: $title, imgUrl: $imgUrl, createdAt: $createdAt, updatedAt: $updatedAt, user: $user, assetType: $assetType)';
   }
 
   @override
@@ -232,7 +235,7 @@ class _$AssetImpl implements _Asset {
   }
 }
 
-abstract class _Asset implements Asset {
+abstract class _Asset implements Transaction {
   const factory _Asset(
       {required final String title,
       required final String imgUrl,

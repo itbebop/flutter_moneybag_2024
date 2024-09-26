@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$TransactionCategory {
-  String get id => throw _privateConstructorUsedError; // 고유 ID
+  int get id => throw _privateConstructorUsedError; // 고유 ID
   String get name =>
       throw _privateConstructorUsedError; // 유형 이름 (예: Salary, Rent 등)
   AssetType get type => throw _privateConstructorUsedError;
@@ -32,7 +32,7 @@ abstract class $TransactionCategoryCopyWith<$Res> {
           TransactionCategory value, $Res Function(TransactionCategory) then) =
       _$TransactionCategoryCopyWithImpl<$Res, TransactionCategory>;
   @useResult
-  $Res call({String id, String name, AssetType type});
+  $Res call({int id, String name, AssetType type});
 }
 
 /// @nodoc
@@ -56,7 +56,7 @@ class _$TransactionCategoryCopyWithImpl<$Res, $Val extends TransactionCategory>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -77,7 +77,7 @@ abstract class _$$TransactionCategoryImplCopyWith<$Res>
       __$$TransactionCategoryImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String name, AssetType type});
+  $Res call({int id, String name, AssetType type});
 }
 
 /// @nodoc
@@ -99,7 +99,7 @@ class __$$TransactionCategoryImplCopyWithImpl<$Res>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -119,7 +119,7 @@ class _$TransactionCategoryImpl implements _TransactionCategory {
       {required this.id, required this.name, required this.type});
 
   @override
-  final String id;
+  final int id;
 // 고유 ID
   @override
   final String name;
@@ -155,12 +155,12 @@ class _$TransactionCategoryImpl implements _TransactionCategory {
 
 abstract class _TransactionCategory implements TransactionCategory {
   const factory _TransactionCategory(
-      {required final String id,
+      {required final int id,
       required final String name,
       required final AssetType type}) = _$TransactionCategoryImpl;
 
   @override
-  String get id;
+  int get id;
   @override // 고유 ID
   String get name;
   @override // 유형 이름 (예: Salary, Rent 등)
