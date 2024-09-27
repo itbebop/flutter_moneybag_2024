@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_moneybag_2024/common/common.dart';
 import 'package:flutter_moneybag_2024/common/common_component/sort_button.dart';
+import 'package:flutter_moneybag_2024/common/common_component/transaction_item.dart';
 import 'package:flutter_moneybag_2024/domain/model/dummies.dart';
 import 'package:flutter_moneybag_2024/screen/tab/home/component/asset_items.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -64,49 +65,26 @@ class _MainScreenState extends ConsumerState<HomeScreen> {
               shrinkWrap: true,
               primary: false,
               children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: const Color(0xffFFFFFF),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              SizedBox(
-                                width: 50,
-                                height: 50,
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
-                                  child: Image.network(transaction1.imgUrl),
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 16,
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(transaction1.title, style: UiConfig.h4Style),
-                                  Text(transaction1.createdAt.toString(),
-                                      style: UiConfig.smallStyle.copyWith(
-                                        color: UiConfig.color[700],
-                                      )),
-                                ],
-                              ),
-                            ],
-                          ),
-                          Text(transaction1.amount.toString())
-                        ],
-                      ),
-                    ),
-                  ),
-                )
+                TransactionItem(
+                  title: transaction1.title,
+                  imgUrl: transaction1.imgUrl,
+                  createdAt: transaction1.createdAt,
+                  amount: transaction1.amount,
+                ),
+                const SizedBox(height: 24),
+                TransactionItem(
+                  title: transaction2.title,
+                  imgUrl: transaction2.imgUrl,
+                  createdAt: transaction2.createdAt,
+                  amount: transaction2.amount,
+                ),
+                const SizedBox(height: 24),
+                TransactionItem(
+                  title: transaction3.title,
+                  imgUrl: transaction3.imgUrl,
+                  createdAt: transaction3.createdAt,
+                  amount: transaction3.amount,
+                ),
               ],
             )
           ],
