@@ -11,6 +11,7 @@ class TransactionDetail with _$TransactionDetail {
     required String imgUrl,
     required String createdAt,
     required String updatedAt,
+    required double amount,
     required List<User> user,
     required AssetType assetType,
   }) = _TransactionDetail;

@@ -20,6 +20,7 @@ mixin _$TransactionDetail {
   String get imgUrl => throw _privateConstructorUsedError;
   String get createdAt => throw _privateConstructorUsedError;
   String get updatedAt => throw _privateConstructorUsedError;
+  double get amount => throw _privateConstructorUsedError;
   List<User> get user => throw _privateConstructorUsedError;
   AssetType get assetType => throw _privateConstructorUsedError;
 
@@ -39,6 +40,7 @@ abstract class $TransactionDetailCopyWith<$Res> {
       String imgUrl,
       String createdAt,
       String updatedAt,
+      double amount,
       List<User> user,
       AssetType assetType});
 }
@@ -60,6 +62,7 @@ class _$TransactionDetailCopyWithImpl<$Res, $Val extends TransactionDetail>
     Object? imgUrl = null,
     Object? createdAt = null,
     Object? updatedAt = null,
+    Object? amount = null,
     Object? user = null,
     Object? assetType = null,
   }) {
@@ -80,6 +83,10 @@ class _$TransactionDetailCopyWithImpl<$Res, $Val extends TransactionDetail>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as String,
+      amount: null == amount
+          ? _value.amount
+          : amount // ignore: cast_nullable_to_non_nullable
+              as double,
       user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -105,6 +112,7 @@ abstract class _$$TransactionDetailImplCopyWith<$Res>
       String imgUrl,
       String createdAt,
       String updatedAt,
+      double amount,
       List<User> user,
       AssetType assetType});
 }
@@ -124,6 +132,7 @@ class __$$TransactionDetailImplCopyWithImpl<$Res>
     Object? imgUrl = null,
     Object? createdAt = null,
     Object? updatedAt = null,
+    Object? amount = null,
     Object? user = null,
     Object? assetType = null,
   }) {
@@ -144,6 +153,10 @@ class __$$TransactionDetailImplCopyWithImpl<$Res>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as String,
+      amount: null == amount
+          ? _value.amount
+          : amount // ignore: cast_nullable_to_non_nullable
+              as double,
       user: null == user
           ? _value._user
           : user // ignore: cast_nullable_to_non_nullable
@@ -164,6 +177,7 @@ class _$TransactionDetailImpl implements _TransactionDetail {
       required this.imgUrl,
       required this.createdAt,
       required this.updatedAt,
+      required this.amount,
       required final List<User> user,
       required this.assetType})
       : _user = user;
@@ -176,6 +190,8 @@ class _$TransactionDetailImpl implements _TransactionDetail {
   final String createdAt;
   @override
   final String updatedAt;
+  @override
+  final double amount;
   final List<User> _user;
   @override
   List<User> get user {
@@ -189,7 +205,7 @@ class _$TransactionDetailImpl implements _TransactionDetail {
 
   @override
   String toString() {
-    return 'TransactionDetail(title: $title, imgUrl: $imgUrl, createdAt: $createdAt, updatedAt: $updatedAt, user: $user, assetType: $assetType)';
+    return 'TransactionDetail(title: $title, imgUrl: $imgUrl, createdAt: $createdAt, updatedAt: $updatedAt, amount: $amount, user: $user, assetType: $assetType)';
   }
 
   @override
@@ -203,6 +219,7 @@ class _$TransactionDetailImpl implements _TransactionDetail {
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
                 other.updatedAt == updatedAt) &&
+            (identical(other.amount, amount) || other.amount == amount) &&
             const DeepCollectionEquality().equals(other._user, _user) &&
             (identical(other.assetType, assetType) ||
                 other.assetType == assetType));
@@ -210,7 +227,7 @@ class _$TransactionDetailImpl implements _TransactionDetail {
 
   @override
   int get hashCode => Object.hash(runtimeType, title, imgUrl, createdAt,
-      updatedAt, const DeepCollectionEquality().hash(_user), assetType);
+      updatedAt, amount, const DeepCollectionEquality().hash(_user), assetType);
 
   @JsonKey(ignore: true)
   @override
@@ -226,6 +243,7 @@ abstract class _TransactionDetail implements TransactionDetail {
       required final String imgUrl,
       required final String createdAt,
       required final String updatedAt,
+      required final double amount,
       required final List<User> user,
       required final AssetType assetType}) = _$TransactionDetailImpl;
 
@@ -237,6 +255,8 @@ abstract class _TransactionDetail implements TransactionDetail {
   String get createdAt;
   @override
   String get updatedAt;
+  @override
+  double get amount;
   @override
   List<User> get user;
   @override
