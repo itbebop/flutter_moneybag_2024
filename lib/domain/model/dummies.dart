@@ -23,6 +23,7 @@ DateTime now = DateTime.now();
 
 final transaction1 = TransactionDetail(
   title: '장보기',
+  amount: -86000,
   imgUrl: picSum(201),
   createdAt: dateFormat.format(now),
   updatedAt: dateFormat.format(now.subtract(10.minutes)),
@@ -30,7 +31,8 @@ final transaction1 = TransactionDetail(
   assetType: AssetType.expense,
 );
 final transaction2 = TransactionDetail(
-  title: '꽁치기에 빌린 돈',
+  title: '꽁치기에 빌려준 돈',
+  amount: 360000,
   imgUrl: picSum(202),
   createdAt: dateFormat.format(now),
   updatedAt: dateFormat.format(now.subtract(10.minutes)),
@@ -39,6 +41,7 @@ final transaction2 = TransactionDetail(
 );
 final transaction3 = TransactionDetail(
   title: '커피 2잔',
+  amount: -12000,
   imgUrl: picSum(203),
   createdAt: dateFormat.format(now),
   updatedAt: dateFormat.format(now.subtract(10.minutes)),
@@ -47,6 +50,7 @@ final transaction3 = TransactionDetail(
 );
 final transaction4 = TransactionDetail(
   title: '점심(피자)',
+  amount: -30000,
   imgUrl: picSum(204),
   createdAt: dateFormat.format(now),
   updatedAt: dateFormat.format(now.subtract(10.minutes)),
@@ -55,6 +59,7 @@ final transaction4 = TransactionDetail(
 );
 final transaction5 = TransactionDetail(
   title: '파킹통장 이자',
+  amount: 86000,
   imgUrl: picSum(205),
   createdAt: dateFormat.format(now),
   updatedAt: dateFormat.format(now.subtract(10.minutes)),
@@ -63,6 +68,7 @@ final transaction5 = TransactionDetail(
 );
 final transaction6 = TransactionDetail(
   title: '9월 월급',
+  amount: 5600000,
   imgUrl: picSum(206),
   createdAt: dateFormat.format(now),
   updatedAt: dateFormat.format(now.subtract(10.minutes)),
