@@ -9,8 +9,8 @@ class TransactionDetail with _$TransactionDetail {
   const factory TransactionDetail({
     required String title,
     required String imgUrl,
-    required DateTime createdAt,
-    required DateTime updatedAt,
+    required String createdAt,
+    required String updatedAt,
     required List<User> user,
     required AssetType assetType,
   }) = _TransactionDetail;
