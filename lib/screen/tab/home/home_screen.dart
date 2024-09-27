@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_moneybag_2024/common/dart/extension/num_extension.dart';
+import 'package:flutter_moneybag_2024/common/common_component/sort_button.dart';
 import 'package:flutter_moneybag_2024/screen/tab/home/component/asset_items.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -47,6 +47,9 @@ class _MainScreenState extends ConsumerState<HomeScreen> {
                 ],
               ),
             ),
+            const SizedBox(
+              height: 16,
+            ),
             TableCalendar(
               firstDay: DateTime.utc(2021, 10, 16),
               lastDay: DateTime.utc(2030, 3, 14),
@@ -54,6 +57,20 @@ class _MainScreenState extends ConsumerState<HomeScreen> {
               //availableCalendarFormats: const {CalendarFormat.twoWeeks: '4 week'},
             ),
             const Divider(),
+            const SortButton(),
+            ListView(
+              shrinkWrap: true,
+              primary: false,
+              children: const [
+                SortButton(),
+                SortButton(),
+                SortButton(),
+                SortButton(),
+                SortButton(),
+                SortButton(),
+                Text('adsfa'),
+              ],
+            )
           ],
         ),
       ),
