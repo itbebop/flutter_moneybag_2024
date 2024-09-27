@@ -6,6 +6,7 @@ class UiConfig {
   static const Color primaryColorSurface = Color(0xffECB159);
   static const Color secondaryColor = Color.fromRGBO(114, 186, 192, 1);
   static const Color secondaryColorSurface = Color(0xFF8CB9BD);
+  static const Color backgroundColor = Color(0xFFFEFBF6);
 
   static const MaterialColor black = MaterialColor(0xff282828, color);
   static const Map<int, Color> color = {
