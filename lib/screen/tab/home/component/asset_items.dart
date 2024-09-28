@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_moneybag_2024/common/common.dart';
-import 'package:flutter_moneybag_2024/common/theme/ui_config.dart';
 
 class AssetItems extends StatelessWidget {
   final String title;

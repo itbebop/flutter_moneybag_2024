@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_moneybag_2024/common/common.dart';
 import 'package:flutter_moneybag_2024/common/common_component/sort_button.dart';
 import 'package:flutter_moneybag_2024/common/common_component/transaction_item.dart';
 import 'package:flutter_moneybag_2024/domain/model/dummies.dart';
@@ -71,20 +70,21 @@ class _MainScreenState extends ConsumerState<HomeScreen> {
                   createdAt: transaction1.createdAt,
                   amount: transaction1.amount,
                 ),
-                const SizedBox(height: 24),
+                const SizedBox(height: 16),
                 TransactionItem(
                   title: transaction2.title,
                   imgUrl: transaction2.imgUrl,
                   createdAt: transaction2.createdAt,
                   amount: transaction2.amount,
                 ),
-                const SizedBox(height: 24),
+                const SizedBox(height: 16),
                 TransactionItem(
                   title: transaction3.title,
                   imgUrl: transaction3.imgUrl,
                   createdAt: transaction3.createdAt,
                   amount: transaction3.amount,
                 ),
+                const SizedBox(height: 16),
               ],
             )
           ],

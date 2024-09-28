@@ -4,7 +4,6 @@ import 'package:flutter_moneybag_2024/domain/enums/user_types.dart';
 import 'package:flutter_moneybag_2024/domain/model/transaction_category.dart';
 import 'package:flutter_moneybag_2024/domain/model/transaction_detail.dart';
 import 'package:flutter_moneybag_2024/domain/model/user.dart';
-import 'package:intl/intl.dart';
 
 String picSum(int id) => 'https://picsum.photos/id/$id/200/200';
 

@@ -23,6 +23,7 @@ class _AppState extends State<App> {
           builder: (context, ref, _) {
             final router = ref.watch(routerProvider);
             return MaterialApp.router(
+                debugShowCheckedModeBanner: false,
                 locale: const Locale('ko'),
                 routerConfig: router, // GoRouter 설정
                 theme: ThemeData(
