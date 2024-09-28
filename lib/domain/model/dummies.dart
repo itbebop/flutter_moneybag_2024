@@ -5,8 +5,6 @@ import 'package:flutter_moneybag_2024/domain/model/transaction_category.dart';
 import 'package:flutter_moneybag_2024/domain/model/transaction_detail.dart';
 import 'package:flutter_moneybag_2024/domain/model/user.dart';
 
-String picSum(int id) => 'https://picsum.photos/id/$id/200/200';
-
 final user1 = User(userId: 1, name: '캐시옹', imgUrl: picSum(200), language: 'ko', userType: UserType.paid);
 final user2 = User(userId: 2, name: '빌라동', imgUrl: picSum(300), language: 'ko', userType: UserType.free);
 final user3 = User(userId: 3, name: '택시옹', imgUrl: picSum(400), language: 'ko', userType: UserType.free);
@@ -30,7 +28,7 @@ final transaction1 = TransactionDetail(
   assetType: AssetType.expense,
 );
 final transaction2 = TransactionDetail(
-  title: '꽁치기에 빌려준 돈',
+  title: '빌려준 돈',
   amount: 360000,
   imgUrl: picSum(202),
   createdAt: dateFormat.format(now),
