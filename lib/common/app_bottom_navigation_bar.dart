@@ -25,10 +25,19 @@ class AppBottomNavigationBar extends ConsumerWidget {
           ref.read(bottomNavIndexProvider.notifier).state = index;
         },
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home', backgroundColor: Colors.black),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+            backgroundColor: Colors.black,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Report',
+            backgroundColor: Colors.black,
+          ),
           BottomNavigationBarItem(
             icon: Icon(Icons.menu),
-            label: 'My Menu',
+            label: 'My Menu', // TODO: 내메뉴에서는 Floating button 안보이게
           ),
         ],
       ),

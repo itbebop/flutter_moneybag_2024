@@ -66,7 +66,7 @@ class _MainScreenState extends ConsumerState<MainScreen> {
             bottomNavigationBar: const AppBottomNavigationBar(), // 바텀 내비게이션
           ),
           AnimatedOpacity(
-            opacity: _currentTab != TabItem.chat ? 1 : 0,
+            opacity: _currentTab != TabItem.mymenu ? 1 : 0,
             duration: 300.ms,
             child: FloatingAddButton(),
           ),

@@ -10,7 +10,6 @@ final floatingButtonStateProvider = StateNotifierProvider<FloatingButtonStateNot
 class FloatingButtonStateNotifier extends StateNotifier<FloatingButtonState> {
   FloatingButtonStateNotifier(super.state);
 
-  @override
   bool needToMakeButtonBigger = false;
 
   @override
