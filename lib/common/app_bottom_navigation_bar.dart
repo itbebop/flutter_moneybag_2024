@@ -28,12 +28,12 @@ class AppBottomNavigationBar extends ConsumerWidget {
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
-            backgroundColor: Colors.black,
+            backgroundColor: UiConfig.primaryColorSurface,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: Icon(Icons.report),
             label: 'Report',
-            backgroundColor: Colors.black,
+            backgroundColor: UiConfig.primaryColorSurface,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.menu),
