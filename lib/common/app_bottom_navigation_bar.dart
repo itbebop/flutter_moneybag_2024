@@ -21,22 +21,28 @@ class AppBottomNavigationBar extends ConsumerWidget {
         unselectedItemColor: Colors.white,
         backgroundColor: UiConfig.primaryColorSurface,
         currentIndex: selectedIndex,
+        type: BottomNavigationBarType.fixed,
         onTap: (index) {
           ref.read(bottomNavIndexProvider.notifier).state = index;
         },
         items: const [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: Icon(Icons.home_outlined),
             label: 'Home',
             backgroundColor: UiConfig.primaryColorSurface,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.report),
+            icon: Icon(Icons.leaderboard),
             label: 'Report',
             backgroundColor: UiConfig.primaryColorSurface,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.menu),
+            icon: Icon(Icons.account_balance_wallet_outlined),
+            label: 'Asset',
+            backgroundColor: UiConfig.primaryColorSurface,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person_2_outlined),
             label: 'My Menu', // TODO: 내메뉴에서는 Floating button 안보이게
           ),
         ],

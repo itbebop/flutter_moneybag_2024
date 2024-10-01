@@ -3,6 +3,7 @@ import 'package:flutter_moneybag_2024/common/app_bottom_navigation_bar.dart';
 import 'package:flutter_moneybag_2024/common/common.dart';
 import 'package:flutter_moneybag_2024/common/common_component/floating_add_button/floating_add_button.dart';
 import 'package:flutter_moneybag_2024/router/router.dart';
+import 'package:flutter_moneybag_2024/screen/tab/Asset/asset_screen.dart';
 import 'package:flutter_moneybag_2024/screen/tab/home/home_screen.dart';
 import 'package:flutter_moneybag_2024/screen/tab/my_menu/my_menu_screen.dart';
 import 'package:flutter_moneybag_2024/screen/tab/report/report_screen.dart';
@@ -60,7 +61,8 @@ class _MainScreenState extends ConsumerState<MainScreen> {
                   children: const [
                     HomeScreen(), // 첫 번째 화면
                     ReportScreen(),
-                    MyMenuScreen(), // 두 번째 화면
+                    AssetScreen(),
+                    MyMenuScreen(),
                   ],
                 );
               },
