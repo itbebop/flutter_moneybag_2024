@@ -13,12 +13,10 @@ class AppBottomNavigationBar extends ConsumerWidget {
     return ClipRRect(
       borderRadius: const BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20)),
       child: BottomNavigationBar(
-        selectedIconTheme: const IconThemeData(
-          color: UiConfig.primaryColor,
-        ),
-        selectedItemColor: UiConfig.primaryColor,
-        unselectedIconTheme: const IconThemeData(color: Colors.white),
-        unselectedItemColor: Colors.white,
+        selectedIconTheme: const IconThemeData(color: Colors.white),
+        selectedItemColor: Colors.white,
+        unselectedIconTheme: const IconThemeData(color: UiConfig.primaryColor),
+        unselectedItemColor: UiConfig.primaryColor,
         backgroundColor: UiConfig.primaryColorSurface,
         currentIndex: selectedIndex,
         type: BottomNavigationBarType.fixed,
@@ -34,6 +32,14 @@ class AppBottomNavigationBar extends ConsumerWidget {
           BottomNavigationBarItem(
             icon: Icon(Icons.leaderboard),
             label: 'Report',
+            backgroundColor: UiConfig.primaryColorSurface,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.account_balance_wallet_outlined,
+              color: Colors.transparent,
+            ),
+            label: '',
             backgroundColor: UiConfig.primaryColorSurface,
           ),
           BottomNavigationBarItem(
