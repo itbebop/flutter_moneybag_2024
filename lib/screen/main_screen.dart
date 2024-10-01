@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_moneybag_2024/common/app_bottom_navigation_bar.dart';
+import 'package:flutter_moneybag_2024/common/common_component/app_bottom_navigation_bar.dart';
 import 'package:flutter_moneybag_2024/common/common.dart';
 import 'package:flutter_moneybag_2024/common/common_component/floating_add_button/floating_add_button.dart';
 import 'package:flutter_moneybag_2024/router/router.dart';
@@ -61,6 +61,7 @@ class _MainScreenState extends ConsumerState<MainScreen> {
                   children: const [
                     HomeScreen(), // 첫 번째 화면
                     ReportScreen(),
+                    HomeScreen(),
                     AssetScreen(),
                     MyMenuScreen(),
                   ],
