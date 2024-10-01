@@ -47,7 +47,9 @@ dependencies:
   freezed_annotation: ^2.2.0
   json_annotation: ^4.8.0
   intl: ^0.18.1
-
+  flutter_hooks: ^0.20.5
+  hooks_riverpod: ^2.5.2
+  
   # ui
   table_calendar: ^3.0.9
   flutter_screenutil: ^5.9.3
