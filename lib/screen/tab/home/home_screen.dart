@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_moneybag_2024/common/common_component/month_dropdown_button.dart';
 import 'package:flutter_moneybag_2024/common/common_component/sort_button.dart';
-import 'package:flutter_moneybag_2024/common/common_component/transaction/transaction_item.dart';
 import 'package:flutter_moneybag_2024/common/common_component/transaction/transaction_list.dart';
-import 'package:flutter_moneybag_2024/domain/model/dummies.dart';
+import 'package:flutter_moneybag_2024/common/data/month_list.dart';
 import 'package:flutter_moneybag_2024/screen/tab/home/component/asset_items.dart';
+import 'package:flutter_moneybag_2024/screen/tab/home/component/asset_list.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
@@ -15,8 +17,23 @@ class HomeScreen extends ConsumerStatefulWidget {
 }
 
 class _MainScreenState extends ConsumerState<HomeScreen> {
+  String currentMonth = DateFormat('MMM').format(DateTime.now()).toLowerCase();
+  MonthList selectedMonth = MonthList.jan; // 초기값으로 설정
+
+  @override
+  void initState() {
+    super.initState();
+    // 현재 월에 해당하는 MonthList 항목으로 selectedMonth 초기화
+    selectedMonth = MonthList.values.firstWhere(
+      (e) => e.toString().split('.')[1] == currentMonth,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    DateTime now = DateTime.now();
+    DateTime focusedDay = DateTime.utc(now.year, selectedMonth.month, now.day);
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -27,37 +44,56 @@ class _MainScreenState extends ConsumerState<HomeScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         '${(DateTime.now().year).toString().substring(2)}년',
-                        style: const TextStyle(fontSize: 24),
+                        style: const TextStyle(
+                          fontSize: 24,
+                          color: Colors.black,
+                        ),
                       ),
-                      Text(
-                        '${(DateTime.now().month).toString()}월',
-                        style: const TextStyle(fontSize: 32),
+                      MonthDropdownButton(
+                        selectedMonth: selectedMonth,
+                        onMonthChanged: (value) {
+                          setState(() {
+                            selectedMonth = value; // 선택된 월 업데이트
+                          });
+                        },
                       ),
                     ],
                   ),
-                  Column(
-                    children: [
-                      AssetItems(title: '수입', amounts: 3400000),
-                      const SizedBox(height: 16),
-                      AssetItems(title: '지출', amounts: 1800000),
-                      const SizedBox(height: 16),
-                      AssetItems(title: '잔액', amounts: 1600000),
-                    ],
-                  ),
+                  const AssetList(),
                 ],
               ),
             ),
-            const SizedBox(
-              height: 16,
-            ),
+            const SizedBox(height: 16),
             TableCalendar(
-              firstDay: DateTime.utc(2021, 10, 16),
+              // headerVisible: false,
+              headerStyle: const HeaderStyle(
+                formatButtonVisible: false,
+                titleCentered: true,
+              ),
+              locale: 'ko-KR',
+              firstDay: DateTime.utc(2010, 10, 16),
               lastDay: DateTime.utc(2030, 3, 14),
-              focusedDay: DateTime.now(),
-              //availableCalendarFormats: const {CalendarFormat.twoWeeks: '4 week'},
+              focusedDay: focusedDay,
+              availableGestures: AvailableGestures.horizontalSwipe,
+              onHeaderTapped: (focusedDay) async {
+                // 1. show date picker
+                final DateTime? dateTime = await showDatePicker(
+                  context: context,
+                  initialDate: now,
+                  firstDate: DateTime(2000),
+                  lastDate: DateTime(3000),
+                );
+                if (dateTime != null) {
+                  setState(() {
+                    now = dateTime;
+                  });
+                }
+                // 2. update the focusedDay state with the selected date (from date picker)
+              },
             ),
             const Divider(),
             const SortButton(),
