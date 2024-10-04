@@ -52,7 +52,7 @@ class FloatingAddButton extends ConsumerWidget {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(bottom: 30.h, right: 170.w),
+                padding: EdgeInsets.only(bottom: 30.h, right: MediaQuery.of(context).size.width * 0.43),
                 child: Tap(
                   onTap: () {
                     final currentTab = ref.read(currentTabProvider);
