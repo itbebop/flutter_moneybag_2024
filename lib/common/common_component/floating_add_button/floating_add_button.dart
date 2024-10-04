@@ -77,7 +77,7 @@ class FloatingAddButton extends ConsumerWidget {
                         duration: duration,
                         child: Icon(
                           Icons.add,
-                          color: isExpanded ? Colors.black : Colors.white,
+                          color: isExpanded ? Colors.black : UiConfig.whiteColor,
                         ),
                       ),
                       AnimatedWidthCollapse(
@@ -85,7 +85,7 @@ class FloatingAddButton extends ConsumerWidget {
                         duration: duration,
                         child: const Text(
                           '',
-                          style: TextStyle(color: Colors.white),
+                          style: TextStyle(color: UiConfig.whiteColor),
                         ),
                       ),
                     ]),

@@ -13,8 +13,8 @@ class AppBottomNavigationBar extends ConsumerWidget {
     return ClipRRect(
       borderRadius: const BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20)),
       child: BottomNavigationBar(
-        selectedIconTheme: const IconThemeData(color: Colors.white),
-        selectedItemColor: Colors.white,
+        selectedIconTheme: const IconThemeData(color: UiConfig.whiteColor),
+        selectedItemColor: UiConfig.whiteColor,
         unselectedIconTheme: const IconThemeData(color: UiConfig.primaryColor),
         unselectedItemColor: UiConfig.primaryColor,
         backgroundColor: UiConfig.primaryColorSurface,
