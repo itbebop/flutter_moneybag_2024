@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_moneybag_2024/common/common.dart';
-import 'package:flutter_moneybag_2024/screen/tab/report/report_fragment.dart';
+import 'package:flutter_moneybag_2024/screen/tab/report/report_list_fragment.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final notificationEditModeProvider = StateProvider((ref) => false);
@@ -23,9 +23,9 @@ class ReportScreen extends HookConsumerWidget {
           indicatorSize: TabBarIndicatorSize.tab,
           labelPadding: const EdgeInsets.all(16),
           // labelStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-          overlayColor: WidgetStatePropertyAll(
-            Colors.blue.shade100,
-          ),
+          // overlayColor: WidgetStatePropertyAll(
+          //   Colors.blue.shade100,
+          // ),
 
           /// 탭바 클릭할 때 나오는 splash effect의 radius
           splashBorderRadius: BorderRadius.circular(10),
@@ -37,8 +37,9 @@ class ReportScreen extends HookConsumerWidget {
         Expanded(
             child: TabBarView(
           controller: tabController,
-          children: const [
-            ReportFragment(),
+          children: [
+            const ReportListFragment(),
+            Image.network(picSum(202)),
           ],
         ))
       ],
