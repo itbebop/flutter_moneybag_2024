@@ -1,56 +1,79 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_moneybag_2024/common/common.dart';
+import 'package:flutter_moneybag_2024/common/theme/ui_config.dart';
+import 'package:flutter_moneybag_2024/domain/enums/asset_types.dart';
 
 class TransactionItem extends StatelessWidget {
   final String title;
   final String imgUrl;
   final String createdAt;
   final double amount;
-  const TransactionItem({super.key, required this.title, required this.imgUrl, required this.createdAt, required this.amount});
+  final AssetType assetType;
+  const TransactionItem({super.key, required this.title, required this.imgUrl, required this.createdAt, required this.amount, required this.assetType});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          color: const Color.fromARGB(255, 255, 255, 255),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          Container(
+            decoration: const BoxDecoration(
+              color: UiConfig.secondaryColorSurface,
+              borderRadius: BorderRadius.only(topLeft: Radius.circular(5.0), topRight: Radius.circular(5.0)),
+            ),
+            height: 16,
+            width: 70,
+            child: Center(
+                child: Text(
+              '이자',
+              style: UiConfig.extraSmallStyle.copyWith(color: UiConfig.whiteColor),
+            )),
+          ),
+          Container(
+            decoration: const BoxDecoration(
+              borderRadius: BorderRadius.only(topLeft: Radius.circular(10.0), bottomLeft: Radius.circular(10.0), bottomRight: Radius.circular(10.0)),
+              color: UiConfig.whiteColor,
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  SizedBox(
-                    width: 50,
-                    height: 50,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: Image.network(imgUrl),
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 16,
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  Row(
                     children: [
-                      Text(title, style: UiConfig.h4Style),
-                      Text(createdAt,
-                          style: UiConfig.smallStyle.copyWith(
-                            color: UiConfig.color[700],
-                          )),
+                      SizedBox(
+                        width: 50,
+                        height: 50,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: Image.network(imgUrl),
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 16,
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(title, style: UiConfig.h4Style),
+                          Text(createdAt,
+                              style: UiConfig.smallStyle.copyWith(
+                                color: UiConfig.color[700],
+                              )),
+                        ],
+                      ),
                     ],
                   ),
+                  Text(amount.toString())
                 ],
               ),
-              Text(amount.toString())
-            ],
+            ),
           ),
-        ),
+        ],
       ),
     );
   }
