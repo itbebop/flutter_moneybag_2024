@@ -18,6 +18,7 @@ class MonthDropdownButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return DropdownButton<MonthList>(
       value: selectedMonth,
+      itemHeight: 48.0,
       items: MonthList.values
           .map((e) => DropdownMenuItem(
                 value: e,
