@@ -9,8 +9,8 @@ class TransactionDetail with _$TransactionDetail {
   const factory TransactionDetail({
     required String title,
     required String imgUrl,
-    required String createdAt,
-    required String updatedAt,
+    required DateTime createdAt,
+    required DateTime updatedAt,
     required double amount,
     required List<User> user,
     required AssetType assetType,

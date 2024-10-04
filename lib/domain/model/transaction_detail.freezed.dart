@@ -18,8 +18,8 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$TransactionDetail {
   String get title => throw _privateConstructorUsedError;
   String get imgUrl => throw _privateConstructorUsedError;
-  String get createdAt => throw _privateConstructorUsedError;
-  String get updatedAt => throw _privateConstructorUsedError;
+  DateTime get createdAt => throw _privateConstructorUsedError;
+  DateTime get updatedAt => throw _privateConstructorUsedError;
   double get amount => throw _privateConstructorUsedError;
   List<User> get user => throw _privateConstructorUsedError;
   AssetType get assetType => throw _privateConstructorUsedError;
@@ -38,8 +38,8 @@ abstract class $TransactionDetailCopyWith<$Res> {
   $Res call(
       {String title,
       String imgUrl,
-      String createdAt,
-      String updatedAt,
+      DateTime createdAt,
+      DateTime updatedAt,
       double amount,
       List<User> user,
       AssetType assetType});
@@ -78,11 +78,11 @@ class _$TransactionDetailCopyWithImpl<$Res, $Val extends TransactionDetail>
       createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as String,
+              as DateTime,
       updatedAt: null == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
-              as String,
+              as DateTime,
       amount: null == amount
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
@@ -110,8 +110,8 @@ abstract class _$$TransactionDetailImplCopyWith<$Res>
   $Res call(
       {String title,
       String imgUrl,
-      String createdAt,
-      String updatedAt,
+      DateTime createdAt,
+      DateTime updatedAt,
       double amount,
       List<User> user,
       AssetType assetType});
@@ -148,11 +148,11 @@ class __$$TransactionDetailImplCopyWithImpl<$Res>
       createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as String,
+              as DateTime,
       updatedAt: null == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
-              as String,
+              as DateTime,
       amount: null == amount
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
@@ -187,9 +187,9 @@ class _$TransactionDetailImpl implements _TransactionDetail {
   @override
   final String imgUrl;
   @override
-  final String createdAt;
+  final DateTime createdAt;
   @override
-  final String updatedAt;
+  final DateTime updatedAt;
   @override
   final double amount;
   final List<User> _user;
@@ -241,8 +241,8 @@ abstract class _TransactionDetail implements TransactionDetail {
   const factory _TransactionDetail(
       {required final String title,
       required final String imgUrl,
-      required final String createdAt,
-      required final String updatedAt,
+      required final DateTime createdAt,
+      required final DateTime updatedAt,
       required final double amount,
       required final List<User> user,
       required final AssetType assetType}) = _$TransactionDetailImpl;
@@ -252,9 +252,9 @@ abstract class _TransactionDetail implements TransactionDetail {
   @override
   String get imgUrl;
   @override
-  String get createdAt;
+  DateTime get createdAt;
   @override
-  String get updatedAt;
+  DateTime get updatedAt;
   @override
   double get amount;
   @override
