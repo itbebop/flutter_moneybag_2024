@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_moneybag_2024/common/common.dart';
 import 'package:flutter_moneybag_2024/common/data/month_list.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:velocity_x/velocity_x.dart';
 
 class MonthDropdownButton extends StatelessWidget {
   final MonthList selectedMonth;
   final ValueChanged<MonthList> onMonthChanged;
-
+  final double fontSize;
   MonthDropdownButton({
     super.key,
     required this.selectedMonth,
     required this.onMonthChanged,
+    this.fontSize = 16,
   });
   final currentTabProvider = StateProvider<MonthList>((ref) => MonthList.jan);
   @override
@@ -23,7 +23,7 @@ class MonthDropdownButton extends StatelessWidget {
                 value: e,
                 child: Text(
                   e.kr,
-                  style: const TextStyle(fontSize: 32),
+                  style: TextStyle(fontSize: fontSize),
                 ),
               ))
           .toList(),

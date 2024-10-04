@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_moneybag_2024/common/common_component/month_dropdown_button.dart';
+import 'package:flutter_moneybag_2024/common/common.dart';
 import 'package:flutter_moneybag_2024/common/common_component/sort_button.dart';
 import 'package:flutter_moneybag_2024/common/common_component/transaction/transaction_list.dart';
 import 'package:flutter_moneybag_2024/common/data/month_list.dart';
-import 'package:flutter_moneybag_2024/screen/tab/home/component/asset_items.dart';
 import 'package:flutter_moneybag_2024/screen/tab/home/component/asset_list.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
@@ -13,10 +12,10 @@ class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
 
   @override
-  ConsumerState<HomeScreen> createState() => _MainScreenState();
+  ConsumerState<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _MainScreenState extends ConsumerState<HomeScreen> {
+class _HomeScreenState extends ConsumerState<HomeScreen> {
   String currentMonth = DateFormat('MMM').format(DateTime.now()).toLowerCase();
   MonthList selectedMonth = MonthList.jan; // 초기값으로 설정
 
@@ -60,6 +59,7 @@ class _MainScreenState extends ConsumerState<HomeScreen> {
                             selectedMonth = value; // 선택된 월 업데이트
                           });
                         },
+                        fontSize: 32,
                       ),
                     ],
                   ),
@@ -79,21 +79,19 @@ class _MainScreenState extends ConsumerState<HomeScreen> {
               lastDay: DateTime.utc(2030, 3, 14),
               focusedDay: focusedDay,
               availableGestures: AvailableGestures.horizontalSwipe,
-              onHeaderTapped: (focusedDay) async {
-                // 1. show date picker
-                final DateTime? dateTime = await showDatePicker(
-                  context: context,
-                  initialDate: now,
-                  firstDate: DateTime(2000),
-                  lastDate: DateTime(3000),
-                );
-                if (dateTime != null) {
-                  setState(() {
-                    now = dateTime;
-                  });
-                }
-                // 2. update the focusedDay state with the selected date (from date picker)
-              },
+              // onHeaderTapped: (focusedDay) async {
+              //   final DateTime? dateTime = await showDatePicker(
+              //     context: context,
+              //     initialDate: now,
+              //     firstDate: DateTime(2000),
+              //     lastDate: DateTime(3000),
+              //   );
+              //   if (dateTime != null) {
+              //     setState(() {
+              //       now = dateTime;
+              //     });
+              //   }
+              // },
             ),
             const Divider(),
             const SortButton(),
