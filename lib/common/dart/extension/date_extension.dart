@@ -1,3 +1,4 @@
 import 'package:intl/intl.dart';
 
-DateFormat dateFormat = DateFormat('aa hh:mm', 'ko');
+DateFormat detailDateFormat = DateFormat('aa hh:mm', 'ko');
+DateFormat listDateFormat = DateFormat('MM월dd일', 'ko');
