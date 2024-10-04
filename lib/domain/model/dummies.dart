@@ -17,6 +17,10 @@ const transactionExpense1 = TransactionCategory(id: 4, name: '식비', type: Ass
 const transactionExpense2 = TransactionCategory(id: 5, name: '주거비', type: AssetType.expense);
 const transactionExpense3 = TransactionCategory(id: 6, name: '쇼핑', type: AssetType.expense);
 DateTime now = DateTime.now();
+const transactionCategory1 = TransactionCategory(id: 1, name: '이자', type: AssetType.income);
+const transactionCategory2 = TransactionCategory(id: 1, name: '월급', type: AssetType.income);
+const transactionCategory3 = TransactionCategory(id: 1, name: '식비', type: AssetType.expense);
+const transactionCategory4 = TransactionCategory(id: 1, name: '기타', type: AssetType.expense);
 
 final transaction1 = TransactionDetail(
   title: '장보기',
@@ -25,7 +29,7 @@ final transaction1 = TransactionDetail(
   createdAt: now,
   updatedAt: now.subtract(10.minutes),
   user: [user1],
-  assetType: AssetType.expense,
+  category: transactionCategory3,
 );
 final transaction2 = TransactionDetail(
   title: '빌려준 돈',
@@ -34,7 +38,7 @@ final transaction2 = TransactionDetail(
   createdAt: now,
   updatedAt: now.subtract(10.minutes),
   user: [user1],
-  assetType: AssetType.expense,
+  category: transactionCategory4,
 );
 final transaction3 = TransactionDetail(
   title: '커피 2잔',
@@ -43,7 +47,7 @@ final transaction3 = TransactionDetail(
   createdAt: now.subtract(1.days),
   updatedAt: now.subtract(10.minutes),
   user: [user1],
-  assetType: AssetType.expense,
+  category: transactionCategory4,
 );
 final transaction4 = TransactionDetail(
   title: '점심(피자)',
@@ -52,7 +56,7 @@ final transaction4 = TransactionDetail(
   createdAt: now.subtract(1.days),
   updatedAt: now.subtract(10.minutes),
   user: [user1],
-  assetType: AssetType.expense,
+  category: transactionCategory3,
 );
 final transaction5 = TransactionDetail(
   title: '파킹통장 이자',
@@ -61,7 +65,7 @@ final transaction5 = TransactionDetail(
   createdAt: now.subtract(1.days),
   updatedAt: now.subtract(10.minutes),
   user: [user1],
-  assetType: AssetType.income,
+  category: transactionCategory1,
 );
 final transaction6 = TransactionDetail(
   title: '9월 월급',
@@ -70,43 +74,43 @@ final transaction6 = TransactionDetail(
   createdAt: now.subtract(2.days),
   updatedAt: now.subtract(10.minutes),
   user: [user1],
-  assetType: AssetType.income,
+  category: transactionCategory2,
 );
 final transaction7 = TransactionDetail(
-  title: '9월 월급',
-  amount: 5600000,
+  title: '미용',
+  amount: -20000,
   imgUrl: picSum(206),
-  createdAt: now.subtract(3.days),
+  createdAt: now.subtract(2.days),
   updatedAt: now.subtract(10.minutes),
   user: [user1],
-  assetType: AssetType.income,
+  category: transactionCategory4,
 );
 final transaction8 = TransactionDetail(
-  title: '9월 월급',
-  amount: 5600000,
+  title: '이자',
+  amount: 210000,
   imgUrl: picSum(206),
   createdAt: now.subtract(3.days),
   updatedAt: now.subtract(10.minutes),
   user: [user1],
-  assetType: AssetType.income,
+  category: transactionCategory1,
 );
 final transaction9 = TransactionDetail(
-  title: '9월 월급',
-  amount: 5600000,
-  imgUrl: picSum(206),
-  createdAt: now.subtract(4.days),
-  updatedAt: now.subtract(10.minutes),
-  user: [user1],
-  assetType: AssetType.income,
-);
-final transaction10 = TransactionDetail(
   title: '9월 월급',
   amount: 5600000,
   imgUrl: picSum(206),
   createdAt: now.subtract(5.days),
   updatedAt: now.subtract(10.minutes),
   user: [user1],
-  assetType: AssetType.income,
+  category: transactionCategory2,
+);
+final transaction10 = TransactionDetail(
+  title: '9월 월급',
+  amount: 5600000,
+  imgUrl: picSum(206),
+  createdAt: now.subtract(6.days),
+  updatedAt: now.subtract(10.minutes),
+  user: [user1],
+  category: transactionCategory2,
 );
 final transactionList = [
   transaction1,
@@ -115,4 +119,8 @@ final transactionList = [
   transaction4,
   transaction5,
   transaction6,
+  transaction7,
+  transaction8,
+  transaction9,
+  transaction10,
 ];

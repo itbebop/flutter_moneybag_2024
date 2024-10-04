@@ -22,7 +22,7 @@ mixin _$TransactionDetail {
   DateTime get updatedAt => throw _privateConstructorUsedError;
   double get amount => throw _privateConstructorUsedError;
   List<User> get user => throw _privateConstructorUsedError;
-  AssetType get assetType => throw _privateConstructorUsedError;
+  TransactionCategory get category => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TransactionDetailCopyWith<TransactionDetail> get copyWith =>
@@ -42,7 +42,9 @@ abstract class $TransactionDetailCopyWith<$Res> {
       DateTime updatedAt,
       double amount,
       List<User> user,
-      AssetType assetType});
+      TransactionCategory category});
+
+  $TransactionCategoryCopyWith<$Res> get category;
 }
 
 /// @nodoc
@@ -64,7 +66,7 @@ class _$TransactionDetailCopyWithImpl<$Res, $Val extends TransactionDetail>
     Object? updatedAt = null,
     Object? amount = null,
     Object? user = null,
-    Object? assetType = null,
+    Object? category = null,
   }) {
     return _then(_value.copyWith(
       title: null == title
@@ -91,11 +93,19 @@ class _$TransactionDetailCopyWithImpl<$Res, $Val extends TransactionDetail>
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as List<User>,
-      assetType: null == assetType
-          ? _value.assetType
-          : assetType // ignore: cast_nullable_to_non_nullable
-              as AssetType,
+      category: null == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as TransactionCategory,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $TransactionCategoryCopyWith<$Res> get category {
+    return $TransactionCategoryCopyWith<$Res>(_value.category, (value) {
+      return _then(_value.copyWith(category: value) as $Val);
+    });
   }
 }
 
@@ -114,7 +124,10 @@ abstract class _$$TransactionDetailImplCopyWith<$Res>
       DateTime updatedAt,
       double amount,
       List<User> user,
-      AssetType assetType});
+      TransactionCategory category});
+
+  @override
+  $TransactionCategoryCopyWith<$Res> get category;
 }
 
 /// @nodoc
@@ -134,7 +147,7 @@ class __$$TransactionDetailImplCopyWithImpl<$Res>
     Object? updatedAt = null,
     Object? amount = null,
     Object? user = null,
-    Object? assetType = null,
+    Object? category = null,
   }) {
     return _then(_$TransactionDetailImpl(
       title: null == title
@@ -161,10 +174,10 @@ class __$$TransactionDetailImplCopyWithImpl<$Res>
           ? _value._user
           : user // ignore: cast_nullable_to_non_nullable
               as List<User>,
-      assetType: null == assetType
-          ? _value.assetType
-          : assetType // ignore: cast_nullable_to_non_nullable
-              as AssetType,
+      category: null == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as TransactionCategory,
     ));
   }
 }
@@ -179,7 +192,7 @@ class _$TransactionDetailImpl implements _TransactionDetail {
       required this.updatedAt,
       required this.amount,
       required final List<User> user,
-      required this.assetType})
+      required this.category})
       : _user = user;
 
   @override
@@ -201,11 +214,11 @@ class _$TransactionDetailImpl implements _TransactionDetail {
   }
 
   @override
-  final AssetType assetType;
+  final TransactionCategory category;
 
   @override
   String toString() {
-    return 'TransactionDetail(title: $title, imgUrl: $imgUrl, createdAt: $createdAt, updatedAt: $updatedAt, amount: $amount, user: $user, assetType: $assetType)';
+    return 'TransactionDetail(title: $title, imgUrl: $imgUrl, createdAt: $createdAt, updatedAt: $updatedAt, amount: $amount, user: $user, category: $category)';
   }
 
   @override
@@ -221,13 +234,13 @@ class _$TransactionDetailImpl implements _TransactionDetail {
                 other.updatedAt == updatedAt) &&
             (identical(other.amount, amount) || other.amount == amount) &&
             const DeepCollectionEquality().equals(other._user, _user) &&
-            (identical(other.assetType, assetType) ||
-                other.assetType == assetType));
+            (identical(other.category, category) ||
+                other.category == category));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, title, imgUrl, createdAt,
-      updatedAt, amount, const DeepCollectionEquality().hash(_user), assetType);
+      updatedAt, amount, const DeepCollectionEquality().hash(_user), category);
 
   @JsonKey(ignore: true)
   @override
@@ -245,7 +258,7 @@ abstract class _TransactionDetail implements TransactionDetail {
       required final DateTime updatedAt,
       required final double amount,
       required final List<User> user,
-      required final AssetType assetType}) = _$TransactionDetailImpl;
+      required final TransactionCategory category}) = _$TransactionDetailImpl;
 
   @override
   String get title;
@@ -260,7 +273,7 @@ abstract class _TransactionDetail implements TransactionDetail {
   @override
   List<User> get user;
   @override
-  AssetType get assetType;
+  TransactionCategory get category;
   @override
   @JsonKey(ignore: true)
   _$$TransactionDetailImplCopyWith<_$TransactionDetailImpl> get copyWith =>

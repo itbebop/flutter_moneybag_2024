@@ -1,4 +1,5 @@
 import 'package:flutter_moneybag_2024/domain/enums/asset_types.dart';
+import 'package:flutter_moneybag_2024/domain/model/transaction_category.dart';
 import 'package:flutter_moneybag_2024/domain/model/user.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -13,6 +14,6 @@ class TransactionDetail with _$TransactionDetail {
     required DateTime updatedAt,
     required double amount,
     required List<User> user,
-    required AssetType assetType,
+    required TransactionCategory category,
   }) = _TransactionDetail;
 }
