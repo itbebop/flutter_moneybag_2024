@@ -66,6 +66,7 @@ class TransactionList extends StatelessWidget {
               amount: transaction.amount,
               imgUrl: transaction.imgUrl,
               createdAt: createdAtFormatted,
+              category: transaction.category,
             ),
             const SizedBox(height: 16),
           ],

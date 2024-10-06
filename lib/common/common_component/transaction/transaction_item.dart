@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_moneybag_2024/common/common.dart';
 import 'package:flutter_moneybag_2024/common/theme/ui_config.dart';
-import 'package:flutter_moneybag_2024/domain/enums/asset_types.dart';
+import 'package:flutter_moneybag_2024/domain/model/transaction_category.dart';
 
 class TransactionItem extends StatelessWidget {
   final String title;
   final String imgUrl;
   final String createdAt;
   final double amount;
-  final AssetType assetType;
-  const TransactionItem({super.key, required this.title, required this.imgUrl, required this.createdAt, required this.amount, required this.assetType});
+  final TransactionCategory category;
+  const TransactionItem({super.key, required this.title, required this.imgUrl, required this.createdAt, required this.amount, required this.category});
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class TransactionItem extends StatelessWidget {
             width: 70,
             child: Center(
                 child: Text(
-              '이자',
+              category.name,
               style: UiConfig.extraSmallStyle.copyWith(color: UiConfig.whiteColor),
             )),
           ),

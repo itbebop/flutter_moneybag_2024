@@ -16,6 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$TransactionDetail {
+  int get transactionId => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get imgUrl => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
@@ -36,7 +37,8 @@ abstract class $TransactionDetailCopyWith<$Res> {
       _$TransactionDetailCopyWithImpl<$Res, TransactionDetail>;
   @useResult
   $Res call(
-      {String title,
+      {int transactionId,
+      String title,
       String imgUrl,
       DateTime createdAt,
       DateTime updatedAt,
@@ -60,6 +62,7 @@ class _$TransactionDetailCopyWithImpl<$Res, $Val extends TransactionDetail>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? transactionId = null,
     Object? title = null,
     Object? imgUrl = null,
     Object? createdAt = null,
@@ -69,6 +72,10 @@ class _$TransactionDetailCopyWithImpl<$Res, $Val extends TransactionDetail>
     Object? category = null,
   }) {
     return _then(_value.copyWith(
+      transactionId: null == transactionId
+          ? _value.transactionId
+          : transactionId // ignore: cast_nullable_to_non_nullable
+              as int,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -118,7 +125,8 @@ abstract class _$$TransactionDetailImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String title,
+      {int transactionId,
+      String title,
       String imgUrl,
       DateTime createdAt,
       DateTime updatedAt,
@@ -141,6 +149,7 @@ class __$$TransactionDetailImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? transactionId = null,
     Object? title = null,
     Object? imgUrl = null,
     Object? createdAt = null,
@@ -150,6 +159,10 @@ class __$$TransactionDetailImplCopyWithImpl<$Res>
     Object? category = null,
   }) {
     return _then(_$TransactionDetailImpl(
+      transactionId: null == transactionId
+          ? _value.transactionId
+          : transactionId // ignore: cast_nullable_to_non_nullable
+              as int,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -186,7 +199,8 @@ class __$$TransactionDetailImplCopyWithImpl<$Res>
 
 class _$TransactionDetailImpl implements _TransactionDetail {
   const _$TransactionDetailImpl(
-      {required this.title,
+      {required this.transactionId,
+      required this.title,
       required this.imgUrl,
       required this.createdAt,
       required this.updatedAt,
@@ -195,6 +209,8 @@ class _$TransactionDetailImpl implements _TransactionDetail {
       required this.category})
       : _user = user;
 
+  @override
+  final int transactionId;
   @override
   final String title;
   @override
@@ -218,7 +234,7 @@ class _$TransactionDetailImpl implements _TransactionDetail {
 
   @override
   String toString() {
-    return 'TransactionDetail(title: $title, imgUrl: $imgUrl, createdAt: $createdAt, updatedAt: $updatedAt, amount: $amount, user: $user, category: $category)';
+    return 'TransactionDetail(transactionId: $transactionId, title: $title, imgUrl: $imgUrl, createdAt: $createdAt, updatedAt: $updatedAt, amount: $amount, user: $user, category: $category)';
   }
 
   @override
@@ -226,6 +242,8 @@ class _$TransactionDetailImpl implements _TransactionDetail {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TransactionDetailImpl &&
+            (identical(other.transactionId, transactionId) ||
+                other.transactionId == transactionId) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.imgUrl, imgUrl) || other.imgUrl == imgUrl) &&
             (identical(other.createdAt, createdAt) ||
@@ -239,8 +257,16 @@ class _$TransactionDetailImpl implements _TransactionDetail {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, title, imgUrl, createdAt,
-      updatedAt, amount, const DeepCollectionEquality().hash(_user), category);
+  int get hashCode => Object.hash(
+      runtimeType,
+      transactionId,
+      title,
+      imgUrl,
+      createdAt,
+      updatedAt,
+      amount,
+      const DeepCollectionEquality().hash(_user),
+      category);
 
   @JsonKey(ignore: true)
   @override
@@ -252,7 +278,8 @@ class _$TransactionDetailImpl implements _TransactionDetail {
 
 abstract class _TransactionDetail implements TransactionDetail {
   const factory _TransactionDetail(
-      {required final String title,
+      {required final int transactionId,
+      required final String title,
       required final String imgUrl,
       required final DateTime createdAt,
       required final DateTime updatedAt,
@@ -260,6 +287,8 @@ abstract class _TransactionDetail implements TransactionDetail {
       required final List<User> user,
       required final TransactionCategory category}) = _$TransactionDetailImpl;
 
+  @override
+  int get transactionId;
   @override
   String get title;
   @override
