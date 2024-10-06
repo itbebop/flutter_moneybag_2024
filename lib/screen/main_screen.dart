@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_moneybag_2024/common/common_component/app_bottom_navigation_bar.dart';
 import 'package:flutter_moneybag_2024/common/common.dart';
+import 'package:flutter_moneybag_2024/common/common_component/drawer_widget.dart';
 import 'package:flutter_moneybag_2024/common/common_component/floating_add_button/floating_add_button.dart';
 import 'package:flutter_moneybag_2024/router/router.dart';
 import 'package:flutter_moneybag_2024/screen/tab/Asset/asset_screen.dart';
@@ -41,15 +42,8 @@ class _MainScreenState extends ConsumerState<MainScreen> {
               ),
               backgroundColor: UiConfig.backgroundColor,
             ),
-            drawer: Drawer(
-              child: ListView(
-                padding: EdgeInsets.zero,
-                children: const [
-                  DrawerHeader(
-                    child: Text('Header'),
-                  )
-                ],
-              ),
+            drawer: const Drawer(
+              child: DrawerWidget(),
             ),
             body: Consumer(
               builder: (context, ref, _) {
