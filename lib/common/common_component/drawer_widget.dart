@@ -21,53 +21,52 @@ class _DrawerWidgetState extends State<DrawerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    bool isLogin = false;
+    // bool isLogin = false;
     return SafeArea(
       child: Material(
         color: Colors.transparent,
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
-            isLogin
-                ? UserAccountsDrawerHeader(
-                    currentAccountPicture: CircleAvatar(
-                      // 현재 계정 이미지 set
-                      backgroundImage: NetworkImage(picSum(301)),
-                      backgroundColor: Colors.white,
-                    ),
-                    accountName: const Text('GANGPRO'),
-                    accountEmail: const Text('gangpro@email.com'),
-                    onDetailsPressed: () {
-                      print('arrow is clicked');
-                    },
-                    decoration: const BoxDecoration(
-                      color: UiConfig.primaryColorSurface,
-                      borderRadius: BorderRadius.only(bottomLeft: Radius.circular(40.0), bottomRight: Radius.circular(40.0)),
-                    ),
-                  )
-                : Column(
-                    children: [
-                      SizedBox(
-                        height: 100.h,
-                        child: Center(
-                            child: TextButton(
-                                onPressed: () {
-                                  context.go('/login');
-                                },
-                                child: const Text('로그인을 해주세요'))),
-                      ),
-                      const Divider(),
-                    ],
-                  ),
+            // isLogin
+            //     ? UserAccountsDrawerHeader(
+            //         currentAccountPicture: CircleAvatar(
+            //           // 현재 계정 이미지 set
+            //           backgroundImage: NetworkImage(picSum(301)),
+            //           backgroundColor: Colors.white,
+            //         ),
+            //         accountName: const Text('GANGPRO'),
+            //         accountEmail: const Text('gangpro@email.com'),
+            //         onDetailsPressed: () {
+            //           print('arrow is clicked');
+            //         },
+            //         decoration: const BoxDecoration(
+            //           color: UiConfig.primaryColorSurface,
+            //           borderRadius: BorderRadius.only(bottomLeft: Radius.circular(40.0), bottomRight: Radius.circular(40.0)),
+            //         ),
+            //       )
+            //     :
+            Column(
+              children: [
+                SizedBox(
+                  height: 100.h,
+                  child: Center(
+                      child: TextButton(
+                          onPressed: () {
+                            context.go('/login');
+                          },
+                          child: const Text('로그인을 해주세요'))),
+                ),
+                const Divider(),
+              ],
+            ),
             ListTile(
               leading: Icon(
                 Icons.home,
                 color: Colors.grey[850],
               ),
               title: const Text('Home'),
-              onTap: () {
-                print('Home is clicked');
-              },
+              onTap: () {},
               trailing: const Icon(Icons.add),
             ),
             ListTile(
@@ -76,9 +75,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                 color: Colors.grey[850],
               ),
               title: const Text('Setting'),
-              onTap: () {
-                print('Setting is clicked');
-              },
+              onTap: () {},
               trailing: const Icon(Icons.add),
             ),
             ListTile(
@@ -87,9 +84,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                 color: Colors.grey[850],
               ),
               title: const Text('Q&A'),
-              onTap: () {
-                print('Q&A is clicked');
-              },
+              onTap: () {},
               trailing: const Icon(Icons.add),
             ),
           ],
