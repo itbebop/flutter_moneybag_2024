@@ -61,6 +61,8 @@ ios/Runner.xcodeproj/project.pbxproj
 
 # firebase
 google-services.json
+firebase.json
+firebase_options.dart
 
 # env
 .env
