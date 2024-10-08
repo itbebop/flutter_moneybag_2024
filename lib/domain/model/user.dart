@@ -2,6 +2,7 @@ import 'package:flutter_moneybag_2024/domain/enums/user_types.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'user.freezed.dart';
+part 'user.g.dart';
 
 @freezed
 class User with _$User {
@@ -12,4 +13,6 @@ class User with _$User {
     required String language,
     required UserType userType,
   }) = _User;
+
+  factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 }
