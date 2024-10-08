@@ -1,6 +1,5 @@
 import 'package:flutter_moneybag_2024/screen/login/login_screen.dart';
 import 'package:flutter_moneybag_2024/screen/main_screen.dart';
-import 'package:flutter_moneybag_2024/screen/tab/home/home_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 

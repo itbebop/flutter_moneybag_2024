@@ -124,8 +124,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    DateTime now = DateTime.now();
-    DateTime focusedDay = DateTime.utc(now.year, selectedMonth.month, now.day);
+    // DateTime now = DateTime.now();
+    // DateTime focusedDay = DateTime.utc(now.year, selectedMonth.month, now.day);
     // final int selectedDay = focusedDay.day;
 
     return Scaffold(
