@@ -34,9 +34,17 @@ class TransactionItem extends StatelessWidget {
             )),
           ),
           Container(
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.only(topLeft: Radius.circular(10.0), bottomLeft: Radius.circular(10.0), bottomRight: Radius.circular(10.0)),
+            decoration: BoxDecoration(
+              borderRadius: const BorderRadius.only(topLeft: Radius.circular(10.0), bottomLeft: Radius.circular(10.0), bottomRight: Radius.circular(10.0)),
               color: UiConfig.whiteColor,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.08),
+                  spreadRadius: 0,
+                  blurRadius: 5.0,
+                  offset: const Offset(10, 10), // changes position of shadow
+                ),
+              ],
             ),
             child: Padding(
               padding: const EdgeInsets.all(16.0),
