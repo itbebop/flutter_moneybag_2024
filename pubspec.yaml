@@ -64,6 +64,7 @@ dependencies:
   flutter_hooks: ^0.20.5
   hooks_riverpod: ^2.5.2
   image_picker: ^1.1.2
+  get_it: ^8.0.0
 
   # ui
   table_calendar: ^3.0.9

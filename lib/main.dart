@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_moneybag_2024/app.dart';
+import 'package:flutter_moneybag_2024/di/di_setup.dart';
 import 'package:flutter_moneybag_2024/firebase_options.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
@@ -22,6 +23,8 @@ void main() async {
   );
 
   await initializeDateFormatting('ko', null);
+
+  diSetup();
   runApp(const MyApp());
 }
 
