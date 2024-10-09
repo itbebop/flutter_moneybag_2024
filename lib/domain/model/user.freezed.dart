@@ -22,6 +22,7 @@ User _$UserFromJson(Map<String, dynamic> json) {
 mixin _$User {
   int get userId => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
+  String get email => throw _privateConstructorUsedError;
   String get imgUrl => throw _privateConstructorUsedError;
   String get language => throw _privateConstructorUsedError;
   UserType get userType => throw _privateConstructorUsedError;
@@ -39,6 +40,7 @@ abstract class $UserCopyWith<$Res> {
   $Res call(
       {int userId,
       String name,
+      String email,
       String imgUrl,
       String language,
       UserType userType});
@@ -59,6 +61,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
   $Res call({
     Object? userId = null,
     Object? name = null,
+    Object? email = null,
     Object? imgUrl = null,
     Object? language = null,
     Object? userType = null,
@@ -71,6 +74,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
               as String,
       imgUrl: null == imgUrl
           ? _value.imgUrl
@@ -98,6 +105,7 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
   $Res call(
       {int userId,
       String name,
+      String email,
       String imgUrl,
       String language,
       UserType userType});
@@ -115,6 +123,7 @@ class __$$UserImplCopyWithImpl<$Res>
   $Res call({
     Object? userId = null,
     Object? name = null,
+    Object? email = null,
     Object? imgUrl = null,
     Object? language = null,
     Object? userType = null,
@@ -127,6 +136,10 @@ class __$$UserImplCopyWithImpl<$Res>
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
               as String,
       imgUrl: null == imgUrl
           ? _value.imgUrl
@@ -150,6 +163,7 @@ class _$UserImpl implements _User {
   const _$UserImpl(
       {required this.userId,
       required this.name,
+      required this.email,
       required this.imgUrl,
       required this.language,
       required this.userType});
@@ -162,6 +176,8 @@ class _$UserImpl implements _User {
   @override
   final String name;
   @override
+  final String email;
+  @override
   final String imgUrl;
   @override
   final String language;
@@ -170,7 +186,7 @@ class _$UserImpl implements _User {
 
   @override
   String toString() {
-    return 'User(userId: $userId, name: $name, imgUrl: $imgUrl, language: $language, userType: $userType)';
+    return 'User(userId: $userId, name: $name, email: $email, imgUrl: $imgUrl, language: $language, userType: $userType)';
   }
 
   @override
@@ -180,6 +196,7 @@ class _$UserImpl implements _User {
             other is _$UserImpl &&
             (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.name, name) || other.name == name) &&
+            (identical(other.email, email) || other.email == email) &&
             (identical(other.imgUrl, imgUrl) || other.imgUrl == imgUrl) &&
             (identical(other.language, language) ||
                 other.language == language) &&
@@ -190,7 +207,7 @@ class _$UserImpl implements _User {
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, userId, name, imgUrl, language, userType);
+      Object.hash(runtimeType, userId, name, email, imgUrl, language, userType);
 
   @JsonKey(ignore: true)
   @override
@@ -210,6 +227,7 @@ abstract class _User implements User {
   const factory _User(
       {required final int userId,
       required final String name,
+      required final String email,
       required final String imgUrl,
       required final String language,
       required final UserType userType}) = _$UserImpl;
@@ -220,6 +238,8 @@ abstract class _User implements User {
   int get userId;
   @override
   String get name;
+  @override
+  String get email;
   @override
   String get imgUrl;
   @override
