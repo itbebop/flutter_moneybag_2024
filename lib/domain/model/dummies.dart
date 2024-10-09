@@ -6,7 +6,7 @@ import 'package:flutter_moneybag_2024/domain/model/transaction_detail.dart';
 import 'package:flutter_moneybag_2024/domain/model/user.dart';
 
 final user1 = User(
-  userId: 1,
+  userId: '1',
   name: '캐시옹',
   imgUrl: picSum(200),
   language: 'ko',
@@ -14,7 +14,7 @@ final user1 = User(
   email: 'abc@naver.com',
 );
 final user2 = User(
-  userId: 2,
+  userId: '2',
   name: '빌라동',
   imgUrl: picSum(300),
   language: 'ko',
@@ -22,7 +22,7 @@ final user2 = User(
   email: 'abc@naver.com',
 );
 final user3 = User(
-  userId: 3,
+  userId: '3',
   name: '택시옹',
   imgUrl: picSum(400),
   language: 'ko',
@@ -30,7 +30,7 @@ final user3 = User(
   email: 'abc@naver.com',
 );
 final user4 = User(
-  userId: 4,
+  userId: '4',
   name: '뤈배',
   imgUrl: picSum(500),
   language: 'ko',
