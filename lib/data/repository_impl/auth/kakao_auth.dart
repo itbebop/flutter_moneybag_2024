@@ -13,7 +13,7 @@ class KakaoAuth implements SocialAuth {
       try {
         kakao.OAuthToken token = await kakao.UserApi.instance.loginWithKakaoTalk();
 
-        var credential = auth.OAuthProvider("oidc.kovel").credential(
+        var credential = auth.OAuthProvider("oidc.moneybag").credential(
           idToken: token.idToken,
           accessToken: token.accessToken,
         );
@@ -40,7 +40,7 @@ class KakaoAuth implements SocialAuth {
         // 카카오톡에 연결된 카카오계정이 없는 경우, 카카오계정으로 로그인
         try {
           kakao.OAuthToken token = await kakao.UserApi.instance.loginWithKakaoAccount();
-          var credential = auth.OAuthProvider("oidc.kovel").credential(
+          var credential = auth.OAuthProvider("oidc.moneybag").credential(
             idToken: token.idToken,
             accessToken: token.accessToken,
           );
@@ -69,7 +69,7 @@ class KakaoAuth implements SocialAuth {
         // kakao 계정으로 token 생성
         kakao.OAuthToken token = await kakao.UserApi.instance.loginWithKakaoAccount();
         // 생성된 토큰으로 firebase credential 생성
-        var credential = auth.OAuthProvider("oidc.kovel").credential(
+        var credential = auth.OAuthProvider("oidc.moneybag").credential(
           idToken: token.idToken,
           accessToken: token.accessToken,
         );
