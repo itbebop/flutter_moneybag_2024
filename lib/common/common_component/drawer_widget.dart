@@ -32,6 +32,7 @@ class _DrawerWidgetState extends ConsumerState<DrawerWidget> {
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
+            // TODO: loading 처리
             userProvider.user != null
                 ? UserAccountsDrawerHeader(
                     currentAccountPicture: CircleAvatar(

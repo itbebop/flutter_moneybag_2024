@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_moneybag_2024/common/common.dart';
 import 'package:flutter_moneybag_2024/common/common_component/floating_add_button/floating_add_button.riverpod.dart';
-import 'package:flutter_moneybag_2024/screen/main_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class FloatingAddButton extends ConsumerWidget {
