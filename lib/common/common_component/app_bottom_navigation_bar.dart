@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_moneybag_2024/common/common.dart';
-import 'package:flutter_moneybag_2024/router/router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+final bottomNavIndexProvider = StateProvider<int>((ref) => 0);
 
 class AppBottomNavigationBar extends ConsumerWidget {
   const AppBottomNavigationBar({super.key});

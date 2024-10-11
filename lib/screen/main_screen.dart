@@ -3,15 +3,12 @@ import 'package:flutter_moneybag_2024/common/common_component/app_bottom_navigat
 import 'package:flutter_moneybag_2024/common/common.dart';
 import 'package:flutter_moneybag_2024/common/common_component/drawer_widget.dart';
 import 'package:flutter_moneybag_2024/common/common_component/floating_add_button/floating_add_button.dart';
-import 'package:flutter_moneybag_2024/router/router.dart';
 import 'package:flutter_moneybag_2024/screen/tab/Asset/asset_screen.dart';
 import 'package:flutter_moneybag_2024/screen/tab/home/home_screen.dart';
 import 'package:flutter_moneybag_2024/screen/tab/my_menu/my_menu_screen.dart';
 import 'package:flutter_moneybag_2024/screen/tab/report/report_screen.dart';
 import 'package:flutter_moneybag_2024/screen/tab/tab_item.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-final currentTabProvider = StateProvider<TabItem>((ref) => TabItem.home);
 
 class MainScreen extends ConsumerStatefulWidget {
   const MainScreen({super.key});
@@ -21,7 +18,8 @@ class MainScreen extends ConsumerStatefulWidget {
 }
 
 class _MainScreenState extends ConsumerState<MainScreen> {
-  TabItem get _currentTab => ref.watch(currentTabProvider);
+  int get _currentTab => ref.watch(bottomNavIndexProvider);
+  bool isButtonVisible = true;
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +28,9 @@ class _MainScreenState extends ConsumerState<MainScreen> {
         children: [
           Scaffold(
             appBar: AppBar(
+              title: Text(_currentTab.toString())
+              // Text(ref.watch(routeInformationProvider).value.location)
+              ,
               leading: Builder(
                 builder: (context) {
                   return IconButton(
@@ -45,6 +46,11 @@ class _MainScreenState extends ConsumerState<MainScreen> {
             drawer: const Drawer(
               child: DrawerWidget(),
             ),
+            onDrawerChanged: (isOpen) {
+              setState(() {
+                isButtonVisible = !isOpen;
+              });
+            },
             body: Consumer(
               builder: (context, ref, _) {
                 final currentIndex = ref.watch(bottomNavIndexProvider);
@@ -64,11 +70,13 @@ class _MainScreenState extends ConsumerState<MainScreen> {
             ),
             bottomNavigationBar: const AppBottomNavigationBar(), // 바텀 내비게이션
           ),
-          AnimatedOpacity(
-            opacity: _currentTab != TabItem.mymenu ? 1 : 0,
-            duration: 300.ms,
-            child: FloatingAddButton(),
-          ),
+          isButtonVisible && _currentTab != 4
+              ? AnimatedOpacity(
+                  opacity: 1,
+                  duration: const Duration(milliseconds: 300),
+                  child: FloatingAddButton(),
+                )
+              : const SizedBox(),
         ],
       ),
     );

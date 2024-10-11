@@ -3,7 +3,19 @@ import 'package:flutter_moneybag_2024/screen/main_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-final bottomNavIndexProvider = StateProvider<int>((ref) => 0);
+// 현재 경로를 제공하는 Provider
+// final currentRouteProvider = Provider<String>((ref) {
+//   final router = ref.watch(routerProvider); // GoRouter를 가져옴
+//   return router.; // 현재 경로를 반환
+// });
+final routeInformationProvider = ChangeNotifierProvider<GoRouteInformationProvider>((ref) {
+  final router = ref.watch(routerProvider);
+  return router.routeInformationProvider;
+});
+
+final currentRouteProvider = Provider((ref) {
+  return ref.watch(routeInformationProvider).value.location;
+});
 
 final routerProvider = Provider<GoRouter>((ref) {
   return GoRouter(
@@ -17,7 +29,7 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: '/login',
         name: 'login',
-        builder: (context, state) => const LoginScreen(), // MainPage를 경로로 설정
+        builder: (context, state) => const LoginScreen(),
       ),
     ],
   );

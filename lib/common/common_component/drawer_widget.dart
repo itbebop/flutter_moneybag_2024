@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_moneybag_2024/common/common.dart';
 import 'package:flutter_moneybag_2024/core/provider/user_state_notifier.dart';
-import 'package:flutter_moneybag_2024/domain/model/user.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -41,10 +40,8 @@ class _DrawerWidgetState extends ConsumerState<DrawerWidget> {
                       backgroundColor: Colors.white,
                     ),
                     accountName: Text(userProvider.user!.name),
-                    accountEmail: Text(userProvider.user!.email ?? ''),
-                    onDetailsPressed: () {
-                      print('arrow is clicked');
-                    },
+                    accountEmail: Text(userProvider.user!.email),
+                    onDetailsPressed: () {},
                     decoration: const BoxDecoration(
                       color: UiConfig.primaryColorSurface,
                       borderRadius: BorderRadius.only(bottomLeft: Radius.circular(40.0), bottomRight: Radius.circular(40.0)),

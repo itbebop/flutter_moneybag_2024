@@ -55,12 +55,6 @@ class FloatingAddButton extends ConsumerWidget {
                 padding: EdgeInsets.only(bottom: 30.h, right: MediaQuery.of(context).size.width * 0.43),
                 child: Tap(
                   onTap: () {
-                    final currentTab = ref.read(currentTabProvider);
-                    switch (currentTab) {
-                      case TabItem.home:
-                      case TabItem.report:
-                      case TabItem.mymenu:
-                    }
                     ref.read(floatingButtonStateProvider.notifier).toggleMenu(); // button이 눌러진 것만 알려주고 로직은 따로
                   },
                   child: AnimatedContainer(
