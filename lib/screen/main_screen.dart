@@ -7,7 +7,6 @@ import 'package:flutter_moneybag_2024/screen/tab/Asset/asset_screen.dart';
 import 'package:flutter_moneybag_2024/screen/tab/home/home_screen.dart';
 import 'package:flutter_moneybag_2024/screen/tab/my_menu/my_menu_screen.dart';
 import 'package:flutter_moneybag_2024/screen/tab/report/report_screen.dart';
-import 'package:flutter_moneybag_2024/screen/tab/tab_item.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class MainScreen extends ConsumerStatefulWidget {
