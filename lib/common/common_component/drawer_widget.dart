@@ -50,7 +50,8 @@ class _DrawerWidgetState extends ConsumerState<DrawerWidget> {
                       borderRadius: BorderRadius.only(bottomLeft: Radius.circular(40.0), bottomRight: Radius.circular(40.0)),
                     ),
                   )
-                : 
+                : Column(
+                    children: [
                       SizedBox(
                         height: 100.h,
                         child: Center(
@@ -93,6 +94,6 @@ class _DrawerWidgetState extends ConsumerState<DrawerWidget> {
           ],
         ),
       ),
-    )
+    );
   }
 }
