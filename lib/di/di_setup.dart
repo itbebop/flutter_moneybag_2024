@@ -4,6 +4,7 @@ import 'package:flutter_moneybag_2024/data/repository_impl/user_repository_impl.
 import 'package:flutter_moneybag_2024/domain/repository/user_repository.dart';
 import 'package:flutter_moneybag_2024/domain/usecase/check_user_duplicated_usecase.dart';
 import 'package:flutter_moneybag_2024/domain/usecase/create_user_usecase.dart';
+import 'package:flutter_moneybag_2024/domain/usecase/get_user_usecase.dart';
 import 'package:flutter_moneybag_2024/domain/usecase/login_usecase.dart';
 import 'package:flutter_moneybag_2024/domain/usecase/logout_usecase.dart';
 import 'package:get_it/get_it.dart';
@@ -22,4 +23,5 @@ void diSetup() {
   getIt.registerSingleton<LogoutUseCase>(LogoutUseCase(userRepository: getIt()));
   getIt.registerSingleton<CheckUserDuplicatedUseCase>(CheckUserDuplicatedUseCase(userRepository: getIt()));
   getIt.registerSingleton<CreateUserUseCase>(CreateUserUseCase(userRepository: getIt()));
+  getIt.registerSingleton<GetUserUseCase>(GetUserUseCase(userRepository: getIt()));
 }

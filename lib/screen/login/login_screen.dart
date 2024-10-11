@@ -8,7 +8,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 // ignore: unused_import
 import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart' as kakao;
-// ignore: library_prefixes
+// ignore: library_prefixes, unused_import
 import 'package:firebase_auth/firebase_auth.dart' as Auth;
 
 class LoginScreen extends ConsumerWidget {
