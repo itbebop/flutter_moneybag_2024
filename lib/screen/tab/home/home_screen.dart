@@ -1,10 +1,8 @@
-import 'dart:collection';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_moneybag_2024/common/common.dart';
 import 'package:flutter_moneybag_2024/common/common_component/transaction/transaction_item.dart';
 import 'package:flutter_moneybag_2024/common/data/month_list.dart';
-import 'package:flutter_moneybag_2024/domain/model/dummies.dart';
+import 'package:flutter_moneybag_2024/common/data/transaction_event.dart';
 import 'package:flutter_moneybag_2024/domain/model/transaction_detail.dart';
 import 'package:flutter_moneybag_2024/screen/tab/home/component/asset_list.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -44,73 +42,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   }
 
   List<TransactionDetail> _getEventsForDay(DateTime day) {
-    return _kTransactionEvents[day] ?? [];
-  }
-
-  // 트랜잭션 데이터를 날짜별로 매핑
-  static final Map<DateTime, List<TransactionDetail>> _kTransactionEvents = LinkedHashMap<DateTime, List<TransactionDetail>>(
-    equals: isSameDay,
-    hashCode: (DateTime key) => key.day * 1000000 + key.month * 10000 + key.year,
-  )..addAll(_generateSampleTransactions());
-  static Map<DateTime, List<TransactionDetail>> _generateSampleTransactions() {
-    DateTime now = DateTime.now();
-    return {
-      now: [],
-      now.subtract(const Duration(days: 1)): [
-        TransactionDetail(
-          transactionId: 11,
-          title: '커피 2잔',
-          amount: -12000,
-          imgUrl: 'https://picsum.photos/203',
-          createdAt: now.subtract(const Duration(days: 1)),
-          updatedAt: now.subtract(const Duration(minutes: 10)),
-          user: [user1],
-          category: transactionCategory4,
-        ),
-        TransactionDetail(
-          transactionId: 12,
-          title: '점심(피자)',
-          amount: -30000,
-          imgUrl: 'https://picsum.photos/204',
-          createdAt: now.subtract(const Duration(days: 1)),
-          updatedAt: now.subtract(const Duration(minutes: 10)),
-          user: [user1],
-          category: transactionCategory3,
-        ),
-        TransactionDetail(
-          transactionId: 13,
-          title: '파킹통장 이자',
-          amount: 86000,
-          imgUrl: 'https://picsum.photos/206',
-          createdAt: now.subtract(const Duration(days: 1)),
-          updatedAt: now.subtract(const Duration(minutes: 10)),
-          user: [user1],
-          category: transactionCategory1,
-        ),
-      ],
-      now.subtract(const Duration(days: 2)): [
-        TransactionDetail(
-          transactionId: 14,
-          title: '9월 월급',
-          amount: 5600000,
-          imgUrl: 'https://picsum.photos/206',
-          createdAt: now.subtract(const Duration(days: 2)),
-          updatedAt: now.subtract(const Duration(minutes: 10)),
-          user: [user1, user2],
-          category: transactionCategory2,
-        ),
-        TransactionDetail(
-          transactionId: 15,
-          title: '미용',
-          amount: -20000,
-          imgUrl: 'https://picsum.photos/206',
-          createdAt: now.subtract(const Duration(days: 2)),
-          updatedAt: now.subtract(const Duration(minutes: 10)),
-          user: [user1],
-          category: transactionCategory2,
-        ),
-      ],
-    };
+    return kTransactionEvents[day] ?? [];
   }
 
   void _onDaySelected(DateTime selectedDay, DateTime focusedDay) {
