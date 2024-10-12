@@ -1,0 +1,28 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_moneybag_2024/data/data_source/transaction_data_source.dart';
+import 'package:flutter_moneybag_2024/domain/model/transaction_detail.dart';
+
+class TransactionDataSourceImpl implements TransactionDataSource {
+  final _transactionRef = FirebaseFirestore.instance
+      .collection('transaction')
+      .withConverter<TransactionDetail>(fromFirestore: (snapshot, _) => TransactionDetail.fromJson(snapshot.data()!), toFirestore: (snapshot, _) => snapshot.toJson());
+  @override
+  Future<void> createTransaction({required TransactionDetail transaction}) async {
+    await _transactionRef.add(transaction).then((value) => _transactionRef.doc(value.id).update({'transactionId': value.id}));
+  }
+
+  @override
+  Future<List<TransactionDetail>> getTransactionList() async {
+    return await _transactionRef.orderBy('createAt', descending: true).get().then((value) => value.docs.map((e) => e.data()).toList());
+  }
+
+  @override
+  Future<void> updateTransaction({required TransactionDetail transaction}) async {
+    await _transactionRef.doc(transaction.transactionId).set(transaction);
+  }
+
+  @override
+  Future<void> deleteTransaction({required String transactionId}) async {
+    await _transactionRef.doc(transactionId).delete();
+  }
+}
