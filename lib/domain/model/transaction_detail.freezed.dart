@@ -20,7 +20,7 @@ TransactionDetail _$TransactionDetailFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$TransactionDetail {
-  int get transactionId => throw _privateConstructorUsedError;
+  String get transactionId => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get imgUrl => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
@@ -42,7 +42,7 @@ abstract class $TransactionDetailCopyWith<$Res> {
       _$TransactionDetailCopyWithImpl<$Res, TransactionDetail>;
   @useResult
   $Res call(
-      {int transactionId,
+      {String transactionId,
       String title,
       String imgUrl,
       DateTime createdAt,
@@ -80,7 +80,7 @@ class _$TransactionDetailCopyWithImpl<$Res, $Val extends TransactionDetail>
       transactionId: null == transactionId
           ? _value.transactionId
           : transactionId // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -130,7 +130,7 @@ abstract class _$$TransactionDetailImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int transactionId,
+      {String transactionId,
       String title,
       String imgUrl,
       DateTime createdAt,
@@ -167,7 +167,7 @@ class __$$TransactionDetailImplCopyWithImpl<$Res>
       transactionId: null == transactionId
           ? _value.transactionId
           : transactionId // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -218,7 +218,7 @@ class _$TransactionDetailImpl implements _TransactionDetail {
       _$$TransactionDetailImplFromJson(json);
 
   @override
-  final int transactionId;
+  final String transactionId;
   @override
   final String title;
   @override
@@ -294,7 +294,7 @@ class _$TransactionDetailImpl implements _TransactionDetail {
 
 abstract class _TransactionDetail implements TransactionDetail {
   const factory _TransactionDetail(
-      {required final int transactionId,
+      {required final String transactionId,
       required final String title,
       required final String imgUrl,
       required final DateTime createdAt,
@@ -307,7 +307,7 @@ abstract class _TransactionDetail implements TransactionDetail {
       _$TransactionDetailImpl.fromJson;
 
   @override
-  int get transactionId;
+  String get transactionId;
   @override
   String get title;
   @override

@@ -7,7 +7,7 @@ Map<DateTime, List<TransactionDetail>> generateSampleTransactions() {
     now: [],
     now.subtract(const Duration(days: 1)): [
       TransactionDetail(
-        transactionId: 11,
+        transactionId: '11',
         title: '커피 2잔',
         amount: -12000,
         imgUrl: 'https://picsum.photos/203',
@@ -17,7 +17,7 @@ Map<DateTime, List<TransactionDetail>> generateSampleTransactions() {
         category: transactionCategory4,
       ),
       TransactionDetail(
-        transactionId: 12,
+        transactionId: '12',
         title: '점심(피자)',
         amount: -30000,
         imgUrl: 'https://picsum.photos/204',
@@ -27,7 +27,7 @@ Map<DateTime, List<TransactionDetail>> generateSampleTransactions() {
         category: transactionCategory3,
       ),
       TransactionDetail(
-        transactionId: 13,
+        transactionId: '13',
         title: '파킹통장 이자',
         amount: 86000,
         imgUrl: 'https://picsum.photos/206',
@@ -39,7 +39,7 @@ Map<DateTime, List<TransactionDetail>> generateSampleTransactions() {
     ],
     now.subtract(const Duration(days: 2)): [
       TransactionDetail(
-        transactionId: 14,
+        transactionId: '14',
         title: '9월 월급',
         amount: 5600000,
         imgUrl: 'https://picsum.photos/206',
@@ -49,7 +49,7 @@ Map<DateTime, List<TransactionDetail>> generateSampleTransactions() {
         category: transactionCategory2,
       ),
       TransactionDetail(
-        transactionId: 15,
+        transactionId: '15',
         title: '미용',
         amount: -20000,
         imgUrl: 'https://picsum.photos/206',

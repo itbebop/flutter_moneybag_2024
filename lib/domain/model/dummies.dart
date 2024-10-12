@@ -51,7 +51,7 @@ const transactionCategory3 = TransactionCategory(id: 1, name: '식비', type: As
 const transactionCategory4 = TransactionCategory(id: 1, name: '기타', type: AssetType.expense);
 
 final transaction1 = TransactionDetail(
-  transactionId: 1,
+  transactionId: '1',
   title: '장보기',
   amount: -86000,
   imgUrl: picSum(201),
@@ -61,7 +61,7 @@ final transaction1 = TransactionDetail(
   category: transactionCategory3,
 );
 final transaction2 = TransactionDetail(
-  transactionId: 2,
+  transactionId: '2',
   title: '빌려준 돈',
   amount: 360000,
   imgUrl: picSum(202),
@@ -71,7 +71,7 @@ final transaction2 = TransactionDetail(
   category: transactionCategory4,
 );
 final transaction3 = TransactionDetail(
-  transactionId: 3,
+  transactionId: '3',
   title: '커피 2잔',
   amount: -12000,
   imgUrl: picSum(203),
@@ -81,7 +81,7 @@ final transaction3 = TransactionDetail(
   category: transactionCategory4,
 );
 final transaction4 = TransactionDetail(
-  transactionId: 4,
+  transactionId: '4',
   title: '점심(피자)',
   amount: -30000,
   imgUrl: picSum(204),
@@ -91,7 +91,7 @@ final transaction4 = TransactionDetail(
   category: transactionCategory3,
 );
 final transaction5 = TransactionDetail(
-  transactionId: 5,
+  transactionId: '5',
   title: '파킹통장 이자',
   amount: 86000,
   imgUrl: picSum(206),
@@ -101,7 +101,7 @@ final transaction5 = TransactionDetail(
   category: transactionCategory1,
 );
 final transaction6 = TransactionDetail(
-  transactionId: 6,
+  transactionId: '6',
   title: '9월 월급',
   amount: 5600000,
   imgUrl: picSum(206),
@@ -111,7 +111,7 @@ final transaction6 = TransactionDetail(
   category: transactionCategory2,
 );
 final transaction7 = TransactionDetail(
-  transactionId: 7,
+  transactionId: '7',
   title: '미용',
   amount: -20000,
   imgUrl: picSum(206),
@@ -121,7 +121,7 @@ final transaction7 = TransactionDetail(
   category: transactionCategory4,
 );
 final transaction8 = TransactionDetail(
-  transactionId: 8,
+  transactionId: '8',
   title: '이자',
   amount: 210000,
   imgUrl: picSum(206),
@@ -131,7 +131,7 @@ final transaction8 = TransactionDetail(
   category: transactionCategory1,
 );
 final transaction9 = TransactionDetail(
-  transactionId: 9,
+  transactionId: '9',
   title: '9월 월급',
   amount: 5600000,
   imgUrl: picSum(206),
@@ -141,7 +141,7 @@ final transaction9 = TransactionDetail(
   category: transactionCategory2,
 );
 final transaction10 = TransactionDetail(
-  transactionId: 10,
+  transactionId: '10',
   title: '9월 월급',
   amount: 5600000,
   imgUrl: picSum(206),

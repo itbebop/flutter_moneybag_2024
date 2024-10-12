@@ -9,7 +9,7 @@ part of 'transaction_detail.dart';
 _$TransactionDetailImpl _$$TransactionDetailImplFromJson(
         Map<String, dynamic> json) =>
     _$TransactionDetailImpl(
-      transactionId: (json['transactionId'] as num).toInt(),
+      transactionId: json['transactionId'] as String,
       title: json['title'] as String,
       imgUrl: json['imgUrl'] as String,
       createdAt: DateTime.parse(json['createdAt'] as String),
