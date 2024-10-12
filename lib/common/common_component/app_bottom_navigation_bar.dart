@@ -50,7 +50,7 @@ class AppBottomNavigationBar extends ConsumerWidget {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person_2_outlined),
-            label: 'My Menu', // TODO: 내메뉴에서는 Floating button 안보이게
+            label: 'My Menu',
           ),
         ],
       ),
