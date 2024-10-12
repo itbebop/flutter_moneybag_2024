@@ -14,6 +14,10 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
+TransactionDetail _$TransactionDetailFromJson(Map<String, dynamic> json) {
+  return _TransactionDetail.fromJson(json);
+}
+
 /// @nodoc
 mixin _$TransactionDetail {
   int get transactionId => throw _privateConstructorUsedError;
@@ -25,6 +29,7 @@ mixin _$TransactionDetail {
   List<User> get user => throw _privateConstructorUsedError;
   TransactionCategory get category => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $TransactionDetailCopyWith<TransactionDetail> get copyWith =>
       throw _privateConstructorUsedError;
@@ -196,7 +201,7 @@ class __$$TransactionDetailImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$TransactionDetailImpl implements _TransactionDetail {
   const _$TransactionDetailImpl(
       {required this.transactionId,
@@ -208,6 +213,9 @@ class _$TransactionDetailImpl implements _TransactionDetail {
       required final List<User> user,
       required this.category})
       : _user = user;
+
+  factory _$TransactionDetailImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TransactionDetailImplFromJson(json);
 
   @override
   final int transactionId;
@@ -256,6 +264,7 @@ class _$TransactionDetailImpl implements _TransactionDetail {
                 other.category == category));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -274,6 +283,13 @@ class _$TransactionDetailImpl implements _TransactionDetail {
   _$$TransactionDetailImplCopyWith<_$TransactionDetailImpl> get copyWith =>
       __$$TransactionDetailImplCopyWithImpl<_$TransactionDetailImpl>(
           this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$TransactionDetailImplToJson(
+      this,
+    );
+  }
 }
 
 abstract class _TransactionDetail implements TransactionDetail {
@@ -286,6 +302,9 @@ abstract class _TransactionDetail implements TransactionDetail {
       required final double amount,
       required final List<User> user,
       required final TransactionCategory category}) = _$TransactionDetailImpl;
+
+  factory _TransactionDetail.fromJson(Map<String, dynamic> json) =
+      _$TransactionDetailImpl.fromJson;
 
   @override
   int get transactionId;

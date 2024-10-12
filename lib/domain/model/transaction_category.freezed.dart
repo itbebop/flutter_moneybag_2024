@@ -14,6 +14,10 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
+TransactionCategory _$TransactionCategoryFromJson(Map<String, dynamic> json) {
+  return _TransactionCategory.fromJson(json);
+}
+
 /// @nodoc
 mixin _$TransactionCategory {
   int get id => throw _privateConstructorUsedError; // 고유 ID
@@ -21,6 +25,7 @@ mixin _$TransactionCategory {
       throw _privateConstructorUsedError; // 유형 이름 (예: Salary, Rent 등)
   AssetType get type => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $TransactionCategoryCopyWith<TransactionCategory> get copyWith =>
       throw _privateConstructorUsedError;
@@ -113,10 +118,13 @@ class __$$TransactionCategoryImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$TransactionCategoryImpl implements _TransactionCategory {
   const _$TransactionCategoryImpl(
       {required this.id, required this.name, required this.type});
+
+  factory _$TransactionCategoryImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TransactionCategoryImplFromJson(json);
 
   @override
   final int id;
@@ -142,6 +150,7 @@ class _$TransactionCategoryImpl implements _TransactionCategory {
             (identical(other.type, type) || other.type == type));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, name, type);
 
@@ -151,6 +160,13 @@ class _$TransactionCategoryImpl implements _TransactionCategory {
   _$$TransactionCategoryImplCopyWith<_$TransactionCategoryImpl> get copyWith =>
       __$$TransactionCategoryImplCopyWithImpl<_$TransactionCategoryImpl>(
           this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$TransactionCategoryImplToJson(
+      this,
+    );
+  }
 }
 
 abstract class _TransactionCategory implements TransactionCategory {
@@ -158,6 +174,9 @@ abstract class _TransactionCategory implements TransactionCategory {
       {required final int id,
       required final String name,
       required final AssetType type}) = _$TransactionCategoryImpl;
+
+  factory _TransactionCategory.fromJson(Map<String, dynamic> json) =
+      _$TransactionCategoryImpl.fromJson;
 
   @override
   int get id;

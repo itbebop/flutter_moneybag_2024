@@ -3,6 +3,7 @@ import 'package:flutter_moneybag_2024/domain/model/user.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'transaction_detail.freezed.dart';
+part 'transaction_detail.g.dart';
 
 @freezed
 class TransactionDetail with _$TransactionDetail {
@@ -16,4 +17,6 @@ class TransactionDetail with _$TransactionDetail {
     required List<User> user,
     required TransactionCategory category,
   }) = _TransactionDetail;
+
+  factory TransactionDetail.fromJson(Map<String, dynamic> json) => _$TransactionDetailFromJson(json);
 }
