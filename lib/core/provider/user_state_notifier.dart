@@ -1,23 +1,24 @@
-import 'package:flutter_moneybag_2024/core/provider/user_state.dart';
 import 'package:flutter_moneybag_2024/di/di_setup.dart';
+import 'package:flutter_moneybag_2024/domain/usecase/get_user_usecase.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 
 import '../../domain/model/user.dart';
 
-final userStateProvier = StateNotifierProvider<UserStateNotifier, UserState>((ref) => UserStateNotifier(UserState(
-      getUserUseCase: getIt(),
-    )));
+final userStateProvier = StateNotifierProvider<UserStateNotifier, AsyncValue<User>>((ref) => UserStateNotifier(getIt()));
 
-class UserStateNotifier extends StateNotifier<UserState> {
-  UserStateNotifier(super._state);
+class UserStateNotifier extends StateNotifier<AsyncValue<User>> {
+  final GetUserUseCase getUserUseCase;
 
-  Future<User> fetchUser() async {
-    final user = await state.getUserUseCase.execute(userId: auth.FirebaseAuth.instance.currentUser!.uid);
+  UserStateNotifier(this.getUserUseCase) : super(const AsyncValue.loading());
 
-    // 상태에 유저 저장
-    state = state.copyWith(user: user);
-
-    return user;
+  Future<void> fetchUser() async {
+    try {
+      state = const AsyncValue.loading(); // 로딩 상태로 변경
+      final user = await getUserUseCase.execute(userId: auth.FirebaseAuth.instance.currentUser!.uid);
+      state = AsyncValue.data(user); // 성공적으로 데이터를 가져오면 상태 업데이트
+    } catch (error, stackTrace) {
+      state = AsyncValue.error(error, stackTrace); // 에러 발생 시 상태 업데이트
+    }
   }
 }

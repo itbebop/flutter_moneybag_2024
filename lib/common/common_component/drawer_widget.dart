@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_moneybag_2024/common/common.dart';
+import 'package:flutter_moneybag_2024/core/provider/user_state.dart';
 import 'package:flutter_moneybag_2024/core/provider/user_state_notifier.dart';
+import 'package:flutter_moneybag_2024/di/di_setup.dart';
+import 'package:flutter_moneybag_2024/domain/model/user.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -24,67 +27,60 @@ class _DrawerWidgetState extends ConsumerState<DrawerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final userProvider = ref.watch(userStateProvier);
+    // userStateProvider는 이미 최상위에서 선언된 프로바이더이므로 다시 선언할 필요가 없음.
+    final userState = ref.watch(userStateProvier); // 상태를 watch하여 UI에 반영
 
     return SafeArea(
       child: Material(
         color: Colors.transparent,
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            // TODO: loading 처리
-            userProvider.user != null
-                ? UserAccountsDrawerHeader(
-                    currentAccountPicture: CircleAvatar(
-                      // 현재 계정 이미지 set
-                      backgroundImage: NetworkImage(picSum(301)),
-                      backgroundColor: Colors.white,
-                    ),
-                    accountName: Text(userProvider.user!.name),
-                    accountEmail: Text(userProvider.user!.email),
-                    onDetailsPressed: () {},
-                    decoration: const BoxDecoration(
-                      color: UiConfig.primaryColorSurface,
-                      borderRadius: BorderRadius.only(bottomLeft: Radius.circular(40.0), bottomRight: Radius.circular(40.0)),
-                    ),
-                  )
-                : Column(
-                    children: [
-                      SizedBox(
-                        height: 100.h,
-                        child: Center(
-                            child: TextButton(
-                                onPressed: () {
-                                  context.push('/login');
-                                },
-                                child: const Text('로그인을 해주세요'))),
+        child: Column(
+          children: [
+            SizedBox(
+              height: 200.h,
+              child: userState.when(
+                loading: () => const Center(
+                  child: CircularProgressIndicator(), // 로딩 중인 경우 Progress Indicator 표시
+                ),
+                error: (error, stackTrace) => const Center(
+                  child: Text('잠시 후 다시 시도해주세요.'), // 에러 발생 시 에러 메시지 표시
+                ),
+                data: (user) => ListView(
+                  padding: EdgeInsets.zero,
+                  children: <Widget>[
+                    UserAccountsDrawerHeader(
+                      currentAccountPicture: CircleAvatar(
+                        backgroundImage: NetworkImage(picSum(301)), // 사용자 이미지
+                        backgroundColor: Colors.white,
                       ),
-                      const Divider(),
-                    ],
-                  ),
-            ListTile(
-              leading: Icon(
-                Icons.home,
-                color: Colors.grey[850],
+                      accountName: Text(user.name),
+                      accountEmail: Text(user.email),
+                      onDetailsPressed: () {},
+                      decoration: const BoxDecoration(
+                        color: UiConfig.primaryColorSurface,
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(40.0),
+                          bottomRight: Radius.circular(40.0),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
+            ),
+            ListTile(
+              leading: Icon(Icons.home, color: Colors.grey[850]),
               title: const Text('Home'),
               onTap: () {},
               trailing: const Icon(Icons.add),
             ),
             ListTile(
-              leading: Icon(
-                Icons.settings,
-                color: Colors.grey[850],
-              ),
+              leading: Icon(Icons.settings, color: Colors.grey[850]),
               title: const Text('Setting'),
               onTap: () {},
               trailing: const Icon(Icons.add),
             ),
             ListTile(
-              leading: Icon(
-                Icons.question_answer,
-                color: Colors.grey[850],
-              ),
+              leading: Icon(Icons.question_answer, color: Colors.grey[850]),
               title: const Text('Q&A'),
               onTap: () {},
               trailing: const Icon(Icons.add),
