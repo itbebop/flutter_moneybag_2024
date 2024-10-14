@@ -27,9 +27,6 @@ class _MainScreenState extends ConsumerState<MainScreen> {
         children: [
           Scaffold(
             appBar: AppBar(
-              title: Text(_currentTab.toString())
-              // Text(ref.watch(routeInformationProvider).value.location)
-              ,
               leading: Builder(
                 builder: (context) {
                   return IconButton(

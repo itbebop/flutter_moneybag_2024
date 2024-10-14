@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_moneybag_2024/common/common.dart';
 import 'package:flutter_moneybag_2024/common/common_component/sort_button.dart';
-import 'package:flutter_moneybag_2024/common/common_component/transaction/transaction_list.dart';
+import 'package:flutter_moneybag_2024/screen/tab/report/component/report_transaction_list.dart';
 import 'package:flutter_moneybag_2024/common/data/month_list.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
@@ -48,7 +48,7 @@ class _ReportListFragmentState extends ConsumerState<ReportListFragment> {
       ),
       SizedBox(
           height: 520.0.h,
-          child: TransactionList(
+          child: ReportTransactionList(
             selectedMonth: selectedMonth.month,
           )),
     ]);

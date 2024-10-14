@@ -9,3 +9,7 @@ final Map<DateTime, List<TransactionDetail>> kTransactionEvents = LinkedHashMap<
   equals: isSameDay,
   hashCode: (DateTime key) => key.day * 1000000 + key.month * 10000 + key.year,
 )..addAll(generateSampleTransactions());
+
+List<TransactionDetail> getEventsForDay(DateTime day) {
+  return kTransactionEvents[day] ?? [];
+}

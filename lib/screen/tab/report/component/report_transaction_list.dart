@@ -3,10 +3,11 @@ import 'package:flutter_moneybag_2024/common/common_component/transaction/transa
 import 'package:flutter_moneybag_2024/domain/model/dummies.dart';
 import 'package:intl/intl.dart';
 
-class TransactionList extends StatelessWidget {
+class ReportTransactionList extends StatelessWidget {
   final int selectedMonth;
   final int? selectedDay;
-  const TransactionList({super.key, required this.selectedMonth, this.selectedDay});
+
+  const ReportTransactionList({super.key, required this.selectedMonth, this.selectedDay});
 
   @override
   Widget build(BuildContext context) {
