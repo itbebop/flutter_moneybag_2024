@@ -60,7 +60,25 @@ class FloatingAddButton extends ConsumerWidget {
                     height: 60,
                     padding: const EdgeInsets.symmetric(horizontal: 18),
                     decoration: BoxDecoration(
-                      color: isExpanded ? UiConfig.backgroundColor : UiConfig.secondaryColor,
+                      // color: isExpanded ? UiConfig.backgroundColor : UiConfig.buttonColor,
+                      gradient: !isExpanded
+                          ? const LinearGradient(
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                              colors: [
+                                UiConfig.whiteColor,
+                                UiConfig.buttonColor,
+                                UiConfig.primaryColorSurface,
+                              ],
+                            )
+                          : const LinearGradient(
+                              begin: Alignment.centerLeft,
+                              end: Alignment.centerRight,
+                              colors: [
+                                UiConfig.backgroundColor,
+                                UiConfig.backgroundColor,
+                              ],
+                            ),
                       borderRadius: BorderRadius.circular(30),
                     ),
                     child: Row(mainAxisSize: MainAxisSize.min, children: [

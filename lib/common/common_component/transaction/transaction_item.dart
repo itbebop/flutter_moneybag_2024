@@ -20,7 +20,7 @@ class TransactionItem extends StatelessWidget {
         children: [
           Container(
             decoration: const BoxDecoration(
-              color: UiConfig.secondaryColorSurface,
+              color: UiConfig.secondaryColor,
               borderRadius: BorderRadius.only(topLeft: Radius.circular(5.0), topRight: Radius.circular(5.0)),
             ),
             height: 16,
