@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_moneybag_2024/common/common.dart';
 import 'package:flutter_moneybag_2024/common/data/transaction_event.dart';
 import 'package:flutter_moneybag_2024/domain/model/transaction_detail.dart';
@@ -36,6 +37,20 @@ class Calendar extends StatelessWidget {
         onPageChanged: (focusedDay) {
           focusedDay = now;
         },
+        calendarStyle: const CalendarStyle(
+            // marker 모양
+            markerDecoration: BoxDecoration(
+              color: UiConfig.primaryColorSurface,
+              shape: BoxShape.circle,
+            ),
+            selectedDecoration: BoxDecoration(
+              color: UiConfig.primaryColorSurface,
+              shape: BoxShape.circle,
+            ),
+            todayDecoration: BoxDecoration(
+              color: UiConfig.buttonColor,
+              shape: BoxShape.circle,
+            )),
       ),
     );
   }
