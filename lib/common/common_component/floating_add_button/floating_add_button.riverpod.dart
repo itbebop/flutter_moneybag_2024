@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final floatingButtonStateProvider = StateNotifierProvider<FloatingButtonStateNotifier, FloatingButtonState>(
   (ref) => FloatingButtonStateNotifier(
-    const FloatingButtonState(false, false),
+    const FloatingButtonState(false, false, false),
   ),
 );
 
@@ -20,11 +20,10 @@ class FloatingButtonStateNotifier extends StateNotifier<FloatingButtonState> {
     // return true; // 무조건 바뀌었다고 알려주는 것(편법)
   }
 
-  void toggleMenu() {
+  void toggleCategoryMenu() {
     final isExpanded = state.isExpanded;
     final isSmall = state.isSmall;
-
-    state = state.copyWith(isExpanded: !state.isExpanded, isSmall: needToMakeButtonBigger ? false : true);
+    state = state.copyWith(isExpanded: !isExpanded, isSmall: needToMakeButtonBigger ? false : true);
 
     // 초기화
     if (needToMakeButtonBigger) {
@@ -34,6 +33,7 @@ class FloatingButtonStateNotifier extends StateNotifier<FloatingButtonState> {
     if (!isSmall && !isExpanded) {
       needToMakeButtonBigger = true;
     }
+    if (isSmall) state = state.copyWith(isClassified: !isSmall);
   }
 
   void changeButtonSize(bool isSmall) {
@@ -42,5 +42,11 @@ class FloatingButtonStateNotifier extends StateNotifier<FloatingButtonState> {
     // state = FloatingButtonState(state.isExpanded, isSmall);
 
     state = state.copyWith(isSmall: isSmall);
+  }
+
+  void toggleTransactionMenu() {
+    final isClassified = state.isClassified;
+
+    state = state.copyWith(isClassified: !isClassified);
   }
 }

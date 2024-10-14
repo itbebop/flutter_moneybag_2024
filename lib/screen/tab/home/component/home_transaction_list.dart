@@ -33,7 +33,7 @@ class HomeTransactionList extends StatelessWidget {
                   TransactionItem(
                     title: transaction.title,
                     amount: transaction.amount,
-                    imgUrl: transaction.imgUrl,
+                    imgUrl: transaction.category.imgUrl,
                     createdAt: transaction.createdAt.toString(),
                     category: transaction.category,
                   ),

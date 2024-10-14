@@ -9,7 +9,7 @@ class UiConfig {
   static const Color secondaryTextColor = Color.fromARGB(255, 67, 190, 201);
   static const Color backgroundColor = Color(0xFFFEFBF6);
   static const Color whiteColor = Color(0xFFFFFFFF);
-  static const Color whiteColor1 = Color(0xFF5C6BC0);
+  static const Color greyColor = Colors.black26;
 
   static const MaterialColor black = MaterialColor(0xff282828, color);
   static const Map<int, Color> color = {

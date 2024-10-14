@@ -65,7 +65,7 @@ class ReportTransactionList extends StatelessWidget {
             TransactionItem(
               title: transaction.title,
               amount: transaction.amount,
-              imgUrl: transaction.imgUrl,
+              imgUrl: transaction.category.imgUrl,
               createdAt: createdAtFormatted,
               category: transaction.category,
             ),
