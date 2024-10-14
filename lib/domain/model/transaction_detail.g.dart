@@ -11,7 +11,6 @@ _$TransactionDetailImpl _$$TransactionDetailImplFromJson(
     _$TransactionDetailImpl(
       transactionId: json['transactionId'] as String,
       title: json['title'] as String,
-      imgUrl: json['imgUrl'] as String,
       createdAt: DateTime.parse(json['createdAt'] as String),
       updatedAt: DateTime.parse(json['updatedAt'] as String),
       amount: (json['amount'] as num).toDouble(),
@@ -27,7 +26,6 @@ Map<String, dynamic> _$$TransactionDetailImplToJson(
     <String, dynamic>{
       'transactionId': instance.transactionId,
       'title': instance.title,
-      'imgUrl': instance.imgUrl,
       'createdAt': instance.createdAt.toIso8601String(),
       'updatedAt': instance.updatedAt.toIso8601String(),
       'amount': instance.amount,

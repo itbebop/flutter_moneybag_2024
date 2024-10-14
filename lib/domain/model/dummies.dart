@@ -38,23 +38,72 @@ final user4 = User(
   email: 'abc@naver.com',
 );
 
-const transactionIncome1 = TransactionCategory(id: 1, name: '이자', type: AssetType.income);
-const transactionIncome2 = TransactionCategory(id: 2, name: '월급', type: AssetType.income);
-const transactionIncome3 = TransactionCategory(id: 3, name: '임대료', type: AssetType.income);
-const transactionExpense1 = TransactionCategory(id: 4, name: '식비', type: AssetType.expense);
-const transactionExpense2 = TransactionCategory(id: 5, name: '주거비', type: AssetType.expense);
-const transactionExpense3 = TransactionCategory(id: 6, name: '쇼핑', type: AssetType.expense);
+final transactionIncome1 = TransactionCategory(
+  id: 1,
+  name: '이자',
+  type: AssetType.income,
+  imgUrl: picSum(201),
+);
+final transactionIncome2 = TransactionCategory(
+  id: 2,
+  name: '월급',
+  type: AssetType.income,
+  imgUrl: picSum(202),
+);
+final transactionIncome3 = TransactionCategory(
+  id: 3,
+  name: '임대료',
+  type: AssetType.income,
+  imgUrl: picSum(202),
+);
+final transactionExpense1 = TransactionCategory(
+  id: 4,
+  name: '식비',
+  type: AssetType.expense,
+  imgUrl: picSum(202),
+);
+final transactionExpense2 = TransactionCategory(
+  id: 5,
+  name: '주거비',
+  type: AssetType.expense,
+  imgUrl: picSum(202),
+);
+final transactionExpense3 = TransactionCategory(
+  id: 6,
+  name: '쇼핑',
+  type: AssetType.expense,
+  imgUrl: picSum(202),
+);
 DateTime now = DateTime.now();
-const transactionCategory1 = TransactionCategory(id: 1, name: '이자', type: AssetType.income);
-const transactionCategory2 = TransactionCategory(id: 1, name: '월급', type: AssetType.income);
-const transactionCategory3 = TransactionCategory(id: 1, name: '식비', type: AssetType.expense);
-const transactionCategory4 = TransactionCategory(id: 1, name: '기타', type: AssetType.expense);
+final transactionCategory1 = TransactionCategory(
+  id: 1,
+  name: '이자',
+  type: AssetType.income,
+  imgUrl: picSum(202),
+);
+final transactionCategory2 = TransactionCategory(
+  id: 1,
+  name: '월급',
+  type: AssetType.income,
+  imgUrl: picSum(202),
+);
+final transactionCategory3 = TransactionCategory(
+  id: 1,
+  name: '식비',
+  type: AssetType.expense,
+  imgUrl: picSum(202),
+);
+final transactionCategory4 = TransactionCategory(
+  id: 1,
+  name: '기타',
+  type: AssetType.expense,
+  imgUrl: picSum(202),
+);
 
 final transaction1 = TransactionDetail(
   transactionId: '1',
   title: '장보기',
   amount: -86000,
-  imgUrl: picSum(201),
   createdAt: now,
   updatedAt: now.subtract(10.minutes),
   user: [user1],
@@ -64,7 +113,6 @@ final transaction2 = TransactionDetail(
   transactionId: '2',
   title: '빌려준 돈',
   amount: 360000,
-  imgUrl: picSum(202),
   createdAt: now,
   updatedAt: now.subtract(10.minutes),
   user: [user1],
@@ -74,7 +122,6 @@ final transaction3 = TransactionDetail(
   transactionId: '3',
   title: '커피 2잔',
   amount: -12000,
-  imgUrl: picSum(203),
   createdAt: now.subtract(1.days),
   updatedAt: now.subtract(10.minutes),
   user: [user1],
@@ -84,7 +131,6 @@ final transaction4 = TransactionDetail(
   transactionId: '4',
   title: '점심(피자)',
   amount: -30000,
-  imgUrl: picSum(204),
   createdAt: now.subtract(1.days),
   updatedAt: now.subtract(10.minutes),
   user: [user1],
@@ -94,7 +140,6 @@ final transaction5 = TransactionDetail(
   transactionId: '5',
   title: '파킹통장 이자',
   amount: 86000,
-  imgUrl: picSum(206),
   createdAt: now.subtract(1.days),
   updatedAt: now.subtract(10.minutes),
   user: [user1],
@@ -104,7 +149,6 @@ final transaction6 = TransactionDetail(
   transactionId: '6',
   title: '9월 월급',
   amount: 5600000,
-  imgUrl: picSum(206),
   createdAt: now.subtract(2.days),
   updatedAt: now.subtract(10.minutes),
   user: [user1],
@@ -114,7 +158,6 @@ final transaction7 = TransactionDetail(
   transactionId: '7',
   title: '미용',
   amount: -20000,
-  imgUrl: picSum(206),
   createdAt: now.subtract(2.days),
   updatedAt: now.subtract(10.minutes),
   user: [user1],
@@ -124,7 +167,6 @@ final transaction8 = TransactionDetail(
   transactionId: '8',
   title: '이자',
   amount: 210000,
-  imgUrl: picSum(206),
   createdAt: now.subtract(3.days),
   updatedAt: now.subtract(10.minutes),
   user: [user1],
@@ -134,7 +176,6 @@ final transaction9 = TransactionDetail(
   transactionId: '9',
   title: '9월 월급',
   amount: 5600000,
-  imgUrl: picSum(206),
   createdAt: now.subtract(5.days),
   updatedAt: now.subtract(10.minutes),
   user: [user1],
@@ -144,7 +185,6 @@ final transaction10 = TransactionDetail(
   transactionId: '10',
   title: '9월 월급',
   amount: 5600000,
-  imgUrl: picSum(206),
   createdAt: now.subtract(6.days),
   updatedAt: now.subtract(10.minutes),
   user: [user1],

@@ -11,6 +11,7 @@ _$TransactionCategoryImpl _$$TransactionCategoryImplFromJson(
     _$TransactionCategoryImpl(
       id: (json['id'] as num).toInt(),
       name: json['name'] as String,
+      imgUrl: json['imgUrl'] as String,
       type: $enumDecode(_$AssetTypeEnumMap, json['type']),
     );
 
@@ -19,6 +20,7 @@ Map<String, dynamic> _$$TransactionCategoryImplToJson(
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
+      'imgUrl': instance.imgUrl,
       'type': _$AssetTypeEnumMap[instance.type]!,
     };
 
