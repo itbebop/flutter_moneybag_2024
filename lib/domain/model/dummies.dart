@@ -39,62 +39,62 @@ final user4 = User(
 );
 
 final transactionIncome1 = TransactionCategory(
-  id: 1,
+  id: '1',
   name: '이자',
   type: AssetType.income,
   imgUrl: picSum(201),
 );
 final transactionIncome2 = TransactionCategory(
-  id: 2,
+  id: '2',
   name: '월급',
   type: AssetType.income,
   imgUrl: picSum(202),
 );
 final transactionIncome3 = TransactionCategory(
-  id: 3,
+  id: '3',
   name: '임대료',
   type: AssetType.income,
   imgUrl: picSum(202),
 );
 final transactionExpense1 = TransactionCategory(
-  id: 4,
+  id: '4',
   name: '식비',
   type: AssetType.expense,
   imgUrl: picSum(202),
 );
 final transactionExpense2 = TransactionCategory(
-  id: 5,
+  id: '5',
   name: '주거비',
   type: AssetType.expense,
   imgUrl: picSum(202),
 );
 final transactionExpense3 = TransactionCategory(
-  id: 6,
+  id: '6',
   name: '쇼핑',
   type: AssetType.expense,
   imgUrl: picSum(202),
 );
 DateTime now = DateTime.now();
 final transactionCategory1 = TransactionCategory(
-  id: 1,
+  id: '1',
   name: '이자',
   type: AssetType.income,
   imgUrl: picSum(202),
 );
 final transactionCategory2 = TransactionCategory(
-  id: 1,
+  id: '1',
   name: '월급',
   type: AssetType.income,
   imgUrl: picSum(202),
 );
 final transactionCategory3 = TransactionCategory(
-  id: 1,
+  id: '1',
   name: '식비',
   type: AssetType.expense,
   imgUrl: picSum(202),
 );
 final transactionCategory4 = TransactionCategory(
-  id: 1,
+  id: '1',
   name: '기타',
   type: AssetType.expense,
   imgUrl: picSum(202),

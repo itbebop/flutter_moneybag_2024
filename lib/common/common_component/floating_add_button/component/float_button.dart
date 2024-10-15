@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_moneybag_2024/common/common.dart';
-import 'package:flutter_moneybag_2024/common/widget/tap_widget.dart';
 
 class FloatButton extends StatelessWidget {
   const FloatButton({

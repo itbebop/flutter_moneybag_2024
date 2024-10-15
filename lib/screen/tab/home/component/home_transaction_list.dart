@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_moneybag_2024/common/common_component/transaction/transaction_item.dart';
+import 'package:flutter_moneybag_2024/common/common_component/transaction/widget/transaction_item.dart';
 import 'package:flutter_moneybag_2024/domain/model/transaction_detail.dart';
 
 class HomeTransactionList extends StatelessWidget {
