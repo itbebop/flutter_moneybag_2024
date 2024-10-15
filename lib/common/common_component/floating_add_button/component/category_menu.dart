@@ -32,13 +32,17 @@ class CategoryMenu extends StatelessWidget {
             FloatItem(
               title: '수입',
               imagePath: picSum(401),
-              action: () => action,
+              action: () {
+                action();
+              },
             ),
             const SizedBox(height: 8),
             FloatItem(
               title: '지출',
               imagePath: picSum(404),
-              action: () => action,
+              action: () {
+                action();
+              },
             ),
           ],
         ),

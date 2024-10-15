@@ -20,7 +20,9 @@ class FloatButton extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(bottom: 30.h, right: MediaQuery.of(context).size.width * 0.43),
       child: Tap(
-        onTap: () => action,
+        onTap: () {
+          action();
+        },
         child: AnimatedContainer(
           duration: duration,
           height: 60,

@@ -13,7 +13,7 @@ class FloatItem extends StatelessWidget {
     return Tap(
       onTap: () {
         if (action != null) {
-          action!(); // action을 함수로 호출
+          action!();
         }
       },
       child: Row(
