@@ -12,14 +12,6 @@ class FloatingButtonStateNotifier extends StateNotifier<FloatingButtonState> {
 
   bool needToMakeButtonBigger = false;
 
-  @override
-  bool updateShouldNotify(old, current) {
-    // statte에 할당할 때 넘겨주는 새로운 state와 기존의 value에 들어있는 state를 비교하는 함수
-    return super.updateShouldNotify(old, current); // 같지 않다면 true
-    // 이렇게 쓰려면 실제로 다른 값이 내려오게 해야함
-    // return true; // 무조건 바뀌었다고 알려주는 것(편법)
-  }
-
   void toggleCategoryMenu() {
     final isExpanded = state.isExpanded;
     final isSmall = state.isSmall;
