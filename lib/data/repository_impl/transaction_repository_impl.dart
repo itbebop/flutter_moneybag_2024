@@ -13,7 +13,7 @@ class TransactionDetailRepositoryImpl implements TransactionRepository {
   }
 
   @override
-  Future<List<TransactionDetail>> getTransactionlList() async {
+  Future<List<TransactionDetail>> getTransactionList() async {
     return await _transactionDetailDataSource.getTransactionList();
   }
 
