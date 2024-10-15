@@ -38,7 +38,7 @@ class FloatingAddButton extends ConsumerWidget {
                 duration: duration,
                 opacity: isExpanded ? 1 : 0,
                 child: Container(
-                  width: 160,
+                  width: isExpanded ? 160 : 1,
                   padding: const EdgeInsets.all(16),
                   margin: const EdgeInsets.only(right: 15, bottom: 10),
                   decoration: BoxDecoration(
@@ -120,7 +120,7 @@ class FloatingAddButton extends ConsumerWidget {
                 duration: duration,
                 opacity: isClassified ? 1 : 0,
                 child: Container(
-                  width: MediaQuery.of(context).size.width * 0.8,
+                  width: isClassified ? MediaQuery.of(context).size.width * 0.8 : 1,
                   padding: const EdgeInsets.all(16),
                   margin: const EdgeInsets.only(right: 15, bottom: 220),
                   decoration: BoxDecoration(
