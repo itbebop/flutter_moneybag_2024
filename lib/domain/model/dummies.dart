@@ -38,67 +38,17 @@ final user4 = User(
   email: 'abc@naver.com',
 );
 
-final transactionIncome1 = TransactionCategory(
-  id: '1',
-  name: '이자',
-  type: AssetType.income,
-  imgUrl: picSum(201),
-);
-final transactionIncome2 = TransactionCategory(
-  id: '2',
-  name: '월급',
-  type: AssetType.income,
-  imgUrl: picSum(202),
-);
-final transactionIncome3 = TransactionCategory(
-  id: '3',
-  name: '임대료',
-  type: AssetType.income,
-  imgUrl: picSum(202),
-);
-final transactionExpense1 = TransactionCategory(
-  id: '4',
-  name: '식비',
-  type: AssetType.expense,
-  imgUrl: picSum(202),
-);
-final transactionExpense2 = TransactionCategory(
-  id: '5',
-  name: '주거비',
-  type: AssetType.expense,
-  imgUrl: picSum(202),
-);
-final transactionExpense3 = TransactionCategory(
-  id: '6',
-  name: '쇼핑',
-  type: AssetType.expense,
-  imgUrl: picSum(202),
-);
+final transactionIncome1 = TransactionCategory(id: '1', name: '이자', type: AssetType.income, imgUrl: picSum(201), userId: 'kpbwsziudRcomCD9mLx0o4QUHQq1');
+final transactionIncome2 = TransactionCategory(id: '2', name: '월급', type: AssetType.income, imgUrl: picSum(202), userId: 'kpbwsziudRcomCD9mLx0o4QUHQq1');
+final transactionIncome3 = TransactionCategory(id: '3', name: '임대료', type: AssetType.income, imgUrl: picSum(202), userId: 'kpbwsziudRcomCD9mLx0o4QUHQq1');
+final transactionExpense1 = TransactionCategory(id: '4', name: '식비', type: AssetType.expense, imgUrl: picSum(202), userId: 'kpbwsziudRcomCD9mLx0o4QUHQq1');
+final transactionExpense2 = TransactionCategory(id: '5', name: '주거비', type: AssetType.expense, imgUrl: picSum(202), userId: 'kpbwsziudRcomCD9mLx0o4QUHQq1');
+final transactionExpense3 = TransactionCategory(id: '6', name: '쇼핑', type: AssetType.expense, imgUrl: picSum(202), userId: 'kpbwsziudRcomCD9mLx0o4QUHQq1');
 DateTime now = DateTime.now();
-final transactionCategory1 = TransactionCategory(
-  id: '1',
-  name: '이자',
-  type: AssetType.income,
-  imgUrl: picSum(202),
-);
-final transactionCategory2 = TransactionCategory(
-  id: '1',
-  name: '월급',
-  type: AssetType.income,
-  imgUrl: picSum(202),
-);
-final transactionCategory3 = TransactionCategory(
-  id: '1',
-  name: '식비',
-  type: AssetType.expense,
-  imgUrl: picSum(202),
-);
-final transactionCategory4 = TransactionCategory(
-  id: '1',
-  name: '기타',
-  type: AssetType.expense,
-  imgUrl: picSum(202),
-);
+final transactionCategory1 = TransactionCategory(id: '1', name: '이자', type: AssetType.income, imgUrl: picSum(202), userId: 'kpbwsziudRcomCD9mLx0o4QUHQq1');
+final transactionCategory2 = TransactionCategory(id: '1', name: '월급', type: AssetType.income, imgUrl: picSum(202), userId: 'kpbwsziudRcomCD9mLx0o4QUHQq1');
+final transactionCategory3 = TransactionCategory(id: '1', name: '식비', type: AssetType.expense, imgUrl: picSum(202), userId: 'kpbwsziudRcomCD9mLx0o4QUHQq1');
+final transactionCategory4 = TransactionCategory(id: '1', name: '기타', type: AssetType.expense, imgUrl: picSum(202), userId: 'kpbwsziudRcomCD9mLx0o4QUHQq1');
 
 final transaction1 = TransactionDetail(
   transactionId: '1',
@@ -106,7 +56,7 @@ final transaction1 = TransactionDetail(
   amount: -86000,
   createdAt: now,
   updatedAt: now.subtract(10.minutes),
-  user: [user1],
+  userId: ['kpbwsziudRcomCD9mLx0o4QUHQq1'],
   category: transactionCategory3,
 );
 final transaction2 = TransactionDetail(
@@ -115,7 +65,7 @@ final transaction2 = TransactionDetail(
   amount: 360000,
   createdAt: now,
   updatedAt: now.subtract(10.minutes),
-  user: [user1],
+  userId: ['kpbwsziudRcomCD9mLx0o4QUHQq1'],
   category: transactionCategory4,
 );
 final transaction3 = TransactionDetail(
@@ -124,7 +74,7 @@ final transaction3 = TransactionDetail(
   amount: -12000,
   createdAt: now.subtract(1.days),
   updatedAt: now.subtract(10.minutes),
-  user: [user1],
+  userId: ['kpbwsziudRcomCD9mLx0o4QUHQq1'],
   category: transactionCategory4,
 );
 final transaction4 = TransactionDetail(
@@ -133,7 +83,7 @@ final transaction4 = TransactionDetail(
   amount: -30000,
   createdAt: now.subtract(1.days),
   updatedAt: now.subtract(10.minutes),
-  user: [user1],
+  userId: ['kpbwsziudRcomCD9mLx0o4QUHQq1'],
   category: transactionCategory3,
 );
 final transaction5 = TransactionDetail(
@@ -142,7 +92,7 @@ final transaction5 = TransactionDetail(
   amount: 86000,
   createdAt: now.subtract(1.days),
   updatedAt: now.subtract(10.minutes),
-  user: [user1],
+  userId: ['kpbwsziudRcomCD9mLx0o4QUHQq1'],
   category: transactionCategory1,
 );
 final transaction6 = TransactionDetail(
@@ -151,7 +101,7 @@ final transaction6 = TransactionDetail(
   amount: 5600000,
   createdAt: now.subtract(2.days),
   updatedAt: now.subtract(10.minutes),
-  user: [user1],
+  userId: ['kpbwsziudRcomCD9mLx0o4QUHQq1'],
   category: transactionCategory2,
 );
 final transaction7 = TransactionDetail(
@@ -160,7 +110,7 @@ final transaction7 = TransactionDetail(
   amount: -20000,
   createdAt: now.subtract(2.days),
   updatedAt: now.subtract(10.minutes),
-  user: [user1],
+  userId: ['kpbwsziudRcomCD9mLx0o4QUHQq1'],
   category: transactionCategory4,
 );
 final transaction8 = TransactionDetail(
@@ -169,7 +119,7 @@ final transaction8 = TransactionDetail(
   amount: 210000,
   createdAt: now.subtract(3.days),
   updatedAt: now.subtract(10.minutes),
-  user: [user1],
+  userId: ['kpbwsziudRcomCD9mLx0o4QUHQq1'],
   category: transactionCategory1,
 );
 final transaction9 = TransactionDetail(
@@ -178,7 +128,7 @@ final transaction9 = TransactionDetail(
   amount: 5600000,
   createdAt: now.subtract(5.days),
   updatedAt: now.subtract(10.minutes),
-  user: [user1],
+  userId: ['kpbwsziudRcomCD9mLx0o4QUHQq1'],
   category: transactionCategory2,
 );
 final transaction10 = TransactionDetail(
@@ -187,7 +137,7 @@ final transaction10 = TransactionDetail(
   amount: 5600000,
   createdAt: now.subtract(6.days),
   updatedAt: now.subtract(10.minutes),
-  user: [user1],
+  userId: ['kpbwsziudRcomCD9mLx0o4QUHQq1'],
   category: transactionCategory2,
 );
 final transactionList = [

@@ -37,17 +37,17 @@ class ReportTransactionList extends StatelessWidget {
         }
 
         // 선택된 월과 일에 해당하는 거래 내역만 필터링
-        if (transaction.createdAt.isBefore(startOfSelectedDay) || transaction.createdAt.isAfter(endOfSelectedDay)) {
+        if (transaction.createdAt!.isBefore(startOfSelectedDay) || transaction.createdAt!.isAfter(endOfSelectedDay)) {
           return const SizedBox.shrink(); // 선택한 날짜의 범위가 아니면 출력하지 않음
         }
 
         // 날짜 포맷 설정
         final dateFormat = DateFormat('yyyy-MM-dd');
-        final createdAtFormatted = dateFormat.format(transaction.createdAt);
-        final currentTransactionDate = dateFormat.format(transaction.createdAt);
+        final createdAtFormatted = dateFormat.format(transaction.createdAt!);
+        final currentTransactionDate = dateFormat.format(transaction.createdAt!);
 
         // 날짜가 중복되지 않도록 첫 거래인지 확인
-        bool isFirstTransactionOfTheDay = index == 0 || dateFormat.format(transactionList[index - 1].createdAt) != currentTransactionDate;
+        bool isFirstTransactionOfTheDay = index == 0 || dateFormat.format(transactionList[index - 1].createdAt!) != currentTransactionDate;
 
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,

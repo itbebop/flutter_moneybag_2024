@@ -12,7 +12,9 @@ Map<DateTime, List<TransactionDetail>> generateSampleTransactions() {
         amount: -12000,
         createdAt: now.subtract(const Duration(days: 1)),
         updatedAt: now.subtract(const Duration(minutes: 10)),
-        user: [user1],
+        userId: [
+          'kpbwsziudRcomCD9mLx0o4QUHQq1',
+        ],
         category: transactionCategory4,
       ),
       TransactionDetail(
@@ -21,7 +23,9 @@ Map<DateTime, List<TransactionDetail>> generateSampleTransactions() {
         amount: -30000,
         createdAt: now.subtract(const Duration(days: 1)),
         updatedAt: now.subtract(const Duration(minutes: 10)),
-        user: [user1],
+        userId: [
+          'kpbwsziudRcomCD9mLx0o4QUHQq1',
+        ],
         category: transactionCategory3,
       ),
       TransactionDetail(
@@ -30,7 +34,9 @@ Map<DateTime, List<TransactionDetail>> generateSampleTransactions() {
         amount: 86000,
         createdAt: now.subtract(const Duration(days: 1)),
         updatedAt: now.subtract(const Duration(minutes: 10)),
-        user: [user1],
+        userId: [
+          'kpbwsziudRcomCD9mLx0o4QUHQq1',
+        ],
         category: transactionCategory1,
       ),
     ],
@@ -41,7 +47,9 @@ Map<DateTime, List<TransactionDetail>> generateSampleTransactions() {
         amount: 5600000,
         createdAt: now.subtract(const Duration(days: 2)),
         updatedAt: now.subtract(const Duration(minutes: 10)),
-        user: [user1, user2],
+        userId: [
+          'kpbwsziudRcomCD9mLx0o4QUHQq1',
+        ],
         category: transactionCategory2,
       ),
       TransactionDetail(
@@ -50,7 +58,9 @@ Map<DateTime, List<TransactionDetail>> generateSampleTransactions() {
         amount: -20000,
         createdAt: now.subtract(const Duration(days: 2)),
         updatedAt: now.subtract(const Duration(minutes: 10)),
-        user: [user1],
+        userId: [
+          'kpbwsziudRcomCD9mLx0o4QUHQq1',
+        ],
         category: transactionCategory2,
       ),
     ],

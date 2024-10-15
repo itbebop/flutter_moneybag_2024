@@ -10,10 +10,10 @@ class TransactionDetail with _$TransactionDetail {
   const factory TransactionDetail({
     required String transactionId,
     required String title,
-    required DateTime createdAt,
-    required DateTime updatedAt,
+    DateTime? createdAt,
+    DateTime? updatedAt,
     required double amount,
-    required List<User> user,
+    required List<String> userId,
     required TransactionCategory category,
   }) = _TransactionDetail;
 
