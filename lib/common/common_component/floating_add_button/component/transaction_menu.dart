@@ -15,7 +15,8 @@ class TransactionMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textEditController = TextEditingController();
+    final memoEditController = TextEditingController();
+    final amountEditController = TextEditingController();
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -42,7 +43,7 @@ class TransactionMenu extends StatelessWidget {
                     color: UiConfig.whiteColor,
                   ),
                   child: TextFormField(
-                    controller: textEditController,
+                    controller: amountEditController,
                     textAlignVertical: TextAlignVertical.bottom,
                     style: const TextStyle(color: Colors.black),
                     cursorColor: const Color(0xFF075E54),
@@ -78,7 +79,7 @@ class TransactionMenu extends StatelessWidget {
                     color: UiConfig.whiteColor,
                   ),
                   child: TextFormField(
-                    controller: textEditController,
+                    controller: memoEditController,
                     textAlignVertical: TextAlignVertical.bottom,
                     style: const TextStyle(color: Colors.black),
                     cursorColor: const Color(0xFF075E54),
