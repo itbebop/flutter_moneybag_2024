@@ -20,7 +20,7 @@ TransactionCategory _$TransactionCategoryFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$TransactionCategory {
-  int get id => throw _privateConstructorUsedError; // 고유 ID
+  String get id => throw _privateConstructorUsedError; // 고유 ID
   String get name =>
       throw _privateConstructorUsedError; // 유형 이름 (예: Salary, Rent 등)
   String get imgUrl => throw _privateConstructorUsedError;
@@ -38,7 +38,7 @@ abstract class $TransactionCategoryCopyWith<$Res> {
           TransactionCategory value, $Res Function(TransactionCategory) then) =
       _$TransactionCategoryCopyWithImpl<$Res, TransactionCategory>;
   @useResult
-  $Res call({int id, String name, String imgUrl, AssetType type});
+  $Res call({String id, String name, String imgUrl, AssetType type});
 }
 
 /// @nodoc
@@ -63,7 +63,7 @@ class _$TransactionCategoryCopyWithImpl<$Res, $Val extends TransactionCategory>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -88,7 +88,7 @@ abstract class _$$TransactionCategoryImplCopyWith<$Res>
       __$$TransactionCategoryImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, String name, String imgUrl, AssetType type});
+  $Res call({String id, String name, String imgUrl, AssetType type});
 }
 
 /// @nodoc
@@ -111,7 +111,7 @@ class __$$TransactionCategoryImplCopyWithImpl<$Res>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -141,7 +141,7 @@ class _$TransactionCategoryImpl implements _TransactionCategory {
       _$$TransactionCategoryImplFromJson(json);
 
   @override
-  final int id;
+  final String id;
 // 고유 ID
   @override
   final String name;
@@ -188,7 +188,7 @@ class _$TransactionCategoryImpl implements _TransactionCategory {
 
 abstract class _TransactionCategory implements TransactionCategory {
   const factory _TransactionCategory(
-      {required final int id,
+      {required final String id,
       required final String name,
       required final String imgUrl,
       required final AssetType type}) = _$TransactionCategoryImpl;
@@ -197,7 +197,7 @@ abstract class _TransactionCategory implements TransactionCategory {
       _$TransactionCategoryImpl.fromJson;
 
   @override
-  int get id;
+  String get id;
   @override // 고유 ID
   String get name;
   @override // 유형 이름 (예: Salary, Rent 등)

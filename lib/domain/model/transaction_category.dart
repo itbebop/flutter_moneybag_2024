@@ -7,7 +7,7 @@ part 'transaction_category.g.dart';
 @freezed
 class TransactionCategory with _$TransactionCategory {
   const factory TransactionCategory({
-    required int id, // 고유 ID
+    required String id, // 고유 ID
     required String name, // 유형 이름 (예: Salary, Rent 등)
     required String imgUrl,
     required AssetType type, // 수입 또는 지출에 대한 구분

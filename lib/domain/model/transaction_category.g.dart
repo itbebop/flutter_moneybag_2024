@@ -9,7 +9,7 @@ part of 'transaction_category.dart';
 _$TransactionCategoryImpl _$$TransactionCategoryImplFromJson(
         Map<String, dynamic> json) =>
     _$TransactionCategoryImpl(
-      id: (json['id'] as num).toInt(),
+      id: json['id'] as String,
       name: json['name'] as String,
       imgUrl: json['imgUrl'] as String,
       type: $enumDecode(_$AssetTypeEnumMap, json['type']),
