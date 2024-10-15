@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_moneybag_2024/common/common.dart';
-import 'package:flutter_moneybag_2024/common/common_component/floating_add_button/floating_add_button.riverpod.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class FloatItem extends StatelessWidget {
   final String title;
   final String imagePath;
-  final WidgetRef ref;
+  final Function? action;
 
-  const FloatItem({super.key, required this.title, required this.imagePath, required this.ref});
+  const FloatItem({super.key, required this.title, required this.imagePath, this.action});
 
   @override
   Widget build(BuildContext context) {
     return Tap(
       onTap: () {
-        ref.read(floatingButtonStateProvider.notifier).toggleTransactionMenu();
+        if (action != null) {
+          action!(); // action을 함수로 호출
+        }
       },
       child: Row(
         children: [

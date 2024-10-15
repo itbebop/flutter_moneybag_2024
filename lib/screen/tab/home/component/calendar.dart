@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_moneybag_2024/common/common.dart';
 import 'package:flutter_moneybag_2024/common/data/transaction_event.dart';
 import 'package:flutter_moneybag_2024/domain/model/transaction_detail.dart';
