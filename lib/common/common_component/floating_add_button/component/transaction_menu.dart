@@ -118,8 +118,8 @@ class TransactionMenu extends ConsumerWidget {
                       ref.read(transactionStateProvider.notifier).createTransaction(TransactionDetail(
                           transactionId: '1',
                           title: memoEditController.text,
-                          createdAt: DateTime.now().subtract(2.days),
-                          updatedAt: DateTime.now().subtract(2.days),
+                          createdAt: DateTime.now(),
+                          updatedAt: DateTime.now(),
                           amount: double.parse(amountEditController.text),
                           userId: [userState.value!.userId],
                           category: TransactionCategory(id: '1', name: '이자', type: AssetType.income, imgUrl: picSum(201), userId: 'kpbwsziudRcomCD9mLx0o4QUHQq1')));

@@ -31,7 +31,7 @@ class HomeTransactionList extends StatelessWidget {
                 children: [
                   TransactionItem(
                     title: transaction.title,
-                    amount: transaction.amount,
+                    amount: transaction.amount.toComma(),
                     imgUrl: transaction.category.imgUrl,
                     createdAt: detailDateFormat.format(transaction.updatedAt!),
                     category: TransactionCategory(

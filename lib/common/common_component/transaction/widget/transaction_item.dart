@@ -7,7 +7,7 @@ class TransactionItem extends StatelessWidget {
   final String title;
   final String imgUrl;
   final String createdAt;
-  final double amount;
+  final String amount;
   final TransactionCategory category;
   const TransactionItem({super.key, required this.title, required this.imgUrl, required this.createdAt, required this.amount, required this.category});
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_moneybag_2024/common/common.dart';
 import 'package:flutter_moneybag_2024/common/common_component/transaction/widget/transaction_item.dart';
 import 'package:flutter_moneybag_2024/domain/model/dummies.dart';
 import 'package:intl/intl.dart';
@@ -64,7 +65,7 @@ class ReportTransactionList extends StatelessWidget {
               ),
             TransactionItem(
               title: transaction.title,
-              amount: transaction.amount,
+              amount: transaction.amount.toComma(),
               imgUrl: transaction.category.imgUrl,
               createdAt: createdAtFormatted,
               category: transaction.category,
