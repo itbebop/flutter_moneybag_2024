@@ -21,32 +21,29 @@ class SortButton extends StatelessWidget {
           title ?? '',
           style: UiConfig.h3Style.copyWith(fontWeight: UiConfig.semiBoldFont),
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Row(
-            children: [
-              TextButton(
-                onPressed: () {},
-                child: Text(
-                  '최신순',
-                  style: UiConfig.bodyStyle.copyWith(
-                    fontWeight: UiConfig.semiBoldFont,
-                    color: UiConfig.black.shade700,
-                  ),
+        Row(
+          children: [
+            TextButton(
+              onPressed: () {},
+              child: Text(
+                '최신순',
+                style: UiConfig.bodyStyle.copyWith(
+                  fontWeight: UiConfig.semiBoldFont,
+                  color: UiConfig.black.shade700,
                 ),
               ),
-              TextButton(
-                onPressed: () {},
-                child: Text(
-                  '분류별',
-                  style: UiConfig.bodyStyle.copyWith(
-                    fontWeight: UiConfig.semiBoldFont,
-                    color: UiConfig.black.shade700,
-                  ),
+            ),
+            TextButton(
+              onPressed: () {},
+              child: Text(
+                '분류별',
+                style: UiConfig.bodyStyle.copyWith(
+                  fontWeight: UiConfig.semiBoldFont,
+                  color: UiConfig.black.shade700,
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         )
       ],
     );

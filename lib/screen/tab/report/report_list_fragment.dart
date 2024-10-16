@@ -30,27 +30,21 @@ class _ReportListFragmentState extends ConsumerState<ReportListFragment> {
   Widget build(BuildContext context) {
     return ListView(children: [
       Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        padding: const EdgeInsets.only(left: 24, right: 16),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            MonthDropdownButton(
-              selectedMonth: selectedMonth,
-              onMonthChanged: (value) {
-                setState(() {
-                  selectedMonth = value;
-                });
-              },
-            ),
+            MonthDropdownButton(selectedMonth: selectedMonth, onMonthChanged: (value) => setState(() => selectedMonth = value)),
             const SortButton(),
           ],
         ),
       ),
       SizedBox(
-          height: 520.0.h,
-          child: ReportTransactionList(
-            selectedMonth: selectedMonth.month,
-          )),
+        height: 520.0.h,
+        child: ReportTransactionList(
+          selectedMonth: selectedMonth.month,
+        ),
+      ),
     ]);
   }
 }
