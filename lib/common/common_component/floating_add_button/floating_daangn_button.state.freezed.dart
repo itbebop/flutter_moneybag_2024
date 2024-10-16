@@ -19,6 +19,7 @@ mixin _$FloatingButtonState {
   bool get isExpanded => throw _privateConstructorUsedError;
   bool get isSmall => throw _privateConstructorUsedError;
   bool get isClassified => throw _privateConstructorUsedError;
+  AssetType get assetType => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $FloatingButtonStateCopyWith<FloatingButtonState> get copyWith =>
@@ -31,7 +32,8 @@ abstract class $FloatingButtonStateCopyWith<$Res> {
           FloatingButtonState value, $Res Function(FloatingButtonState) then) =
       _$FloatingButtonStateCopyWithImpl<$Res, FloatingButtonState>;
   @useResult
-  $Res call({bool isExpanded, bool isSmall, bool isClassified});
+  $Res call(
+      {bool isExpanded, bool isSmall, bool isClassified, AssetType assetType});
 }
 
 /// @nodoc
@@ -50,6 +52,7 @@ class _$FloatingButtonStateCopyWithImpl<$Res, $Val extends FloatingButtonState>
     Object? isExpanded = null,
     Object? isSmall = null,
     Object? isClassified = null,
+    Object? assetType = null,
   }) {
     return _then(_value.copyWith(
       isExpanded: null == isExpanded
@@ -64,6 +67,10 @@ class _$FloatingButtonStateCopyWithImpl<$Res, $Val extends FloatingButtonState>
           ? _value.isClassified
           : isClassified // ignore: cast_nullable_to_non_nullable
               as bool,
+      assetType: null == assetType
+          ? _value.assetType
+          : assetType // ignore: cast_nullable_to_non_nullable
+              as AssetType,
     ) as $Val);
   }
 }
@@ -76,7 +83,8 @@ abstract class _$$FloatingButtonStateImplCopyWith<$Res>
       __$$FloatingButtonStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool isExpanded, bool isSmall, bool isClassified});
+  $Res call(
+      {bool isExpanded, bool isSmall, bool isClassified, AssetType assetType});
 }
 
 /// @nodoc
@@ -93,6 +101,7 @@ class __$$FloatingButtonStateImplCopyWithImpl<$Res>
     Object? isExpanded = null,
     Object? isSmall = null,
     Object? isClassified = null,
+    Object? assetType = null,
   }) {
     return _then(_$FloatingButtonStateImpl(
       null == isExpanded
@@ -107,6 +116,10 @@ class __$$FloatingButtonStateImplCopyWithImpl<$Res>
           ? _value.isClassified
           : isClassified // ignore: cast_nullable_to_non_nullable
               as bool,
+      null == assetType
+          ? _value.assetType
+          : assetType // ignore: cast_nullable_to_non_nullable
+              as AssetType,
     ));
   }
 }
@@ -115,7 +128,7 @@ class __$$FloatingButtonStateImplCopyWithImpl<$Res>
 
 class _$FloatingButtonStateImpl implements _FloatingButtonState {
   const _$FloatingButtonStateImpl(
-      this.isExpanded, this.isSmall, this.isClassified);
+      this.isExpanded, this.isSmall, this.isClassified, this.assetType);
 
   @override
   final bool isExpanded;
@@ -123,10 +136,12 @@ class _$FloatingButtonStateImpl implements _FloatingButtonState {
   final bool isSmall;
   @override
   final bool isClassified;
+  @override
+  final AssetType assetType;
 
   @override
   String toString() {
-    return 'FloatingButtonState(isExpanded: $isExpanded, isSmall: $isSmall, isClassified: $isClassified)';
+    return 'FloatingButtonState(isExpanded: $isExpanded, isSmall: $isSmall, isClassified: $isClassified, assetType: $assetType)';
   }
 
   @override
@@ -138,12 +153,14 @@ class _$FloatingButtonStateImpl implements _FloatingButtonState {
                 other.isExpanded == isExpanded) &&
             (identical(other.isSmall, isSmall) || other.isSmall == isSmall) &&
             (identical(other.isClassified, isClassified) ||
-                other.isClassified == isClassified));
+                other.isClassified == isClassified) &&
+            (identical(other.assetType, assetType) ||
+                other.assetType == assetType));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, isExpanded, isSmall, isClassified);
+      Object.hash(runtimeType, isExpanded, isSmall, isClassified, assetType);
 
   @JsonKey(ignore: true)
   @override
@@ -155,8 +172,10 @@ class _$FloatingButtonStateImpl implements _FloatingButtonState {
 
 abstract class _FloatingButtonState implements FloatingButtonState {
   const factory _FloatingButtonState(
-          final bool isExpanded, final bool isSmall, final bool isClassified) =
-      _$FloatingButtonStateImpl;
+      final bool isExpanded,
+      final bool isSmall,
+      final bool isClassified,
+      final AssetType assetType) = _$FloatingButtonStateImpl;
 
   @override
   bool get isExpanded;
@@ -164,6 +183,8 @@ abstract class _FloatingButtonState implements FloatingButtonState {
   bool get isSmall;
   @override
   bool get isClassified;
+  @override
+  AssetType get assetType;
   @override
   @JsonKey(ignore: true)
   _$$FloatingButtonStateImplCopyWith<_$FloatingButtonStateImpl> get copyWith =>

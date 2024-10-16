@@ -1,9 +1,10 @@
 import 'package:flutter_moneybag_2024/common/common_component/floating_add_button/floating_daangn_button.state.dart';
+import 'package:flutter_moneybag_2024/domain/enums/asset_types.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final floatingButtonStateProvider = StateNotifierProvider<FloatingButtonStateNotifier, FloatingButtonState>(
   (ref) => FloatingButtonStateNotifier(
-    const FloatingButtonState(false, false, false),
+    const FloatingButtonState(false, false, false, AssetType.income),
   ),
 );
 
@@ -40,5 +41,9 @@ class FloatingButtonStateNotifier extends StateNotifier<FloatingButtonState> {
     final isClassified = state.isClassified;
 
     state = state.copyWith(isClassified: !isClassified);
+  }
+
+  void selectAssetType(AssetType assetType) {
+    print(assetType.displayName);
   }
 }

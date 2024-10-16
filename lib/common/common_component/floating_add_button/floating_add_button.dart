@@ -39,13 +39,14 @@ class FloatingAddButton extends ConsumerWidget {
               CategoryMenu(
                 duration: duration,
                 isExpanded: isExpanded,
-                action: () => ref.read(floatingButtonStateProvider.notifier).toggleTransactionMenu(),
               ),
               FloatButton(
                 duration: duration,
                 isExpanded: isExpanded,
                 isSmall: isSmall,
-                action: () => ref.read(floatingButtonStateProvider.notifier).toggleCategoryMenu(),
+                action: () {
+                  ref.read(floatingButtonStateProvider.notifier).toggleCategoryMenu();
+                },
               ),
             ],
           ),
