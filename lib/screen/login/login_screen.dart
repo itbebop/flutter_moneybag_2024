@@ -15,8 +15,6 @@ class LoginScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // final userProvider = context.watch<UserProvider>();
-
     return Scaffold(
       body: SafeArea(
         child: Container(
