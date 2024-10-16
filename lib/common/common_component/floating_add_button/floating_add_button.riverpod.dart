@@ -43,6 +43,13 @@ class FloatingButtonStateNotifier extends StateNotifier<FloatingButtonState> {
     state = state.copyWith(isClassified: !isClassified);
   }
 
+  void tapOutside() {
+    state = state.copyWith(
+      isExpanded: false,
+      isClassified: false,
+    );
+  }
+
   void selectAssetType(AssetType assetType) {
     print(assetType.displayName);
   }
