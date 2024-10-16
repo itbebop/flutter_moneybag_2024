@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_moneybag_2024/common/common.dart';
+import 'package:flutter_moneybag_2024/common/common_component/transaction/riverpod/transaction_state_notifier.dart';
 import 'package:flutter_moneybag_2024/common/data/month_list.dart';
-import 'package:flutter_moneybag_2024/common/data/transaction_event.dart';
 import 'package:flutter_moneybag_2024/domain/model/transaction_detail.dart';
 import 'package:flutter_moneybag_2024/screen/tab/home/component/asset_list.dart';
 import 'package:flutter_moneybag_2024/screen/tab/home/component/calendar.dart';
@@ -28,11 +28,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   void initState() {
     super.initState();
     _selectedDay = _focusedDay;
-    _selectedEvents.value = getEventsForDay(_selectedDay);
-    // 현재 월에 해당하는 MonthList 항목으로 selectedMonth 초기화
-    selectedMonth = MonthList.values.firstWhere(
-      (e) => e.toString().split('.')[1] == _currentMonth,
-    );
+    Future.microtask(() {
+      _fetchEventsForDay(_selectedDay);
+
+      selectedMonth = MonthList.values.firstWhere(
+        (e) => e.toString().split('.')[1] == _currentMonth,
+      );
+    });
   }
 
   @override
@@ -41,18 +43,19 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     super.dispose();
   }
 
+  Future<void> _fetchEventsForDay(DateTime day) async {
+    final events = await ref.read(transactionStateProvider.notifier).getEventsForDay(day);
+    setState(() {
+      _selectedEvents.value = events;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    // DateTime now = DateTime.now();
-    // DateTime focusedDay = DateTime.utc(now.year, selectedMonth.month, now.day);
-    // final int selectedDay = focusedDay.day;
-
     return Scaffold(
       body: Column(
-        // Column으로 변경
         children: [
           Expanded(
-            // Expanded를 Column 안으로 이동
             child: SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -60,7 +63,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   children: [
                     Container(
                       padding: const EdgeInsets.all(16),
-                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: UiConfig.whiteColor),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: UiConfig.whiteColor,
+                      ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -69,13 +75,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                             children: [
                               const CurrentMonth(),
                               MonthDropdownButton(
-                                  selectedMonth: selectedMonth,
-                                  onMonthChanged: (value) {
-                                    setState(() {
-                                      selectedMonth = value; // 선택된 월 업데이트
-                                    });
-                                  },
-                                  fontSize: 24),
+                                selectedMonth: selectedMonth,
+                                onMonthChanged: (value) {
+                                  setState(() {
+                                    selectedMonth = value; // 선택된 월 업데이트
+                                  });
+                                },
+                                fontSize: 24,
+                              ),
                             ],
                           ),
                           const AssetList(),
@@ -90,12 +97,20 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                           _selectedDay = selectedDay;
                           _focusedDay = focusedDay;
                         });
-                        _selectedEvents.value = getEventsForDay(selectedDay);
+                        _fetchEventsForDay(selectedDay); // Fetch events for the new selected day
                       },
                     ),
                     const SizedBox(height: 8.0),
                     const Divider(),
-                    HomeTransactionList(selectedEvents: _selectedEvents),
+                    ValueListenableBuilder<List<TransactionDetail>>(
+                      valueListenable: _selectedEvents,
+                      builder: (context, events, child) {
+                        if (events.isEmpty) {
+                          return const Center(child: Text('No events found.'));
+                        }
+                        return HomeTransactionList(selectedEvents: _selectedEvents);
+                      },
+                    ),
                   ],
                 ),
               ),
