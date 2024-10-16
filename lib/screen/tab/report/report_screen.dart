@@ -19,13 +19,9 @@ class ReportScreen extends HookConsumerWidget {
           controller: tabController,
           indicatorColor: UiConfig.primaryColor,
           padding: const EdgeInsets.all(16),
-          // indicatorWeight: 5,
           indicatorSize: TabBarIndicatorSize.tab,
           labelPadding: const EdgeInsets.all(16),
-          // labelStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-          // overlayColor: WidgetStatePropertyAll(
-          //   Colors.blue.shade100,
-          // ),
+          labelStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
 
           /// 탭바 클릭할 때 나오는 splash effect의 radius
           splashBorderRadius: BorderRadius.circular(10),
