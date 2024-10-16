@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_moneybag_2024/common/common.dart';
 import 'package:flutter_moneybag_2024/core/provider/user_state_notifier.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 class DrawerWidget extends ConsumerStatefulWidget {
   static const minHeightForScrollView = 380;
@@ -37,8 +38,23 @@ class _DrawerWidgetState extends ConsumerState<DrawerWidget> {
                 loading: () => const Center(
                   child: CircularProgressIndicator(), // 로딩 중인 경우 Progress Indicator 표시
                 ),
-                error: (error, stackTrace) => const Center(
-                  child: Text('잠시 후 다시 시도해주세요.'), // 에러 발생 시 에러 메시지 표시
+                error: (error, stackTrace) => Center(
+                  child: Tap(
+                    onTap: () {
+                      context.go('/login');
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.only(top: 12, bottom: 12, left: 36, right: 36),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: UiConfig.primaryColorSurface,
+                      ),
+                      child: Text(
+                        '다시 로그인해주세요',
+                        style: UiConfig.h4Style,
+                      ),
+                    ),
+                  ),
                 ),
                 data: (user) => ListView(
                   padding: EdgeInsets.zero,
