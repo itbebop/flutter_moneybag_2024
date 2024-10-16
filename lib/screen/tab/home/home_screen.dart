@@ -106,7 +106,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       valueListenable: _selectedEvents,
                       builder: (context, events, child) {
                         if (events.isEmpty) {
-                          return const Center(child: Text('No events found.'));
+                          return const Padding(
+                            padding: EdgeInsets.only(top: 16.0),
+                            child: Center(child: Text('등록된 내역이 없습니다.')),
+                          );
                         }
                         return HomeTransactionList(selectedEvents: _selectedEvents);
                       },
