@@ -132,18 +132,27 @@ class TransactionMenu extends ConsumerWidget {
                 Tap(
                   onTap: () async {
                     await ref.read(userStateProvier.notifier).fetchUser();
-                    if (userState.value != null) {
-                      await ref.read(transactionStateProvider.notifier).createTransaction(TransactionDetail(
-                          transactionId: '${userState.value!.userId}_${idDateFormat.format(DateTime.now())}',
-                          title: memoEditController.text,
-                          createdAt: DateTime.now(),
-                          updatedAt: DateTime.now(),
-                          amount: amount,
-                          userId: [userState.value!.userId],
-                          category: TransactionCategory(id: '1', name: '이자', type: AssetType.income, imgUrl: picSum(201), userId: 'kpbwsziudRcomCD9mLx0o4QUHQq1')));
-                    } else {
-                      // TODO: 스낵바 띄우기
-                    }
+
+                    // fetchUser가 완료된 후에도 userState.value가 null인지 체크
+                    final userStateValue = ref.read(userStateProvier); // 최종 userState 값을 가져옴
+
+                    await ref.read(transactionStateProvider.notifier).createTransaction(
+                          TransactionDetail(
+                            transactionId: '${userStateValue.value!.userId}_${idDateFormat.format(DateTime.now())}',
+                            title: memoEditController.text,
+                            createdAt: DateTime.now(),
+                            updatedAt: DateTime.now(),
+                            amount: amount,
+                            userId: [userStateValue.value!.userId],
+                            category: TransactionCategory(
+                              id: '1',
+                              name: '이자',
+                              type: AssetType.income,
+                              imgUrl: picSum(201),
+                              userId: 'kpbwsziudRcomCD9mLx0o4QUHQq1',
+                            ),
+                          ),
+                        );
                   },
                   child: Container(
                     padding: const EdgeInsets.only(top: 12, bottom: 12, left: 36, right: 36),
