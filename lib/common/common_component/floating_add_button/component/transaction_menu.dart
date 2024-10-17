@@ -9,6 +9,7 @@ import 'package:flutter_moneybag_2024/domain/model/dummies.dart';
 import 'package:flutter_moneybag_2024/domain/model/transaction_category.dart';
 import 'package:flutter_moneybag_2024/domain/model/transaction_detail.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 
 class TransactionMenu extends ConsumerWidget {
   const TransactionMenu({
@@ -22,6 +23,7 @@ class TransactionMenu extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    double amount = 0.0;
     final userState = ref.watch(userStateProvier);
     final memoEditController = TextEditingController();
     final amountEditController = TextEditingController();
@@ -53,9 +55,16 @@ class TransactionMenu extends ConsumerWidget {
                   child: TextFormField(
                     controller: amountEditController,
                     keyboardType: TextInputType.number,
-                    inputFormatters: [
-                      FilteringTextInputFormatter.digitsOnly, // 숫자만 허용
+                    textAlign: TextAlign.right,
+                    inputFormatters: <TextInputFormatter>[
+                      FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                      FilteringTextInputFormatter.digitsOnly,
+                      ThousandCommaInputFormatter(),
                     ],
+                    onChanged: (value) {
+                      String newValue = value.replaceAll(',', '');
+                      amount = double.parse(newValue); // double로 변환
+                    },
                     textAlignVertical: TextAlignVertical.bottom,
                     style: const TextStyle(color: Colors.black),
                     cursorColor: const Color(0xFF075E54),
@@ -120,7 +129,7 @@ class TransactionMenu extends ConsumerWidget {
                           title: memoEditController.text,
                           createdAt: DateTime.now(),
                           updatedAt: DateTime.now(),
-                          amount: double.parse(amountEditController.text),
+                          amount: amount,
                           userId: [userState.value!.userId],
                           category: TransactionCategory(id: '1', name: '이자', type: AssetType.income, imgUrl: picSum(201), userId: 'kpbwsziudRcomCD9mLx0o4QUHQq1')));
                     } else {
@@ -145,5 +154,52 @@ class TransactionMenu extends ConsumerWidget {
         ),
       ],
     );
+  }
+}
+
+String thousandComma(dynamic val, {String defaultVal = ""}) {
+  NumberFormat numberFormat = NumberFormat('#,###', "ko_KR");
+  if (val != null && val != "") {
+    if (val is int || val is double) {
+      return numberFormat.format(val);
+    } else if (double.tryParse(val) != null) {
+      return numberFormat.format(double.parse(val));
+    } else if (int.tryParse(val) != null) {
+      return numberFormat.format(int.parse(val));
+    }
+  }
+
+  return defaultVal;
+}
+
+class ThousandCommaInputFormatter extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
+    String oldNum = oldValue.text.replaceAll(",", "");
+    String newNum = newValue.text.replaceAll(",", "");
+
+    String newText = thousandComma(newValue.text, defaultVal: "0");
+
+    // 다음 커서 위치 잡기
+    int selectionIndex = ((newValue.text.length - 1) / 3).floor() // 전체 ,(comma)의 수
+        -
+        (((newValue.text.length - newValue.selection.end) - 1) / 3).floor() //현재 커서 위치를 기준으로 오른쪽에 있는 ,(comma)의 수
+        +
+        newValue.selection.end;
+
+    if (selectionIndex > newText.length) {
+      selectionIndex = newText.length;
+    }
+
+    if (oldNum == newNum) {
+      //,(comma) 뒤에 커서놓고 삭제 시
+      //1,234,567에서 4,뒤(커서 위치 6)에서 삭제하면 123,567이 되므로 1뒤의 ,와 4가 같이 없어져서 커서 위치가 2만큼 왼쪽으로 이동해야 한다. (최종 커서 위치 4가 되야함)
+      //98,765에서 8,뒤(커서 위치 3)에서 삭제하면 9,765가 되므로 8만 없어져서 커서 위치가 1만큼 왼쪽으로 이동해야 한다. (최종 커서 위치 2가 되야함)
+      selectionIndex = selectionIndex - (newText.replaceAll(",", "").length % 3 == 1 ? 2 : 1);
+      newText = newValue.text.substring(0, newValue.selection.end - 1) + newValue.text.substring(newValue.selection.end);
+      newText = thousandComma(newText, defaultVal: "0");
+    }
+
+    return newValue.copyWith(text: newText, selection: TextSelection.collapsed(offset: selectionIndex));
   }
 }
