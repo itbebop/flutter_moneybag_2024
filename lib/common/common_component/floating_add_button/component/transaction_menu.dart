@@ -125,7 +125,7 @@ class TransactionMenu extends ConsumerWidget {
                     await ref.read(userStateProvier.notifier).fetchUser();
                     if (userState.value != null) {
                       ref.read(transactionStateProvider.notifier).createTransaction(TransactionDetail(
-                          transactionId: '1',
+                          transactionId: '${userState.value!.userId}_${idDateFormat.format(DateTime.now())}',
                           title: memoEditController.text,
                           createdAt: DateTime.now(),
                           updatedAt: DateTime.now(),
