@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_moneybag_2024/common/common.dart';
 import 'package:flutter_moneybag_2024/common/common_component/floating_add_button/component/float_item.dart';
 import 'package:flutter_moneybag_2024/common/common_component/transaction/riverpod/transaction_state_notifier.dart';
+import 'package:flutter_moneybag_2024/common/dart/extension/thousand_comma_input_formatter.dart';
 import 'package:flutter_moneybag_2024/core/provider/user_state_notifier.dart';
 import 'package:flutter_moneybag_2024/domain/enums/asset_types.dart';
 import 'package:flutter_moneybag_2024/domain/model/dummies.dart';
@@ -52,7 +53,7 @@ class TransactionMenu extends ConsumerWidget {
                     borderRadius: BorderRadius.circular(15),
                     color: UiConfig.whiteColor,
                   ),
-                  child: TextFormField(
+                  child: TextField(
                     controller: amountEditController,
                     keyboardType: TextInputType.number,
                     textAlign: TextAlign.right,
@@ -64,6 +65,14 @@ class TransactionMenu extends ConsumerWidget {
                     onChanged: (value) {
                       String newValue = value.replaceAll(',', '');
                       amount = double.parse(newValue); // double로 변환
+                      if (value.isNotEmpty) {
+                        // 키보드를 다시 보여줌
+                        SystemChannels.textInput.invokeMethod('TextInput.show');
+                      }
+                    },
+                    onSubmitted: (value) {
+                      // 입력을 완료하면 키보드를 숨김
+                      SystemChannels.textInput.invokeMethod('TextInput.hide');
                     },
                     textAlignVertical: TextAlignVertical.bottom,
                     style: const TextStyle(color: Colors.black),
@@ -124,7 +133,7 @@ class TransactionMenu extends ConsumerWidget {
                   onTap: () async {
                     await ref.read(userStateProvier.notifier).fetchUser();
                     if (userState.value != null) {
-                      ref.read(transactionStateProvider.notifier).createTransaction(TransactionDetail(
+                      await ref.read(transactionStateProvider.notifier).createTransaction(TransactionDetail(
                           transactionId: '${userState.value!.userId}_${idDateFormat.format(DateTime.now())}',
                           title: memoEditController.text,
                           createdAt: DateTime.now(),
@@ -154,52 +163,5 @@ class TransactionMenu extends ConsumerWidget {
         ),
       ],
     );
-  }
-}
-
-String thousandComma(dynamic val, {String defaultVal = ""}) {
-  NumberFormat numberFormat = NumberFormat('#,###', "ko_KR");
-  if (val != null && val != "") {
-    if (val is int || val is double) {
-      return numberFormat.format(val);
-    } else if (double.tryParse(val) != null) {
-      return numberFormat.format(double.parse(val));
-    } else if (int.tryParse(val) != null) {
-      return numberFormat.format(int.parse(val));
-    }
-  }
-
-  return defaultVal;
-}
-
-class ThousandCommaInputFormatter extends TextInputFormatter {
-  @override
-  TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
-    String oldNum = oldValue.text.replaceAll(",", "");
-    String newNum = newValue.text.replaceAll(",", "");
-
-    String newText = thousandComma(newValue.text, defaultVal: "0");
-
-    // 다음 커서 위치 잡기
-    int selectionIndex = ((newValue.text.length - 1) / 3).floor() // 전체 ,(comma)의 수
-        -
-        (((newValue.text.length - newValue.selection.end) - 1) / 3).floor() //현재 커서 위치를 기준으로 오른쪽에 있는 ,(comma)의 수
-        +
-        newValue.selection.end;
-
-    if (selectionIndex > newText.length) {
-      selectionIndex = newText.length;
-    }
-
-    if (oldNum == newNum) {
-      //,(comma) 뒤에 커서놓고 삭제 시
-      //1,234,567에서 4,뒤(커서 위치 6)에서 삭제하면 123,567이 되므로 1뒤의 ,와 4가 같이 없어져서 커서 위치가 2만큼 왼쪽으로 이동해야 한다. (최종 커서 위치 4가 되야함)
-      //98,765에서 8,뒤(커서 위치 3)에서 삭제하면 9,765가 되므로 8만 없어져서 커서 위치가 1만큼 왼쪽으로 이동해야 한다. (최종 커서 위치 2가 되야함)
-      selectionIndex = selectionIndex - (newText.replaceAll(",", "").length % 3 == 1 ? 2 : 1);
-      newText = newValue.text.substring(0, newValue.selection.end - 1) + newValue.text.substring(newValue.selection.end);
-      newText = thousandComma(newText, defaultVal: "0");
-    }
-
-    return newValue.copyWith(text: newText, selection: TextSelection.collapsed(offset: selectionIndex));
   }
 }
