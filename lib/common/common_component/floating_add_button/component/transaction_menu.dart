@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_moneybag_2024/common/common.dart';
 import 'package:flutter_moneybag_2024/common/common_component/floating_add_button/component/float_item.dart';
+import 'package:flutter_moneybag_2024/common/common_component/floating_add_button/floating_add_button.riverpod.dart';
 import 'package:flutter_moneybag_2024/common/common_component/transaction/riverpod/transaction_state_notifier.dart';
 import 'package:flutter_moneybag_2024/common/dart/extension/thousand_comma_input_formatter.dart';
 import 'package:flutter_moneybag_2024/core/provider/user_state_notifier.dart';
@@ -133,26 +134,27 @@ class TransactionMenu extends ConsumerWidget {
                   onTap: () async {
                     await ref.read(userStateProvier.notifier).fetchUser();
 
-                    // fetchUser가 완료된 후에도 userState.value가 null인지 체크
-                    final userStateValue = ref.read(userStateProvier); // 최종 userState 값을 가져옴
-
-                    await ref.read(transactionStateProvider.notifier).createTransaction(
-                          TransactionDetail(
-                            transactionId: '${userStateValue.value!.userId}_${idDateFormat.format(DateTime.now())}',
-                            title: memoEditController.text,
-                            createdAt: DateTime.now(),
-                            updatedAt: DateTime.now(),
-                            amount: amount,
-                            userId: [userStateValue.value!.userId],
-                            category: TransactionCategory(
-                              id: '1',
-                              name: '이자',
-                              type: AssetType.income,
-                              imgUrl: picSum(201),
-                              userId: 'kpbwsziudRcomCD9mLx0o4QUHQq1',
+                    final userStateValue = ref.read(userStateProvier);
+                    if (userStateValue.value != null) {
+                      await ref.read(transactionStateProvider.notifier).createTransaction(
+                            TransactionDetail(
+                              transactionId: '${userStateValue.value!.userId}_${idDateFormat.format(DateTime.now())}',
+                              title: memoEditController.text,
+                              createdAt: DateTime.now(),
+                              updatedAt: DateTime.now(),
+                              amount: amount,
+                              userId: [userStateValue.value!.userId],
+                              category: TransactionCategory(
+                                id: '1',
+                                name: '이자',
+                                type: AssetType.income,
+                                imgUrl: picSum(201),
+                                userId: userStateValue.value!.userId,
+                              ),
                             ),
-                          ),
-                        );
+                          );
+                    }
+                    ref.read(floatingButtonStateProvider.notifier).tapOutside();
                   },
                   child: Container(
                     padding: const EdgeInsets.only(top: 12, bottom: 12, left: 36, right: 36),
