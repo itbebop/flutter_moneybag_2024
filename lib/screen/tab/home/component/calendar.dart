@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_moneybag_2024/common/common.dart';
+import 'package:flutter_moneybag_2024/common/common_component/transaction/riverpod/transaction_state_notifier.dart';
 import 'package:flutter_moneybag_2024/domain/model/transaction_detail.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-class Calendar extends StatelessWidget {
+class Calendar extends ConsumerWidget {
   final DateTime selectedDay;
   final Function(DateTime, DateTime) onDaySelected;
 
@@ -14,45 +16,61 @@ class Calendar extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     DateTime now = DateTime.now();
-    return Container(
-      padding: const EdgeInsets.all(8),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        color: UiConfig.whiteColor,
-      ),
-      child: TableCalendar<TransactionDetail>(
-        headerStyle: const HeaderStyle(
-          formatButtonVisible: false,
-          titleCentered: true,
-        ),
-        locale: 'ko-KR',
-        firstDay: DateTime.utc(2020, 1, 1),
-        lastDay: DateTime.utc(2030, 12, 31),
-        focusedDay: now,
-        selectedDayPredicate: (day) => isSameDay(selectedDay, day),
-        calendarFormat: CalendarFormat.month,
-        availableGestures: AvailableGestures.horizontalSwipe,
-        onDaySelected: onDaySelected,
-        onPageChanged: (focusedDay) {
-          focusedDay = now;
-        },
-        calendarStyle: const CalendarStyle(
-            // marker 모양
-            markerDecoration: BoxDecoration(
-              color: UiConfig.primaryColorSurface,
-              shape: BoxShape.circle,
+    return StreamBuilder<List<TransactionDetail>>(
+      stream: ref.watch(transactionStateProvider.notifier).getTransactions().asStream(),
+      builder: (context, snapshot) {
+        if (snapshot.hasError) {
+          return Text('에러 발생: ${snapshot.error}');
+        } else if (snapshot.hasData) {
+          final events = snapshot.data!;
+          return Container(
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              color: UiConfig.whiteColor,
             ),
-            selectedDecoration: BoxDecoration(
-              color: UiConfig.primaryColorSurface,
-              shape: BoxShape.circle,
+            child: TableCalendar<TransactionDetail>(
+              headerStyle: const HeaderStyle(
+                formatButtonVisible: false,
+                titleCentered: true,
+              ),
+              locale: 'ko-KR',
+              firstDay: DateTime.utc(2020, 1, 1),
+              lastDay: DateTime.utc(2030, 12, 31),
+              focusedDay: now,
+              eventLoader: (day) {
+                return events.where((event) => isSameDay(event.createdAt, day)).toList();
+              },
+              selectedDayPredicate: (day) => isSameDay(selectedDay, day),
+              calendarFormat: CalendarFormat.month,
+              availableGestures: AvailableGestures.horizontalSwipe,
+              onDaySelected: onDaySelected,
+              onPageChanged: (focusedDay) {},
+              calendarStyle: const CalendarStyle(
+                markerDecoration: BoxDecoration(
+                  color: UiConfig.primaryColorSurface,
+                  shape: BoxShape.circle,
+                ),
+                selectedDecoration: BoxDecoration(
+                  color: UiConfig.primaryColorSurface,
+                  shape: BoxShape.circle,
+                ),
+                todayDecoration: BoxDecoration(
+                  color: UiConfig.buttonColor,
+                  shape: BoxShape.circle,
+                ),
+                markersMaxCount: 3, // 한 날짜에 최대 3개의 마커 표시
+                markersAlignment: Alignment.bottomCenter, // 마커 정렬
+              ),
             ),
-            todayDecoration: BoxDecoration(
-              color: UiConfig.buttonColor,
-              shape: BoxShape.circle,
-            )),
-      ),
+          );
+        } else {
+          // snapshot이 데이터도 없고 에러도 없는 경우 (기본적으로 빈 상태일 경우)
+          return const Center(child: Text('데이터가 없습니다.'));
+        }
+      },
     );
   }
 }

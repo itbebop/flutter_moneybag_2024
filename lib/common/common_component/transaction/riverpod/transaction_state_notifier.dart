@@ -20,18 +20,18 @@ class TransactionStateNotifier extends StateNotifier<TransactionState> {
     await state.createTransactionUseCase.execute(transactionDetail: transactionDetail);
   }
 
-  Future<List<TransactionDetail>> generateSampleTransactions() async {
+  Future<List<TransactionDetail>> getTransactions() async {
     return await state.getTransactionListUseCase.execute();
   }
 
+  // 트랜잭션 이벤트를 초기화
   Future<Map<DateTime, List<TransactionDetail>>> initializeTransactionEvents() async {
-    // 수정 가능한 LinkedHashMap으로 설정
     final newTransactionEvents = LinkedHashMap<DateTime, List<TransactionDetail>>(
       equals: isSameDay,
       hashCode: (DateTime key) => key.day * 1000000 + key.month * 10000 + key.year,
     );
 
-    final transactions = await generateSampleTransactions();
+    final transactions = await getTransactions();
     for (var transaction in transactions) {
       final date = DateTime(transaction.createdAt!.year, transaction.createdAt!.month, transaction.createdAt!.day);
       newTransactionEvents.update(
@@ -40,10 +40,10 @@ class TransactionStateNotifier extends StateNotifier<TransactionState> {
         ifAbsent: () => [transaction],
       );
     }
-
     return newTransactionEvents;
   }
 
+  // 선택한 날짜의 이벤트를 가져옴
   Future<List<TransactionDetail>> getEventsForDay(DateTime day) async {
     final events = await initializeTransactionEvents();
     return events[day] ?? [];
