@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_moneybag_2024/data/data_source/transaction_category_data_source.dart';
-import 'package:flutter_moneybag_2024/domain/enums/asset_types.dart';
 import 'package:flutter_moneybag_2024/domain/model/transaction_category.dart';
 
 class TransactionCategoryDataSourceImpl implements TransactionCategoryDataSource {
