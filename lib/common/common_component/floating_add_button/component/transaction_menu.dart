@@ -57,8 +57,8 @@ class TransactionMenu extends ConsumerWidget {
                     keyboardType: TextInputType.number,
                     textAlign: TextAlign.right,
                     inputFormatters: <TextInputFormatter>[
-                      FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
-                      FilteringTextInputFormatter.digitsOnly,
+                      // FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                      // FilteringTextInputFormatter.digitsOnly,
                       ThousandCommaInputFormatter(),
                     ],
                     onChanged: (value) {
