@@ -22,6 +22,7 @@ class UiConfig {
     900: Color(0xff282828),
   };
 
+  static TextStyle largeStyle = TextStyle(fontSize: 32.sp, letterSpacing: -0.3, fontWeight: FontWeight.w400, color: const Color(0xFF282828), fontFamily: 'Inter');
   static TextStyle h1Style = TextStyle(fontSize: 24.sp, letterSpacing: -0.3, fontWeight: FontWeight.w400, color: const Color(0xFF282828), fontFamily: 'Inter');
   static TextStyle h2Style = TextStyle(fontSize: 20.sp, letterSpacing: -0.3, fontWeight: FontWeight.w400, color: const Color(0xFF282828), fontFamily: 'Inter');
   static TextStyle h3Style = TextStyle(fontSize: 18.sp, letterSpacing: -0.3, fontWeight: FontWeight.w400, color: const Color(0xFF282828), fontFamily: 'Inter');
