@@ -17,12 +17,6 @@ class DrawerWidget extends ConsumerStatefulWidget {
 
 class _DrawerWidgetState extends ConsumerState<DrawerWidget> {
   @override
-  void initState() {
-    super.initState();
-    Future.microtask(() => ref.read(userStateProvier.notifier).fetchUser());
-  }
-
-  @override
   Widget build(BuildContext context) {
     // userStateProvider는 이미 최상위에서 선언된 프로바이더이므로 다시 선언할 필요가 없음.
     final userState = ref.watch(userStateProvier); // 상태를 watch하여 UI에 반영
