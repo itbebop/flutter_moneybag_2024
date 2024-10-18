@@ -15,10 +15,6 @@ final routeInformationProvider = ChangeNotifierProvider<GoRouteInformationProvid
   return router.routeInformationProvider;
 });
 
-final currentRouteProvider = Provider((ref) {
-  return ref.watch(routeInformationProvider).value.location;
-});
-
 final routerProvider = Provider<GoRouter>((ref) {
   return GoRouter(
     initialLocation: '/splash',
