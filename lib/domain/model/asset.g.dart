@@ -17,6 +17,8 @@ _$AssetImpl _$$AssetImplFromJson(Map<String, dynamic> json) => _$AssetImpl(
           ? null
           : DateTime.parse(json['updatedAt'] as String),
       assetColor: json['assetColor'] as String?,
+      totalAmount: (json['totalAmount'] as num).toDouble(),
+      currency: json['currency'] as String,
     );
 
 Map<String, dynamic> _$$AssetImplToJson(_$AssetImpl instance) =>
@@ -27,4 +29,6 @@ Map<String, dynamic> _$$AssetImplToJson(_$AssetImpl instance) =>
       'createdAt': instance.createdAt?.toIso8601String(),
       'updatedAt': instance.updatedAt?.toIso8601String(),
       'assetColor': instance.assetColor,
+      'totalAmount': instance.totalAmount,
+      'currency': instance.currency,
     };

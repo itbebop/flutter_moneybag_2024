@@ -26,6 +26,8 @@ mixin _$Asset {
   DateTime? get createdAt => throw _privateConstructorUsedError;
   DateTime? get updatedAt => throw _privateConstructorUsedError;
   String? get assetColor => throw _privateConstructorUsedError;
+  double get totalAmount => throw _privateConstructorUsedError;
+  String get currency => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -43,7 +45,9 @@ abstract class $AssetCopyWith<$Res> {
       String imgUrl,
       DateTime? createdAt,
       DateTime? updatedAt,
-      String? assetColor});
+      String? assetColor,
+      double totalAmount,
+      String currency});
 }
 
 /// @nodoc
@@ -65,6 +69,8 @@ class _$AssetCopyWithImpl<$Res, $Val extends Asset>
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
     Object? assetColor = freezed,
+    Object? totalAmount = null,
+    Object? currency = null,
   }) {
     return _then(_value.copyWith(
       assetId: null == assetId
@@ -91,6 +97,14 @@ class _$AssetCopyWithImpl<$Res, $Val extends Asset>
           ? _value.assetColor
           : assetColor // ignore: cast_nullable_to_non_nullable
               as String?,
+      totalAmount: null == totalAmount
+          ? _value.totalAmount
+          : totalAmount // ignore: cast_nullable_to_non_nullable
+              as double,
+      currency: null == currency
+          ? _value.currency
+          : currency // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -108,7 +122,9 @@ abstract class _$$AssetImplCopyWith<$Res> implements $AssetCopyWith<$Res> {
       String imgUrl,
       DateTime? createdAt,
       DateTime? updatedAt,
-      String? assetColor});
+      String? assetColor,
+      double totalAmount,
+      String currency});
 }
 
 /// @nodoc
@@ -128,6 +144,8 @@ class __$$AssetImplCopyWithImpl<$Res>
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
     Object? assetColor = freezed,
+    Object? totalAmount = null,
+    Object? currency = null,
   }) {
     return _then(_$AssetImpl(
       assetId: null == assetId
@@ -154,6 +172,14 @@ class __$$AssetImplCopyWithImpl<$Res>
           ? _value.assetColor
           : assetColor // ignore: cast_nullable_to_non_nullable
               as String?,
+      totalAmount: null == totalAmount
+          ? _value.totalAmount
+          : totalAmount // ignore: cast_nullable_to_non_nullable
+              as double,
+      currency: null == currency
+          ? _value.currency
+          : currency // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -167,7 +193,9 @@ class _$AssetImpl implements _Asset {
       required this.imgUrl,
       this.createdAt,
       this.updatedAt,
-      this.assetColor});
+      this.assetColor,
+      required this.totalAmount,
+      required this.currency});
 
   factory _$AssetImpl.fromJson(Map<String, dynamic> json) =>
       _$$AssetImplFromJson(json);
@@ -184,10 +212,14 @@ class _$AssetImpl implements _Asset {
   final DateTime? updatedAt;
   @override
   final String? assetColor;
+  @override
+  final double totalAmount;
+  @override
+  final String currency;
 
   @override
   String toString() {
-    return 'Asset(assetId: $assetId, assetName: $assetName, imgUrl: $imgUrl, createdAt: $createdAt, updatedAt: $updatedAt, assetColor: $assetColor)';
+    return 'Asset(assetId: $assetId, assetName: $assetName, imgUrl: $imgUrl, createdAt: $createdAt, updatedAt: $updatedAt, assetColor: $assetColor, totalAmount: $totalAmount, currency: $currency)';
   }
 
   @override
@@ -204,13 +236,17 @@ class _$AssetImpl implements _Asset {
             (identical(other.updatedAt, updatedAt) ||
                 other.updatedAt == updatedAt) &&
             (identical(other.assetColor, assetColor) ||
-                other.assetColor == assetColor));
+                other.assetColor == assetColor) &&
+            (identical(other.totalAmount, totalAmount) ||
+                other.totalAmount == totalAmount) &&
+            (identical(other.currency, currency) ||
+                other.currency == currency));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, assetId, assetName, imgUrl,
-      createdAt, updatedAt, assetColor);
+      createdAt, updatedAt, assetColor, totalAmount, currency);
 
   @JsonKey(ignore: true)
   @override
@@ -233,7 +269,9 @@ abstract class _Asset implements Asset {
       required final String imgUrl,
       final DateTime? createdAt,
       final DateTime? updatedAt,
-      final String? assetColor}) = _$AssetImpl;
+      final String? assetColor,
+      required final double totalAmount,
+      required final String currency}) = _$AssetImpl;
 
   factory _Asset.fromJson(Map<String, dynamic> json) = _$AssetImpl.fromJson;
 
@@ -249,6 +287,10 @@ abstract class _Asset implements Asset {
   DateTime? get updatedAt;
   @override
   String? get assetColor;
+  @override
+  double get totalAmount;
+  @override
+  String get currency;
   @override
   @JsonKey(ignore: true)
   _$$AssetImplCopyWith<_$AssetImpl> get copyWith =>
