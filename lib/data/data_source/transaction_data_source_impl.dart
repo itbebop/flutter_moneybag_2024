@@ -8,7 +8,7 @@ class TransactionDataSourceImpl implements TransactionDataSource {
 
   // TransactionRef 초기화
   CollectionReference<TransactionDetail> _transactionRef(String userId, String assetId) {
-    return _firestore.collection('user').doc(userId).collection('asset').doc(assetId).collection('transactions').withConverter<TransactionDetail>(
+    return _firestore.collection('users').doc(userId).collection('assets').doc(assetId).collection('transactions').withConverter<TransactionDetail>(
           fromFirestore: (snapshot, _) => TransactionDetail.fromJson(snapshot.data()!),
           toFirestore: (transaction, _) {
             final transactionMap = transaction.toJson();
