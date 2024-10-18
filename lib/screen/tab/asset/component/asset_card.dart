@@ -25,15 +25,15 @@ class AssetCard extends StatelessWidget {
           left: 28.w,
           top: 20.h,
           child: ClipRRect(
-            borderRadius: BorderRadius.circular(15.0),
+            borderRadius: BorderRadius.circular(25.0),
             child: Image.network(
-              picSum(301),
-              width: 30,
+              picSum(201),
+              width: 40,
             ),
           ),
         ),
         Positioned(
-          left: 68.w,
+          left: 78.w,
           top: 16.h,
           child: Text(
             'Default asset',

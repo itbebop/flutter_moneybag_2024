@@ -26,13 +26,13 @@ class AssetCardNew extends StatelessWidget {
           child: ClipRRect(
             borderRadius: BorderRadius.circular(15.0),
             child: Image.network(
-              picSum(301),
-              width: 30,
+              picSum(201),
+              width: 40,
             ),
           ),
         ),
         Positioned(
-          left: 68.w,
+          left: 78.w,
           top: 12.h,
           child: SizedBox(
             width: 150.w,
