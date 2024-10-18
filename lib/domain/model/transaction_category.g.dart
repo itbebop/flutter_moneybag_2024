@@ -13,7 +13,6 @@ _$TransactionCategoryImpl _$$TransactionCategoryImplFromJson(
       name: json['name'] as String,
       imgUrl: json['imgUrl'] as String,
       type: $enumDecode(_$AssetTypeEnumMap, json['type']),
-      userId: json['userId'] as String,
     );
 
 Map<String, dynamic> _$$TransactionCategoryImplToJson(
@@ -23,7 +22,6 @@ Map<String, dynamic> _$$TransactionCategoryImplToJson(
       'name': instance.name,
       'imgUrl': instance.imgUrl,
       'type': _$AssetTypeEnumMap[instance.type]!,
-      'userId': instance.userId,
     };
 
 const _$AssetTypeEnumMap = {

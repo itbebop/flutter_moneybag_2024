@@ -25,7 +25,6 @@ mixin _$TransactionCategory {
       throw _privateConstructorUsedError; // 유형 이름 (예: Salary, Rent 등)
   String get imgUrl => throw _privateConstructorUsedError;
   AssetType get type => throw _privateConstructorUsedError;
-  String get userId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -39,8 +38,7 @@ abstract class $TransactionCategoryCopyWith<$Res> {
           TransactionCategory value, $Res Function(TransactionCategory) then) =
       _$TransactionCategoryCopyWithImpl<$Res, TransactionCategory>;
   @useResult
-  $Res call(
-      {String id, String name, String imgUrl, AssetType type, String userId});
+  $Res call({String id, String name, String imgUrl, AssetType type});
 }
 
 /// @nodoc
@@ -60,7 +58,6 @@ class _$TransactionCategoryCopyWithImpl<$Res, $Val extends TransactionCategory>
     Object? name = null,
     Object? imgUrl = null,
     Object? type = null,
-    Object? userId = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -79,10 +76,6 @@ class _$TransactionCategoryCopyWithImpl<$Res, $Val extends TransactionCategory>
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as AssetType,
-      userId: null == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
-              as String,
     ) as $Val);
   }
 }
@@ -95,8 +88,7 @@ abstract class _$$TransactionCategoryImplCopyWith<$Res>
       __$$TransactionCategoryImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String id, String name, String imgUrl, AssetType type, String userId});
+  $Res call({String id, String name, String imgUrl, AssetType type});
 }
 
 /// @nodoc
@@ -114,7 +106,6 @@ class __$$TransactionCategoryImplCopyWithImpl<$Res>
     Object? name = null,
     Object? imgUrl = null,
     Object? type = null,
-    Object? userId = null,
   }) {
     return _then(_$TransactionCategoryImpl(
       id: null == id
@@ -133,10 +124,6 @@ class __$$TransactionCategoryImplCopyWithImpl<$Res>
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as AssetType,
-      userId: null == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
-              as String,
     ));
   }
 }
@@ -148,8 +135,7 @@ class _$TransactionCategoryImpl implements _TransactionCategory {
       {required this.id,
       required this.name,
       required this.imgUrl,
-      required this.type,
-      required this.userId});
+      required this.type});
 
   factory _$TransactionCategoryImpl.fromJson(Map<String, dynamic> json) =>
       _$$TransactionCategoryImplFromJson(json);
@@ -164,12 +150,10 @@ class _$TransactionCategoryImpl implements _TransactionCategory {
   final String imgUrl;
   @override
   final AssetType type;
-  @override
-  final String userId;
 
   @override
   String toString() {
-    return 'TransactionCategory(id: $id, name: $name, imgUrl: $imgUrl, type: $type, userId: $userId)';
+    return 'TransactionCategory(id: $id, name: $name, imgUrl: $imgUrl, type: $type)';
   }
 
   @override
@@ -180,13 +164,12 @@ class _$TransactionCategoryImpl implements _TransactionCategory {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.imgUrl, imgUrl) || other.imgUrl == imgUrl) &&
-            (identical(other.type, type) || other.type == type) &&
-            (identical(other.userId, userId) || other.userId == userId));
+            (identical(other.type, type) || other.type == type));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, imgUrl, type, userId);
+  int get hashCode => Object.hash(runtimeType, id, name, imgUrl, type);
 
   @JsonKey(ignore: true)
   @override
@@ -208,8 +191,7 @@ abstract class _TransactionCategory implements TransactionCategory {
       {required final String id,
       required final String name,
       required final String imgUrl,
-      required final AssetType type,
-      required final String userId}) = _$TransactionCategoryImpl;
+      required final AssetType type}) = _$TransactionCategoryImpl;
 
   factory _TransactionCategory.fromJson(Map<String, dynamic> json) =
       _$TransactionCategoryImpl.fromJson;
@@ -222,8 +204,6 @@ abstract class _TransactionCategory implements TransactionCategory {
   String get imgUrl;
   @override
   AssetType get type;
-  @override
-  String get userId;
   @override
   @JsonKey(ignore: true)
   _$$TransactionCategoryImplCopyWith<_$TransactionCategoryImpl> get copyWith =>

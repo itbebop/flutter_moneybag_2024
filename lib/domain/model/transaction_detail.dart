@@ -8,7 +8,7 @@ part 'transaction_detail.g.dart';
 class TransactionDetail with _$TransactionDetail {
   const factory TransactionDetail({
     required String transactionId,
-    required String title,
+    required String memo,
     DateTime? createdAt,
     DateTime? updatedAt,
     required double amount,

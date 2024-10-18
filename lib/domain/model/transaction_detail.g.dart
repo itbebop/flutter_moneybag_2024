@@ -10,7 +10,7 @@ _$TransactionDetailImpl _$$TransactionDetailImplFromJson(
         Map<String, dynamic> json) =>
     _$TransactionDetailImpl(
       transactionId: json['transactionId'] as String,
-      title: json['title'] as String,
+      memo: json['memo'] as String,
       createdAt: json['createdAt'] == null
           ? null
           : DateTime.parse(json['createdAt'] as String),
@@ -28,7 +28,7 @@ Map<String, dynamic> _$$TransactionDetailImplToJson(
         _$TransactionDetailImpl instance) =>
     <String, dynamic>{
       'transactionId': instance.transactionId,
-      'title': instance.title,
+      'memo': instance.memo,
       'createdAt': instance.createdAt?.toIso8601String(),
       'updatedAt': instance.updatedAt?.toIso8601String(),
       'amount': instance.amount,

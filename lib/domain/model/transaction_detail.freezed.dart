@@ -21,7 +21,7 @@ TransactionDetail _$TransactionDetailFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$TransactionDetail {
   String get transactionId => throw _privateConstructorUsedError;
-  String get title => throw _privateConstructorUsedError;
+  String get memo => throw _privateConstructorUsedError;
   DateTime? get createdAt => throw _privateConstructorUsedError;
   DateTime? get updatedAt => throw _privateConstructorUsedError;
   double get amount => throw _privateConstructorUsedError;
@@ -42,7 +42,7 @@ abstract class $TransactionDetailCopyWith<$Res> {
   @useResult
   $Res call(
       {String transactionId,
-      String title,
+      String memo,
       DateTime? createdAt,
       DateTime? updatedAt,
       double amount,
@@ -66,7 +66,7 @@ class _$TransactionDetailCopyWithImpl<$Res, $Val extends TransactionDetail>
   @override
   $Res call({
     Object? transactionId = null,
-    Object? title = null,
+    Object? memo = null,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
     Object? amount = null,
@@ -78,9 +78,9 @@ class _$TransactionDetailCopyWithImpl<$Res, $Val extends TransactionDetail>
           ? _value.transactionId
           : transactionId // ignore: cast_nullable_to_non_nullable
               as String,
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
+      memo: null == memo
+          ? _value.memo
+          : memo // ignore: cast_nullable_to_non_nullable
               as String,
       createdAt: freezed == createdAt
           ? _value.createdAt
@@ -124,7 +124,7 @@ abstract class _$$TransactionDetailImplCopyWith<$Res>
   @useResult
   $Res call(
       {String transactionId,
-      String title,
+      String memo,
       DateTime? createdAt,
       DateTime? updatedAt,
       double amount,
@@ -147,7 +147,7 @@ class __$$TransactionDetailImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? transactionId = null,
-    Object? title = null,
+    Object? memo = null,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
     Object? amount = null,
@@ -159,9 +159,9 @@ class __$$TransactionDetailImplCopyWithImpl<$Res>
           ? _value.transactionId
           : transactionId // ignore: cast_nullable_to_non_nullable
               as String,
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
+      memo: null == memo
+          ? _value.memo
+          : memo // ignore: cast_nullable_to_non_nullable
               as String,
       createdAt: freezed == createdAt
           ? _value.createdAt
@@ -192,7 +192,7 @@ class __$$TransactionDetailImplCopyWithImpl<$Res>
 class _$TransactionDetailImpl implements _TransactionDetail {
   const _$TransactionDetailImpl(
       {required this.transactionId,
-      required this.title,
+      required this.memo,
       this.createdAt,
       this.updatedAt,
       required this.amount,
@@ -206,7 +206,7 @@ class _$TransactionDetailImpl implements _TransactionDetail {
   @override
   final String transactionId;
   @override
-  final String title;
+  final String memo;
   @override
   final DateTime? createdAt;
   @override
@@ -226,7 +226,7 @@ class _$TransactionDetailImpl implements _TransactionDetail {
 
   @override
   String toString() {
-    return 'TransactionDetail(transactionId: $transactionId, title: $title, createdAt: $createdAt, updatedAt: $updatedAt, amount: $amount, userId: $userId, category: $category)';
+    return 'TransactionDetail(transactionId: $transactionId, memo: $memo, createdAt: $createdAt, updatedAt: $updatedAt, amount: $amount, userId: $userId, category: $category)';
   }
 
   @override
@@ -236,7 +236,7 @@ class _$TransactionDetailImpl implements _TransactionDetail {
             other is _$TransactionDetailImpl &&
             (identical(other.transactionId, transactionId) ||
                 other.transactionId == transactionId) &&
-            (identical(other.title, title) || other.title == title) &&
+            (identical(other.memo, memo) || other.memo == memo) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
@@ -252,7 +252,7 @@ class _$TransactionDetailImpl implements _TransactionDetail {
   int get hashCode => Object.hash(
       runtimeType,
       transactionId,
-      title,
+      memo,
       createdAt,
       updatedAt,
       amount,
@@ -277,7 +277,7 @@ class _$TransactionDetailImpl implements _TransactionDetail {
 abstract class _TransactionDetail implements TransactionDetail {
   const factory _TransactionDetail(
       {required final String transactionId,
-      required final String title,
+      required final String memo,
       final DateTime? createdAt,
       final DateTime? updatedAt,
       required final double amount,
@@ -290,7 +290,7 @@ abstract class _TransactionDetail implements TransactionDetail {
   @override
   String get transactionId;
   @override
-  String get title;
+  String get memo;
   @override
   DateTime? get createdAt;
   @override
