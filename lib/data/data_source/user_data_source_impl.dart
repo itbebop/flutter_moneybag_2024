@@ -8,7 +8,10 @@ import 'package:image_picker/image_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 
 class UserDataSourceImpl implements UserDataSource {
-  final _userRef = FirebaseFirestore.instance.collection('user').withConverter<User>(fromFirestore: (snapshot, _) => User.fromJson(snapshot.data()!), toFirestore: (snapshot, _) => snapshot.toJson());
+  final _userRef = FirebaseFirestore.instance.collection('user').withConverter<User>(
+        fromFirestore: (snapshot, _) => User.fromJson(snapshot.data()!),
+        toFirestore: (snapshot, _) => snapshot.toJson(),
+      );
   final _picker = ImagePicker();
 
   @override
