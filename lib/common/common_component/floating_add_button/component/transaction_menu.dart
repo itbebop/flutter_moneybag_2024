@@ -85,7 +85,7 @@ class TransactionMenu extends ConsumerWidget {
                           child: SizedBox(
                             width: 100,
                             child: FloatItem(
-                              title: 'transaction1.title',
+                              title: '이자', //'transaction1.title' // TODO: 글자제한, eclips 필요함
                               imagePath: picSum(401),
                             ),
                           )),
