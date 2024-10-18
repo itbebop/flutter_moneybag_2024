@@ -7,11 +7,9 @@ import 'package:flutter_moneybag_2024/common/common_component/transaction/riverp
 import 'package:flutter_moneybag_2024/common/dart/extension/thousand_comma_input_formatter.dart';
 import 'package:flutter_moneybag_2024/core/provider/user_state_notifier.dart';
 import 'package:flutter_moneybag_2024/domain/enums/asset_types.dart';
-import 'package:flutter_moneybag_2024/domain/model/dummies.dart';
 import 'package:flutter_moneybag_2024/domain/model/transaction_category.dart';
 import 'package:flutter_moneybag_2024/domain/model/transaction_detail.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:intl/intl.dart';
 
 class TransactionMenu extends ConsumerWidget {
   const TransactionMenu({
@@ -26,7 +24,6 @@ class TransactionMenu extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     double amount = 0.0;
-    final userState = ref.watch(userStateProvier);
     final memoEditController = TextEditingController();
     final amountEditController = TextEditingController();
 
@@ -65,7 +62,7 @@ class TransactionMenu extends ConsumerWidget {
                     ],
                     onChanged: (value) {
                       String newValue = value.replaceAll(',', '');
-                      amount = double.parse(newValue); // double로 변환
+                      amount = double.parse(newValue);
                       if (value.isNotEmpty) {
                         // 키보드를 다시 보여줌
                         SystemChannels.textInput.invokeMethod('TextInput.show');
@@ -88,8 +85,8 @@ class TransactionMenu extends ConsumerWidget {
                           child: SizedBox(
                             width: 100,
                             child: FloatItem(
-                              title: transaction1.title,
-                              imagePath: transaction1.category.imgUrl,
+                              title: 'transaction1.title',
+                              imagePath: picSum(401),
                             ),
                           )),
                       border: InputBorder.none,
@@ -132,14 +129,12 @@ class TransactionMenu extends ConsumerWidget {
                 const SizedBox(height: 8),
                 Tap(
                   onTap: () async {
-                    await ref.read(userStateProvier.notifier).fetchUser();
-
-                    final userStateValue = ref.read(userStateProvier);
+                    final userStateValue = ref.watch(userStateProvier);
                     if (userStateValue.value != null) {
                       await ref.read(transactionStateProvider.notifier).createTransaction(
-                            TransactionDetail(
+                            transactionDetail: TransactionDetail(
                               transactionId: '${userStateValue.value!.userId}_${idDateFormat.format(DateTime.now())}',
-                              title: memoEditController.text,
+                              memo: memoEditController.text,
                               createdAt: DateTime.now(),
                               updatedAt: DateTime.now(),
                               amount: amount,
@@ -149,7 +144,6 @@ class TransactionMenu extends ConsumerWidget {
                                 name: '이자',
                                 type: AssetType.income,
                                 imgUrl: picSum(201),
-                                userId: userStateValue.value!.userId,
                               ),
                             ),
                           );

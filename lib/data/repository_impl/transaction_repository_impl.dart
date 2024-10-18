@@ -8,22 +8,23 @@ class TransactionDetailRepositoryImpl implements TransactionRepository {
   TransactionDetailRepositoryImpl({required TransactionDataSource transactionDetailDataSource}) : _transactionDetailDataSource = transactionDetailDataSource;
 
   @override
-  Future<void> createTransaction({required TransactionDetail transaction}) async {
-    await _transactionDetailDataSource.createTransaction(transaction: transaction);
+  // Constructor
+  Future<void> createTransaction({required TransactionDetail transaction, required String userId, required String assetId}) async {
+    await _transactionDetailDataSource.createTransaction(transaction: transaction, userId: userId, assetId: assetId);
   }
 
   @override
-  Future<List<TransactionDetail>> getTransactionList() async {
-    return await _transactionDetailDataSource.getTransactionList();
+  Future<List<TransactionDetail>> getTransactionList({required String userId, required String assetId}) async {
+    return await _transactionDetailDataSource.getTransactionList(userId: userId, assetId: assetId);
   }
 
   @override
-  Future<void> updateTransaction({required TransactionDetail transaction}) async {
-    await _transactionDetailDataSource.updateTransaction(transaction: transaction);
+  Future<void> updateTransaction({required TransactionDetail transaction, required String userId, required String assetId}) async {
+    await _transactionDetailDataSource.updateTransaction(transaction: transaction, userId: userId, assetId: assetId);
   }
 
   @override
-  Future<void> deleteTransaction({required String transactionId}) async {
-    await _transactionDetailDataSource.deleteTransaction(transactionId: transactionId);
+  Future<void> deleteTransaction({required String transactionId, required String userId, required String assetId}) async {
+    await _transactionDetailDataSource.deleteTransaction(transactionId: transactionId, userId: userId, assetId: assetId);
   }
 }

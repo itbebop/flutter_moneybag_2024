@@ -3,34 +3,40 @@ import 'package:flutter_moneybag_2024/data/data_source/transaction_data_source.d
 import 'package:flutter_moneybag_2024/domain/model/transaction_detail.dart';
 
 class TransactionDataSourceImpl implements TransactionDataSource {
-  final _transactionRef = FirebaseFirestore.instance.collection('transaction').withConverter<TransactionDetail>(
-        fromFirestore: (snapshot, _) => TransactionDetail.fromJson(snapshot.data()!),
-        toFirestore: (transaction, _) {
-          final transactionMap = transaction.toJson();
-          transactionMap['category'] = transaction.category.toJson();
-          return transactionMap;
-        },
-      );
+  // Firestore 인스턴스 생성
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+  // TransactionRef 초기화
+  CollectionReference<TransactionDetail> _transactionRef(String userId, String assetId) {
+    return _firestore.collection('user').doc(userId).collection('asset').doc(assetId).collection('transactions').withConverter<TransactionDetail>(
+          fromFirestore: (snapshot, _) => TransactionDetail.fromJson(snapshot.data()!),
+          toFirestore: (transaction, _) {
+            final transactionMap = transaction.toJson();
+            transactionMap['category'] = transaction.category.toJson();
+            return transactionMap;
+          },
+        );
+  }
+
   @override
-  Future<void> createTransaction({required TransactionDetail transaction}) async {
-    // await _transactionRef.add(transaction).then((value) => _transactionRef.doc(value.id).update({'transactionId': value.id}));
-    await _transactionRef
+  Future<void> createTransaction({required TransactionDetail transaction, required String userId, required String assetId}) async {
+    await _transactionRef(userId, assetId)
         .doc(transaction.transactionId) // transactionId를 문서의 ID로 사용
         .set(transaction); // 데이터를 저장
   }
 
   @override
-  Future<List<TransactionDetail>> getTransactionList() async {
-    return await _transactionRef.get().then((value) => value.docs.map((e) => e.data()).toList());
+  Future<List<TransactionDetail>> getTransactionList({required String userId, required String assetId}) async {
+    return await _transactionRef(userId, assetId).get().then((value) => value.docs.map((e) => e.data()).toList());
   }
 
   @override
-  Future<void> updateTransaction({required TransactionDetail transaction}) async {
-    await _transactionRef.doc(transaction.transactionId).set(transaction);
+  Future<void> updateTransaction({required TransactionDetail transaction, required String userId, required String assetId}) async {
+    await _transactionRef(userId, assetId).doc(transaction.transactionId).set(transaction);
   }
 
   @override
-  Future<void> deleteTransaction({required String transactionId}) async {
-    await _transactionRef.doc(transactionId).delete();
+  Future<void> deleteTransaction({required String transactionId, required String userId, required String assetId}) async {
+    await _transactionRef(userId, assetId).doc(transactionId).delete();
   }
 }
