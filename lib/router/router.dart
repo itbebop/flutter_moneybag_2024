@@ -1,6 +1,7 @@
 import 'package:flutter_moneybag_2024/screen/category/category_screen.dart';
 import 'package:flutter_moneybag_2024/screen/login/login_screen.dart';
 import 'package:flutter_moneybag_2024/screen/main_screen.dart';
+import 'package:flutter_moneybag_2024/screen/splash/splash_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -20,8 +21,13 @@ final currentRouteProvider = Provider((ref) {
 
 final routerProvider = Provider<GoRouter>((ref) {
   return GoRouter(
-    initialLocation: '/main',
+    initialLocation: '/splash',
     routes: [
+      GoRoute(
+        path: '/splash',
+        name: 'splash',
+        builder: (context, state) => const SplashScreen(), // MainPage를 경로로 설정
+      ),
       GoRoute(
         path: '/main',
         name: 'main',
