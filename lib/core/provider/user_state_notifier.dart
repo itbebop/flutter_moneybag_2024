@@ -15,7 +15,13 @@ class UserStateNotifier extends StateNotifier<AsyncValue<User>> {
   Future<void> fetchUser() async {
     try {
       state = const AsyncValue.loading(); // 로딩 상태로 변경
-      final user = await getUserUseCase.execute(userId: auth.FirebaseAuth.instance.currentUser!.uid);
+
+      final currentUser = auth.FirebaseAuth.instance.currentUser;
+      if (currentUser == null) {
+        throw Exception("User is not logged in"); // 유저가 null인 경우 예외 처리
+      }
+
+      final user = await getUserUseCase.execute(userId: currentUser.uid);
       state = AsyncValue.data(user); // 성공적으로 데이터를 가져오면 상태 업데이트
     } catch (error, stackTrace) {
       state = AsyncValue.error(error, stackTrace); // 에러 발생 시 상태 업데이트
