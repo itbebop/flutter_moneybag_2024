@@ -20,9 +20,7 @@ class TransactionDataSourceImpl implements TransactionDataSource {
 
   @override
   Future<void> createTransaction({required TransactionDetail transaction, required String userId, required String assetId}) async {
-    await _transactionRef(userId, assetId)
-        .doc(transaction.transactionId) // transactionId를 문서의 ID로 사용
-        .set(transaction); // 데이터를 저장
+    await _transactionRef(userId, assetId).add(transaction).then((value) => _transactionRef(userId, assetId).doc(value.id).update({'transactionId': value.id}));
   }
 
   @override
