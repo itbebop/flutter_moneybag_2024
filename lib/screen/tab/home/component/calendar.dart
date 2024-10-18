@@ -8,7 +8,6 @@ import 'package:table_calendar/table_calendar.dart';
 class Calendar extends ConsumerWidget {
   final DateTime selectedDay;
   final Function(DateTime, DateTime) onDaySelected;
-
   const Calendar({
     super.key,
     required this.selectedDay,
@@ -22,7 +21,13 @@ class Calendar extends ConsumerWidget {
       stream: ref.watch(transactionStateProvider.notifier).getTransactions().asStream(),
       builder: (context, snapshot) {
         if (snapshot.hasError) {
-          return Text('에러 발생: ${snapshot.error}');
+          // 에러 발생 시 Snackbar로 메시지 표시
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('잠시 후에 다시 시도해주세요')),
+            );
+          });
+          return const Center(child: Text('데이터가 없습니다.')); // 기본 상태로 변경
         } else if (snapshot.hasData) {
           final events = snapshot.data!;
           return Container(
