@@ -10,7 +10,7 @@ final reportScreenStateProvider = StateNotifierProvider<ReportScreenStateNotifie
 class ReportScreenStateNotifier extends StateNotifier<ReportScreenState> {
   ReportScreenStateNotifier(super.state);
 
-  Future<List<TransactionDetail>> getTransactionList(String userId) async {
-    return await state.getTransactionListUseCase.execute(userId);
+  Future<List<TransactionDetail>> getTransactionList(String userId, String assetId) async {
+    return await state.getTransactionListUseCase.execute(userId, 'assetId');
   }
 }

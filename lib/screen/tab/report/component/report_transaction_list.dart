@@ -21,7 +21,7 @@ class ReportTransactionList extends ConsumerWidget {
       userId = userProvider.value!.userId;
     }
     return StreamBuilder<List<TransactionDetail>>(
-      stream: ref.watch(reportScreenStateProvider.notifier).getTransactionList(userId).asStream(),
+      stream: ref.watch(reportScreenStateProvider.notifier).getTransactionList(userId, 'assetId').asStream(),
       builder: (context, snapshot) {
         if (snapshot.hasError) {
           WidgetsBinding.instance.addPostFrameCallback((_) {
