@@ -4,12 +4,12 @@ import 'package:flutter_moneybag_2024/common/theme/ui_config.dart';
 import 'package:flutter_moneybag_2024/domain/model/transaction_category.dart';
 
 class TransactionItem extends StatelessWidget {
-  final String title;
+  final String memo;
   final String imgUrl;
   final String createdAt;
   final String amount;
   final TransactionCategory category;
-  const TransactionItem({super.key, required this.title, required this.imgUrl, required this.createdAt, required this.amount, required this.category});
+  const TransactionItem({super.key, required this.memo, required this.imgUrl, required this.createdAt, required this.amount, required this.category});
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +65,7 @@ class TransactionItem extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(title, style: UiConfig.h4Style),
+                          Text(memo, style: UiConfig.h4Style),
                           Text(createdAt,
                               style: UiConfig.smallStyle.copyWith(
                                 color: UiConfig.color[700],

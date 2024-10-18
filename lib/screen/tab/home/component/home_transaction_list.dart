@@ -30,7 +30,7 @@ class HomeTransactionList extends StatelessWidget {
               child: Column(
                 children: [
                   TransactionItem(
-                    title: transaction.title,
+                    memo: transaction.memo,
                     amount: transaction.amount.toComma(),
                     imgUrl: transaction.category.imgUrl,
                     createdAt: detailDateFormat.format(transaction.updatedAt!),
@@ -39,7 +39,6 @@ class HomeTransactionList extends StatelessWidget {
                       name: '이자',
                       type: AssetType.income,
                       imgUrl: picSum(201),
-                      userId: transaction.userId.first, // TODO: List로 맞춰야하는지 확인
                     ),
                   ),
                 ],
