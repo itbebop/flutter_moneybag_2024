@@ -138,7 +138,7 @@ class TransactionMenu extends ConsumerWidget {
                               createdAt: DateTime.now(),
                               updatedAt: DateTime.now(),
                               amount: amount,
-                              email: [userStateValue.value!.email],
+                              userIdList: [userStateValue.value!.userId],
                               category: TransactionCategory(
                                 id: '1',
                                 name: '이자',

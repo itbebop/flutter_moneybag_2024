@@ -62,7 +62,7 @@ class UserRepositoryImpl implements UserRepository {
 
   @override
   Future<bool> checkDuplicatedUser({required String email}) async {
-    final result = await _userDataSource.checkDuplicatedUser(email: email);
+    final result = await _userDataSource.checkDuplicatedUser(userId: email);
     return result;
   }
 
@@ -70,7 +70,7 @@ class UserRepositoryImpl implements UserRepository {
   Future<User> getUser({required String email}) async {
     User user;
     try {
-      user = await _userDataSource.getUser(email: email);
+      user = await _userDataSource.getUser(userId: email);
     } catch (error) {
       user = const User(
         userId: '',
@@ -88,7 +88,7 @@ class UserRepositoryImpl implements UserRepository {
   Future<bool> updateUserName({required String email, required String name}) async {
     bool result = false;
     try {
-      await _userDataSource.updateUserName(email: email, name: name);
+      await _userDataSource.updateUserName(userId: email, name: name);
       result = true;
     } catch (error) {
       result = false;
@@ -98,11 +98,11 @@ class UserRepositoryImpl implements UserRepository {
 
   @override
   Future<void> updatePhoto({required String email}) async {
-    await _userDataSource.updatePhoto(email: email);
+    await _userDataSource.updatePhoto(userId: email);
   }
 
   @override
   Future<void> updateLanguage({required String lang, required String email}) async {
-    await _userDataSource.updateLanguage(lang: lang, email: email);
+    await _userDataSource.updateLanguage(lang: lang, userId: email);
   }
 }

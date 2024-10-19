@@ -16,7 +16,7 @@ class UserDataSourceImpl implements UserDataSource {
 
   @override
   Future<void> createUser({required User user}) async {
-    await _userRef.doc(user.email.toString()).set(user);
+    await _userRef.doc(user.userId.toString()).set(user);
   }
 
   @override
@@ -25,42 +25,42 @@ class UserDataSourceImpl implements UserDataSource {
   }
 
   @override
-  Future<User> getUser({required String email}) async {
-    final user = await _userRef.doc(email).get().then((s) => s.data()!);
+  Future<User> getUser({required String userId}) async {
+    final user = await _userRef.doc(userId).get().then((s) => s.data()!);
     return user;
   }
 
   @override
-  Future<bool> checkDuplicatedUser({required String email}) async {
+  Future<bool> checkDuplicatedUser({required String userId}) async {
     // data 있으면(old) false/ data없으면(new) true
-    final result = await _userRef.doc(email).get().then((s) => s.data()!).then((value) => false).onError((error, stackTrace) => true);
+    final result = await _userRef.doc(userId).get().then((s) => s.data()!).then((value) => false).onError((error, stackTrace) => true);
     return result;
   }
 
   @override
-  Future<void> updateUserName({required String email, required String name}) async {
-    await _userRef.doc(email).update({'name': name});
+  Future<void> updateUserName({required String userId, required String name}) async {
+    await _userRef.doc(userId).update({'name': name});
   }
 
   @override
-  Future<void> updateLanguage({required String lang, required String email}) async {
-    await _userRef.doc(email).update({'language': lang});
+  Future<void> updateLanguage({required String lang, required String userId}) async {
+    await _userRef.doc(userId).update({'language': lang});
   }
 
   @override
-  Future<void> updatePhoto({required String email}) async {
+  Future<void> updatePhoto({required String userId}) async {
     XFile? xFile = await _picker.pickImage(source: ImageSource.gallery);
     if (xFile != null) {
       //이미지 업로드
       final storageRef = FirebaseStorage.instance.ref();
-      final imageRef = storageRef.child('user/$email/profile/profile.png');
+      final imageRef = storageRef.child('user/$userId/profile/profile.png');
 
       //이미지 다운로드
       await imageRef.putFile(File(xFile.path));
       final downloadUrl = await imageRef.getDownloadURL();
 
       //업데이트 (이후 currentUser로 바꾸기)
-      await _userRef.doc(email).update({'imageUrl': downloadUrl});
+      await _userRef.doc(userId).update({'imageUrl': downloadUrl});
     }
   }
 }
