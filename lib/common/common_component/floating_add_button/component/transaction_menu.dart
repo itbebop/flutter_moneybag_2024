@@ -140,7 +140,7 @@ class TransactionMenu extends ConsumerWidget {
                               amount: amount,
                               userId: userStateValue.value!.userId,
                               category: TransactionCategory(
-                                id: '1',
+                                categoryId: '1',
                                 name: '이자',
                                 type: AssetType.income,
                                 imgUrl: picSum(201),

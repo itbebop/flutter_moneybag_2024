@@ -35,7 +35,7 @@ class HomeTransactionList extends StatelessWidget {
                     imgUrl: transaction.category.imgUrl,
                     createdAt: detailDateFormat.format(transaction.updatedAt!),
                     category: TransactionCategory(
-                      id: '1',
+                      categoryId: '1',
                       name: '이자',
                       type: AssetType.income,
                       imgUrl: picSum(201),
