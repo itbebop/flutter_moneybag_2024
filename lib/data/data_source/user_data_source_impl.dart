@@ -32,15 +32,19 @@ class UserDataSourceImpl implements UserDataSource {
 
   @override
   Future<bool> isNewUser({required User user}) async {
-    // 이메일 필드와 userId를 비교
-    final result = await _userRef.doc(user.userId).get().then((s) {
-      final userData = s.data();
-      if (userData != null) {
-        return userData.email == user.email; // 이메일 비교
+    try {
+      // 이메일로 User 컬렉션을 조회하여 중복된 이메일이 있는지 확인
+      final querySnapshot = await _userRef.where('email', isEqualTo: user.email).get();
+
+      if (querySnapshot.docs.isNotEmpty) {
+        // 같은 이메일을 가진 문서가 존재하면 false 반환 (중복 사용자)
+        return false;
       }
-      return false; // userData가 null인 경우 false 반환
-    }).onError((error, stackTrace) => false);
-    return result;
+      // 이메일이 존재하지 않으면 새로운 사용자로 간주하고 true 반환
+      return true;
+    } catch (error) {
+      return false; // 에러 발생 시 기본적으로 false 반환
+    }
   }
 
   @override
