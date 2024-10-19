@@ -19,6 +19,9 @@ _$AssetImpl _$$AssetImplFromJson(Map<String, dynamic> json) => _$AssetImpl(
       assetColor: json['assetColor'] as String?,
       totalAmount: (json['totalAmount'] as num).toDouble(),
       currency: json['currency'] as String,
+      userIdList: (json['userIdList'] as List<dynamic>)
+          .map((e) => e as String)
+          .toList(),
     );
 
 Map<String, dynamic> _$$AssetImplToJson(_$AssetImpl instance) =>
@@ -31,4 +34,5 @@ Map<String, dynamic> _$$AssetImplToJson(_$AssetImpl instance) =>
       'assetColor': instance.assetColor,
       'totalAmount': instance.totalAmount,
       'currency': instance.currency,
+      'userIdList': instance.userIdList,
     };

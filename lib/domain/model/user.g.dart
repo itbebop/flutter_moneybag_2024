@@ -13,6 +13,9 @@ _$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
       imgUrl: json['imgUrl'] as String,
       language: json['language'] as String,
       userType: $enumDecode(_$UserTypeEnumMap, json['userType']),
+      assetIdList: (json['assetIdList'] as List<dynamic>)
+          .map((e) => e as String)
+          .toList(),
     );
 
 Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
@@ -23,6 +26,7 @@ Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
       'imgUrl': instance.imgUrl,
       'language': instance.language,
       'userType': _$UserTypeEnumMap[instance.userType]!,
+      'assetIdList': instance.assetIdList,
     };
 
 const _$UserTypeEnumMap = {

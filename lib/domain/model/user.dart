@@ -13,6 +13,7 @@ class User with _$User {
     required String imgUrl,
     required String language,
     required UserType userType,
+    required List<String> assetIdList,
   }) = _User;
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);

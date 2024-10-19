@@ -14,6 +14,7 @@ class Asset with _$Asset {
     String? assetColor,
     required double totalAmount,
     required String currency,
+    required List<String> userIdList,
   }) = _Asset;
 
   factory Asset.fromJson(Map<String, dynamic> json) => _$AssetFromJson(json);

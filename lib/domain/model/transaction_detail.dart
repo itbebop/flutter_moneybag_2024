@@ -12,7 +12,7 @@ class TransactionDetail with _$TransactionDetail {
     DateTime? createdAt,
     DateTime? updatedAt,
     required double amount,
-    required List<String> userIdList,
+    required String userId,
     required TransactionCategory category,
   }) = _TransactionDetail;
 

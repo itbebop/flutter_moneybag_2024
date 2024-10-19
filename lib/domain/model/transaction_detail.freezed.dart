@@ -25,7 +25,7 @@ mixin _$TransactionDetail {
   DateTime? get createdAt => throw _privateConstructorUsedError;
   DateTime? get updatedAt => throw _privateConstructorUsedError;
   double get amount => throw _privateConstructorUsedError;
-  List<String> get userIdList => throw _privateConstructorUsedError;
+  String get userId => throw _privateConstructorUsedError;
   TransactionCategory get category => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -46,7 +46,7 @@ abstract class $TransactionDetailCopyWith<$Res> {
       DateTime? createdAt,
       DateTime? updatedAt,
       double amount,
-      List<String> userIdList,
+      String userId,
       TransactionCategory category});
 
   $TransactionCategoryCopyWith<$Res> get category;
@@ -70,7 +70,7 @@ class _$TransactionDetailCopyWithImpl<$Res, $Val extends TransactionDetail>
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
     Object? amount = null,
-    Object? userIdList = null,
+    Object? userId = null,
     Object? category = null,
   }) {
     return _then(_value.copyWith(
@@ -94,10 +94,10 @@ class _$TransactionDetailCopyWithImpl<$Res, $Val extends TransactionDetail>
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
               as double,
-      userIdList: null == userIdList
-          ? _value.userIdList
-          : userIdList // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
       category: null == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
@@ -128,7 +128,7 @@ abstract class _$$TransactionDetailImplCopyWith<$Res>
       DateTime? createdAt,
       DateTime? updatedAt,
       double amount,
-      List<String> userIdList,
+      String userId,
       TransactionCategory category});
 
   @override
@@ -151,7 +151,7 @@ class __$$TransactionDetailImplCopyWithImpl<$Res>
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
     Object? amount = null,
-    Object? userIdList = null,
+    Object? userId = null,
     Object? category = null,
   }) {
     return _then(_$TransactionDetailImpl(
@@ -175,10 +175,10 @@ class __$$TransactionDetailImplCopyWithImpl<$Res>
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
               as double,
-      userIdList: null == userIdList
-          ? _value._userIdList
-          : userIdList // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
       category: null == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
@@ -196,9 +196,8 @@ class _$TransactionDetailImpl implements _TransactionDetail {
       this.createdAt,
       this.updatedAt,
       required this.amount,
-      required final List<String> userIdList,
-      required this.category})
-      : _userIdList = userIdList;
+      required this.userId,
+      required this.category});
 
   factory _$TransactionDetailImpl.fromJson(Map<String, dynamic> json) =>
       _$$TransactionDetailImplFromJson(json);
@@ -213,20 +212,14 @@ class _$TransactionDetailImpl implements _TransactionDetail {
   final DateTime? updatedAt;
   @override
   final double amount;
-  final List<String> _userIdList;
   @override
-  List<String> get userIdList {
-    if (_userIdList is EqualUnmodifiableListView) return _userIdList;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_userIdList);
-  }
-
+  final String userId;
   @override
   final TransactionCategory category;
 
   @override
   String toString() {
-    return 'TransactionDetail(transactionId: $transactionId, memo: $memo, createdAt: $createdAt, updatedAt: $updatedAt, amount: $amount, userIdList: $userIdList, category: $category)';
+    return 'TransactionDetail(transactionId: $transactionId, memo: $memo, createdAt: $createdAt, updatedAt: $updatedAt, amount: $amount, userId: $userId, category: $category)';
   }
 
   @override
@@ -242,23 +235,15 @@ class _$TransactionDetailImpl implements _TransactionDetail {
             (identical(other.updatedAt, updatedAt) ||
                 other.updatedAt == updatedAt) &&
             (identical(other.amount, amount) || other.amount == amount) &&
-            const DeepCollectionEquality()
-                .equals(other._userIdList, _userIdList) &&
+            (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.category, category) ||
                 other.category == category));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      transactionId,
-      memo,
-      createdAt,
-      updatedAt,
-      amount,
-      const DeepCollectionEquality().hash(_userIdList),
-      category);
+  int get hashCode => Object.hash(runtimeType, transactionId, memo, createdAt,
+      updatedAt, amount, userId, category);
 
   @JsonKey(ignore: true)
   @override
@@ -282,7 +267,7 @@ abstract class _TransactionDetail implements TransactionDetail {
       final DateTime? createdAt,
       final DateTime? updatedAt,
       required final double amount,
-      required final List<String> userIdList,
+      required final String userId,
       required final TransactionCategory category}) = _$TransactionDetailImpl;
 
   factory _TransactionDetail.fromJson(Map<String, dynamic> json) =
@@ -299,7 +284,7 @@ abstract class _TransactionDetail implements TransactionDetail {
   @override
   double get amount;
   @override
-  List<String> get userIdList;
+  String get userId;
   @override
   TransactionCategory get category;
   @override

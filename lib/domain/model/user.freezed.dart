@@ -26,6 +26,7 @@ mixin _$User {
   String get imgUrl => throw _privateConstructorUsedError;
   String get language => throw _privateConstructorUsedError;
   UserType get userType => throw _privateConstructorUsedError;
+  List<String> get assetIdList => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -43,7 +44,8 @@ abstract class $UserCopyWith<$Res> {
       String email,
       String imgUrl,
       String language,
-      UserType userType});
+      UserType userType,
+      List<String> assetIdList});
 }
 
 /// @nodoc
@@ -65,6 +67,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? imgUrl = null,
     Object? language = null,
     Object? userType = null,
+    Object? assetIdList = null,
   }) {
     return _then(_value.copyWith(
       userId: null == userId
@@ -91,6 +94,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.userType
           : userType // ignore: cast_nullable_to_non_nullable
               as UserType,
+      assetIdList: null == assetIdList
+          ? _value.assetIdList
+          : assetIdList // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ) as $Val);
   }
 }
@@ -108,7 +115,8 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       String email,
       String imgUrl,
       String language,
-      UserType userType});
+      UserType userType,
+      List<String> assetIdList});
 }
 
 /// @nodoc
@@ -127,6 +135,7 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? imgUrl = null,
     Object? language = null,
     Object? userType = null,
+    Object? assetIdList = null,
   }) {
     return _then(_$UserImpl(
       userId: null == userId
@@ -153,6 +162,10 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.userType
           : userType // ignore: cast_nullable_to_non_nullable
               as UserType,
+      assetIdList: null == assetIdList
+          ? _value._assetIdList
+          : assetIdList // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ));
   }
 }
@@ -166,7 +179,9 @@ class _$UserImpl implements _User {
       required this.email,
       required this.imgUrl,
       required this.language,
-      required this.userType});
+      required this.userType,
+      required final List<String> assetIdList})
+      : _assetIdList = assetIdList;
 
   factory _$UserImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserImplFromJson(json);
@@ -183,10 +198,17 @@ class _$UserImpl implements _User {
   final String language;
   @override
   final UserType userType;
+  final List<String> _assetIdList;
+  @override
+  List<String> get assetIdList {
+    if (_assetIdList is EqualUnmodifiableListView) return _assetIdList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_assetIdList);
+  }
 
   @override
   String toString() {
-    return 'User(userId: $userId, name: $name, email: $email, imgUrl: $imgUrl, language: $language, userType: $userType)';
+    return 'User(userId: $userId, name: $name, email: $email, imgUrl: $imgUrl, language: $language, userType: $userType, assetIdList: $assetIdList)';
   }
 
   @override
@@ -201,13 +223,15 @@ class _$UserImpl implements _User {
             (identical(other.language, language) ||
                 other.language == language) &&
             (identical(other.userType, userType) ||
-                other.userType == userType));
+                other.userType == userType) &&
+            const DeepCollectionEquality()
+                .equals(other._assetIdList, _assetIdList));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, userId, name, email, imgUrl, language, userType);
+  int get hashCode => Object.hash(runtimeType, userId, name, email, imgUrl,
+      language, userType, const DeepCollectionEquality().hash(_assetIdList));
 
   @JsonKey(ignore: true)
   @override
@@ -230,7 +254,8 @@ abstract class _User implements User {
       required final String email,
       required final String imgUrl,
       required final String language,
-      required final UserType userType}) = _$UserImpl;
+      required final UserType userType,
+      required final List<String> assetIdList}) = _$UserImpl;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
 
@@ -246,6 +271,8 @@ abstract class _User implements User {
   String get language;
   @override
   UserType get userType;
+  @override
+  List<String> get assetIdList;
   @override
   @JsonKey(ignore: true)
   _$$UserImplCopyWith<_$UserImpl> get copyWith =>

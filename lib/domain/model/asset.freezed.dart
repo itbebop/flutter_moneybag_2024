@@ -28,6 +28,7 @@ mixin _$Asset {
   String? get assetColor => throw _privateConstructorUsedError;
   double get totalAmount => throw _privateConstructorUsedError;
   String get currency => throw _privateConstructorUsedError;
+  List<String> get userIdList => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -47,7 +48,8 @@ abstract class $AssetCopyWith<$Res> {
       DateTime? updatedAt,
       String? assetColor,
       double totalAmount,
-      String currency});
+      String currency,
+      List<String> userIdList});
 }
 
 /// @nodoc
@@ -71,6 +73,7 @@ class _$AssetCopyWithImpl<$Res, $Val extends Asset>
     Object? assetColor = freezed,
     Object? totalAmount = null,
     Object? currency = null,
+    Object? userIdList = null,
   }) {
     return _then(_value.copyWith(
       assetId: null == assetId
@@ -105,6 +108,10 @@ class _$AssetCopyWithImpl<$Res, $Val extends Asset>
           ? _value.currency
           : currency // ignore: cast_nullable_to_non_nullable
               as String,
+      userIdList: null == userIdList
+          ? _value.userIdList
+          : userIdList // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ) as $Val);
   }
 }
@@ -124,7 +131,8 @@ abstract class _$$AssetImplCopyWith<$Res> implements $AssetCopyWith<$Res> {
       DateTime? updatedAt,
       String? assetColor,
       double totalAmount,
-      String currency});
+      String currency,
+      List<String> userIdList});
 }
 
 /// @nodoc
@@ -146,6 +154,7 @@ class __$$AssetImplCopyWithImpl<$Res>
     Object? assetColor = freezed,
     Object? totalAmount = null,
     Object? currency = null,
+    Object? userIdList = null,
   }) {
     return _then(_$AssetImpl(
       assetId: null == assetId
@@ -180,6 +189,10 @@ class __$$AssetImplCopyWithImpl<$Res>
           ? _value.currency
           : currency // ignore: cast_nullable_to_non_nullable
               as String,
+      userIdList: null == userIdList
+          ? _value._userIdList
+          : userIdList // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ));
   }
 }
@@ -195,7 +208,9 @@ class _$AssetImpl implements _Asset {
       this.updatedAt,
       this.assetColor,
       required this.totalAmount,
-      required this.currency});
+      required this.currency,
+      required final List<String> userIdList})
+      : _userIdList = userIdList;
 
   factory _$AssetImpl.fromJson(Map<String, dynamic> json) =>
       _$$AssetImplFromJson(json);
@@ -216,10 +231,17 @@ class _$AssetImpl implements _Asset {
   final double totalAmount;
   @override
   final String currency;
+  final List<String> _userIdList;
+  @override
+  List<String> get userIdList {
+    if (_userIdList is EqualUnmodifiableListView) return _userIdList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_userIdList);
+  }
 
   @override
   String toString() {
-    return 'Asset(assetId: $assetId, assetName: $assetName, imgUrl: $imgUrl, createdAt: $createdAt, updatedAt: $updatedAt, assetColor: $assetColor, totalAmount: $totalAmount, currency: $currency)';
+    return 'Asset(assetId: $assetId, assetName: $assetName, imgUrl: $imgUrl, createdAt: $createdAt, updatedAt: $updatedAt, assetColor: $assetColor, totalAmount: $totalAmount, currency: $currency, userIdList: $userIdList)';
   }
 
   @override
@@ -240,13 +262,24 @@ class _$AssetImpl implements _Asset {
             (identical(other.totalAmount, totalAmount) ||
                 other.totalAmount == totalAmount) &&
             (identical(other.currency, currency) ||
-                other.currency == currency));
+                other.currency == currency) &&
+            const DeepCollectionEquality()
+                .equals(other._userIdList, _userIdList));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, assetId, assetName, imgUrl,
-      createdAt, updatedAt, assetColor, totalAmount, currency);
+  int get hashCode => Object.hash(
+      runtimeType,
+      assetId,
+      assetName,
+      imgUrl,
+      createdAt,
+      updatedAt,
+      assetColor,
+      totalAmount,
+      currency,
+      const DeepCollectionEquality().hash(_userIdList));
 
   @JsonKey(ignore: true)
   @override
@@ -271,7 +304,8 @@ abstract class _Asset implements Asset {
       final DateTime? updatedAt,
       final String? assetColor,
       required final double totalAmount,
-      required final String currency}) = _$AssetImpl;
+      required final String currency,
+      required final List<String> userIdList}) = _$AssetImpl;
 
   factory _Asset.fromJson(Map<String, dynamic> json) = _$AssetImpl.fromJson;
 
@@ -291,6 +325,8 @@ abstract class _Asset implements Asset {
   double get totalAmount;
   @override
   String get currency;
+  @override
+  List<String> get userIdList;
   @override
   @JsonKey(ignore: true)
   _$$AssetImplCopyWith<_$AssetImpl> get copyWith =>

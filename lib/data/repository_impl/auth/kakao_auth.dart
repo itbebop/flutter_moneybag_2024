@@ -30,6 +30,7 @@ class KakaoAuth implements SocialAuth {
           imgUrl: kakaoUser.kakaoAccount?.profile?.profileImageUrl ?? '',
           language: 'ko',
           userType: UserType.free,
+          assetIdList: [],
         );
         return user;
       } catch (error) {
@@ -51,12 +52,14 @@ class KakaoAuth implements SocialAuth {
           final kakaoUser = await kakao.UserApi.instance.me();
 
           final user = User(
-              userId: userCredential.user!.uid,
-              name: kakaoUser.kakaoAccount?.profile?.nickname ?? '',
-              email: kakaoUser.kakaoAccount?.email ?? '',
-              imgUrl: kakaoUser.kakaoAccount?.profile?.profileImageUrl ?? '',
-              language: 'ko',
-              userType: UserType.free);
+            userId: userCredential.user!.uid,
+            name: kakaoUser.kakaoAccount?.profile?.nickname ?? '',
+            email: kakaoUser.kakaoAccount?.email ?? '',
+            imgUrl: kakaoUser.kakaoAccount?.profile?.profileImageUrl ?? '',
+            language: 'ko',
+            userType: UserType.free,
+            assetIdList: [],
+          );
           return user;
         } catch (error) {
           return null;
@@ -79,12 +82,14 @@ class KakaoAuth implements SocialAuth {
         final kakaoUser = await kakao.UserApi.instance.me();
 
         final user = User(
-            userId: userCredential.user!.uid,
-            name: kakaoUser.kakaoAccount?.profile?.nickname ?? '',
-            email: kakaoUser.kakaoAccount?.email ?? '',
-            imgUrl: kakaoUser.kakaoAccount?.profile?.profileImageUrl ?? '',
-            language: 'ko',
-            userType: UserType.free);
+          userId: userCredential.user!.uid,
+          name: kakaoUser.kakaoAccount?.profile?.nickname ?? '',
+          email: kakaoUser.kakaoAccount?.email ?? '',
+          imgUrl: kakaoUser.kakaoAccount?.profile?.profileImageUrl ?? '',
+          language: 'ko',
+          userType: UserType.free,
+          assetIdList: [],
+        );
         return user;
       } catch (error) {
         return null;

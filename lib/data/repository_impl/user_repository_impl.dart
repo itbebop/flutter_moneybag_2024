@@ -78,6 +78,7 @@ class UserRepositoryImpl implements UserRepository {
         imgUrl: '',
         language: 'ko',
         userType: UserType.free,
+        assetIdList: [],
       );
     }
     return user;

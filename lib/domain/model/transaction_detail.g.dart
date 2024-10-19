@@ -18,9 +18,7 @@ _$TransactionDetailImpl _$$TransactionDetailImplFromJson(
           ? null
           : DateTime.parse(json['updatedAt'] as String),
       amount: (json['amount'] as num).toDouble(),
-      userIdList: (json['userIdList'] as List<dynamic>)
-          .map((e) => e as String)
-          .toList(),
+      userId: json['userId'] as String,
       category: TransactionCategory.fromJson(
           json['category'] as Map<String, dynamic>),
     );
@@ -33,6 +31,6 @@ Map<String, dynamic> _$$TransactionDetailImplToJson(
       'createdAt': instance.createdAt?.toIso8601String(),
       'updatedAt': instance.updatedAt?.toIso8601String(),
       'amount': instance.amount,
-      'userIdList': instance.userIdList,
+      'userId': instance.userId,
       'category': instance.category,
     };
