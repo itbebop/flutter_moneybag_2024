@@ -3,7 +3,7 @@ import 'package:flutter_moneybag_2024/common/common.dart';
 import 'package:flutter_moneybag_2024/data/data_source/asset_data_source.dart';
 import 'package:flutter_moneybag_2024/domain/model/asset.dart';
 
-class AssetDataSouceImpl implements AssetDataSource {
+class AssetDataSourceImpl implements AssetDataSource {
   // Firestore 인스턴스 생성
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
