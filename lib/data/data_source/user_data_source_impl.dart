@@ -32,7 +32,8 @@ class UserDataSourceImpl implements UserDataSource {
 
   @override
   Future<bool> checkDuplicatedUser({required String email}) async {
-    final result = await _userRef.doc(email).get().then((s) => s.data()!).then((value) => true).onError((error, stackTrace) => false);
+    // data 있으면(old) false/ data없으면(new) true
+    final result = await _userRef.doc(email).get().then((s) => s.data()!).then((value) => false).onError((error, stackTrace) => true);
     return result;
   }
 

@@ -28,8 +28,7 @@ class LoginScreenStateNotifier extends StateNotifier<LoginScreenState> {
       if (state.user != null) {
         result = await state.checkUserDuplicatedUseCase.execute(email: state.user!.email);
         if (result == true) {
-          state = state.copyWith(isNewUser: false);
-        } else {
+          state = state.copyWith(isNewUser: true);
           await state.createUserUseCase.execute(user: state.user!);
         }
       }

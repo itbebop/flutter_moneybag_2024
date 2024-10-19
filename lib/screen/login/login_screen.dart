@@ -2,8 +2,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_moneybag_2024/common/common.dart';
 import 'package:flutter_moneybag_2024/core/enum/login_platform.dart';
+import 'package:flutter_moneybag_2024/core/provider/user_state_notifier.dart';
 import 'package:flutter_moneybag_2024/screen/login/login_screen_state_notifier.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 // ignore: unused_import
 import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart' as kakao;
@@ -40,16 +42,14 @@ class LoginScreen extends ConsumerWidget {
                       elevation: 2,
                       child: InkWell(
                         onTap: () async {
-                          // await viewModel.login(platform: LoginPlatform.kakao);
-                          // await userProvider.fetchUser();
-                          // if (viewModel.user == null) return;
-                          // if (viewModel.isNewUser) {
-                          //   if (context.mounted)
-                          //     context.go('/signUp', extra: viewModel.user);
-                          // } else {
-                          //   if (context.mounted) context.go('/');
-                          // }
-                          ref.read(loginScreenStateProvider.notifier).login(platform: LoginPlatform.kakao);
+                          await ref.read(loginScreenStateProvider.notifier).login(platform: LoginPlatform.kakao);
+                          ref.read(userStateProvier.notifier).fetchUser();
+                          if (ref.read(loginScreenStateProvider).user == null) {
+                            return;
+                          } else {
+                            // 유저 정보 있으면 main으로 이동
+                            if (context.mounted) context.go('/main');
+                          }
                         },
                         child: Image.asset(
                           'assets/image/login/kakao_login_icon.png',
@@ -65,7 +65,13 @@ class LoginScreen extends ConsumerWidget {
                       elevation: 2,
                       child: InkWell(
                         onTap: () async {
-                          ref.read(loginScreenStateProvider.notifier).login(platform: LoginPlatform.google);
+                          await ref.read(loginScreenStateProvider.notifier).login(platform: LoginPlatform.google);
+                          ref.read(userStateProvier.notifier).fetchUser();
+                          if (ref.read(loginScreenStateProvider).user == null) {
+                            return;
+                          } else {
+                            if (context.mounted) context.go('/main');
+                          }
                         },
                         child: Image.asset(
                           'assets/image/login/google_login_icon.png',
