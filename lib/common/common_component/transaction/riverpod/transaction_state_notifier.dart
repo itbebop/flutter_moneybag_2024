@@ -17,14 +17,14 @@ import 'package:table_calendar/table_calendar.dart';
 // userId는 userProvider를 통해 전역으로 가져옴
 final transactionStateProvider = StateNotifierProvider<TransactionStateNotifier, TransactionState>((ref) {
   final userState = ref.watch(userStateProvier);
-  final userId = userState.when(
-    data: (user) => user.userId, // userId 가져오기
+  final email = userState.when(
+    data: (user) => user.email,
     loading: () => '', // 로딩 중일 때 기본값
     error: (error, stackTrace) => '', // 에러 발생 시 기본값
   );
 
   return TransactionStateNotifier(
-    TransactionState(createTransactionUseCase: getIt(), deleteTransactionUseCase: getIt(), getTransactionListUseCase: getIt(), updateTransactionUseCase: getIt(), userId: userId, assetId: 'assetId'),
+    TransactionState(createTransactionUseCase: getIt(), deleteTransactionUseCase: getIt(), getTransactionListUseCase: getIt(), updateTransactionUseCase: getIt(), userId: email, assetId: 'assetId'),
   );
 });
 
@@ -32,7 +32,7 @@ class TransactionStateNotifier extends StateNotifier<TransactionState> {
   TransactionStateNotifier(super.state);
 
   Future<void> createTransaction({required TransactionDetail transactionDetail}) async {
-    await state.createTransactionUseCase.execute(transactionDetail: transactionDetail, userId: state.userId, assetId: 'state.assetId');
+    await state.createTransactionUseCase.execute(transactionDetail: transactionDetail, email: state.userId, assetId: 'state.assetId');
   }
 
   Future<List<TransactionDetail>> getTransactions() async {

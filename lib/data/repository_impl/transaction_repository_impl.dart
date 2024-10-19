@@ -9,22 +9,22 @@ class TransactionDetailRepositoryImpl implements TransactionRepository {
 
   @override
   // Constructor
-  Future<void> createTransaction({required TransactionDetail transaction, required String userId, required String assetId}) async {
-    await _transactionDetailDataSource.createTransaction(transaction: transaction, userId: userId, assetId: assetId);
+  Future<void> createTransaction({required TransactionDetail transaction, required String email, required String assetId}) async {
+    await _transactionDetailDataSource.createTransaction(transaction: transaction, userId: email, assetId: assetId);
   }
 
   @override
-  Future<List<TransactionDetail>> getTransactionList({required String userId, required String assetId}) async {
-    return await _transactionDetailDataSource.getTransactionList(userId: userId, assetId: assetId);
+  Future<List<TransactionDetail>> getTransactionList({required String email, required String assetId}) async {
+    return await _transactionDetailDataSource.getTransactionList(userId: email, assetId: assetId);
   }
 
   @override
-  Future<void> updateTransaction({required TransactionDetail transaction, required String userId, required String assetId}) async {
-    await _transactionDetailDataSource.updateTransaction(transaction: transaction, userId: userId, assetId: assetId);
+  Future<void> updateTransaction({required TransactionDetail transaction, required String email, required String assetId}) async {
+    await _transactionDetailDataSource.updateTransaction(transaction: transaction, userId: email, assetId: assetId);
   }
 
   @override
-  Future<void> deleteTransaction({required String transactionId, required String userId, required String assetId}) async {
-    await _transactionDetailDataSource.deleteTransaction(transactionId: transactionId, userId: userId, assetId: assetId);
+  Future<void> deleteTransaction({required String transactionId, required String email, required String assetId}) async {
+    await _transactionDetailDataSource.deleteTransaction(transactionId: transactionId, userId: email, assetId: assetId);
   }
 }

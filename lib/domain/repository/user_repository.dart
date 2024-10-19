@@ -8,8 +8,8 @@ abstract interface class UserRepository {
 
   Future<bool> createUser({required User user});
   Future<bool> checkDuplicatedUser({required String email});
-  Future<User> getUser({required String userId});
-  Future<bool> updateUserName({required String userId, required String name});
-  Future<void> updatePhoto({required String userId});
-  Future<void> updateLanguage({required String lang, required String userId});
+  Future<User> getUser({required String email});
+  Future<bool> updateUserName({required String email, required String name});
+  Future<void> updatePhoto({required String email});
+  Future<void> updateLanguage({required String lang, required String email});
 }

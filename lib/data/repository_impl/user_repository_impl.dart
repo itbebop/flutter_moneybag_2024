@@ -67,10 +67,10 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<User> getUser({required String userId}) async {
+  Future<User> getUser({required String email}) async {
     User user;
     try {
-      user = await _userDataSource.getUser(userId: userId);
+      user = await _userDataSource.getUser(email: email);
     } catch (error) {
       user = const User(
         userId: '',
@@ -85,10 +85,10 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<bool> updateUserName({required String userId, required String name}) async {
+  Future<bool> updateUserName({required String email, required String name}) async {
     bool result = false;
     try {
-      await _userDataSource.updateUserName(userId: userId, name: name);
+      await _userDataSource.updateUserName(email: email, name: name);
       result = true;
     } catch (error) {
       result = false;
@@ -97,12 +97,12 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<void> updatePhoto({required String userId}) async {
-    await _userDataSource.updatePhoto(userId: userId);
+  Future<void> updatePhoto({required String email}) async {
+    await _userDataSource.updatePhoto(email: email);
   }
 
   @override
-  Future<void> updateLanguage({required String lang, required String userId}) async {
-    await _userDataSource.updateLanguage(lang: lang, userId: userId);
+  Future<void> updateLanguage({required String lang, required String email}) async {
+    await _userDataSource.updateLanguage(lang: lang, email: email);
   }
 }
