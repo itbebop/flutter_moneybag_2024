@@ -61,8 +61,8 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<bool> existUser({required String userId}) async {
-    final result = await _userDataSource.existUser(userId: userId);
+  Future<bool> checkDuplicatedUser({required String email}) async {
+    final result = await _userDataSource.checkDuplicatedUser(email: email);
     return result;
   }
 

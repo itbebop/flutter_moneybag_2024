@@ -5,8 +5,8 @@ class CheckUserDuplicatedUseCase {
 
   CheckUserDuplicatedUseCase({required UserRepository userRepository}) : _userRepository = userRepository;
 
-  Future<bool> execute({required String userId}) async {
-    final result = _userRepository.existUser(userId: userId);
+  Future<bool> execute({required String email}) async {
+    final result = _userRepository.checkDuplicatedUser(email: email);
     return result;
   }
 }
