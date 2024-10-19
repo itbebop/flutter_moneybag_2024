@@ -8,42 +8,68 @@ class AssetDataSourceImpl implements AssetDataSource {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   // TransactionRef 초기화
-  CollectionReference<Asset> _assetRef(String userId) {
-    return _firestore.collection('users').doc(userId).collection('assets').withConverter<Asset>(
-          fromFirestore: (snapshot, _) => Asset.fromJson(snapshot.data()!),
-          toFirestore: (snapshot, _) => snapshot.toJson(),
-        );
-  }
+  final _assetRef = FirebaseFirestore.instance.collection('assets').withConverter<Asset>(
+        fromFirestore: (snapshot, _) => Asset.fromJson(snapshot.data()!),
+        toFirestore: (snapshot, _) => snapshot.toJson(),
+      );
 
   @override
   Future<void> createAsset({Asset? asset, required String userId}) async {
-    // asset collection 있는지 확인
-    final assetsSnapshot = await _firestore.collection('users').doc(userId).collection('assets').get();
+    // user document의 assetIdList 확인
+    final userDoc = await _firestore.collection('users').doc(userId).get();
 
-    if (assetsSnapshot.docs.isEmpty) {
-      // 기본 asset이 없는 경우 생성
-      await _assetRef(userId)
-          .add(Asset(assetId: '0', assetName: '첫 자산', imgUrl: picSum(301), totalAmount: 0, currency: 'kr', createdAt: DateTime.now(), assetColor: 'ECB159'))
-          .then((value) => _assetRef(userId).doc(value.id).update({'assetId': value.id}));
-    } else {
-      if (asset != null) {
-        await _assetRef(userId).add(asset).then((value) => _assetRef(userId).doc(value.id).update({'assetId': value.id}));
+    if (userDoc.exists) {
+      // assetIdList가 비어있는지 확인
+      final assetIdList = (userDoc.data()?['assetIdList'] as List<dynamic>?) ?? [];
+
+      if (assetIdList.isEmpty) {
+        // assetIdList가 비어있으면 기본 asset 생성
+        final newAssetRef = await _assetRef.add(
+          Asset(
+            assetId: '0',
+            assetName: '첫 자산',
+            imgUrl: picSum(301),
+            totalAmount: 0,
+            currency: 'kr',
+            createdAt: DateTime.now(),
+            assetColor: 'ECB159',
+            userIdList: [userId],
+          ),
+        );
+        // assetId 업데이트
+        await _assetRef.doc(newAssetRef.id).update({'assetId': newAssetRef.id});
+
+        // user 문서의 assetIdList 업데이트
+        await _firestore.collection('users').doc(userId).update({
+          'assetIdList': FieldValue.arrayUnion([newAssetRef.id])
+        });
+      } else {
+        // asset이 이미 존재하는 경우 새로운 asset 추가 (asset이 주어졌을 때)
+        if (asset != null) {
+          final newAssetRef = await _assetRef.add(asset);
+          await _assetRef.doc(newAssetRef.id).update({'assetId': newAssetRef.id});
+
+          // user 문서의 assetIdList에 새 asset 추가
+          await _firestore.collection('users').doc(userId).update({
+            'assetIdList': FieldValue.arrayUnion([newAssetRef.id])
+          });
+        }
       }
     }
   }
 
   @override
   Future<List<Asset>> getAssetList({required String userId, required String assetId}) async {
-    return await _assetRef(userId).get().then((value) => value.docs.map((e) => e.data()).toList());
+    return await _assetRef.get().then((value) => value.docs.map((e) => e.data()).toList());
   }
 
   @override
   Future<void> updateAsset({required Asset asset, required String userId}) async {
-    await _assetRef(userId).doc(asset.assetId).set(asset);
+    await _assetRef.doc(asset.assetId).set(asset);
   }
 
   @override
   Future<void> deleteAsset({required String userId, required String assetId}) async {
-    await _assetRef(userId).doc(assetId).delete();
+    await _assetRef.doc(assetId).delete();
   }
 }
