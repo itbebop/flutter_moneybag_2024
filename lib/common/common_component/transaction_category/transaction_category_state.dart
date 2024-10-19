@@ -10,6 +10,7 @@ part 'transaction_category_state.freezed.dart';
 class TransactionCategoryState with _$TransactionCategoryState {
   const factory TransactionCategoryState({
     @Default(false) final bool isLoading,
+    required final String userId,
     required final CreateTransactionCategoryUseCase createTransactionCategoryUseCase,
     required final DeleteTransactionCategoryUseCase deleteTransactionCategoryUseCase,
     required final GetTransactionCategoryListUseCase getTransactionCategoryListUseCase,

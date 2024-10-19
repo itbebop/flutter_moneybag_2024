@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$TransactionCategoryState {
   bool get isLoading => throw _privateConstructorUsedError;
+  String get userId => throw _privateConstructorUsedError;
   CreateTransactionCategoryUseCase get createTransactionCategoryUseCase =>
       throw _privateConstructorUsedError;
   DeleteTransactionCategoryUseCase get deleteTransactionCategoryUseCase =>
@@ -39,6 +40,7 @@ abstract class $TransactionCategoryStateCopyWith<$Res> {
   @useResult
   $Res call(
       {bool isLoading,
+      String userId,
       CreateTransactionCategoryUseCase createTransactionCategoryUseCase,
       DeleteTransactionCategoryUseCase deleteTransactionCategoryUseCase,
       GetTransactionCategoryListUseCase getTransactionCategoryListUseCase,
@@ -60,6 +62,7 @@ class _$TransactionCategoryStateCopyWithImpl<$Res,
   @override
   $Res call({
     Object? isLoading = null,
+    Object? userId = null,
     Object? createTransactionCategoryUseCase = null,
     Object? deleteTransactionCategoryUseCase = null,
     Object? getTransactionCategoryListUseCase = null,
@@ -70,6 +73,10 @@ class _$TransactionCategoryStateCopyWithImpl<$Res,
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
       createTransactionCategoryUseCase: null == createTransactionCategoryUseCase
           ? _value.createTransactionCategoryUseCase
           : createTransactionCategoryUseCase // ignore: cast_nullable_to_non_nullable
@@ -102,6 +109,7 @@ abstract class _$$TransactionCategoryStateImplCopyWith<$Res>
   @useResult
   $Res call(
       {bool isLoading,
+      String userId,
       CreateTransactionCategoryUseCase createTransactionCategoryUseCase,
       DeleteTransactionCategoryUseCase deleteTransactionCategoryUseCase,
       GetTransactionCategoryListUseCase getTransactionCategoryListUseCase,
@@ -122,6 +130,7 @@ class __$$TransactionCategoryStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isLoading = null,
+    Object? userId = null,
     Object? createTransactionCategoryUseCase = null,
     Object? deleteTransactionCategoryUseCase = null,
     Object? getTransactionCategoryListUseCase = null,
@@ -132,6 +141,10 @@ class __$$TransactionCategoryStateImplCopyWithImpl<$Res>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
       createTransactionCategoryUseCase: null == createTransactionCategoryUseCase
           ? _value.createTransactionCategoryUseCase
           : createTransactionCategoryUseCase // ignore: cast_nullable_to_non_nullable
@@ -158,6 +171,7 @@ class __$$TransactionCategoryStateImplCopyWithImpl<$Res>
 class _$TransactionCategoryStateImpl implements _TransactionCategoryState {
   const _$TransactionCategoryStateImpl(
       {this.isLoading = false,
+      required this.userId,
       required this.createTransactionCategoryUseCase,
       required this.deleteTransactionCategoryUseCase,
       required this.getTransactionCategoryListUseCase,
@@ -166,6 +180,8 @@ class _$TransactionCategoryStateImpl implements _TransactionCategoryState {
   @override
   @JsonKey()
   final bool isLoading;
+  @override
+  final String userId;
   @override
   final CreateTransactionCategoryUseCase createTransactionCategoryUseCase;
   @override
@@ -177,7 +193,7 @@ class _$TransactionCategoryStateImpl implements _TransactionCategoryState {
 
   @override
   String toString() {
-    return 'TransactionCategoryState(isLoading: $isLoading, createTransactionCategoryUseCase: $createTransactionCategoryUseCase, deleteTransactionCategoryUseCase: $deleteTransactionCategoryUseCase, getTransactionCategoryListUseCase: $getTransactionCategoryListUseCase, updateTransactionCategoryUseCase: $updateTransactionCategoryUseCase)';
+    return 'TransactionCategoryState(isLoading: $isLoading, userId: $userId, createTransactionCategoryUseCase: $createTransactionCategoryUseCase, deleteTransactionCategoryUseCase: $deleteTransactionCategoryUseCase, getTransactionCategoryListUseCase: $getTransactionCategoryListUseCase, updateTransactionCategoryUseCase: $updateTransactionCategoryUseCase)';
   }
 
   @override
@@ -187,6 +203,7 @@ class _$TransactionCategoryStateImpl implements _TransactionCategoryState {
             other is _$TransactionCategoryStateImpl &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
+            (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.createTransactionCategoryUseCase,
                     createTransactionCategoryUseCase) ||
                 other.createTransactionCategoryUseCase ==
@@ -209,6 +226,7 @@ class _$TransactionCategoryStateImpl implements _TransactionCategoryState {
   int get hashCode => Object.hash(
       runtimeType,
       isLoading,
+      userId,
       createTransactionCategoryUseCase,
       deleteTransactionCategoryUseCase,
       getTransactionCategoryListUseCase,
@@ -225,6 +243,7 @@ class _$TransactionCategoryStateImpl implements _TransactionCategoryState {
 abstract class _TransactionCategoryState implements TransactionCategoryState {
   const factory _TransactionCategoryState(
       {final bool isLoading,
+      required final String userId,
       required final CreateTransactionCategoryUseCase
           createTransactionCategoryUseCase,
       required final DeleteTransactionCategoryUseCase
@@ -236,6 +255,8 @@ abstract class _TransactionCategoryState implements TransactionCategoryState {
 
   @override
   bool get isLoading;
+  @override
+  String get userId;
   @override
   CreateTransactionCategoryUseCase get createTransactionCategoryUseCase;
   @override

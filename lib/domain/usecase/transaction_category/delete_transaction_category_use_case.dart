@@ -5,7 +5,7 @@ class DeleteTransactionCategoryUseCase {
 
   DeleteTransactionCategoryUseCase({required TransactionCategoryRepository transactionCategoryRepository}) : _transactionCategoryRepository = transactionCategoryRepository;
 
-  Future<void> execute({required String id}) async {
-    await _transactionCategoryRepository.deleteTransactionCategory(id: id);
+  Future<void> execute({required String categoryId, required String userId}) async {
+    await _transactionCategoryRepository.deleteTransactionCategory(categoryId: categoryId, userId: userId);
   }
 }

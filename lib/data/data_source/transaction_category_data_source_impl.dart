@@ -3,32 +3,38 @@ import 'package:flutter_moneybag_2024/data/data_source/transaction_category_data
 import 'package:flutter_moneybag_2024/domain/model/transaction_category.dart';
 
 class TransactionCategoryDataSourceImpl implements TransactionCategoryDataSource {
-  final _transactionCategoryRef = FirebaseFirestore.instance.collection('transactionCategory').withConverter<TransactionCategory>(
-        fromFirestore: (snapshot, _) => TransactionCategory.fromJson(snapshot.data()!),
-        toFirestore: (transactionCategory, _) {
-          final transactionCategoryMap = transactionCategory.toJson();
-          transactionCategoryMap['AssetType'] = transactionCategory.type.displayName;
-          return transactionCategoryMap;
-        },
-      );
+  // Firestore 인스턴스 생성
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  @override
-  Future<void> createTransactionCategory({required TransactionCategory transactionCategory}) async {
-    await _transactionCategoryRef.add(transactionCategory).then((value) => _transactionCategoryRef.doc(value.id).update({'id': value.id}));
+  // TransactionRef 초기화
+  CollectionReference<TransactionCategory> _transactionCategoryRef(String userId) {
+    return _firestore.collection('users').doc(userId).collection('transactionCategory').withConverter<TransactionCategory>(
+          fromFirestore: (snapshot, _) => TransactionCategory.fromJson(snapshot.data()!),
+          toFirestore: (transactionCategory, _) {
+            final transactionCategoryMap = transactionCategory.toJson();
+            transactionCategoryMap['AssetType'] = transactionCategory.type.displayName;
+            return transactionCategoryMap;
+          },
+        );
   }
 
   @override
-  Future<List<TransactionCategory>> getTransactionCategoryList() async {
-    return await _transactionCategoryRef.orderBy('createAt', descending: true).get().then((value) => value.docs.map((e) => e.data()).toList());
+  Future<void> createTransactionCategory({required TransactionCategory transactionCategory, required String userId}) async {
+    await _transactionCategoryRef(userId).add(transactionCategory).then((value) => _transactionCategoryRef(userId).doc(value.id).update({'id': value.id}));
   }
 
   @override
-  Future<void> updateTransactionCategory({required TransactionCategory transactionCategory}) async {
-    await _transactionCategoryRef.doc(transactionCategory.id).set(transactionCategory);
+  Future<List<TransactionCategory>> getTransactionCategoryList({required String userId}) async {
+    return await _transactionCategoryRef(userId).orderBy('createAt', descending: true).get().then((value) => value.docs.map((e) => e.data()).toList());
   }
 
   @override
-  Future<void> deleteTransactionCategory({required String id}) async {
-    await _transactionCategoryRef.doc(id).delete();
+  Future<void> updateTransactionCategory({required TransactionCategory transactionCategory, required String userId}) async {
+    await _transactionCategoryRef(userId).doc(transactionCategory.categoryId).set(transactionCategory);
+  }
+
+  @override
+  Future<void> deleteTransactionCategory({required String categoryId, required String userId}) async {
+    await _transactionCategoryRef(userId).doc(categoryId).delete();
   }
 }

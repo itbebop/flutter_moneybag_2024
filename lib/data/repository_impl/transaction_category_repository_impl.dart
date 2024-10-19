@@ -8,22 +8,22 @@ class TransactionCategoryRepositoryImpl implements TransactionCategoryRepository
   TransactionCategoryRepositoryImpl({required TransactionCategoryDataSource transactionCategoryDataSource}) : _transactionCategoryDataSource = transactionCategoryDataSource;
 
   @override
-  Future<void> createTransactionCategory({required TransactionCategory transactionCategory}) async {
-    await _transactionCategoryDataSource.createTransactionCategory(transactionCategory: transactionCategory);
+  Future<void> createTransactionCategory({required TransactionCategory transactionCategory, required String userId}) async {
+    await _transactionCategoryDataSource.createTransactionCategory(transactionCategory: transactionCategory, userId: userId);
   }
 
   @override
-  Future<List<TransactionCategory>> getTransactionCategoryList() async {
-    return await _transactionCategoryDataSource.getTransactionCategoryList();
+  Future<List<TransactionCategory>> getTransactionCategoryList({required String userId}) async {
+    return await _transactionCategoryDataSource.getTransactionCategoryList(userId: userId);
   }
 
   @override
-  Future<void> updateTransactionCategory({required TransactionCategory transactionCategory}) async {
-    await _transactionCategoryDataSource.updateTransactionCategory(transactionCategory: transactionCategory);
+  Future<void> updateTransactionCategory({required TransactionCategory transactionCategory, required String userId}) async {
+    await _transactionCategoryDataSource.updateTransactionCategory(transactionCategory: transactionCategory, userId: userId);
   }
 
   @override
-  Future<void> deleteTransactionCategory({required String id}) async {
-    await _transactionCategoryDataSource.deleteTransactionCategory(id: id);
+  Future<void> deleteTransactionCategory({required String categoryId, required String userId}) async {
+    await _transactionCategoryDataSource.deleteTransactionCategory(categoryId: categoryId, userId: userId);
   }
 }
