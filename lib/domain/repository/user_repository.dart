@@ -7,7 +7,7 @@ abstract interface class UserRepository {
   Future<void> signOut();
 
   Future<bool> createUser({required User user});
-  Future<bool> checkDuplicatedUser({required String email});
+  Future<bool> isNewUser({required User user});
   Future<User> getUser({required String email});
   Future<bool> updateUserName({required String email, required String name});
   Future<void> updatePhoto({required String email});

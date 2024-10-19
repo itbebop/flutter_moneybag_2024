@@ -31,9 +31,15 @@ class UserDataSourceImpl implements UserDataSource {
   }
 
   @override
-  Future<bool> checkDuplicatedUser({required String userId}) async {
-    // data 있으면(old) false/ data없으면(new) true
-    final result = await _userRef.doc(userId).get().then((s) => s.data()!).then((value) => false).onError((error, stackTrace) => true);
+  Future<bool> isNewUser({required User user}) async {
+    // 이메일 필드와 userId를 비교
+    final result = await _userRef.doc(user.userId).get().then((s) {
+      final userData = s.data();
+      if (userData != null) {
+        return userData.email == user.email; // 이메일 비교
+      }
+      return false; // userData가 null인 경우 false 반환
+    }).onError((error, stackTrace) => false);
     return result;
   }
 
