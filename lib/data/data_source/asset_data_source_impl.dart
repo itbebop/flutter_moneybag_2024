@@ -22,10 +22,12 @@ class AssetDataSourceImpl implements AssetDataSource {
 
     if (assetsSnapshot.docs.isEmpty) {
       // 기본 asset이 없는 경우 생성
-      await _assetRef(userId).add(Asset(assetId: '0', assetName: '첫 자산', imgUrl: picSum(301), totalAmount: 0, currency: 'kr'));
+      await _assetRef(userId)
+          .add(Asset(assetId: '0', assetName: '첫 자산', imgUrl: picSum(301), totalAmount: 0, currency: 'kr', createdAt: DateTime.now(), assetColor: 'ECB159'))
+          .then((value) => _assetRef(userId).doc(value.id).update({'assetId': value.id}));
     } else {
       if (asset != null) {
-        await _assetRef(userId).add(asset).then((value) => _assetRef(userId).doc(value.id).update({'id': value.id}));
+        await _assetRef(userId).add(asset).then((value) => _assetRef(userId).doc(value.id).update({'assetId': value.id}));
       }
     }
   }
