@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$ReportScreenState {
   bool get isLoading => throw _privateConstructorUsedError;
+  String get assetId => throw _privateConstructorUsedError;
   GetTransactionListUseCase get getTransactionListUseCase =>
       throw _privateConstructorUsedError;
 
@@ -32,7 +33,9 @@ abstract class $ReportScreenStateCopyWith<$Res> {
       _$ReportScreenStateCopyWithImpl<$Res, ReportScreenState>;
   @useResult
   $Res call(
-      {bool isLoading, GetTransactionListUseCase getTransactionListUseCase});
+      {bool isLoading,
+      String assetId,
+      GetTransactionListUseCase getTransactionListUseCase});
 }
 
 /// @nodoc
@@ -49,6 +52,7 @@ class _$ReportScreenStateCopyWithImpl<$Res, $Val extends ReportScreenState>
   @override
   $Res call({
     Object? isLoading = null,
+    Object? assetId = null,
     Object? getTransactionListUseCase = null,
   }) {
     return _then(_value.copyWith(
@@ -56,6 +60,10 @@ class _$ReportScreenStateCopyWithImpl<$Res, $Val extends ReportScreenState>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      assetId: null == assetId
+          ? _value.assetId
+          : assetId // ignore: cast_nullable_to_non_nullable
+              as String,
       getTransactionListUseCase: null == getTransactionListUseCase
           ? _value.getTransactionListUseCase
           : getTransactionListUseCase // ignore: cast_nullable_to_non_nullable
@@ -73,7 +81,9 @@ abstract class _$$ReportScreenStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {bool isLoading, GetTransactionListUseCase getTransactionListUseCase});
+      {bool isLoading,
+      String assetId,
+      GetTransactionListUseCase getTransactionListUseCase});
 }
 
 /// @nodoc
@@ -88,6 +98,7 @@ class __$$ReportScreenStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isLoading = null,
+    Object? assetId = null,
     Object? getTransactionListUseCase = null,
   }) {
     return _then(_$ReportScreenStateImpl(
@@ -95,6 +106,10 @@ class __$$ReportScreenStateImplCopyWithImpl<$Res>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      assetId: null == assetId
+          ? _value.assetId
+          : assetId // ignore: cast_nullable_to_non_nullable
+              as String,
       getTransactionListUseCase: null == getTransactionListUseCase
           ? _value.getTransactionListUseCase
           : getTransactionListUseCase // ignore: cast_nullable_to_non_nullable
@@ -107,17 +122,21 @@ class __$$ReportScreenStateImplCopyWithImpl<$Res>
 
 class _$ReportScreenStateImpl implements _ReportScreenState {
   const _$ReportScreenStateImpl(
-      {this.isLoading = false, required this.getTransactionListUseCase});
+      {this.isLoading = false,
+      required this.assetId,
+      required this.getTransactionListUseCase});
 
   @override
   @JsonKey()
   final bool isLoading;
   @override
+  final String assetId;
+  @override
   final GetTransactionListUseCase getTransactionListUseCase;
 
   @override
   String toString() {
-    return 'ReportScreenState(isLoading: $isLoading, getTransactionListUseCase: $getTransactionListUseCase)';
+    return 'ReportScreenState(isLoading: $isLoading, assetId: $assetId, getTransactionListUseCase: $getTransactionListUseCase)';
   }
 
   @override
@@ -127,6 +146,7 @@ class _$ReportScreenStateImpl implements _ReportScreenState {
             other is _$ReportScreenStateImpl &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
+            (identical(other.assetId, assetId) || other.assetId == assetId) &&
             (identical(other.getTransactionListUseCase,
                     getTransactionListUseCase) ||
                 other.getTransactionListUseCase == getTransactionListUseCase));
@@ -134,7 +154,7 @@ class _$ReportScreenStateImpl implements _ReportScreenState {
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, isLoading, getTransactionListUseCase);
+      Object.hash(runtimeType, isLoading, assetId, getTransactionListUseCase);
 
   @JsonKey(ignore: true)
   @override
@@ -147,11 +167,14 @@ class _$ReportScreenStateImpl implements _ReportScreenState {
 abstract class _ReportScreenState implements ReportScreenState {
   const factory _ReportScreenState(
           {final bool isLoading,
+          required final String assetId,
           required final GetTransactionListUseCase getTransactionListUseCase}) =
       _$ReportScreenStateImpl;
 
   @override
   bool get isLoading;
+  @override
+  String get assetId;
   @override
   GetTransactionListUseCase get getTransactionListUseCase;
   @override

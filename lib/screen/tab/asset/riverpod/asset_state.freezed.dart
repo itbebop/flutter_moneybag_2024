@@ -16,6 +16,8 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$AssetState {
+  GetAssetListUseCase get getAssetListUseCase =>
+      throw _privateConstructorUsedError;
   Asset get asset => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -29,7 +31,7 @@ abstract class $AssetStateCopyWith<$Res> {
           AssetState value, $Res Function(AssetState) then) =
       _$AssetStateCopyWithImpl<$Res, AssetState>;
   @useResult
-  $Res call({Asset asset});
+  $Res call({GetAssetListUseCase getAssetListUseCase, Asset asset});
 
   $AssetCopyWith<$Res> get asset;
 }
@@ -47,9 +49,14 @@ class _$AssetStateCopyWithImpl<$Res, $Val extends AssetState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? getAssetListUseCase = null,
     Object? asset = null,
   }) {
     return _then(_value.copyWith(
+      getAssetListUseCase: null == getAssetListUseCase
+          ? _value.getAssetListUseCase
+          : getAssetListUseCase // ignore: cast_nullable_to_non_nullable
+              as GetAssetListUseCase,
       asset: null == asset
           ? _value.asset
           : asset // ignore: cast_nullable_to_non_nullable
@@ -74,7 +81,7 @@ abstract class _$$AssetStateImplCopyWith<$Res>
       __$$AssetStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Asset asset});
+  $Res call({GetAssetListUseCase getAssetListUseCase, Asset asset});
 
   @override
   $AssetCopyWith<$Res> get asset;
@@ -91,9 +98,14 @@ class __$$AssetStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? getAssetListUseCase = null,
     Object? asset = null,
   }) {
     return _then(_$AssetStateImpl(
+      getAssetListUseCase: null == getAssetListUseCase
+          ? _value.getAssetListUseCase
+          : getAssetListUseCase // ignore: cast_nullable_to_non_nullable
+              as GetAssetListUseCase,
       asset: null == asset
           ? _value.asset
           : asset // ignore: cast_nullable_to_non_nullable
@@ -105,14 +117,17 @@ class __$$AssetStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$AssetStateImpl implements _AssetState {
-  const _$AssetStateImpl({required this.asset});
+  const _$AssetStateImpl(
+      {required this.getAssetListUseCase, required this.asset});
 
+  @override
+  final GetAssetListUseCase getAssetListUseCase;
   @override
   final Asset asset;
 
   @override
   String toString() {
-    return 'AssetState(asset: $asset)';
+    return 'AssetState(getAssetListUseCase: $getAssetListUseCase, asset: $asset)';
   }
 
   @override
@@ -120,11 +135,13 @@ class _$AssetStateImpl implements _AssetState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AssetStateImpl &&
+            (identical(other.getAssetListUseCase, getAssetListUseCase) ||
+                other.getAssetListUseCase == getAssetListUseCase) &&
             (identical(other.asset, asset) || other.asset == asset));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, asset);
+  int get hashCode => Object.hash(runtimeType, getAssetListUseCase, asset);
 
   @JsonKey(ignore: true)
   @override
@@ -134,8 +151,12 @@ class _$AssetStateImpl implements _AssetState {
 }
 
 abstract class _AssetState implements AssetState {
-  const factory _AssetState({required final Asset asset}) = _$AssetStateImpl;
+  const factory _AssetState(
+      {required final GetAssetListUseCase getAssetListUseCase,
+      required final Asset asset}) = _$AssetStateImpl;
 
+  @override
+  GetAssetListUseCase get getAssetListUseCase;
   @override
   Asset get asset;
   @override
