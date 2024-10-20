@@ -14,8 +14,8 @@ class AssetRepositoryImpl implements AssetRepository {
   }
 
   @override
-  Future<List<Asset>> getAssetList() async {
-    return await _assetDetailDataSource.getAssetList();
+  Future<List<Asset>> getAssetList(List<String> assetIdList) async {
+    return await _assetDetailDataSource.getAssetList(assetIdList);
   }
 
   @override

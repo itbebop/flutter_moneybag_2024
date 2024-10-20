@@ -7,7 +7,7 @@ part 'report_screen_state.freezed.dart';
 class ReportScreenState with _$ReportScreenState {
   const factory ReportScreenState({
     @Default(false) final bool isLoading,
-    required final String assetId,
+    required final List<String> assetIdList,
     required final GetTransactionListUseCase getTransactionListUseCase,
   }) = _ReportScreenState;
 }

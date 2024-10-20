@@ -1,22 +1,26 @@
+import 'package:flutter_moneybag_2024/core/provider/user_state_notifier.dart';
 import 'package:flutter_moneybag_2024/di/di_setup.dart';
-import 'package:flutter_moneybag_2024/domain/model/asset.dart';
-import 'package:flutter_moneybag_2024/domain/usecase/asset/get_asset_list_use_case.dart';
+import 'package:flutter_moneybag_2024/screen/tab/asset/riverpod/asset_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final assetStateProvier = StateNotifierProvider<AssetStateNotifier, AsyncValue<Asset>>((ref) => AssetStateNotifier(getIt()));
+final assetStateProvier = StateNotifierProvider<AssetStateNotifier, AssetState>((ref) {
+  final userState = ref.watch(userStateProvier);
+  final List<String> assetIdList = userState.when(
+    data: (user) => user.assetIdList,
+    loading: () => [], // 로딩 중일 때 기본값
+    error: (error, stackTrace) => [], // 에러 발생 시 기본값
+  );
 
-class AssetStateNotifier extends StateNotifier<AsyncValue<Asset>> {
-  final GetAssetListUseCase getAssetListUseCase;
+  return AssetStateNotifier(AssetState(assetIdList: assetIdList, getAssetListUseCase: getIt()));
+});
 
-  AssetStateNotifier(this.getAssetListUseCase) : super(const AsyncValue.loading());
+class AssetStateNotifier extends StateNotifier<AssetState> {
+  AssetStateNotifier(super.state);
 
   Future<void> fetchAsset() async {
     try {
-      state = const AsyncValue.loading(); // 로딩 상태로 변경
-
-      final assets = await getAssetListUseCase.execute();
+      final assets = await state.getAssetListUseCase.execute(state.assetIdList);
       final asset = assets.firstWhere((a) => a.activated == true);
-      state = AsyncValue.data(asset);
     } catch (error) {
       throw Exception("선택된 자산이 없습니다");
     }

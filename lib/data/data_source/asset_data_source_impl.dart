@@ -32,6 +32,7 @@ class AssetDataSourceImpl implements AssetDataSource {
             totalAmount: 0,
             currency: 'kr',
             createdAt: DateTime.now(),
+            updatedAt: DateTime.now(),
             assetColor: 'ECB159',
             userIdList: [userId],
             activated: true,
@@ -60,8 +61,17 @@ class AssetDataSourceImpl implements AssetDataSource {
   }
 
   @override
-  Future<List<Asset>> getAssetList() async {
-    return await _assetRef.get().then((value) => value.docs.map((e) => e.data()).toList());
+  Future<List<Asset>> getAssetList(List<String> assetIdList) async {
+    // assetIdList에 있는 assetId로 자산 선택
+    final assets = await Future.wait(assetIdList.map((assetId) async {
+      final doc = await _assetRef.doc(assetId).get();
+      return doc.data();
+    }));
+
+    // assets를 updatedAt 기준으로 정렬
+    final sortedAssets = assets.whereType<Asset>().toList()..sort((a, b) => b.updatedAt.compareTo(a.updatedAt)); // updatedAt 기준 내림차순 정렬
+
+    return sortedAssets; // 정렬된 Asset 반환
   }
 
   @override

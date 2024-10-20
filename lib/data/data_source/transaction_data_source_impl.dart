@@ -28,7 +28,7 @@ class TransactionDataSourceImpl implements TransactionDataSource {
     List<TransactionDetail> allTransactions = [];
 
     for (String assetId in assetIdList) {
-      final transactions = await _transactionRef(assetId).orderBy('createAt', descending: true).get();
+      final transactions = await _transactionRef(assetId).orderBy('updatedAt', descending: true).get();
       allTransactions.addAll(transactions.docs.map((e) => e.data()));
     }
 
