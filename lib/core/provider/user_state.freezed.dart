@@ -16,7 +16,6 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$UserState {
-  GetUserUseCase get getUserUseCase => throw _privateConstructorUsedError;
   User? get user => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -29,7 +28,7 @@ abstract class $UserStateCopyWith<$Res> {
   factory $UserStateCopyWith(UserState value, $Res Function(UserState) then) =
       _$UserStateCopyWithImpl<$Res, UserState>;
   @useResult
-  $Res call({GetUserUseCase getUserUseCase, User? user});
+  $Res call({User? user});
 
   $UserCopyWith<$Res>? get user;
 }
@@ -47,14 +46,9 @@ class _$UserStateCopyWithImpl<$Res, $Val extends UserState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? getUserUseCase = null,
     Object? user = freezed,
   }) {
     return _then(_value.copyWith(
-      getUserUseCase: null == getUserUseCase
-          ? _value.getUserUseCase
-          : getUserUseCase // ignore: cast_nullable_to_non_nullable
-              as GetUserUseCase,
       user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -83,7 +77,7 @@ abstract class _$$UserStateImplCopyWith<$Res>
       __$$UserStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({GetUserUseCase getUserUseCase, User? user});
+  $Res call({User? user});
 
   @override
   $UserCopyWith<$Res>? get user;
@@ -100,14 +94,9 @@ class __$$UserStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? getUserUseCase = null,
     Object? user = freezed,
   }) {
     return _then(_$UserStateImpl(
-      getUserUseCase: null == getUserUseCase
-          ? _value.getUserUseCase
-          : getUserUseCase // ignore: cast_nullable_to_non_nullable
-              as GetUserUseCase,
       user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -119,16 +108,14 @@ class __$$UserStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$UserStateImpl implements _UserState {
-  const _$UserStateImpl({required this.getUserUseCase, this.user});
+  const _$UserStateImpl({this.user});
 
-  @override
-  final GetUserUseCase getUserUseCase;
   @override
   final User? user;
 
   @override
   String toString() {
-    return 'UserState(getUserUseCase: $getUserUseCase, user: $user)';
+    return 'UserState(user: $user)';
   }
 
   @override
@@ -136,13 +123,11 @@ class _$UserStateImpl implements _UserState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UserStateImpl &&
-            (identical(other.getUserUseCase, getUserUseCase) ||
-                other.getUserUseCase == getUserUseCase) &&
             (identical(other.user, user) || other.user == user));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, getUserUseCase, user);
+  int get hashCode => Object.hash(runtimeType, user);
 
   @JsonKey(ignore: true)
   @override
@@ -152,12 +137,8 @@ class _$UserStateImpl implements _UserState {
 }
 
 abstract class _UserState implements UserState {
-  const factory _UserState(
-      {required final GetUserUseCase getUserUseCase,
-      final User? user}) = _$UserStateImpl;
+  const factory _UserState({final User? user}) = _$UserStateImpl;
 
-  @override
-  GetUserUseCase get getUserUseCase;
   @override
   User? get user;
   @override
