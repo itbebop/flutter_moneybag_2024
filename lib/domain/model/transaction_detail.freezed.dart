@@ -22,8 +22,8 @@ TransactionDetail _$TransactionDetailFromJson(Map<String, dynamic> json) {
 mixin _$TransactionDetail {
   String get transactionId => throw _privateConstructorUsedError;
   String get memo => throw _privateConstructorUsedError;
-  DateTime? get createdAt => throw _privateConstructorUsedError;
-  DateTime? get updatedAt => throw _privateConstructorUsedError;
+  DateTime get createdAt => throw _privateConstructorUsedError;
+  DateTime get updatedAt => throw _privateConstructorUsedError;
   double get amount => throw _privateConstructorUsedError;
   String get userId => throw _privateConstructorUsedError;
   TransactionCategory get category => throw _privateConstructorUsedError;
@@ -43,8 +43,8 @@ abstract class $TransactionDetailCopyWith<$Res> {
   $Res call(
       {String transactionId,
       String memo,
-      DateTime? createdAt,
-      DateTime? updatedAt,
+      DateTime createdAt,
+      DateTime updatedAt,
       double amount,
       String userId,
       TransactionCategory category});
@@ -67,8 +67,8 @@ class _$TransactionDetailCopyWithImpl<$Res, $Val extends TransactionDetail>
   $Res call({
     Object? transactionId = null,
     Object? memo = null,
-    Object? createdAt = freezed,
-    Object? updatedAt = freezed,
+    Object? createdAt = null,
+    Object? updatedAt = null,
     Object? amount = null,
     Object? userId = null,
     Object? category = null,
@@ -82,14 +82,14 @@ class _$TransactionDetailCopyWithImpl<$Res, $Val extends TransactionDetail>
           ? _value.memo
           : memo // ignore: cast_nullable_to_non_nullable
               as String,
-      createdAt: freezed == createdAt
+      createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      updatedAt: freezed == updatedAt
+              as DateTime,
+      updatedAt: null == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as DateTime,
       amount: null == amount
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
@@ -125,8 +125,8 @@ abstract class _$$TransactionDetailImplCopyWith<$Res>
   $Res call(
       {String transactionId,
       String memo,
-      DateTime? createdAt,
-      DateTime? updatedAt,
+      DateTime createdAt,
+      DateTime updatedAt,
       double amount,
       String userId,
       TransactionCategory category});
@@ -148,8 +148,8 @@ class __$$TransactionDetailImplCopyWithImpl<$Res>
   $Res call({
     Object? transactionId = null,
     Object? memo = null,
-    Object? createdAt = freezed,
-    Object? updatedAt = freezed,
+    Object? createdAt = null,
+    Object? updatedAt = null,
     Object? amount = null,
     Object? userId = null,
     Object? category = null,
@@ -163,14 +163,14 @@ class __$$TransactionDetailImplCopyWithImpl<$Res>
           ? _value.memo
           : memo // ignore: cast_nullable_to_non_nullable
               as String,
-      createdAt: freezed == createdAt
+      createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      updatedAt: freezed == updatedAt
+              as DateTime,
+      updatedAt: null == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as DateTime,
       amount: null == amount
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
@@ -193,8 +193,8 @@ class _$TransactionDetailImpl implements _TransactionDetail {
   const _$TransactionDetailImpl(
       {required this.transactionId,
       required this.memo,
-      this.createdAt,
-      this.updatedAt,
+      required this.createdAt,
+      required this.updatedAt,
       required this.amount,
       required this.userId,
       required this.category});
@@ -207,9 +207,9 @@ class _$TransactionDetailImpl implements _TransactionDetail {
   @override
   final String memo;
   @override
-  final DateTime? createdAt;
+  final DateTime createdAt;
   @override
-  final DateTime? updatedAt;
+  final DateTime updatedAt;
   @override
   final double amount;
   @override
@@ -264,8 +264,8 @@ abstract class _TransactionDetail implements TransactionDetail {
   const factory _TransactionDetail(
       {required final String transactionId,
       required final String memo,
-      final DateTime? createdAt,
-      final DateTime? updatedAt,
+      required final DateTime createdAt,
+      required final DateTime updatedAt,
       required final double amount,
       required final String userId,
       required final TransactionCategory category}) = _$TransactionDetailImpl;
@@ -278,9 +278,9 @@ abstract class _TransactionDetail implements TransactionDetail {
   @override
   String get memo;
   @override
-  DateTime? get createdAt;
+  DateTime get createdAt;
   @override
-  DateTime? get updatedAt;
+  DateTime get updatedAt;
   @override
   double get amount;
   @override

@@ -16,12 +16,8 @@ _$AssetImpl _$$AssetImplFromJson(Map<String, dynamic> json) => _$AssetImpl(
       userIdList: (json['userIdList'] as List<dynamic>)
           .map((e) => e as String)
           .toList(),
-      createdAt: json['createdAt'] == null
-          ? null
-          : DateTime.parse(json['createdAt'] as String),
-      updatedAt: json['updatedAt'] == null
-          ? null
-          : DateTime.parse(json['updatedAt'] as String),
+      createdAt: DateTime.parse(json['createdAt'] as String),
+      updatedAt: DateTime.parse(json['updatedAt'] as String),
       assetColor: json['assetColor'] as String?,
     );
 
@@ -34,7 +30,7 @@ Map<String, dynamic> _$$AssetImplToJson(_$AssetImpl instance) =>
       'imgUrl': instance.imgUrl,
       'currency': instance.currency,
       'userIdList': instance.userIdList,
-      'createdAt': instance.createdAt?.toIso8601String(),
-      'updatedAt': instance.updatedAt?.toIso8601String(),
+      'createdAt': instance.createdAt.toIso8601String(),
+      'updatedAt': instance.updatedAt.toIso8601String(),
       'assetColor': instance.assetColor,
     };

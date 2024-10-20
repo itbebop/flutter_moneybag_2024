@@ -33,7 +33,7 @@ class HomeTransactionList extends StatelessWidget {
                     memo: transaction.memo,
                     amount: transaction.amount.toComma(),
                     imgUrl: transaction.category.imgUrl,
-                    createdAt: detailDateFormat.format(transaction.updatedAt!),
+                    createdAt: detailDateFormat.format(transaction.updatedAt),
                     category: TransactionCategory(
                       categoryId: '1',
                       name: '이자',

@@ -27,8 +27,8 @@ mixin _$Asset {
   String get imgUrl => throw _privateConstructorUsedError;
   String get currency => throw _privateConstructorUsedError;
   List<String> get userIdList => throw _privateConstructorUsedError;
-  DateTime? get createdAt => throw _privateConstructorUsedError;
-  DateTime? get updatedAt => throw _privateConstructorUsedError;
+  DateTime get createdAt => throw _privateConstructorUsedError;
+  DateTime get updatedAt => throw _privateConstructorUsedError;
   String? get assetColor => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -49,8 +49,8 @@ abstract class $AssetCopyWith<$Res> {
       String imgUrl,
       String currency,
       List<String> userIdList,
-      DateTime? createdAt,
-      DateTime? updatedAt,
+      DateTime createdAt,
+      DateTime updatedAt,
       String? assetColor});
 }
 
@@ -74,8 +74,8 @@ class _$AssetCopyWithImpl<$Res, $Val extends Asset>
     Object? imgUrl = null,
     Object? currency = null,
     Object? userIdList = null,
-    Object? createdAt = freezed,
-    Object? updatedAt = freezed,
+    Object? createdAt = null,
+    Object? updatedAt = null,
     Object? assetColor = freezed,
   }) {
     return _then(_value.copyWith(
@@ -107,14 +107,14 @@ class _$AssetCopyWithImpl<$Res, $Val extends Asset>
           ? _value.userIdList
           : userIdList // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      createdAt: freezed == createdAt
+      createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      updatedAt: freezed == updatedAt
+              as DateTime,
+      updatedAt: null == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as DateTime,
       assetColor: freezed == assetColor
           ? _value.assetColor
           : assetColor // ignore: cast_nullable_to_non_nullable
@@ -138,8 +138,8 @@ abstract class _$$AssetImplCopyWith<$Res> implements $AssetCopyWith<$Res> {
       String imgUrl,
       String currency,
       List<String> userIdList,
-      DateTime? createdAt,
-      DateTime? updatedAt,
+      DateTime createdAt,
+      DateTime updatedAt,
       String? assetColor});
 }
 
@@ -161,8 +161,8 @@ class __$$AssetImplCopyWithImpl<$Res>
     Object? imgUrl = null,
     Object? currency = null,
     Object? userIdList = null,
-    Object? createdAt = freezed,
-    Object? updatedAt = freezed,
+    Object? createdAt = null,
+    Object? updatedAt = null,
     Object? assetColor = freezed,
   }) {
     return _then(_$AssetImpl(
@@ -194,14 +194,14 @@ class __$$AssetImplCopyWithImpl<$Res>
           ? _value._userIdList
           : userIdList // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      createdAt: freezed == createdAt
+      createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      updatedAt: freezed == updatedAt
+              as DateTime,
+      updatedAt: null == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as DateTime,
       assetColor: freezed == assetColor
           ? _value.assetColor
           : assetColor // ignore: cast_nullable_to_non_nullable
@@ -221,8 +221,8 @@ class _$AssetImpl implements _Asset {
       required this.imgUrl,
       required this.currency,
       required final List<String> userIdList,
-      this.createdAt,
-      this.updatedAt,
+      required this.createdAt,
+      required this.updatedAt,
       this.assetColor})
       : _userIdList = userIdList;
 
@@ -250,9 +250,9 @@ class _$AssetImpl implements _Asset {
   }
 
   @override
-  final DateTime? createdAt;
+  final DateTime createdAt;
   @override
-  final DateTime? updatedAt;
+  final DateTime updatedAt;
   @override
   final String? assetColor;
 
@@ -324,8 +324,8 @@ abstract class _Asset implements Asset {
       required final String imgUrl,
       required final String currency,
       required final List<String> userIdList,
-      final DateTime? createdAt,
-      final DateTime? updatedAt,
+      required final DateTime createdAt,
+      required final DateTime updatedAt,
       final String? assetColor}) = _$AssetImpl;
 
   factory _Asset.fromJson(Map<String, dynamic> json) = _$AssetImpl.fromJson;
@@ -345,9 +345,9 @@ abstract class _Asset implements Asset {
   @override
   List<String> get userIdList;
   @override
-  DateTime? get createdAt;
+  DateTime get createdAt;
   @override
-  DateTime? get updatedAt;
+  DateTime get updatedAt;
   @override
   String? get assetColor;
   @override

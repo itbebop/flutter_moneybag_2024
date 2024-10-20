@@ -11,12 +11,8 @@ _$TransactionDetailImpl _$$TransactionDetailImplFromJson(
     _$TransactionDetailImpl(
       transactionId: json['transactionId'] as String,
       memo: json['memo'] as String,
-      createdAt: json['createdAt'] == null
-          ? null
-          : DateTime.parse(json['createdAt'] as String),
-      updatedAt: json['updatedAt'] == null
-          ? null
-          : DateTime.parse(json['updatedAt'] as String),
+      createdAt: DateTime.parse(json['createdAt'] as String),
+      updatedAt: DateTime.parse(json['updatedAt'] as String),
       amount: (json['amount'] as num).toDouble(),
       userId: json['userId'] as String,
       category: TransactionCategory.fromJson(
@@ -28,8 +24,8 @@ Map<String, dynamic> _$$TransactionDetailImplToJson(
     <String, dynamic>{
       'transactionId': instance.transactionId,
       'memo': instance.memo,
-      'createdAt': instance.createdAt?.toIso8601String(),
-      'updatedAt': instance.updatedAt?.toIso8601String(),
+      'createdAt': instance.createdAt.toIso8601String(),
+      'updatedAt': instance.updatedAt.toIso8601String(),
       'amount': instance.amount,
       'userId': instance.userId,
       'category': instance.category,

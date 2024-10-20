@@ -24,8 +24,15 @@ class TransactionDataSourceImpl implements TransactionDataSource {
   }
 
   @override
-  Future<List<TransactionDetail>> getTransactionList({required String assetId}) async {
-    return await _transactionRef(assetId).orderBy('createAt', descending: true).get().then((value) => value.docs.map((e) => e.data()).toList());
+  Future<List<TransactionDetail>> getTransactionList({required List<String> assetIdList}) async {
+    List<TransactionDetail> allTransactions = [];
+
+    for (String assetId in assetIdList) {
+      final transactions = await _transactionRef(assetId).orderBy('createAt', descending: true).get();
+      allTransactions.addAll(transactions.docs.map((e) => e.data()));
+    }
+
+    return allTransactions;
   }
 
   @override

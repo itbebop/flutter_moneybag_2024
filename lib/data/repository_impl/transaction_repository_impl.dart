@@ -14,8 +14,8 @@ class TransactionRepositoryImpl implements TransactionRepository {
   }
 
   @override
-  Future<List<TransactionDetail>> getTransactionList({required String assetId}) async {
-    return await _transactionDataSource.getTransactionList(assetId: assetId);
+  Future<List<TransactionDetail>> getTransactionList({required List<String> assetIdList}) async {
+    return await _transactionDataSource.getTransactionList(assetIdList: assetIdList);
   }
 
   @override

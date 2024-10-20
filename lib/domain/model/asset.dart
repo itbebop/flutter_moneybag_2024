@@ -13,8 +13,8 @@ class Asset with _$Asset {
     required String imgUrl,
     required String currency,
     required List<String> userIdList,
-    DateTime? createdAt,
-    DateTime? updatedAt,
+    required DateTime createdAt,
+    required DateTime updatedAt,
     String? assetColor,
   }) = _Asset;
 

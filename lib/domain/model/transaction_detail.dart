@@ -9,8 +9,8 @@ class TransactionDetail with _$TransactionDetail {
   const factory TransactionDetail({
     required String transactionId,
     required String memo,
-    DateTime? createdAt,
-    DateTime? updatedAt,
+    required DateTime createdAt,
+    required DateTime updatedAt,
     required double amount,
     required String userId,
     required TransactionCategory category,
