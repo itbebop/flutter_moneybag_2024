@@ -15,15 +15,14 @@ class AssetDataSourceImpl implements AssetDataSource {
 
   @override
   Future<void> createAsset({Asset? asset, required String userId}) async {
-    // user document의 assetIdList 확인
     final userDoc = await _firestore.collection('users').doc(userId).get();
 
     if (userDoc.exists) {
-      // assetIdList가 비어있는지 확인
-      final assetIdList = (userDoc.data()?['assetIdList'] as List<dynamic>?) ?? [];
+      // activatedAssetId가 비어있는지 확인
+      final activatedAssetId = userDoc.data()?['activatedAssetId'] as String? ?? '';
 
-      if (assetIdList.isEmpty) {
-        // assetIdList가 비어있으면 기본 asset 생성
+      if (activatedAssetId.isEmpty) {
+        // activatedAssetId가 비어있으면 기본 asset 생성
         final newAssetRef = await _assetRef.add(
           Asset(
             assetId: '0',
@@ -35,13 +34,12 @@ class AssetDataSourceImpl implements AssetDataSource {
             updatedAt: DateTime.now(),
             assetColor: 'ECB159',
             userIdList: [userId],
-            activated: true,
           ),
         );
         // assetId 업데이트
         await _assetRef.doc(newAssetRef.id).update({'assetId': newAssetRef.id});
 
-        // user 문서의 assetIdList 업데이트
+        // user 문서의 assetIdList에 새 asset 추가
         await _firestore.collection('users').doc(userId).update({
           'assetIdList': FieldValue.arrayUnion([newAssetRef.id])
         });
@@ -61,7 +59,7 @@ class AssetDataSourceImpl implements AssetDataSource {
   }
 
   @override
-  Future<List<Asset>> getAssetList(List<String> assetIdList) async {
+  Future<List<Asset>> getAssetList({required List<String> assetIdList}) async {
     // assetIdList에 있는 assetId로 자산 선택
     final assets = await Future.wait(assetIdList.map((assetId) async {
       final doc = await _assetRef.doc(assetId).get();
@@ -77,6 +75,12 @@ class AssetDataSourceImpl implements AssetDataSource {
   @override
   Future<void> updateAsset({required Asset asset}) async {
     await _assetRef.doc(asset.assetId).set(asset);
+  }
+
+  @override
+  Future<void> chageActivatedAsset({required String assetId}) {
+    // TODO: implement chageActivatedAsset
+    throw UnimplementedError();
   }
 
   @override

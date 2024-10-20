@@ -20,7 +20,6 @@ Asset _$AssetFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Asset {
-  bool get activated => throw _privateConstructorUsedError;
   double get totalAmount => throw _privateConstructorUsedError;
   String get assetId => throw _privateConstructorUsedError;
   String get assetName => throw _privateConstructorUsedError;
@@ -42,8 +41,7 @@ abstract class $AssetCopyWith<$Res> {
       _$AssetCopyWithImpl<$Res, Asset>;
   @useResult
   $Res call(
-      {bool activated,
-      double totalAmount,
+      {double totalAmount,
       String assetId,
       String assetName,
       String imgUrl,
@@ -67,7 +65,6 @@ class _$AssetCopyWithImpl<$Res, $Val extends Asset>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? activated = null,
     Object? totalAmount = null,
     Object? assetId = null,
     Object? assetName = null,
@@ -79,10 +76,6 @@ class _$AssetCopyWithImpl<$Res, $Val extends Asset>
     Object? assetColor = freezed,
   }) {
     return _then(_value.copyWith(
-      activated: null == activated
-          ? _value.activated
-          : activated // ignore: cast_nullable_to_non_nullable
-              as bool,
       totalAmount: null == totalAmount
           ? _value.totalAmount
           : totalAmount // ignore: cast_nullable_to_non_nullable
@@ -131,8 +124,7 @@ abstract class _$$AssetImplCopyWith<$Res> implements $AssetCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {bool activated,
-      double totalAmount,
+      {double totalAmount,
       String assetId,
       String assetName,
       String imgUrl,
@@ -154,7 +146,6 @@ class __$$AssetImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? activated = null,
     Object? totalAmount = null,
     Object? assetId = null,
     Object? assetName = null,
@@ -166,10 +157,6 @@ class __$$AssetImplCopyWithImpl<$Res>
     Object? assetColor = freezed,
   }) {
     return _then(_$AssetImpl(
-      activated: null == activated
-          ? _value.activated
-          : activated // ignore: cast_nullable_to_non_nullable
-              as bool,
       totalAmount: null == totalAmount
           ? _value.totalAmount
           : totalAmount // ignore: cast_nullable_to_non_nullable
@@ -214,8 +201,7 @@ class __$$AssetImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$AssetImpl implements _Asset {
   const _$AssetImpl(
-      {required this.activated,
-      required this.totalAmount,
+      {required this.totalAmount,
       required this.assetId,
       required this.assetName,
       required this.imgUrl,
@@ -229,8 +215,6 @@ class _$AssetImpl implements _Asset {
   factory _$AssetImpl.fromJson(Map<String, dynamic> json) =>
       _$$AssetImplFromJson(json);
 
-  @override
-  final bool activated;
   @override
   final double totalAmount;
   @override
@@ -258,7 +242,7 @@ class _$AssetImpl implements _Asset {
 
   @override
   String toString() {
-    return 'Asset(activated: $activated, totalAmount: $totalAmount, assetId: $assetId, assetName: $assetName, imgUrl: $imgUrl, currency: $currency, userIdList: $userIdList, createdAt: $createdAt, updatedAt: $updatedAt, assetColor: $assetColor)';
+    return 'Asset(totalAmount: $totalAmount, assetId: $assetId, assetName: $assetName, imgUrl: $imgUrl, currency: $currency, userIdList: $userIdList, createdAt: $createdAt, updatedAt: $updatedAt, assetColor: $assetColor)';
   }
 
   @override
@@ -266,8 +250,6 @@ class _$AssetImpl implements _Asset {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AssetImpl &&
-            (identical(other.activated, activated) ||
-                other.activated == activated) &&
             (identical(other.totalAmount, totalAmount) ||
                 other.totalAmount == totalAmount) &&
             (identical(other.assetId, assetId) || other.assetId == assetId) &&
@@ -290,7 +272,6 @@ class _$AssetImpl implements _Asset {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      activated,
       totalAmount,
       assetId,
       assetName,
@@ -317,8 +298,7 @@ class _$AssetImpl implements _Asset {
 
 abstract class _Asset implements Asset {
   const factory _Asset(
-      {required final bool activated,
-      required final double totalAmount,
+      {required final double totalAmount,
       required final String assetId,
       required final String assetName,
       required final String imgUrl,
@@ -330,8 +310,6 @@ abstract class _Asset implements Asset {
 
   factory _Asset.fromJson(Map<String, dynamic> json) = _$AssetImpl.fromJson;
 
-  @override
-  bool get activated;
   @override
   double get totalAmount;
   @override

@@ -23,9 +23,9 @@ class _SplashScreenState extends ConsumerState<SplashScreen> with SingleTickerPr
     super.initState();
 
     // 상태를 마이크로 태스크로 처리
-    Future.microtask(() {
-      ref.read(userStateProvier.notifier).fetchUser();
-      ref.read(assetStateProvier.notifier).fetchActivatedAsset();
+    Future.microtask(() async {
+      await ref.read(userStateProvier.notifier).fetchUser();
+      ref.read(assetStateProvier.notifier).fetchAsset();
     });
 
     // AnimationController 초기화

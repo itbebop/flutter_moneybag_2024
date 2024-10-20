@@ -7,8 +7,8 @@ part 'asset_state.freezed.dart';
 @freezed
 class AssetState with _$AssetState {
   const factory AssetState({
-    required List<String> allAssetIdList,
-    required List<Asset> activatedAssetList,
+    @Default([]) List<Asset> assetList,
+    required List<String> assetIdList,
     required final GetAssetListUseCase getAssetListUseCase,
   }) = _AssetState;
 }

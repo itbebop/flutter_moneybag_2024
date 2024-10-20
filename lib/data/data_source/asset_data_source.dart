@@ -2,7 +2,8 @@ import 'package:flutter_moneybag_2024/domain/model/asset.dart';
 
 abstract interface class AssetDataSource {
   Future<void> createAsset({Asset? asset, required String userId});
-  Future<List<Asset>> getAssetList(List<String> assetIdList);
+  Future<List<Asset>> getAssetList({required List<String> assetIdList});
   Future<void> updateAsset({required Asset asset});
+  Future<void> chageActivatedAsset({required String assetId});
   Future<void> deleteAsset({required String assetId});
 }

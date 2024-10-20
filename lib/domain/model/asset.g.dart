@@ -7,7 +7,6 @@ part of 'asset.dart';
 // **************************************************************************
 
 _$AssetImpl _$$AssetImplFromJson(Map<String, dynamic> json) => _$AssetImpl(
-      activated: json['activated'] as bool,
       totalAmount: (json['totalAmount'] as num).toDouble(),
       assetId: json['assetId'] as String,
       assetName: json['assetName'] as String,
@@ -23,7 +22,6 @@ _$AssetImpl _$$AssetImplFromJson(Map<String, dynamic> json) => _$AssetImpl(
 
 Map<String, dynamic> _$$AssetImplToJson(_$AssetImpl instance) =>
     <String, dynamic>{
-      'activated': instance.activated,
       'totalAmount': instance.totalAmount,
       'assetId': instance.assetId,
       'assetName': instance.assetName,

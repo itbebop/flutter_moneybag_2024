@@ -4,6 +4,7 @@ import 'package:flutter_moneybag_2024/common/common.dart';
 import 'package:flutter_moneybag_2024/core/enum/login_platform.dart';
 import 'package:flutter_moneybag_2024/core/provider/user_state_notifier.dart';
 import 'package:flutter_moneybag_2024/screen/login/login_screen_state_notifier.dart';
+import 'package:flutter_moneybag_2024/screen/tab/asset/riverpod/asset_state_notifier.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -29,7 +30,7 @@ class LoginScreen extends ConsumerWidget {
                     SizedBox(height: MediaQuery.of(context).size.height * 0.05),
                     SizedBox(height: MediaQuery.of(context).size.height * 0.01),
                     Text(
-                      '로그인하여 다양한 여행정보를\n 탐색해 보세요',
+                      '',
                       textAlign: TextAlign.center,
                       style: UiConfig.h4Style.copyWith(color: UiConfig.black.shade700),
                     ),
@@ -43,11 +44,12 @@ class LoginScreen extends ConsumerWidget {
                       child: InkWell(
                         onTap: () async {
                           await ref.read(loginScreenStateProvider.notifier).login(platform: LoginPlatform.kakao);
-                          ref.read(userStateProvier.notifier).fetchUser();
-                          if (ref.read(loginScreenStateProvider).user == null) {
+                          await ref.read(userStateProvier.notifier).fetchUser();
+                          await ref.read(assetStateProvier.notifier).fetchAsset();
+                          final assetgList = ref.read(assetStateProvier).assetIdList;
+                          if (ref.read(loginScreenStateProvider).user == null || assetgList == []) {
                             return;
                           } else {
-                            // 유저 정보 있으면 main으로 이동
                             if (context.mounted) context.go('/main');
                           }
                         },
@@ -66,8 +68,10 @@ class LoginScreen extends ConsumerWidget {
                       child: InkWell(
                         onTap: () async {
                           await ref.read(loginScreenStateProvider.notifier).login(platform: LoginPlatform.google);
-                          ref.read(userStateProvier.notifier).fetchUser();
-                          if (ref.read(loginScreenStateProvider).user == null) {
+                          await ref.read(userStateProvier.notifier).fetchUser();
+                          await ref.read(assetStateProvier.notifier).fetchAsset();
+                          final assetgList = ref.read(assetStateProvier).assetIdList;
+                          if (ref.read(loginScreenStateProvider).user == null || assetgList == []) {
                             return;
                           } else {
                             if (context.mounted) context.go('/main');
@@ -82,14 +86,6 @@ class LoginScreen extends ConsumerWidget {
                   ],
                 ),
               ),
-              // viewModel.isLoading ? Container(
-              //   color: UiConfig.black.shade900.withOpacity(0.5),
-              //   child: const Center(
-              //       child: SpinKitFadingCircle(
-              //         color: UiConfig.primaryColor,
-              //       )
-              //   ),
-              // ) : const SizedBox()
             ],
           ),
         ),

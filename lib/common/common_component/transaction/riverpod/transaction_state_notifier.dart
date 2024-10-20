@@ -10,7 +10,7 @@ import 'package:table_calendar/table_calendar.dart';
 
 final transactionStateProvider = StateNotifierProvider<TransactionStateNotifier, TransactionState>((ref) {
   final assetState = ref.watch(assetStateProvier);
-  final List<Asset> activatedAssetList = assetState.activatedAssetList;
+  final List<Asset> activatedAssetList = assetState.assetList;
 
   final List<String> activatedAssetIdList = activatedAssetList.map((asset) => asset.assetId).toList();
 
