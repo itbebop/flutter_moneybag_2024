@@ -7,9 +7,15 @@ part of 'asset.dart';
 // **************************************************************************
 
 _$AssetImpl _$$AssetImplFromJson(Map<String, dynamic> json) => _$AssetImpl(
+      activated: json['activated'] as bool,
+      totalAmount: (json['totalAmount'] as num).toDouble(),
       assetId: json['assetId'] as String,
       assetName: json['assetName'] as String,
       imgUrl: json['imgUrl'] as String,
+      currency: json['currency'] as String,
+      userIdList: (json['userIdList'] as List<dynamic>)
+          .map((e) => e as String)
+          .toList(),
       createdAt: json['createdAt'] == null
           ? null
           : DateTime.parse(json['createdAt'] as String),
@@ -17,22 +23,18 @@ _$AssetImpl _$$AssetImplFromJson(Map<String, dynamic> json) => _$AssetImpl(
           ? null
           : DateTime.parse(json['updatedAt'] as String),
       assetColor: json['assetColor'] as String?,
-      totalAmount: (json['totalAmount'] as num).toDouble(),
-      currency: json['currency'] as String,
-      userIdList: (json['userIdList'] as List<dynamic>)
-          .map((e) => e as String)
-          .toList(),
     );
 
 Map<String, dynamic> _$$AssetImplToJson(_$AssetImpl instance) =>
     <String, dynamic>{
+      'activated': instance.activated,
+      'totalAmount': instance.totalAmount,
       'assetId': instance.assetId,
       'assetName': instance.assetName,
       'imgUrl': instance.imgUrl,
+      'currency': instance.currency,
+      'userIdList': instance.userIdList,
       'createdAt': instance.createdAt?.toIso8601String(),
       'updatedAt': instance.updatedAt?.toIso8601String(),
       'assetColor': instance.assetColor,
-      'totalAmount': instance.totalAmount,
-      'currency': instance.currency,
-      'userIdList': instance.userIdList,
     };
