@@ -10,7 +10,6 @@ part 'transaction_state.freezed.dart';
 class TransactionState with _$TransactionState {
   const factory TransactionState({
     @Default(false) final bool isLoading,
-    required final String userId,
     required final String assetId,
     required final CreateTransactionUseCase createTransactionUseCase,
     required final DeleteTransactionUseCase deleteTransactionUseCase,

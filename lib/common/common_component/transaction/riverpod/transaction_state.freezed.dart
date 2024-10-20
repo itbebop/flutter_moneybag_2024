@@ -17,7 +17,6 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$TransactionState {
   bool get isLoading => throw _privateConstructorUsedError;
-  String get userId => throw _privateConstructorUsedError;
   String get assetId => throw _privateConstructorUsedError;
   CreateTransactionUseCase get createTransactionUseCase =>
       throw _privateConstructorUsedError;
@@ -41,7 +40,6 @@ abstract class $TransactionStateCopyWith<$Res> {
   @useResult
   $Res call(
       {bool isLoading,
-      String userId,
       String assetId,
       CreateTransactionUseCase createTransactionUseCase,
       DeleteTransactionUseCase deleteTransactionUseCase,
@@ -63,7 +61,6 @@ class _$TransactionStateCopyWithImpl<$Res, $Val extends TransactionState>
   @override
   $Res call({
     Object? isLoading = null,
-    Object? userId = null,
     Object? assetId = null,
     Object? createTransactionUseCase = null,
     Object? deleteTransactionUseCase = null,
@@ -75,10 +72,6 @@ class _$TransactionStateCopyWithImpl<$Res, $Val extends TransactionState>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      userId: null == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
-              as String,
       assetId: null == assetId
           ? _value.assetId
           : assetId // ignore: cast_nullable_to_non_nullable
@@ -113,7 +106,6 @@ abstract class _$$TransactionStateImplCopyWith<$Res>
   @useResult
   $Res call(
       {bool isLoading,
-      String userId,
       String assetId,
       CreateTransactionUseCase createTransactionUseCase,
       DeleteTransactionUseCase deleteTransactionUseCase,
@@ -133,7 +125,6 @@ class __$$TransactionStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isLoading = null,
-    Object? userId = null,
     Object? assetId = null,
     Object? createTransactionUseCase = null,
     Object? deleteTransactionUseCase = null,
@@ -145,10 +136,6 @@ class __$$TransactionStateImplCopyWithImpl<$Res>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      userId: null == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
-              as String,
       assetId: null == assetId
           ? _value.assetId
           : assetId // ignore: cast_nullable_to_non_nullable
@@ -178,7 +165,6 @@ class __$$TransactionStateImplCopyWithImpl<$Res>
 class _$TransactionStateImpl implements _TransactionState {
   const _$TransactionStateImpl(
       {this.isLoading = false,
-      required this.userId,
       required this.assetId,
       required this.createTransactionUseCase,
       required this.deleteTransactionUseCase,
@@ -188,8 +174,6 @@ class _$TransactionStateImpl implements _TransactionState {
   @override
   @JsonKey()
   final bool isLoading;
-  @override
-  final String userId;
   @override
   final String assetId;
   @override
@@ -203,7 +187,7 @@ class _$TransactionStateImpl implements _TransactionState {
 
   @override
   String toString() {
-    return 'TransactionState(isLoading: $isLoading, userId: $userId, assetId: $assetId, createTransactionUseCase: $createTransactionUseCase, deleteTransactionUseCase: $deleteTransactionUseCase, getTransactionListUseCase: $getTransactionListUseCase, updateTransactionUseCase: $updateTransactionUseCase)';
+    return 'TransactionState(isLoading: $isLoading, assetId: $assetId, createTransactionUseCase: $createTransactionUseCase, deleteTransactionUseCase: $deleteTransactionUseCase, getTransactionListUseCase: $getTransactionListUseCase, updateTransactionUseCase: $updateTransactionUseCase)';
   }
 
   @override
@@ -213,7 +197,6 @@ class _$TransactionStateImpl implements _TransactionState {
             other is _$TransactionStateImpl &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
-            (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.assetId, assetId) || other.assetId == assetId) &&
             (identical(
                     other.createTransactionUseCase, createTransactionUseCase) ||
@@ -233,7 +216,6 @@ class _$TransactionStateImpl implements _TransactionState {
   int get hashCode => Object.hash(
       runtimeType,
       isLoading,
-      userId,
       assetId,
       createTransactionUseCase,
       deleteTransactionUseCase,
@@ -251,7 +233,6 @@ class _$TransactionStateImpl implements _TransactionState {
 abstract class _TransactionState implements TransactionState {
   const factory _TransactionState(
           {final bool isLoading,
-          required final String userId,
           required final String assetId,
           required final CreateTransactionUseCase createTransactionUseCase,
           required final DeleteTransactionUseCase deleteTransactionUseCase,
@@ -261,8 +242,6 @@ abstract class _TransactionState implements TransactionState {
 
   @override
   bool get isLoading;
-  @override
-  String get userId;
   @override
   String get assetId;
   @override
