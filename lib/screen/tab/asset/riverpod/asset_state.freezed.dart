@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$AssetState {
-  List<String> get assetIdList => throw _privateConstructorUsedError;
+  List<String> get allAssetIdList => throw _privateConstructorUsedError;
   List<Asset> get activatedAssetList => throw _privateConstructorUsedError;
   GetAssetListUseCase get getAssetListUseCase =>
       throw _privateConstructorUsedError;
@@ -33,7 +33,7 @@ abstract class $AssetStateCopyWith<$Res> {
       _$AssetStateCopyWithImpl<$Res, AssetState>;
   @useResult
   $Res call(
-      {List<String> assetIdList,
+      {List<String> allAssetIdList,
       List<Asset> activatedAssetList,
       GetAssetListUseCase getAssetListUseCase});
 }
@@ -51,14 +51,14 @@ class _$AssetStateCopyWithImpl<$Res, $Val extends AssetState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? assetIdList = null,
+    Object? allAssetIdList = null,
     Object? activatedAssetList = null,
     Object? getAssetListUseCase = null,
   }) {
     return _then(_value.copyWith(
-      assetIdList: null == assetIdList
-          ? _value.assetIdList
-          : assetIdList // ignore: cast_nullable_to_non_nullable
+      allAssetIdList: null == allAssetIdList
+          ? _value.allAssetIdList
+          : allAssetIdList // ignore: cast_nullable_to_non_nullable
               as List<String>,
       activatedAssetList: null == activatedAssetList
           ? _value.activatedAssetList
@@ -81,7 +81,7 @@ abstract class _$$AssetStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {List<String> assetIdList,
+      {List<String> allAssetIdList,
       List<Asset> activatedAssetList,
       GetAssetListUseCase getAssetListUseCase});
 }
@@ -97,14 +97,14 @@ class __$$AssetStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? assetIdList = null,
+    Object? allAssetIdList = null,
     Object? activatedAssetList = null,
     Object? getAssetListUseCase = null,
   }) {
     return _then(_$AssetStateImpl(
-      assetIdList: null == assetIdList
-          ? _value._assetIdList
-          : assetIdList // ignore: cast_nullable_to_non_nullable
+      allAssetIdList: null == allAssetIdList
+          ? _value._allAssetIdList
+          : allAssetIdList // ignore: cast_nullable_to_non_nullable
               as List<String>,
       activatedAssetList: null == activatedAssetList
           ? _value._activatedAssetList
@@ -122,18 +122,18 @@ class __$$AssetStateImplCopyWithImpl<$Res>
 
 class _$AssetStateImpl implements _AssetState {
   const _$AssetStateImpl(
-      {required final List<String> assetIdList,
+      {required final List<String> allAssetIdList,
       required final List<Asset> activatedAssetList,
       required this.getAssetListUseCase})
-      : _assetIdList = assetIdList,
+      : _allAssetIdList = allAssetIdList,
         _activatedAssetList = activatedAssetList;
 
-  final List<String> _assetIdList;
+  final List<String> _allAssetIdList;
   @override
-  List<String> get assetIdList {
-    if (_assetIdList is EqualUnmodifiableListView) return _assetIdList;
+  List<String> get allAssetIdList {
+    if (_allAssetIdList is EqualUnmodifiableListView) return _allAssetIdList;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_assetIdList);
+    return EqualUnmodifiableListView(_allAssetIdList);
   }
 
   final List<Asset> _activatedAssetList;
@@ -150,7 +150,7 @@ class _$AssetStateImpl implements _AssetState {
 
   @override
   String toString() {
-    return 'AssetState(assetIdList: $assetIdList, activatedAssetList: $activatedAssetList, getAssetListUseCase: $getAssetListUseCase)';
+    return 'AssetState(allAssetIdList: $allAssetIdList, activatedAssetList: $activatedAssetList, getAssetListUseCase: $getAssetListUseCase)';
   }
 
   @override
@@ -159,7 +159,7 @@ class _$AssetStateImpl implements _AssetState {
         (other.runtimeType == runtimeType &&
             other is _$AssetStateImpl &&
             const DeepCollectionEquality()
-                .equals(other._assetIdList, _assetIdList) &&
+                .equals(other._allAssetIdList, _allAssetIdList) &&
             const DeepCollectionEquality()
                 .equals(other._activatedAssetList, _activatedAssetList) &&
             (identical(other.getAssetListUseCase, getAssetListUseCase) ||
@@ -169,7 +169,7 @@ class _$AssetStateImpl implements _AssetState {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(_assetIdList),
+      const DeepCollectionEquality().hash(_allAssetIdList),
       const DeepCollectionEquality().hash(_activatedAssetList),
       getAssetListUseCase);
 
@@ -182,13 +182,13 @@ class _$AssetStateImpl implements _AssetState {
 
 abstract class _AssetState implements AssetState {
   const factory _AssetState(
-          {required final List<String> assetIdList,
+          {required final List<String> allAssetIdList,
           required final List<Asset> activatedAssetList,
           required final GetAssetListUseCase getAssetListUseCase}) =
       _$AssetStateImpl;
 
   @override
-  List<String> get assetIdList;
+  List<String> get allAssetIdList;
   @override
   List<Asset> get activatedAssetList;
   @override

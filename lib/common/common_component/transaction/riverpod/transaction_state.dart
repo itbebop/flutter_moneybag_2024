@@ -11,6 +11,7 @@ class TransactionState with _$TransactionState {
   const factory TransactionState({
     @Default(false) final bool isLoading,
     required final String assetId,
+    required final List<String> assetIdList,
     required final CreateTransactionUseCase createTransactionUseCase,
     required final DeleteTransactionUseCase deleteTransactionUseCase,
     required final GetTransactionListUseCase getTransactionListUseCase,

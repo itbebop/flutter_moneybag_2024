@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$TransactionState {
   bool get isLoading => throw _privateConstructorUsedError;
   String get assetId => throw _privateConstructorUsedError;
+  List<String> get assetIdList => throw _privateConstructorUsedError;
   CreateTransactionUseCase get createTransactionUseCase =>
       throw _privateConstructorUsedError;
   DeleteTransactionUseCase get deleteTransactionUseCase =>
@@ -41,6 +42,7 @@ abstract class $TransactionStateCopyWith<$Res> {
   $Res call(
       {bool isLoading,
       String assetId,
+      List<String> assetIdList,
       CreateTransactionUseCase createTransactionUseCase,
       DeleteTransactionUseCase deleteTransactionUseCase,
       GetTransactionListUseCase getTransactionListUseCase,
@@ -62,6 +64,7 @@ class _$TransactionStateCopyWithImpl<$Res, $Val extends TransactionState>
   $Res call({
     Object? isLoading = null,
     Object? assetId = null,
+    Object? assetIdList = null,
     Object? createTransactionUseCase = null,
     Object? deleteTransactionUseCase = null,
     Object? getTransactionListUseCase = null,
@@ -76,6 +79,10 @@ class _$TransactionStateCopyWithImpl<$Res, $Val extends TransactionState>
           ? _value.assetId
           : assetId // ignore: cast_nullable_to_non_nullable
               as String,
+      assetIdList: null == assetIdList
+          ? _value.assetIdList
+          : assetIdList // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       createTransactionUseCase: null == createTransactionUseCase
           ? _value.createTransactionUseCase
           : createTransactionUseCase // ignore: cast_nullable_to_non_nullable
@@ -107,6 +114,7 @@ abstract class _$$TransactionStateImplCopyWith<$Res>
   $Res call(
       {bool isLoading,
       String assetId,
+      List<String> assetIdList,
       CreateTransactionUseCase createTransactionUseCase,
       DeleteTransactionUseCase deleteTransactionUseCase,
       GetTransactionListUseCase getTransactionListUseCase,
@@ -126,6 +134,7 @@ class __$$TransactionStateImplCopyWithImpl<$Res>
   $Res call({
     Object? isLoading = null,
     Object? assetId = null,
+    Object? assetIdList = null,
     Object? createTransactionUseCase = null,
     Object? deleteTransactionUseCase = null,
     Object? getTransactionListUseCase = null,
@@ -140,6 +149,10 @@ class __$$TransactionStateImplCopyWithImpl<$Res>
           ? _value.assetId
           : assetId // ignore: cast_nullable_to_non_nullable
               as String,
+      assetIdList: null == assetIdList
+          ? _value._assetIdList
+          : assetIdList // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       createTransactionUseCase: null == createTransactionUseCase
           ? _value.createTransactionUseCase
           : createTransactionUseCase // ignore: cast_nullable_to_non_nullable
@@ -166,16 +179,26 @@ class _$TransactionStateImpl implements _TransactionState {
   const _$TransactionStateImpl(
       {this.isLoading = false,
       required this.assetId,
+      required final List<String> assetIdList,
       required this.createTransactionUseCase,
       required this.deleteTransactionUseCase,
       required this.getTransactionListUseCase,
-      required this.updateTransactionUseCase});
+      required this.updateTransactionUseCase})
+      : _assetIdList = assetIdList;
 
   @override
   @JsonKey()
   final bool isLoading;
   @override
   final String assetId;
+  final List<String> _assetIdList;
+  @override
+  List<String> get assetIdList {
+    if (_assetIdList is EqualUnmodifiableListView) return _assetIdList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_assetIdList);
+  }
+
   @override
   final CreateTransactionUseCase createTransactionUseCase;
   @override
@@ -187,7 +210,7 @@ class _$TransactionStateImpl implements _TransactionState {
 
   @override
   String toString() {
-    return 'TransactionState(isLoading: $isLoading, assetId: $assetId, createTransactionUseCase: $createTransactionUseCase, deleteTransactionUseCase: $deleteTransactionUseCase, getTransactionListUseCase: $getTransactionListUseCase, updateTransactionUseCase: $updateTransactionUseCase)';
+    return 'TransactionState(isLoading: $isLoading, assetId: $assetId, assetIdList: $assetIdList, createTransactionUseCase: $createTransactionUseCase, deleteTransactionUseCase: $deleteTransactionUseCase, getTransactionListUseCase: $getTransactionListUseCase, updateTransactionUseCase: $updateTransactionUseCase)';
   }
 
   @override
@@ -198,6 +221,8 @@ class _$TransactionStateImpl implements _TransactionState {
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.assetId, assetId) || other.assetId == assetId) &&
+            const DeepCollectionEquality()
+                .equals(other._assetIdList, _assetIdList) &&
             (identical(
                     other.createTransactionUseCase, createTransactionUseCase) ||
                 other.createTransactionUseCase == createTransactionUseCase) &&
@@ -217,6 +242,7 @@ class _$TransactionStateImpl implements _TransactionState {
       runtimeType,
       isLoading,
       assetId,
+      const DeepCollectionEquality().hash(_assetIdList),
       createTransactionUseCase,
       deleteTransactionUseCase,
       getTransactionListUseCase,
@@ -234,6 +260,7 @@ abstract class _TransactionState implements TransactionState {
   const factory _TransactionState(
           {final bool isLoading,
           required final String assetId,
+          required final List<String> assetIdList,
           required final CreateTransactionUseCase createTransactionUseCase,
           required final DeleteTransactionUseCase deleteTransactionUseCase,
           required final GetTransactionListUseCase getTransactionListUseCase,
@@ -244,6 +271,8 @@ abstract class _TransactionState implements TransactionState {
   bool get isLoading;
   @override
   String get assetId;
+  @override
+  List<String> get assetIdList;
   @override
   CreateTransactionUseCase get createTransactionUseCase;
   @override

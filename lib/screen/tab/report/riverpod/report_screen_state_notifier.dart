@@ -6,7 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final reportScreenStateProvider = StateNotifierProvider<ReportScreenStateNotifier, ReportScreenState>((ref) {
   final assetState = ref.watch(assetStateProvier);
-  final List<String> assetIdList = assetState.assetIdList;
+  final List<String> assetIdList = assetState.allAssetIdList;
 
   return ReportScreenStateNotifier(ReportScreenState(getTransactionListUseCase: getIt(), assetIdList: assetIdList));
 });

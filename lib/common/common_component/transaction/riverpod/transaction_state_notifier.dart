@@ -2,34 +2,42 @@ import 'dart:collection';
 
 import 'package:flutter_moneybag_2024/common/common_component/transaction/riverpod/transaction_state.dart';
 import 'package:flutter_moneybag_2024/di/di_setup.dart';
+import 'package:flutter_moneybag_2024/domain/model/asset.dart';
 import 'package:flutter_moneybag_2024/domain/model/transaction_detail.dart';
 import 'package:flutter_moneybag_2024/screen/tab/asset/riverpod/asset_state_notifier.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-// userId는 userProvider를 통해 전역으로 가져옴
 final transactionStateProvider = StateNotifierProvider<TransactionStateNotifier, TransactionState>((ref) {
   final assetState = ref.watch(assetStateProvier);
-  final assetId = assetState.when(
-    data: (asset) => asset.assetId,
-    loading: () => '',
-    error: (error, stackTrace) => '',
-  );
+  final List<Asset> activatedAssetList = assetState.activatedAssetList;
+
+  final List<String> activatedAssetIdList = activatedAssetList.map((asset) => asset.assetId).toList();
 
   return TransactionStateNotifier(
-    TransactionState(createTransactionUseCase: getIt(), deleteTransactionUseCase: getIt(), getTransactionListUseCase: getIt(), updateTransactionUseCase: getIt(), assetId: assetId),
+    TransactionState(
+        createTransactionUseCase: getIt(),
+        deleteTransactionUseCase: getIt(),
+        getTransactionListUseCase: getIt(),
+        updateTransactionUseCase: getIt(),
+        assetId: activatedAssetIdList.first,
+        assetIdList: activatedAssetIdList),
   );
 });
 
 class TransactionStateNotifier extends StateNotifier<TransactionState> {
   TransactionStateNotifier(super.state);
 
+  void selectAsset(String assetId) {
+    state = state.copyWith(assetId: assetId);
+  }
+
   Future<void> createTransaction({required TransactionDetail transactionDetail}) async {
     await state.createTransactionUseCase.execute(transactionDetail: transactionDetail, assetId: state.assetId);
   }
 
   Future<List<TransactionDetail>> getTransactions() async {
-    return await state.getTransactionListUseCase.execute(state.assetId);
+    return await state.getTransactionListUseCase.execute(state.assetIdList);
   }
 
   // 트랜잭션 이벤트를 초기화
@@ -41,7 +49,7 @@ class TransactionStateNotifier extends StateNotifier<TransactionState> {
 
     final transactions = await getTransactions();
     for (var transaction in transactions) {
-      final date = DateTime(transaction.createdAt!.year, transaction.createdAt!.month, transaction.createdAt!.day);
+      final date = DateTime(transaction.createdAt.year, transaction.createdAt.month, transaction.createdAt.day);
       newTransactionEvents.update(
         date,
         (list) => list..add(transaction),

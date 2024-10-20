@@ -12,7 +12,7 @@ final assetStateProvier = StateNotifierProvider<AssetStateNotifier, AssetState>(
     error: (error, stackTrace) => [], // 에러 발생 시 기본값
   );
 
-  return AssetStateNotifier(AssetState(assetIdList: assetIdList, getAssetListUseCase: getIt(), activatedAssetList: []));
+  return AssetStateNotifier(AssetState(allAssetIdList: assetIdList, getAssetListUseCase: getIt(), activatedAssetList: []));
 });
 
 class AssetStateNotifier extends StateNotifier<AssetState> {
@@ -20,7 +20,7 @@ class AssetStateNotifier extends StateNotifier<AssetState> {
 
   Future<void> fetchActivatedAsset() async {
     try {
-      final allAssets = await state.getAssetListUseCase.execute(state.assetIdList);
+      final allAssets = await state.getAssetListUseCase.execute(state.allAssetIdList);
       final List<Asset> activatedAssetList = allAssets.where((a) => a.activated == true).toList(); // 수정: firstWhere 대신 where를 사용하여 리스트로 변환
       state = state.copyWith(activatedAssetList: activatedAssetList);
     } catch (error) {
