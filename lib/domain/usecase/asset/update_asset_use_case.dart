@@ -6,7 +6,7 @@ class UpdateAssetUseCase {
 
   UpdateAssetUseCase({required AssetRepository assetRepository}) : _assetRepository = assetRepository;
 
-  Future<void> execute({required Asset asset, required String userId, required String assetId}) async {
-    await _assetRepository.updateAsset(asset: asset, userId: userId);
+  Future<void> execute({required Asset asset, required String assetId}) async {
+    await _assetRepository.updateAsset(asset: asset);
   }
 }

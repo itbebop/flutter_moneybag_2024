@@ -14,17 +14,17 @@ class AssetRepositoryImpl implements AssetRepository {
   }
 
   @override
-  Future<List<Asset>> getAssetList({required String userId, required String assetId}) async {
-    return await _assetDetailDataSource.getAssetList(userId: userId, assetId: assetId);
+  Future<List<Asset>> getAssetList() async {
+    return await _assetDetailDataSource.getAssetList();
   }
 
   @override
-  Future<void> updateAsset({required Asset asset, required String userId}) async {
-    await _assetDetailDataSource.updateAsset(asset: asset, userId: userId);
+  Future<void> updateAsset({required Asset asset}) async {
+    await _assetDetailDataSource.updateAsset(asset: asset);
   }
 
   @override
-  Future<void> deleteAsset({required String assetId, required String userId}) async {
-    await _assetDetailDataSource.deleteAsset(assetId: assetId, userId: userId);
+  Future<void> deleteAsset({required String assetId}) async {
+    await _assetDetailDataSource.deleteAsset(assetId: assetId);
   }
 }

@@ -34,6 +34,7 @@ class AssetDataSourceImpl implements AssetDataSource {
             createdAt: DateTime.now(),
             assetColor: 'ECB159',
             userIdList: [userId],
+            activated: true,
           ),
         );
         // assetId 업데이트
@@ -59,17 +60,17 @@ class AssetDataSourceImpl implements AssetDataSource {
   }
 
   @override
-  Future<List<Asset>> getAssetList({required String userId, required String assetId}) async {
+  Future<List<Asset>> getAssetList() async {
     return await _assetRef.get().then((value) => value.docs.map((e) => e.data()).toList());
   }
 
   @override
-  Future<void> updateAsset({required Asset asset, required String userId}) async {
+  Future<void> updateAsset({required Asset asset}) async {
     await _assetRef.doc(asset.assetId).set(asset);
   }
 
   @override
-  Future<void> deleteAsset({required String userId, required String assetId}) async {
+  Future<void> deleteAsset({required String assetId}) async {
     await _assetRef.doc(assetId).delete();
   }
 }
