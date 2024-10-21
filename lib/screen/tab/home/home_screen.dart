@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_moneybag_2024/common/common.dart';
-import 'package:flutter_moneybag_2024/common/common_component/transaction/riverpod/transaction_state_notifier.dart';
 import 'package:flutter_moneybag_2024/common/data/month_list.dart';
-import 'package:flutter_moneybag_2024/domain/model/transaction_detail.dart';
 import 'package:flutter_moneybag_2024/screen/tab/home/component/asset_list.dart';
 import 'package:flutter_moneybag_2024/screen/tab/home/component/calendar.dart';
 import 'package:flutter_moneybag_2024/screen/tab/home/component/current_month.dart';
 import 'package:flutter_moneybag_2024/screen/tab/home/component/home_transaction_list.dart';
+import 'package:flutter_moneybag_2024/common/data/month_state_notifier.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_moneybag_2024/common/common_component/transaction/riverpod/transaction_state_notifier.dart';
+import 'package:flutter_moneybag_2024/domain/model/transaction_detail.dart';
+import 'package:flutter_moneybag_2024/common/common.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -18,10 +19,8 @@ class HomeScreen extends ConsumerStatefulWidget {
 }
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
-  final String _currentMonth = DateFormat('MMM').format(DateTime.now()).toLowerCase();
   DateTime _focusedDay = DateTime.now();
   late DateTime _selectedDay;
-  MonthList selectedMonth = MonthList.jan; // 초기값으로 설정
   final ValueNotifier<List<TransactionDetail>> _selectedEvents = ValueNotifier([]);
 
   @override
@@ -31,9 +30,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     Future.microtask(() {
       _fetchEventsForDay(_selectedDay);
 
-      selectedMonth = MonthList.values.firstWhere(
-        (e) => e.toString().split('.')[1] == _currentMonth,
+      // 자동으로 현재 달을 설정
+      final currentMonth = DateFormat('MMM').format(DateTime.now()).toLowerCase();
+      final initialMonth = MonthList.values.firstWhere(
+        (e) => e.toString().split('.')[1] == currentMonth,
       );
+      ref.read(monthStateProvider.notifier).setMonth(initialMonth); // 초기 설정
     });
   }
 
@@ -52,6 +54,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // Watch the selected month state from Riverpod
+    DateTime now = DateTime.now();
+    final selectedMonth = ref.watch(monthStateProvider);
+    DateTime focusedDay = DateTime.utc(now.year, selectedMonth.month, now.day);
+
     return Scaffold(
       body: Column(
         children: [
@@ -77,9 +84,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                               MonthDropdownButton(
                                 selectedMonth: selectedMonth,
                                 onMonthChanged: (value) {
-                                  setState(() {
-                                    selectedMonth = value; // 선택된 월 업데이트
-                                  });
+                                  ref.read(monthStateProvider.notifier).setMonth(value);
                                 },
                                 fontSize: 24,
                               ),
@@ -92,10 +97,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     SizedBox(height: 15.h),
                     Calendar(
                       selectedDay: _selectedDay,
+                      focusedDay: focusedDay,
                       onDaySelected: (DateTime selectedDay, DateTime focusedDay) {
                         setState(() {
                           _selectedDay = selectedDay;
                           _focusedDay = focusedDay;
+                          ref.read(monthStateProvider.notifier).setMonth(MonthList.values[focusedDay.month - 1]); // 선택한 날짜의 월로 업데이트
                         });
                         _fetchEventsForDay(selectedDay); // Fetch events for the new selected day
                       },

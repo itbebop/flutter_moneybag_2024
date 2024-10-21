@@ -1,6 +1,7 @@
 import 'dart:collection';
 
 import 'package:flutter_moneybag_2024/common/common_component/transaction/riverpod/transaction_state.dart';
+import 'package:flutter_moneybag_2024/common/data/month_list.dart';
 import 'package:flutter_moneybag_2024/di/di_setup.dart';
 import 'package:flutter_moneybag_2024/domain/model/asset.dart';
 import 'package:flutter_moneybag_2024/domain/model/transaction_detail.dart';
@@ -10,6 +11,7 @@ import 'package:table_calendar/table_calendar.dart';
 
 final transactionStateProvider = StateNotifierProvider<TransactionStateNotifier, TransactionState>((ref) {
   final assetState = ref.watch(assetStateProvier);
+  ref.read(assetStateProvier.notifier).fetchAsset();
   final List<Asset> activatedAssetList = assetState.assetList;
 
   final List<String> activatedAssetIdList = activatedAssetList.map((asset) => asset.assetId).toList();
@@ -64,4 +66,6 @@ class TransactionStateNotifier extends StateNotifier<TransactionState> {
     final events = await initializeTransactionEvents();
     return events[day] ?? [];
   }
+
+  getEventsForMonth(MonthList month) {}
 }
