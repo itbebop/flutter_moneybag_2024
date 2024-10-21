@@ -40,11 +40,12 @@ class FloatButton extends StatelessWidget {
                     ],
                   )
                 : const LinearGradient(
-                    begin: Alignment.centerLeft,
-                    end: Alignment.centerRight,
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
                     colors: [
-                      UiConfig.backgroundColor,
-                      UiConfig.backgroundColor,
+                      Color.fromARGB(255, 255, 242, 206),
+                      Color.fromARGB(255, 253, 221, 132),
+                      Color.fromARGB(255, 247, 172, 60),
                     ],
                   ),
             borderRadius: BorderRadius.circular(30),
@@ -53,9 +54,9 @@ class FloatButton extends StatelessWidget {
             AnimatedRotation(
               turns: isExpanded ? 0.125 : 0,
               duration: duration,
-              child: Icon(
+              child: const Icon(
                 Icons.add,
-                color: isExpanded ? Colors.black : UiConfig.whiteColor,
+                color: UiConfig.whiteColor,
               ),
             ),
             AnimatedWidthCollapse(
