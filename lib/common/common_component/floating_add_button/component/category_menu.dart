@@ -35,10 +35,7 @@ class CategoryMenu extends ConsumerWidget {
                 ref.read(floatingButtonStateProvider.notifier).selectAssetType(AssetType.income);
                 ref.read(floatingButtonStateProvider.notifier).toggleTransactionMenu();
               },
-              child: FloatItem(
-                title: '수입',
-                imagePath: picSum(401),
-              ),
+              child: const FloatItem(title: '수입', icon: Icon(Icons.login_outlined)),
             ),
             const SizedBox(height: 16),
             Tap(
@@ -46,10 +43,7 @@ class CategoryMenu extends ConsumerWidget {
                 ref.read(floatingButtonStateProvider.notifier).selectAssetType(AssetType.expense);
                 ref.read(floatingButtonStateProvider.notifier).toggleTransactionMenu();
               },
-              child: FloatItem(
-                title: '지출',
-                imagePath: picSum(401),
-              ),
+              child: const FloatItem(title: '지출', icon: Icon(Icons.logout_outlined)),
             ),
           ],
         ),

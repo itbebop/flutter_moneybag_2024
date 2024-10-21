@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 
 class FloatItem extends StatelessWidget {
   final String title;
-  final String imagePath;
+  final String? imagePath;
+  final Icon? icon;
 
-  const FloatItem({super.key, required this.title, required this.imagePath});
+  const FloatItem({super.key, required this.title, this.icon, this.imagePath});
 
   @override
   Widget build(BuildContext context) {
@@ -12,10 +13,12 @@ class FloatItem extends StatelessWidget {
       children: [
         ClipRRect(
           borderRadius: BorderRadius.circular(8.0),
-          child: Image.network(
-            imagePath,
-            width: 30,
-          ),
+          child: imagePath != null
+              ? Image.network(
+                  imagePath!,
+                  width: 30,
+                )
+              : icon,
         ),
         const SizedBox(
           width: 8,
