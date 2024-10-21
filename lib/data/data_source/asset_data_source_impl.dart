@@ -73,6 +73,16 @@ class AssetDataSourceImpl implements AssetDataSource {
   }
 
   @override
+  Future<Asset> getAsset({required String assetId}) async {
+    final doc = await _assetRef.doc(assetId).get();
+    if (doc.exists) {
+      return doc.data()!;
+    } else {
+      throw Exception('Asset not found');
+    }
+  }
+
+  @override
   Future<void> updateAsset({required Asset asset}) async {
     await _assetRef.doc(asset.assetId).set(asset);
   }

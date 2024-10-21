@@ -19,6 +19,11 @@ class AssetRepositoryImpl implements AssetRepository {
   }
 
   @override
+  Future<Asset> getAsset({required String assetId}) async {
+    return await _assetDetailDataSource.getAsset(assetId: assetId);
+  }
+
+  @override
   Future<void> updateAsset({required Asset asset}) async {
     await _assetDetailDataSource.updateAsset(asset: asset);
   }
