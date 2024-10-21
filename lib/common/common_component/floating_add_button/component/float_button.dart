@@ -34,9 +34,9 @@ class FloatButton extends StatelessWidget {
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                     colors: [
-                      UiConfig.whiteColor,
+                      Color.fromARGB(255, 255, 242, 206),
                       UiConfig.buttonColor,
-                      UiConfig.primaryColorSurface,
+                      Color.fromARGB(255, 250, 167, 42),
                     ],
                   )
                 : const LinearGradient(

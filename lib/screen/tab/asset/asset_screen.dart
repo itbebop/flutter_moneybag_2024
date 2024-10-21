@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_moneybag_2024/screen/tab/asset/component/asset_card.dart';
 import 'package:flutter_moneybag_2024/screen/tab/asset/component/asset_card_button.dart';
-import 'package:flutter_moneybag_2024/screen/tab/asset/component/asset_card_new.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class AssetScreen extends ConsumerStatefulWidget {
@@ -23,6 +22,8 @@ class _ReportScreenState extends ConsumerState<AssetScreen> {
       padding: EdgeInsets.all(8.0),
       child: Column(
         children: [
+          AssetCard(),
+          SizedBox(height: 16),
           AssetCard(),
           SizedBox(height: 16),
           // AssetCardNew(titleEditController: titleEditController),

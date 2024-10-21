@@ -13,16 +13,19 @@ class AssetCard extends StatelessWidget {
         Align(
           alignment: Alignment.topCenter,
           child: Container(
-            width: 350.w,
-            height: 200.h,
+            width: 330.w,
+            height: 180.h,
             decoration: BoxDecoration(
-              color: UiConfig.primaryColorSurface,
-              borderRadius: BorderRadius.circular(10),
+              gradient: const LinearGradient(colors: [
+                Color(0xFFECB159),
+                Color(0xFFFFC527),
+              ]),
+              borderRadius: BorderRadius.circular(20),
             ),
           ),
         ),
         Positioned(
-          left: 28.w,
+          left: 44.w,
           top: 20.h,
           child: ClipRRect(
             borderRadius: BorderRadius.circular(25.0),
@@ -33,11 +36,14 @@ class AssetCard extends StatelessWidget {
           ),
         ),
         Positioned(
-          left: 78.w,
-          top: 16.h,
+          left: 96.w,
+          top: 18.h,
           child: Text(
-            'Default asset',
-            style: UiConfig.h1Style.copyWith(fontWeight: UiConfig.semiBoldFont, color: UiConfig.whiteColor),
+            '첫 자산',
+            style: UiConfig.h2Style.copyWith(
+              fontWeight: UiConfig.semiBoldFont,
+              color: UiConfig.whiteColor,
+            ),
           ),
         ),
         Positioned(
@@ -50,29 +56,33 @@ class AssetCard extends StatelessWidget {
           ),
         ),
         Positioned(
-          right: 36.w,
-          top: 16.h,
+          right: 42.w,
+          top: 24.h,
           child: Container(
-            width: 58.w,
-            height: 32.h,
+            width: 48.w,
+            height: 24.h,
             decoration: BoxDecoration(
               color: UiConfig.whiteColor,
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(15),
             ),
             child: Center(
               child: Text(
                 'KRW',
-                style: UiConfig.bodyStyle.copyWith(letterSpacing: 1.0, fontWeight: UiConfig.semiBoldFont, color: UiConfig.primaryColor),
+                style: UiConfig.smallStyle.copyWith(
+                  letterSpacing: 1.0,
+                  // fontWeight: UiConfig.semiBoldFont,
+                  color: UiConfig.primaryColor,
+                ),
               ),
             ),
           ),
         ),
         Positioned(
           bottom: 14.h,
-          left: 30.w,
+          left: 44.w,
           child: Text(
             '₩1800000.00',
-            style: UiConfig.largeStyle.copyWith(
+            style: UiConfig.numberStyle.copyWith(
               color: UiConfig.whiteColor,
               fontWeight: UiConfig.semiBoldFont,
             ),
@@ -80,18 +90,18 @@ class AssetCard extends StatelessWidget {
         ),
         Positioned(
           top: 88.h,
-          left: 30.w,
+          left: 50.w,
           child: Text(
             'single/multiple',
             style: UiConfig.bodyStyle.copyWith(
               color: UiConfig.whiteColor,
-              fontWeight: UiConfig.semiBoldFont,
+              // fontWeight: UiConfig.semiBoldFont,
             ),
           ),
         ),
         Positioned(
           top: 88.h,
-          right: 36.w,
+          right: 42.w,
           child: ClipRRect(
             borderRadius: BorderRadius.circular(15.0),
             child: Image.network(

@@ -30,6 +30,7 @@ class UiConfig {
   static TextStyle bodyStyle = TextStyle(fontSize: 14.sp, letterSpacing: -0.3, fontWeight: FontWeight.w400, color: const Color(0xFF282828), fontFamily: 'Inter');
   static TextStyle smallStyle = TextStyle(fontSize: 12.sp, letterSpacing: -0.3, fontWeight: FontWeight.w400, color: const Color(0xFF282828), fontFamily: 'Inter');
   static TextStyle extraSmallStyle = TextStyle(fontSize: 10.sp, letterSpacing: -0.3, fontWeight: FontWeight.w400, color: const Color(0xFF282828), fontFamily: 'Inter');
+  static TextStyle numberStyle = TextStyle(fontSize: 20.sp, letterSpacing: 0.5, fontWeight: FontWeight.w400, color: const Color(0xFF282828), fontFamily: 'Digital');
 
   static const FontWeight regularFont = FontWeight.w400;
   static const FontWeight semiBoldFont = FontWeight.w600;
