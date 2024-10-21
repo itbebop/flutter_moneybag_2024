@@ -21,6 +21,12 @@ class TransactionDataSourceImpl implements TransactionDataSource {
   @override
   Future<void> createTransaction({required TransactionDetail transaction, required String assetId}) async {
     await _transactionRef(assetId).add(transaction).then((value) => _transactionRef(assetId).doc(value.id).update({'transactionId': value.id}));
+    final assetRef = FirebaseFirestore.instance.collection('assets');
+
+    // totalAmount에 transaction.amount를 더하는 로직 추가
+    await assetRef.doc(assetId).update({
+      'totalAmount': FieldValue.increment(transaction.amount),
+    });
   }
 
   @override

@@ -11,12 +11,7 @@ final assetStateProvier = StateNotifierProvider<AssetStateNotifier, AssetState>(
     error: (error, stackTrace) => [], // 에러 발생 시 기본값
   );
 
-  return AssetStateNotifier(AssetState(
-    assetIdList: assetIdList,
-    getAssetListUseCase: getIt(),
-    getAssetUseCase: getIt(),
-    hints: '선택',
-  ));
+  return AssetStateNotifier(AssetState(assetIdList: assetIdList, getAssetListUseCase: getIt(), getAssetUseCase: getIt(), hints: '선택', selectedAssetId: ''));
 });
 
 class AssetStateNotifier extends StateNotifier<AssetState> {
@@ -35,6 +30,6 @@ class AssetStateNotifier extends StateNotifier<AssetState> {
     final asset = await state.getAssetUseCase.execute(assetId: assetId);
     final String hints = asset.assetName;
     final double amount = asset.totalAmount;
-    state = state.copyWith(assetAmount: amount, hints: hints, assetIdList: [assetId]);
+    state = state.copyWith(assetAmount: amount, hints: hints, selectedAssetId: assetId);
   }
 }

@@ -18,6 +18,8 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$TransactionState {
   bool get isLoading => throw _privateConstructorUsedError;
   String get assetId => throw _privateConstructorUsedError;
+  double get amount => throw _privateConstructorUsedError;
+  AssetType get assetType => throw _privateConstructorUsedError;
   List<String> get assetIdList => throw _privateConstructorUsedError;
   CreateTransactionUseCase get createTransactionUseCase =>
       throw _privateConstructorUsedError;
@@ -42,6 +44,8 @@ abstract class $TransactionStateCopyWith<$Res> {
   $Res call(
       {bool isLoading,
       String assetId,
+      double amount,
+      AssetType assetType,
       List<String> assetIdList,
       CreateTransactionUseCase createTransactionUseCase,
       DeleteTransactionUseCase deleteTransactionUseCase,
@@ -64,6 +68,8 @@ class _$TransactionStateCopyWithImpl<$Res, $Val extends TransactionState>
   $Res call({
     Object? isLoading = null,
     Object? assetId = null,
+    Object? amount = null,
+    Object? assetType = null,
     Object? assetIdList = null,
     Object? createTransactionUseCase = null,
     Object? deleteTransactionUseCase = null,
@@ -79,6 +85,14 @@ class _$TransactionStateCopyWithImpl<$Res, $Val extends TransactionState>
           ? _value.assetId
           : assetId // ignore: cast_nullable_to_non_nullable
               as String,
+      amount: null == amount
+          ? _value.amount
+          : amount // ignore: cast_nullable_to_non_nullable
+              as double,
+      assetType: null == assetType
+          ? _value.assetType
+          : assetType // ignore: cast_nullable_to_non_nullable
+              as AssetType,
       assetIdList: null == assetIdList
           ? _value.assetIdList
           : assetIdList // ignore: cast_nullable_to_non_nullable
@@ -114,6 +128,8 @@ abstract class _$$TransactionStateImplCopyWith<$Res>
   $Res call(
       {bool isLoading,
       String assetId,
+      double amount,
+      AssetType assetType,
       List<String> assetIdList,
       CreateTransactionUseCase createTransactionUseCase,
       DeleteTransactionUseCase deleteTransactionUseCase,
@@ -134,6 +150,8 @@ class __$$TransactionStateImplCopyWithImpl<$Res>
   $Res call({
     Object? isLoading = null,
     Object? assetId = null,
+    Object? amount = null,
+    Object? assetType = null,
     Object? assetIdList = null,
     Object? createTransactionUseCase = null,
     Object? deleteTransactionUseCase = null,
@@ -149,6 +167,14 @@ class __$$TransactionStateImplCopyWithImpl<$Res>
           ? _value.assetId
           : assetId // ignore: cast_nullable_to_non_nullable
               as String,
+      amount: null == amount
+          ? _value.amount
+          : amount // ignore: cast_nullable_to_non_nullable
+              as double,
+      assetType: null == assetType
+          ? _value.assetType
+          : assetType // ignore: cast_nullable_to_non_nullable
+              as AssetType,
       assetIdList: null == assetIdList
           ? _value._assetIdList
           : assetIdList // ignore: cast_nullable_to_non_nullable
@@ -179,6 +205,8 @@ class _$TransactionStateImpl implements _TransactionState {
   const _$TransactionStateImpl(
       {this.isLoading = false,
       required this.assetId,
+      required this.amount,
+      required this.assetType,
       required final List<String> assetIdList,
       required this.createTransactionUseCase,
       required this.deleteTransactionUseCase,
@@ -191,6 +219,10 @@ class _$TransactionStateImpl implements _TransactionState {
   final bool isLoading;
   @override
   final String assetId;
+  @override
+  final double amount;
+  @override
+  final AssetType assetType;
   final List<String> _assetIdList;
   @override
   List<String> get assetIdList {
@@ -210,7 +242,7 @@ class _$TransactionStateImpl implements _TransactionState {
 
   @override
   String toString() {
-    return 'TransactionState(isLoading: $isLoading, assetId: $assetId, assetIdList: $assetIdList, createTransactionUseCase: $createTransactionUseCase, deleteTransactionUseCase: $deleteTransactionUseCase, getTransactionListUseCase: $getTransactionListUseCase, updateTransactionUseCase: $updateTransactionUseCase)';
+    return 'TransactionState(isLoading: $isLoading, assetId: $assetId, amount: $amount, assetType: $assetType, assetIdList: $assetIdList, createTransactionUseCase: $createTransactionUseCase, deleteTransactionUseCase: $deleteTransactionUseCase, getTransactionListUseCase: $getTransactionListUseCase, updateTransactionUseCase: $updateTransactionUseCase)';
   }
 
   @override
@@ -221,6 +253,9 @@ class _$TransactionStateImpl implements _TransactionState {
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.assetId, assetId) || other.assetId == assetId) &&
+            (identical(other.amount, amount) || other.amount == amount) &&
+            (identical(other.assetType, assetType) ||
+                other.assetType == assetType) &&
             const DeepCollectionEquality()
                 .equals(other._assetIdList, _assetIdList) &&
             (identical(
@@ -242,6 +277,8 @@ class _$TransactionStateImpl implements _TransactionState {
       runtimeType,
       isLoading,
       assetId,
+      amount,
+      assetType,
       const DeepCollectionEquality().hash(_assetIdList),
       createTransactionUseCase,
       deleteTransactionUseCase,
@@ -260,6 +297,8 @@ abstract class _TransactionState implements TransactionState {
   const factory _TransactionState(
           {final bool isLoading,
           required final String assetId,
+          required final double amount,
+          required final AssetType assetType,
           required final List<String> assetIdList,
           required final CreateTransactionUseCase createTransactionUseCase,
           required final DeleteTransactionUseCase deleteTransactionUseCase,
@@ -271,6 +310,10 @@ abstract class _TransactionState implements TransactionState {
   bool get isLoading;
   @override
   String get assetId;
+  @override
+  double get amount;
+  @override
+  AssetType get assetType;
   @override
   List<String> get assetIdList;
   @override

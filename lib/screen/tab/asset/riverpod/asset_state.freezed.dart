@@ -19,6 +19,7 @@ mixin _$AssetState {
   List<Asset> get assetList => throw _privateConstructorUsedError;
   double get assetAmount => throw _privateConstructorUsedError;
   String get hints => throw _privateConstructorUsedError;
+  String get selectedAssetId => throw _privateConstructorUsedError;
   List<String> get assetIdList => throw _privateConstructorUsedError;
   GetAssetListUseCase get getAssetListUseCase =>
       throw _privateConstructorUsedError;
@@ -39,6 +40,7 @@ abstract class $AssetStateCopyWith<$Res> {
       {List<Asset> assetList,
       double assetAmount,
       String hints,
+      String selectedAssetId,
       List<String> assetIdList,
       GetAssetListUseCase getAssetListUseCase,
       GetAssetUseCase getAssetUseCase});
@@ -60,6 +62,7 @@ class _$AssetStateCopyWithImpl<$Res, $Val extends AssetState>
     Object? assetList = null,
     Object? assetAmount = null,
     Object? hints = null,
+    Object? selectedAssetId = null,
     Object? assetIdList = null,
     Object? getAssetListUseCase = null,
     Object? getAssetUseCase = freezed,
@@ -76,6 +79,10 @@ class _$AssetStateCopyWithImpl<$Res, $Val extends AssetState>
       hints: null == hints
           ? _value.hints
           : hints // ignore: cast_nullable_to_non_nullable
+              as String,
+      selectedAssetId: null == selectedAssetId
+          ? _value.selectedAssetId
+          : selectedAssetId // ignore: cast_nullable_to_non_nullable
               as String,
       assetIdList: null == assetIdList
           ? _value.assetIdList
@@ -105,6 +112,7 @@ abstract class _$$AssetStateImplCopyWith<$Res>
       {List<Asset> assetList,
       double assetAmount,
       String hints,
+      String selectedAssetId,
       List<String> assetIdList,
       GetAssetListUseCase getAssetListUseCase,
       GetAssetUseCase getAssetUseCase});
@@ -124,6 +132,7 @@ class __$$AssetStateImplCopyWithImpl<$Res>
     Object? assetList = null,
     Object? assetAmount = null,
     Object? hints = null,
+    Object? selectedAssetId = null,
     Object? assetIdList = null,
     Object? getAssetListUseCase = null,
     Object? getAssetUseCase = freezed,
@@ -140,6 +149,10 @@ class __$$AssetStateImplCopyWithImpl<$Res>
       hints: null == hints
           ? _value.hints
           : hints // ignore: cast_nullable_to_non_nullable
+              as String,
+      selectedAssetId: null == selectedAssetId
+          ? _value.selectedAssetId
+          : selectedAssetId // ignore: cast_nullable_to_non_nullable
               as String,
       assetIdList: null == assetIdList
           ? _value._assetIdList
@@ -164,6 +177,7 @@ class _$AssetStateImpl implements _AssetState {
       {final List<Asset> assetList = const [],
       this.assetAmount = 0,
       required this.hints,
+      required this.selectedAssetId,
       required final List<String> assetIdList,
       required this.getAssetListUseCase,
       required this.getAssetUseCase})
@@ -184,6 +198,8 @@ class _$AssetStateImpl implements _AssetState {
   final double assetAmount;
   @override
   final String hints;
+  @override
+  final String selectedAssetId;
   final List<String> _assetIdList;
   @override
   List<String> get assetIdList {
@@ -199,7 +215,7 @@ class _$AssetStateImpl implements _AssetState {
 
   @override
   String toString() {
-    return 'AssetState(assetList: $assetList, assetAmount: $assetAmount, hints: $hints, assetIdList: $assetIdList, getAssetListUseCase: $getAssetListUseCase, getAssetUseCase: $getAssetUseCase)';
+    return 'AssetState(assetList: $assetList, assetAmount: $assetAmount, hints: $hints, selectedAssetId: $selectedAssetId, assetIdList: $assetIdList, getAssetListUseCase: $getAssetListUseCase, getAssetUseCase: $getAssetUseCase)';
   }
 
   @override
@@ -212,6 +228,8 @@ class _$AssetStateImpl implements _AssetState {
             (identical(other.assetAmount, assetAmount) ||
                 other.assetAmount == assetAmount) &&
             (identical(other.hints, hints) || other.hints == hints) &&
+            (identical(other.selectedAssetId, selectedAssetId) ||
+                other.selectedAssetId == selectedAssetId) &&
             const DeepCollectionEquality()
                 .equals(other._assetIdList, _assetIdList) &&
             (identical(other.getAssetListUseCase, getAssetListUseCase) ||
@@ -226,6 +244,7 @@ class _$AssetStateImpl implements _AssetState {
       const DeepCollectionEquality().hash(_assetList),
       assetAmount,
       hints,
+      selectedAssetId,
       const DeepCollectionEquality().hash(_assetIdList),
       getAssetListUseCase,
       const DeepCollectionEquality().hash(getAssetUseCase));
@@ -242,6 +261,7 @@ abstract class _AssetState implements AssetState {
       {final List<Asset> assetList,
       final double assetAmount,
       required final String hints,
+      required final String selectedAssetId,
       required final List<String> assetIdList,
       required final GetAssetListUseCase getAssetListUseCase,
       required final GetAssetUseCase getAssetUseCase}) = _$AssetStateImpl;
@@ -252,6 +272,8 @@ abstract class _AssetState implements AssetState {
   double get assetAmount;
   @override
   String get hints;
+  @override
+  String get selectedAssetId;
   @override
   List<String> get assetIdList;
   @override

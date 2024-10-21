@@ -11,6 +11,7 @@ class AssetState with _$AssetState {
     @Default([]) List<Asset> assetList,
     @Default(0) double assetAmount,
     required String hints,
+    required String selectedAssetId,
     required List<String> assetIdList,
     required final GetAssetListUseCase getAssetListUseCase,
     required final GetAssetUseCase getAssetUseCase,

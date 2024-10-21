@@ -32,11 +32,10 @@ class TransactionMenu extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    double amount = 0.0;
-
     assetAmountController.text = ref.read(assetStateProvier).assetAmount.toString();
 
     final assetProvider = ref.watch(assetStateProvier);
+    final transactionProvider = ref.watch(transactionStateProvider);
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.end,
@@ -112,8 +111,10 @@ class TransactionMenu extends ConsumerWidget {
                       ThousandCommaInputFormatter(),
                     ],
                     onChanged: (value) {
+                      // ,제거하고 전송
                       String newValue = value.replaceAll(',', '');
-                      amount = double.parse(newValue);
+                      ref.read(transactionStateProvider.notifier).onChangeAmount(newValue);
+
                       if (value.isNotEmpty) {
                         // 키보드를 다시 보여줌
                         SystemChannels.textInput.invokeMethod('TextInput.show');
@@ -188,17 +189,19 @@ class TransactionMenu extends ConsumerWidget {
                               memo: memoEditController.text,
                               createdAt: DateTime.now(),
                               updatedAt: DateTime.now(),
-                              amount: amount,
+                              amount: transactionProvider.assetType == AssetType.income ? transactionProvider.amount : -transactionProvider.amount,
                               userId: userStateValue.value!.userId,
                               category: TransactionCategory(
                                 categoryId: '1',
                                 name: '이자',
-                                type: AssetType.income,
+                                type: transactionProvider.assetType,
                                 imgUrl: picSum(201),
                               ),
                             ),
                           );
                     }
+                    amountEditController.clear();
+                    memoEditController.clear();
                     ref.read(floatingButtonStateProvider.notifier).tapOutside();
                   },
                   child: Container(

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_moneybag_2024/common/common.dart';
 import 'package:flutter_moneybag_2024/common/common_component/floating_add_button/component/float_item.dart';
 import 'package:flutter_moneybag_2024/common/common_component/floating_add_button/floating_add_button.riverpod.dart';
+import 'package:flutter_moneybag_2024/common/common_component/transaction/riverpod/transaction_state_notifier.dart';
 import 'package:flutter_moneybag_2024/domain/enums/asset_types.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -32,7 +33,7 @@ class CategoryMenu extends ConsumerWidget {
           children: [
             Tap(
               onTap: () {
-                ref.read(floatingButtonStateProvider.notifier).selectAssetType(AssetType.income);
+                ref.read(transactionStateProvider.notifier).selectAssetType(AssetType.income);
                 ref.read(floatingButtonStateProvider.notifier).toggleTransactionMenu();
               },
               child: const FloatItem(title: '수입', icon: Icon(Icons.login_outlined)),
@@ -40,7 +41,7 @@ class CategoryMenu extends ConsumerWidget {
             const SizedBox(height: 16),
             Tap(
               onTap: () {
-                ref.read(floatingButtonStateProvider.notifier).selectAssetType(AssetType.expense);
+                ref.read(transactionStateProvider.notifier).selectAssetType(AssetType.expense);
                 ref.read(floatingButtonStateProvider.notifier).toggleTransactionMenu();
               },
               child: const FloatItem(title: '지출', icon: Icon(Icons.logout_outlined)),
