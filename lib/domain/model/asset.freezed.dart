@@ -21,6 +21,8 @@ Asset _$AssetFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Asset {
   double get totalAmount => throw _privateConstructorUsedError;
+  double get totalIncome => throw _privateConstructorUsedError;
+  double get totalExpense => throw _privateConstructorUsedError;
   String get assetId => throw _privateConstructorUsedError;
   String get assetName => throw _privateConstructorUsedError;
   String get imgUrl => throw _privateConstructorUsedError;
@@ -42,6 +44,8 @@ abstract class $AssetCopyWith<$Res> {
   @useResult
   $Res call(
       {double totalAmount,
+      double totalIncome,
+      double totalExpense,
       String assetId,
       String assetName,
       String imgUrl,
@@ -66,6 +70,8 @@ class _$AssetCopyWithImpl<$Res, $Val extends Asset>
   @override
   $Res call({
     Object? totalAmount = null,
+    Object? totalIncome = null,
+    Object? totalExpense = null,
     Object? assetId = null,
     Object? assetName = null,
     Object? imgUrl = null,
@@ -79,6 +85,14 @@ class _$AssetCopyWithImpl<$Res, $Val extends Asset>
       totalAmount: null == totalAmount
           ? _value.totalAmount
           : totalAmount // ignore: cast_nullable_to_non_nullable
+              as double,
+      totalIncome: null == totalIncome
+          ? _value.totalIncome
+          : totalIncome // ignore: cast_nullable_to_non_nullable
+              as double,
+      totalExpense: null == totalExpense
+          ? _value.totalExpense
+          : totalExpense // ignore: cast_nullable_to_non_nullable
               as double,
       assetId: null == assetId
           ? _value.assetId
@@ -125,6 +139,8 @@ abstract class _$$AssetImplCopyWith<$Res> implements $AssetCopyWith<$Res> {
   @useResult
   $Res call(
       {double totalAmount,
+      double totalIncome,
+      double totalExpense,
       String assetId,
       String assetName,
       String imgUrl,
@@ -147,6 +163,8 @@ class __$$AssetImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? totalAmount = null,
+    Object? totalIncome = null,
+    Object? totalExpense = null,
     Object? assetId = null,
     Object? assetName = null,
     Object? imgUrl = null,
@@ -160,6 +178,14 @@ class __$$AssetImplCopyWithImpl<$Res>
       totalAmount: null == totalAmount
           ? _value.totalAmount
           : totalAmount // ignore: cast_nullable_to_non_nullable
+              as double,
+      totalIncome: null == totalIncome
+          ? _value.totalIncome
+          : totalIncome // ignore: cast_nullable_to_non_nullable
+              as double,
+      totalExpense: null == totalExpense
+          ? _value.totalExpense
+          : totalExpense // ignore: cast_nullable_to_non_nullable
               as double,
       assetId: null == assetId
           ? _value.assetId
@@ -202,6 +228,8 @@ class __$$AssetImplCopyWithImpl<$Res>
 class _$AssetImpl implements _Asset {
   const _$AssetImpl(
       {required this.totalAmount,
+      required this.totalIncome,
+      required this.totalExpense,
       required this.assetId,
       required this.assetName,
       required this.imgUrl,
@@ -217,6 +245,10 @@ class _$AssetImpl implements _Asset {
 
   @override
   final double totalAmount;
+  @override
+  final double totalIncome;
+  @override
+  final double totalExpense;
   @override
   final String assetId;
   @override
@@ -242,7 +274,7 @@ class _$AssetImpl implements _Asset {
 
   @override
   String toString() {
-    return 'Asset(totalAmount: $totalAmount, assetId: $assetId, assetName: $assetName, imgUrl: $imgUrl, currency: $currency, userIdList: $userIdList, createdAt: $createdAt, updatedAt: $updatedAt, assetColor: $assetColor)';
+    return 'Asset(totalAmount: $totalAmount, totalIncome: $totalIncome, totalExpense: $totalExpense, assetId: $assetId, assetName: $assetName, imgUrl: $imgUrl, currency: $currency, userIdList: $userIdList, createdAt: $createdAt, updatedAt: $updatedAt, assetColor: $assetColor)';
   }
 
   @override
@@ -252,6 +284,10 @@ class _$AssetImpl implements _Asset {
             other is _$AssetImpl &&
             (identical(other.totalAmount, totalAmount) ||
                 other.totalAmount == totalAmount) &&
+            (identical(other.totalIncome, totalIncome) ||
+                other.totalIncome == totalIncome) &&
+            (identical(other.totalExpense, totalExpense) ||
+                other.totalExpense == totalExpense) &&
             (identical(other.assetId, assetId) || other.assetId == assetId) &&
             (identical(other.assetName, assetName) ||
                 other.assetName == assetName) &&
@@ -273,6 +309,8 @@ class _$AssetImpl implements _Asset {
   int get hashCode => Object.hash(
       runtimeType,
       totalAmount,
+      totalIncome,
+      totalExpense,
       assetId,
       assetName,
       imgUrl,
@@ -299,6 +337,8 @@ class _$AssetImpl implements _Asset {
 abstract class _Asset implements Asset {
   const factory _Asset(
       {required final double totalAmount,
+      required final double totalIncome,
+      required final double totalExpense,
       required final String assetId,
       required final String assetName,
       required final String imgUrl,
@@ -312,6 +352,10 @@ abstract class _Asset implements Asset {
 
   @override
   double get totalAmount;
+  @override
+  double get totalIncome;
+  @override
+  double get totalExpense;
   @override
   String get assetId;
   @override

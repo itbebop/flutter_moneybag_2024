@@ -7,6 +7,8 @@ part 'asset.g.dart';
 class Asset with _$Asset {
   const factory Asset({
     required double totalAmount,
+    required double totalIncome,
+    required double totalExpense,
     required String assetId,
     required String assetName,
     required String imgUrl,
