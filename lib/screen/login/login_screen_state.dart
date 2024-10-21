@@ -1,6 +1,5 @@
 import 'package:flutter_moneybag_2024/domain/model/user.dart';
 import 'package:flutter_moneybag_2024/domain/usecase/asset/create_asset_use_case.dart';
-import 'package:flutter_moneybag_2024/domain/usecase/asset/get_asset_list_use_case.dart';
 import 'package:flutter_moneybag_2024/domain/usecase/auth/check_user_duplicated_usecase.dart';
 import 'package:flutter_moneybag_2024/domain/usecase/auth/create_user_usecase.dart';
 import 'package:flutter_moneybag_2024/domain/usecase/auth/login_usecase.dart';
@@ -19,7 +18,6 @@ class LoginScreenState with _$LoginScreenState {
     required final CheckUserDuplicatedUseCase checkUserDuplicatedUseCase,
     required final CreateUserUseCase createUserUseCase,
     required final CreateAssetUseCase createAssetUseCase,
-    required final GetAssetListUseCase getAssetListUseCase,
     final User? user,
   }) = _LoginScreenState;
 }

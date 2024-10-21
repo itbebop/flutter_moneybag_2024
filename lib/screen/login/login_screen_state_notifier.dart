@@ -4,7 +4,6 @@ import 'package:flutter_moneybag_2024/screen/login/login_screen_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final loginScreenStateProvider = StateNotifierProvider<LoginScreenStateNotifier, LoginScreenState>((ref) => LoginScreenStateNotifier(LoginScreenState(
-      getAssetListUseCase: getIt(),
       loginUseCase: getIt(),
       logoutUseCase: getIt(),
       checkUserDuplicatedUseCase: getIt(),
@@ -32,7 +31,6 @@ class LoginScreenStateNotifier extends StateNotifier<LoginScreenState> {
         state = state.copyWith(isNewUser: true);
         await state.createUserUseCase.execute(user: state.user!);
         await state.createAssetUseCase.execute(userId: state.user!.userId);
-        await state.getAssetListUseCase.execute(assetIdList: state.user!.assetIdList);
       }
     } catch (e) {
       throw Exception(e);
