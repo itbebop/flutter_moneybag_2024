@@ -6,16 +6,25 @@ import 'package:flutter_moneybag_2024/common/common_component/floating_add_butto
 import 'package:flutter_moneybag_2024/common/common_component/floating_add_button/floating_add_button.riverpod.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class FloatingAddButton extends ConsumerWidget {
-  FloatingAddButton({super.key});
-  final duration = 150.ms;
+class FloatingAddButton extends ConsumerStatefulWidget {
+  const FloatingAddButton({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<FloatingAddButton> createState() => _FloatingAddButtonState();
+}
+
+class _FloatingAddButtonState extends ConsumerState<FloatingAddButton> {
+  final memoEditController = TextEditingController();
+  final amountEditController = TextEditingController();
+  final assetAmountController = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
     final floatingButtonState = ref.watch(floatingButtonStateProvider);
     final isExpanded = floatingButtonState.isExpanded;
     final isSmall = floatingButtonState.isSmall;
     final isClassified = floatingButtonState.isClassified;
+    final duration = 150.ms;
 
     return Stack(
       children: [
@@ -38,6 +47,9 @@ class FloatingAddButton extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               TransactionMenu(
+                amountEditController: amountEditController,
+                assetAmountController: assetAmountController,
+                memoEditController: memoEditController,
                 duration: duration,
                 isClassified: isClassified,
               ),

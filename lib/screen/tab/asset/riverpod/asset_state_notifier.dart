@@ -14,6 +14,8 @@ final assetStateProvier = StateNotifierProvider<AssetStateNotifier, AssetState>(
   return AssetStateNotifier(AssetState(
     assetIdList: assetIdList,
     getAssetListUseCase: getIt(),
+    getAssetUseCase: getIt(),
+    hints: '선택',
   ));
 });
 
@@ -27,5 +29,12 @@ class AssetStateNotifier extends StateNotifier<AssetState> {
     } catch (error) {
       throw Exception("선택된 자산이 없습니다");
     }
+  }
+
+  Future<void> selectAsset(String assetId) async {
+    final asset = await state.getAssetUseCase.execute(assetId: assetId);
+    final String hints = asset.assetName;
+    final double amount = asset.totalAmount;
+    state = state.copyWith(assetAmount: amount, hints: hints, assetIdList: [assetId]);
   }
 }

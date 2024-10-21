@@ -5,15 +5,24 @@ import 'package:flutter_moneybag_2024/common/common_component/floating_add_butto
 import 'package:flutter_moneybag_2024/common/common_component/floating_add_button/floating_add_button.riverpod.dart';
 import 'package:flutter_moneybag_2024/common/common_component/transaction/riverpod/transaction_state_notifier.dart';
 import 'package:flutter_moneybag_2024/common/dart/extension/thousand_comma_input_formatter.dart';
+import 'package:flutter_moneybag_2024/common/widget/custom_dropdown_button.dart';
 import 'package:flutter_moneybag_2024/core/provider/user_state_notifier.dart';
 import 'package:flutter_moneybag_2024/domain/enums/asset_types.dart';
 import 'package:flutter_moneybag_2024/domain/model/transaction_category.dart';
 import 'package:flutter_moneybag_2024/domain/model/transaction_detail.dart';
+import 'package:flutter_moneybag_2024/screen/tab/asset/riverpod/asset_state_notifier.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class TransactionMenu extends ConsumerWidget {
+  final TextEditingController memoEditController;
+  final TextEditingController amountEditController;
+  final TextEditingController assetAmountController;
+
   const TransactionMenu({
     super.key,
+    required this.memoEditController,
+    required this.amountEditController,
+    required this.assetAmountController,
     required this.duration,
     required this.isClassified,
   });
@@ -24,9 +33,10 @@ class TransactionMenu extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     double amount = 0.0;
-    final memoEditController = TextEditingController();
-    final amountEditController = TextEditingController();
 
+    assetAmountController.text = ref.read(assetStateProvier).assetAmount.toString();
+
+    final assetProvider = ref.watch(assetStateProvier);
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.end,
@@ -44,6 +54,47 @@ class TransactionMenu extends ConsumerWidget {
             ),
             child: Column(
               children: [
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  padding: const EdgeInsets.only(left: 5.0, right: 50.0),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    color: UiConfig.whiteColor,
+                  ),
+                  child: TextField(
+                    readOnly: true,
+                    controller: assetAmountController,
+                    textAlign: TextAlign.right,
+                    inputFormatters: <TextInputFormatter>[
+                      ThousandCommaInputFormatter(),
+                    ],
+                    textAlignVertical: TextAlignVertical.bottom,
+                    style: const TextStyle(color: Colors.black),
+                    cursorColor: const Color(0xFF075E54),
+                    decoration: InputDecoration(
+                      contentPadding: const EdgeInsets.only(bottom: 13.0),
+                      prefixIcon: Container(
+                          margin: const EdgeInsets.only(right: 8),
+                          decoration: const BoxDecoration(
+                            border: Border(right: BorderSide(color: Colors.black38)),
+                          ),
+                          child: SizedBox(
+                            width: 100,
+                            child: CustomDropdownButton(
+                              items: assetProvider.assetList,
+                              hints: assetProvider.hints,
+                            ),
+                          )),
+                      border: InputBorder.none,
+                      hintText: '자산을 선택하세요.',
+                      hintStyle: TextStyle(
+                        color: Colors.grey[400],
+                        fontSize: MediaQuery.of(context).size.width * 0.038,
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 8),
                 Container(
                   width: MediaQuery.of(context).size.width,
                   padding: const EdgeInsets.only(left: 5.0, right: 50.0),
@@ -154,7 +205,7 @@ class TransactionMenu extends ConsumerWidget {
                     padding: const EdgeInsets.only(top: 12, bottom: 12, left: 36, right: 36),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      color: UiConfig.primaryColorSurface,
+                      color: UiConfig.buttonColor,
                     ),
                     child: Text(
                       '입력',
