@@ -215,6 +215,8 @@ class TransactionMenu extends ConsumerWidget {
                     ref.read(assetStateProvier.notifier).fetchAsset();
                     // 입력창 비우기
                     ref.read(assetStateProvier.notifier).completeWrite(amountEditController: amountEditController, memoEditController: memoEditController);
+                    // transaction data 다시 가져옴
+                    ref.read(transactionStateProvider.notifier).fetchEventsForDay(DateTime.now());
                   },
                   child: Container(
                     padding: const EdgeInsets.only(top: 12, bottom: 12, left: 36, right: 36),
