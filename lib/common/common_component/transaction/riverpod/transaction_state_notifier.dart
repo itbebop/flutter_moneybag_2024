@@ -9,28 +9,37 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 final transactionStateProvider = StateNotifierProvider<TransactionStateNotifier, TransactionState>((ref) {
+  // final assetState = ref.read(assetStateProvier);
+  // final selectedAssetId = assetState.selectedAssetId;
+
+  // final List<Asset> activatedAssetList = assetState.assetList;
+  // final List<String> activatedAssetIdList = activatedAssetList.map((asset) => asset.assetId).toList();
+
   return TransactionStateNotifier(
     TransactionState(
       createTransactionUseCase: getIt(),
       deleteTransactionUseCase: getIt(),
       getTransactionListUseCase: getIt(),
       updateTransactionUseCase: getIt(),
+      assetId: '',
+      assetIdList: [],
       amount: 0,
       assetType: AssetType.expense,
       selectedEvents: ValueNotifier([]),
-      selectedDay: DateTime.now(),
       focusedDay: DateTime.now(),
-      assetId: '',
-      assetIdList: [],
+      selectedDay: DateTime.now(),
     ),
   );
 });
 
 class TransactionStateNotifier extends StateNotifier<TransactionState> {
   TransactionStateNotifier(super.state);
-
   void selectAssetType(AssetType assetType) {
     state = state.copyWith(assetType: assetType);
+  }
+
+  void selectAsset(String assetId) {
+    state = state.copyWith(assetId: assetId);
   }
 
   void setAssetId(String assetId) {
@@ -53,6 +62,10 @@ class TransactionStateNotifier extends StateNotifier<TransactionState> {
 
   Future<void> createTransaction({required TransactionDetail transactionDetail}) async {
     await state.createTransactionUseCase.execute(transactionDetail: transactionDetail, assetId: state.assetId);
+  }
+
+  Future<void> getAssetIdList(List<String> assetIdList) async {
+    state = state.copyWith(assetIdList: assetIdList);
   }
 
   Future<List<TransactionDetail>> getTransactions() async {
@@ -88,7 +101,7 @@ class TransactionStateNotifier extends StateNotifier<TransactionState> {
   Future<void> fetchEventsForDay(DateTime day) async {
     // 일일 transaction을 불러옴
     final events = await getEventsForDay(day);
-    // print('day in fetch: $day');
+
     state = state.copyWith(selectedEvents: ValueNotifier(events));
   }
 }
