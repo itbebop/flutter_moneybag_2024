@@ -19,15 +19,11 @@ class HomeScreen extends ConsumerStatefulWidget {
 }
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
-  DateTime _focusedDay = DateTime.now();
-  late DateTime _selectedDay;
-
   @override
   void initState() {
     super.initState();
-    _selectedDay = _focusedDay;
     // build하면서 오늘 transaction을 불러옴
-    ref.read(transactionStateProvider.notifier).fetchEventsForDay(_selectedDay);
+    ref.read(transactionStateProvider.notifier).fetchEventsForDay(DateTime.now());
     Future.microtask(() {
       // 자동으로 현재 달을 설정
       final currentMonth = DateFormat('MMM').format(DateTime.now()).toLowerCase();
@@ -48,7 +44,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final selectedMonth = ref.watch(monthStateProvider);
     final monthProvider = ref.read(monthStateProvider.notifier);
     final transactionProvider = ref.read(transactionStateProvider);
-    DateTime focusedDay = DateTime.utc(_focusedDay.year, selectedMonth.month, _focusedDay.day);
 
     return Scaffold(
       body: Column(
@@ -90,16 +85,17 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     ),
                     SizedBox(height: 15.h),
                     Calendar(
-                      selectedDay: _selectedDay,
-                      focusedDay: focusedDay,
+                      selectedDay: ref.watch(transactionStateProvider).selectedDay,
+                      focusedDay: ref.watch(transactionStateProvider).focusedDay,
                       onDaySelected: (DateTime selectedDay, DateTime focusedDay) {
-                        setState(() {
-                          _selectedDay = selectedDay;
-                          _focusedDay = focusedDay;
-                          monthProvider.setMonth(MonthList.values[focusedDay.month - 1]); // 선택한 날짜의 월로 업데이트
-                        });
+                        // setState(() {
+                        //   _selectedDay = selectedDay;
+                        //   _focusedDay = focusedDay;
+                        //   monthProvider.setMonth(MonthList.values[focusedDay.month - 1]); // 선택한 날짜의 월로 업데이트
+                        // });
+                        ref.read(transactionStateProvider.notifier).onSelectDay(selectedDay, focusedDay);
                         // _fetchEventsForDay(selectedDay);
-                        ref.watch(transactionStateProvider.notifier).fetchEventsForDay(selectedDay);
+                        ref.read(transactionStateProvider.notifier).fetchEventsForDay(selectedDay);
                       },
                     ),
                     const SizedBox(height: 8.0),
