@@ -29,6 +29,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     _selectedDay = _focusedDay;
     Future.microtask(() {
       _fetchEventsForDay(_selectedDay);
+      // await ref.watch(assetStateProvier.notifier).fetchAsset();
+      // await ref.watch(transactionStateProvider.notifier).getTransactions();
 
       // 자동으로 현재 달을 설정
       final currentMonth = DateFormat('MMM').format(DateTime.now()).toLowerCase();
@@ -58,7 +60,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     DateTime now = DateTime.now();
     final selectedMonth = ref.watch(monthStateProvider);
     DateTime focusedDay = DateTime.utc(now.year, selectedMonth.month, now.day);
-
+    ref.watch(transactionStateProvider.notifier).fetchEventsForDay(_selectedDay);
     return Scaffold(
       body: Column(
         children: [
@@ -77,18 +79,21 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const CurrentMonth(),
-                              MonthDropdownButton(
-                                selectedMonth: selectedMonth,
-                                onMonthChanged: (value) {
-                                  ref.read(monthStateProvider.notifier).setMonth(value);
-                                },
-                                fontSize: 24,
-                              ),
-                            ],
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 8),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const CurrentMonth(),
+                                MonthDropdownButton(
+                                  selectedMonth: selectedMonth,
+                                  onMonthChanged: (value) {
+                                    ref.read(monthStateProvider.notifier).setMonth(value);
+                                  },
+                                  fontSize: 24,
+                                ),
+                              ],
+                            ),
                           ),
                           const AssetList(),
                         ],
