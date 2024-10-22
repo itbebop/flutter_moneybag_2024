@@ -33,9 +33,8 @@ class TransactionMenu extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     assetAmountController.text = ref.read(assetStateProvier).assetAmount.toString();
-
     final assetProvider = ref.watch(assetStateProvier);
-    final transactionProvider = ref.read(transactionStateProvider);
+
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.end,
@@ -87,10 +86,7 @@ class TransactionMenu extends ConsumerWidget {
                                       ))
                                   .toList(),
                               hints: assetProvider.hints, // 힌트 텍스트
-                              action: (asset) {
-                                ref.read(assetStateProvier.notifier).getAsset(asset.assetId);
-                                ref.read(transactionStateProvider.notifier).setAssetId(asset.assetId);
-                              }, // Asset 선택 시 호출되는 액션
+                              action: (asset) => ref.read(assetStateProvier.notifier).getAsset(asset.assetId), // Asset 선택 시 호출되는 액션
                             ),
                           )),
                       border: InputBorder.none,
@@ -186,29 +182,28 @@ class TransactionMenu extends ConsumerWidget {
                     final value = amountEditController.text;
                     final valueWithoutComma = value.replaceAll(',', '');
                     ref.read(transactionStateProvider.notifier).onChangeAmount(valueWithoutComma);
-
                     final userStateValue = ref.watch(userStateProvier);
                     if (userStateValue.value != null) {
+                      print('assetProvider assid: ${assetProvider.selectedAssetId}');
                       await ref.read(transactionStateProvider.notifier).createTransaction(
-                            transactionDetail: TransactionDetail(
-                              transactionId: '1',
-                              memo: memoEditController.text,
-                              createdAt: DateTime.now(),
-                              updatedAt: DateTime.now(),
-                              amount: transactionProvider.amount,
-                              userId: userStateValue.value!.userId,
-                              category: TransactionCategory(
-                                categoryId: '1',
-                                name: '이자',
-                                type: transactionProvider.assetType,
-                                imgUrl: picSum(201),
-                              ),
+                          transactionDetail: TransactionDetail(
+                            transactionId: '1',
+                            memo: memoEditController.text,
+                            createdAt: DateTime.now(),
+                            updatedAt: DateTime.now(),
+                            amount: ref.read(transactionStateProvider).amount,
+                            userId: userStateValue.value!.userId,
+                            category: TransactionCategory(
+                              categoryId: '1',
+                              name: '이자',
+                              type: ref.read(transactionStateProvider).assetType,
+                              imgUrl: picSum(201),
                             ),
-                          );
+                          ),
+                          assetId: assetProvider.selectedAssetId);
                     }
                     // 입력을 완료하면 키보드를 숨김
                     SystemChannels.textInput.invokeMethod('TextInput.hide');
-
                     // write tap 닫기
                     ref.read(floatingButtonStateProvider.notifier).tapOutside();
                     // asset data 다시 로드

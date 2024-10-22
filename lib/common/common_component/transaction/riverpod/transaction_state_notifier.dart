@@ -48,7 +48,8 @@ class TransactionStateNotifier extends StateNotifier<TransactionState> {
 
   void onChangeAmount(String value) {
     final double amount = double.parse(value);
-
+    print('amount: $amount');
+    print('assetType: ${state.assetType}');
     if (state.assetType == AssetType.income) {
       state = state.copyWith(amount: amount);
     } else {
@@ -60,8 +61,8 @@ class TransactionStateNotifier extends StateNotifier<TransactionState> {
     state = state.copyWith(selectedDay: selectedDay, focusedDay: focusedDay);
   }
 
-  Future<void> createTransaction({required TransactionDetail transactionDetail}) async {
-    await state.createTransactionUseCase.execute(transactionDetail: transactionDetail, assetId: state.assetId);
+  Future<void> createTransaction({required TransactionDetail transactionDetail, required String assetId}) async {
+    await state.createTransactionUseCase.execute(transactionDetail: transactionDetail, assetId: assetId);
   }
 
   Future<void> getAssetIdList(List<String> assetIdList) async {

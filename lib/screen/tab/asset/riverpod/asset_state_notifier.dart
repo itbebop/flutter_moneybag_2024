@@ -45,6 +45,7 @@ class AssetStateNotifier extends StateNotifier<AssetState> {
     state = state.copyWith(
       hints: hints,
       assetAmount: assetAmount,
+      selectedAssetId: assetId,
     );
   }
 
