@@ -7,7 +7,6 @@ import 'package:flutter_moneybag_2024/common/common_component/transaction/riverp
 import 'package:flutter_moneybag_2024/common/dart/extension/thousand_comma_input_formatter.dart';
 import 'package:flutter_moneybag_2024/common/widget/custom_dropdown_button.dart';
 import 'package:flutter_moneybag_2024/core/provider/user_state_notifier.dart';
-import 'package:flutter_moneybag_2024/domain/enums/asset_types.dart';
 import 'package:flutter_moneybag_2024/domain/model/asset.dart';
 import 'package:flutter_moneybag_2024/domain/model/transaction_category.dart';
 import 'package:flutter_moneybag_2024/domain/model/transaction_detail.dart';
@@ -36,7 +35,7 @@ class TransactionMenu extends ConsumerWidget {
     assetAmountController.text = ref.read(assetStateProvier).assetAmount.toString();
 
     final assetProvider = ref.watch(assetStateProvier);
-    final transactionProvider = ref.watch(transactionStateProvider);
+    final transactionProvider = ref.read(transactionStateProvider);
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.end,
@@ -88,7 +87,10 @@ class TransactionMenu extends ConsumerWidget {
                                       ))
                                   .toList(),
                               hints: assetProvider.hints, // 힌트 텍스트
-                              action: (asset) => ref.read(assetStateProvier.notifier).selectAsset(asset.assetId), // Asset 선택 시 호출되는 액션
+                              action: (asset) {
+                                ref.read(assetStateProvier.notifier).getAsset(asset.assetId);
+                                ref.read(transactionStateProvider.notifier).setAssetId(asset.assetId);
+                              }, // Asset 선택 시 호출되는 액션
                             ),
                           )),
                       border: InputBorder.none,
@@ -193,12 +195,12 @@ class TransactionMenu extends ConsumerWidget {
                               memo: memoEditController.text,
                               createdAt: DateTime.now(),
                               updatedAt: DateTime.now(),
-                              amount: ref.read(transactionStateProvider).amount,
+                              amount: transactionProvider.amount,
                               userId: userStateValue.value!.userId,
                               category: TransactionCategory(
                                 categoryId: '1',
                                 name: '이자',
-                                type: ref.read(transactionStateProvider).assetType,
+                                type: transactionProvider.assetType,
                                 imgUrl: picSum(201),
                               ),
                             ),

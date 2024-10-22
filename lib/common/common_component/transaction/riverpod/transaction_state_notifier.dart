@@ -4,30 +4,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_moneybag_2024/common/common_component/transaction/riverpod/transaction_state.dart';
 import 'package:flutter_moneybag_2024/di/di_setup.dart';
 import 'package:flutter_moneybag_2024/domain/enums/asset_types.dart';
-import 'package:flutter_moneybag_2024/domain/model/asset.dart';
 import 'package:flutter_moneybag_2024/domain/model/transaction_detail.dart';
-import 'package:flutter_moneybag_2024/screen/tab/asset/riverpod/asset_state_notifier.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 final transactionStateProvider = StateNotifierProvider<TransactionStateNotifier, TransactionState>((ref) {
-  final assetState = ref.watch(assetStateProvier);
-  final selectedAssetId = assetState.selectedAssetId;
-
-  final List<Asset> activatedAssetList = assetState.assetList;
-  final List<String> activatedAssetIdList = activatedAssetList.map((asset) => asset.assetId).toList();
-
   return TransactionStateNotifier(
     TransactionState(
       createTransactionUseCase: getIt(),
       deleteTransactionUseCase: getIt(),
       getTransactionListUseCase: getIt(),
       updateTransactionUseCase: getIt(),
-      assetId: selectedAssetId,
-      assetIdList: activatedAssetIdList,
       amount: 0,
       assetType: AssetType.expense,
       selectedEvents: ValueNotifier([]),
+      selectedDay: DateTime.now(),
+      focusedDay: DateTime.now(),
+      assetId: '',
+      assetIdList: [],
     ),
   );
 });
@@ -39,7 +33,7 @@ class TransactionStateNotifier extends StateNotifier<TransactionState> {
     state = state.copyWith(assetType: assetType);
   }
 
-  void selectAsset(String assetId) {
+  void setAssetId(String assetId) {
     state = state.copyWith(assetId: assetId);
   }
 
@@ -51,6 +45,10 @@ class TransactionStateNotifier extends StateNotifier<TransactionState> {
     } else {
       state = state.copyWith(amount: -amount);
     }
+  }
+
+  void onSelectDay(DateTime selectedDay, DateTime focusedDay) {
+    state = state.copyWith(selectedDay: selectedDay, focusedDay: focusedDay);
   }
 
   Future<void> createTransaction({required TransactionDetail transactionDetail}) async {
@@ -90,7 +88,7 @@ class TransactionStateNotifier extends StateNotifier<TransactionState> {
   Future<void> fetchEventsForDay(DateTime day) async {
     // 일일 transaction을 불러옴
     final events = await getEventsForDay(day);
-
+    // print('day in fetch: $day');
     state = state.copyWith(selectedEvents: ValueNotifier(events));
   }
 }

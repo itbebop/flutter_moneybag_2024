@@ -38,13 +38,12 @@ class AssetStateNotifier extends StateNotifier<AssetState> {
     }
   }
 
-  Future<void> selectAsset(String assetId) async {
+  Future<void> getAsset(String assetId) async {
     final asset = await state.getAssetUseCase.execute(assetId: assetId);
     final String hints = asset.assetName;
     final double assetAmount = asset.totalAmount; // 조회한 asset하나의 amount
     state = state.copyWith(
       hints: hints,
-      selectedAssetId: assetId,
       assetAmount: assetAmount,
     );
   }

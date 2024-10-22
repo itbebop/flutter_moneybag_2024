@@ -13,6 +13,8 @@ part 'transaction_state.freezed.dart';
 class TransactionState with _$TransactionState {
   const factory TransactionState({
     @Default(false) final bool isLoading,
+    required final DateTime selectedDay,
+    required final DateTime focusedDay,
     required ValueNotifier<List<TransactionDetail>> selectedEvents,
     required final String assetId,
     required final double amount,
