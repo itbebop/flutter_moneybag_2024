@@ -8,6 +8,7 @@ import 'package:flutter_moneybag_2024/common/dart/extension/thousand_comma_input
 import 'package:flutter_moneybag_2024/common/widget/custom_dropdown_button.dart';
 import 'package:flutter_moneybag_2024/core/provider/user_state_notifier.dart';
 import 'package:flutter_moneybag_2024/domain/enums/asset_types.dart';
+import 'package:flutter_moneybag_2024/domain/model/asset.dart';
 import 'package:flutter_moneybag_2024/domain/model/transaction_category.dart';
 import 'package:flutter_moneybag_2024/domain/model/transaction_detail.dart';
 import 'package:flutter_moneybag_2024/screen/tab/asset/riverpod/asset_state_notifier.dart';
@@ -79,9 +80,15 @@ class TransactionMenu extends ConsumerWidget {
                           ),
                           child: SizedBox(
                             width: 100,
-                            child: CustomDropdownButton(
-                              items: assetProvider.assetList,
-                              hints: assetProvider.hints,
+                            child: CustomDropdownButton<Asset>(
+                              items: assetProvider.assetList
+                                  .map<DropdownMenuItem<Asset>>((asset) => DropdownMenuItem<Asset>(
+                                        value: asset,
+                                        child: Text(asset.assetName),
+                                      ))
+                                  .toList(),
+                              hints: assetProvider.hints, // 힌트 텍스트
+                              action: (asset) => ref.read(assetStateProvier.notifier).selectAsset(asset.assetId), // Asset 선택 시 호출되는 액션
                             ),
                           )),
                       border: InputBorder.none,
