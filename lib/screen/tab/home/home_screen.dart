@@ -47,7 +47,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   Widget build(BuildContext context) {
     final selectedMonth = ref.watch(monthStateProvider);
     final monthProvider = ref.read(monthStateProvider.notifier);
-    final transactionProvider = ref.watch(transactionStateProvider);
+    final transactionProvider = ref.read(transactionStateProvider);
     DateTime focusedDay = DateTime.utc(_focusedDay.year, selectedMonth.month, _focusedDay.day);
 
     return Scaffold(

@@ -19,15 +19,16 @@ final transactionStateProvider = StateNotifierProvider<TransactionStateNotifier,
 
   return TransactionStateNotifier(
     TransactionState(
-        createTransactionUseCase: getIt(),
-        deleteTransactionUseCase: getIt(),
-        getTransactionListUseCase: getIt(),
-        updateTransactionUseCase: getIt(),
-        assetId: selectedAssetId,
-        assetIdList: activatedAssetIdList,
-        amount: 0,
-        assetType: AssetType.expense,
-        selectedEvents: ValueNotifier([])),
+      createTransactionUseCase: getIt(),
+      deleteTransactionUseCase: getIt(),
+      getTransactionListUseCase: getIt(),
+      updateTransactionUseCase: getIt(),
+      assetId: selectedAssetId,
+      assetIdList: activatedAssetIdList,
+      amount: 0,
+      assetType: AssetType.expense,
+      selectedEvents: ValueNotifier([]),
+    ),
   );
 });
 
@@ -89,6 +90,7 @@ class TransactionStateNotifier extends StateNotifier<TransactionState> {
   Future<void> fetchEventsForDay(DateTime day) async {
     // 일일 transaction을 불러옴
     final events = await getEventsForDay(day);
+
     state = state.copyWith(selectedEvents: ValueNotifier(events));
   }
 }
