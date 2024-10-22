@@ -17,6 +17,8 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$TransactionState {
   bool get isLoading => throw _privateConstructorUsedError;
+  ValueNotifier<List<TransactionDetail>> get selectedEvents =>
+      throw _privateConstructorUsedError;
   String get assetId => throw _privateConstructorUsedError;
   double get amount => throw _privateConstructorUsedError;
   AssetType get assetType => throw _privateConstructorUsedError;
@@ -43,6 +45,7 @@ abstract class $TransactionStateCopyWith<$Res> {
   @useResult
   $Res call(
       {bool isLoading,
+      ValueNotifier<List<TransactionDetail>> selectedEvents,
       String assetId,
       double amount,
       AssetType assetType,
@@ -67,6 +70,7 @@ class _$TransactionStateCopyWithImpl<$Res, $Val extends TransactionState>
   @override
   $Res call({
     Object? isLoading = null,
+    Object? selectedEvents = null,
     Object? assetId = null,
     Object? amount = null,
     Object? assetType = null,
@@ -81,6 +85,10 @@ class _$TransactionStateCopyWithImpl<$Res, $Val extends TransactionState>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      selectedEvents: null == selectedEvents
+          ? _value.selectedEvents
+          : selectedEvents // ignore: cast_nullable_to_non_nullable
+              as ValueNotifier<List<TransactionDetail>>,
       assetId: null == assetId
           ? _value.assetId
           : assetId // ignore: cast_nullable_to_non_nullable
@@ -127,6 +135,7 @@ abstract class _$$TransactionStateImplCopyWith<$Res>
   @useResult
   $Res call(
       {bool isLoading,
+      ValueNotifier<List<TransactionDetail>> selectedEvents,
       String assetId,
       double amount,
       AssetType assetType,
@@ -149,6 +158,7 @@ class __$$TransactionStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isLoading = null,
+    Object? selectedEvents = null,
     Object? assetId = null,
     Object? amount = null,
     Object? assetType = null,
@@ -163,6 +173,10 @@ class __$$TransactionStateImplCopyWithImpl<$Res>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      selectedEvents: null == selectedEvents
+          ? _value.selectedEvents
+          : selectedEvents // ignore: cast_nullable_to_non_nullable
+              as ValueNotifier<List<TransactionDetail>>,
       assetId: null == assetId
           ? _value.assetId
           : assetId // ignore: cast_nullable_to_non_nullable
@@ -204,6 +218,7 @@ class __$$TransactionStateImplCopyWithImpl<$Res>
 class _$TransactionStateImpl implements _TransactionState {
   const _$TransactionStateImpl(
       {this.isLoading = false,
+      required this.selectedEvents,
       required this.assetId,
       required this.amount,
       required this.assetType,
@@ -217,6 +232,8 @@ class _$TransactionStateImpl implements _TransactionState {
   @override
   @JsonKey()
   final bool isLoading;
+  @override
+  final ValueNotifier<List<TransactionDetail>> selectedEvents;
   @override
   final String assetId;
   @override
@@ -242,7 +259,7 @@ class _$TransactionStateImpl implements _TransactionState {
 
   @override
   String toString() {
-    return 'TransactionState(isLoading: $isLoading, assetId: $assetId, amount: $amount, assetType: $assetType, assetIdList: $assetIdList, createTransactionUseCase: $createTransactionUseCase, deleteTransactionUseCase: $deleteTransactionUseCase, getTransactionListUseCase: $getTransactionListUseCase, updateTransactionUseCase: $updateTransactionUseCase)';
+    return 'TransactionState(isLoading: $isLoading, selectedEvents: $selectedEvents, assetId: $assetId, amount: $amount, assetType: $assetType, assetIdList: $assetIdList, createTransactionUseCase: $createTransactionUseCase, deleteTransactionUseCase: $deleteTransactionUseCase, getTransactionListUseCase: $getTransactionListUseCase, updateTransactionUseCase: $updateTransactionUseCase)';
   }
 
   @override
@@ -252,6 +269,8 @@ class _$TransactionStateImpl implements _TransactionState {
             other is _$TransactionStateImpl &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
+            (identical(other.selectedEvents, selectedEvents) ||
+                other.selectedEvents == selectedEvents) &&
             (identical(other.assetId, assetId) || other.assetId == assetId) &&
             (identical(other.amount, amount) || other.amount == amount) &&
             (identical(other.assetType, assetType) ||
@@ -276,6 +295,7 @@ class _$TransactionStateImpl implements _TransactionState {
   int get hashCode => Object.hash(
       runtimeType,
       isLoading,
+      selectedEvents,
       assetId,
       amount,
       assetType,
@@ -296,6 +316,7 @@ class _$TransactionStateImpl implements _TransactionState {
 abstract class _TransactionState implements TransactionState {
   const factory _TransactionState(
           {final bool isLoading,
+          required final ValueNotifier<List<TransactionDetail>> selectedEvents,
           required final String assetId,
           required final double amount,
           required final AssetType assetType,
@@ -308,6 +329,8 @@ abstract class _TransactionState implements TransactionState {
 
   @override
   bool get isLoading;
+  @override
+  ValueNotifier<List<TransactionDetail>> get selectedEvents;
   @override
   String get assetId;
   @override

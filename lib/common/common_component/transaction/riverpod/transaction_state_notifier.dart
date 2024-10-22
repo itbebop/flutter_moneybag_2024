@@ -1,7 +1,7 @@
 import 'dart:collection';
 
+import 'package:flutter/material.dart';
 import 'package:flutter_moneybag_2024/common/common_component/transaction/riverpod/transaction_state.dart';
-import 'package:flutter_moneybag_2024/common/data/month_list.dart';
 import 'package:flutter_moneybag_2024/di/di_setup.dart';
 import 'package:flutter_moneybag_2024/domain/enums/asset_types.dart';
 import 'package:flutter_moneybag_2024/domain/model/asset.dart';
@@ -19,15 +19,15 @@ final transactionStateProvider = StateNotifierProvider<TransactionStateNotifier,
 
   return TransactionStateNotifier(
     TransactionState(
-      createTransactionUseCase: getIt(),
-      deleteTransactionUseCase: getIt(),
-      getTransactionListUseCase: getIt(),
-      updateTransactionUseCase: getIt(),
-      assetId: selectedAssetId,
-      assetIdList: activatedAssetIdList,
-      amount: 0,
-      assetType: AssetType.expense,
-    ),
+        createTransactionUseCase: getIt(),
+        deleteTransactionUseCase: getIt(),
+        getTransactionListUseCase: getIt(),
+        updateTransactionUseCase: getIt(),
+        assetId: selectedAssetId,
+        assetIdList: activatedAssetIdList,
+        amount: 0,
+        assetType: AssetType.expense,
+        selectedEvents: ValueNotifier([])),
   );
 });
 
@@ -42,8 +42,17 @@ class TransactionStateNotifier extends StateNotifier<TransactionState> {
     state = state.copyWith(assetId: assetId);
   }
 
+  void onChangeAmount(String value) {
+    final double amount = double.parse(value);
+
+    if (state.assetType == AssetType.income) {
+      state = state.copyWith(amount: amount);
+    } else {
+      state = state.copyWith(amount: -amount);
+    }
+  }
+
   Future<void> createTransaction({required TransactionDetail transactionDetail}) async {
-    print('### amount: ${transactionDetail.amount}');
     await state.createTransactionUseCase.execute(transactionDetail: transactionDetail, assetId: state.assetId);
   }
 
@@ -73,13 +82,13 @@ class TransactionStateNotifier extends StateNotifier<TransactionState> {
   // 선택한 날짜의 이벤트를 가져옴
   Future<List<TransactionDetail>> getEventsForDay(DateTime day) async {
     final events = await initializeTransactionEvents();
+    // print('day: $day');
     return events[day] ?? [];
   }
 
-  void onChangeAmount(String value) {
-    final double amount = double.parse(value);
-    state = state.copyWith(amount: amount);
+  Future<void> fetchEventsForDay(DateTime day) async {
+    // 일일 transaction을 불러옴
+    final events = await getEventsForDay(day);
+    state = state.copyWith(selectedEvents: ValueNotifier(events));
   }
-
-  getEventsForMonth(MonthList month) {}
 }

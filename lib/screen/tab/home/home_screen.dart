@@ -21,46 +21,35 @@ class HomeScreen extends ConsumerStatefulWidget {
 class _HomeScreenState extends ConsumerState<HomeScreen> {
   DateTime _focusedDay = DateTime.now();
   late DateTime _selectedDay;
-  final ValueNotifier<List<TransactionDetail>> _selectedEvents = ValueNotifier([]);
 
   @override
   void initState() {
     super.initState();
     _selectedDay = _focusedDay;
+    // build하면서 오늘 transaction을 불러옴
+    ref.read(transactionStateProvider.notifier).fetchEventsForDay(_selectedDay);
     Future.microtask(() {
-      _fetchEventsForDay(_selectedDay);
-      // await ref.watch(assetStateProvier.notifier).fetchAsset();
-      // await ref.watch(transactionStateProvider.notifier).getTransactions();
-
       // 자동으로 현재 달을 설정
       final currentMonth = DateFormat('MMM').format(DateTime.now()).toLowerCase();
       final initialMonth = MonthList.values.firstWhere(
         (e) => e.toString().split('.')[1] == currentMonth,
       );
-      ref.read(monthStateProvider.notifier).setMonth(initialMonth); // 초기 설정
+      ref.read(monthStateProvider.notifier).setMonth(initialMonth);
     });
   }
 
   @override
   void dispose() {
-    _selectedEvents.dispose();
     super.dispose();
-  }
-
-  Future<void> _fetchEventsForDay(DateTime day) async {
-    final events = await ref.read(transactionStateProvider.notifier).getEventsForDay(day);
-    setState(() {
-      _selectedEvents.value = events;
-    });
   }
 
   @override
   Widget build(BuildContext context) {
-    // Watch the selected month state from Riverpod
-    DateTime now = DateTime.now();
     final selectedMonth = ref.watch(monthStateProvider);
-    DateTime focusedDay = DateTime.utc(now.year, selectedMonth.month, now.day);
-    ref.watch(transactionStateProvider.notifier).fetchEventsForDay(_selectedDay);
+    final monthProvider = ref.read(monthStateProvider.notifier);
+    final transactionProvider = ref.watch(transactionStateProvider);
+    DateTime focusedDay = DateTime.utc(_focusedDay.year, selectedMonth.month, _focusedDay.day);
+
     return Scaffold(
       body: Column(
         children: [
@@ -88,7 +77,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                 MonthDropdownButton(
                                   selectedMonth: selectedMonth,
                                   onMonthChanged: (value) {
-                                    ref.read(monthStateProvider.notifier).setMonth(value);
+                                    monthProvider.setMonth(value);
                                   },
                                   fontSize: 24,
                                 ),
@@ -107,15 +96,16 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         setState(() {
                           _selectedDay = selectedDay;
                           _focusedDay = focusedDay;
-                          ref.read(monthStateProvider.notifier).setMonth(MonthList.values[focusedDay.month - 1]); // 선택한 날짜의 월로 업데이트
+                          monthProvider.setMonth(MonthList.values[focusedDay.month - 1]); // 선택한 날짜의 월로 업데이트
                         });
-                        _fetchEventsForDay(selectedDay); // Fetch events for the new selected day
+                        // _fetchEventsForDay(selectedDay);
+                        ref.watch(transactionStateProvider.notifier).fetchEventsForDay(selectedDay);
                       },
                     ),
                     const SizedBox(height: 8.0),
                     const Divider(),
                     ValueListenableBuilder<List<TransactionDetail>>(
-                      valueListenable: _selectedEvents,
+                      valueListenable: transactionProvider.selectedEvents,
                       builder: (context, events, child) {
                         if (events.isEmpty) {
                           return const Padding(
@@ -123,7 +113,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                             child: Center(child: Text('등록된 내역이 없습니다.')),
                           );
                         }
-                        return HomeTransactionList(selectedEvents: _selectedEvents);
+                        return HomeTransactionList(selectedEvents: transactionProvider.selectedEvents);
                       },
                     ),
                   ],
