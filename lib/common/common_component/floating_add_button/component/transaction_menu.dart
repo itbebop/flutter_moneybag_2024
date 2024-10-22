@@ -118,18 +118,10 @@ class TransactionMenu extends ConsumerWidget {
                       ThousandCommaInputFormatter(),
                     ],
                     onChanged: (value) {
-                      // ,제거하고 전송
-                      String newValue = value.replaceAll(',', '');
-                      ref.read(transactionStateProvider.notifier).onChangeAmount(newValue);
-
                       if (value.isNotEmpty) {
                         // 키보드를 다시 보여줌
                         SystemChannels.textInput.invokeMethod('TextInput.show');
                       }
-                    },
-                    onSubmitted: (value) {
-                      // 입력을 완료하면 키보드를 숨김
-                      SystemChannels.textInput.invokeMethod('TextInput.hide');
                     },
                     textAlignVertical: TextAlignVertical.bottom,
                     style: const TextStyle(color: Colors.black),
@@ -188,6 +180,11 @@ class TransactionMenu extends ConsumerWidget {
                 const SizedBox(height: 8),
                 Tap(
                   onTap: () async {
+                    // ,제거하고 전송
+                    final value = amountEditController.text;
+                    final valueWithoutComma = value.replaceAll(',', '');
+                    ref.read(transactionStateProvider.notifier).onChangeAmount(valueWithoutComma);
+
                     final userStateValue = ref.watch(userStateProvier);
                     if (userStateValue.value != null) {
                       await ref.read(transactionStateProvider.notifier).createTransaction(
@@ -196,20 +193,26 @@ class TransactionMenu extends ConsumerWidget {
                               memo: memoEditController.text,
                               createdAt: DateTime.now(),
                               updatedAt: DateTime.now(),
-                              amount: transactionProvider.assetType == AssetType.income ? transactionProvider.amount : -transactionProvider.amount,
+                              amount: ref.read(transactionStateProvider).amount,
                               userId: userStateValue.value!.userId,
                               category: TransactionCategory(
                                 categoryId: '1',
                                 name: '이자',
-                                type: transactionProvider.assetType,
+                                type: ref.read(transactionStateProvider).assetType,
                                 imgUrl: picSum(201),
                               ),
                             ),
                           );
                     }
-                    amountEditController.clear();
-                    memoEditController.clear();
+                    // 입력을 완료하면 키보드를 숨김
+                    SystemChannels.textInput.invokeMethod('TextInput.hide');
+
+                    // write tap 닫기
                     ref.read(floatingButtonStateProvider.notifier).tapOutside();
+                    // asset data 다시 로드
+                    ref.read(assetStateProvier.notifier).fetchAsset();
+                    // 입력창 비우기
+                    ref.read(assetStateProvier.notifier).completeWrite(amountEditController: amountEditController, memoEditController: memoEditController);
                   },
                   child: Container(
                     padding: const EdgeInsets.only(top: 12, bottom: 12, left: 36, right: 36),
