@@ -63,6 +63,7 @@ class _FloatingAddButtonState extends ConsumerState<FloatingAddButton> {
                 isSmall: isSmall,
                 action: () {
                   ref.read(floatingButtonStateProvider.notifier).toggleCategoryMenu();
+                  ref.read(floatingButtonStateProvider.notifier).quitWrite(memoEditController: memoEditController, amountEditController: amountEditController);
                 },
               ),
             ],

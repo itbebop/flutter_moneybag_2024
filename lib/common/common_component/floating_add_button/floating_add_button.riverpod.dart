@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_moneybag_2024/common/common_component/floating_add_button/floating_daangn_button.state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -44,6 +45,14 @@ class FloatingButtonStateNotifier extends StateNotifier<FloatingButtonState> {
     final isClassified = state.isClassified;
 
     state = state.copyWith(isClassified: !isClassified);
+  }
+
+  void quitWrite({
+    required TextEditingController memoEditController,
+    required TextEditingController amountEditController,
+  }) {
+    memoEditController.clear();
+    amountEditController.clear();
   }
 
   void tapOutside() {
