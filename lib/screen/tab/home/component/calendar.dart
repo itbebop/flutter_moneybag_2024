@@ -54,7 +54,7 @@ class Calendar extends ConsumerWidget {
               selectedDayPredicate: (day) => isSameDay(selectedDay, day),
               calendarFormat: CalendarFormat.month,
               availableGestures: AvailableGestures.horizontalSwipe,
-              onDaySelected: (onDaySelected),
+              onDaySelected: onDaySelected,
               onPageChanged: (focusedDay) {
                 ref.read(monthStateProvider.notifier).setMonth(MonthList.values[focusedDay.month - 1]); // 수정된 부분
               },
