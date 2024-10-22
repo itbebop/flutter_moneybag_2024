@@ -31,4 +31,15 @@ extension DoubleExt on double {
   String toComma() {
     return decimalFormat.format(this);
   }
+
+  String toWon() {
+    return '${toComma()}원';
+  }
+}
+
+// 추가: num 타입에 대한 확장
+extension NumExt on num {
+  String toWon() {
+    return '${NumberFormat.decimalPattern("en").format(this)}원';
+  }
 }
