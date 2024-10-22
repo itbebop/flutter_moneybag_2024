@@ -17,6 +17,8 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$TransactionState {
   bool get isLoading => throw _privateConstructorUsedError;
+  DateTime get selectedDay => throw _privateConstructorUsedError;
+  DateTime get focusedDay => throw _privateConstructorUsedError;
   ValueNotifier<List<TransactionDetail>> get selectedEvents =>
       throw _privateConstructorUsedError;
   String get assetId => throw _privateConstructorUsedError;
@@ -45,6 +47,8 @@ abstract class $TransactionStateCopyWith<$Res> {
   @useResult
   $Res call(
       {bool isLoading,
+      DateTime selectedDay,
+      DateTime focusedDay,
       ValueNotifier<List<TransactionDetail>> selectedEvents,
       String assetId,
       double amount,
@@ -70,6 +74,8 @@ class _$TransactionStateCopyWithImpl<$Res, $Val extends TransactionState>
   @override
   $Res call({
     Object? isLoading = null,
+    Object? selectedDay = null,
+    Object? focusedDay = null,
     Object? selectedEvents = null,
     Object? assetId = null,
     Object? amount = null,
@@ -85,6 +91,14 @@ class _$TransactionStateCopyWithImpl<$Res, $Val extends TransactionState>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      selectedDay: null == selectedDay
+          ? _value.selectedDay
+          : selectedDay // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      focusedDay: null == focusedDay
+          ? _value.focusedDay
+          : focusedDay // ignore: cast_nullable_to_non_nullable
+              as DateTime,
       selectedEvents: null == selectedEvents
           ? _value.selectedEvents
           : selectedEvents // ignore: cast_nullable_to_non_nullable
@@ -135,6 +149,8 @@ abstract class _$$TransactionStateImplCopyWith<$Res>
   @useResult
   $Res call(
       {bool isLoading,
+      DateTime selectedDay,
+      DateTime focusedDay,
       ValueNotifier<List<TransactionDetail>> selectedEvents,
       String assetId,
       double amount,
@@ -158,6 +174,8 @@ class __$$TransactionStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isLoading = null,
+    Object? selectedDay = null,
+    Object? focusedDay = null,
     Object? selectedEvents = null,
     Object? assetId = null,
     Object? amount = null,
@@ -173,6 +191,14 @@ class __$$TransactionStateImplCopyWithImpl<$Res>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      selectedDay: null == selectedDay
+          ? _value.selectedDay
+          : selectedDay // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      focusedDay: null == focusedDay
+          ? _value.focusedDay
+          : focusedDay // ignore: cast_nullable_to_non_nullable
+              as DateTime,
       selectedEvents: null == selectedEvents
           ? _value.selectedEvents
           : selectedEvents // ignore: cast_nullable_to_non_nullable
@@ -218,6 +244,8 @@ class __$$TransactionStateImplCopyWithImpl<$Res>
 class _$TransactionStateImpl implements _TransactionState {
   const _$TransactionStateImpl(
       {this.isLoading = false,
+      required this.selectedDay,
+      required this.focusedDay,
       required this.selectedEvents,
       required this.assetId,
       required this.amount,
@@ -232,6 +260,10 @@ class _$TransactionStateImpl implements _TransactionState {
   @override
   @JsonKey()
   final bool isLoading;
+  @override
+  final DateTime selectedDay;
+  @override
+  final DateTime focusedDay;
   @override
   final ValueNotifier<List<TransactionDetail>> selectedEvents;
   @override
@@ -259,7 +291,7 @@ class _$TransactionStateImpl implements _TransactionState {
 
   @override
   String toString() {
-    return 'TransactionState(isLoading: $isLoading, selectedEvents: $selectedEvents, assetId: $assetId, amount: $amount, assetType: $assetType, assetIdList: $assetIdList, createTransactionUseCase: $createTransactionUseCase, deleteTransactionUseCase: $deleteTransactionUseCase, getTransactionListUseCase: $getTransactionListUseCase, updateTransactionUseCase: $updateTransactionUseCase)';
+    return 'TransactionState(isLoading: $isLoading, selectedDay: $selectedDay, focusedDay: $focusedDay, selectedEvents: $selectedEvents, assetId: $assetId, amount: $amount, assetType: $assetType, assetIdList: $assetIdList, createTransactionUseCase: $createTransactionUseCase, deleteTransactionUseCase: $deleteTransactionUseCase, getTransactionListUseCase: $getTransactionListUseCase, updateTransactionUseCase: $updateTransactionUseCase)';
   }
 
   @override
@@ -269,6 +301,10 @@ class _$TransactionStateImpl implements _TransactionState {
             other is _$TransactionStateImpl &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
+            (identical(other.selectedDay, selectedDay) ||
+                other.selectedDay == selectedDay) &&
+            (identical(other.focusedDay, focusedDay) ||
+                other.focusedDay == focusedDay) &&
             (identical(other.selectedEvents, selectedEvents) ||
                 other.selectedEvents == selectedEvents) &&
             (identical(other.assetId, assetId) || other.assetId == assetId) &&
@@ -295,6 +331,8 @@ class _$TransactionStateImpl implements _TransactionState {
   int get hashCode => Object.hash(
       runtimeType,
       isLoading,
+      selectedDay,
+      focusedDay,
       selectedEvents,
       assetId,
       amount,
@@ -316,6 +354,8 @@ class _$TransactionStateImpl implements _TransactionState {
 abstract class _TransactionState implements TransactionState {
   const factory _TransactionState(
           {final bool isLoading,
+          required final DateTime selectedDay,
+          required final DateTime focusedDay,
           required final ValueNotifier<List<TransactionDetail>> selectedEvents,
           required final String assetId,
           required final double amount,
@@ -329,6 +369,10 @@ abstract class _TransactionState implements TransactionState {
 
   @override
   bool get isLoading;
+  @override
+  DateTime get selectedDay;
+  @override
+  DateTime get focusedDay;
   @override
   ValueNotifier<List<TransactionDetail>> get selectedEvents;
   @override

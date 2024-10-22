@@ -28,6 +28,8 @@ final transactionStateProvider = StateNotifierProvider<TransactionStateNotifier,
       amount: 0,
       assetType: AssetType.expense,
       selectedEvents: ValueNotifier([]),
+      focusedDay: DateTime.now(),
+      selectedDay: DateTime.now(),
     ),
   );
 });
@@ -51,6 +53,10 @@ class TransactionStateNotifier extends StateNotifier<TransactionState> {
     } else {
       state = state.copyWith(amount: -amount);
     }
+  }
+
+  void onSelectDay(DateTime selectedDay, DateTime focusedDay) {
+    state = state.copyWith(selectedDay: selectedDay, focusedDay: focusedDay);
   }
 
   Future<void> createTransaction({required TransactionDetail transactionDetail}) async {
