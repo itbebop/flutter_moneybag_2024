@@ -18,6 +18,9 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$AssetState {
   List<Asset> get assetList => throw _privateConstructorUsedError;
   double get assetAmount => throw _privateConstructorUsedError;
+  double get totalAmount => throw _privateConstructorUsedError;
+  double get totalIncome => throw _privateConstructorUsedError;
+  double get totalExpense => throw _privateConstructorUsedError;
   String get hints => throw _privateConstructorUsedError;
   String get selectedAssetId => throw _privateConstructorUsedError;
   List<String> get assetIdList => throw _privateConstructorUsedError;
@@ -39,6 +42,9 @@ abstract class $AssetStateCopyWith<$Res> {
   $Res call(
       {List<Asset> assetList,
       double assetAmount,
+      double totalAmount,
+      double totalIncome,
+      double totalExpense,
       String hints,
       String selectedAssetId,
       List<String> assetIdList,
@@ -61,11 +67,14 @@ class _$AssetStateCopyWithImpl<$Res, $Val extends AssetState>
   $Res call({
     Object? assetList = null,
     Object? assetAmount = null,
+    Object? totalAmount = null,
+    Object? totalIncome = null,
+    Object? totalExpense = null,
     Object? hints = null,
     Object? selectedAssetId = null,
     Object? assetIdList = null,
     Object? getAssetListUseCase = null,
-    Object? getAssetUseCase = freezed,
+    Object? getAssetUseCase = null,
   }) {
     return _then(_value.copyWith(
       assetList: null == assetList
@@ -75,6 +84,18 @@ class _$AssetStateCopyWithImpl<$Res, $Val extends AssetState>
       assetAmount: null == assetAmount
           ? _value.assetAmount
           : assetAmount // ignore: cast_nullable_to_non_nullable
+              as double,
+      totalAmount: null == totalAmount
+          ? _value.totalAmount
+          : totalAmount // ignore: cast_nullable_to_non_nullable
+              as double,
+      totalIncome: null == totalIncome
+          ? _value.totalIncome
+          : totalIncome // ignore: cast_nullable_to_non_nullable
+              as double,
+      totalExpense: null == totalExpense
+          ? _value.totalExpense
+          : totalExpense // ignore: cast_nullable_to_non_nullable
               as double,
       hints: null == hints
           ? _value.hints
@@ -92,7 +113,7 @@ class _$AssetStateCopyWithImpl<$Res, $Val extends AssetState>
           ? _value.getAssetListUseCase
           : getAssetListUseCase // ignore: cast_nullable_to_non_nullable
               as GetAssetListUseCase,
-      getAssetUseCase: freezed == getAssetUseCase
+      getAssetUseCase: null == getAssetUseCase
           ? _value.getAssetUseCase
           : getAssetUseCase // ignore: cast_nullable_to_non_nullable
               as GetAssetUseCase,
@@ -111,6 +132,9 @@ abstract class _$$AssetStateImplCopyWith<$Res>
   $Res call(
       {List<Asset> assetList,
       double assetAmount,
+      double totalAmount,
+      double totalIncome,
+      double totalExpense,
       String hints,
       String selectedAssetId,
       List<String> assetIdList,
@@ -131,11 +155,14 @@ class __$$AssetStateImplCopyWithImpl<$Res>
   $Res call({
     Object? assetList = null,
     Object? assetAmount = null,
+    Object? totalAmount = null,
+    Object? totalIncome = null,
+    Object? totalExpense = null,
     Object? hints = null,
     Object? selectedAssetId = null,
     Object? assetIdList = null,
     Object? getAssetListUseCase = null,
-    Object? getAssetUseCase = freezed,
+    Object? getAssetUseCase = null,
   }) {
     return _then(_$AssetStateImpl(
       assetList: null == assetList
@@ -145,6 +172,18 @@ class __$$AssetStateImplCopyWithImpl<$Res>
       assetAmount: null == assetAmount
           ? _value.assetAmount
           : assetAmount // ignore: cast_nullable_to_non_nullable
+              as double,
+      totalAmount: null == totalAmount
+          ? _value.totalAmount
+          : totalAmount // ignore: cast_nullable_to_non_nullable
+              as double,
+      totalIncome: null == totalIncome
+          ? _value.totalIncome
+          : totalIncome // ignore: cast_nullable_to_non_nullable
+              as double,
+      totalExpense: null == totalExpense
+          ? _value.totalExpense
+          : totalExpense // ignore: cast_nullable_to_non_nullable
               as double,
       hints: null == hints
           ? _value.hints
@@ -162,7 +201,7 @@ class __$$AssetStateImplCopyWithImpl<$Res>
           ? _value.getAssetListUseCase
           : getAssetListUseCase // ignore: cast_nullable_to_non_nullable
               as GetAssetListUseCase,
-      getAssetUseCase: freezed == getAssetUseCase
+      getAssetUseCase: null == getAssetUseCase
           ? _value.getAssetUseCase
           : getAssetUseCase // ignore: cast_nullable_to_non_nullable
               as GetAssetUseCase,
@@ -176,6 +215,9 @@ class _$AssetStateImpl implements _AssetState {
   const _$AssetStateImpl(
       {final List<Asset> assetList = const [],
       this.assetAmount = 0,
+      this.totalAmount = 0,
+      this.totalIncome = 0,
+      this.totalExpense = 0,
       required this.hints,
       required this.selectedAssetId,
       required final List<String> assetIdList,
@@ -197,6 +239,15 @@ class _$AssetStateImpl implements _AssetState {
   @JsonKey()
   final double assetAmount;
   @override
+  @JsonKey()
+  final double totalAmount;
+  @override
+  @JsonKey()
+  final double totalIncome;
+  @override
+  @JsonKey()
+  final double totalExpense;
+  @override
   final String hints;
   @override
   final String selectedAssetId;
@@ -215,7 +266,7 @@ class _$AssetStateImpl implements _AssetState {
 
   @override
   String toString() {
-    return 'AssetState(assetList: $assetList, assetAmount: $assetAmount, hints: $hints, selectedAssetId: $selectedAssetId, assetIdList: $assetIdList, getAssetListUseCase: $getAssetListUseCase, getAssetUseCase: $getAssetUseCase)';
+    return 'AssetState(assetList: $assetList, assetAmount: $assetAmount, totalAmount: $totalAmount, totalIncome: $totalIncome, totalExpense: $totalExpense, hints: $hints, selectedAssetId: $selectedAssetId, assetIdList: $assetIdList, getAssetListUseCase: $getAssetListUseCase, getAssetUseCase: $getAssetUseCase)';
   }
 
   @override
@@ -227,6 +278,12 @@ class _$AssetStateImpl implements _AssetState {
                 .equals(other._assetList, _assetList) &&
             (identical(other.assetAmount, assetAmount) ||
                 other.assetAmount == assetAmount) &&
+            (identical(other.totalAmount, totalAmount) ||
+                other.totalAmount == totalAmount) &&
+            (identical(other.totalIncome, totalIncome) ||
+                other.totalIncome == totalIncome) &&
+            (identical(other.totalExpense, totalExpense) ||
+                other.totalExpense == totalExpense) &&
             (identical(other.hints, hints) || other.hints == hints) &&
             (identical(other.selectedAssetId, selectedAssetId) ||
                 other.selectedAssetId == selectedAssetId) &&
@@ -234,8 +291,8 @@ class _$AssetStateImpl implements _AssetState {
                 .equals(other._assetIdList, _assetIdList) &&
             (identical(other.getAssetListUseCase, getAssetListUseCase) ||
                 other.getAssetListUseCase == getAssetListUseCase) &&
-            const DeepCollectionEquality()
-                .equals(other.getAssetUseCase, getAssetUseCase));
+            (identical(other.getAssetUseCase, getAssetUseCase) ||
+                other.getAssetUseCase == getAssetUseCase));
   }
 
   @override
@@ -243,11 +300,14 @@ class _$AssetStateImpl implements _AssetState {
       runtimeType,
       const DeepCollectionEquality().hash(_assetList),
       assetAmount,
+      totalAmount,
+      totalIncome,
+      totalExpense,
       hints,
       selectedAssetId,
       const DeepCollectionEquality().hash(_assetIdList),
       getAssetListUseCase,
-      const DeepCollectionEquality().hash(getAssetUseCase));
+      getAssetUseCase);
 
   @JsonKey(ignore: true)
   @override
@@ -260,6 +320,9 @@ abstract class _AssetState implements AssetState {
   const factory _AssetState(
       {final List<Asset> assetList,
       final double assetAmount,
+      final double totalAmount,
+      final double totalIncome,
+      final double totalExpense,
       required final String hints,
       required final String selectedAssetId,
       required final List<String> assetIdList,
@@ -270,6 +333,12 @@ abstract class _AssetState implements AssetState {
   List<Asset> get assetList;
   @override
   double get assetAmount;
+  @override
+  double get totalAmount;
+  @override
+  double get totalIncome;
+  @override
+  double get totalExpense;
   @override
   String get hints;
   @override

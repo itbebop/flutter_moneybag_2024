@@ -10,6 +10,9 @@ class AssetState with _$AssetState {
   const factory AssetState({
     @Default([]) List<Asset> assetList,
     @Default(0) double assetAmount,
+    @Default(0) double totalAmount,
+    @Default(0) double totalIncome,
+    @Default(0) double totalExpense,
     required String hints,
     required String selectedAssetId,
     required List<String> assetIdList,

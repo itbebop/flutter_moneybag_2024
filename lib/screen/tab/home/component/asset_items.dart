@@ -3,7 +3,7 @@ import 'package:flutter_moneybag_2024/common/common.dart';
 
 class AssetItems extends StatelessWidget {
   final String title;
-  final int amounts;
+  final double amounts;
   final Color numColor;
 
   AssetItems({
@@ -29,17 +29,22 @@ class AssetItems extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        Text(
-          title,
-          style: const TextStyle(fontSize: 18),
+        SizedBox(
+          width: 80.w,
+          child: Text(
+            title,
+            style: const TextStyle(fontSize: 18),
+          ),
         ),
-        const SizedBox(
-          width: 24,
+        SizedBox(
+          width: 100.w,
+          child: Text(
+            amounts.toWon(),
+            style: TextStyle(fontSize: 18, color: numColor),
+            textAlign: TextAlign.end, // 오른쪽 정렬 추가
+          ),
         ),
-        Text(
-          amounts.toWon(),
-          style: TextStyle(fontSize: 18, color: numColor),
-        ),
+        const SizedBox(width: 16),
       ],
     );
   }
