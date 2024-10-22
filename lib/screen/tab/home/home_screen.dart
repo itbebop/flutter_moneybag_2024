@@ -44,7 +44,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final selectedMonth = ref.watch(monthStateProvider);
     final monthProvider = ref.read(monthStateProvider.notifier);
     final transactionProvider = ref.read(transactionStateProvider);
-
     return Scaffold(
       body: Column(
         children: [
@@ -72,7 +71,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                 MonthDropdownButton(
                                   selectedMonth: selectedMonth,
                                   onMonthChanged: (value) {
+                                    final focusedDay = ref.read(monthStateProvider.notifier).setMonth(value);
                                     monthProvider.setMonth(value);
+                                    ref.watch(transactionStateProvider.notifier).onSelectDay(focusedDay, focusedDay);
                                   },
                                   fontSize: 24,
                                 ),

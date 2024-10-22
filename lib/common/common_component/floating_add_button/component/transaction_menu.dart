@@ -184,7 +184,6 @@ class TransactionMenu extends ConsumerWidget {
                     ref.read(transactionStateProvider.notifier).onChangeAmount(valueWithoutComma);
                     final userStateValue = ref.watch(userStateProvier);
                     if (userStateValue.value != null) {
-                      print('assetProvider assid: ${assetProvider.selectedAssetId}');
                       await ref.read(transactionStateProvider.notifier).createTransaction(
                           transactionDetail: TransactionDetail(
                             transactionId: '1',

@@ -6,17 +6,14 @@ final monthStateProvider = StateNotifierProvider<MonthStateNotifier, MonthList>(
 });
 
 class MonthStateNotifier extends StateNotifier<MonthList> {
-  MonthStateNotifier() : super(MonthList.jan);
+  MonthStateNotifier() : super(MonthList.values[DateTime.now().month - 1]);
 
-  void setMonth(MonthList month) {
+  DateTime setMonth(MonthList month) {
     state = month;
+    return DateTime.utc(DateTime.now().year, month.month, DateTime.now().day);
   }
 
-  // 새로운 메서드 추가: 월을 설정하고 이벤트를 가져오는 메서드
   Future<void> setMonthAndFetchEvents(WidgetRef ref, MonthList month) async {
     setMonth(month);
-    // 현재 월에 대한 이벤트를 가져오는 로직 추가
-
-    // 이벤트를 처리하는 로직 추가 (예: 상태 업데이트 등)
   }
 }

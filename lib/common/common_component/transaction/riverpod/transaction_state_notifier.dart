@@ -48,8 +48,6 @@ class TransactionStateNotifier extends StateNotifier<TransactionState> {
 
   void onChangeAmount(String value) {
     final double amount = double.parse(value);
-    print('amount: $amount');
-    print('assetType: ${state.assetType}');
     if (state.assetType == AssetType.income) {
       state = state.copyWith(amount: amount);
     } else {
@@ -58,6 +56,7 @@ class TransactionStateNotifier extends StateNotifier<TransactionState> {
   }
 
   void onSelectDay(DateTime selectedDay, DateTime focusedDay) {
+    print('focusedDay!!: $focusedDay');
     state = state.copyWith(selectedDay: selectedDay, focusedDay: focusedDay);
   }
 

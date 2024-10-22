@@ -56,7 +56,8 @@ class Calendar extends ConsumerWidget {
               availableGestures: AvailableGestures.horizontalSwipe,
               onDaySelected: onDaySelected,
               onPageChanged: (focusedDay) {
-                ref.read(monthStateProvider.notifier).setMonth(MonthList.values[focusedDay.month - 1]); // 수정된 부분
+                ref.read(transactionStateProvider.notifier).onSelectDay(selectedDay, focusedDay);
+                ref.read(monthStateProvider.notifier).setMonth(MonthList.values[focusedDay.month - 1]);
               },
               calendarStyle: const CalendarStyle(
                 markerDecoration: BoxDecoration(
