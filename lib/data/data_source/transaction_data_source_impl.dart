@@ -23,9 +23,12 @@ class TransactionDataSourceImpl implements TransactionDataSource {
     await _transactionRef(assetId).add(transaction).then((value) => _transactionRef(assetId).doc(value.id).update({'transactionId': value.id}));
     final assetRef = FirebaseFirestore.instance.collection('assets');
 
-    // totalAmount에 transaction.amount를 더하는 로직 추가
+    // totalAmount에 transaction.amount를 더하는 로직
     await assetRef.doc(assetId).update({
       'totalAmount': FieldValue.increment(transaction.amount),
+      // transaction.amount가 양수이면 totalIncome에 더하고, 음수이면 totalExpense에 더하는 로직 추가
+      'totalIncome': FieldValue.increment(transaction.amount > 0 ? transaction.amount : 0),
+      'totalExpense': FieldValue.increment(transaction.amount < 0 ? -transaction.amount : 0),
     });
   }
 
