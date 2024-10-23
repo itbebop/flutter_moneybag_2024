@@ -28,7 +28,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> with SingleTickerPr
       await ref.read(userStateProvier.notifier).fetchUser();
       await ref.read(assetStateProvier.notifier).fetchAsset();
       final assetIdList = ref.read(assetStateProvier).assetIdList;
-      ref.read(transactionStateProvider.notifier).getAssetIdList(assetIdList);
+      await ref.read(transactionStateProvider.notifier).getAssetIdList(assetIdList);
     });
 
     // AnimationController 초기화
