@@ -26,9 +26,7 @@ class _AppState extends State<App> {
                 debugShowCheckedModeBanner: false,
                 locale: const Locale('ko'),
                 routerConfig: router, // GoRouter 설정
-                theme: ThemeData(
-                  scaffoldBackgroundColor: UiConfig.backgroundColor,
-                ));
+                theme: ThemeData(scaffoldBackgroundColor: UiConfig.backgroundColor, appBarTheme: const AppBarTheme(backgroundColor: UiConfig.backgroundColor)));
           },
         ),
       ),

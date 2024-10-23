@@ -76,14 +76,14 @@ class _DrawerWidgetState extends ConsumerState<DrawerWidget> {
             ListTile(
               leading: Icon(Icons.settings, color: Colors.grey[850]),
               title: const Text('로그인'),
-              onTap: () => context.go('/login'),
+              onTap: () => context.push('/login'),
               trailing: const Icon(Icons.add),
             ),
             ListTile(
               leading: Icon(Icons.home, color: Colors.grey[850]),
               title: const Text('카테고리 관리'),
               onTap: () {
-                context.go('/category');
+                context.push('/category');
               },
               trailing: const Icon(Icons.add),
             ),

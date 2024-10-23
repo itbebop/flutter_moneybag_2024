@@ -19,6 +19,7 @@ class LoginScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
+      appBar: AppBar(),
       body: SafeArea(
         child: Container(
           constraints: BoxConstraints(minHeight: 1.sh),

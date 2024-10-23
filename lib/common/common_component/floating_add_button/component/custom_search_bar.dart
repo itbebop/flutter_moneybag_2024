@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_moneybag_2024/common/theme/ui_config.dart';
 
-class SearchBar extends StatelessWidget {
+class CustomSearchBar extends StatelessWidget {
   final TextEditingController _queryTextEditingController;
 
   final FocusNode searchFocusNode;
 
-  const SearchBar({super.key, required TextEditingController queryTextEditingController, required this.searchFocusNode}) : _queryTextEditingController = queryTextEditingController;
+  const CustomSearchBar({super.key, required TextEditingController queryTextEditingController, required this.searchFocusNode}) : _queryTextEditingController = queryTextEditingController;
 
   @override
   Widget build(BuildContext context) {
