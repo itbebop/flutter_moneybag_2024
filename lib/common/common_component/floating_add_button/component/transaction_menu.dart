@@ -34,7 +34,7 @@ class TransactionMenu extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    assetAmountController.text = ref.read(assetStateProvier).assetAmount.toString();
+    // assetAmountController.text = ref.read(assetStateProvier).assetAmount.toString();
     final assetProvider = ref.watch(assetStateProvier);
 
     return Column(
@@ -74,21 +74,25 @@ class TransactionMenu extends ConsumerWidget {
                     decoration: InputDecoration(
                       contentPadding: const EdgeInsets.only(bottom: 13.0),
                       prefixIcon: Container(
-                          margin: const EdgeInsets.only(right: 8),
                           decoration: const BoxDecoration(
                             border: Border(right: BorderSide(color: Colors.black38)),
                           ),
                           child: SizedBox(
-                            width: 100,
-                            child: CustomDropdownButton<Asset>(
-                              items: assetProvider.assetList
-                                  .map<DropdownMenuItem<Asset>>((asset) => DropdownMenuItem<Asset>(
-                                        value: asset,
-                                        child: Text(asset.assetName),
-                                      ))
-                                  .toList(),
-                              hints: assetProvider.hints, // 힌트 텍스트
-                              action: (asset) => ref.read(assetStateProvier.notifier).getAsset(asset.assetId), // Asset 선택 시 호출되는 액션
+                            width: 90.w,
+                            child: Row(
+                              children: [
+                                SizedBox(width: 10.w),
+                                CustomDropdownButton<Asset>(
+                                  items: assetProvider.assetList
+                                      .map<DropdownMenuItem<Asset>>((asset) => DropdownMenuItem<Asset>(
+                                            value: asset,
+                                            child: Text(asset.assetName),
+                                          ))
+                                      .toList(),
+                                  hints: assetProvider.hints, // 힌트 텍스트
+                                  action: (asset) => ref.read(assetStateProvier.notifier).getAsset(asset.assetId), // Asset 선택 시 호출되는 액션
+                                ),
+                              ],
                             ),
                           )),
                       border: InputBorder.none,
@@ -113,8 +117,6 @@ class TransactionMenu extends ConsumerWidget {
                     keyboardType: TextInputType.number,
                     textAlign: TextAlign.right,
                     inputFormatters: <TextInputFormatter>[
-                      // FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
-                      // FilteringTextInputFormatter.digitsOnly,
                       ThousandCommaInputFormatter(),
                     ],
                     onChanged: (value) {
@@ -134,17 +136,22 @@ class TransactionMenu extends ConsumerWidget {
                             border: Border(right: BorderSide(color: Colors.black38)),
                           ),
                           child: SizedBox(
-                            width: 100,
-                            child: FloatItem<TransactionCategory>(
-                              title: '이자', //'transaction1.title' // TODO: 글자제한, eclips 필요함
-                              onSelect: (TransactionCategory category) {},
-                              selectedValue: const TransactionCategory(
-                                categoryId: '',
-                                imgUrl: '',
-                                name: '',
-                                type: AssetType.income,
-                              ),
-                              icon: HugeIcons.strokeRoundedLoginCircle02,
+                            width: 90.w,
+                            child: Row(
+                              children: [
+                                SizedBox(width: 10.w),
+                                FloatItem<TransactionCategory>(
+                                  title: '이자', //'transaction1.title' // TODO: 글자제한, eclips 필요함
+                                  onSelect: (TransactionCategory category) {},
+                                  selectedValue: const TransactionCategory(
+                                    categoryId: '',
+                                    imgUrl: '',
+                                    name: '',
+                                    type: AssetType.income,
+                                  ),
+                                  icon: HugeIcons.strokeRoundedLoginCircle02,
+                                ),
+                              ],
                             ),
                           )),
                       border: InputBorder.none,
