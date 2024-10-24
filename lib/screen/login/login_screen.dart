@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_moneybag_2024/common/common.dart';
+import 'package:flutter_moneybag_2024/common/common_component/transaction/riverpod/transaction_state_notifier.dart';
 import 'package:flutter_moneybag_2024/core/enum/login_platform.dart';
 import 'package:flutter_moneybag_2024/core/provider/user_state_notifier.dart';
 import 'package:flutter_moneybag_2024/screen/login/login_screen_state_notifier.dart';
@@ -48,6 +49,8 @@ class LoginScreen extends ConsumerWidget {
                           await ref.read(userStateProvier.notifier).fetchUser();
                           await ref.read(assetStateProvier.notifier).fetchAsset();
                           final assetgList = ref.read(assetStateProvier).assetIdList;
+                          await ref.read(transactionStateProvider.notifier).getAssetIdList(assetgList);
+                          await ref.read(transactionStateProvider.notifier).getTransactions();
                           if (ref.read(loginScreenStateProvider).user == null || assetgList == []) {
                             return;
                           } else {
@@ -72,6 +75,8 @@ class LoginScreen extends ConsumerWidget {
                           await ref.read(userStateProvier.notifier).fetchUser();
                           await ref.read(assetStateProvier.notifier).fetchAsset();
                           final assetgList = ref.read(assetStateProvier).assetIdList;
+                          await ref.read(transactionStateProvider.notifier).getAssetIdList(assetgList);
+                          await ref.read(transactionStateProvider.notifier).getTransactions();
                           if (ref.read(loginScreenStateProvider).user == null || assetgList == []) {
                             return;
                           } else {
