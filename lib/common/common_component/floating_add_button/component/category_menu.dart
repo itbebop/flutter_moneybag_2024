@@ -34,7 +34,7 @@ class CategoryMenu extends ConsumerWidget {
           children: [
             FloatItem<AssetType>(
               title: '수입',
-              icon: HugeIcons.strokeRoundedLoginCircle02,
+              icon: HugeIcons.strokeRoundedLogoutSquare01,
               selectedValue: AssetType.income,
               onSelect: (AssetType assetType) {
                 ref.read(transactionStateProvider.notifier).selectAssetType(assetType);
@@ -46,7 +46,7 @@ class CategoryMenu extends ConsumerWidget {
             const SizedBox(height: 16),
             FloatItem<AssetType>(
               title: '지출',
-              icon: HugeIcons.strokeRoundedLoginCircle02,
+              icon: HugeIcons.strokeRoundedLoginSquare01,
               selectedValue: AssetType.expense,
               onSelect: (AssetType assetType) {
                 ref.read(transactionStateProvider.notifier).selectAssetType(assetType);
