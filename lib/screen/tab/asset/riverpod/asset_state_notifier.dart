@@ -17,6 +17,15 @@ final assetStateProvier = StateNotifierProvider<AssetStateNotifier, AssetState>(
 class AssetStateNotifier extends StateNotifier<AssetState> {
   AssetStateNotifier(super.state);
 
+  void logout() {
+    print('asset logout');
+    state = state.copyWith(
+      totalAmount: 0,
+      totalExpense: 0,
+      totalIncome: 0,
+    );
+  }
+
   Future<void> fetchAsset() async {
     try {
       final assetList = await state.getAssetListUseCase.execute(assetIdList: state.assetIdList);

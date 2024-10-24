@@ -17,6 +17,9 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$TransactionState {
   bool get isLoading => throw _privateConstructorUsedError;
+  bool get isIncome => throw _privateConstructorUsedError;
+  bool get isLogout => throw _privateConstructorUsedError;
+  List<TransactionDetail> get events => throw _privateConstructorUsedError;
   DateTime get selectedDay => throw _privateConstructorUsedError;
   DateTime get focusedDay => throw _privateConstructorUsedError;
   ValueNotifier<List<TransactionDetail>> get selectedEvents =>
@@ -47,6 +50,9 @@ abstract class $TransactionStateCopyWith<$Res> {
   @useResult
   $Res call(
       {bool isLoading,
+      bool isIncome,
+      bool isLogout,
+      List<TransactionDetail> events,
       DateTime selectedDay,
       DateTime focusedDay,
       ValueNotifier<List<TransactionDetail>> selectedEvents,
@@ -74,6 +80,9 @@ class _$TransactionStateCopyWithImpl<$Res, $Val extends TransactionState>
   @override
   $Res call({
     Object? isLoading = null,
+    Object? isIncome = null,
+    Object? isLogout = null,
+    Object? events = null,
     Object? selectedDay = null,
     Object? focusedDay = null,
     Object? selectedEvents = null,
@@ -91,6 +100,18 @@ class _$TransactionStateCopyWithImpl<$Res, $Val extends TransactionState>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      isIncome: null == isIncome
+          ? _value.isIncome
+          : isIncome // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isLogout: null == isLogout
+          ? _value.isLogout
+          : isLogout // ignore: cast_nullable_to_non_nullable
+              as bool,
+      events: null == events
+          ? _value.events
+          : events // ignore: cast_nullable_to_non_nullable
+              as List<TransactionDetail>,
       selectedDay: null == selectedDay
           ? _value.selectedDay
           : selectedDay // ignore: cast_nullable_to_non_nullable
@@ -149,6 +170,9 @@ abstract class _$$TransactionStateImplCopyWith<$Res>
   @useResult
   $Res call(
       {bool isLoading,
+      bool isIncome,
+      bool isLogout,
+      List<TransactionDetail> events,
       DateTime selectedDay,
       DateTime focusedDay,
       ValueNotifier<List<TransactionDetail>> selectedEvents,
@@ -174,6 +198,9 @@ class __$$TransactionStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isLoading = null,
+    Object? isIncome = null,
+    Object? isLogout = null,
+    Object? events = null,
     Object? selectedDay = null,
     Object? focusedDay = null,
     Object? selectedEvents = null,
@@ -191,6 +218,18 @@ class __$$TransactionStateImplCopyWithImpl<$Res>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      isIncome: null == isIncome
+          ? _value.isIncome
+          : isIncome // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isLogout: null == isLogout
+          ? _value.isLogout
+          : isLogout // ignore: cast_nullable_to_non_nullable
+              as bool,
+      events: null == events
+          ? _value._events
+          : events // ignore: cast_nullable_to_non_nullable
+              as List<TransactionDetail>,
       selectedDay: null == selectedDay
           ? _value.selectedDay
           : selectedDay // ignore: cast_nullable_to_non_nullable
@@ -244,6 +283,9 @@ class __$$TransactionStateImplCopyWithImpl<$Res>
 class _$TransactionStateImpl implements _TransactionState {
   const _$TransactionStateImpl(
       {this.isLoading = false,
+      this.isIncome = false,
+      this.isLogout = false,
+      final List<TransactionDetail> events = const [],
       required this.selectedDay,
       required this.focusedDay,
       required this.selectedEvents,
@@ -255,11 +297,27 @@ class _$TransactionStateImpl implements _TransactionState {
       required this.deleteTransactionUseCase,
       required this.getTransactionListUseCase,
       required this.updateTransactionUseCase})
-      : _assetIdList = assetIdList;
+      : _events = events,
+        _assetIdList = assetIdList;
 
   @override
   @JsonKey()
   final bool isLoading;
+  @override
+  @JsonKey()
+  final bool isIncome;
+  @override
+  @JsonKey()
+  final bool isLogout;
+  final List<TransactionDetail> _events;
+  @override
+  @JsonKey()
+  List<TransactionDetail> get events {
+    if (_events is EqualUnmodifiableListView) return _events;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_events);
+  }
+
   @override
   final DateTime selectedDay;
   @override
@@ -291,7 +349,7 @@ class _$TransactionStateImpl implements _TransactionState {
 
   @override
   String toString() {
-    return 'TransactionState(isLoading: $isLoading, selectedDay: $selectedDay, focusedDay: $focusedDay, selectedEvents: $selectedEvents, assetId: $assetId, amount: $amount, assetType: $assetType, assetIdList: $assetIdList, createTransactionUseCase: $createTransactionUseCase, deleteTransactionUseCase: $deleteTransactionUseCase, getTransactionListUseCase: $getTransactionListUseCase, updateTransactionUseCase: $updateTransactionUseCase)';
+    return 'TransactionState(isLoading: $isLoading, isIncome: $isIncome, isLogout: $isLogout, events: $events, selectedDay: $selectedDay, focusedDay: $focusedDay, selectedEvents: $selectedEvents, assetId: $assetId, amount: $amount, assetType: $assetType, assetIdList: $assetIdList, createTransactionUseCase: $createTransactionUseCase, deleteTransactionUseCase: $deleteTransactionUseCase, getTransactionListUseCase: $getTransactionListUseCase, updateTransactionUseCase: $updateTransactionUseCase)';
   }
 
   @override
@@ -301,6 +359,11 @@ class _$TransactionStateImpl implements _TransactionState {
             other is _$TransactionStateImpl &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
+            (identical(other.isIncome, isIncome) ||
+                other.isIncome == isIncome) &&
+            (identical(other.isLogout, isLogout) ||
+                other.isLogout == isLogout) &&
+            const DeepCollectionEquality().equals(other._events, _events) &&
             (identical(other.selectedDay, selectedDay) ||
                 other.selectedDay == selectedDay) &&
             (identical(other.focusedDay, focusedDay) ||
@@ -331,6 +394,9 @@ class _$TransactionStateImpl implements _TransactionState {
   int get hashCode => Object.hash(
       runtimeType,
       isLoading,
+      isIncome,
+      isLogout,
+      const DeepCollectionEquality().hash(_events),
       selectedDay,
       focusedDay,
       selectedEvents,
@@ -354,6 +420,9 @@ class _$TransactionStateImpl implements _TransactionState {
 abstract class _TransactionState implements TransactionState {
   const factory _TransactionState(
           {final bool isLoading,
+          final bool isIncome,
+          final bool isLogout,
+          final List<TransactionDetail> events,
           required final DateTime selectedDay,
           required final DateTime focusedDay,
           required final ValueNotifier<List<TransactionDetail>> selectedEvents,
@@ -369,6 +438,12 @@ abstract class _TransactionState implements TransactionState {
 
   @override
   bool get isLoading;
+  @override
+  bool get isIncome;
+  @override
+  bool get isLogout;
+  @override
+  List<TransactionDetail> get events;
   @override
   DateTime get selectedDay;
   @override

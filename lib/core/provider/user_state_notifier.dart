@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_moneybag_2024/core/provider/user_state.dart';
 import 'package:flutter_moneybag_2024/di/di_setup.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -28,6 +29,17 @@ class UserStateNotifier extends StateNotifier<UserState> {
   }
 
   Future<void> logout() async {
+    state = state.copyWith(user: null);
     await state.logoutUseCase.execute();
+  }
+
+  void showLogoutSnackbar(BuildContext context) {
+    const snackBar = SnackBar(
+      content: Text('로그아웃 되었습니다.'),
+      duration: Duration(seconds: 2),
+    );
+
+    // ScaffoldMessenger를 사용하여 SnackBar를 화면에 띄웁니다.
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 }

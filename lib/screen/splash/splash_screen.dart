@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_moneybag_2024/common/common.dart';
 import 'package:flutter_moneybag_2024/common/common_component/transaction/riverpod/transaction_state_notifier.dart';
@@ -17,7 +16,6 @@ class SplashScreen extends ConsumerStatefulWidget {
 class _SplashScreenState extends ConsumerState<SplashScreen> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _fadeAnimation;
-  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   @override
   void initState() {
@@ -25,10 +23,14 @@ class _SplashScreenState extends ConsumerState<SplashScreen> with SingleTickerPr
 
     // 상태를 마이크로 태스크로 처리
     Future.microtask(() async {
-      await ref.read(userStateProvier.notifier).fetchUser();
-      await ref.read(assetStateProvier.notifier).fetchAsset();
-      final assetIdList = ref.read(assetStateProvier).assetIdList;
-      await ref.read(transactionStateProvider.notifier).getAssetIdList(assetIdList);
+      try {
+        await ref.read(userStateProvider.notifier).fetchUser();
+        await ref.read(assetStateProvier.notifier).fetchAsset();
+        final assetIdList = ref.read(assetStateProvier).assetIdList;
+        await ref.read(transactionStateProvider.notifier).getAssetIdList(assetIdList);
+      } catch (e) {
+        throw Exception(e);
+      }
     });
 
     // AnimationController 초기화
@@ -48,17 +50,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> with SingleTickerPr
     _controller.forward().then((_) {
       // 빌드가 끝난 후에 상태 변경 처리
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        _auth.authStateChanges().first.then((User? user) {
-          if (user != null) {
-            if (mounted) {
-              context.go('/main');
-            }
-          } else {
-            if (mounted) {
-              context.go('/login');
-            }
-          }
-        });
+        if (mounted) context.go('/main');
       });
     });
   }

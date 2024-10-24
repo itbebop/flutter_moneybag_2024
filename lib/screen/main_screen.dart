@@ -19,6 +19,7 @@ class MainScreen extends ConsumerStatefulWidget {
 class _MainScreenState extends ConsumerState<MainScreen> {
   int get _currentTab => ref.watch(bottomNavIndexProvider);
   bool isButtonVisible = true;
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +27,7 @@ class _MainScreenState extends ConsumerState<MainScreen> {
       child: Stack(
         children: [
           Scaffold(
+            key: _scaffoldKey,
             appBar: AppBar(
               leading: Builder(
                 builder: (context) {
@@ -39,8 +41,10 @@ class _MainScreenState extends ConsumerState<MainScreen> {
               ),
               backgroundColor: UiConfig.backgroundColor,
             ),
-            drawer: const Drawer(
-              child: DrawerWidget(),
+            drawer: Drawer(
+              child: DrawerWidget(
+                scaffoldKey: _scaffoldKey,
+              ),
             ),
             onDrawerChanged: (isOpen) {
               setState(() {

@@ -9,12 +9,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 final transactionStateProvider = StateNotifierProvider<TransactionStateNotifier, TransactionState>((ref) {
-  // final assetState = ref.read(assetStateProvier);
-  // final selectedAssetId = assetState.selectedAssetId;
-
-  // final List<Asset> activatedAssetList = assetState.assetList;
-  // final List<String> activatedAssetIdList = activatedAssetList.map((asset) => asset.assetId).toList();
-
   return TransactionStateNotifier(
     TransactionState(
       createTransactionUseCase: getIt(),
@@ -34,8 +28,12 @@ final transactionStateProvider = StateNotifierProvider<TransactionStateNotifier,
 
 class TransactionStateNotifier extends StateNotifier<TransactionState> {
   TransactionStateNotifier(super.state);
+
   void selectAssetType(AssetType assetType) {
     state = state.copyWith(assetType: assetType);
+    if (assetType == AssetType.income) {
+      state = state.copyWith(isIncome: true);
+    }
   }
 
   void selectAsset(String assetId) {
@@ -56,7 +54,6 @@ class TransactionStateNotifier extends StateNotifier<TransactionState> {
   }
 
   void onSelectDay(DateTime selectedDay, DateTime focusedDay) {
-    print('focusedDay!!: $focusedDay');
     state = state.copyWith(selectedDay: selectedDay, focusedDay: focusedDay);
   }
 
@@ -99,9 +96,16 @@ class TransactionStateNotifier extends StateNotifier<TransactionState> {
   }
 
   Future<void> fetchEventsForDay(DateTime day) async {
-    // 일일 transaction을 불러옴
-    final events = await getEventsForDay(day);
+    state = state.copyWith(events: await getEventsForDay(day));
 
-    state = state.copyWith(selectedEvents: ValueNotifier(events));
+    state = state.copyWith(selectedEvents: ValueNotifier(state.events));
+    print('###events: $state.events');
+  }
+
+  void clearTransactions() {
+    state = state.copyWith(
+      selectedEvents: ValueNotifier([]),
+      assetIdList: [],
+    ); // 초기 상태로 리셋
   }
 }
