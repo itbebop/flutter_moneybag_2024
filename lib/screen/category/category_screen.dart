@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_moneybag_2024/common/common.dart';
-import 'package:flutter_moneybag_2024/common/common_component/floating_add_button/component/custom_search_bar.dart';
 import 'package:flutter_moneybag_2024/domain/enums/asset_types.dart';
 import 'package:flutter_moneybag_2024/domain/model/transaction_category.dart';
 import 'package:flutter_moneybag_2024/screen/category/component/category_list.dart';
@@ -14,7 +13,6 @@ class CategoryScreen extends StatefulWidget {
 }
 
 class _CategoryScreenState extends State<CategoryScreen> {
-  final FocusNode _searchFocusNode = FocusNode();
   final queryTextEditingController = TextEditingController();
   @override
   Widget build(BuildContext context) {

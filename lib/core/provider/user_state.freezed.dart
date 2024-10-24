@@ -16,6 +16,9 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$UserState {
+  bool get isLoading => throw _privateConstructorUsedError;
+  GetUserUseCase get getUserUseCase => throw _privateConstructorUsedError;
+  LogoutUseCase get logoutUseCase => throw _privateConstructorUsedError;
   User? get user => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -28,7 +31,11 @@ abstract class $UserStateCopyWith<$Res> {
   factory $UserStateCopyWith(UserState value, $Res Function(UserState) then) =
       _$UserStateCopyWithImpl<$Res, UserState>;
   @useResult
-  $Res call({User? user});
+  $Res call(
+      {bool isLoading,
+      GetUserUseCase getUserUseCase,
+      LogoutUseCase logoutUseCase,
+      User? user});
 
   $UserCopyWith<$Res>? get user;
 }
@@ -46,9 +53,24 @@ class _$UserStateCopyWithImpl<$Res, $Val extends UserState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? isLoading = null,
+    Object? getUserUseCase = null,
+    Object? logoutUseCase = null,
     Object? user = freezed,
   }) {
     return _then(_value.copyWith(
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      getUserUseCase: null == getUserUseCase
+          ? _value.getUserUseCase
+          : getUserUseCase // ignore: cast_nullable_to_non_nullable
+              as GetUserUseCase,
+      logoutUseCase: null == logoutUseCase
+          ? _value.logoutUseCase
+          : logoutUseCase // ignore: cast_nullable_to_non_nullable
+              as LogoutUseCase,
       user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -77,7 +99,11 @@ abstract class _$$UserStateImplCopyWith<$Res>
       __$$UserStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({User? user});
+  $Res call(
+      {bool isLoading,
+      GetUserUseCase getUserUseCase,
+      LogoutUseCase logoutUseCase,
+      User? user});
 
   @override
   $UserCopyWith<$Res>? get user;
@@ -94,9 +120,24 @@ class __$$UserStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? isLoading = null,
+    Object? getUserUseCase = null,
+    Object? logoutUseCase = null,
     Object? user = freezed,
   }) {
     return _then(_$UserStateImpl(
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      getUserUseCase: null == getUserUseCase
+          ? _value.getUserUseCase
+          : getUserUseCase // ignore: cast_nullable_to_non_nullable
+              as GetUserUseCase,
+      logoutUseCase: null == logoutUseCase
+          ? _value.logoutUseCase
+          : logoutUseCase // ignore: cast_nullable_to_non_nullable
+              as LogoutUseCase,
       user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -108,14 +149,25 @@ class __$$UserStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$UserStateImpl implements _UserState {
-  const _$UserStateImpl({this.user});
+  const _$UserStateImpl(
+      {this.isLoading = false,
+      required this.getUserUseCase,
+      required this.logoutUseCase,
+      this.user});
 
+  @override
+  @JsonKey()
+  final bool isLoading;
+  @override
+  final GetUserUseCase getUserUseCase;
+  @override
+  final LogoutUseCase logoutUseCase;
   @override
   final User? user;
 
   @override
   String toString() {
-    return 'UserState(user: $user)';
+    return 'UserState(isLoading: $isLoading, getUserUseCase: $getUserUseCase, logoutUseCase: $logoutUseCase, user: $user)';
   }
 
   @override
@@ -123,11 +175,18 @@ class _$UserStateImpl implements _UserState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UserStateImpl &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading) &&
+            (identical(other.getUserUseCase, getUserUseCase) ||
+                other.getUserUseCase == getUserUseCase) &&
+            (identical(other.logoutUseCase, logoutUseCase) ||
+                other.logoutUseCase == logoutUseCase) &&
             (identical(other.user, user) || other.user == user));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, user);
+  int get hashCode =>
+      Object.hash(runtimeType, isLoading, getUserUseCase, logoutUseCase, user);
 
   @JsonKey(ignore: true)
   @override
@@ -137,8 +196,18 @@ class _$UserStateImpl implements _UserState {
 }
 
 abstract class _UserState implements UserState {
-  const factory _UserState({final User? user}) = _$UserStateImpl;
+  const factory _UserState(
+      {final bool isLoading,
+      required final GetUserUseCase getUserUseCase,
+      required final LogoutUseCase logoutUseCase,
+      final User? user}) = _$UserStateImpl;
 
+  @override
+  bool get isLoading;
+  @override
+  GetUserUseCase get getUserUseCase;
+  @override
+  LogoutUseCase get logoutUseCase;
   @override
   User? get user;
   @override

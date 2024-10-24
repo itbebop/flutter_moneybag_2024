@@ -5,12 +5,11 @@ import 'package:flutter_moneybag_2024/screen/tab/asset/riverpod/asset_state.dart
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final assetStateProvier = StateNotifierProvider<AssetStateNotifier, AssetState>((ref) {
-  final userState = ref.watch(userStateProvier);
-  final List<String> assetIdList = userState.when(
-    data: (user) => user.assetIdList,
-    loading: () => [], // 로딩 중일 때 기본값
-    error: (error, stackTrace) => [], // 에러 발생 시 기본값
-  );
+  final userState = ref.watch(userStateProvider);
+  List<String> assetIdList = [];
+  if (userState.user != null) {
+    assetIdList = userState.user!.assetIdList;
+  }
 
   return AssetStateNotifier(AssetState(assetIdList: assetIdList, getAssetListUseCase: getIt(), getAssetUseCase: getIt(), hints: '선택', selectedAssetId: ''));
 });
@@ -21,7 +20,6 @@ class AssetStateNotifier extends StateNotifier<AssetState> {
   Future<void> fetchAsset() async {
     try {
       final assetList = await state.getAssetListUseCase.execute(assetIdList: state.assetIdList);
-
       // assetList의 totalAmount, totalExpense, totalIncome 합산
       final double amount = assetList.fold(0, (sum, asset) => sum + asset.totalAmount);
       final double expense = assetList.fold(0, (sum, asset) => sum + asset.totalExpense);

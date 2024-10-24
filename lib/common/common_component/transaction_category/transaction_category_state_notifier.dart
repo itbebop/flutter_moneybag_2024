@@ -5,12 +5,12 @@ import 'package:flutter_moneybag_2024/domain/model/transaction_category.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final transactionCategoryStateProvider = StateNotifierProvider<TransactionCategoryStateNotifier, TransactionCategoryState>((ref) {
-  final userState = ref.watch(userStateProvier);
-  final userId = userState.when(
-    data: (user) => user.userId,
-    loading: () => '', // 로딩 중일 때 기본값
-    error: (error, stackTrace) => '', // 에러 발생 시 기본값
-  );
+  final userState = ref.watch(userStateProvider);
+  String userId = '';
+
+  if (userState.user != null) {
+    userId = userState.user!.userId;
+  }
 
   return TransactionCategoryStateNotifier(TransactionCategoryState(
     createTransactionCategoryUseCase: getIt(),

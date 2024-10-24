@@ -182,8 +182,8 @@ class TransactionMenu extends ConsumerWidget {
                     final value = amountEditController.text;
                     final valueWithoutComma = value.replaceAll(',', '');
                     ref.read(transactionStateProvider.notifier).onChangeAmount(valueWithoutComma);
-                    final userStateValue = ref.watch(userStateProvier);
-                    if (userStateValue.value != null) {
+                    final userStateValue = ref.watch(userStateProvider);
+                    if (userStateValue.user != null) {
                       await ref.read(transactionStateProvider.notifier).createTransaction(
                           transactionDetail: TransactionDetail(
                             transactionId: '1',
@@ -191,7 +191,7 @@ class TransactionMenu extends ConsumerWidget {
                             createdAt: DateTime.now(),
                             updatedAt: DateTime.now(),
                             amount: ref.read(transactionStateProvider).amount,
-                            userId: userStateValue.value!.userId,
+                            userId: userStateValue.user!.userId,
                             category: TransactionCategory(
                               categoryId: '1',
                               name: '이자',

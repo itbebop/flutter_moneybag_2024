@@ -46,7 +46,7 @@ class LoginScreen extends ConsumerWidget {
                       child: InkWell(
                         onTap: () async {
                           await ref.read(loginScreenStateProvider.notifier).login(platform: LoginPlatform.kakao);
-                          await ref.read(userStateProvier.notifier).fetchUser();
+                          await ref.read(userStateProvider.notifier).fetchUser();
                           await ref.read(assetStateProvier.notifier).fetchAsset();
                           final assetgList = ref.read(assetStateProvier).assetIdList;
                           await ref.read(transactionStateProvider.notifier).getAssetIdList(assetgList);
@@ -72,7 +72,7 @@ class LoginScreen extends ConsumerWidget {
                       child: InkWell(
                         onTap: () async {
                           await ref.read(loginScreenStateProvider.notifier).login(platform: LoginPlatform.google);
-                          await ref.read(userStateProvier.notifier).fetchUser();
+                          await ref.read(userStateProvider.notifier).fetchUser();
                           await ref.read(assetStateProvier.notifier).fetchAsset();
                           final assetgList = ref.read(assetStateProvier).assetIdList;
                           await ref.read(transactionStateProvider.notifier).getAssetIdList(assetgList);
