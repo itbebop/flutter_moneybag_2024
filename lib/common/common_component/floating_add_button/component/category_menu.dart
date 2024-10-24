@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_moneybag_2024/common/common.dart';
 import 'package:flutter_moneybag_2024/common/common_component/floating_add_button/component/float_item.dart';
 import 'package:flutter_moneybag_2024/common/common_component/floating_add_button/floating_add_button.riverpod.dart';
+import 'package:flutter_moneybag_2024/common/common_component/transaction/riverpod/transaction_state_notifier.dart';
 import 'package:flutter_moneybag_2024/domain/enums/asset_types.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hugeicons/hugeicons.dart';
@@ -36,6 +37,7 @@ class CategoryMenu extends ConsumerWidget {
               icon: HugeIcons.strokeRoundedLoginCircle02,
               selectedValue: AssetType.income,
               onSelect: (AssetType assetType) {
+                ref.read(transactionStateProvider.notifier).selectAssetType(assetType);
                 ref.read(floatingButtonStateProvider.notifier).toggleTransactionMenu();
                 ref.read(floatingButtonStateProvider.notifier).tapCategory(assetType);
               },
@@ -47,6 +49,7 @@ class CategoryMenu extends ConsumerWidget {
               icon: HugeIcons.strokeRoundedLoginCircle02,
               selectedValue: AssetType.expense,
               onSelect: (AssetType assetType) {
+                ref.read(transactionStateProvider.notifier).selectAssetType(assetType);
                 ref.read(floatingButtonStateProvider.notifier).toggleTransactionMenu();
                 ref.read(floatingButtonStateProvider.notifier).tapCategory(assetType);
               },
