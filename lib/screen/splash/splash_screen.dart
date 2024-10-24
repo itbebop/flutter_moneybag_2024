@@ -50,9 +50,13 @@ class _SplashScreenState extends ConsumerState<SplashScreen> with SingleTickerPr
       WidgetsBinding.instance.addPostFrameCallback((_) {
         _auth.authStateChanges().first.then((User? user) {
           if (user != null) {
-            context.go('/main');
+            if (mounted) {
+              context.go('/main');
+            }
           } else {
-            context.go('/login');
+            if (mounted) {
+              context.go('/login');
+            }
           }
         });
       });
