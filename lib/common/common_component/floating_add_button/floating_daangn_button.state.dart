@@ -4,9 +4,11 @@ part 'floating_daangn_button.state.freezed.dart';
 
 @freezed
 class FloatingButtonState with _$FloatingButtonState {
-  const factory FloatingButtonState(
-    final bool isExpanded,
-    final bool isSmall,
-    final bool isClassified,
-  ) = _FloatingButtonState;
+  const factory FloatingButtonState({
+    @Default(false) final bool isExpanded,
+    @Default(false) final bool isSmall,
+    @Default(false) final bool isClassified,
+    @Default(false) final bool expenseSelected,
+    @Default(false) final bool incomeSelected,
+  }) = _FloatingButtonState;
 }

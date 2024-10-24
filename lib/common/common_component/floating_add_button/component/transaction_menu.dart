@@ -7,11 +7,13 @@ import 'package:flutter_moneybag_2024/common/common_component/transaction/riverp
 import 'package:flutter_moneybag_2024/common/dart/extension/thousand_comma_input_formatter.dart';
 import 'package:flutter_moneybag_2024/common/widget/custom_dropdown_button.dart';
 import 'package:flutter_moneybag_2024/core/provider/user_state_notifier.dart';
+import 'package:flutter_moneybag_2024/domain/enums/asset_types.dart';
 import 'package:flutter_moneybag_2024/domain/model/asset.dart';
 import 'package:flutter_moneybag_2024/domain/model/transaction_category.dart';
 import 'package:flutter_moneybag_2024/domain/model/transaction_detail.dart';
 import 'package:flutter_moneybag_2024/screen/tab/asset/riverpod/asset_state_notifier.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hugeicons/hugeicons.dart';
 
 class TransactionMenu extends ConsumerWidget {
   final TextEditingController memoEditController;
@@ -133,9 +135,16 @@ class TransactionMenu extends ConsumerWidget {
                           ),
                           child: SizedBox(
                             width: 100,
-                            child: FloatItem(
+                            child: FloatItem<TransactionCategory>(
                               title: '이자', //'transaction1.title' // TODO: 글자제한, eclips 필요함
-                              imagePath: picSum(401),
+                              onSelect: (TransactionCategory category) {},
+                              selectedValue: const TransactionCategory(
+                                categoryId: '',
+                                imgUrl: '',
+                                name: '',
+                                type: AssetType.income,
+                              ),
+                              icon: HugeIcons.strokeRoundedLoginCircle02,
                             ),
                           )),
                       border: InputBorder.none,

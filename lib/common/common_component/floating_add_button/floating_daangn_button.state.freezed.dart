@@ -19,6 +19,8 @@ mixin _$FloatingButtonState {
   bool get isExpanded => throw _privateConstructorUsedError;
   bool get isSmall => throw _privateConstructorUsedError;
   bool get isClassified => throw _privateConstructorUsedError;
+  bool get expenseSelected => throw _privateConstructorUsedError;
+  bool get incomeSelected => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $FloatingButtonStateCopyWith<FloatingButtonState> get copyWith =>
@@ -31,7 +33,12 @@ abstract class $FloatingButtonStateCopyWith<$Res> {
           FloatingButtonState value, $Res Function(FloatingButtonState) then) =
       _$FloatingButtonStateCopyWithImpl<$Res, FloatingButtonState>;
   @useResult
-  $Res call({bool isExpanded, bool isSmall, bool isClassified});
+  $Res call(
+      {bool isExpanded,
+      bool isSmall,
+      bool isClassified,
+      bool expenseSelected,
+      bool incomeSelected});
 }
 
 /// @nodoc
@@ -50,6 +57,8 @@ class _$FloatingButtonStateCopyWithImpl<$Res, $Val extends FloatingButtonState>
     Object? isExpanded = null,
     Object? isSmall = null,
     Object? isClassified = null,
+    Object? expenseSelected = null,
+    Object? incomeSelected = null,
   }) {
     return _then(_value.copyWith(
       isExpanded: null == isExpanded
@@ -64,6 +73,14 @@ class _$FloatingButtonStateCopyWithImpl<$Res, $Val extends FloatingButtonState>
           ? _value.isClassified
           : isClassified // ignore: cast_nullable_to_non_nullable
               as bool,
+      expenseSelected: null == expenseSelected
+          ? _value.expenseSelected
+          : expenseSelected // ignore: cast_nullable_to_non_nullable
+              as bool,
+      incomeSelected: null == incomeSelected
+          ? _value.incomeSelected
+          : incomeSelected // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -76,7 +93,12 @@ abstract class _$$FloatingButtonStateImplCopyWith<$Res>
       __$$FloatingButtonStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool isExpanded, bool isSmall, bool isClassified});
+  $Res call(
+      {bool isExpanded,
+      bool isSmall,
+      bool isClassified,
+      bool expenseSelected,
+      bool incomeSelected});
 }
 
 /// @nodoc
@@ -93,19 +115,29 @@ class __$$FloatingButtonStateImplCopyWithImpl<$Res>
     Object? isExpanded = null,
     Object? isSmall = null,
     Object? isClassified = null,
+    Object? expenseSelected = null,
+    Object? incomeSelected = null,
   }) {
     return _then(_$FloatingButtonStateImpl(
-      null == isExpanded
+      isExpanded: null == isExpanded
           ? _value.isExpanded
           : isExpanded // ignore: cast_nullable_to_non_nullable
               as bool,
-      null == isSmall
+      isSmall: null == isSmall
           ? _value.isSmall
           : isSmall // ignore: cast_nullable_to_non_nullable
               as bool,
-      null == isClassified
+      isClassified: null == isClassified
           ? _value.isClassified
           : isClassified // ignore: cast_nullable_to_non_nullable
+              as bool,
+      expenseSelected: null == expenseSelected
+          ? _value.expenseSelected
+          : expenseSelected // ignore: cast_nullable_to_non_nullable
+              as bool,
+      incomeSelected: null == incomeSelected
+          ? _value.incomeSelected
+          : incomeSelected // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }
@@ -115,18 +147,31 @@ class __$$FloatingButtonStateImplCopyWithImpl<$Res>
 
 class _$FloatingButtonStateImpl implements _FloatingButtonState {
   const _$FloatingButtonStateImpl(
-      this.isExpanded, this.isSmall, this.isClassified);
+      {this.isExpanded = false,
+      this.isSmall = false,
+      this.isClassified = false,
+      this.expenseSelected = false,
+      this.incomeSelected = false});
 
   @override
+  @JsonKey()
   final bool isExpanded;
   @override
+  @JsonKey()
   final bool isSmall;
   @override
+  @JsonKey()
   final bool isClassified;
+  @override
+  @JsonKey()
+  final bool expenseSelected;
+  @override
+  @JsonKey()
+  final bool incomeSelected;
 
   @override
   String toString() {
-    return 'FloatingButtonState(isExpanded: $isExpanded, isSmall: $isSmall, isClassified: $isClassified)';
+    return 'FloatingButtonState(isExpanded: $isExpanded, isSmall: $isSmall, isClassified: $isClassified, expenseSelected: $expenseSelected, incomeSelected: $incomeSelected)';
   }
 
   @override
@@ -138,12 +183,16 @@ class _$FloatingButtonStateImpl implements _FloatingButtonState {
                 other.isExpanded == isExpanded) &&
             (identical(other.isSmall, isSmall) || other.isSmall == isSmall) &&
             (identical(other.isClassified, isClassified) ||
-                other.isClassified == isClassified));
+                other.isClassified == isClassified) &&
+            (identical(other.expenseSelected, expenseSelected) ||
+                other.expenseSelected == expenseSelected) &&
+            (identical(other.incomeSelected, incomeSelected) ||
+                other.incomeSelected == incomeSelected));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, isExpanded, isSmall, isClassified);
+  int get hashCode => Object.hash(runtimeType, isExpanded, isSmall,
+      isClassified, expenseSelected, incomeSelected);
 
   @JsonKey(ignore: true)
   @override
@@ -155,8 +204,11 @@ class _$FloatingButtonStateImpl implements _FloatingButtonState {
 
 abstract class _FloatingButtonState implements FloatingButtonState {
   const factory _FloatingButtonState(
-          final bool isExpanded, final bool isSmall, final bool isClassified) =
-      _$FloatingButtonStateImpl;
+      {final bool isExpanded,
+      final bool isSmall,
+      final bool isClassified,
+      final bool expenseSelected,
+      final bool incomeSelected}) = _$FloatingButtonStateImpl;
 
   @override
   bool get isExpanded;
@@ -164,6 +216,10 @@ abstract class _FloatingButtonState implements FloatingButtonState {
   bool get isSmall;
   @override
   bool get isClassified;
+  @override
+  bool get expenseSelected;
+  @override
+  bool get incomeSelected;
   @override
   @JsonKey(ignore: true)
   _$$FloatingButtonStateImplCopyWith<_$FloatingButtonStateImpl> get copyWith =>

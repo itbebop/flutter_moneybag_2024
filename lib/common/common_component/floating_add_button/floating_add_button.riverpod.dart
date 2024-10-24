@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_moneybag_2024/common/common_component/floating_add_button/floating_daangn_button.state.dart';
+import 'package:flutter_moneybag_2024/domain/enums/asset_types.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final floatingButtonStateProvider = StateNotifierProvider<FloatingButtonStateNotifier, FloatingButtonState>(
   (ref) => FloatingButtonStateNotifier(
-    const FloatingButtonState(
-      false,
-      false,
-      false,
-    ),
+    const FloatingButtonState(),
   ),
 );
 
@@ -31,19 +28,17 @@ class FloatingButtonStateNotifier extends StateNotifier<FloatingButtonState> {
       needToMakeButtonBigger = true;
     }
     if (isSmall) state = state.copyWith(isClassified: !isSmall);
+    if (state.expenseSelected || state.incomeSelected) {
+      state = state.copyWith(expenseSelected: false, incomeSelected: false);
+    }
   }
 
   void changeButtonSize(bool isSmall) {
-    // state = state..isSmall = isSmall;
-
-    // state = FloatingButtonState(state.isExpanded, isSmall);
-
     state = state.copyWith(isSmall: isSmall);
   }
 
   void toggleTransactionMenu() {
     final isClassified = state.isClassified;
-
     state = state.copyWith(isClassified: !isClassified);
   }
 
@@ -59,6 +54,18 @@ class FloatingButtonStateNotifier extends StateNotifier<FloatingButtonState> {
     state = state.copyWith(
       isExpanded: false,
       isClassified: false,
+      expenseSelected: false,
+      incomeSelected: false,
     );
+  }
+
+  void tapCategory<T>(T selectedValue) {
+    if (selectedValue == AssetType.expense && !state.incomeSelected) {
+      state = state.copyWith(expenseSelected: !state.expenseSelected);
+    } else if (selectedValue == AssetType.income && !state.expenseSelected) {
+      state = state.copyWith(incomeSelected: !state.incomeSelected);
+    } else {
+      state = state.copyWith(incomeSelected: false, expenseSelected: false);
+    }
   }
 }
