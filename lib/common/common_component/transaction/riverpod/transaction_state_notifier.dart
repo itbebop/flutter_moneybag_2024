@@ -31,9 +31,6 @@ class TransactionStateNotifier extends StateNotifier<TransactionState> {
 
   void selectAssetType(AssetType assetType) {
     state = state.copyWith(assetType: assetType);
-    if (assetType == AssetType.income) {
-      state = state.copyWith(isIncome: true);
-    }
   }
 
   void selectAsset(String assetId) {
@@ -91,15 +88,12 @@ class TransactionStateNotifier extends StateNotifier<TransactionState> {
   // 선택한 날짜의 이벤트를 가져옴
   Future<List<TransactionDetail>> getEventsForDay(DateTime day) async {
     final events = await initializeTransactionEvents();
-    // print('day: $day');
     return events[day] ?? [];
   }
 
   Future<void> fetchEventsForDay(DateTime day) async {
     state = state.copyWith(events: await getEventsForDay(day));
-
     state = state.copyWith(selectedEvents: ValueNotifier(state.events));
-    print('###events: $state.events');
   }
 
   void clearTransactions() {

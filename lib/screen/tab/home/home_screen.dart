@@ -92,13 +92,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       selectedDay: ref.watch(transactionStateProvider).selectedDay,
                       focusedDay: ref.watch(transactionStateProvider).focusedDay,
                       onDaySelected: (DateTime selectedDay, DateTime focusedDay) {
-                        // setState(() {
-                        //   _selectedDay = selectedDay;
-                        //   _focusedDay = focusedDay;
-                        //   monthProvider.setMonth(MonthList.values[focusedDay.month - 1]); // 선택한 날짜의 월로 업데이트
-                        // });
                         ref.read(transactionStateProvider.notifier).onSelectDay(selectedDay, focusedDay);
-                        // _fetchEventsForDay(selectedDay);
                         ref.read(transactionStateProvider.notifier).fetchEventsForDay(selectedDay);
                       },
                     ),

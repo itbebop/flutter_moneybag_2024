@@ -13,8 +13,6 @@ part 'transaction_state.freezed.dart';
 class TransactionState with _$TransactionState {
   const factory TransactionState({
     @Default(false) final bool isLoading,
-    @Default(false) final bool isIncome,
-    @Default(false) final bool isLogout,
     @Default([]) List<TransactionDetail> events,
     required final DateTime selectedDay,
     required final DateTime focusedDay,
