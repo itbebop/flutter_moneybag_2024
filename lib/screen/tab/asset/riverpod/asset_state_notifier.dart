@@ -102,7 +102,6 @@ class AssetStateNotifier extends StateNotifier<AssetState> {
   }
 
   void onEnterWithoutSelect(BuildContext context) {
-    DialogWidget.showCustomDialog(context: context, title: '필수선택', content: '자산을 선택해주세요');
     if (state.selectedAssetId == '') {
       DialogWidget.showCustomDialog(context: context, title: '', content: '자산을 선택해주세요');
     }
