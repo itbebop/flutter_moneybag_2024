@@ -97,7 +97,10 @@ class TransactionMenu extends ConsumerWidget {
                                           ))
                                       .toList(),
                                   hints: assetProvider.assetHints, // 힌트 텍스트
-                                  action: (asset) => ref.read(assetStateProvier.notifier).getAsset(asset.assetId), // Asset 선택 시 호출되는 액션
+                                  action: (asset) {
+                                    ref.read(assetStateProvier.notifier).getAsset(asset.assetId);
+                                    assetAmountController.text = asset.totalAmount.toWon().toString();
+                                  }, // Asset 선택 시 호출되는 액션
                                 ),
                               ],
                             ),
@@ -146,7 +149,7 @@ class TransactionMenu extends ConsumerWidget {
                             width: 140.w,
                             child: Row(
                               children: [
-                                SizedBox(width: 10.w),
+                                SizedBox(width: 14.w),
                                 FloatItem<TransactionCategory>(
                                   title: '이자', //'transaction1.title' // TODO: 글자제한, eclips 필요함
                                   onSelect: (TransactionCategory category) {},
