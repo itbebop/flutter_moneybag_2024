@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_moneybag_2024/common/common.dart';
+import 'package:hugeicons/hugeicons.dart';
 
 class AssetCard extends StatelessWidget {
+  final String title;
+  final String amount;
+  final String currency;
   const AssetCard({
     super.key,
+    required this.title,
+    required this.amount,
+    required this.currency,
   });
 
   @override
@@ -26,20 +33,14 @@ class AssetCard extends StatelessWidget {
         ),
         Positioned(
           left: 44.w,
-          top: 20.h,
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(25.0),
-            child: Image.network(
-              picSum(201),
-              width: 40,
-            ),
-          ),
+          top: 23.h,
+          child: const HugeIcon(icon: HugeIcons.strokeRoundedMoneyBag02, color: UiConfig.whiteColor),
         ),
         Positioned(
-          left: 96.w,
+          left: 76.w,
           top: 18.h,
           child: Text(
-            '첫 자산',
+            title,
             style: UiConfig.h2Style.copyWith(
               fontWeight: UiConfig.semiBoldFont,
               color: UiConfig.whiteColor,
@@ -59,15 +60,15 @@ class AssetCard extends StatelessWidget {
           right: 42.w,
           top: 24.h,
           child: Container(
-            width: 48.w,
-            height: 24.h,
+            width: 60.w,
+            height: 30.h,
             decoration: BoxDecoration(
               color: UiConfig.whiteColor,
               borderRadius: BorderRadius.circular(15),
             ),
             child: Center(
               child: Text(
-                'KRW',
+                currency,
                 style: UiConfig.smallStyle.copyWith(
                   letterSpacing: 1.0,
                   // fontWeight: UiConfig.semiBoldFont,
@@ -81,7 +82,7 @@ class AssetCard extends StatelessWidget {
           bottom: 14.h,
           left: 44.w,
           child: Text(
-            '₩1800000.00',
+            amount,
             style: UiConfig.numberStyle.copyWith(
               color: UiConfig.whiteColor,
               fontWeight: UiConfig.semiBoldFont,
@@ -111,8 +112,8 @@ class AssetCard extends StatelessWidget {
           ),
         ),
         Positioned(
-          bottom: 24.h,
-          right: 24.w,
+          bottom: 15.h,
+          right: 34.w,
           child: Tap(
               onTap: () {}, // TODO: 수정/삭제(팝업), 색 변경
               child: const Icon(

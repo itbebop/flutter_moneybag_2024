@@ -29,7 +29,7 @@ mixin _$Asset {
   List<String> get userIdList => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
   DateTime get updatedAt => throw _privateConstructorUsedError;
-  String? get assetColor => throw _privateConstructorUsedError;
+  String get assetColor => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -51,7 +51,7 @@ abstract class $AssetCopyWith<$Res> {
       List<String> userIdList,
       DateTime createdAt,
       DateTime updatedAt,
-      String? assetColor});
+      String assetColor});
 }
 
 /// @nodoc
@@ -76,7 +76,7 @@ class _$AssetCopyWithImpl<$Res, $Val extends Asset>
     Object? userIdList = null,
     Object? createdAt = null,
     Object? updatedAt = null,
-    Object? assetColor = freezed,
+    Object? assetColor = null,
   }) {
     return _then(_value.copyWith(
       totalAmount: null == totalAmount
@@ -115,10 +115,10 @@ class _$AssetCopyWithImpl<$Res, $Val extends Asset>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      assetColor: freezed == assetColor
+      assetColor: null == assetColor
           ? _value.assetColor
           : assetColor // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
     ) as $Val);
   }
 }
@@ -140,7 +140,7 @@ abstract class _$$AssetImplCopyWith<$Res> implements $AssetCopyWith<$Res> {
       List<String> userIdList,
       DateTime createdAt,
       DateTime updatedAt,
-      String? assetColor});
+      String assetColor});
 }
 
 /// @nodoc
@@ -163,7 +163,7 @@ class __$$AssetImplCopyWithImpl<$Res>
     Object? userIdList = null,
     Object? createdAt = null,
     Object? updatedAt = null,
-    Object? assetColor = freezed,
+    Object? assetColor = null,
   }) {
     return _then(_$AssetImpl(
       totalAmount: null == totalAmount
@@ -202,10 +202,10 @@ class __$$AssetImplCopyWithImpl<$Res>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      assetColor: freezed == assetColor
+      assetColor: null == assetColor
           ? _value.assetColor
           : assetColor // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
     ));
   }
 }
@@ -223,7 +223,7 @@ class _$AssetImpl implements _Asset {
       required final List<String> userIdList,
       required this.createdAt,
       required this.updatedAt,
-      this.assetColor})
+      required this.assetColor})
       : _userIdList = userIdList;
 
   factory _$AssetImpl.fromJson(Map<String, dynamic> json) =>
@@ -254,7 +254,7 @@ class _$AssetImpl implements _Asset {
   @override
   final DateTime updatedAt;
   @override
-  final String? assetColor;
+  final String assetColor;
 
   @override
   String toString() {
@@ -327,7 +327,7 @@ abstract class _Asset implements Asset {
       required final List<String> userIdList,
       required final DateTime createdAt,
       required final DateTime updatedAt,
-      final String? assetColor}) = _$AssetImpl;
+      required final String assetColor}) = _$AssetImpl;
 
   factory _Asset.fromJson(Map<String, dynamic> json) = _$AssetImpl.fromJson;
 
@@ -350,7 +350,7 @@ abstract class _Asset implements Asset {
   @override
   DateTime get updatedAt;
   @override
-  String? get assetColor;
+  String get assetColor;
   @override
   @JsonKey(ignore: true)
   _$$AssetImplCopyWith<_$AssetImpl> get copyWith =>

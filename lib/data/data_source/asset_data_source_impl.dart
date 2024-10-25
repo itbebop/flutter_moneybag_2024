@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_moneybag_2024/common/common.dart';
 import 'package:flutter_moneybag_2024/data/data_source/asset_data_source.dart';
 import 'package:flutter_moneybag_2024/domain/model/asset.dart';
 
@@ -19,9 +18,9 @@ class AssetDataSourceImpl implements AssetDataSource {
 
     if (userDoc.exists) {
       // activatedAssetId가 비어있는지 확인
-      final activatedAssetId = userDoc.data()?['activatedAssetId'] as String? ?? '';
+      final List<String> assetIdList = (userDoc.data()?['assetIdList'] as List<dynamic>).map((item) => item as String).toList();
 
-      if (activatedAssetId.isEmpty) {
+      if (assetIdList == []) {
         // activatedAssetId가 비어있으면 기본 asset 생성
         final newAssetRef = await _assetRef.add(
           Asset(
@@ -68,7 +67,7 @@ class AssetDataSourceImpl implements AssetDataSource {
     }));
 
     // assets를 updatedAt 기준으로 정렬
-    final sortedAssets = assets.whereType<Asset>().toList()..sort((a, b) => b.updatedAt.compareTo(a.updatedAt)); // updatedAt 기준 내림차순 정렬
+    final sortedAssets = assets.whereType<Asset>().toList()..sort((a, b) => a.updatedAt.compareTo(b.updatedAt)); // updatedAt 기준 내림차순 정렬
 
     return sortedAssets; // 정렬된 Asset 반환
   }

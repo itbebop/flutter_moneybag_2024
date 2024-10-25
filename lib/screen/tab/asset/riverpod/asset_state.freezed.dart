@@ -17,16 +17,24 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$AssetState {
   List<Asset> get assetList => throw _privateConstructorUsedError;
-  double get assetAmount => throw _privateConstructorUsedError;
   double get totalAmount => throw _privateConstructorUsedError;
   double get totalIncome => throw _privateConstructorUsedError;
   double get totalExpense => throw _privateConstructorUsedError;
-  String get hints => throw _privateConstructorUsedError;
+  double get assetAmount => throw _privateConstructorUsedError;
+  bool get showAssetCardNew => throw _privateConstructorUsedError;
+  String get userId => throw _privateConstructorUsedError;
+  String get assetHints => throw _privateConstructorUsedError;
+  String get assetName => throw _privateConstructorUsedError;
+  String get assetColor => throw _privateConstructorUsedError;
+  String get assetCurrency => throw _privateConstructorUsedError;
+  String get currencyHints => throw _privateConstructorUsedError;
   String get selectedAssetId => throw _privateConstructorUsedError;
   List<String> get assetIdList => throw _privateConstructorUsedError;
   GetAssetListUseCase get getAssetListUseCase =>
       throw _privateConstructorUsedError;
   GetAssetUseCase get getAssetUseCase => throw _privateConstructorUsedError;
+  CreateAssetUseCase get createAssetUserCase =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AssetStateCopyWith<AssetState> get copyWith =>
@@ -41,15 +49,22 @@ abstract class $AssetStateCopyWith<$Res> {
   @useResult
   $Res call(
       {List<Asset> assetList,
-      double assetAmount,
       double totalAmount,
       double totalIncome,
       double totalExpense,
-      String hints,
+      double assetAmount,
+      bool showAssetCardNew,
+      String userId,
+      String assetHints,
+      String assetName,
+      String assetColor,
+      String assetCurrency,
+      String currencyHints,
       String selectedAssetId,
       List<String> assetIdList,
       GetAssetListUseCase getAssetListUseCase,
-      GetAssetUseCase getAssetUseCase});
+      GetAssetUseCase getAssetUseCase,
+      CreateAssetUseCase createAssetUserCase});
 }
 
 /// @nodoc
@@ -66,25 +81,28 @@ class _$AssetStateCopyWithImpl<$Res, $Val extends AssetState>
   @override
   $Res call({
     Object? assetList = null,
-    Object? assetAmount = null,
     Object? totalAmount = null,
     Object? totalIncome = null,
     Object? totalExpense = null,
-    Object? hints = null,
+    Object? assetAmount = null,
+    Object? showAssetCardNew = null,
+    Object? userId = null,
+    Object? assetHints = null,
+    Object? assetName = null,
+    Object? assetColor = null,
+    Object? assetCurrency = null,
+    Object? currencyHints = null,
     Object? selectedAssetId = null,
     Object? assetIdList = null,
     Object? getAssetListUseCase = null,
     Object? getAssetUseCase = null,
+    Object? createAssetUserCase = null,
   }) {
     return _then(_value.copyWith(
       assetList: null == assetList
           ? _value.assetList
           : assetList // ignore: cast_nullable_to_non_nullable
               as List<Asset>,
-      assetAmount: null == assetAmount
-          ? _value.assetAmount
-          : assetAmount // ignore: cast_nullable_to_non_nullable
-              as double,
       totalAmount: null == totalAmount
           ? _value.totalAmount
           : totalAmount // ignore: cast_nullable_to_non_nullable
@@ -97,9 +115,37 @@ class _$AssetStateCopyWithImpl<$Res, $Val extends AssetState>
           ? _value.totalExpense
           : totalExpense // ignore: cast_nullable_to_non_nullable
               as double,
-      hints: null == hints
-          ? _value.hints
-          : hints // ignore: cast_nullable_to_non_nullable
+      assetAmount: null == assetAmount
+          ? _value.assetAmount
+          : assetAmount // ignore: cast_nullable_to_non_nullable
+              as double,
+      showAssetCardNew: null == showAssetCardNew
+          ? _value.showAssetCardNew
+          : showAssetCardNew // ignore: cast_nullable_to_non_nullable
+              as bool,
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      assetHints: null == assetHints
+          ? _value.assetHints
+          : assetHints // ignore: cast_nullable_to_non_nullable
+              as String,
+      assetName: null == assetName
+          ? _value.assetName
+          : assetName // ignore: cast_nullable_to_non_nullable
+              as String,
+      assetColor: null == assetColor
+          ? _value.assetColor
+          : assetColor // ignore: cast_nullable_to_non_nullable
+              as String,
+      assetCurrency: null == assetCurrency
+          ? _value.assetCurrency
+          : assetCurrency // ignore: cast_nullable_to_non_nullable
+              as String,
+      currencyHints: null == currencyHints
+          ? _value.currencyHints
+          : currencyHints // ignore: cast_nullable_to_non_nullable
               as String,
       selectedAssetId: null == selectedAssetId
           ? _value.selectedAssetId
@@ -117,6 +163,10 @@ class _$AssetStateCopyWithImpl<$Res, $Val extends AssetState>
           ? _value.getAssetUseCase
           : getAssetUseCase // ignore: cast_nullable_to_non_nullable
               as GetAssetUseCase,
+      createAssetUserCase: null == createAssetUserCase
+          ? _value.createAssetUserCase
+          : createAssetUserCase // ignore: cast_nullable_to_non_nullable
+              as CreateAssetUseCase,
     ) as $Val);
   }
 }
@@ -131,15 +181,22 @@ abstract class _$$AssetStateImplCopyWith<$Res>
   @useResult
   $Res call(
       {List<Asset> assetList,
-      double assetAmount,
       double totalAmount,
       double totalIncome,
       double totalExpense,
-      String hints,
+      double assetAmount,
+      bool showAssetCardNew,
+      String userId,
+      String assetHints,
+      String assetName,
+      String assetColor,
+      String assetCurrency,
+      String currencyHints,
       String selectedAssetId,
       List<String> assetIdList,
       GetAssetListUseCase getAssetListUseCase,
-      GetAssetUseCase getAssetUseCase});
+      GetAssetUseCase getAssetUseCase,
+      CreateAssetUseCase createAssetUserCase});
 }
 
 /// @nodoc
@@ -154,25 +211,28 @@ class __$$AssetStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? assetList = null,
-    Object? assetAmount = null,
     Object? totalAmount = null,
     Object? totalIncome = null,
     Object? totalExpense = null,
-    Object? hints = null,
+    Object? assetAmount = null,
+    Object? showAssetCardNew = null,
+    Object? userId = null,
+    Object? assetHints = null,
+    Object? assetName = null,
+    Object? assetColor = null,
+    Object? assetCurrency = null,
+    Object? currencyHints = null,
     Object? selectedAssetId = null,
     Object? assetIdList = null,
     Object? getAssetListUseCase = null,
     Object? getAssetUseCase = null,
+    Object? createAssetUserCase = null,
   }) {
     return _then(_$AssetStateImpl(
       assetList: null == assetList
           ? _value._assetList
           : assetList // ignore: cast_nullable_to_non_nullable
               as List<Asset>,
-      assetAmount: null == assetAmount
-          ? _value.assetAmount
-          : assetAmount // ignore: cast_nullable_to_non_nullable
-              as double,
       totalAmount: null == totalAmount
           ? _value.totalAmount
           : totalAmount // ignore: cast_nullable_to_non_nullable
@@ -185,9 +245,37 @@ class __$$AssetStateImplCopyWithImpl<$Res>
           ? _value.totalExpense
           : totalExpense // ignore: cast_nullable_to_non_nullable
               as double,
-      hints: null == hints
-          ? _value.hints
-          : hints // ignore: cast_nullable_to_non_nullable
+      assetAmount: null == assetAmount
+          ? _value.assetAmount
+          : assetAmount // ignore: cast_nullable_to_non_nullable
+              as double,
+      showAssetCardNew: null == showAssetCardNew
+          ? _value.showAssetCardNew
+          : showAssetCardNew // ignore: cast_nullable_to_non_nullable
+              as bool,
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      assetHints: null == assetHints
+          ? _value.assetHints
+          : assetHints // ignore: cast_nullable_to_non_nullable
+              as String,
+      assetName: null == assetName
+          ? _value.assetName
+          : assetName // ignore: cast_nullable_to_non_nullable
+              as String,
+      assetColor: null == assetColor
+          ? _value.assetColor
+          : assetColor // ignore: cast_nullable_to_non_nullable
+              as String,
+      assetCurrency: null == assetCurrency
+          ? _value.assetCurrency
+          : assetCurrency // ignore: cast_nullable_to_non_nullable
+              as String,
+      currencyHints: null == currencyHints
+          ? _value.currencyHints
+          : currencyHints // ignore: cast_nullable_to_non_nullable
               as String,
       selectedAssetId: null == selectedAssetId
           ? _value.selectedAssetId
@@ -205,6 +293,10 @@ class __$$AssetStateImplCopyWithImpl<$Res>
           ? _value.getAssetUseCase
           : getAssetUseCase // ignore: cast_nullable_to_non_nullable
               as GetAssetUseCase,
+      createAssetUserCase: null == createAssetUserCase
+          ? _value.createAssetUserCase
+          : createAssetUserCase // ignore: cast_nullable_to_non_nullable
+              as CreateAssetUseCase,
     ));
   }
 }
@@ -214,15 +306,22 @@ class __$$AssetStateImplCopyWithImpl<$Res>
 class _$AssetStateImpl implements _AssetState {
   const _$AssetStateImpl(
       {final List<Asset> assetList = const [],
-      this.assetAmount = 0,
       this.totalAmount = 0,
       this.totalIncome = 0,
       this.totalExpense = 0,
-      required this.hints,
+      this.assetAmount = 0,
+      this.showAssetCardNew = false,
+      required this.userId,
+      required this.assetHints,
+      required this.assetName,
+      required this.assetColor,
+      required this.assetCurrency,
+      required this.currencyHints,
       required this.selectedAssetId,
       required final List<String> assetIdList,
       required this.getAssetListUseCase,
-      required this.getAssetUseCase})
+      required this.getAssetUseCase,
+      required this.createAssetUserCase})
       : _assetList = assetList,
         _assetIdList = assetIdList;
 
@@ -237,9 +336,6 @@ class _$AssetStateImpl implements _AssetState {
 
   @override
   @JsonKey()
-  final double assetAmount;
-  @override
-  @JsonKey()
   final double totalAmount;
   @override
   @JsonKey()
@@ -248,7 +344,23 @@ class _$AssetStateImpl implements _AssetState {
   @JsonKey()
   final double totalExpense;
   @override
-  final String hints;
+  @JsonKey()
+  final double assetAmount;
+  @override
+  @JsonKey()
+  final bool showAssetCardNew;
+  @override
+  final String userId;
+  @override
+  final String assetHints;
+  @override
+  final String assetName;
+  @override
+  final String assetColor;
+  @override
+  final String assetCurrency;
+  @override
+  final String currencyHints;
   @override
   final String selectedAssetId;
   final List<String> _assetIdList;
@@ -263,10 +375,12 @@ class _$AssetStateImpl implements _AssetState {
   final GetAssetListUseCase getAssetListUseCase;
   @override
   final GetAssetUseCase getAssetUseCase;
+  @override
+  final CreateAssetUseCase createAssetUserCase;
 
   @override
   String toString() {
-    return 'AssetState(assetList: $assetList, assetAmount: $assetAmount, totalAmount: $totalAmount, totalIncome: $totalIncome, totalExpense: $totalExpense, hints: $hints, selectedAssetId: $selectedAssetId, assetIdList: $assetIdList, getAssetListUseCase: $getAssetListUseCase, getAssetUseCase: $getAssetUseCase)';
+    return 'AssetState(assetList: $assetList, totalAmount: $totalAmount, totalIncome: $totalIncome, totalExpense: $totalExpense, assetAmount: $assetAmount, showAssetCardNew: $showAssetCardNew, userId: $userId, assetHints: $assetHints, assetName: $assetName, assetColor: $assetColor, assetCurrency: $assetCurrency, currencyHints: $currencyHints, selectedAssetId: $selectedAssetId, assetIdList: $assetIdList, getAssetListUseCase: $getAssetListUseCase, getAssetUseCase: $getAssetUseCase, createAssetUserCase: $createAssetUserCase)';
   }
 
   @override
@@ -276,15 +390,27 @@ class _$AssetStateImpl implements _AssetState {
             other is _$AssetStateImpl &&
             const DeepCollectionEquality()
                 .equals(other._assetList, _assetList) &&
-            (identical(other.assetAmount, assetAmount) ||
-                other.assetAmount == assetAmount) &&
             (identical(other.totalAmount, totalAmount) ||
                 other.totalAmount == totalAmount) &&
             (identical(other.totalIncome, totalIncome) ||
                 other.totalIncome == totalIncome) &&
             (identical(other.totalExpense, totalExpense) ||
                 other.totalExpense == totalExpense) &&
-            (identical(other.hints, hints) || other.hints == hints) &&
+            (identical(other.assetAmount, assetAmount) ||
+                other.assetAmount == assetAmount) &&
+            (identical(other.showAssetCardNew, showAssetCardNew) ||
+                other.showAssetCardNew == showAssetCardNew) &&
+            (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.assetHints, assetHints) ||
+                other.assetHints == assetHints) &&
+            (identical(other.assetName, assetName) ||
+                other.assetName == assetName) &&
+            (identical(other.assetColor, assetColor) ||
+                other.assetColor == assetColor) &&
+            (identical(other.assetCurrency, assetCurrency) ||
+                other.assetCurrency == assetCurrency) &&
+            (identical(other.currencyHints, currencyHints) ||
+                other.currencyHints == currencyHints) &&
             (identical(other.selectedAssetId, selectedAssetId) ||
                 other.selectedAssetId == selectedAssetId) &&
             const DeepCollectionEquality()
@@ -292,22 +418,31 @@ class _$AssetStateImpl implements _AssetState {
             (identical(other.getAssetListUseCase, getAssetListUseCase) ||
                 other.getAssetListUseCase == getAssetListUseCase) &&
             (identical(other.getAssetUseCase, getAssetUseCase) ||
-                other.getAssetUseCase == getAssetUseCase));
+                other.getAssetUseCase == getAssetUseCase) &&
+            (identical(other.createAssetUserCase, createAssetUserCase) ||
+                other.createAssetUserCase == createAssetUserCase));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(_assetList),
-      assetAmount,
       totalAmount,
       totalIncome,
       totalExpense,
-      hints,
+      assetAmount,
+      showAssetCardNew,
+      userId,
+      assetHints,
+      assetName,
+      assetColor,
+      assetCurrency,
+      currencyHints,
       selectedAssetId,
       const DeepCollectionEquality().hash(_assetIdList),
       getAssetListUseCase,
-      getAssetUseCase);
+      getAssetUseCase,
+      createAssetUserCase);
 
   @JsonKey(ignore: true)
   @override
@@ -318,21 +453,27 @@ class _$AssetStateImpl implements _AssetState {
 
 abstract class _AssetState implements AssetState {
   const factory _AssetState(
-      {final List<Asset> assetList,
-      final double assetAmount,
-      final double totalAmount,
-      final double totalIncome,
-      final double totalExpense,
-      required final String hints,
-      required final String selectedAssetId,
-      required final List<String> assetIdList,
-      required final GetAssetListUseCase getAssetListUseCase,
-      required final GetAssetUseCase getAssetUseCase}) = _$AssetStateImpl;
+          {final List<Asset> assetList,
+          final double totalAmount,
+          final double totalIncome,
+          final double totalExpense,
+          final double assetAmount,
+          final bool showAssetCardNew,
+          required final String userId,
+          required final String assetHints,
+          required final String assetName,
+          required final String assetColor,
+          required final String assetCurrency,
+          required final String currencyHints,
+          required final String selectedAssetId,
+          required final List<String> assetIdList,
+          required final GetAssetListUseCase getAssetListUseCase,
+          required final GetAssetUseCase getAssetUseCase,
+          required final CreateAssetUseCase createAssetUserCase}) =
+      _$AssetStateImpl;
 
   @override
   List<Asset> get assetList;
-  @override
-  double get assetAmount;
   @override
   double get totalAmount;
   @override
@@ -340,7 +481,21 @@ abstract class _AssetState implements AssetState {
   @override
   double get totalExpense;
   @override
-  String get hints;
+  double get assetAmount;
+  @override
+  bool get showAssetCardNew;
+  @override
+  String get userId;
+  @override
+  String get assetHints;
+  @override
+  String get assetName;
+  @override
+  String get assetColor;
+  @override
+  String get assetCurrency;
+  @override
+  String get currencyHints;
   @override
   String get selectedAssetId;
   @override
@@ -349,6 +504,8 @@ abstract class _AssetState implements AssetState {
   GetAssetListUseCase get getAssetListUseCase;
   @override
   GetAssetUseCase get getAssetUseCase;
+  @override
+  CreateAssetUseCase get createAssetUserCase;
   @override
   @JsonKey(ignore: true)
   _$$AssetStateImplCopyWith<_$AssetStateImpl> get copyWith =>

@@ -2,22 +2,32 @@ import 'package:flutter/material.dart';
 import 'package:flutter_moneybag_2024/common/widget/dialog_widget.dart';
 import 'package:flutter_moneybag_2024/core/provider/user_state_notifier.dart';
 import 'package:flutter_moneybag_2024/di/di_setup.dart';
+import 'package:flutter_moneybag_2024/domain/enums/currency.dart';
+import 'package:flutter_moneybag_2024/domain/model/asset.dart';
 import 'package:flutter_moneybag_2024/screen/tab/asset/riverpod/asset_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final assetStateProvier = StateNotifierProvider<AssetStateNotifier, AssetState>((ref) {
   final userState = ref.watch(userStateProvider);
   List<String> assetIdList = [];
+  String userId = '';
   if (userState.user != null) {
     assetIdList = userState.user!.assetIdList;
+    userId = userState.user!.userId;
   }
 
   return AssetStateNotifier(AssetState(
-    assetIdList: assetIdList,
+    createAssetUserCase: getIt(),
     getAssetListUseCase: getIt(),
+    assetIdList: assetIdList,
     getAssetUseCase: getIt(),
-    hints: '선택',
+    assetHints: '선택',
+    currencyHints: '',
     selectedAssetId: '',
+    assetName: '',
+    assetColor: '',
+    assetCurrency: '',
+    userId: userId,
   ));
 });
 
@@ -58,12 +68,18 @@ class AssetStateNotifier extends StateNotifier<AssetState> {
 
   Future<void> getAsset(String assetId) async {
     final asset = await state.getAssetUseCase.execute(assetId: assetId);
-    final String leftHints = asset.assetName;
+    final String assetHints = asset.assetName;
     final double assetAmount = asset.totalAmount; // 조회한 asset하나의 amount
+    final String assetName = asset.assetName;
+    final String assetCurrency = asset.currency;
+    final String assetColor = asset.assetColor;
     state = state.copyWith(
-      hints: leftHints,
+      assetHints: assetHints,
       assetAmount: assetAmount,
       selectedAssetId: assetId,
+      assetName: assetName,
+      assetColor: assetColor,
+      assetCurrency: assetCurrency,
     );
   }
 
@@ -71,7 +87,7 @@ class AssetStateNotifier extends StateNotifier<AssetState> {
     // 자산이 1개 이상인 경우는 목록 날림
     if (state.assetList.length > 1) {
       state = state.copyWith(
-        hints: '선택',
+        assetHints: '선택',
         selectedAssetId: '',
       );
     }
@@ -90,5 +106,17 @@ class AssetStateNotifier extends StateNotifier<AssetState> {
     if (state.selectedAssetId == '') {
       DialogWidget.showCustomDialog(context: context, title: '', content: '자산을 선택해주세요');
     }
+  }
+
+  void onSelectCurrency(Currency currency) {
+    state = state.copyWith(currencyHints: currency.currencyName);
+  }
+
+  void onTapAssetCardNew(bool showAsset) {
+    state = state.copyWith(showAssetCardNew: showAsset);
+  }
+
+  Future<void> createAsset(Asset asset) async {
+    await state.createAssetUserCase.execute(asset: asset, userId: state.userId);
   }
 }

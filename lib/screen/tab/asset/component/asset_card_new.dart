@@ -1,35 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_moneybag_2024/common/common.dart';
+import 'package:flutter_moneybag_2024/common/widget/custom_button.dart';
+import 'package:flutter_moneybag_2024/common/widget/custom_dropdown_button.dart';
+import 'package:flutter_moneybag_2024/domain/enums/currency.dart';
+import 'package:flutter_moneybag_2024/domain/model/asset.dart';
+import 'package:flutter_moneybag_2024/screen/tab/asset/riverpod/asset_state_notifier.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hugeicons/hugeicons.dart';
 
-class AssetCardNew extends StatelessWidget {
+class AssetCardNew extends ConsumerWidget {
   final TextEditingController titleEditController;
-  const AssetCardNew({super.key, required this.titleEditController});
+  const AssetCardNew({
+    super.key,
+    required this.titleEditController,
+  });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final assetProvider = ref.watch(assetStateProvier);
+
     return Stack(
       children: [
         Align(
           alignment: Alignment.topCenter,
           child: Container(
-            width: 350.w,
-            height: 200.h,
+            width: 330.w,
+            height: 180.h,
             decoration: BoxDecoration(
-              color: UiConfig.primaryColorSurface,
-              borderRadius: BorderRadius.circular(10),
+              gradient: const LinearGradient(colors: [
+                Color(0xFFECB159),
+                Color(0xFFFFC527),
+              ]),
+              borderRadius: BorderRadius.circular(20),
             ),
           ),
         ),
         Positioned(
-          left: 28.w,
-          top: 20.h,
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(15.0),
-            child: Image.network(
-              picSum(201),
-              width: 40,
-            ),
-          ),
+          left: 44.w,
+          top: 23.h,
+          child: const HugeIcon(icon: HugeIcons.strokeRoundedMoneyBag02, color: UiConfig.whiteColor),
         ),
         Positioned(
           left: 78.w,
@@ -39,58 +48,108 @@ class AssetCardNew extends StatelessWidget {
             height: 50.h,
             child: TextField(
               controller: titleEditController,
-              decoration: const InputDecoration(
-                enabledBorder: UnderlineInputBorder(
+              decoration: InputDecoration(
+                hintText: '자산 이름을 입력하세요',
+                hintStyle: UiConfig.smallStyle.copyWith(color: UiConfig.whiteColor),
+                enabledBorder: const UnderlineInputBorder(
                   borderSide: BorderSide(color: UiConfig.whiteColor),
                 ),
-                focusedBorder: UnderlineInputBorder(
+                focusedBorder: const UnderlineInputBorder(
                   borderSide: BorderSide(color: UiConfig.whiteColor),
                 ),
               ),
               style: const TextStyle(
                 color: UiConfig.whiteColor,
                 decorationThickness: 0,
+                fontWeight: UiConfig.semiBoldFont,
               ),
             ),
           ),
         ),
         Positioned(
-          right: 36.w,
-          top: 16.h,
+          right: 42.w,
+          top: 24.h,
           child: Container(
-            width: 58.w,
-            height: 32.h,
+            width: 80.w,
+            height: 34.h,
             decoration: BoxDecoration(
               color: UiConfig.whiteColor,
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(15),
             ),
-            child: Center(
-              child: Text(
-                'KRW',
-                style: UiConfig.bodyStyle.copyWith(letterSpacing: 1.0, fontWeight: UiConfig.semiBoldFont, color: UiConfig.primaryColor),
-              ),
+            child: Row(
+              children: [
+                SizedBox(width: 8.w),
+                SizedBox(
+                  width: 70.w,
+                  child: CustomDropdownButton<Currency>(
+                    action: (currency) {
+                      ref.read(assetStateProvier.notifier).onSelectCurrency(currency);
+                    },
+                    items: Currency.values
+                        .map((currency) => DropdownMenuItem<Currency>(
+                              value: currency,
+                              child: Text(
+                                currency.currencyName,
+                                style: UiConfig.extraSmallStyle,
+                              ),
+                            ))
+                        .toList(),
+                    hints: assetProvider.currencyHints,
+                    hintsStyle: UiConfig.extraSmallStyle,
+                    expanded: true,
+                  ),
+                ),
+              ],
             ),
           ),
         ),
         Positioned(
-          bottom: 14.h,
-          left: 30.w,
-          child: Text(
-            '₩1800000.00',
-            style: UiConfig.largeStyle.copyWith(
-              color: UiConfig.whiteColor,
-              fontWeight: UiConfig.semiBoldFont,
-            ),
-          ),
-        ),
-        Positioned(
+          right: 80.w,
+          bottom: 24.h,
           child: Tap(
-              onTap: () {}, // TODO: 수정/삭제(팝업), 색 변경
-              child: const Icon(
-                Icons.more_vert,
-                color: UiConfig.whiteColor,
-              )),
+            onTap: () {
+              ref.read(assetStateProvier.notifier).createAsset(
+                    Asset(
+                      totalAmount: 0,
+                      totalIncome: 0,
+                      totalExpense: 0,
+                      assetId: '0',
+                      assetName: titleEditController.text,
+                      currency: assetProvider.currencyHints,
+                      userIdList: [],
+                      createdAt: DateTime.now(),
+                      updatedAt: DateTime.now(),
+                      assetColor: 'ECB159',
+                    ),
+                  );
+              ref.read(assetStateProvier.notifier).onTapAssetCardNew(false);
+              ref.read(assetStateProvier.notifier).fetchAsset();
+            },
+            child: CustomButton(
+              name: '확 인',
+              buttonColor: UiConfig.whiteColor,
+              textStyle: UiConfig.smallStyle.copyWith(
+                fontWeight: UiConfig.semiBoldFont,
+              ),
+              edgeInsets: const EdgeInsets.only(top: 6, bottom: 6, left: 12, right: 12),
+            ),
+          ),
         ),
+        Positioned(
+          left: 80.w,
+          bottom: 24.h,
+          child: Tap(
+            onTap: () => ref.read(assetStateProvier.notifier).onTapAssetCardNew(false),
+            child: CustomButton(
+              name: '취 소',
+              buttonColor: UiConfig.whiteColor,
+              textStyle: UiConfig.smallStyle.copyWith(
+                fontWeight: UiConfig.semiBoldFont,
+              ),
+              edgeInsets: const EdgeInsets.only(top: 6, bottom: 6, left: 12, right: 12),
+            ),
+          ),
+        )
       ],
     );
   }
