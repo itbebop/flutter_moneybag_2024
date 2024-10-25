@@ -60,12 +60,11 @@ class ReportTransactionList extends ConsumerWidget {
             }
 
             // 날짜 포맷 설정
-            final dateFormat = DateFormat('yyyy-MM-dd');
-            final createdAtFormatted = dateFormat.format(transaction.createdAt);
-            final currentTransactionDate = dateFormat.format(transaction.createdAt);
+            final createdAtFormatted = detailDateFormat.format(transaction.createdAt);
+            final currentTransactionDate = standardFormat.format(transaction.createdAt);
 
             // 날짜가 중복되지 않도록 첫 거래인지 확인
-            bool isFirstTransactionOfTheDay = index == 0 || dateFormat.format(transactionList[index - 1].createdAt) != currentTransactionDate;
+            bool isFirstTransactionOfTheDay = index == 0 || standardFormat.format(transactionList[index - 1].createdAt) != currentTransactionDate;
 
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -76,7 +75,10 @@ class ReportTransactionList extends ConsumerWidget {
                     child: Row(
                       children: [
                         const SizedBox(width: 24),
-                        Text(currentTransactionDate), // 해당 날짜 출력
+                        Text(
+                          currentTransactionDate,
+                          style: UiConfig.h4Style,
+                        ), // 해당 날짜 출력
                       ],
                     ),
                   ),

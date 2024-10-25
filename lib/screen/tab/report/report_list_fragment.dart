@@ -34,7 +34,7 @@ class _ReportListFragmentState extends ConsumerState<ReportListFragment> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            MonthDropdownButton(selectedMonth: selectedMonth, onMonthChanged: (value) => setState(() => selectedMonth = value)),
+            MonthDropdownButton(selectedMonth: selectedMonth, onMonthChanged: (value) => setState(() => selectedMonth = value), fontSize: 20),
             const SortButton(),
           ],
         ),
