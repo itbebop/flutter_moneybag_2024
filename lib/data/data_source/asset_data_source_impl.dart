@@ -27,11 +27,10 @@ class AssetDataSourceImpl implements AssetDataSource {
           Asset(
             assetId: '0',
             assetName: '첫 자산',
-            imgUrl: picSum(301),
             totalAmount: 0,
             totalExpense: 0,
             totalIncome: 0,
-            currency: 'kr',
+            currency: 'KRW',
             createdAt: DateTime.now(),
             updatedAt: DateTime.now(),
             assetColor: 'ECB159',

@@ -12,7 +12,6 @@ _$AssetImpl _$$AssetImplFromJson(Map<String, dynamic> json) => _$AssetImpl(
       totalExpense: (json['totalExpense'] as num).toDouble(),
       assetId: json['assetId'] as String,
       assetName: json['assetName'] as String,
-      imgUrl: json['imgUrl'] as String,
       currency: json['currency'] as String,
       userIdList: (json['userIdList'] as List<dynamic>)
           .map((e) => e as String)
@@ -29,7 +28,6 @@ Map<String, dynamic> _$$AssetImplToJson(_$AssetImpl instance) =>
       'totalExpense': instance.totalExpense,
       'assetId': instance.assetId,
       'assetName': instance.assetName,
-      'imgUrl': instance.imgUrl,
       'currency': instance.currency,
       'userIdList': instance.userIdList,
       'createdAt': instance.createdAt.toIso8601String(),
