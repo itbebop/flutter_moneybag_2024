@@ -44,10 +44,10 @@ class CategoryList extends StatelessWidget {
           Expanded(
             child: GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 4, // 열의 개수
-                childAspectRatio: 1, // 아이템 비율
+                crossAxisCount: 4,
+                childAspectRatio: 1,
               ),
-              itemCount: transactionCategories.length + 1, // '추가' 버튼을 포함하기 위해 1 증가
+              itemCount: transactionCategories.length + 1,
               itemBuilder: (context, index) {
                 if (index < transactionCategories.length) {
                   final category = transactionCategories[index];
@@ -60,44 +60,41 @@ class CategoryList extends StatelessWidget {
                       ),
                       borderRadius: BorderRadius.circular(15),
                     ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: ListView(
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              HugeIcon(
-                                icon: HugeIcons.strokeRoundedMoneyBag02,
-                                color: assetType == AssetType.income ? UiConfig.secondaryTextColor : UiConfig.primaryColorSurface,
-                                size: 20,
-                              ),
-                              Text(category.name,
-                                  style: UiConfig.bodyStyle.copyWith(
-                                    color: UiConfig.color[800],
-                                  )),
-                            ],
-                          )
-                        ],
-                      ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        HugeIcon(
+                          icon: HugeIcons.strokeRoundedMoneyBag02,
+                          color: assetType == AssetType.income ? UiConfig.secondaryTextColor : UiConfig.primaryColorSurface,
+                          size: 20,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                          child: Text(
+                            category.name,
+                            style: UiConfig.bodyStyle.copyWith(
+                              color: UiConfig.color[800],
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ],
                     ),
                   );
                 } else {
-                  // '추가' 버튼
                   return Card(
-                    color: UiConfig.whiteColor, // 카드 배경색을 흰색으로 변경
+                    color: UiConfig.whiteColor,
                     shape: RoundedRectangleBorder(
                       side: BorderSide(
                         color: assetType == AssetType.income ? UiConfig.secondaryTextColor : UiConfig.primaryColorSurface,
                         width: 1,
-                      ), // 테두리선 추가
-                      borderRadius: BorderRadius.circular(15), // 모서리 둥글게
+                      ),
+                      borderRadius: BorderRadius.circular(15),
                     ),
                     child: InkWell(
                       onTap: () {
                         // 추가 버튼 클릭 시 동작
-                        // 예: 카테고리 추가 화면으로 이동
                       },
                       child: Center(
                         child: Icon(
@@ -110,7 +107,7 @@ class CategoryList extends StatelessWidget {
                 }
               },
             ),
-          ),
+          )
         ],
       ),
     );

@@ -105,7 +105,7 @@ final List<TransactionCategory> transactionCategories = [
   ),
   TransactionCategory(
     categoryId: '12',
-    name: '문화생활 중엔 방해하지 말거라',
+    name: '문화생활 중엔',
     imgUrl: picSum(201),
     type: AssetType.expense,
   ),
