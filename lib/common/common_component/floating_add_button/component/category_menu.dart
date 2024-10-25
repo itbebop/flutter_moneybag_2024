@@ -25,7 +25,7 @@ class CategoryMenu extends ConsumerWidget {
       child: Container(
         width: isExpanded ? 160 : 1,
         padding: const EdgeInsets.all(16),
-        margin: const EdgeInsets.only(right: 15, bottom: 20),
+        margin: const EdgeInsets.only(right: 15, bottom: 30),
         decoration: BoxDecoration(
           color: UiConfig.backgroundColor,
           borderRadius: BorderRadius.circular(10),

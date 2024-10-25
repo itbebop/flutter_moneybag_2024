@@ -5,6 +5,7 @@ import 'package:flutter_moneybag_2024/common/common_component/floating_add_butto
 import 'package:flutter_moneybag_2024/common/common_component/floating_add_button/floating_add_button.riverpod.dart';
 import 'package:flutter_moneybag_2024/common/common_component/transaction/riverpod/transaction_state_notifier.dart';
 import 'package:flutter_moneybag_2024/common/dart/extension/thousand_comma_input_formatter.dart';
+import 'package:flutter_moneybag_2024/common/widget/custom_button.dart';
 import 'package:flutter_moneybag_2024/common/widget/custom_dropdown_button.dart';
 import 'package:flutter_moneybag_2024/core/provider/user_state_notifier.dart';
 import 'package:flutter_moneybag_2024/domain/enums/asset_types.dart';
@@ -44,9 +45,9 @@ class TransactionMenu extends ConsumerWidget {
           duration: duration,
           opacity: isClassified ? 1 : 0,
           child: Container(
-            width: isClassified ? MediaQuery.of(context).size.width * 0.8 : 1,
+            width: isClassified ? MediaQuery.of(context).size.width * 0.92 : 1,
             padding: const EdgeInsets.all(16),
-            margin: const EdgeInsets.only(right: 15, bottom: 30),
+            margin: const EdgeInsets.only(right: 15, bottom: 40),
             decoration: BoxDecoration(
               color: UiConfig.backgroundColor,
               borderRadius: BorderRadius.circular(10),
@@ -55,7 +56,7 @@ class TransactionMenu extends ConsumerWidget {
               children: [
                 Container(
                   width: MediaQuery.of(context).size.width,
-                  padding: const EdgeInsets.only(left: 5.0, right: 50.0),
+                  padding: const EdgeInsets.only(right: 50.0),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
                     color: UiConfig.whiteColor,
@@ -77,18 +78,25 @@ class TransactionMenu extends ConsumerWidget {
                             border: Border(right: BorderSide(color: Colors.black38)),
                           ),
                           child: SizedBox(
-                            width: 90.w,
+                            width: 140.w,
                             child: Row(
                               children: [
-                                SizedBox(width: 10.w),
                                 CustomDropdownButton<Asset>(
                                   items: assetProvider.assetList
                                       .map<DropdownMenuItem<Asset>>((asset) => DropdownMenuItem<Asset>(
                                             value: asset,
-                                            child: Text(asset.assetName),
+                                            child: FittedBox(
+                                              fit: BoxFit.contain,
+                                              child: Text(
+                                                asset.assetName,
+                                                style: const TextStyle(
+                                                  overflow: TextOverflow.ellipsis,
+                                                ),
+                                              ),
+                                            ),
                                           ))
                                       .toList(),
-                                  hints: assetProvider.hints, // 힌트 텍스트
+                                  hints: assetProvider.assetHints, // 힌트 텍스트
                                   action: (asset) => ref.read(assetStateProvier.notifier).getAsset(asset.assetId), // Asset 선택 시 호출되는 액션
                                 ),
                               ],
@@ -106,7 +114,7 @@ class TransactionMenu extends ConsumerWidget {
                 const SizedBox(height: 8),
                 Container(
                   width: MediaQuery.of(context).size.width,
-                  padding: const EdgeInsets.only(left: 5.0, right: 50.0),
+                  padding: const EdgeInsets.only(right: 50.0),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
                     color: UiConfig.whiteColor,
@@ -135,7 +143,7 @@ class TransactionMenu extends ConsumerWidget {
                             border: Border(right: BorderSide(color: Colors.black38)),
                           ),
                           child: SizedBox(
-                            width: 90.w,
+                            width: 140.w,
                             child: Row(
                               children: [
                                 SizedBox(width: 10.w),
@@ -228,16 +236,9 @@ class TransactionMenu extends ConsumerWidget {
                     // transaction data 다시 가져옴
                     ref.read(transactionStateProvider.notifier).fetchEventsForDay(DateTime.now());
                   },
-                  child: Container(
-                    padding: const EdgeInsets.only(top: 12, bottom: 12, left: 36, right: 36),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: UiConfig.buttonColor,
-                    ),
-                    child: Text(
-                      '입력',
-                      style: UiConfig.h4Style,
-                    ),
+                  child: const CustomButton(
+                    name: '입력',
+                    buttonColor: UiConfig.buttonColor,
                   ),
                 )
               ],
