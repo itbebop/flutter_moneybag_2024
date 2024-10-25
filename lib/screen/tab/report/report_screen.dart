@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_moneybag_2024/common/common.dart';
+import 'package:flutter_moneybag_2024/core/provider/user_state_notifier.dart';
 import 'package:flutter_moneybag_2024/screen/tab/report/report_list_fragment.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final notificationEditModeProvider = StateProvider((ref) => false);
@@ -12,7 +14,7 @@ class ReportScreen extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final tabController = useTabController(initialLength: 2);
-
+    final userState = ref.watch(userStateProvider);
     return Column(
       children: [
         TabBar(
@@ -37,13 +39,26 @@ class ReportScreen extends HookConsumerWidget {
           ],
         ),
         Expanded(
-            child: TabBarView(
-          controller: tabController,
-          children: [
-            const ReportListFragment(),
-            Image.network(picSum(202)),
-          ],
-        ))
+          child: TabBarView(
+            controller: tabController,
+            children: [
+              const ReportListFragment(),
+              Image.network(picSum(202)),
+            ],
+          ),
+        ),
+        if (userState.user == null)
+          Column(
+            children: [
+              const Text('로그인 후 이용하실 수 있습니다.'),
+              SizedBox(height: 16.h),
+              TextButton(
+                onPressed: () => context.push('/login'),
+                child: const Text('> 로그인 페이지로 이동하기'),
+              ),
+              SizedBox(height: 32.h),
+            ],
+          )
       ],
     );
   }
