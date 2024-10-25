@@ -30,7 +30,7 @@ class AssetItems extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         SizedBox(
-          width: 80.w,
+          width: 65.w,
           child: Text(
             title,
             style: const TextStyle(fontSize: 18),
@@ -44,7 +44,7 @@ class AssetItems extends StatelessWidget {
             textAlign: TextAlign.end, // 오른쪽 정렬 추가
           ),
         ),
-        const SizedBox(width: 16),
+        SizedBox(width: 16.w),
       ],
     );
   }

@@ -127,7 +127,7 @@ class AssetCardNew extends ConsumerWidget {
             },
             child: CustomButton(
               name: '확 인',
-              buttonColor: UiConfig.whiteColor,
+              buttonColor: UiConfig.backgroundColor,
               textStyle: UiConfig.smallStyle.copyWith(
                 fontWeight: UiConfig.semiBoldFont,
               ),
@@ -142,7 +142,7 @@ class AssetCardNew extends ConsumerWidget {
             onTap: () => ref.read(assetStateProvier.notifier).onTapAssetCardNew(false),
             child: CustomButton(
               name: '취 소',
-              buttonColor: UiConfig.whiteColor,
+              buttonColor: UiConfig.backgroundColor,
               textStyle: UiConfig.smallStyle.copyWith(
                 fontWeight: UiConfig.semiBoldFont,
               ),
