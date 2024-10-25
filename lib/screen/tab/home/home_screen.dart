@@ -117,6 +117,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                       onPressed: () => context.push('/login'),
                                       child: const Text('> 로그인 페이지로 이동하기'),
                                     ),
+                                    SizedBox(height: 32.h),
                                   ],
                                 )));
                           }

@@ -18,7 +18,7 @@ class FloatButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(bottom: 30.h, right: MediaQuery.of(context).size.width * 0.43),
+      padding: EdgeInsets.only(bottom: 30.h, right: MediaQuery.of(context).size.width * 0.425),
       child: Tap(
         onTap: () {
           action();
@@ -28,7 +28,6 @@ class FloatButton extends StatelessWidget {
           height: 60,
           padding: const EdgeInsets.symmetric(horizontal: 18),
           decoration: BoxDecoration(
-            // color: isExpanded ? UiConfig.backgroundColor : UiConfig.buttonColor,
             gradient: !isExpanded
                 ? const LinearGradient(
                     begin: Alignment.topLeft,

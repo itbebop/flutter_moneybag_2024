@@ -25,9 +25,15 @@ class ReportScreen extends HookConsumerWidget {
 
           /// 탭바 클릭할 때 나오는 splash effect의 radius
           splashBorderRadius: BorderRadius.circular(10),
-          tabs: const [
-            Text('List'),
-            Text('Chart'),
+          tabs: [
+            Text(
+              'List',
+              style: UiConfig.h3Style,
+            ),
+            Text(
+              'Chart',
+              style: UiConfig.h3Style,
+            ),
           ],
         ),
         Expanded(

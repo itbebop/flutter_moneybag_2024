@@ -23,10 +23,17 @@ class _AppState extends State<App> {
           builder: (context, ref, _) {
             final router = ref.watch(routerProvider);
             return MaterialApp.router(
-                debugShowCheckedModeBanner: false,
-                locale: const Locale('ko'),
-                routerConfig: router, // GoRouter 설정
-                theme: ThemeData(scaffoldBackgroundColor: UiConfig.backgroundColor, appBarTheme: const AppBarTheme(backgroundColor: UiConfig.backgroundColor)));
+              debugShowCheckedModeBanner: false,
+              locale: const Locale('ko'),
+              routerConfig: router, // GoRouter 설정
+              theme: ThemeData(
+                colorScheme: ColorScheme.fromSeed(seedColor: UiConfig.buttonColor),
+                scaffoldBackgroundColor: UiConfig.backgroundColor,
+                appBarTheme: const AppBarTheme(
+                  backgroundColor: UiConfig.backgroundColor,
+                ),
+              ),
+            );
           },
         ),
       ),
