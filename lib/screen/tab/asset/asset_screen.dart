@@ -37,6 +37,7 @@ class _ReportScreenState extends ConsumerState<AssetScreen> {
                       title: assetProvider.assetList[index].assetName,
                       amount: assetProvider.assetList[index].totalAmount.toWon().toString(),
                       currency: assetProvider.assetList[index].currency,
+                      assetColor: assetProvider.assetList[index].assetColor,
                     ),
                     const SizedBox(height: 16),
                   ],

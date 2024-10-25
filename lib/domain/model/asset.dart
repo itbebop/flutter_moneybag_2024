@@ -15,7 +15,7 @@ class Asset with _$Asset {
     required List<String> userIdList,
     required DateTime createdAt,
     required DateTime updatedAt,
-    required String assetColor,
+    required List<int> assetColor,
   }) = _Asset;
 
   factory Asset.fromJson(Map<String, dynamic> json) => _$AssetFromJson(json);

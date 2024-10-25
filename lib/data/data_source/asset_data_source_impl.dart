@@ -32,7 +32,7 @@ class AssetDataSourceImpl implements AssetDataSource {
             currency: 'KRW',
             createdAt: DateTime.now(),
             updatedAt: DateTime.now(),
-            assetColor: 'ECB159',
+            assetColor: [236, 177, 89, 1, 255, 197, 39, 1],
             userIdList: [userId],
           ),
         );

@@ -25,7 +25,7 @@ mixin _$AssetState {
   String get userId => throw _privateConstructorUsedError;
   String get assetHints => throw _privateConstructorUsedError;
   String get assetName => throw _privateConstructorUsedError;
-  String get assetColor => throw _privateConstructorUsedError;
+  List<int> get assetColor => throw _privateConstructorUsedError;
   String get assetCurrency => throw _privateConstructorUsedError;
   String get currencyHints => throw _privateConstructorUsedError;
   String get selectedAssetId => throw _privateConstructorUsedError;
@@ -57,7 +57,7 @@ abstract class $AssetStateCopyWith<$Res> {
       String userId,
       String assetHints,
       String assetName,
-      String assetColor,
+      List<int> assetColor,
       String assetCurrency,
       String currencyHints,
       String selectedAssetId,
@@ -138,7 +138,7 @@ class _$AssetStateCopyWithImpl<$Res, $Val extends AssetState>
       assetColor: null == assetColor
           ? _value.assetColor
           : assetColor // ignore: cast_nullable_to_non_nullable
-              as String,
+              as List<int>,
       assetCurrency: null == assetCurrency
           ? _value.assetCurrency
           : assetCurrency // ignore: cast_nullable_to_non_nullable
@@ -189,7 +189,7 @@ abstract class _$$AssetStateImplCopyWith<$Res>
       String userId,
       String assetHints,
       String assetName,
-      String assetColor,
+      List<int> assetColor,
       String assetCurrency,
       String currencyHints,
       String selectedAssetId,
@@ -266,9 +266,9 @@ class __$$AssetStateImplCopyWithImpl<$Res>
           : assetName // ignore: cast_nullable_to_non_nullable
               as String,
       assetColor: null == assetColor
-          ? _value.assetColor
+          ? _value._assetColor
           : assetColor // ignore: cast_nullable_to_non_nullable
-              as String,
+              as List<int>,
       assetCurrency: null == assetCurrency
           ? _value.assetCurrency
           : assetCurrency // ignore: cast_nullable_to_non_nullable
@@ -314,7 +314,7 @@ class _$AssetStateImpl implements _AssetState {
       required this.userId,
       required this.assetHints,
       required this.assetName,
-      required this.assetColor,
+      required final List<int> assetColor,
       required this.assetCurrency,
       required this.currencyHints,
       required this.selectedAssetId,
@@ -323,6 +323,7 @@ class _$AssetStateImpl implements _AssetState {
       required this.getAssetUseCase,
       required this.createAssetUserCase})
       : _assetList = assetList,
+        _assetColor = assetColor,
         _assetIdList = assetIdList;
 
   final List<Asset> _assetList;
@@ -355,8 +356,14 @@ class _$AssetStateImpl implements _AssetState {
   final String assetHints;
   @override
   final String assetName;
+  final List<int> _assetColor;
   @override
-  final String assetColor;
+  List<int> get assetColor {
+    if (_assetColor is EqualUnmodifiableListView) return _assetColor;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_assetColor);
+  }
+
   @override
   final String assetCurrency;
   @override
@@ -405,8 +412,8 @@ class _$AssetStateImpl implements _AssetState {
                 other.assetHints == assetHints) &&
             (identical(other.assetName, assetName) ||
                 other.assetName == assetName) &&
-            (identical(other.assetColor, assetColor) ||
-                other.assetColor == assetColor) &&
+            const DeepCollectionEquality()
+                .equals(other._assetColor, _assetColor) &&
             (identical(other.assetCurrency, assetCurrency) ||
                 other.assetCurrency == assetCurrency) &&
             (identical(other.currencyHints, currencyHints) ||
@@ -435,7 +442,7 @@ class _$AssetStateImpl implements _AssetState {
       userId,
       assetHints,
       assetName,
-      assetColor,
+      const DeepCollectionEquality().hash(_assetColor),
       assetCurrency,
       currencyHints,
       selectedAssetId,
@@ -462,7 +469,7 @@ abstract class _AssetState implements AssetState {
           required final String userId,
           required final String assetHints,
           required final String assetName,
-          required final String assetColor,
+          required final List<int> assetColor,
           required final String assetCurrency,
           required final String currencyHints,
           required final String selectedAssetId,
@@ -491,7 +498,7 @@ abstract class _AssetState implements AssetState {
   @override
   String get assetName;
   @override
-  String get assetColor;
+  List<int> get assetColor;
   @override
   String get assetCurrency;
   @override

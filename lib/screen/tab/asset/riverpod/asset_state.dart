@@ -18,7 +18,7 @@ class AssetState with _$AssetState {
     required String userId,
     required String assetHints,
     required String assetName,
-    required String assetColor,
+    required List<int> assetColor,
     required String assetCurrency,
     required String currencyHints,
     required String selectedAssetId,

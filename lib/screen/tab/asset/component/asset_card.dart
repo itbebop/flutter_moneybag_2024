@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_moneybag_2024/common/common.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hugeicons/hugeicons.dart';
 
-class AssetCard extends StatelessWidget {
+class AssetCard extends ConsumerWidget {
   final String title;
   final String amount;
   final String currency;
+  final List<int> assetColor;
   const AssetCard({
     super.key,
     required this.title,
     required this.amount,
     required this.currency,
+    required this.assetColor,
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Stack(
       children: [
         Align(
@@ -23,9 +26,9 @@ class AssetCard extends StatelessWidget {
             width: 330.w,
             height: 180.h,
             decoration: BoxDecoration(
-              gradient: const LinearGradient(colors: [
-                Color(0xFFECB159),
-                Color(0xFFFFC527),
+              gradient: LinearGradient(colors: [
+                Color.fromARGB(assetColor[0], assetColor[1], assetColor[2], assetColor[3]),
+                Color.fromARGB(assetColor[4], assetColor[5], assetColor[6], assetColor[7]),
               ]),
               borderRadius: BorderRadius.circular(20),
             ),

@@ -29,7 +29,7 @@ mixin _$Asset {
   List<String> get userIdList => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
   DateTime get updatedAt => throw _privateConstructorUsedError;
-  String get assetColor => throw _privateConstructorUsedError;
+  List<int> get assetColor => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -51,7 +51,7 @@ abstract class $AssetCopyWith<$Res> {
       List<String> userIdList,
       DateTime createdAt,
       DateTime updatedAt,
-      String assetColor});
+      List<int> assetColor});
 }
 
 /// @nodoc
@@ -118,7 +118,7 @@ class _$AssetCopyWithImpl<$Res, $Val extends Asset>
       assetColor: null == assetColor
           ? _value.assetColor
           : assetColor // ignore: cast_nullable_to_non_nullable
-              as String,
+              as List<int>,
     ) as $Val);
   }
 }
@@ -140,7 +140,7 @@ abstract class _$$AssetImplCopyWith<$Res> implements $AssetCopyWith<$Res> {
       List<String> userIdList,
       DateTime createdAt,
       DateTime updatedAt,
-      String assetColor});
+      List<int> assetColor});
 }
 
 /// @nodoc
@@ -203,9 +203,9 @@ class __$$AssetImplCopyWithImpl<$Res>
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
       assetColor: null == assetColor
-          ? _value.assetColor
+          ? _value._assetColor
           : assetColor // ignore: cast_nullable_to_non_nullable
-              as String,
+              as List<int>,
     ));
   }
 }
@@ -223,8 +223,9 @@ class _$AssetImpl implements _Asset {
       required final List<String> userIdList,
       required this.createdAt,
       required this.updatedAt,
-      required this.assetColor})
-      : _userIdList = userIdList;
+      required final List<int> assetColor})
+      : _userIdList = userIdList,
+        _assetColor = assetColor;
 
   factory _$AssetImpl.fromJson(Map<String, dynamic> json) =>
       _$$AssetImplFromJson(json);
@@ -253,8 +254,13 @@ class _$AssetImpl implements _Asset {
   final DateTime createdAt;
   @override
   final DateTime updatedAt;
+  final List<int> _assetColor;
   @override
-  final String assetColor;
+  List<int> get assetColor {
+    if (_assetColor is EqualUnmodifiableListView) return _assetColor;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_assetColor);
+  }
 
   @override
   String toString() {
@@ -283,8 +289,8 @@ class _$AssetImpl implements _Asset {
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
                 other.updatedAt == updatedAt) &&
-            (identical(other.assetColor, assetColor) ||
-                other.assetColor == assetColor));
+            const DeepCollectionEquality()
+                .equals(other._assetColor, _assetColor));
   }
 
   @JsonKey(ignore: true)
@@ -300,7 +306,7 @@ class _$AssetImpl implements _Asset {
       const DeepCollectionEquality().hash(_userIdList),
       createdAt,
       updatedAt,
-      assetColor);
+      const DeepCollectionEquality().hash(_assetColor));
 
   @JsonKey(ignore: true)
   @override
@@ -327,7 +333,7 @@ abstract class _Asset implements Asset {
       required final List<String> userIdList,
       required final DateTime createdAt,
       required final DateTime updatedAt,
-      required final String assetColor}) = _$AssetImpl;
+      required final List<int> assetColor}) = _$AssetImpl;
 
   factory _Asset.fromJson(Map<String, dynamic> json) = _$AssetImpl.fromJson;
 
@@ -350,7 +356,7 @@ abstract class _Asset implements Asset {
   @override
   DateTime get updatedAt;
   @override
-  String get assetColor;
+  List<int> get assetColor;
   @override
   @JsonKey(ignore: true)
   _$$AssetImplCopyWith<_$AssetImpl> get copyWith =>

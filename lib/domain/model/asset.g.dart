@@ -18,7 +18,9 @@ _$AssetImpl _$$AssetImplFromJson(Map<String, dynamic> json) => _$AssetImpl(
           .toList(),
       createdAt: DateTime.parse(json['createdAt'] as String),
       updatedAt: DateTime.parse(json['updatedAt'] as String),
-      assetColor: json['assetColor'] as String,
+      assetColor: (json['assetColor'] as List<dynamic>)
+          .map((e) => (e as num).toInt())
+          .toList(),
     );
 
 Map<String, dynamic> _$$AssetImplToJson(_$AssetImpl instance) =>

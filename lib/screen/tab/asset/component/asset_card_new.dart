@@ -119,7 +119,7 @@ class AssetCardNew extends ConsumerWidget {
                       userIdList: [],
                       createdAt: DateTime.now(),
                       updatedAt: DateTime.now(),
-                      assetColor: 'ECB159',
+                      assetColor: [236, 177, 89, 1, 255, 197, 39, 1],
                     ),
                   );
               ref.read(assetStateProvier.notifier).onTapAssetCardNew(false);

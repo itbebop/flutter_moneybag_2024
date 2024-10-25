@@ -25,7 +25,7 @@ final assetStateProvier = StateNotifierProvider<AssetStateNotifier, AssetState>(
     currencyHints: '',
     selectedAssetId: '',
     assetName: '',
-    assetColor: '',
+    assetColor: [],
     assetCurrency: '',
     userId: userId,
   ));
@@ -72,7 +72,7 @@ class AssetStateNotifier extends StateNotifier<AssetState> {
     final double assetAmount = asset.totalAmount; // 조회한 asset하나의 amount
     final String assetName = asset.assetName;
     final String assetCurrency = asset.currency;
-    final String assetColor = asset.assetColor;
+    final List<int> assetColor = asset.assetColor;
     state = state.copyWith(
       assetHints: assetHints,
       assetAmount: assetAmount,
