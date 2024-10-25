@@ -34,7 +34,6 @@ class TransactionMenu extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // assetAmountController.text = ref.read(assetStateProvier).assetAmount.toString();
     final assetProvider = ref.watch(assetStateProvier);
 
     return Column(
@@ -194,6 +193,7 @@ class TransactionMenu extends ConsumerWidget {
                 const SizedBox(height: 8),
                 Tap(
                   onTap: () async {
+                    ref.read(assetStateProvier.notifier).onEnterWithoutSelect(context);
                     // ,제거하고 전송
                     final value = amountEditController.text;
                     final valueWithoutComma = value.replaceAll(',', '');
