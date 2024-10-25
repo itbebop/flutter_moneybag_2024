@@ -31,6 +31,7 @@ class _ReportScreenState extends ConsumerState<AssetScreen> {
         child: Column(
           children: [
             ListView.builder(
+              physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true, // ListView의 크기를 제한
               itemCount: assetProvider.assetList.length,
               itemBuilder: (context, index) {
