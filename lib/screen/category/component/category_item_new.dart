@@ -33,14 +33,17 @@ class CategoryItemNew extends ConsumerWidget {
               top: 5.h,
               right: 5.w,
               child: Tap(
-                onTap: () => ref.read(categoryStateProvider.notifier).createTransactionCategoryUseCase(
-                      transactionCategory: TransactionCategory(
-                        categoryId: '0',
-                        name: categoryNameEditController.text,
-                        iconKey: categoryProvider.selectedIconName,
-                        type: assetType,
-                      ),
-                    ),
+                onTap: () {
+                  ref.read(categoryStateProvider.notifier).createTransactionCategoryUseCase(
+                        transactionCategory: TransactionCategory(
+                          categoryId: '0',
+                          name: categoryNameEditController.text,
+                          iconKey: categoryProvider.selectedIconName,
+                          type: assetType,
+                        ),
+                      );
+                  ref.read(categoryStateProvider.notifier).getTransactionCetegory(assetType);
+                },
                 child: const Icon(
                   Icons.check,
                   size: 15,
