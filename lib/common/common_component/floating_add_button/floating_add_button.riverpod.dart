@@ -17,7 +17,10 @@ class FloatingButtonStateNotifier extends StateNotifier<FloatingButtonState> {
   void toggleCategoryMenu() {
     final isExpanded = state.isExpanded;
     final isSmall = state.isSmall;
-    state = state.copyWith(isExpanded: !isExpanded, isSmall: needToMakeButtonBigger ? false : true);
+    state = state.copyWith(
+      isExpanded: !isExpanded,
+      isSmall: needToMakeButtonBigger ? false : true,
+    );
 
     // 초기화
     if (needToMakeButtonBigger) {
