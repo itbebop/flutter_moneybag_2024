@@ -25,7 +25,8 @@ class TransactionCategoryDataSourceImpl implements TransactionCategoryDataSource
 
   @override
   Future<List<TransactionCategory>> getTransactionCategoryList({required String userId}) async {
-    return await _transactionCategoryRef(userId).orderBy('createAt', descending: true).get().then((value) => value.docs.map((e) => e.data()).toList());
+    final List<TransactionCategory> categories = await _transactionCategoryRef(userId).get().then((value) => value.docs.map((e) => e.data()).toList());
+    return categories;
   }
 
   @override
