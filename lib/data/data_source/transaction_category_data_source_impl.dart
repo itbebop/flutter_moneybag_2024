@@ -20,7 +20,7 @@ class TransactionCategoryDataSourceImpl implements TransactionCategoryDataSource
 
   @override
   Future<void> createTransactionCategory({required TransactionCategory transactionCategory, required String userId}) async {
-    await _transactionCategoryRef(userId).add(transactionCategory).then((value) => _transactionCategoryRef(userId).doc(value.id).update({'id': value.id}));
+    await _transactionCategoryRef(userId).add(transactionCategory).then((value) => _transactionCategoryRef(userId).doc(value.id).update({'categoryId': value.id}));
   }
 
   @override

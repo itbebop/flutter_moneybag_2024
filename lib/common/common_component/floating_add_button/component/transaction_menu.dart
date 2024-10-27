@@ -155,7 +155,7 @@ class TransactionMenu extends ConsumerWidget {
                                   onSelect: (TransactionCategory category) {},
                                   selectedValue: const TransactionCategory(
                                     categoryId: '',
-                                    imgUrl: '',
+                                    iconKey: '',
                                     name: '',
                                     type: AssetType.income,
                                   ),
@@ -223,7 +223,7 @@ class TransactionMenu extends ConsumerWidget {
                               categoryId: '1',
                               name: '이자',
                               type: ref.read(transactionStateProvider).assetType,
-                              imgUrl: picSum(201),
+                              iconKey: picSum(201),
                             ),
                           ),
                           assetId: assetProvider.selectedAssetId);

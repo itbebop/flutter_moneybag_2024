@@ -5,11 +5,11 @@ import 'package:flutter_moneybag_2024/domain/model/transaction_category.dart';
 
 class TransactionItem extends StatelessWidget {
   final String memo;
-  final String imgUrl;
+  final String icon;
   final String createdAt;
   final String amount;
   final TransactionCategory category;
-  const TransactionItem({super.key, required this.memo, required this.imgUrl, required this.createdAt, required this.amount, required this.category});
+  const TransactionItem({super.key, required this.memo, required this.icon, required this.createdAt, required this.amount, required this.category});
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +56,7 @@ class TransactionItem extends StatelessWidget {
                         height: 50,
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(10),
-                          child: Image.network(imgUrl),
+                          child: Image.network(icon),
                         ),
                       ),
                       const SizedBox(

@@ -32,13 +32,13 @@ class HomeTransactionList extends StatelessWidget {
                   TransactionItem(
                     memo: transaction.memo,
                     amount: transaction.amount.toComma(),
-                    imgUrl: transaction.category.imgUrl,
+                    icon: transaction.category.iconKey,
                     createdAt: detailDateFormat.format(transaction.updatedAt),
                     category: TransactionCategory(
                       categoryId: '1',
                       name: '이자',
                       type: AssetType.income,
-                      imgUrl: picSum(201),
+                      iconKey: picSum(201),
                     ),
                   ),
                 ],

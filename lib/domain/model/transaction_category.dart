@@ -9,7 +9,7 @@ class TransactionCategory with _$TransactionCategory {
   const factory TransactionCategory({
     required String categoryId, // 고유 ID
     required String name, // 유형 이름 (예: Salary, Rent 등)
-    required String imgUrl,
+    required String iconKey,
     required AssetType type,
   }) = _TransactionCategory;
 
