@@ -5,6 +5,7 @@ abstract interface class UserDataSource {
   Future<void> signOut();
   Future<User> getUser({required String userId});
   Future<bool> isNewUser({required User user});
+  Future<void> updateColorList({required String userId, required User user});
   Future<void> updateUserName({required String userId, required String name});
   Future<void> updateLanguage({required String lang, required String userId});
   Future<void> updatePhoto({required String userId});

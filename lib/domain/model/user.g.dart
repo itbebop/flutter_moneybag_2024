@@ -16,6 +16,12 @@ _$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
       assetIdList: (json['assetIdList'] as List<dynamic>)
           .map((e) => e as String)
           .toList(),
+      firstColorListSave: (json['firstColorListSave'] as List<dynamic>)
+          .map((e) => e as String)
+          .toList(),
+      secondColorListSave: (json['secondColorListSave'] as List<dynamic>)
+          .map((e) => e as String)
+          .toList(),
     );
 
 Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
@@ -27,6 +33,8 @@ Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
       'language': instance.language,
       'userType': _$UserTypeEnumMap[instance.userType]!,
       'assetIdList': instance.assetIdList,
+      'firstColorListSave': instance.firstColorListSave,
+      'secondColorListSave': instance.secondColorListSave,
     };
 
 const _$UserTypeEnumMap = {

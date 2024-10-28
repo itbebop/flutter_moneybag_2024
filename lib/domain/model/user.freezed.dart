@@ -27,6 +27,8 @@ mixin _$User {
   String get language => throw _privateConstructorUsedError;
   UserType get userType => throw _privateConstructorUsedError;
   List<String> get assetIdList => throw _privateConstructorUsedError;
+  List<String> get firstColorListSave => throw _privateConstructorUsedError;
+  List<String> get secondColorListSave => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -45,7 +47,9 @@ abstract class $UserCopyWith<$Res> {
       String imgUrl,
       String language,
       UserType userType,
-      List<String> assetIdList});
+      List<String> assetIdList,
+      List<String> firstColorListSave,
+      List<String> secondColorListSave});
 }
 
 /// @nodoc
@@ -68,6 +72,8 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? language = null,
     Object? userType = null,
     Object? assetIdList = null,
+    Object? firstColorListSave = null,
+    Object? secondColorListSave = null,
   }) {
     return _then(_value.copyWith(
       userId: null == userId
@@ -98,6 +104,14 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.assetIdList
           : assetIdList // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      firstColorListSave: null == firstColorListSave
+          ? _value.firstColorListSave
+          : firstColorListSave // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      secondColorListSave: null == secondColorListSave
+          ? _value.secondColorListSave
+          : secondColorListSave // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ) as $Val);
   }
 }
@@ -116,7 +130,9 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       String imgUrl,
       String language,
       UserType userType,
-      List<String> assetIdList});
+      List<String> assetIdList,
+      List<String> firstColorListSave,
+      List<String> secondColorListSave});
 }
 
 /// @nodoc
@@ -136,6 +152,8 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? language = null,
     Object? userType = null,
     Object? assetIdList = null,
+    Object? firstColorListSave = null,
+    Object? secondColorListSave = null,
   }) {
     return _then(_$UserImpl(
       userId: null == userId
@@ -166,6 +184,14 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value._assetIdList
           : assetIdList // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      firstColorListSave: null == firstColorListSave
+          ? _value._firstColorListSave
+          : firstColorListSave // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      secondColorListSave: null == secondColorListSave
+          ? _value._secondColorListSave
+          : secondColorListSave // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ));
   }
 }
@@ -180,8 +206,12 @@ class _$UserImpl implements _User {
       required this.imgUrl,
       required this.language,
       required this.userType,
-      required final List<String> assetIdList})
-      : _assetIdList = assetIdList;
+      required final List<String> assetIdList,
+      required final List<String> firstColorListSave,
+      required final List<String> secondColorListSave})
+      : _assetIdList = assetIdList,
+        _firstColorListSave = firstColorListSave,
+        _secondColorListSave = secondColorListSave;
 
   factory _$UserImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserImplFromJson(json);
@@ -206,9 +236,27 @@ class _$UserImpl implements _User {
     return EqualUnmodifiableListView(_assetIdList);
   }
 
+  final List<String> _firstColorListSave;
+  @override
+  List<String> get firstColorListSave {
+    if (_firstColorListSave is EqualUnmodifiableListView)
+      return _firstColorListSave;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_firstColorListSave);
+  }
+
+  final List<String> _secondColorListSave;
+  @override
+  List<String> get secondColorListSave {
+    if (_secondColorListSave is EqualUnmodifiableListView)
+      return _secondColorListSave;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_secondColorListSave);
+  }
+
   @override
   String toString() {
-    return 'User(userId: $userId, name: $name, email: $email, imgUrl: $imgUrl, language: $language, userType: $userType, assetIdList: $assetIdList)';
+    return 'User(userId: $userId, name: $name, email: $email, imgUrl: $imgUrl, language: $language, userType: $userType, assetIdList: $assetIdList, firstColorListSave: $firstColorListSave, secondColorListSave: $secondColorListSave)';
   }
 
   @override
@@ -225,13 +273,26 @@ class _$UserImpl implements _User {
             (identical(other.userType, userType) ||
                 other.userType == userType) &&
             const DeepCollectionEquality()
-                .equals(other._assetIdList, _assetIdList));
+                .equals(other._assetIdList, _assetIdList) &&
+            const DeepCollectionEquality()
+                .equals(other._firstColorListSave, _firstColorListSave) &&
+            const DeepCollectionEquality()
+                .equals(other._secondColorListSave, _secondColorListSave));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, userId, name, email, imgUrl,
-      language, userType, const DeepCollectionEquality().hash(_assetIdList));
+  int get hashCode => Object.hash(
+      runtimeType,
+      userId,
+      name,
+      email,
+      imgUrl,
+      language,
+      userType,
+      const DeepCollectionEquality().hash(_assetIdList),
+      const DeepCollectionEquality().hash(_firstColorListSave),
+      const DeepCollectionEquality().hash(_secondColorListSave));
 
   @JsonKey(ignore: true)
   @override
@@ -255,7 +316,9 @@ abstract class _User implements User {
       required final String imgUrl,
       required final String language,
       required final UserType userType,
-      required final List<String> assetIdList}) = _$UserImpl;
+      required final List<String> assetIdList,
+      required final List<String> firstColorListSave,
+      required final List<String> secondColorListSave}) = _$UserImpl;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
 
@@ -273,6 +336,10 @@ abstract class _User implements User {
   UserType get userType;
   @override
   List<String> get assetIdList;
+  @override
+  List<String> get firstColorListSave;
+  @override
+  List<String> get secondColorListSave;
   @override
   @JsonKey(ignore: true)
   _$$UserImplCopyWith<_$UserImpl> get copyWith =>

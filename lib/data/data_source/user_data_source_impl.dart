@@ -53,6 +53,11 @@ class UserDataSourceImpl implements UserDataSource {
   }
 
   @override
+  Future<void> updateColorList({required String userId, required User user}) async {
+    await _userRef.doc(userId).update({'firstColorListSave': user.firstColorListSave, 'secondColorListSave': user.secondColorListSave});
+  }
+
+  @override
   Future<void> updateLanguage({required String lang, required String userId}) async {
     await _userRef.doc(userId).update({'language': lang});
   }

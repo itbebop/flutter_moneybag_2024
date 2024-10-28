@@ -14,6 +14,8 @@ class User with _$User {
     required String language,
     required UserType userType,
     required List<String> assetIdList,
+    required List<String> firstColorListSave,
+    required List<String> secondColorListSave,
   }) = _User;
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);

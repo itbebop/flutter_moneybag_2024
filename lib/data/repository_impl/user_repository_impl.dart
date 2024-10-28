@@ -3,7 +3,6 @@ import 'package:flutter_moneybag_2024/core/enum/login_platform.dart';
 import 'package:flutter_moneybag_2024/data/data_source/user_data_source.dart';
 import 'package:flutter_moneybag_2024/data/repository_impl/auth/google_auth.dart';
 import 'package:flutter_moneybag_2024/data/repository_impl/auth/kakao_auth.dart';
-import 'package:flutter_moneybag_2024/domain/enums/user_types.dart';
 import 'package:flutter_moneybag_2024/domain/model/user.dart';
 import 'package:flutter_moneybag_2024/domain/repository/user_repository.dart';
 
@@ -66,29 +65,21 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<User> getUser({required String email}) async {
+  Future<User> getUser({required String userId}) async {
     User user;
     try {
-      user = await _userDataSource.getUser(userId: email);
+      user = await _userDataSource.getUser(userId: userId);
     } catch (error) {
-      user = const User(
-        userId: '',
-        name: '',
-        email: '',
-        imgUrl: '',
-        language: 'ko',
-        userType: UserType.free,
-        assetIdList: [],
-      );
+      rethrow;
     }
     return user;
   }
 
   @override
-  Future<bool> updateUserName({required String email, required String name}) async {
+  Future<bool> updateUserName({required String userId, required String name}) async {
     bool result = false;
     try {
-      await _userDataSource.updateUserName(userId: email, name: name);
+      await _userDataSource.updateUserName(userId: userId, name: name);
       result = true;
     } catch (error) {
       result = false;
@@ -97,12 +88,17 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<void> updatePhoto({required String email}) async {
-    await _userDataSource.updatePhoto(userId: email);
+  Future<void> updateColorList({required String userId, required User user}) async {
+    await _userDataSource.updateColorList(userId: userId, user: user);
   }
 
   @override
-  Future<void> updateLanguage({required String lang, required String email}) async {
-    await _userDataSource.updateLanguage(lang: lang, userId: email);
+  Future<void> updatePhoto({required String userId}) async {
+    await _userDataSource.updatePhoto(userId: userId);
+  }
+
+  @override
+  Future<void> updateLanguage({required String lang, required String userId}) async {
+    await _userDataSource.updateLanguage(lang: lang, userId: userId);
   }
 }

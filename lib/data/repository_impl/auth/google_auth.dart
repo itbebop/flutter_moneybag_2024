@@ -32,6 +32,8 @@ class GoogleAuth implements SocialAuth {
         language: 'ko',
         userType: UserType.free,
         assetIdList: [],
+        firstColorListSave: [],
+        secondColorListSave: [],
       );
       return user;
     } catch (error) {
