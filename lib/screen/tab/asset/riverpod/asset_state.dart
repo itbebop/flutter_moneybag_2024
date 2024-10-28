@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_moneybag_2024/domain/model/asset.dart';
 import 'package:flutter_moneybag_2024/domain/usecase/asset/create_asset_use_case.dart';
 import 'package:flutter_moneybag_2024/domain/usecase/asset/get_asset_list_use_case.dart';
@@ -18,6 +19,12 @@ class AssetState with _$AssetState {
     @Default(false) bool showAssetCardNew,
     @Default(false) bool showAssetCardUpdate,
     @Default(0) int selectedAssetCardIndex,
+    required List<Color> firstColorList,
+    required List<Color> secondColorList,
+    required List<String> firstColorListSave,
+    required List<String> secondColorListSave,
+    required Color firstColor,
+    required Color secondColor,
     required String userId,
     required String assetHints,
     required String assetName,

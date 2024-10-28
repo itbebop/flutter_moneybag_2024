@@ -79,7 +79,7 @@ class AssetCard extends ConsumerWidget {
                 style: UiConfig.smallStyle.copyWith(
                   letterSpacing: 1.0,
                   // fontWeight: UiConfig.semiBoldFont,
-                  color: UiConfig.primaryColor,
+                  color: UiConfig.black,
                 ),
               ),
             ),

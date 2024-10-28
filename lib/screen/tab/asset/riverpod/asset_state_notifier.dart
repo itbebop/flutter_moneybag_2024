@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
+import 'package:flutter_moneybag_2024/common/data/color_list.dart';
 import 'package:flutter_moneybag_2024/common/widget/dialog_widget.dart';
 import 'package:flutter_moneybag_2024/core/provider/user_state_notifier.dart';
 import 'package:flutter_moneybag_2024/di/di_setup.dart';
@@ -29,6 +31,12 @@ final assetStateProvier = StateNotifierProvider<AssetStateNotifier, AssetState>(
     assetColor: [],
     assetCurrency: '',
     userId: userId,
+    firstColor: const Color.fromARGB(255, 236, 177, 89),
+    secondColor: const Color.fromARGB(255, 255, 197, 39),
+    firstColorList: firstColorList,
+    secondColorList: secondColorList,
+    firstColorListSave: [],
+    secondColorListSave: [],
   ));
 });
 
@@ -74,8 +82,19 @@ class AssetStateNotifier extends StateNotifier<AssetState> {
     final String assetName = asset.assetName;
     final String assetCurrency = asset.currency;
     final List<int> assetColor = asset.assetColor;
+    final firstColor = Color.fromARGB(assetColor[0], assetColor[1], assetColor[2], assetColor[3]);
+    final secondColor = Color.fromARGB(assetColor[4], assetColor[5], assetColor[6], assetColor[7]);
     state = state.copyWith(
-        assetHints: assetHints, assetAmount: assetAmount, selectedAssetId: assetId, assetName: assetName, assetColor: assetColor, assetCurrency: assetCurrency, currencyHints: assetCurrency);
+      assetHints: assetHints,
+      assetAmount: assetAmount,
+      selectedAssetId: assetId,
+      assetName: assetName,
+      assetColor: assetColor,
+      assetCurrency: assetCurrency,
+      currencyHints: assetCurrency,
+      firstColor: firstColor,
+      secondColor: secondColor,
+    );
   }
 
   void completeWrite({TextEditingController? memoEditController, TextEditingController? amountEditController}) {
@@ -140,5 +159,59 @@ class AssetStateNotifier extends StateNotifier<AssetState> {
   void onChangeAssetName(String assetName) {
     print(assetName);
     state = state.copyWith(assetName: assetName);
+  }
+
+  void selectColor(Color color, bool isFirst) {
+    if (isFirst) {
+      state = state.copyWith(firstColor: color);
+    } else {
+      state = state.copyWith(secondColor: color);
+    }
+  }
+
+  void showAddDialog(BuildContext context, Color selectedColor, bool isFirst) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Pick a color'),
+        content: SingleChildScrollView(
+          child: ColorPicker(
+            pickerColor: selectedColor,
+            onColorChanged: (newColor) {
+              selectedColor = newColor;
+            },
+          ),
+        ),
+        actions: [
+          TextButton(
+            child: const Text('Add Color'),
+            onPressed: () {
+              addColor(selectedColor, isFirst);
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
+  void addColor(Color color, bool isFirst) {
+    if (isFirst) {
+      state = state.copyWith(firstColorList: [...firstColorList, color]);
+      firstColorList = state.firstColorList;
+    } else {
+      state = state.copyWith(secondColorList: [...secondColorList, color]);
+      secondColorList = state.secondColorList;
+    }
+  }
+
+  void removeColor(Color color, bool isFirst) {
+    if (isFirst) {
+      firstColorList.remove(color);
+      state = state.copyWith(firstColorList: [...firstColorList, color]);
+    } else {
+      secondColorList.remove(color);
+      state = state.copyWith(secondColorList: [...secondColorList, color]);
+    }
   }
 }

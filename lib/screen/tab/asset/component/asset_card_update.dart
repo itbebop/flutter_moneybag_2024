@@ -4,6 +4,7 @@ import 'package:flutter_moneybag_2024/common/widget/custom_button.dart';
 import 'package:flutter_moneybag_2024/common/widget/custom_dropdown_button.dart';
 import 'package:flutter_moneybag_2024/domain/enums/currency.dart';
 import 'package:flutter_moneybag_2024/domain/model/asset.dart';
+import 'package:flutter_moneybag_2024/screen/tab/asset/component/color_picker_widget.dart';
 import 'package:flutter_moneybag_2024/screen/tab/asset/riverpod/asset_state_notifier.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hugeicons/hugeicons.dart';
@@ -22,6 +23,7 @@ class AssetCardUpdate extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final assetProvider = ref.watch(assetStateProvier);
+
     titleEditController.text = assetProvider.assetName;
 
     return SingleChildScrollView(
@@ -36,8 +38,8 @@ class AssetCardUpdate extends ConsumerWidget {
                   height: 180.h,
                   decoration: BoxDecoration(
                     gradient: LinearGradient(colors: [
-                      Color.fromARGB(asset.assetColor[0], asset.assetColor[1], asset.assetColor[2], asset.assetColor[3]),
-                      Color.fromARGB(asset.assetColor[4], asset.assetColor[5], asset.assetColor[6], asset.assetColor[7]),
+                      assetProvider.firstColor,
+                      assetProvider.secondColor,
                     ]),
                     borderRadius: BorderRadius.circular(20),
                   ),
@@ -115,9 +117,31 @@ class AssetCardUpdate extends ConsumerWidget {
             ],
           ),
           SizedBox(height: 16.h),
+          SizedBox(
+            height: 150.h,
+            width: 350.w,
+            child: const ColorPickerWidget(isFirst: true),
+          ),
+          SizedBox(
+            height: 150.h,
+            width: 350.w,
+            child: const ColorPickerWidget(isFirst: false),
+          ),
+          SizedBox(height: 16.h),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Tap(
+                onTap: () => ref.read(assetStateProvier.notifier).onTapAssetCardUpdate(false),
+                child: CustomButton(
+                  name: '취 소',
+                  buttonColor: UiConfig.buttonColor,
+                  textStyle: UiConfig.extraSmallStyle.copyWith(
+                    fontWeight: UiConfig.semiBoldFont,
+                  ),
+                ),
+              ),
+              SizedBox(width: 16.w),
               Tap(
                 onTap: () {
                   ref.read(assetStateProvier.notifier).updateAsset(
@@ -131,7 +155,16 @@ class AssetCardUpdate extends ConsumerWidget {
                           userIdList: asset.userIdList,
                           createdAt: asset.createdAt,
                           updatedAt: DateTime.now(),
-                          assetColor: [255, 236, 177, 89, 255, 255, 197, 39],
+                          assetColor: [
+                            assetProvider.firstColor.alpha,
+                            assetProvider.firstColor.red,
+                            assetProvider.firstColor.green,
+                            assetProvider.firstColor.blue,
+                            assetProvider.secondColor.alpha,
+                            assetProvider.secondColor.red,
+                            assetProvider.secondColor.green,
+                            assetProvider.secondColor.blue
+                          ],
                         ),
                       );
                   ref.read(assetStateProvier.notifier).fetchAsset();
@@ -145,17 +178,6 @@ class AssetCardUpdate extends ConsumerWidget {
                   ),
                 ),
               ),
-              SizedBox(width: 16.w),
-              Tap(
-                onTap: () => ref.read(assetStateProvier.notifier).onTapAssetCardUpdate(false),
-                child: CustomButton(
-                  name: '취 소',
-                  buttonColor: UiConfig.buttonColor,
-                  textStyle: UiConfig.extraSmallStyle.copyWith(
-                    fontWeight: UiConfig.semiBoldFont,
-                  ),
-                ),
-              )
             ],
           )
         ],
