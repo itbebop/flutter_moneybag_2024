@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:flutter_moneybag_2024/common/common.dart';
-import 'package:flutter_moneybag_2024/common/data/color_list.dart';
 import 'package:flutter_moneybag_2024/common/widget/dialog_widget.dart';
 import 'package:flutter_moneybag_2024/core/provider/user_state_notifier.dart';
 import 'package:flutter_moneybag_2024/di/di_setup.dart';
@@ -27,10 +26,12 @@ final assetStateProvier = StateNotifierProvider<AssetStateNotifier, AssetState>(
     createAssetUserCase: getIt(),
     getAssetListUseCase: getIt(),
     updateAssetUserCase: getIt(),
+    deleteAssetUseCase: getIt(),
+    secondColorListSave: [],
     assetIdList: assetIdList,
     getAssetUseCase: getIt(),
     assetHints: '선택',
-    currencyHints: '',
+    currencyHints: '선택',
     selectedAssetId: '',
     assetName: '',
     assetColor: [],
@@ -41,7 +42,6 @@ final assetStateProvier = StateNotifierProvider<AssetStateNotifier, AssetState>(
     firstColorList: firstColorList,
     secondColorList: secondColorList,
     firstColorListSave: [],
-    secondColorListSave: [],
   ));
 });
 
@@ -218,5 +218,9 @@ class AssetStateNotifier extends StateNotifier<AssetState> {
       secondUpdatedList.remove(color);
       state = state.copyWith(secondColorList: [...secondUpdatedList, color]);
     }
+  }
+
+  Future<void> deleteAsset(String assetId) async {
+    await state.deleteAssetUseCase.execute(assetId: assetId);
   }
 }

@@ -8,6 +8,7 @@ import 'package:flutter_moneybag_2024/screen/tab/asset/component/asset_card_upda
 import 'package:flutter_moneybag_2024/screen/tab/asset/riverpod/asset_state_notifier.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hugeicons/hugeicons.dart';
 
 class AssetScreen extends ConsumerStatefulWidget {
   const AssetScreen({super.key});
@@ -44,10 +45,34 @@ class _ReportScreenState extends ConsumerState<AssetScreen> {
                         return Column(
                           children: [
                             if (!assetProvider.showAssetCardUpdate)
-                              AssetCard(
-                                asset: assetProvider.assetList[index],
-                                focusNode: focusNode,
-                                index: index,
+                              Dismissible(
+                                onDismissed: (direction) {
+                                  ref.read(assetStateProvier.notifier).deleteAsset(assetProvider.assetList[index].assetId);
+                                  ref.read(assetStateProvier.notifier).fetchAsset();
+                                },
+                                background: Container(
+                                  color: UiConfig.deleteBackColor,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [SizedBox(width: 20.w), const HugeIcon(icon: HugeIcons.strokeRoundedDeleteThrow, color: UiConfig.whiteColor)],
+                                  ),
+                                ),
+                                secondaryBackground: Container(
+                                  color: UiConfig.deleteBackColor,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      const HugeIcon(icon: HugeIcons.strokeRoundedDeleteThrow, color: UiConfig.whiteColor),
+                                      SizedBox(width: 20.w),
+                                    ],
+                                  ),
+                                ),
+                                key: ValueKey(assetProvider.assetList[index].assetId),
+                                child: AssetCard(
+                                  asset: assetProvider.assetList[index],
+                                  focusNode: focusNode,
+                                  index: index,
+                                ),
                               ),
                             if (assetProvider.showAssetCardUpdate && assetProvider.selectedAssetCardIndex == index)
                               AssetCardUpdate(

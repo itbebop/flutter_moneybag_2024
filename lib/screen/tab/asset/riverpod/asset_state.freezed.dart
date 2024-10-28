@@ -45,6 +45,8 @@ mixin _$AssetState {
       throw _privateConstructorUsedError;
   UpdateAssetUseCase get updateAssetUserCase =>
       throw _privateConstructorUsedError;
+  DeleteAssetUseCase get deleteAssetUseCase =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AssetStateCopyWith<AssetState> get copyWith =>
@@ -83,7 +85,8 @@ abstract class $AssetStateCopyWith<$Res> {
       GetAssetListUseCase getAssetListUseCase,
       GetAssetUseCase getAssetUseCase,
       CreateAssetUseCase createAssetUserCase,
-      UpdateAssetUseCase updateAssetUserCase});
+      UpdateAssetUseCase updateAssetUserCase,
+      DeleteAssetUseCase deleteAssetUseCase});
 }
 
 /// @nodoc
@@ -125,6 +128,7 @@ class _$AssetStateCopyWithImpl<$Res, $Val extends AssetState>
     Object? getAssetUseCase = null,
     Object? createAssetUserCase = null,
     Object? updateAssetUserCase = null,
+    Object? deleteAssetUseCase = null,
   }) {
     return _then(_value.copyWith(
       assetList: null == assetList
@@ -231,6 +235,10 @@ class _$AssetStateCopyWithImpl<$Res, $Val extends AssetState>
           ? _value.updateAssetUserCase
           : updateAssetUserCase // ignore: cast_nullable_to_non_nullable
               as UpdateAssetUseCase,
+      deleteAssetUseCase: null == deleteAssetUseCase
+          ? _value.deleteAssetUseCase
+          : deleteAssetUseCase // ignore: cast_nullable_to_non_nullable
+              as DeleteAssetUseCase,
     ) as $Val);
   }
 }
@@ -269,7 +277,8 @@ abstract class _$$AssetStateImplCopyWith<$Res>
       GetAssetListUseCase getAssetListUseCase,
       GetAssetUseCase getAssetUseCase,
       CreateAssetUseCase createAssetUserCase,
-      UpdateAssetUseCase updateAssetUserCase});
+      UpdateAssetUseCase updateAssetUserCase,
+      DeleteAssetUseCase deleteAssetUseCase});
 }
 
 /// @nodoc
@@ -309,6 +318,7 @@ class __$$AssetStateImplCopyWithImpl<$Res>
     Object? getAssetUseCase = null,
     Object? createAssetUserCase = null,
     Object? updateAssetUserCase = null,
+    Object? deleteAssetUseCase = null,
   }) {
     return _then(_$AssetStateImpl(
       assetList: null == assetList
@@ -415,6 +425,10 @@ class __$$AssetStateImplCopyWithImpl<$Res>
           ? _value.updateAssetUserCase
           : updateAssetUserCase // ignore: cast_nullable_to_non_nullable
               as UpdateAssetUseCase,
+      deleteAssetUseCase: null == deleteAssetUseCase
+          ? _value.deleteAssetUseCase
+          : deleteAssetUseCase // ignore: cast_nullable_to_non_nullable
+              as DeleteAssetUseCase,
     ));
   }
 }
@@ -448,7 +462,8 @@ class _$AssetStateImpl implements _AssetState {
       required this.getAssetListUseCase,
       required this.getAssetUseCase,
       required this.createAssetUserCase,
-      required this.updateAssetUserCase})
+      required this.updateAssetUserCase,
+      required this.deleteAssetUseCase})
       : _assetList = assetList,
         _firstColorList = firstColorList,
         _secondColorList = secondColorList,
@@ -561,10 +576,12 @@ class _$AssetStateImpl implements _AssetState {
   final CreateAssetUseCase createAssetUserCase;
   @override
   final UpdateAssetUseCase updateAssetUserCase;
+  @override
+  final DeleteAssetUseCase deleteAssetUseCase;
 
   @override
   String toString() {
-    return 'AssetState(assetList: $assetList, totalAmount: $totalAmount, totalIncome: $totalIncome, totalExpense: $totalExpense, assetAmount: $assetAmount, showAssetCardNew: $showAssetCardNew, showAssetCardUpdate: $showAssetCardUpdate, selectedAssetCardIndex: $selectedAssetCardIndex, firstColorList: $firstColorList, secondColorList: $secondColorList, firstColorListSave: $firstColorListSave, secondColorListSave: $secondColorListSave, firstColor: $firstColor, secondColor: $secondColor, userId: $userId, assetHints: $assetHints, assetName: $assetName, assetColor: $assetColor, assetCurrency: $assetCurrency, currencyHints: $currencyHints, selectedAssetId: $selectedAssetId, assetIdList: $assetIdList, getAssetListUseCase: $getAssetListUseCase, getAssetUseCase: $getAssetUseCase, createAssetUserCase: $createAssetUserCase, updateAssetUserCase: $updateAssetUserCase)';
+    return 'AssetState(assetList: $assetList, totalAmount: $totalAmount, totalIncome: $totalIncome, totalExpense: $totalExpense, assetAmount: $assetAmount, showAssetCardNew: $showAssetCardNew, showAssetCardUpdate: $showAssetCardUpdate, selectedAssetCardIndex: $selectedAssetCardIndex, firstColorList: $firstColorList, secondColorList: $secondColorList, firstColorListSave: $firstColorListSave, secondColorListSave: $secondColorListSave, firstColor: $firstColor, secondColor: $secondColor, userId: $userId, assetHints: $assetHints, assetName: $assetName, assetColor: $assetColor, assetCurrency: $assetCurrency, currencyHints: $currencyHints, selectedAssetId: $selectedAssetId, assetIdList: $assetIdList, getAssetListUseCase: $getAssetListUseCase, getAssetUseCase: $getAssetUseCase, createAssetUserCase: $createAssetUserCase, updateAssetUserCase: $updateAssetUserCase, deleteAssetUseCase: $deleteAssetUseCase)';
   }
 
   @override
@@ -622,7 +639,9 @@ class _$AssetStateImpl implements _AssetState {
             (identical(other.createAssetUserCase, createAssetUserCase) ||
                 other.createAssetUserCase == createAssetUserCase) &&
             (identical(other.updateAssetUserCase, updateAssetUserCase) ||
-                other.updateAssetUserCase == updateAssetUserCase));
+                other.updateAssetUserCase == updateAssetUserCase) &&
+            (identical(other.deleteAssetUseCase, deleteAssetUseCase) ||
+                other.deleteAssetUseCase == deleteAssetUseCase));
   }
 
   @override
@@ -653,7 +672,8 @@ class _$AssetStateImpl implements _AssetState {
         getAssetListUseCase,
         getAssetUseCase,
         createAssetUserCase,
-        updateAssetUserCase
+        updateAssetUserCase,
+        deleteAssetUseCase
       ]);
 
   @JsonKey(ignore: true)
@@ -665,33 +685,33 @@ class _$AssetStateImpl implements _AssetState {
 
 abstract class _AssetState implements AssetState {
   const factory _AssetState(
-          {final List<Asset> assetList,
-          final double totalAmount,
-          final double totalIncome,
-          final double totalExpense,
-          final double assetAmount,
-          final bool showAssetCardNew,
-          final bool showAssetCardUpdate,
-          final int selectedAssetCardIndex,
-          required final List<Color> firstColorList,
-          required final List<Color> secondColorList,
-          required final List<String> firstColorListSave,
-          required final List<String> secondColorListSave,
-          required final Color firstColor,
-          required final Color secondColor,
-          required final String userId,
-          required final String assetHints,
-          required final String assetName,
-          required final List<int> assetColor,
-          required final String assetCurrency,
-          required final String currencyHints,
-          required final String selectedAssetId,
-          required final List<String> assetIdList,
-          required final GetAssetListUseCase getAssetListUseCase,
-          required final GetAssetUseCase getAssetUseCase,
-          required final CreateAssetUseCase createAssetUserCase,
-          required final UpdateAssetUseCase updateAssetUserCase}) =
-      _$AssetStateImpl;
+      {final List<Asset> assetList,
+      final double totalAmount,
+      final double totalIncome,
+      final double totalExpense,
+      final double assetAmount,
+      final bool showAssetCardNew,
+      final bool showAssetCardUpdate,
+      final int selectedAssetCardIndex,
+      required final List<Color> firstColorList,
+      required final List<Color> secondColorList,
+      required final List<String> firstColorListSave,
+      required final List<String> secondColorListSave,
+      required final Color firstColor,
+      required final Color secondColor,
+      required final String userId,
+      required final String assetHints,
+      required final String assetName,
+      required final List<int> assetColor,
+      required final String assetCurrency,
+      required final String currencyHints,
+      required final String selectedAssetId,
+      required final List<String> assetIdList,
+      required final GetAssetListUseCase getAssetListUseCase,
+      required final GetAssetUseCase getAssetUseCase,
+      required final CreateAssetUseCase createAssetUserCase,
+      required final UpdateAssetUseCase updateAssetUserCase,
+      required final DeleteAssetUseCase deleteAssetUseCase}) = _$AssetStateImpl;
 
   @override
   List<Asset> get assetList;
@@ -745,6 +765,8 @@ abstract class _AssetState implements AssetState {
   CreateAssetUseCase get createAssetUserCase;
   @override
   UpdateAssetUseCase get updateAssetUserCase;
+  @override
+  DeleteAssetUseCase get deleteAssetUseCase;
   @override
   @JsonKey(ignore: true)
   _$$AssetStateImplCopyWith<_$AssetStateImpl> get copyWith =>
