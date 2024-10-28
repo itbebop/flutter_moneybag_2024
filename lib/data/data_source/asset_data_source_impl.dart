@@ -67,7 +67,7 @@ class AssetDataSourceImpl implements AssetDataSource {
     }));
 
     // assets를 updatedAt 기준으로 정렬
-    final sortedAssets = assets.whereType<Asset>().toList()..sort((a, b) => a.updatedAt.compareTo(b.updatedAt)); // updatedAt 기준 내림차순 정렬
+    final sortedAssets = assets.whereType<Asset>().toList()..sort((a, b) => a.createdAt.compareTo(b.createdAt)); // updatedAt 기준 내림차순 정렬
 
     return sortedAssets; // 정렬된 Asset 반환
   }
