@@ -1,23 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_moneybag_2024/common/common.dart';
+import 'package:flutter_moneybag_2024/domain/model/asset.dart';
+import 'package:flutter_moneybag_2024/screen/tab/asset/riverpod/asset_state_notifier.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hugeicons/hugeicons.dart';
 
 class AssetCard extends ConsumerWidget {
-  final String title;
-  final String amount;
-  final String currency;
-  final List<int> assetColor;
+  final Asset asset;
+  final int index;
+  final FocusNode focusNode;
   const AssetCard({
     super.key,
-    required this.title,
-    required this.amount,
-    required this.currency,
-    required this.assetColor,
+    required this.asset,
+    required this.index,
+    required this.focusNode,
   });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final assetColor = asset.assetColor;
+    final title = asset.assetName;
+    final currency = asset.currency;
+    final amount = asset.totalAmount;
     return Stack(
       children: [
         Align(
@@ -85,7 +89,7 @@ class AssetCard extends ConsumerWidget {
           bottom: 14.h,
           left: 44.w,
           child: Text(
-            amount,
+            amount.toString(),
             style: UiConfig.numberStyle.copyWith(
               color: UiConfig.whiteColor,
               fontWeight: UiConfig.semiBoldFont,
@@ -94,18 +98,7 @@ class AssetCard extends ConsumerWidget {
         ),
         Positioned(
           top: 88.h,
-          left: 50.w,
-          child: Text(
-            'single/multiple',
-            style: UiConfig.bodyStyle.copyWith(
-              color: UiConfig.whiteColor,
-              // fontWeight: UiConfig.semiBoldFont,
-            ),
-          ),
-        ),
-        Positioned(
-          top: 88.h,
-          right: 42.w,
+          left: 42.w,
           child: ClipRRect(
             borderRadius: BorderRadius.circular(15.0),
             child: Image.network(
@@ -116,13 +109,19 @@ class AssetCard extends ConsumerWidget {
         ),
         Positioned(
           bottom: 15.h,
-          right: 34.w,
+          right: 42.w,
           child: Tap(
-              onTap: () {}, // TODO: 수정/삭제(팝업), 색 변경
-              child: const Icon(
-                Icons.more_vert,
-                color: UiConfig.whiteColor,
-              )),
+            onTap: () {
+              ref.read(assetStateProvier.notifier).showAssetUpdate(index);
+              ref.read(assetStateProvier.notifier).getAsset(asset.assetId);
+              FocusScope.of(context).requestFocus(focusNode);
+              ref.read(assetStateProvier.notifier).onTapAssetCardNew(false);
+            },
+            child: const HugeIcon(
+              icon: HugeIcons.strokeRoundedEdit02,
+              color: UiConfig.whiteColor,
+            ),
+          ),
         ),
       ],
     );

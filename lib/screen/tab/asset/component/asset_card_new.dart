@@ -28,8 +28,8 @@ class AssetCardNew extends ConsumerWidget {
             height: 180.h,
             decoration: BoxDecoration(
               gradient: const LinearGradient(colors: [
-                Color(0xFFECB159),
-                Color(0xFFFFC527),
+                Color.fromARGB(255, 236, 177, 89),
+                Color.fromARGB(255, 255, 197, 39),
               ]),
               borderRadius: BorderRadius.circular(20),
             ),
@@ -105,7 +105,7 @@ class AssetCardNew extends ConsumerWidget {
         ),
         Positioned(
           right: 80.w,
-          bottom: 24.h,
+          bottom: 16.h,
           child: Tap(
             onTap: () {
               ref.read(assetStateProvier.notifier).createAsset(
@@ -119,7 +119,7 @@ class AssetCardNew extends ConsumerWidget {
                       userIdList: [],
                       createdAt: DateTime.now(),
                       updatedAt: DateTime.now(),
-                      assetColor: [236, 177, 89, 1, 255, 197, 39, 1],
+                      assetColor: [255, 236, 177, 89, 255, 255, 197, 39],
                     ),
                   );
               ref.read(assetStateProvier.notifier).onTapAssetCardNew(false);
@@ -131,22 +131,25 @@ class AssetCardNew extends ConsumerWidget {
               textStyle: UiConfig.smallStyle.copyWith(
                 fontWeight: UiConfig.semiBoldFont,
               ),
-              edgeInsets: const EdgeInsets.only(top: 6, bottom: 6, left: 12, right: 12),
+              edgeInsets: const EdgeInsets.only(top: 4, bottom: 4, left: 10, right: 10),
             ),
           ),
         ),
         Positioned(
           left: 80.w,
-          bottom: 24.h,
+          bottom: 16.h,
           child: Tap(
-            onTap: () => ref.read(assetStateProvier.notifier).onTapAssetCardNew(false),
+            onTap: () {
+              ref.read(assetStateProvier.notifier).onTapAssetCardNew(false);
+              titleEditController.clear();
+            },
             child: CustomButton(
               name: '취 소',
               buttonColor: UiConfig.backgroundColor,
               textStyle: UiConfig.smallStyle.copyWith(
                 fontWeight: UiConfig.semiBoldFont,
               ),
-              edgeInsets: const EdgeInsets.only(top: 6, bottom: 6, left: 12, right: 12),
+              edgeInsets: const EdgeInsets.only(top: 4, bottom: 4, left: 10, right: 10),
             ),
           ),
         )

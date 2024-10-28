@@ -19,6 +19,7 @@ final assetStateProvier = StateNotifierProvider<AssetStateNotifier, AssetState>(
   return AssetStateNotifier(AssetState(
     createAssetUserCase: getIt(),
     getAssetListUseCase: getIt(),
+    updateAssetUserCase: getIt(),
     assetIdList: assetIdList,
     getAssetUseCase: getIt(),
     assetHints: '선택',
@@ -74,13 +75,7 @@ class AssetStateNotifier extends StateNotifier<AssetState> {
     final String assetCurrency = asset.currency;
     final List<int> assetColor = asset.assetColor;
     state = state.copyWith(
-      assetHints: assetHints,
-      assetAmount: assetAmount,
-      selectedAssetId: assetId,
-      assetName: assetName,
-      assetColor: assetColor,
-      assetCurrency: assetCurrency,
-    );
+        assetHints: assetHints, assetAmount: assetAmount, selectedAssetId: assetId, assetName: assetName, assetColor: assetColor, assetCurrency: assetCurrency, currencyHints: assetCurrency);
   }
 
   void completeWrite({TextEditingController? memoEditController, TextEditingController? amountEditController}) {
@@ -107,15 +102,43 @@ class AssetStateNotifier extends StateNotifier<AssetState> {
     }
   }
 
-  void onSelectCurrency(Currency currency) {
-    state = state.copyWith(currencyHints: currency.currencyName);
+  void onSelectCurrency(Currency currency, {String? assetName}) {
+    state = state.copyWith(
+      currencyHints: currency.currencyName,
+      assetName: assetName ?? state.assetName,
+    );
   }
 
   void onTapAssetCardNew(bool showAsset) {
-    state = state.copyWith(showAssetCardNew: showAsset);
+    state = state.copyWith(
+      showAssetCardNew: showAsset,
+    );
   }
 
   Future<void> createAsset(Asset asset) async {
     await state.createAssetUserCase.execute(asset: asset, userId: state.userId);
+  }
+
+  Future<void> updateAsset(Asset asset) async {
+    await state.updateAssetUserCase.execute(asset: asset, assetId: asset.assetId);
+  }
+
+  void showAssetUpdate(int selectedAssetCardIndex) {
+    state = state.copyWith(
+      showAssetCardUpdate: true,
+      selectedAssetCardIndex: selectedAssetCardIndex,
+      currencyHints: state.assetList[selectedAssetCardIndex].currency,
+    );
+  }
+
+  void onTapAssetCardUpdate(bool showUpdate) {
+    state = state.copyWith(
+      showAssetCardUpdate: showUpdate,
+    );
+  }
+
+  void onChangeAssetName(String assetName) {
+    print(assetName);
+    state = state.copyWith(assetName: assetName);
   }
 }

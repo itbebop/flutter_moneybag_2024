@@ -2,6 +2,7 @@ import 'package:flutter_moneybag_2024/domain/model/asset.dart';
 import 'package:flutter_moneybag_2024/domain/usecase/asset/create_asset_use_case.dart';
 import 'package:flutter_moneybag_2024/domain/usecase/asset/get_asset_list_use_case.dart';
 import 'package:flutter_moneybag_2024/domain/usecase/asset/get_asset_use_case.dart';
+import 'package:flutter_moneybag_2024/domain/usecase/asset/update_asset_use_case.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'asset_state.freezed.dart';
@@ -15,6 +16,8 @@ class AssetState with _$AssetState {
     @Default(0) double totalExpense,
     @Default(0) double assetAmount,
     @Default(false) bool showAssetCardNew,
+    @Default(false) bool showAssetCardUpdate,
+    @Default(0) int selectedAssetCardIndex,
     required String userId,
     required String assetHints,
     required String assetName,
@@ -26,5 +29,6 @@ class AssetState with _$AssetState {
     required final GetAssetListUseCase getAssetListUseCase,
     required final GetAssetUseCase getAssetUseCase,
     required final CreateAssetUseCase createAssetUserCase,
+    required final UpdateAssetUseCase updateAssetUserCase,
   }) = _AssetState;
 }
