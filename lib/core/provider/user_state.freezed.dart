@@ -18,6 +18,8 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$UserState {
   bool get isLoading => throw _privateConstructorUsedError;
   GetUserUseCase get getUserUseCase => throw _privateConstructorUsedError;
+  UpdateColorListUsecase get updateColorListUsecase =>
+      throw _privateConstructorUsedError;
   LogoutUseCase get logoutUseCase => throw _privateConstructorUsedError;
   User? get user => throw _privateConstructorUsedError;
 
@@ -34,6 +36,7 @@ abstract class $UserStateCopyWith<$Res> {
   $Res call(
       {bool isLoading,
       GetUserUseCase getUserUseCase,
+      UpdateColorListUsecase updateColorListUsecase,
       LogoutUseCase logoutUseCase,
       User? user});
 
@@ -55,6 +58,7 @@ class _$UserStateCopyWithImpl<$Res, $Val extends UserState>
   $Res call({
     Object? isLoading = null,
     Object? getUserUseCase = null,
+    Object? updateColorListUsecase = null,
     Object? logoutUseCase = null,
     Object? user = freezed,
   }) {
@@ -67,6 +71,10 @@ class _$UserStateCopyWithImpl<$Res, $Val extends UserState>
           ? _value.getUserUseCase
           : getUserUseCase // ignore: cast_nullable_to_non_nullable
               as GetUserUseCase,
+      updateColorListUsecase: null == updateColorListUsecase
+          ? _value.updateColorListUsecase
+          : updateColorListUsecase // ignore: cast_nullable_to_non_nullable
+              as UpdateColorListUsecase,
       logoutUseCase: null == logoutUseCase
           ? _value.logoutUseCase
           : logoutUseCase // ignore: cast_nullable_to_non_nullable
@@ -102,6 +110,7 @@ abstract class _$$UserStateImplCopyWith<$Res>
   $Res call(
       {bool isLoading,
       GetUserUseCase getUserUseCase,
+      UpdateColorListUsecase updateColorListUsecase,
       LogoutUseCase logoutUseCase,
       User? user});
 
@@ -122,6 +131,7 @@ class __$$UserStateImplCopyWithImpl<$Res>
   $Res call({
     Object? isLoading = null,
     Object? getUserUseCase = null,
+    Object? updateColorListUsecase = null,
     Object? logoutUseCase = null,
     Object? user = freezed,
   }) {
@@ -134,6 +144,10 @@ class __$$UserStateImplCopyWithImpl<$Res>
           ? _value.getUserUseCase
           : getUserUseCase // ignore: cast_nullable_to_non_nullable
               as GetUserUseCase,
+      updateColorListUsecase: null == updateColorListUsecase
+          ? _value.updateColorListUsecase
+          : updateColorListUsecase // ignore: cast_nullable_to_non_nullable
+              as UpdateColorListUsecase,
       logoutUseCase: null == logoutUseCase
           ? _value.logoutUseCase
           : logoutUseCase // ignore: cast_nullable_to_non_nullable
@@ -152,6 +166,7 @@ class _$UserStateImpl implements _UserState {
   const _$UserStateImpl(
       {this.isLoading = false,
       required this.getUserUseCase,
+      required this.updateColorListUsecase,
       required this.logoutUseCase,
       this.user});
 
@@ -161,13 +176,15 @@ class _$UserStateImpl implements _UserState {
   @override
   final GetUserUseCase getUserUseCase;
   @override
+  final UpdateColorListUsecase updateColorListUsecase;
+  @override
   final LogoutUseCase logoutUseCase;
   @override
   final User? user;
 
   @override
   String toString() {
-    return 'UserState(isLoading: $isLoading, getUserUseCase: $getUserUseCase, logoutUseCase: $logoutUseCase, user: $user)';
+    return 'UserState(isLoading: $isLoading, getUserUseCase: $getUserUseCase, updateColorListUsecase: $updateColorListUsecase, logoutUseCase: $logoutUseCase, user: $user)';
   }
 
   @override
@@ -179,14 +196,16 @@ class _$UserStateImpl implements _UserState {
                 other.isLoading == isLoading) &&
             (identical(other.getUserUseCase, getUserUseCase) ||
                 other.getUserUseCase == getUserUseCase) &&
+            (identical(other.updateColorListUsecase, updateColorListUsecase) ||
+                other.updateColorListUsecase == updateColorListUsecase) &&
             (identical(other.logoutUseCase, logoutUseCase) ||
                 other.logoutUseCase == logoutUseCase) &&
             (identical(other.user, user) || other.user == user));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, isLoading, getUserUseCase, logoutUseCase, user);
+  int get hashCode => Object.hash(runtimeType, isLoading, getUserUseCase,
+      updateColorListUsecase, logoutUseCase, user);
 
   @JsonKey(ignore: true)
   @override
@@ -199,6 +218,7 @@ abstract class _UserState implements UserState {
   const factory _UserState(
       {final bool isLoading,
       required final GetUserUseCase getUserUseCase,
+      required final UpdateColorListUsecase updateColorListUsecase,
       required final LogoutUseCase logoutUseCase,
       final User? user}) = _$UserStateImpl;
 
@@ -206,6 +226,8 @@ abstract class _UserState implements UserState {
   bool get isLoading;
   @override
   GetUserUseCase get getUserUseCase;
+  @override
+  UpdateColorListUsecase get updateColorListUsecase;
   @override
   LogoutUseCase get logoutUseCase;
   @override

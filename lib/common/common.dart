@@ -7,6 +7,7 @@ export 'package:flutter_moneybag_2024/common/dart/extension/date_extension.dart'
 export 'package:flutter_moneybag_2024/common/widget/tap_widget.dart';
 export 'package:flutter_moneybag_2024/common/widget/animated_width_collapse.dart';
 export 'package:flutter_moneybag_2024/common/dart/extension/context_extension.dart';
+export '../../common/dart/function/color_covert_string.dart';
 
 export 'package:flutter_moneybag_2024/common/common_component/month_dropdown_button.dart';
 

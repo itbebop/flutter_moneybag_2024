@@ -79,7 +79,7 @@ class _DrawerWidgetState extends ConsumerState<DrawerWidget> {
                     ref.read(transactionStateProvider.notifier).clearTransactions(); // 트랜잭션 초기화
                     ref.read(transactionStateProvider.notifier).fetchEventsForDay(DateTime.now());
                     widget.scaffoldKey.currentState!.closeDrawer();
-                    if (mounted) ref.read(userStateProvider.notifier).showLogoutSnackbar(context);
+                    // if (mounted) ref.read(userStateProvider.notifier).showLogoutSnackbar(context);
                   },
                   trailing: const Icon(Icons.add),
                 ),

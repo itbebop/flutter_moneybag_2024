@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_moneybag_2024/common/common.dart';
+import 'package:flutter_moneybag_2024/common/data/color_list.dart';
 import 'package:flutter_moneybag_2024/common/widget/custom_button.dart';
 import 'package:flutter_moneybag_2024/common/widget/custom_dropdown_button.dart';
+import 'package:flutter_moneybag_2024/core/provider/user_state_notifier.dart';
 import 'package:flutter_moneybag_2024/domain/enums/currency.dart';
 import 'package:flutter_moneybag_2024/domain/model/asset.dart';
 import 'package:flutter_moneybag_2024/screen/tab/asset/component/color_picker_widget.dart';
@@ -169,6 +171,7 @@ class AssetCardUpdate extends ConsumerWidget {
                       );
                   ref.read(assetStateProvier.notifier).fetchAsset();
                   ref.read(assetStateProvier.notifier).onTapAssetCardUpdate(false);
+                  ref.read(userStateProvider.notifier).modifyColorList(assetProvider.firstColorList, assetProvider.secondColorList);
                 },
                 child: CustomButton(
                   name: '확 인',

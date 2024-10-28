@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
+import 'package:flutter_moneybag_2024/common/common.dart';
 import 'package:flutter_moneybag_2024/common/data/color_list.dart';
 import 'package:flutter_moneybag_2024/common/widget/dialog_widget.dart';
 import 'package:flutter_moneybag_2024/core/provider/user_state_notifier.dart';
@@ -13,9 +14,13 @@ final assetStateProvier = StateNotifierProvider<AssetStateNotifier, AssetState>(
   final userState = ref.watch(userStateProvider);
   List<String> assetIdList = [];
   String userId = '';
+  List<Color> firstColorList = [];
+  List<Color> secondColorList = [];
   if (userState.user != null) {
     assetIdList = userState.user!.assetIdList;
     userId = userState.user!.userId;
+    firstColorList = stringToColorList(userState.user!.firstColorListSave);
+    secondColorList = stringToColorList(userState.user!.secondColorListSave);
   }
 
   return AssetStateNotifier(AssetState(
@@ -197,21 +202,21 @@ class AssetStateNotifier extends StateNotifier<AssetState> {
 
   void addColor(Color color, bool isFirst) {
     if (isFirst) {
-      state = state.copyWith(firstColorList: [...firstColorList, color]);
-      firstColorList = state.firstColorList;
+      state = state.copyWith(firstColorList: [...state.firstColorList, color]);
     } else {
-      state = state.copyWith(secondColorList: [...secondColorList, color]);
-      secondColorList = state.secondColorList;
+      state = state.copyWith(secondColorList: [...state.secondColorList, color]);
     }
   }
 
   void removeColor(Color color, bool isFirst) {
     if (isFirst) {
-      firstColorList.remove(color);
-      state = state.copyWith(firstColorList: [...firstColorList, color]);
+      List<Color> firstUpdatedList = state.firstColorList;
+      firstUpdatedList.remove(color);
+      state = state.copyWith(firstColorList: [...firstUpdatedList, color]);
     } else {
-      secondColorList.remove(color);
-      state = state.copyWith(secondColorList: [...secondColorList, color]);
+      List<Color> secondUpdatedList = state.secondColorList;
+      secondUpdatedList.remove(color);
+      state = state.copyWith(secondColorList: [...secondUpdatedList, color]);
     }
   }
 }

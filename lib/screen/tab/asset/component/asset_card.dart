@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_moneybag_2024/common/common.dart';
+import 'package:flutter_moneybag_2024/core/provider/user_state_notifier.dart';
 import 'package:flutter_moneybag_2024/domain/model/asset.dart';
 import 'package:flutter_moneybag_2024/screen/tab/asset/riverpod/asset_state_notifier.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -26,15 +27,23 @@ class AssetCard extends ConsumerWidget {
       children: [
         Align(
           alignment: Alignment.topCenter,
-          child: Container(
-            width: 330.w,
-            height: 180.h,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(colors: [
-                Color.fromARGB(assetColor[0], assetColor[1], assetColor[2], assetColor[3]),
-                Color.fromARGB(assetColor[4], assetColor[5], assetColor[6], assetColor[7]),
-              ]),
-              borderRadius: BorderRadius.circular(20),
+          child: Tap(
+            onTap: () {
+              ref.read(assetStateProvier.notifier).showAssetUpdate(index);
+              ref.read(assetStateProvier.notifier).getAsset(asset.assetId);
+              FocusScope.of(context).requestFocus(focusNode);
+              ref.read(assetStateProvier.notifier).onTapAssetCardNew(false);
+            },
+            child: Container(
+              width: 330.w,
+              height: 180.h,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(colors: [
+                  Color.fromARGB(assetColor[0], assetColor[1], assetColor[2], assetColor[3]),
+                  Color.fromARGB(assetColor[4], assetColor[5], assetColor[6], assetColor[7]),
+                ]),
+                borderRadius: BorderRadius.circular(20),
+              ),
             ),
           ),
         ),
@@ -64,11 +73,11 @@ class AssetCard extends ConsumerWidget {
           ),
         ),
         Positioned(
-          right: 42.w,
-          top: 24.h,
+          bottom: 20.h,
+          right: 44.w,
           child: Container(
-            width: 60.w,
-            height: 30.h,
+            width: 64.w,
+            height: 34.h,
             decoration: BoxDecoration(
               color: UiConfig.whiteColor,
               borderRadius: BorderRadius.circular(15),
@@ -78,7 +87,6 @@ class AssetCard extends ConsumerWidget {
                 currency,
                 style: UiConfig.smallStyle.copyWith(
                   letterSpacing: 1.0,
-                  // fontWeight: UiConfig.semiBoldFont,
                   color: UiConfig.black,
                 ),
               ),
@@ -86,10 +94,10 @@ class AssetCard extends ConsumerWidget {
           ),
         ),
         Positioned(
-          bottom: 14.h,
-          left: 44.w,
+          right: 50.w,
+          top: 24.h,
           child: Text(
-            amount.toString(),
+            amount.toComma(),
             style: UiConfig.numberStyle.copyWith(
               color: UiConfig.whiteColor,
               fontWeight: UiConfig.semiBoldFont,
@@ -97,29 +105,13 @@ class AssetCard extends ConsumerWidget {
           ),
         ),
         Positioned(
-          top: 88.h,
-          left: 42.w,
+          bottom: 20.h,
+          left: 52.w,
           child: ClipRRect(
             borderRadius: BorderRadius.circular(15.0),
             child: Image.network(
-              picSum(201),
+              ref.read(userStateProvider).user!.imgUrl,
               width: 30,
-            ),
-          ),
-        ),
-        Positioned(
-          bottom: 15.h,
-          right: 42.w,
-          child: Tap(
-            onTap: () {
-              ref.read(assetStateProvier.notifier).showAssetUpdate(index);
-              ref.read(assetStateProvier.notifier).getAsset(asset.assetId);
-              FocusScope.of(context).requestFocus(focusNode);
-              ref.read(assetStateProvier.notifier).onTapAssetCardNew(false);
-            },
-            child: const HugeIcon(
-              icon: HugeIcons.strokeRoundedEdit02,
-              color: UiConfig.whiteColor,
             ),
           ),
         ),

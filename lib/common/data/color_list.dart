@@ -17,7 +17,7 @@ final List<Color> initColorList = [
   const Color.fromARGB(255, 255, 255, 255),
 ];
 
-List<Color> firstColorList = [
+List<Color> firstColorArray = [
   const Color.fromARGB(255, 244, 67, 54),
   const Color.fromARGB(255, 76, 175, 80),
   const Color.fromARGB(255, 33, 150, 243),
@@ -33,7 +33,7 @@ List<Color> firstColorList = [
   const Color.fromARGB(255, 158, 158, 158),
   const Color.fromARGB(255, 255, 255, 255),
 ];
-List<Color> secondColorList = [
+List<Color> secondColorArray = [
   const Color.fromARGB(255, 244, 67, 54),
   const Color.fromARGB(255, 76, 175, 80),
   const Color.fromARGB(255, 33, 150, 243),
