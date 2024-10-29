@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_moneybag_2024/common/common.dart';
+import 'package:flutter_moneybag_2024/common/widget/alert_dialog_widget.dart';
+import 'package:flutter_moneybag_2024/common/widget/confirm_dialog_widget.dart';
 import 'package:flutter_moneybag_2024/core/provider/user_state_notifier.dart';
 import 'package:flutter_moneybag_2024/screen/tab/asset/component/asset_card.dart';
 import 'package:flutter_moneybag_2024/screen/tab/asset/component/asset_card_button.dart';
@@ -46,8 +48,10 @@ class _ReportScreenState extends ConsumerState<AssetScreen> {
                           children: [
                             if (!assetProvider.showAssetCardUpdate)
                               Dismissible(
-                                onDismissed: (direction) {
-                                  ref.read(assetStateProvier.notifier).deleteAsset(assetProvider.assetList[index].assetId);
+                                onDismissed: (direction) async {
+                                  await ConfirmDialogWidget.asyncInputDialog(
+                                      context: context, initialName: '자산 삭제', onConfirm: () => ref.read(assetStateProvier.notifier).deleteAsset(assetProvider.assetList[index].assetId));
+
                                   ref.read(assetStateProvier.notifier).fetchAsset();
                                 },
                                 background: Container(
