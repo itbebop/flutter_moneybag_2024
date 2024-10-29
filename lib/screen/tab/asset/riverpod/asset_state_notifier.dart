@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:flutter_moneybag_2024/common/common.dart';
-import 'package:flutter_moneybag_2024/common/widget/dialog_widget.dart';
+import 'package:flutter_moneybag_2024/common/widget/alert_dialog_widget.dart';
 import 'package:flutter_moneybag_2024/core/provider/user_state_notifier.dart';
 import 'package:flutter_moneybag_2024/di/di_setup.dart';
 import 'package:flutter_moneybag_2024/domain/enums/currency.dart';
@@ -122,7 +122,7 @@ class AssetStateNotifier extends StateNotifier<AssetState> {
 
   void onEnterWithoutSelect(BuildContext context) {
     if (state.selectedAssetId == '') {
-      DialogWidget.showCustomDialog(context: context, title: '', content: '자산을 선택해주세요');
+      AlertDialogWidget.showCustomDialog(context: context, title: '', content: '자산을 선택해주세요');
     }
   }
 
