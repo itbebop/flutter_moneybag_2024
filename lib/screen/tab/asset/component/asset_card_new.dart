@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_moneybag_2024/common/common.dart';
 import 'package:flutter_moneybag_2024/common/widget/custom_button.dart';
 import 'package:flutter_moneybag_2024/common/widget/custom_dropdown_button.dart';
+import 'package:flutter_moneybag_2024/core/provider/user_state_notifier.dart';
 import 'package:flutter_moneybag_2024/domain/enums/currency.dart';
 import 'package:flutter_moneybag_2024/domain/model/asset.dart';
 import 'package:flutter_moneybag_2024/screen/tab/asset/riverpod/asset_state_notifier.dart';
@@ -107,7 +108,7 @@ class AssetCardNew extends ConsumerWidget {
           right: 80.w,
           bottom: 16.h,
           child: Tap(
-            onTap: () {
+            onTap: () async {
               ref.read(assetStateProvier.notifier).createAsset(
                     Asset(
                       totalAmount: 0,
@@ -123,7 +124,9 @@ class AssetCardNew extends ConsumerWidget {
                     ),
                   );
               ref.read(assetStateProvier.notifier).onTapAssetCardNew(false);
-              ref.read(assetStateProvier.notifier).fetchAsset();
+              await ref.read(userStateProvider.notifier).fetchUser();
+              // await ref.read(assetStateProvier.notifier).fetchAsset();
+              // context.go('/asset');
             },
             child: CustomButton(
               name: '확 인',

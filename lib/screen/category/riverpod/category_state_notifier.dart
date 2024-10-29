@@ -74,13 +74,10 @@ class CategoryStateNotifier extends StateNotifier<CategoryState> {
 
   Future<List<TransactionCategory>> getTransactionCetegory(AssetType assetType) async {
     List<TransactionCategory> categories = await state.getTransactionCategoryListUseCase.execute(userId: state.userId);
-    print('11111');
     if (assetType == AssetType.income) {
       categories = categories.where((category) => category.type == AssetType.income).toList();
-      print('categories income: $categories');
     } else {
       categories = categories.where((category) => category.type == AssetType.expense).toList();
-      print('categories expense: $categories');
     }
     return categories;
   }

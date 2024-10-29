@@ -134,9 +134,9 @@ class AssetStateNotifier extends StateNotifier<AssetState> {
   }
 
   void onTapAssetCardNew(bool showAsset) {
-    state = state.copyWith(
-      showAssetCardNew: showAsset,
-    );
+    // state = state.copyWith(
+    //   showAssetCardNew: showAsset,
+    // );
   }
 
   Future<void> createAsset(Asset asset) async {
@@ -162,7 +162,6 @@ class AssetStateNotifier extends StateNotifier<AssetState> {
   }
 
   void onChangeAssetName(String assetName) {
-    print(assetName);
     state = state.copyWith(assetName: assetName);
   }
 
@@ -221,6 +220,6 @@ class AssetStateNotifier extends StateNotifier<AssetState> {
   }
 
   Future<void> deleteAsset(String assetId) async {
-    await state.deleteAssetUseCase.execute(assetId: assetId);
+    await state.deleteAssetUseCase.execute(assetId: assetId, userId: state.userId);
   }
 }

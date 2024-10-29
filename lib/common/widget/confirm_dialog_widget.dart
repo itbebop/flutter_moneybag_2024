@@ -6,23 +6,14 @@ class ConfirmDialogWidget {
       context: context,
       barrierDismissible: false,
       builder: (context) {
-        String name = initialName;
         return StatefulBuilder(
           builder: (BuildContext context, setState) {
             return AlertDialog(
               title: const Text('Title'),
-              content: Row(
+              content: const Row(
                 children: <Widget>[
                   Expanded(
-                    child: TextField(
-                      autofocus: true,
-                      decoration: const InputDecoration(labelText: 'Team Name', hintText: 'eg. bora'),
-                      onChanged: (value) {
-                        setState(() {
-                          name = value;
-                        });
-                      },
-                    ),
+                    child: Text('자산에 속한 개별 기록들까지 모두 삭제됩니다. 삭제하시겠습니까?'),
                   ),
                 ],
               ),
@@ -35,7 +26,10 @@ class ConfirmDialogWidget {
                 ),
                 TextButton(
                   child: const Text('Ok'),
-                  onPressed: () => onConfirm,
+                  onPressed: () {
+                    onConfirm();
+                    Navigator.of(context).pop();
+                  },
                 ),
               ],
             );
