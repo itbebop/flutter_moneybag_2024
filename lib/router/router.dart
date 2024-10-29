@@ -2,6 +2,7 @@ import 'package:flutter_moneybag_2024/screen/category/category_screen.dart';
 import 'package:flutter_moneybag_2024/screen/login/login_screen.dart';
 import 'package:flutter_moneybag_2024/screen/main_screen.dart';
 import 'package:flutter_moneybag_2024/screen/splash/splash_screen.dart';
+import 'package:flutter_moneybag_2024/screen/tab/asset/asset_create_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -38,6 +39,11 @@ final routerProvider = Provider<GoRouter>((ref) {
         path: '/category',
         name: 'category',
         builder: (context, state) => const CategoryScreen(),
+      ),
+      GoRoute(
+        path: '/asset_create',
+        name: 'asset_create',
+        builder: (context, state) => const AssetCreateScreen(),
       ),
     ],
   );
