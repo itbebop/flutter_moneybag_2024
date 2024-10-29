@@ -6,5 +6,5 @@ abstract interface class AssetDataSource {
   Future<Asset> getAsset({required String assetId});
   Future<void> updateAsset({required Asset asset});
   Future<void> chageActivatedAsset({required String assetId});
-  Future<void> deleteAsset({required String assetId});
+  Future<void> deleteAsset({required String assetId, required String userId});
 }

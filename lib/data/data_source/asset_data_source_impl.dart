@@ -94,7 +94,23 @@ class AssetDataSourceImpl implements AssetDataSource {
   }
 
   @override
-  Future<void> deleteAsset({required String assetId}) async {
-    await _assetRef.doc(assetId).delete();
+  Future<void> deleteAsset({required String assetId, required String userId}) async {
+    // TODO: 완전 삭제가 아니라 복원가능한 삭제로 변경예정
+    await _deleteDocumentWithSubcollections(_assetRef.doc(assetId));
+
+    await _firestore.collection('users').doc(userId).update({
+      'assetIdList': FieldValue.arrayRemove([assetId]) // 특정 assetId 제거);
+    });
+  }
+
+  Future<void> _deleteDocumentWithSubcollections(DocumentReference docRef) async {
+    // 먼저 모든 하위 컬렉션을 삭제
+    final subcollections = await docRef.collection(docRef.id).get();
+    for (final subDoc in subcollections.docs) {
+      await _deleteDocumentWithSubcollections(subDoc.reference);
+    }
+
+    // 최종적으로 현재 문서를 삭제
+    await docRef.delete();
   }
 }

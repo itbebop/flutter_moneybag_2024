@@ -29,7 +29,7 @@ class AssetRepositoryImpl implements AssetRepository {
   }
 
   @override
-  Future<void> deleteAsset({required String assetId}) async {
-    await _assetDetailDataSource.deleteAsset(assetId: assetId);
+  Future<void> deleteAsset({required String assetId, required String userId}) async {
+    await _assetDetailDataSource.deleteAsset(assetId: assetId, userId: userId);
   }
 }
