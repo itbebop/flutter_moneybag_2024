@@ -19,6 +19,8 @@ class UserStateNotifier extends StateNotifier<UserState> {
 
   Future<void> fetchUser() async {
     try {
+      print('#########fetch Asset');
+
       final currentUser = auth.FirebaseAuth.instance.currentUser;
       if (currentUser == null) {
         throw Exception("User is not logged in"); // 유저가 null인 경우 예외 처리

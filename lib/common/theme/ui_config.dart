@@ -10,7 +10,7 @@ class UiConfig {
   static const Color backgroundColor = Color(0xFFFEFBF6);
   static const Color whiteColor = Color(0xFFFFFFFF);
   static const Color greyColor = Colors.black26;
-  static const Color deleteBackColor = Color.fromARGB(255, 255, 93, 93);
+  static const Color deleteBackColor = Color.fromARGB(186, 255, 179, 179);
 
   static const MaterialColor black = MaterialColor(0xff282828, color);
   static const Map<int, Color> color = {

@@ -18,20 +18,15 @@ class ColorPickerWidget extends ConsumerWidget {
     Color selectedColor = Colors.blue;
     final selectedFirstColor = ref.watch(assetStateProvier).firstColor;
     final selectedSecondColor = ref.watch(assetStateProvier).secondColor;
-    return
-        // appBar: AppBar(
-        //   title: const Text('Custom Color Picker'),
-        //   backgroundColor: colorList.isNotEmpty ? colorList.last : Colors.blue,
-        // ),
-        SingleChildScrollView(
+    return SingleChildScrollView(
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(height: 16.h),
             Wrap(
-              spacing: 10,
-              runSpacing: 10,
+              spacing: 1,
+              runSpacing: 1,
               children: [
                 if (isFirst)
                   ...firstColorList.map((color) => GestureDetector(
@@ -43,11 +38,11 @@ class ColorPickerWidget extends ConsumerWidget {
                           height: 40,
                           decoration: BoxDecoration(
                             color: color,
-                            shape: BoxShape.circle,
                             border: Border.all(
                               color: selectedFirstColor == color ? Colors.transparent : Colors.white,
                               width: 3,
                             ),
+                            borderRadius: BorderRadius.circular(10),
                           ),
                         ),
                       )),
@@ -61,13 +56,12 @@ class ColorPickerWidget extends ConsumerWidget {
                           width: 40,
                           height: 40,
                           decoration: BoxDecoration(
-                            color: color,
-                            shape: BoxShape.circle,
-                            border: Border.all(
-                              color: selectedSecondColor == color ? Colors.transparent : Colors.white,
-                              width: 2,
-                            ),
-                          ),
+                              color: color,
+                              border: Border.all(
+                                color: selectedSecondColor == color ? Colors.transparent : Colors.white,
+                                width: 2,
+                              ),
+                              borderRadius: BorderRadius.circular(10)),
                         ),
                       )),
 
