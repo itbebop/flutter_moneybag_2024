@@ -48,12 +48,7 @@ class AssetCard extends ConsumerWidget {
           ),
         ),
         Positioned(
-          left: 44.w,
-          top: 23.h,
-          child: const HugeIcon(icon: HugeIcons.strokeRoundedMoneyBag02, color: UiConfig.whiteColor),
-        ),
-        Positioned(
-          left: 76.w,
+          left: 46.w,
           top: 18.h,
           child: Text(
             title,
@@ -64,7 +59,7 @@ class AssetCard extends ConsumerWidget {
           ),
         ),
         Positioned(
-          top: 84.h,
+          top: 80.h,
           left: 26.w,
           child: Container(
             width: 320.w,
@@ -73,11 +68,11 @@ class AssetCard extends ConsumerWidget {
           ),
         ),
         Positioned(
-          bottom: 20.h,
-          right: 44.w,
+          right: 42.w,
+          top: 18.h,
           child: Container(
-            width: 64.w,
-            height: 34.h,
+            width: 60.w,
+            height: 30.h,
             decoration: BoxDecoration(
               color: UiConfig.whiteColor,
               borderRadius: BorderRadius.circular(15),
@@ -87,6 +82,7 @@ class AssetCard extends ConsumerWidget {
                 currency,
                 style: UiConfig.smallStyle.copyWith(
                   letterSpacing: 1.0,
+                  // fontWeight: UiConfig.semiBoldFont,
                   color: UiConfig.black,
                 ),
               ),
@@ -94,24 +90,41 @@ class AssetCard extends ConsumerWidget {
           ),
         ),
         Positioned(
-          right: 50.w,
-          top: 24.h,
+          bottom: 10.h,
+          left: 44.w,
           child: Text(
             amount.toComma(),
             style: UiConfig.numberStyle.copyWith(
+              fontSize: 28,
               color: UiConfig.whiteColor,
               fontWeight: UiConfig.semiBoldFont,
             ),
           ),
         ),
         Positioned(
-          bottom: 20.h,
-          left: 52.w,
+          top: 84.h,
+          left: 42.w,
           child: ClipRRect(
             borderRadius: BorderRadius.circular(15.0),
             child: Image.network(
               ref.read(userStateProvider).user!.imgUrl,
               width: 30,
+            ),
+          ),
+        ),
+        Positioned(
+          bottom: 15.h,
+          right: 42.w,
+          child: Tap(
+            onTap: () {
+              ref.read(assetStateProvier.notifier).showAssetUpdate(index);
+              ref.read(assetStateProvier.notifier).getAsset(asset.assetId);
+              FocusScope.of(context).requestFocus(focusNode);
+              ref.read(assetStateProvier.notifier).onTapAssetCardNew(false);
+            },
+            child: const HugeIcon(
+              icon: HugeIcons.strokeRoundedEdit02,
+              color: UiConfig.whiteColor,
             ),
           ),
         ),

@@ -48,11 +48,6 @@ class AssetCardUpdate extends ConsumerWidget {
               ),
               Positioned(
                 left: 44.w,
-                top: 23.h,
-                child: const HugeIcon(icon: HugeIcons.strokeRoundedMoneyBag02, color: UiConfig.whiteColor),
-              ),
-              Positioned(
-                left: 78.w,
                 top: 12.h,
                 child: SizedBox(
                   width: 150.w,
@@ -70,7 +65,7 @@ class AssetCardUpdate extends ConsumerWidget {
                         borderSide: BorderSide(color: UiConfig.whiteColor),
                       ),
                     ),
-                    style: UiConfig.h3Style.copyWith(
+                    style: UiConfig.h2Style.copyWith(
                       color: UiConfig.whiteColor,
                       decorationThickness: 0,
                       fontWeight: UiConfig.semiBoldFont,
@@ -82,7 +77,7 @@ class AssetCardUpdate extends ConsumerWidget {
                 right: 42.w,
                 top: 24.h,
                 child: Container(
-                  width: 80.w,
+                  width: 76.w,
                   height: 34.h,
                   decoration: BoxDecoration(
                     color: UiConfig.whiteColor,
@@ -92,7 +87,7 @@ class AssetCardUpdate extends ConsumerWidget {
                     children: [
                       SizedBox(width: 8.w),
                       SizedBox(
-                        width: 70.w,
+                        width: 64.w,
                         child: CustomDropdownButton<Currency>(
                           action: (currency) {
                             ref.read(assetStateProvier.notifier).onSelectCurrency(currency, assetName: titleEditController.text);
@@ -102,12 +97,12 @@ class AssetCardUpdate extends ConsumerWidget {
                                     value: currency,
                                     child: Text(
                                       currency.currencyName,
-                                      style: UiConfig.extraSmallStyle,
+                                      style: UiConfig.smallStyle,
                                     ),
                                   ))
                               .toList(),
                           hints: assetProvider.currencyHints,
-                          hintsStyle: UiConfig.extraSmallStyle,
+                          hintsStyle: UiConfig.smallStyle,
                           expanded: true,
                         ),
                       ),
