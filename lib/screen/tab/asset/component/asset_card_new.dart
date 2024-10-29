@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_moneybag_2024/common/common.dart';
-import 'package:flutter_moneybag_2024/common/widget/custom_button.dart';
 import 'package:flutter_moneybag_2024/common/widget/custom_dropdown_button.dart';
-import 'package:flutter_moneybag_2024/core/provider/user_state_notifier.dart';
 import 'package:flutter_moneybag_2024/domain/enums/currency.dart';
-import 'package:flutter_moneybag_2024/domain/model/asset.dart';
 import 'package:flutter_moneybag_2024/screen/tab/asset/riverpod/asset_state_notifier.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hugeicons/hugeicons.dart';
@@ -28,9 +25,9 @@ class AssetCardNew extends ConsumerWidget {
             width: 330.w,
             height: 180.h,
             decoration: BoxDecoration(
-              gradient: const LinearGradient(colors: [
-                Color.fromARGB(255, 236, 177, 89),
-                Color.fromARGB(255, 255, 197, 39),
+              gradient: LinearGradient(colors: [
+                assetProvider.firstColor,
+                assetProvider.secondColor,
               ]),
               borderRadius: BorderRadius.circular(20),
             ),
@@ -104,58 +101,6 @@ class AssetCardNew extends ConsumerWidget {
             ),
           ),
         ),
-        Positioned(
-          right: 80.w,
-          bottom: 16.h,
-          child: Tap(
-            onTap: () async {
-              ref.read(assetStateProvier.notifier).createAsset(
-                    Asset(
-                      totalAmount: 0,
-                      totalIncome: 0,
-                      totalExpense: 0,
-                      assetId: '0',
-                      assetName: titleEditController.text,
-                      currency: assetProvider.currencyHints,
-                      userIdList: [],
-                      createdAt: DateTime.now(),
-                      updatedAt: DateTime.now(),
-                      assetColor: [255, 236, 177, 89, 255, 255, 197, 39],
-                    ),
-                  );
-              ref.read(assetStateProvier.notifier).onTapAssetCardNew(false);
-              await ref.read(userStateProvider.notifier).fetchUser();
-              // await ref.read(assetStateProvier.notifier).fetchAsset();
-              // context.go('/asset');
-            },
-            child: CustomButton(
-              name: '확 인',
-              buttonColor: UiConfig.backgroundColor,
-              textStyle: UiConfig.smallStyle.copyWith(
-                fontWeight: UiConfig.semiBoldFont,
-              ),
-              edgeInsets: const EdgeInsets.only(top: 4, bottom: 4, left: 10, right: 10),
-            ),
-          ),
-        ),
-        Positioned(
-          left: 80.w,
-          bottom: 16.h,
-          child: Tap(
-            onTap: () {
-              ref.read(assetStateProvier.notifier).onTapAssetCardNew(false);
-              titleEditController.clear();
-            },
-            child: CustomButton(
-              name: '취 소',
-              buttonColor: UiConfig.backgroundColor,
-              textStyle: UiConfig.smallStyle.copyWith(
-                fontWeight: UiConfig.semiBoldFont,
-              ),
-              edgeInsets: const EdgeInsets.only(top: 4, bottom: 4, left: 10, right: 10),
-            ),
-          ),
-        )
       ],
     );
   }

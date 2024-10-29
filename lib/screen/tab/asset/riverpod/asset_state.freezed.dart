@@ -21,8 +21,8 @@ mixin _$AssetState {
   double get totalIncome => throw _privateConstructorUsedError;
   double get totalExpense => throw _privateConstructorUsedError;
   double get assetAmount => throw _privateConstructorUsedError;
-  bool get showAssetCardNew => throw _privateConstructorUsedError;
   bool get showAssetCardUpdate => throw _privateConstructorUsedError;
+  bool get isLoading => throw _privateConstructorUsedError;
   int get selectedAssetCardIndex => throw _privateConstructorUsedError;
   List<Color> get firstColorList => throw _privateConstructorUsedError;
   List<Color> get secondColorList => throw _privateConstructorUsedError;
@@ -65,8 +65,8 @@ abstract class $AssetStateCopyWith<$Res> {
       double totalIncome,
       double totalExpense,
       double assetAmount,
-      bool showAssetCardNew,
       bool showAssetCardUpdate,
+      bool isLoading,
       int selectedAssetCardIndex,
       List<Color> firstColorList,
       List<Color> secondColorList,
@@ -107,8 +107,8 @@ class _$AssetStateCopyWithImpl<$Res, $Val extends AssetState>
     Object? totalIncome = null,
     Object? totalExpense = null,
     Object? assetAmount = null,
-    Object? showAssetCardNew = null,
     Object? showAssetCardUpdate = null,
+    Object? isLoading = null,
     Object? selectedAssetCardIndex = null,
     Object? firstColorList = null,
     Object? secondColorList = null,
@@ -151,13 +151,13 @@ class _$AssetStateCopyWithImpl<$Res, $Val extends AssetState>
           ? _value.assetAmount
           : assetAmount // ignore: cast_nullable_to_non_nullable
               as double,
-      showAssetCardNew: null == showAssetCardNew
-          ? _value.showAssetCardNew
-          : showAssetCardNew // ignore: cast_nullable_to_non_nullable
-              as bool,
       showAssetCardUpdate: null == showAssetCardUpdate
           ? _value.showAssetCardUpdate
           : showAssetCardUpdate // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
       selectedAssetCardIndex: null == selectedAssetCardIndex
           ? _value.selectedAssetCardIndex
@@ -257,8 +257,8 @@ abstract class _$$AssetStateImplCopyWith<$Res>
       double totalIncome,
       double totalExpense,
       double assetAmount,
-      bool showAssetCardNew,
       bool showAssetCardUpdate,
+      bool isLoading,
       int selectedAssetCardIndex,
       List<Color> firstColorList,
       List<Color> secondColorList,
@@ -297,8 +297,8 @@ class __$$AssetStateImplCopyWithImpl<$Res>
     Object? totalIncome = null,
     Object? totalExpense = null,
     Object? assetAmount = null,
-    Object? showAssetCardNew = null,
     Object? showAssetCardUpdate = null,
+    Object? isLoading = null,
     Object? selectedAssetCardIndex = null,
     Object? firstColorList = null,
     Object? secondColorList = null,
@@ -341,13 +341,13 @@ class __$$AssetStateImplCopyWithImpl<$Res>
           ? _value.assetAmount
           : assetAmount // ignore: cast_nullable_to_non_nullable
               as double,
-      showAssetCardNew: null == showAssetCardNew
-          ? _value.showAssetCardNew
-          : showAssetCardNew // ignore: cast_nullable_to_non_nullable
-              as bool,
       showAssetCardUpdate: null == showAssetCardUpdate
           ? _value.showAssetCardUpdate
           : showAssetCardUpdate // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
       selectedAssetCardIndex: null == selectedAssetCardIndex
           ? _value.selectedAssetCardIndex
@@ -442,8 +442,8 @@ class _$AssetStateImpl implements _AssetState {
       this.totalIncome = 0,
       this.totalExpense = 0,
       this.assetAmount = 0,
-      this.showAssetCardNew = false,
       this.showAssetCardUpdate = false,
+      this.isLoading = false,
       this.selectedAssetCardIndex = 0,
       required final List<Color> firstColorList,
       required final List<Color> secondColorList,
@@ -495,10 +495,10 @@ class _$AssetStateImpl implements _AssetState {
   final double assetAmount;
   @override
   @JsonKey()
-  final bool showAssetCardNew;
+  final bool showAssetCardUpdate;
   @override
   @JsonKey()
-  final bool showAssetCardUpdate;
+  final bool isLoading;
   @override
   @JsonKey()
   final int selectedAssetCardIndex;
@@ -581,7 +581,7 @@ class _$AssetStateImpl implements _AssetState {
 
   @override
   String toString() {
-    return 'AssetState(assetList: $assetList, totalAmount: $totalAmount, totalIncome: $totalIncome, totalExpense: $totalExpense, assetAmount: $assetAmount, showAssetCardNew: $showAssetCardNew, showAssetCardUpdate: $showAssetCardUpdate, selectedAssetCardIndex: $selectedAssetCardIndex, firstColorList: $firstColorList, secondColorList: $secondColorList, firstColorListSave: $firstColorListSave, secondColorListSave: $secondColorListSave, firstColor: $firstColor, secondColor: $secondColor, userId: $userId, assetHints: $assetHints, assetName: $assetName, assetColor: $assetColor, assetCurrency: $assetCurrency, currencyHints: $currencyHints, selectedAssetId: $selectedAssetId, assetIdList: $assetIdList, getAssetListUseCase: $getAssetListUseCase, getAssetUseCase: $getAssetUseCase, createAssetUserCase: $createAssetUserCase, updateAssetUserCase: $updateAssetUserCase, deleteAssetUseCase: $deleteAssetUseCase)';
+    return 'AssetState(assetList: $assetList, totalAmount: $totalAmount, totalIncome: $totalIncome, totalExpense: $totalExpense, assetAmount: $assetAmount, showAssetCardUpdate: $showAssetCardUpdate, isLoading: $isLoading, selectedAssetCardIndex: $selectedAssetCardIndex, firstColorList: $firstColorList, secondColorList: $secondColorList, firstColorListSave: $firstColorListSave, secondColorListSave: $secondColorListSave, firstColor: $firstColor, secondColor: $secondColor, userId: $userId, assetHints: $assetHints, assetName: $assetName, assetColor: $assetColor, assetCurrency: $assetCurrency, currencyHints: $currencyHints, selectedAssetId: $selectedAssetId, assetIdList: $assetIdList, getAssetListUseCase: $getAssetListUseCase, getAssetUseCase: $getAssetUseCase, createAssetUserCase: $createAssetUserCase, updateAssetUserCase: $updateAssetUserCase, deleteAssetUseCase: $deleteAssetUseCase)';
   }
 
   @override
@@ -599,10 +599,10 @@ class _$AssetStateImpl implements _AssetState {
                 other.totalExpense == totalExpense) &&
             (identical(other.assetAmount, assetAmount) ||
                 other.assetAmount == assetAmount) &&
-            (identical(other.showAssetCardNew, showAssetCardNew) ||
-                other.showAssetCardNew == showAssetCardNew) &&
             (identical(other.showAssetCardUpdate, showAssetCardUpdate) ||
                 other.showAssetCardUpdate == showAssetCardUpdate) &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading) &&
             (identical(other.selectedAssetCardIndex, selectedAssetCardIndex) ||
                 other.selectedAssetCardIndex == selectedAssetCardIndex) &&
             const DeepCollectionEquality()
@@ -652,8 +652,8 @@ class _$AssetStateImpl implements _AssetState {
         totalIncome,
         totalExpense,
         assetAmount,
-        showAssetCardNew,
         showAssetCardUpdate,
+        isLoading,
         selectedAssetCardIndex,
         const DeepCollectionEquality().hash(_firstColorList),
         const DeepCollectionEquality().hash(_secondColorList),
@@ -690,8 +690,8 @@ abstract class _AssetState implements AssetState {
       final double totalIncome,
       final double totalExpense,
       final double assetAmount,
-      final bool showAssetCardNew,
       final bool showAssetCardUpdate,
+      final bool isLoading,
       final int selectedAssetCardIndex,
       required final List<Color> firstColorList,
       required final List<Color> secondColorList,
@@ -724,9 +724,9 @@ abstract class _AssetState implements AssetState {
   @override
   double get assetAmount;
   @override
-  bool get showAssetCardNew;
-  @override
   bool get showAssetCardUpdate;
+  @override
+  bool get isLoading;
   @override
   int get selectedAssetCardIndex;
   @override

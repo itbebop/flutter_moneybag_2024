@@ -6,6 +6,7 @@ class AlertDialogWidget {
     required String title,
     required String content,
     bool barrierDismissible = false,
+    Function? action,
   }) {
     return showDialog(
         context: context,
@@ -31,6 +32,9 @@ class AlertDialogWidget {
               TextButton(
                 child: const Text("확인"),
                 onPressed: () {
+                  if (action != null) {
+                    action();
+                  }
                   Navigator.pop(context);
                 },
               ),

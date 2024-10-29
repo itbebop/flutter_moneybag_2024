@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ConfirmDialogWidget {
-  static Future<void> asyncInputDialog({required BuildContext context, required String initialName, required Function onConfirm}) {
+  static Future<void> asyncInputDialog({required BuildContext context, required String message, required Function onConfirm}) {
     return showDialog<String>(
       context: context,
       barrierDismissible: false,
@@ -10,22 +10,22 @@ class ConfirmDialogWidget {
           builder: (BuildContext context, setState) {
             return AlertDialog(
               title: const Text('Title'),
-              content: const Row(
+              content: Row(
                 children: <Widget>[
                   Expanded(
-                    child: Text('자산에 속한 개별 기록들까지 모두 삭제됩니다. 삭제하시겠습니까?'),
+                    child: Text(message),
                   ),
                 ],
               ),
               actions: <Widget>[
                 TextButton(
-                  child: const Text('CANCEL'),
+                  child: const Text('취소'),
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
                 ),
                 TextButton(
-                  child: const Text('Ok'),
+                  child: const Text('확인'),
                   onPressed: () {
                     onConfirm();
                     Navigator.of(context).pop();

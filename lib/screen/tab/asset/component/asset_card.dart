@@ -32,7 +32,6 @@ class AssetCard extends ConsumerWidget {
               ref.read(assetStateProvier.notifier).showAssetUpdate(index);
               ref.read(assetStateProvier.notifier).getAsset(asset.assetId);
               FocusScope.of(context).requestFocus(focusNode);
-              ref.read(assetStateProvier.notifier).onTapAssetCardNew(false);
             },
             child: Container(
               width: 330.w,
@@ -120,7 +119,6 @@ class AssetCard extends ConsumerWidget {
               ref.read(assetStateProvier.notifier).showAssetUpdate(index);
               ref.read(assetStateProvier.notifier).getAsset(asset.assetId);
               FocusScope.of(context).requestFocus(focusNode);
-              ref.read(assetStateProvier.notifier).onTapAssetCardNew(false);
             },
             child: const HugeIcon(
               icon: HugeIcons.strokeRoundedEdit02,

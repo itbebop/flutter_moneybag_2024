@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:flutter_moneybag_2024/common/common.dart';
+import 'package:flutter_moneybag_2024/common/data/color_list.dart';
 import 'package:flutter_moneybag_2024/common/widget/alert_dialog_widget.dart';
 import 'package:flutter_moneybag_2024/core/provider/user_state_notifier.dart';
 import 'package:flutter_moneybag_2024/di/di_setup.dart';
@@ -18,8 +19,16 @@ final assetStateProvier = StateNotifierProvider<AssetStateNotifier, AssetState>(
   if (userState.user != null) {
     assetIdList = userState.user!.assetIdList;
     userId = userState.user!.userId;
-    firstColorList = stringToColorList(userState.user!.firstColorListSave);
-    secondColorList = stringToColorList(userState.user!.secondColorListSave);
+    if (userState.user!.firstColorListSave.isEmpty) {
+      firstColorList = initColorList;
+    } else {
+      firstColorList = stringToColorList(userState.user!.firstColorListSave);
+    }
+    if (userState.user!.firstColorListSave.isEmpty) {
+      secondColorList = initColorList;
+    } else {
+      secondColorList = stringToColorList(userState.user!.secondColorListSave);
+    }
   }
 
   return AssetStateNotifier(AssetState(
@@ -58,6 +67,7 @@ class AssetStateNotifier extends StateNotifier<AssetState> {
 
   Future<void> fetchAsset() async {
     try {
+      state = state.copyWith(isLoading: true);
       // 전체 assetList 가져옴
       final assetList = await state.getAssetListUseCase.execute(assetIdList: state.assetIdList);
       // assetList의 totalAmount, totalExpense, totalIncome 합산
@@ -70,13 +80,14 @@ class AssetStateNotifier extends StateNotifier<AssetState> {
         totalAmount: amount,
         totalExpense: expense,
         totalIncome: income,
+        isLoading: false,
       );
       // 자산이 1개인 경우에는 자동 선택
       if (assetList.length == 1) {
         getAsset(assetList.first.assetId);
       }
     } catch (error) {
-      throw Exception("선택된 자산이 없습니다");
+      throw Exception("AssetList를 불러오지 못했습니다.");
     }
   }
 
@@ -133,14 +144,12 @@ class AssetStateNotifier extends StateNotifier<AssetState> {
     );
   }
 
-  void onTapAssetCardNew(bool showAsset) {
-    // state = state.copyWith(
-    //   showAssetCardNew: showAsset,
-    // );
-  }
-
   Future<void> createAsset(Asset asset) async {
     await state.createAssetUserCase.execute(asset: asset, userId: state.userId);
+    state = state.copyWith(
+      firstColor: const Color.fromARGB(255, 236, 177, 89),
+      secondColor: const Color.fromARGB(255, 255, 197, 39),
+    );
   }
 
   Future<void> updateAsset(Asset asset) async {
@@ -220,6 +229,8 @@ class AssetStateNotifier extends StateNotifier<AssetState> {
   }
 
   Future<void> deleteAsset(String assetId) async {
+    state = state.copyWith(isLoading: true);
     await state.deleteAssetUseCase.execute(assetId: assetId, userId: state.userId);
+    state = state.copyWith(isLoading: false);
   }
 }
