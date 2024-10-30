@@ -28,7 +28,6 @@ class _CategoryScreenState extends ConsumerState<CategoryScreen> {
             body: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Column(
-                // crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   SizedBox(height: 16.h),
@@ -56,67 +55,3 @@ class _CategoryScreenState extends ConsumerState<CategoryScreen> {
     );
   }
 }
-
-// 예시 데이터
-final List<TransactionCategory> transactionCategories = [
-  TransactionCategory(
-    categoryId: '1', // 고유 ID
-    name: '식비', // 유형 이름
-    iconKey: picSum(201), // 이미지 URL
-    type: AssetType.expense, // 자산 유형
-  ),
-  TransactionCategory(
-    categoryId: '2',
-    name: '교통비',
-    iconKey: picSum(201),
-    type: AssetType.expense,
-  ),
-  TransactionCategory(
-    categoryId: '3',
-    name: '주거비',
-    iconKey: picSum(201),
-    type: AssetType.expense,
-  ),
-  TransactionCategory(
-    categoryId: '4',
-    name: '문화생활',
-    iconKey: picSum(201),
-    type: AssetType.expense,
-  ),
-  TransactionCategory(
-    categoryId: '5', // 고유 ID
-    name: '쇼핑', // 유형 이름
-    iconKey: picSum(201), // 이미지 URL
-    type: AssetType.expense, // 자산 유형
-  ),
-  TransactionCategory(
-    categoryId: '6',
-    name: '여행',
-    iconKey: picSum(201),
-    type: AssetType.expense,
-  ),
-  TransactionCategory(
-    categoryId: '7',
-    name: '교육비',
-    iconKey: picSum(201),
-    type: AssetType.expense,
-  ),
-  TransactionCategory(
-    categoryId: '8',
-    name: '의료비',
-    iconKey: picSum(201),
-    type: AssetType.expense,
-  ),
-  TransactionCategory(
-    categoryId: '9', // 고유 ID
-    name: '기타', // 유형 이름
-    iconKey: picSum(201), // 이미지 URL
-    type: AssetType.expense, // 자산 유형
-  ),
-  TransactionCategory(
-    categoryId: '10',
-    name: '교통비1',
-    iconKey: picSum(201),
-    type: AssetType.expense,
-  ),
-];
