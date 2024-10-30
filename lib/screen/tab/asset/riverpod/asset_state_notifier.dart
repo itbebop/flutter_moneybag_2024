@@ -115,12 +115,7 @@ class AssetStateNotifier extends StateNotifier<AssetState> {
 
   void completeWrite({TextEditingController? memoEditController, TextEditingController? amountEditController}) {
     // 자산이 1개 이상인 경우는 목록 날림
-    if (state.assetList.length > 1) {
-      state = state.copyWith(
-        assetHints: '선택',
-        selectedAssetId: '',
-      );
-    }
+    quitWrite();
 
     state = state.copyWith(
       assetAmount: 0,
@@ -131,10 +126,23 @@ class AssetStateNotifier extends StateNotifier<AssetState> {
     }
   }
 
-  void onEnterWithoutSelect(BuildContext context) {
+  void quitWrite() {
+    state = state.copyWith(
+      assetHints: '선택',
+      selectedAssetId: '',
+    );
+  }
+
+  bool onEnterWithoutSelect(BuildContext context) {
+    print('state.selectedAssetId: ${state.selectedAssetId}');
+    bool result = false;
     if (state.selectedAssetId == '') {
       AlertDialogWidget.showCustomDialog(context: context, title: '', content: '자산을 선택해주세요');
+      result = true;
+    } else {
+      getAsset(state.selectedAssetId);
     }
+    return result;
   }
 
   void onSelectCurrency(Currency currency, {String? assetName}) {
@@ -145,6 +153,7 @@ class AssetStateNotifier extends StateNotifier<AssetState> {
   }
 
   Future<void> createAsset(Asset asset) async {
+    print('#####userId: ${state.userId}');
     await state.createAssetUserCase.execute(asset: asset, userId: state.userId);
     state = state.copyWith(
       firstColor: const Color.fromARGB(255, 236, 177, 89),
@@ -229,8 +238,12 @@ class AssetStateNotifier extends StateNotifier<AssetState> {
   }
 
   Future<void> deleteAsset(String assetId) async {
-    state = state.copyWith(isLoading: true);
-    await state.deleteAssetUseCase.execute(assetId: assetId, userId: state.userId);
-    state = state.copyWith(isLoading: false);
+    try {
+      state = state.copyWith(isLoading: true);
+      await state.deleteAssetUseCase.execute(assetId: assetId, userId: state.userId);
+      state = state.copyWith(isLoading: false);
+    } catch (e) {
+      rethrow;
+    }
   }
 }

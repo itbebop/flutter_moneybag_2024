@@ -73,7 +73,7 @@ class _AssetCreateScreenState extends ConsumerState<AssetCreateScreen> {
                                   assetId: '0',
                                   assetName: titleEditController.text,
                                   currency: assetProvider.currencyHints,
-                                  userIdList: [],
+                                  userIdList: [assetProvider.userId],
                                   createdAt: DateTime.now(),
                                   updatedAt: DateTime.now(),
                                   assetColor: [
