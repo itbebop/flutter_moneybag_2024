@@ -22,6 +22,7 @@ final categoryStateProvider = StateNotifierProvider<CategoryStateNotifier, Categ
         selectedExpenseIcon: HugeIcons.strokeRoundedAddCircle,
         createTransactionCategoryUseCase: getIt(),
         getTransactionCategoryListUseCase: getIt(),
+        deleteTransactionCategoryUseCase: getIt(),
       ),
     );
   },

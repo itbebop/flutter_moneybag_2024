@@ -8,7 +8,6 @@ import 'package:flutter_moneybag_2024/screen/tab/asset/component/asset_card_new.
 import 'package:flutter_moneybag_2024/screen/tab/asset/component/color_picker_widget.dart';
 import 'package:flutter_moneybag_2024/screen/tab/asset/riverpod/asset_state_notifier.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 
 class AssetCreateScreen extends ConsumerStatefulWidget {
   const AssetCreateScreen({super.key});

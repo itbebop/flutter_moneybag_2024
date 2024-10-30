@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_moneybag_2024/domain/enums/asset_types.dart';
 import 'package:flutter_moneybag_2024/domain/usecase/transaction_category/create_transaction_category_use_case.dart';
+import 'package:flutter_moneybag_2024/domain/usecase/transaction_category/delete_transaction_category_use_case.dart';
 import 'package:flutter_moneybag_2024/domain/usecase/transaction_category/get_transaction_category_list_use_case.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -20,5 +21,6 @@ class CategoryState with _$CategoryState {
     required IconData selectedExpenseIcon,
     required CreateTransactionCategoryUseCase createTransactionCategoryUseCase,
     required GetTransactionCategoryListUseCase getTransactionCategoryListUseCase,
+    required final DeleteTransactionCategoryUseCase deleteTransactionCategoryUseCase,
   }) = _CategoryState;
 }

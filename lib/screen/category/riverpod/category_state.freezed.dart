@@ -29,6 +29,8 @@ mixin _$CategoryState {
       throw _privateConstructorUsedError;
   GetTransactionCategoryListUseCase get getTransactionCategoryListUseCase =>
       throw _privateConstructorUsedError;
+  DeleteTransactionCategoryUseCase get deleteTransactionCategoryUseCase =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CategoryStateCopyWith<CategoryState> get copyWith =>
@@ -52,7 +54,8 @@ abstract class $CategoryStateCopyWith<$Res> {
       IconData selectedIncomeIcon,
       IconData selectedExpenseIcon,
       CreateTransactionCategoryUseCase createTransactionCategoryUseCase,
-      GetTransactionCategoryListUseCase getTransactionCategoryListUseCase});
+      GetTransactionCategoryListUseCase getTransactionCategoryListUseCase,
+      DeleteTransactionCategoryUseCase deleteTransactionCategoryUseCase});
 }
 
 /// @nodoc
@@ -79,6 +82,7 @@ class _$CategoryStateCopyWithImpl<$Res, $Val extends CategoryState>
     Object? selectedExpenseIcon = null,
     Object? createTransactionCategoryUseCase = null,
     Object? getTransactionCategoryListUseCase = null,
+    Object? deleteTransactionCategoryUseCase = null,
   }) {
     return _then(_value.copyWith(
       isVisibleButton: null == isVisibleButton
@@ -126,6 +130,10 @@ class _$CategoryStateCopyWithImpl<$Res, $Val extends CategoryState>
           ? _value.getTransactionCategoryListUseCase
           : getTransactionCategoryListUseCase // ignore: cast_nullable_to_non_nullable
               as GetTransactionCategoryListUseCase,
+      deleteTransactionCategoryUseCase: null == deleteTransactionCategoryUseCase
+          ? _value.deleteTransactionCategoryUseCase
+          : deleteTransactionCategoryUseCase // ignore: cast_nullable_to_non_nullable
+              as DeleteTransactionCategoryUseCase,
     ) as $Val);
   }
 }
@@ -149,7 +157,8 @@ abstract class _$$CategoryStateImplCopyWith<$Res>
       IconData selectedIncomeIcon,
       IconData selectedExpenseIcon,
       CreateTransactionCategoryUseCase createTransactionCategoryUseCase,
-      GetTransactionCategoryListUseCase getTransactionCategoryListUseCase});
+      GetTransactionCategoryListUseCase getTransactionCategoryListUseCase,
+      DeleteTransactionCategoryUseCase deleteTransactionCategoryUseCase});
 }
 
 /// @nodoc
@@ -174,6 +183,7 @@ class __$$CategoryStateImplCopyWithImpl<$Res>
     Object? selectedExpenseIcon = null,
     Object? createTransactionCategoryUseCase = null,
     Object? getTransactionCategoryListUseCase = null,
+    Object? deleteTransactionCategoryUseCase = null,
   }) {
     return _then(_$CategoryStateImpl(
       isVisibleButton: null == isVisibleButton
@@ -221,6 +231,10 @@ class __$$CategoryStateImplCopyWithImpl<$Res>
           ? _value.getTransactionCategoryListUseCase
           : getTransactionCategoryListUseCase // ignore: cast_nullable_to_non_nullable
               as GetTransactionCategoryListUseCase,
+      deleteTransactionCategoryUseCase: null == deleteTransactionCategoryUseCase
+          ? _value.deleteTransactionCategoryUseCase
+          : deleteTransactionCategoryUseCase // ignore: cast_nullable_to_non_nullable
+              as DeleteTransactionCategoryUseCase,
     ));
   }
 }
@@ -239,7 +253,8 @@ class _$CategoryStateImpl implements _CategoryState {
       required this.selectedIncomeIcon,
       required this.selectedExpenseIcon,
       required this.createTransactionCategoryUseCase,
-      required this.getTransactionCategoryListUseCase});
+      required this.getTransactionCategoryListUseCase,
+      required this.deleteTransactionCategoryUseCase});
 
   @override
   @JsonKey()
@@ -269,10 +284,12 @@ class _$CategoryStateImpl implements _CategoryState {
   final CreateTransactionCategoryUseCase createTransactionCategoryUseCase;
   @override
   final GetTransactionCategoryListUseCase getTransactionCategoryListUseCase;
+  @override
+  final DeleteTransactionCategoryUseCase deleteTransactionCategoryUseCase;
 
   @override
   String toString() {
-    return 'CategoryState(isVisibleButton: $isVisibleButton, isExpanded: $isExpanded, showExpenseCategoryCardNew: $showExpenseCategoryCardNew, showIncomeCategoryCardNew: $showIncomeCategoryCardNew, selectedIconName: $selectedIconName, assetType: $assetType, userId: $userId, selectedIncomeIcon: $selectedIncomeIcon, selectedExpenseIcon: $selectedExpenseIcon, createTransactionCategoryUseCase: $createTransactionCategoryUseCase, getTransactionCategoryListUseCase: $getTransactionCategoryListUseCase)';
+    return 'CategoryState(isVisibleButton: $isVisibleButton, isExpanded: $isExpanded, showExpenseCategoryCardNew: $showExpenseCategoryCardNew, showIncomeCategoryCardNew: $showIncomeCategoryCardNew, selectedIconName: $selectedIconName, assetType: $assetType, userId: $userId, selectedIncomeIcon: $selectedIncomeIcon, selectedExpenseIcon: $selectedExpenseIcon, createTransactionCategoryUseCase: $createTransactionCategoryUseCase, getTransactionCategoryListUseCase: $getTransactionCategoryListUseCase, deleteTransactionCategoryUseCase: $deleteTransactionCategoryUseCase)';
   }
 
   @override
@@ -307,7 +324,11 @@ class _$CategoryStateImpl implements _CategoryState {
             (identical(other.getTransactionCategoryListUseCase,
                     getTransactionCategoryListUseCase) ||
                 other.getTransactionCategoryListUseCase ==
-                    getTransactionCategoryListUseCase));
+                    getTransactionCategoryListUseCase) &&
+            (identical(other.deleteTransactionCategoryUseCase,
+                    deleteTransactionCategoryUseCase) ||
+                other.deleteTransactionCategoryUseCase ==
+                    deleteTransactionCategoryUseCase));
   }
 
   @override
@@ -323,7 +344,8 @@ class _$CategoryStateImpl implements _CategoryState {
       selectedIncomeIcon,
       selectedExpenseIcon,
       createTransactionCategoryUseCase,
-      getTransactionCategoryListUseCase);
+      getTransactionCategoryListUseCase,
+      deleteTransactionCategoryUseCase);
 
   @JsonKey(ignore: true)
   @override
@@ -346,7 +368,9 @@ abstract class _CategoryState implements CategoryState {
       required final CreateTransactionCategoryUseCase
           createTransactionCategoryUseCase,
       required final GetTransactionCategoryListUseCase
-          getTransactionCategoryListUseCase}) = _$CategoryStateImpl;
+          getTransactionCategoryListUseCase,
+      required final DeleteTransactionCategoryUseCase
+          deleteTransactionCategoryUseCase}) = _$CategoryStateImpl;
 
   @override
   bool get isVisibleButton;
@@ -370,6 +394,8 @@ abstract class _CategoryState implements CategoryState {
   CreateTransactionCategoryUseCase get createTransactionCategoryUseCase;
   @override
   GetTransactionCategoryListUseCase get getTransactionCategoryListUseCase;
+  @override
+  DeleteTransactionCategoryUseCase get deleteTransactionCategoryUseCase;
   @override
   @JsonKey(ignore: true)
   _$$CategoryStateImplCopyWith<_$CategoryStateImpl> get copyWith =>
