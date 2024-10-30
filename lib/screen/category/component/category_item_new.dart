@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_moneybag_2024/common/common.dart';
-import 'package:flutter_moneybag_2024/common/data/icon_map.dart';
 import 'package:flutter_moneybag_2024/domain/enums/asset_types.dart';
 import 'package:flutter_moneybag_2024/domain/model/transaction_category.dart';
 import 'package:flutter_moneybag_2024/screen/category/riverpod/category_state_notifier.dart';
@@ -44,6 +43,9 @@ class CategoryItemNew extends ConsumerWidget {
                         ),
                       );
                   ref.read(categoryStateProvider.notifier).getTransactionCetegory(assetType);
+                  ref.read(categoryStateProvider.notifier).cancelIconSelect(assetType);
+                  categoryNameEditController.clear();
+                  ref.read(categoryStateProvider.notifier).showCategoryCardNew(false);
                 },
                 child: const Icon(
                   Icons.check,

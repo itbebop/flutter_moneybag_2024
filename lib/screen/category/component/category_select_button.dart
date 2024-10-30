@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_moneybag_2024/common/common.dart';
-import 'package:flutter_moneybag_2024/common/data/icon_list.dart';
+import 'package:flutter_moneybag_2024/common/data/icon_map.dart';
 import 'package:flutter_moneybag_2024/screen/category/riverpod/category_state_notifier.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hugeicons/hugeicons.dart';
@@ -77,7 +77,6 @@ class _CategorySelectButtonState extends ConsumerState<CategorySelectButton> {
                                 selectedIconName: iconKey,
                               );
                           ref.read(categoryStateProvider.notifier).tapOutside();
-                          ref.read(categoryStateProvider.notifier).showCategoryCardNew(false);
                         },
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,

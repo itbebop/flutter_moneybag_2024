@@ -41,7 +41,7 @@ class CategoryStateNotifier extends StateNotifier<CategoryState> {
           showIncomeCategoryCardNew: showNew,
         );
       }
-    } else {
+    } else if (assetType == AssetType.expense) {
       if (showNew) {
         state = state.copyWith(
           showExpenseCategoryCardNew: showNew,
@@ -49,6 +49,13 @@ class CategoryStateNotifier extends StateNotifier<CategoryState> {
         );
       } else {
         state = state.copyWith(
+          showExpenseCategoryCardNew: showNew,
+        );
+      }
+    } else {
+      if (!showNew) {
+        state = state.copyWith(
+          showIncomeCategoryCardNew: showNew,
           showExpenseCategoryCardNew: showNew,
         );
       }
@@ -72,9 +79,15 @@ class CategoryStateNotifier extends StateNotifier<CategoryState> {
 
   void tapIcon({required AssetType assetType, required String selectedIconName}) {
     if (assetType == AssetType.income) {
-      state = state.copyWith(selectedIncomeIcon: iconMap[selectedIconName], selectedIconName: selectedIconName);
+      state = state.copyWith(
+        selectedIncomeIcon: iconMap[selectedIconName],
+        selectedIconName: selectedIconName,
+      );
     } else {
-      state = state.copyWith(selectedExpenseIcon: iconMap[selectedIconName]);
+      state = state.copyWith(
+        selectedExpenseIcon: iconMap[selectedIconName],
+        selectedIconName: selectedIconName,
+      );
     }
   }
 

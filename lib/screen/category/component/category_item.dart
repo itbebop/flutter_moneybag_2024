@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_moneybag_2024/common/common.dart';
+import 'package:flutter_moneybag_2024/common/data/icon_map.dart';
 import 'package:flutter_moneybag_2024/domain/enums/asset_types.dart';
 import 'package:flutter_moneybag_2024/domain/model/transaction_category.dart';
 import 'package:hugeicons/hugeicons.dart';
@@ -30,8 +31,8 @@ class CategoryItem extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           HugeIcon(
-            icon: HugeIcons.strokeRoundedMoneyBag02,
             color: assetType == AssetType.income ? UiConfig.secondaryTextColor : UiConfig.primaryColorSurface,
+            icon: iconMap[category.iconKey],
             size: 25,
           ),
           SizedBox(height: 8.h),
