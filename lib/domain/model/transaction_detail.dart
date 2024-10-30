@@ -13,6 +13,7 @@ class TransactionDetail with _$TransactionDetail {
     required DateTime updatedAt,
     required double amount,
     required String userId,
+    required String imgUrl,
     required TransactionCategory category,
   }) = _TransactionDetail;
 

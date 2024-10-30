@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_moneybag_2024/common/common.dart';
-import 'package:flutter_moneybag_2024/common/theme/ui_config.dart';
-import 'package:flutter_moneybag_2024/domain/model/transaction_category.dart';
+import 'package:flutter_moneybag_2024/common/data/icon_map.dart';
+import 'package:flutter_moneybag_2024/domain/enums/asset_types.dart';
+import 'package:flutter_moneybag_2024/domain/model/transaction_detail.dart';
+import 'package:hugeicons/hugeicons.dart';
 
 class TransactionItem extends StatelessWidget {
-  final String memo;
-  final String icon;
-  final String createdAt;
-  final String amount;
-  final TransactionCategory category;
-  const TransactionItem({super.key, required this.memo, required this.icon, required this.createdAt, required this.amount, required this.category});
+  final TransactionDetail transaction;
+  const TransactionItem({
+    super.key,
+    required this.transaction,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -19,15 +20,15 @@ class TransactionItem extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Container(
-            decoration: const BoxDecoration(
-              color: UiConfig.secondaryColor,
-              borderRadius: BorderRadius.only(topLeft: Radius.circular(5.0), topRight: Radius.circular(5.0)),
+            decoration: BoxDecoration(
+              color: transaction.category.type == AssetType.expense ? UiConfig.secondaryColor : UiConfig.incomeTagColor,
+              borderRadius: const BorderRadius.only(topLeft: Radius.circular(5.0), topRight: Radius.circular(5.0)),
             ),
             height: 16,
             width: 70,
             child: Center(
                 child: Text(
-              category.name,
+              transaction.category.name,
               style: UiConfig.extraSmallStyle.copyWith(color: UiConfig.whiteColor),
             )),
           ),
@@ -55,9 +56,10 @@ class TransactionItem extends StatelessWidget {
                         width: 50,
                         height: 50,
                         child: ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
-                          child: Image.network(icon),
-                        ),
+                            borderRadius: BorderRadius.circular(10),
+                            child: transaction.imgUrl == ''
+                                ? HugeIcon(icon: iconMap[transaction.category.iconKey], color: transaction.category.type == AssetType.expense ? UiConfig.secondaryTextColor : UiConfig.primaryColor)
+                                : Image.asset(transaction.imgUrl)),
                       ),
                       const SizedBox(
                         width: 16,
@@ -65,8 +67,8 @@ class TransactionItem extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(memo, style: UiConfig.h4Style),
-                          Text(createdAt,
+                          Text(transaction.memo, style: UiConfig.h4Style),
+                          Text(detailDateFormat.format(transaction.createdAt),
                               style: UiConfig.smallStyle.copyWith(
                                 color: UiConfig.color[700],
                               )),
@@ -74,7 +76,7 @@ class TransactionItem extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Text(amount.toString())
+                  Text(transaction.amount.toComma())
                 ],
               ),
             ),
