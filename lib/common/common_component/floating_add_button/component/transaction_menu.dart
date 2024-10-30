@@ -1,20 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_moneybag_2024/common/common.dart';
-import 'package:flutter_moneybag_2024/common/common_component/floating_add_button/component/float_item.dart';
 import 'package:flutter_moneybag_2024/common/common_component/floating_add_button/floating_add_button.riverpod.dart';
 import 'package:flutter_moneybag_2024/common/common_component/transaction/riverpod/transaction_state_notifier.dart';
 import 'package:flutter_moneybag_2024/common/dart/extension/thousand_comma_input_formatter.dart';
 import 'package:flutter_moneybag_2024/common/widget/custom_button.dart';
 import 'package:flutter_moneybag_2024/common/widget/custom_dropdown_button.dart';
 import 'package:flutter_moneybag_2024/core/provider/user_state_notifier.dart';
-import 'package:flutter_moneybag_2024/domain/enums/asset_types.dart';
 import 'package:flutter_moneybag_2024/domain/model/asset.dart';
 import 'package:flutter_moneybag_2024/domain/model/transaction_category.dart';
 import 'package:flutter_moneybag_2024/domain/model/transaction_detail.dart';
+import 'package:flutter_moneybag_2024/screen/category/riverpod/category_state_notifier.dart';
 import 'package:flutter_moneybag_2024/screen/tab/asset/riverpod/asset_state_notifier.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hugeicons/hugeicons.dart';
 
 class TransactionMenu extends ConsumerWidget {
   final TextEditingController memoEditController;
@@ -36,7 +34,8 @@ class TransactionMenu extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final assetProvider = ref.watch(assetStateProvier);
-
+    final transacProvider = ref.watch(transactionStateProvider);
+    final categoryProvider = ref.watch(categoryStateProvider);
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.end,
@@ -141,29 +140,37 @@ class TransactionMenu extends ConsumerWidget {
                     decoration: InputDecoration(
                       contentPadding: const EdgeInsets.only(bottom: 13.0),
                       prefixIcon: Container(
-                          margin: const EdgeInsets.only(right: 8),
-                          decoration: const BoxDecoration(
-                            border: Border(right: BorderSide(color: Colors.black38)),
+                        decoration: const BoxDecoration(
+                          border: Border(right: BorderSide(color: Colors.black38)),
+                        ),
+                        child: SizedBox(
+                          width: 140.w,
+                          child: Row(
+                            children: [
+                              CustomDropdownButton<TransactionCategory>(
+                                items: categoryProvider.categoryList
+                                    .map<DropdownMenuItem<TransactionCategory>>((category) => DropdownMenuItem<TransactionCategory>(
+                                          value: category,
+                                          child: FittedBox(
+                                            fit: BoxFit.contain,
+                                            child: Text(
+                                              category.name,
+                                              style: const TextStyle(
+                                                overflow: TextOverflow.ellipsis,
+                                              ),
+                                            ),
+                                          ),
+                                        ))
+                                    .toList(),
+                                hints: categoryProvider.categoryHints, // 힌트 텍스트
+                                action: (category) {
+                                  ref.read(categoryStateProvider.notifier).selectCategory(selectCategory: category);
+                                }, // Asset 선택 시 호출되는 액션
+                              ),
+                            ],
                           ),
-                          child: SizedBox(
-                            width: 140.w,
-                            child: Row(
-                              children: [
-                                SizedBox(width: 14.w),
-                                FloatItem<TransactionCategory>(
-                                  title: '이자', //'transaction1.title' // TODO: 글자제한, eclips 필요함
-                                  onSelect: (TransactionCategory category) {},
-                                  selectedValue: const TransactionCategory(
-                                    categoryId: '',
-                                    iconKey: '',
-                                    name: '',
-                                    type: AssetType.income,
-                                  ),
-                                  icon: HugeIcons.strokeRoundedLoginCircle02,
-                                ),
-                              ],
-                            ),
-                          )),
+                        ),
+                      ),
                       border: InputBorder.none,
                       hintText: '금액을 입력하세요.',
                       hintStyle: TextStyle(
@@ -204,7 +211,12 @@ class TransactionMenu extends ConsumerWidget {
                 const SizedBox(height: 8),
                 Tap(
                   onTap: () async {
-                    ref.read(assetStateProvier.notifier).onEnterWithoutSelect(context);
+                    if (ref.read(assetStateProvier.notifier).onEnterWithoutSelect(context)) {
+                      return;
+                    } else if (ref.read(categoryStateProvider.notifier).onEnterWithoutSelect(context)) {
+                      return;
+                    }
+
                     // ,제거하고 전송
                     final value = amountEditController.text;
                     final valueWithoutComma = value.replaceAll(',', '');
@@ -217,13 +229,14 @@ class TransactionMenu extends ConsumerWidget {
                             memo: memoEditController.text,
                             createdAt: DateTime.now(),
                             updatedAt: DateTime.now(),
-                            amount: ref.read(transactionStateProvider).amount,
+                            amount: transacProvider.amount,
                             userId: userStateValue.user!.userId,
+                            imgUrl: '',
                             category: TransactionCategory(
-                              categoryId: '1',
-                              name: '이자',
-                              type: ref.read(transactionStateProvider).assetType,
-                              iconKey: picSum(201),
+                              categoryId: categoryProvider.category!.categoryId,
+                              name: categoryProvider.category!.name,
+                              type: transacProvider.assetType,
+                              iconKey: categoryProvider.category!.iconKey,
                             ),
                           ),
                           assetId: assetProvider.selectedAssetId);

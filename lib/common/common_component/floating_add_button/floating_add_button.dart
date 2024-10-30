@@ -4,6 +4,8 @@ import 'package:flutter_moneybag_2024/common/common_component/floating_add_butto
 import 'package:flutter_moneybag_2024/common/common_component/floating_add_button/component/float_button.dart';
 import 'package:flutter_moneybag_2024/common/common_component/floating_add_button/component/transaction_menu.dart';
 import 'package:flutter_moneybag_2024/common/common_component/floating_add_button/floating_add_button.riverpod.dart';
+import 'package:flutter_moneybag_2024/screen/category/riverpod/category_state_notifier.dart';
+import 'package:flutter_moneybag_2024/screen/tab/asset/riverpod/asset_state_notifier.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class FloatingAddButton extends ConsumerStatefulWidget {
@@ -64,6 +66,9 @@ class _FloatingAddButtonState extends ConsumerState<FloatingAddButton> {
                 action: () {
                   ref.read(floatingButtonStateProvider.notifier).toggleCategoryMenu();
                   ref.read(floatingButtonStateProvider.notifier).quitWrite(memoEditController: memoEditController, amountEditController: amountEditController);
+                  ref.read(assetStateProvier.notifier).quitWrite();
+                  ref.read(categoryStateProvider.notifier).quitWrite();
+                  ref.read(assetStateProvier.notifier).completeWrite(amountEditController: amountEditController, memoEditController: memoEditController);
                 },
               ),
             ],
