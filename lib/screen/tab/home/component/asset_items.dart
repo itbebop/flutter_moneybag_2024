@@ -15,9 +15,9 @@ class AssetItems extends StatelessWidget {
   static Color _getColorByTitle(String title) {
     switch (title) {
       case '수입':
-        return UiConfig.secondaryTextColor;
-      case '지출':
         return UiConfig.primaryColor;
+      case '지출':
+        return UiConfig.secondaryTextColor;
 
       default:
         return Colors.black;

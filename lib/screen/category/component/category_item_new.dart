@@ -42,7 +42,7 @@ class CategoryItemNew extends ConsumerWidget {
                           type: assetType,
                         ),
                       );
-                  ref.read(categoryStateProvider.notifier).getTransactionCetegory(assetType);
+                  ref.read(categoryStateProvider.notifier).getTransactionCategory(assetType);
                   ref.read(categoryStateProvider.notifier).cancelIconSelect(assetType);
                   categoryNameEditController.clear();
                   ref.read(categoryStateProvider.notifier).showCategoryCardNew(false);

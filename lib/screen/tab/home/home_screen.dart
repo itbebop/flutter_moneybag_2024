@@ -104,7 +104,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                           if (userState.user != null) {
                             return events.isEmpty
                                 ? const Padding(padding: EdgeInsets.only(top: 16.0), child: Center(child: Text('등록된 내역이 없습니다.')))
-                                : HomeTransactionList(selectedEvents: transactionProvider.selectedEvents);
+                                : HomeTransactionList(
+                                    selectedEvents: transactionProvider.selectedEvents,
+                                  );
                           } else {
                             return Padding(
                                 padding: const EdgeInsets.only(top: 16.0),

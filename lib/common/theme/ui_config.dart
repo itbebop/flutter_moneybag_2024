@@ -4,6 +4,8 @@ import 'package:flutter_moneybag_2024/common/common.dart';
 class UiConfig {
   static const Color primaryColor = Color(0xffb67352);
   static const Color primaryColorSurface = Color.fromARGB(255, 236, 177, 89);
+  static const Color incomeTagColor = Color.fromARGB(255, 255, 215, 104);
+
   static const Color buttonColor = Color.fromARGB(255, 255, 220, 124);
   static const Color secondaryColor = Color.fromRGBO(114, 186, 192, 1);
   static const Color secondaryTextColor = Color.fromARGB(255, 67, 190, 201);

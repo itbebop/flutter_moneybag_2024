@@ -59,7 +59,6 @@ class ReportTransactionList extends ConsumerWidget {
             }
 
             // 날짜 포맷 설정
-            final createdAtFormatted = detailDateFormat.format(transaction.createdAt);
             final currentTransactionDate = standardFormat.format(transaction.createdAt);
 
             // 날짜가 중복되지 않도록 첫 거래인지 확인
@@ -82,11 +81,7 @@ class ReportTransactionList extends ConsumerWidget {
                     ),
                   ),
                 TransactionItem(
-                  memo: transaction.memo,
-                  amount: transaction.amount.toComma(),
-                  icon: transaction.category.iconKey,
-                  createdAt: createdAtFormatted,
-                  category: transaction.category,
+                  transaction: transaction,
                 ),
                 const SizedBox(height: 16),
               ],

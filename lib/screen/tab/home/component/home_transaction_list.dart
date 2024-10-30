@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_moneybag_2024/common/common.dart';
 import 'package:flutter_moneybag_2024/common/common_component/transaction/widget/transaction_item.dart';
-import 'package:flutter_moneybag_2024/domain/enums/asset_types.dart';
-import 'package:flutter_moneybag_2024/domain/model/transaction_category.dart';
 import 'package:flutter_moneybag_2024/domain/model/transaction_detail.dart';
 
 class HomeTransactionList extends StatelessWidget {
@@ -29,18 +26,7 @@ class HomeTransactionList extends StatelessWidget {
               padding: const EdgeInsets.only(bottom: 16.0),
               child: Column(
                 children: [
-                  TransactionItem(
-                    memo: transaction.memo,
-                    amount: transaction.amount.toComma(),
-                    icon: transaction.category.iconKey,
-                    createdAt: detailDateFormat.format(transaction.updatedAt),
-                    category: TransactionCategory(
-                      categoryId: '1',
-                      name: '이자',
-                      type: AssetType.income,
-                      iconKey: picSum(201),
-                    ),
-                  ),
+                  TransactionItem(transaction: transaction),
                 ],
               ),
             );
