@@ -70,7 +70,7 @@ class _ReportScreenState extends ConsumerState<AssetScreen> {
                                             context: context,
                                             message: '자산에 속한 개별 기록들까지 모두 삭제됩니다. 삭제하시겠습니까?',
                                             onConfirm: () async {
-                                              ref.read(assetStateProvier.notifier).deleteAsset(assetProvider.assetList[index].assetId);
+                                              await ref.read(assetStateProvier.notifier).deleteAsset(assetProvider.assetList[index].assetId);
                                               await ref.read(userStateProvider.notifier).fetchUser();
                                               await ref.read(assetStateProvier.notifier).fetchAsset();
                                             });
