@@ -93,24 +93,51 @@ class AssetDataSourceImpl implements AssetDataSource {
     throw UnimplementedError();
   }
 
+  // @override
+  // Future<void> deleteAsset({required String assetId, required String userId}) async {
+  //   // TODO: 완전 삭제가 아니라 복원가능한 삭제로 변경예정
+  //   await _deleteDocumentWithSubcollections(_assetRef.doc(assetId));
+
+  //   await _firestore.collection('users').doc(userId).update({
+  //     'assetIdList': FieldValue.arrayRemove([assetId]) // 특정 assetId 제거);
+  //   });
+  // }
+
+  // Future<void> _deleteDocumentWithSubcollections(DocumentReference docRef) async {
+  //   // 먼저 모든 하위 컬렉션을 삭제
+  //   final subcollections = await docRef.collection(docRef.id).get();
+  //   for (final subDoc in subcollections.docs) {
+  //     await _deleteDocumentWithSubcollections(subDoc.reference);
+  //   }
+
+  //   // 최종적으로 현재 문서를 삭제
+  //   await docRef.delete();
+  // }
   @override
   Future<void> deleteAsset({required String assetId, required String userId}) async {
-    // TODO: 완전 삭제가 아니라 복원가능한 삭제로 변경예정
-    await _deleteDocumentWithSubcollections(_assetRef.doc(assetId));
-
     await _firestore.collection('users').doc(userId).update({
       'assetIdList': FieldValue.arrayRemove([assetId]) // 특정 assetId 제거);
     });
+    // 최상위 asset 문서 참조
+    final DocumentReference assetDocRef = _firestore.collection('assets').doc(assetId);
+
+    // asset과 그 하위 컬렉션들까지 모두 삭제하는 재귀 함수
+    await _deleteDocumentWithSubcollections(assetDocRef);
   }
 
   Future<void> _deleteDocumentWithSubcollections(DocumentReference docRef) async {
-    // 먼저 모든 하위 컬렉션을 삭제
-    final subcollections = await docRef.collection(docRef.id).get();
-    for (final subDoc in subcollections.docs) {
-      await _deleteDocumentWithSubcollections(subDoc.reference);
-    }
+    try {
+      // 현재 문서의 모든 하위 컬렉션 문서들을 가져오기
+      final subcollections = await _firestore.collectionGroup(docRef.id).get();
+      for (final subDoc in subcollections.docs) {
+        // 하위 문서에 대해 재귀 호출하여 그 문서의 하위 컬렉션도 모두 삭제
+        await _deleteDocumentWithSubcollections(subDoc.reference);
+      }
 
-    // 최종적으로 현재 문서를 삭제
-    await docRef.delete();
+      // 최종적으로 현재 문서를 삭제
+      await docRef.delete();
+    } catch (e) {
+      rethrow;
+    }
   }
 }
