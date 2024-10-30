@@ -39,7 +39,7 @@ class CategoryMenu extends ConsumerWidget {
               selectedValue: AssetType.income,
               onSelect: (AssetType assetType) async {
                 ref.read(transactionStateProvider.notifier).selectAssetType(assetType);
-                ref.read(floatingButtonStateProvider.notifier).toggleTransactionMenu();
+                ref.read(floatingButtonStateProvider.notifier).toggleTransactionMenu(assetType);
                 await ref.read(categoryStateProvider.notifier).getTransactionCategory(assetType);
                 ref.read(floatingButtonStateProvider.notifier).tapCategory(assetType);
               },
@@ -50,9 +50,10 @@ class CategoryMenu extends ConsumerWidget {
               title: '지출',
               icon: HugeIcons.strokeRoundedLoginSquare01,
               selectedValue: AssetType.expense,
+              selectedColor: UiConfig.secondaryColor,
               onSelect: (AssetType assetType) async {
                 ref.read(transactionStateProvider.notifier).selectAssetType(assetType);
-                ref.read(floatingButtonStateProvider.notifier).toggleTransactionMenu();
+                ref.read(floatingButtonStateProvider.notifier).toggleTransactionMenu(assetType);
                 await ref.read(categoryStateProvider.notifier).getTransactionCategory(assetType);
                 ref.read(floatingButtonStateProvider.notifier).tapCategory(assetType);
               },

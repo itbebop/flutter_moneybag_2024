@@ -21,6 +21,7 @@ mixin _$FloatingButtonState {
   bool get isClassified => throw _privateConstructorUsedError;
   bool get expenseSelected => throw _privateConstructorUsedError;
   bool get incomeSelected => throw _privateConstructorUsedError;
+  AssetType? get assetType => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $FloatingButtonStateCopyWith<FloatingButtonState> get copyWith =>
@@ -38,7 +39,8 @@ abstract class $FloatingButtonStateCopyWith<$Res> {
       bool isSmall,
       bool isClassified,
       bool expenseSelected,
-      bool incomeSelected});
+      bool incomeSelected,
+      AssetType? assetType});
 }
 
 /// @nodoc
@@ -59,6 +61,7 @@ class _$FloatingButtonStateCopyWithImpl<$Res, $Val extends FloatingButtonState>
     Object? isClassified = null,
     Object? expenseSelected = null,
     Object? incomeSelected = null,
+    Object? assetType = freezed,
   }) {
     return _then(_value.copyWith(
       isExpanded: null == isExpanded
@@ -81,6 +84,10 @@ class _$FloatingButtonStateCopyWithImpl<$Res, $Val extends FloatingButtonState>
           ? _value.incomeSelected
           : incomeSelected // ignore: cast_nullable_to_non_nullable
               as bool,
+      assetType: freezed == assetType
+          ? _value.assetType
+          : assetType // ignore: cast_nullable_to_non_nullable
+              as AssetType?,
     ) as $Val);
   }
 }
@@ -98,7 +105,8 @@ abstract class _$$FloatingButtonStateImplCopyWith<$Res>
       bool isSmall,
       bool isClassified,
       bool expenseSelected,
-      bool incomeSelected});
+      bool incomeSelected,
+      AssetType? assetType});
 }
 
 /// @nodoc
@@ -117,6 +125,7 @@ class __$$FloatingButtonStateImplCopyWithImpl<$Res>
     Object? isClassified = null,
     Object? expenseSelected = null,
     Object? incomeSelected = null,
+    Object? assetType = freezed,
   }) {
     return _then(_$FloatingButtonStateImpl(
       isExpanded: null == isExpanded
@@ -139,6 +148,10 @@ class __$$FloatingButtonStateImplCopyWithImpl<$Res>
           ? _value.incomeSelected
           : incomeSelected // ignore: cast_nullable_to_non_nullable
               as bool,
+      assetType: freezed == assetType
+          ? _value.assetType
+          : assetType // ignore: cast_nullable_to_non_nullable
+              as AssetType?,
     ));
   }
 }
@@ -151,7 +164,8 @@ class _$FloatingButtonStateImpl implements _FloatingButtonState {
       this.isSmall = false,
       this.isClassified = false,
       this.expenseSelected = false,
-      this.incomeSelected = false});
+      this.incomeSelected = false,
+      this.assetType});
 
   @override
   @JsonKey()
@@ -168,10 +182,12 @@ class _$FloatingButtonStateImpl implements _FloatingButtonState {
   @override
   @JsonKey()
   final bool incomeSelected;
+  @override
+  final AssetType? assetType;
 
   @override
   String toString() {
-    return 'FloatingButtonState(isExpanded: $isExpanded, isSmall: $isSmall, isClassified: $isClassified, expenseSelected: $expenseSelected, incomeSelected: $incomeSelected)';
+    return 'FloatingButtonState(isExpanded: $isExpanded, isSmall: $isSmall, isClassified: $isClassified, expenseSelected: $expenseSelected, incomeSelected: $incomeSelected, assetType: $assetType)';
   }
 
   @override
@@ -187,12 +203,14 @@ class _$FloatingButtonStateImpl implements _FloatingButtonState {
             (identical(other.expenseSelected, expenseSelected) ||
                 other.expenseSelected == expenseSelected) &&
             (identical(other.incomeSelected, incomeSelected) ||
-                other.incomeSelected == incomeSelected));
+                other.incomeSelected == incomeSelected) &&
+            (identical(other.assetType, assetType) ||
+                other.assetType == assetType));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, isExpanded, isSmall,
-      isClassified, expenseSelected, incomeSelected);
+      isClassified, expenseSelected, incomeSelected, assetType);
 
   @JsonKey(ignore: true)
   @override
@@ -208,7 +226,8 @@ abstract class _FloatingButtonState implements FloatingButtonState {
       final bool isSmall,
       final bool isClassified,
       final bool expenseSelected,
-      final bool incomeSelected}) = _$FloatingButtonStateImpl;
+      final bool incomeSelected,
+      final AssetType? assetType}) = _$FloatingButtonStateImpl;
 
   @override
   bool get isExpanded;
@@ -220,6 +239,8 @@ abstract class _FloatingButtonState implements FloatingButtonState {
   bool get expenseSelected;
   @override
   bool get incomeSelected;
+  @override
+  AssetType? get assetType;
   @override
   @JsonKey(ignore: true)
   _$$FloatingButtonStateImplCopyWith<_$FloatingButtonStateImpl> get copyWith =>

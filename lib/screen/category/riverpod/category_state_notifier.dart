@@ -150,7 +150,6 @@ class CategoryStateNotifier extends StateNotifier<CategoryState> {
       categories = categories.where((category) => category.type == AssetType.expense).toList();
       state = state.copyWith(categoryList: categories);
     }
-    print('#####categories: $categories');
     return categories;
   }
 

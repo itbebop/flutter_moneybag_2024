@@ -40,9 +40,14 @@ class FloatingButtonStateNotifier extends StateNotifier<FloatingButtonState> {
     state = state.copyWith(isSmall: isSmall);
   }
 
-  void toggleTransactionMenu() {
+  void toggleTransactionMenu(AssetType assetType) {
     final isClassified = state.isClassified;
-    state = state.copyWith(isClassified: !isClassified);
+    if (assetType == state.assetType) {
+      state = state.copyWith(isClassified: !isClassified);
+    } else {
+      state = state.copyWith(isClassified: true);
+    }
+    state = state.copyWith(assetType: assetType);
   }
 
   void quitWrite({
@@ -63,12 +68,16 @@ class FloatingButtonStateNotifier extends StateNotifier<FloatingButtonState> {
   }
 
   void tapCategory<T>(T selectedValue) {
+    // 비용선택했고 수입이 선택되어있지 않으면
     if (selectedValue == AssetType.expense && !state.incomeSelected) {
       state = state.copyWith(expenseSelected: !state.expenseSelected);
     } else if (selectedValue == AssetType.income && !state.expenseSelected) {
       state = state.copyWith(incomeSelected: !state.incomeSelected);
     } else {
-      state = state.copyWith(incomeSelected: false, expenseSelected: false);
+      state = state.copyWith(
+        incomeSelected: !state.incomeSelected,
+        expenseSelected: !state.expenseSelected,
+      );
     }
   }
 }

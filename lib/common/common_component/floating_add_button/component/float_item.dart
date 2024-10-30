@@ -10,6 +10,7 @@ class FloatItem<T> extends ConsumerWidget {
   final Function(T value) onSelect;
   final T selectedValue;
   final Color iconColor;
+  final Color? selectedColor;
 
   const FloatItem({
     super.key,
@@ -19,6 +20,7 @@ class FloatItem<T> extends ConsumerWidget {
     required this.onSelect,
     required this.selectedValue,
     this.isSelected,
+    this.selectedColor,
   });
 
   @override
@@ -30,7 +32,7 @@ class FloatItem<T> extends ConsumerWidget {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.all(Radius.circular(5)),
-          color: isSelected ?? false ? UiConfig.buttonColor : UiConfig.whiteColor,
+          color: isSelected ?? false ? selectedColor ?? UiConfig.buttonColor : UiConfig.whiteColor,
         ),
         child: Row(
           children: [
