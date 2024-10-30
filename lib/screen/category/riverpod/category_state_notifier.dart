@@ -1,4 +1,4 @@
-import 'package:flutter_moneybag_2024/common/data/icon_list.dart';
+import 'package:flutter_moneybag_2024/common/data/icon_map.dart';
 import 'package:flutter_moneybag_2024/core/provider/user_state_notifier.dart';
 import 'package:flutter_moneybag_2024/di/di_setup.dart';
 import 'package:flutter_moneybag_2024/domain/enums/asset_types.dart';
@@ -31,9 +31,27 @@ class CategoryStateNotifier extends StateNotifier<CategoryState> {
   CategoryStateNotifier(super.state);
   void showCategoryCardNew(bool showNew, {AssetType? assetType}) {
     if (assetType == AssetType.income) {
-      state = state.copyWith(showIncomeCategoryCardNew: showNew);
+      if (showNew) {
+        state = state.copyWith(
+          showIncomeCategoryCardNew: showNew,
+          showExpenseCategoryCardNew: !showNew,
+        );
+      } else {
+        state = state.copyWith(
+          showIncomeCategoryCardNew: showNew,
+        );
+      }
     } else {
-      state = state.copyWith(showExpenseCategoryCardNew: showNew);
+      if (showNew) {
+        state = state.copyWith(
+          showExpenseCategoryCardNew: showNew,
+          showIncomeCategoryCardNew: !showNew,
+        );
+      } else {
+        state = state.copyWith(
+          showExpenseCategoryCardNew: showNew,
+        );
+      }
     }
   }
 
