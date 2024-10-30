@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_moneybag_2024/common/common_component/transaction/riverpod/transaction_state.dart';
 import 'package:flutter_moneybag_2024/di/di_setup.dart';
 import 'package:flutter_moneybag_2024/domain/enums/asset_types.dart';
+import 'package:flutter_moneybag_2024/domain/model/transaction_category.dart';
 import 'package:flutter_moneybag_2024/domain/model/transaction_detail.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -17,7 +18,6 @@ final transactionStateProvider = StateNotifierProvider<TransactionStateNotifier,
       updateTransactionUseCase: getIt(),
       assetId: '',
       assetIdList: [],
-      amount: 0,
       assetType: AssetType.expense,
       selectedEvents: ValueNotifier([]),
       focusedDay: DateTime.now(),
@@ -41,20 +41,29 @@ class TransactionStateNotifier extends StateNotifier<TransactionState> {
     state = state.copyWith(assetId: assetId);
   }
 
-  void onChangeAmount(String value) {
-    final double amount = double.parse(value);
-    if (state.assetType == AssetType.income) {
-      state = state.copyWith(amount: amount);
-    } else {
-      state = state.copyWith(amount: -amount);
+  double onChangeAmount(String value) {
+    double amount = double.parse(value);
+    if (state.assetType == AssetType.expense) {
+      amount = -amount;
     }
+    return amount;
   }
 
   void onSelectDay(DateTime selectedDay, DateTime focusedDay) {
     state = state.copyWith(selectedDay: selectedDay, focusedDay: focusedDay);
   }
 
-  Future<void> createTransaction({required TransactionDetail transactionDetail, required String assetId}) async {
+  Future<void> createTransaction({required String memo, required String amount, required TransactionCategory category, required String assetId, userId}) async {
+    final transactionDetail = TransactionDetail(
+      transactionId: '1',
+      memo: memo,
+      createdAt: DateTime.now(),
+      updatedAt: DateTime.now(),
+      amount: onChangeAmount(amount),
+      userId: userId,
+      imgUrl: '',
+      category: category,
+    );
     await state.createTransactionUseCase.execute(transactionDetail: transactionDetail, assetId: assetId);
   }
 

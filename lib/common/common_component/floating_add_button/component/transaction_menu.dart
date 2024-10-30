@@ -9,7 +9,6 @@ import 'package:flutter_moneybag_2024/common/widget/custom_dropdown_button.dart'
 import 'package:flutter_moneybag_2024/core/provider/user_state_notifier.dart';
 import 'package:flutter_moneybag_2024/domain/model/asset.dart';
 import 'package:flutter_moneybag_2024/domain/model/transaction_category.dart';
-import 'package:flutter_moneybag_2024/domain/model/transaction_detail.dart';
 import 'package:flutter_moneybag_2024/screen/category/riverpod/category_state_notifier.dart';
 import 'package:flutter_moneybag_2024/screen/tab/asset/riverpod/asset_state_notifier.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -34,7 +33,7 @@ class TransactionMenu extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final assetProvider = ref.watch(assetStateProvier);
-    final transacProvider = ref.watch(transactionStateProvider);
+    final transacProvider = ref.read(transactionStateProvider);
     final categoryProvider = ref.watch(categoryStateProvider);
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -211,35 +210,29 @@ class TransactionMenu extends ConsumerWidget {
                 const SizedBox(height: 8),
                 Tap(
                   onTap: () async {
+                    // ,제거하고 전송
+                    final value = amountEditController.text;
+                    final valueWithoutComma = value.replaceAll(',', '');
+                    // ref.read(transactionStateProvider.notifier).onChangeAmount(valueWithoutComma);
                     if (ref.read(assetStateProvier.notifier).onEnterWithoutSelect(context)) {
                       return;
                     } else if (ref.read(categoryStateProvider.notifier).onEnterWithoutSelect(context)) {
                       return;
                     }
 
-                    // ,제거하고 전송
-                    final value = amountEditController.text;
-                    final valueWithoutComma = value.replaceAll(',', '');
-                    ref.read(transactionStateProvider.notifier).onChangeAmount(valueWithoutComma);
                     final userStateValue = ref.watch(userStateProvider);
                     if (userStateValue.user != null) {
                       await ref.read(transactionStateProvider.notifier).createTransaction(
-                          transactionDetail: TransactionDetail(
-                            transactionId: '1',
-                            memo: memoEditController.text,
-                            createdAt: DateTime.now(),
-                            updatedAt: DateTime.now(),
-                            amount: transacProvider.amount,
-                            userId: userStateValue.user!.userId,
-                            imgUrl: '',
-                            category: TransactionCategory(
-                              categoryId: categoryProvider.category!.categoryId,
-                              name: categoryProvider.category!.name,
-                              type: transacProvider.assetType,
-                              iconKey: categoryProvider.category!.iconKey,
-                            ),
+                          memo: memoEditController.text,
+                          amount: valueWithoutComma,
+                          category: TransactionCategory(
+                            categoryId: categoryProvider.category!.categoryId,
+                            name: categoryProvider.category!.name,
+                            type: transacProvider.assetType,
+                            iconKey: categoryProvider.category!.iconKey,
                           ),
-                          assetId: assetProvider.selectedAssetId);
+                          assetId: assetProvider.selectedAssetId,
+                          userId: userStateValue.user!.userId);
                     }
                     // 입력을 완료하면 키보드를 숨김
                     SystemChannels.textInput.invokeMethod('TextInput.hide');

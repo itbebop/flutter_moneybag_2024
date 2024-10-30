@@ -23,7 +23,6 @@ mixin _$TransactionState {
   ValueNotifier<List<TransactionDetail>> get selectedEvents =>
       throw _privateConstructorUsedError;
   String get assetId => throw _privateConstructorUsedError;
-  double get amount => throw _privateConstructorUsedError;
   AssetType get assetType => throw _privateConstructorUsedError;
   List<String> get assetIdList => throw _privateConstructorUsedError;
   CreateTransactionUseCase get createTransactionUseCase =>
@@ -53,7 +52,6 @@ abstract class $TransactionStateCopyWith<$Res> {
       DateTime focusedDay,
       ValueNotifier<List<TransactionDetail>> selectedEvents,
       String assetId,
-      double amount,
       AssetType assetType,
       List<String> assetIdList,
       CreateTransactionUseCase createTransactionUseCase,
@@ -81,7 +79,6 @@ class _$TransactionStateCopyWithImpl<$Res, $Val extends TransactionState>
     Object? focusedDay = null,
     Object? selectedEvents = null,
     Object? assetId = null,
-    Object? amount = null,
     Object? assetType = null,
     Object? assetIdList = null,
     Object? createTransactionUseCase = null,
@@ -114,10 +111,6 @@ class _$TransactionStateCopyWithImpl<$Res, $Val extends TransactionState>
           ? _value.assetId
           : assetId // ignore: cast_nullable_to_non_nullable
               as String,
-      amount: null == amount
-          ? _value.amount
-          : amount // ignore: cast_nullable_to_non_nullable
-              as double,
       assetType: null == assetType
           ? _value.assetType
           : assetType // ignore: cast_nullable_to_non_nullable
@@ -161,7 +154,6 @@ abstract class _$$TransactionStateImplCopyWith<$Res>
       DateTime focusedDay,
       ValueNotifier<List<TransactionDetail>> selectedEvents,
       String assetId,
-      double amount,
       AssetType assetType,
       List<String> assetIdList,
       CreateTransactionUseCase createTransactionUseCase,
@@ -187,7 +179,6 @@ class __$$TransactionStateImplCopyWithImpl<$Res>
     Object? focusedDay = null,
     Object? selectedEvents = null,
     Object? assetId = null,
-    Object? amount = null,
     Object? assetType = null,
     Object? assetIdList = null,
     Object? createTransactionUseCase = null,
@@ -220,10 +211,6 @@ class __$$TransactionStateImplCopyWithImpl<$Res>
           ? _value.assetId
           : assetId // ignore: cast_nullable_to_non_nullable
               as String,
-      amount: null == amount
-          ? _value.amount
-          : amount // ignore: cast_nullable_to_non_nullable
-              as double,
       assetType: null == assetType
           ? _value.assetType
           : assetType // ignore: cast_nullable_to_non_nullable
@@ -262,7 +249,6 @@ class _$TransactionStateImpl implements _TransactionState {
       required this.focusedDay,
       required this.selectedEvents,
       required this.assetId,
-      required this.amount,
       required this.assetType,
       required final List<String> assetIdList,
       required this.createTransactionUseCase,
@@ -293,8 +279,6 @@ class _$TransactionStateImpl implements _TransactionState {
   @override
   final String assetId;
   @override
-  final double amount;
-  @override
   final AssetType assetType;
   final List<String> _assetIdList;
   @override
@@ -315,7 +299,7 @@ class _$TransactionStateImpl implements _TransactionState {
 
   @override
   String toString() {
-    return 'TransactionState(isLoading: $isLoading, events: $events, selectedDay: $selectedDay, focusedDay: $focusedDay, selectedEvents: $selectedEvents, assetId: $assetId, amount: $amount, assetType: $assetType, assetIdList: $assetIdList, createTransactionUseCase: $createTransactionUseCase, deleteTransactionUseCase: $deleteTransactionUseCase, getTransactionListUseCase: $getTransactionListUseCase, updateTransactionUseCase: $updateTransactionUseCase)';
+    return 'TransactionState(isLoading: $isLoading, events: $events, selectedDay: $selectedDay, focusedDay: $focusedDay, selectedEvents: $selectedEvents, assetId: $assetId, assetType: $assetType, assetIdList: $assetIdList, createTransactionUseCase: $createTransactionUseCase, deleteTransactionUseCase: $deleteTransactionUseCase, getTransactionListUseCase: $getTransactionListUseCase, updateTransactionUseCase: $updateTransactionUseCase)';
   }
 
   @override
@@ -333,7 +317,6 @@ class _$TransactionStateImpl implements _TransactionState {
             (identical(other.selectedEvents, selectedEvents) ||
                 other.selectedEvents == selectedEvents) &&
             (identical(other.assetId, assetId) || other.assetId == assetId) &&
-            (identical(other.amount, amount) || other.amount == amount) &&
             (identical(other.assetType, assetType) ||
                 other.assetType == assetType) &&
             const DeepCollectionEquality()
@@ -361,7 +344,6 @@ class _$TransactionStateImpl implements _TransactionState {
       focusedDay,
       selectedEvents,
       assetId,
-      amount,
       assetType,
       const DeepCollectionEquality().hash(_assetIdList),
       createTransactionUseCase,
@@ -385,7 +367,6 @@ abstract class _TransactionState implements TransactionState {
           required final DateTime focusedDay,
           required final ValueNotifier<List<TransactionDetail>> selectedEvents,
           required final String assetId,
-          required final double amount,
           required final AssetType assetType,
           required final List<String> assetIdList,
           required final CreateTransactionUseCase createTransactionUseCase,
@@ -406,8 +387,6 @@ abstract class _TransactionState implements TransactionState {
   ValueNotifier<List<TransactionDetail>> get selectedEvents;
   @override
   String get assetId;
-  @override
-  double get amount;
   @override
   AssetType get assetType;
   @override

@@ -18,7 +18,6 @@ class TransactionState with _$TransactionState {
     required final DateTime focusedDay,
     required ValueNotifier<List<TransactionDetail>> selectedEvents,
     required final String assetId,
-    required final double amount,
     required final AssetType assetType,
     required final List<String> assetIdList,
     required final CreateTransactionUseCase createTransactionUseCase,
