@@ -30,11 +30,6 @@ class TransactionCategoryDataSourceImpl implements TransactionCategoryDataSource
   }
 
   @override
-  Future<void> updateTransactionCategory({required TransactionCategory transactionCategory, required String userId}) async {
-    await _transactionCategoryRef(userId).doc(transactionCategory.categoryId).set(transactionCategory);
-  }
-
-  @override
   Future<void> deleteTransactionCategory({required String categoryId, required String userId}) async {
     await _transactionCategoryRef(userId).doc(categoryId).delete();
   }
