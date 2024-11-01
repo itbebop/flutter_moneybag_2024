@@ -37,7 +37,7 @@ class ReportTransactionList extends ConsumerWidget {
             final now = DateTime.now();
             final selectedYear = now.year; // 선택한 연도 (필요시 동적으로 변경 가능)
             final firstDayOfSelectedMonth = DateTime(selectedYear, selectedMonth, 1);
-            final lastDayOfSelectedMonth = DateTime(selectedYear, selectedMonth + 1, 0);
+            final lastDayOfSelectedMonth = DateTime(selectedYear, selectedMonth + 1, 1).subtract(const Duration(seconds: 1));
 
             // 선택한 day에 맞게 해당 날짜의 첫날과 마지막 날 설정
             DateTime startOfSelectedDay;
