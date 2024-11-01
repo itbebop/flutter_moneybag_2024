@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_moneybag_2024/common/common.dart';
-import 'package:flutter_moneybag_2024/common/common_component/transaction/riverpod/transaction_state_notifier.dart';
 import 'package:flutter_moneybag_2024/core/provider/user_state_notifier.dart';
 import 'package:flutter_moneybag_2024/screen/tab/asset/riverpod/asset_state_notifier.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -26,8 +25,6 @@ class _SplashScreenState extends ConsumerState<SplashScreen> with SingleTickerPr
       try {
         await ref.read(userStateProvider.notifier).fetchUser();
         await ref.read(assetStateProvier.notifier).fetchAsset();
-        final assetIdList = ref.read(assetStateProvier).assetIdList;
-        await ref.read(transactionStateProvider.notifier).getAssetIdList(assetIdList);
       } catch (e) {
         throw Exception(e);
       }
