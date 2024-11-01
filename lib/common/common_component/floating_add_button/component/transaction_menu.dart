@@ -213,7 +213,7 @@ class TransactionMenu extends ConsumerWidget {
                     // ,제거하고 전송
                     final value = amountEditController.text;
                     final valueWithoutComma = value.replaceAll(',', '');
-                    // ref.read(transactionStateProvider.notifier).onChangeAmount(valueWithoutComma);
+                    ref.read(transactionStateProvider.notifier).onChangeAmount(valueWithoutComma);
                     if (ref.read(assetStateProvier.notifier).onEnterWithoutSelect(context)) {
                       return;
                     } else if (ref.read(categoryStateProvider.notifier).onEnterWithoutSelect(context)) {

@@ -10,6 +10,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 final transactionStateProvider = StateNotifierProvider<TransactionStateNotifier, TransactionState>((ref) {
   final assetState = ref.watch(assetStateProvier);
   final List<String> assetIdList = assetState.assetIdList;
+  final assetType = assetState.assetType;
 
   return TransactionStateNotifier(
     TransactionState(
@@ -19,7 +20,7 @@ final transactionStateProvider = StateNotifierProvider<TransactionStateNotifier,
       updateTransactionUseCase: getIt(),
       assetId: '',
       assetIdList: assetIdList,
-      assetType: AssetType.expense,
+      assetType: assetType,
       selectedEvents: ValueNotifier([]),
       focusedDay: DateTime.now(),
       selectedDay: DateTime.now(),
@@ -29,10 +30,6 @@ final transactionStateProvider = StateNotifierProvider<TransactionStateNotifier,
 
 class TransactionStateNotifier extends StateNotifier<TransactionState> {
   TransactionStateNotifier(super.state);
-
-  void selectAssetType(AssetType assetType) {
-    state = state.copyWith(assetType: assetType);
-  }
 
   void selectAsset(String assetId) {
     state = state.copyWith(assetId: assetId);

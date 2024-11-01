@@ -28,6 +28,7 @@ mixin _$AssetState {
   List<Color> get secondColorList => throw _privateConstructorUsedError;
   List<String> get firstColorListSave => throw _privateConstructorUsedError;
   List<String> get secondColorListSave => throw _privateConstructorUsedError;
+  AssetType get assetType => throw _privateConstructorUsedError;
   Color get firstColor => throw _privateConstructorUsedError;
   Color get secondColor => throw _privateConstructorUsedError;
   String get userId => throw _privateConstructorUsedError;
@@ -72,6 +73,7 @@ abstract class $AssetStateCopyWith<$Res> {
       List<Color> secondColorList,
       List<String> firstColorListSave,
       List<String> secondColorListSave,
+      AssetType assetType,
       Color firstColor,
       Color secondColor,
       String userId,
@@ -114,6 +116,7 @@ class _$AssetStateCopyWithImpl<$Res, $Val extends AssetState>
     Object? secondColorList = null,
     Object? firstColorListSave = null,
     Object? secondColorListSave = null,
+    Object? assetType = null,
     Object? firstColor = null,
     Object? secondColor = null,
     Object? userId = null,
@@ -179,6 +182,10 @@ class _$AssetStateCopyWithImpl<$Res, $Val extends AssetState>
           ? _value.secondColorListSave
           : secondColorListSave // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      assetType: null == assetType
+          ? _value.assetType
+          : assetType // ignore: cast_nullable_to_non_nullable
+              as AssetType,
       firstColor: null == firstColor
           ? _value.firstColor
           : firstColor // ignore: cast_nullable_to_non_nullable
@@ -264,6 +271,7 @@ abstract class _$$AssetStateImplCopyWith<$Res>
       List<Color> secondColorList,
       List<String> firstColorListSave,
       List<String> secondColorListSave,
+      AssetType assetType,
       Color firstColor,
       Color secondColor,
       String userId,
@@ -304,6 +312,7 @@ class __$$AssetStateImplCopyWithImpl<$Res>
     Object? secondColorList = null,
     Object? firstColorListSave = null,
     Object? secondColorListSave = null,
+    Object? assetType = null,
     Object? firstColor = null,
     Object? secondColor = null,
     Object? userId = null,
@@ -369,6 +378,10 @@ class __$$AssetStateImplCopyWithImpl<$Res>
           ? _value._secondColorListSave
           : secondColorListSave // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      assetType: null == assetType
+          ? _value.assetType
+          : assetType // ignore: cast_nullable_to_non_nullable
+              as AssetType,
       firstColor: null == firstColor
           ? _value.firstColor
           : firstColor // ignore: cast_nullable_to_non_nullable
@@ -449,6 +462,7 @@ class _$AssetStateImpl implements _AssetState {
       required final List<Color> secondColorList,
       required final List<String> firstColorListSave,
       required final List<String> secondColorListSave,
+      required this.assetType,
       required this.firstColor,
       required this.secondColor,
       required this.userId,
@@ -537,6 +551,8 @@ class _$AssetStateImpl implements _AssetState {
   }
 
   @override
+  final AssetType assetType;
+  @override
   final Color firstColor;
   @override
   final Color secondColor;
@@ -581,7 +597,7 @@ class _$AssetStateImpl implements _AssetState {
 
   @override
   String toString() {
-    return 'AssetState(assetList: $assetList, totalAmount: $totalAmount, totalIncome: $totalIncome, totalExpense: $totalExpense, assetAmount: $assetAmount, showAssetCardUpdate: $showAssetCardUpdate, isLoading: $isLoading, selectedAssetCardIndex: $selectedAssetCardIndex, firstColorList: $firstColorList, secondColorList: $secondColorList, firstColorListSave: $firstColorListSave, secondColorListSave: $secondColorListSave, firstColor: $firstColor, secondColor: $secondColor, userId: $userId, assetHints: $assetHints, assetName: $assetName, assetColor: $assetColor, assetCurrency: $assetCurrency, currencyHints: $currencyHints, selectedAssetId: $selectedAssetId, assetIdList: $assetIdList, getAssetListUseCase: $getAssetListUseCase, getAssetUseCase: $getAssetUseCase, createAssetUserCase: $createAssetUserCase, updateAssetUserCase: $updateAssetUserCase, deleteAssetUseCase: $deleteAssetUseCase)';
+    return 'AssetState(assetList: $assetList, totalAmount: $totalAmount, totalIncome: $totalIncome, totalExpense: $totalExpense, assetAmount: $assetAmount, showAssetCardUpdate: $showAssetCardUpdate, isLoading: $isLoading, selectedAssetCardIndex: $selectedAssetCardIndex, firstColorList: $firstColorList, secondColorList: $secondColorList, firstColorListSave: $firstColorListSave, secondColorListSave: $secondColorListSave, assetType: $assetType, firstColor: $firstColor, secondColor: $secondColor, userId: $userId, assetHints: $assetHints, assetName: $assetName, assetColor: $assetColor, assetCurrency: $assetCurrency, currencyHints: $currencyHints, selectedAssetId: $selectedAssetId, assetIdList: $assetIdList, getAssetListUseCase: $getAssetListUseCase, getAssetUseCase: $getAssetUseCase, createAssetUserCase: $createAssetUserCase, updateAssetUserCase: $updateAssetUserCase, deleteAssetUseCase: $deleteAssetUseCase)';
   }
 
   @override
@@ -613,6 +629,8 @@ class _$AssetStateImpl implements _AssetState {
                 .equals(other._firstColorListSave, _firstColorListSave) &&
             const DeepCollectionEquality()
                 .equals(other._secondColorListSave, _secondColorListSave) &&
+            (identical(other.assetType, assetType) ||
+                other.assetType == assetType) &&
             (identical(other.firstColor, firstColor) ||
                 other.firstColor == firstColor) &&
             (identical(other.secondColor, secondColor) ||
@@ -659,6 +677,7 @@ class _$AssetStateImpl implements _AssetState {
         const DeepCollectionEquality().hash(_secondColorList),
         const DeepCollectionEquality().hash(_firstColorListSave),
         const DeepCollectionEquality().hash(_secondColorListSave),
+        assetType,
         firstColor,
         secondColor,
         userId,
@@ -697,6 +716,7 @@ abstract class _AssetState implements AssetState {
       required final List<Color> secondColorList,
       required final List<String> firstColorListSave,
       required final List<String> secondColorListSave,
+      required final AssetType assetType,
       required final Color firstColor,
       required final Color secondColor,
       required final String userId,
@@ -737,6 +757,8 @@ abstract class _AssetState implements AssetState {
   List<String> get firstColorListSave;
   @override
   List<String> get secondColorListSave;
+  @override
+  AssetType get assetType;
   @override
   Color get firstColor;
   @override

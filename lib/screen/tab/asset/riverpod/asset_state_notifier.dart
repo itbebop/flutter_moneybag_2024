@@ -5,6 +5,7 @@ import 'package:flutter_moneybag_2024/common/data/color_list.dart';
 import 'package:flutter_moneybag_2024/common/widget/alert_dialog_widget.dart';
 import 'package:flutter_moneybag_2024/core/provider/user_state_notifier.dart';
 import 'package:flutter_moneybag_2024/di/di_setup.dart';
+import 'package:flutter_moneybag_2024/domain/enums/asset_types.dart';
 import 'package:flutter_moneybag_2024/domain/enums/currency.dart';
 import 'package:flutter_moneybag_2024/domain/model/asset.dart';
 import 'package:flutter_moneybag_2024/screen/tab/asset/riverpod/asset_state.dart';
@@ -51,6 +52,7 @@ final assetStateProvier = StateNotifierProvider<AssetStateNotifier, AssetState>(
     firstColorList: firstColorList,
     secondColorList: secondColorList,
     firstColorListSave: [],
+    assetType: AssetType.expense,
   ));
 });
 
@@ -111,6 +113,10 @@ class AssetStateNotifier extends StateNotifier<AssetState> {
       firstColor: firstColor,
       secondColor: secondColor,
     );
+  }
+
+  void selectAssetType(AssetType assetType) {
+    state = state.copyWith(assetType: assetType);
   }
 
   void completeWrite({TextEditingController? memoEditController, TextEditingController? amountEditController}) {
