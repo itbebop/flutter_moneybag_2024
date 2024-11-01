@@ -5,6 +5,7 @@ import 'package:flutter_moneybag_2024/core/provider/user_state_notifier.dart';
 import 'package:flutter_moneybag_2024/screen/tab/asset/riverpod/asset_state_notifier.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hugeicons/hugeicons.dart';
 
 class DrawerWidget extends ConsumerStatefulWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
@@ -35,7 +36,7 @@ class _DrawerWidgetState extends ConsumerState<DrawerWidget> {
                       children: <Widget>[
                         UserAccountsDrawerHeader(
                           currentAccountPicture: CircleAvatar(
-                            backgroundImage: NetworkImage(picSum(301)), // 사용자 이미지
+                            backgroundImage: NetworkImage(userState.user!.imgUrl), // 사용자 이미지
                             backgroundColor: Colors.white,
                           ),
                           accountName: Text(userState.user!.name),
@@ -55,34 +56,45 @@ class _DrawerWidgetState extends ConsumerState<DrawerWidget> {
             Column(
               children: [
                 ListTile(
-                  leading: Icon(Icons.home, color: Colors.grey[850]),
+                  leading: const HugeIcon(
+                    icon: HugeIcons.strokeRoundedFile02,
+                    color: UiConfig.black,
+                  ),
                   title: const Text('카테고리 관리'),
                   onTap: () {
                     context.push('/category');
                   },
                   trailing: const Icon(Icons.add),
                 ),
-                ListTile(
-                  leading: Icon(Icons.logout, color: Colors.grey[850]),
-                  title: const Text('로그인'),
-                  onTap: () async {
-                    context.push('/login');
-                  },
-                  trailing: const Icon(Icons.add),
-                ),
-                ListTile(
-                  leading: Icon(Icons.logout, color: Colors.grey[850]),
-                  title: const Text('로그아웃'),
-                  onTap: () async {
-                    ref.read(assetStateProvier.notifier).logout();
-                    await ref.read(userStateProvider.notifier).logout();
-                    ref.read(transactionStateProvider.notifier).clearTransactions(); // 트랜잭션 초기화
-                    ref.read(transactionStateProvider.notifier).fetchEventsForDay(DateTime.now());
-                    widget.scaffoldKey.currentState!.closeDrawer();
-                    // if (mounted) ref.read(userStateProvider.notifier).showLogoutSnackbar(context);
-                  },
-                  trailing: const Icon(Icons.add),
-                ),
+                if (userState.user == null)
+                  ListTile(
+                    leading: const HugeIcon(
+                      icon: HugeIcons.strokeRoundedLogin01,
+                      color: UiConfig.black,
+                    ),
+                    title: const Text('로그인'),
+                    onTap: () async {
+                      context.push('/login');
+                    },
+                    trailing: const Icon(Icons.add),
+                  ),
+                if (userState.user != null)
+                  ListTile(
+                    leading: const HugeIcon(
+                      icon: HugeIcons.strokeRoundedLogoutSquare01,
+                      color: UiConfig.black,
+                    ),
+                    title: const Text('로그아웃'),
+                    onTap: () async {
+                      ref.read(assetStateProvier.notifier).logout();
+                      await ref.read(userStateProvider.notifier).logout();
+                      ref.read(transactionStateProvider.notifier).clearTransactions(); // 트랜잭션 초기화
+                      ref.read(transactionStateProvider.notifier).fetchEventsForDay(DateTime.now());
+                      widget.scaffoldKey.currentState!.closeDrawer();
+                      // if (mounted) ref.read(userStateProvider.notifier).showLogoutSnackbar(context);
+                    },
+                    trailing: const Icon(Icons.add),
+                  ),
               ],
             )
           ],
