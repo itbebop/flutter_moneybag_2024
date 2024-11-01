@@ -23,7 +23,7 @@ class CategoryItemUpdate extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final categoryProvider = ref.watch(categoryStateProvider);
-    categoryNameEditController.text = category.name;
+    !categoryProvider.showCategoryNameFromServer ? categoryNameEditController.text = categoryProvider.updatedIconName : null;
     return Card(
       color: UiConfig.whiteColor,
       shape: RoundedRectangleBorder(
@@ -40,10 +40,15 @@ class CategoryItemUpdate extends ConsumerWidget {
               top: 5.h,
               left: 5.w,
               child: Tap(
-                onTap: () {
-                  ref.read(categoryStateProvider.notifier).cancelCategoryItemUpdate();
-                  ref.read(categoryStateProvider.notifier).deleteTransactionCategory(category.categoryId);
+                onTap: () async {
+                  await ConfirmDialogWidget.asyncInputDialog(
+                    context: context,
+                    title: '',
+                    message: '아이콘을 삭제하시겠습니까?',
+                    onConfirm: () => ref.read(categoryStateProvider.notifier).deleteTransactionCategory(category.categoryId),
+                  );
                   ref.read(categoryStateProvider.notifier).getTransactionCategory(category.type);
+                  return AlertDialogWidget.showCustomDialog(context: context, title: '', content: '삭제되었습니다');
                 },
                 child: const Icon(
                   Icons.delete,
@@ -59,6 +64,7 @@ class CategoryItemUpdate extends ConsumerWidget {
                   if (categoryProvider.showCategoryCardUpdate) {
                     await ConfirmDialogWidget.asyncInputDialog(
                       context: context,
+                      title: '',
                       message: '아이콘을 변경하시겠습니까?',
                       onConfirm: () => ref.read(categoryStateProvider.notifier).updateTransactionCategory(
                             TransactionCategory(
@@ -70,7 +76,7 @@ class CategoryItemUpdate extends ConsumerWidget {
                           ),
                     );
                   }
-                  AlertDialogWidget.showCustomDialog(context: context, title: '', content: '변경되었습니다');
+                  AlertDialogWidget.showCustomDialog(context: context, title: ' ', content: '변경되었습니다');
                   ref.read(categoryStateProvider.notifier).cancelCategoryItemUpdate();
                   ref.read(categoryStateProvider.notifier).getTransactionCategory(category.type);
                 },
@@ -82,8 +88,8 @@ class CategoryItemUpdate extends ConsumerWidget {
             ),
           ],
           Positioned(
-            top: 20.h,
-            right: 30.w,
+            top: 18.h,
+            right: 29.5.w,
             child: Tap(
               onTap: () => ref.read(categoryStateProvider.notifier).showCategorySelectButton(assetType),
               child: HugeIcon(
@@ -101,7 +107,7 @@ class CategoryItemUpdate extends ConsumerWidget {
                 controller: categoryNameEditController,
                 style: UiConfig.smallStyle,
                 textAlign: TextAlign.center,
-                onChanged: (value) => ref.read(categoryStateProvider.notifier).onChangeCategoryName(value),
+                onTap: () => ref.read(categoryStateProvider.notifier).onTapUpdateTextfield(),
               ),
             ),
           ),

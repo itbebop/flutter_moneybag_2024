@@ -39,7 +39,7 @@ class CategoryList extends ConsumerWidget {
           ref.read(categoryStateProvider.notifier).showCategoryCardNew(false, assetType: assetType);
           ref.read(categoryStateProvider.notifier).cancelIconSelect(assetType);
           if (categoryProvider.showCategoryCardUpdate) {
-            ConfirmDialogWidget.asyncInputDialog(context: context, message: '아이콘 변경을 취소하시겠습니까?', onConfirm: () => ref.read(categoryStateProvider.notifier).cancelCategoryItemUpdate());
+            ConfirmDialogWidget.asyncInputDialog(context: context, title: '', message: '아이콘 변경을 취소하시겠습니까?', onConfirm: () => ref.read(categoryStateProvider.notifier).cancelCategoryItemUpdate());
           }
           categoryNameCreateController.clear();
         },

@@ -109,11 +109,22 @@ class CategoryStateNotifier extends StateNotifier<CategoryState> {
     state = state.copyWith(
       selectedIconIdDelete: category.categoryId,
       showCategoryCardUpdate: true,
+      // update card 열 때 server에서 받은 name을 넣음
+      updatedIconName: category.name,
+    );
+  }
+
+  void onTapUpdateTextfield() {
+    state = state.copyWith(
+      showCategoryNameFromServer: true,
     );
   }
 
   void cancelCategoryItemUpdate() {
-    state = state.copyWith(showCategoryCardUpdate: false);
+    state = state.copyWith(
+      showCategoryCardUpdate: false,
+      showCategoryNameFromServer: false,
+    );
   }
 
   void selectCategory({required TransactionCategory selectCategory}) {
@@ -137,10 +148,6 @@ class CategoryStateNotifier extends StateNotifier<CategoryState> {
       result = true;
     }
     return result;
-  }
-
-  void onChangeCategoryName(String categoryName) {
-    state = state.copyWith(updatedIconName: categoryName);
   }
 
   Future<void> createTransactionCategoryUseCase({required TransactionCategory transactionCategory}) async {

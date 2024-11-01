@@ -20,7 +20,9 @@ class CategoryItem extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return GestureDetector(
-      onLongPress: () => ref.read(categoryStateProvider.notifier).longPressCategoryItem(category: category),
+      onLongPress: () {
+        ref.read(categoryStateProvider.notifier).longPressCategoryItem(category: category);
+      },
       child: Card(
         color: UiConfig.whiteColor,
         shape: RoundedRectangleBorder(
