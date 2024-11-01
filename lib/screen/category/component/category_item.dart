@@ -19,7 +19,6 @@ class CategoryItem extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final categoryProvider = ref.watch(categoryStateProvider);
     return GestureDetector(
       onLongPress: () => ref.read(categoryStateProvider.notifier).longPressCategoryItem(category: category),
       child: Card(
@@ -31,47 +30,24 @@ class CategoryItem extends ConsumerWidget {
           ),
           borderRadius: BorderRadius.circular(15),
         ),
-        child: Stack(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            if (category.categoryId == categoryProvider.selectedIconIdDelete && categoryProvider.showCategoryCardDelete)
-              Positioned(
-                top: 5.h,
-                right: 5.w,
-                child: Tap(
-                  onTap: () {
-                    ref.read(categoryStateProvider.notifier).cancelCategoryItemDelete();
-                    ref.read(categoryStateProvider.notifier).deleteTransactionCategory(category.categoryId);
-                    ref.read(categoryStateProvider.notifier).getTransactionCategory(category.type);
-                  },
-                  child: const Icon(
-                    Icons.delete,
-                    size: 15,
-                  ),
+            HugeIcon(
+              color: assetType == AssetType.income ? UiConfig.secondaryTextColor : UiConfig.primaryColorSurface,
+              icon: iconMap[category.iconKey],
+              size: 25,
+            ),
+            SizedBox(height: 8.h),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 4.0),
+              child: Text(
+                category.name,
+                style: UiConfig.smallStyle.copyWith(
+                  color: UiConfig.color[800],
                 ),
-              ),
-            Align(
-              alignment: Alignment.center,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  HugeIcon(
-                    color: assetType == AssetType.income ? UiConfig.secondaryTextColor : UiConfig.primaryColorSurface,
-                    icon: iconMap[category.iconKey],
-                    size: 25,
-                  ),
-                  SizedBox(height: 8.h),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                    child: Text(
-                      category.name,
-                      style: UiConfig.smallStyle.copyWith(
-                        color: UiConfig.color[800],
-                      ),
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                ],
+                overflow: TextOverflow.ellipsis,
               ),
             ),
           ],

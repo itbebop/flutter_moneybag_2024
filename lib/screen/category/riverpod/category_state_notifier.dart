@@ -20,10 +20,10 @@ final categoryStateProvider = StateNotifierProvider<CategoryStateNotifier, Categ
     return CategoryStateNotifier(
       CategoryState(
         userId: userId,
-        selectedIncomeIcon: HugeIcons.strokeRoundedAddCircle,
-        selectedExpenseIcon: HugeIcons.strokeRoundedAddCircle,
+        selectedCreateIcon: HugeIcons.strokeRoundedAddCircle,
         createTransactionCategoryUseCase: getIt(),
-        getTransactionCategoryListUseCase: getIt(),
+        getTransactionCategoryUseCase: getIt(),
+        updateTransactionCategoryUseCase: getIt(),
         deleteTransactionCategoryUseCase: getIt(),
         categoryHints: '선택',
       ),
@@ -68,28 +68,28 @@ class CategoryStateNotifier extends StateNotifier<CategoryState> {
 
   void showCategorySelectButton(AssetType assetType) {
     state = state.copyWith(
+      isExpanded: true,
       assetType: assetType,
       isVisibleButton: !state.isVisibleButton,
-      isExpanded: !state.isExpanded,
     );
   }
 
-  void tapOutside() {
+  void tapSelectButtonOutside() {
     state = state.copyWith(
       isVisibleButton: false,
       isExpanded: false,
     );
   }
 
-  void tapIcon({required AssetType assetType, required String selectedIconName}) {
-    if (assetType == AssetType.income) {
+  void tapIcon({required String selectedIconName}) {
+    if (state.showCategoryCardUpdate) {
       state = state.copyWith(
-        selectedIncomeIcon: iconMap[selectedIconName],
+        selectedUpdateIcon: iconMap[selectedIconName],
         selectedIconName: selectedIconName,
       );
     } else {
       state = state.copyWith(
-        selectedExpenseIcon: iconMap[selectedIconName],
+        selectedCreateIcon: iconMap[selectedIconName],
         selectedIconName: selectedIconName,
       );
     }
@@ -97,21 +97,23 @@ class CategoryStateNotifier extends StateNotifier<CategoryState> {
 
   void cancelIconSelect(AssetType assetType) {
     if (assetType == AssetType.income) {
-      state = state.copyWith(selectedIncomeIcon: HugeIcons.strokeRoundedAddCircle);
+      state = state.copyWith(selectedCreateIcon: HugeIcons.strokeRoundedAddCircle);
     } else {
-      state = state.copyWith(selectedExpenseIcon: HugeIcons.strokeRoundedAddCircle);
+      state = state.copyWith(
+        selectedCreateIcon: HugeIcons.strokeRoundedAddCircle,
+      );
     }
   }
 
   void longPressCategoryItem({required TransactionCategory category}) {
     state = state.copyWith(
       selectedIconIdDelete: category.categoryId,
-      showCategoryCardDelete: true,
+      showCategoryCardUpdate: true,
     );
   }
 
-  void cancelCategoryItemDelete() {
-    state = state.copyWith(showCategoryCardDelete: false);
+  void cancelCategoryItemUpdate() {
+    state = state.copyWith(showCategoryCardUpdate: false);
   }
 
   void selectCategory({required TransactionCategory selectCategory}) {
@@ -137,12 +139,16 @@ class CategoryStateNotifier extends StateNotifier<CategoryState> {
     return result;
   }
 
+  void onChangeCategoryName(String categoryName) {
+    state = state.copyWith(updatedIconName: categoryName);
+  }
+
   Future<void> createTransactionCategoryUseCase({required TransactionCategory transactionCategory}) async {
     await state.createTransactionCategoryUseCase.execute(transactionCategory: transactionCategory, userId: state.userId);
   }
 
   Future<List<TransactionCategory>> getTransactionCategory(AssetType assetType) async {
-    List<TransactionCategory> categories = await state.getTransactionCategoryListUseCase.execute(userId: state.userId);
+    List<TransactionCategory> categories = await state.getTransactionCategoryUseCase.execute(userId: state.userId);
     if (assetType == AssetType.income) {
       categories = categories.where((category) => category.type == AssetType.income).toList();
       state = state.copyWith(categoryList: categories);
@@ -151,6 +157,10 @@ class CategoryStateNotifier extends StateNotifier<CategoryState> {
       state = state.copyWith(categoryList: categories);
     }
     return categories;
+  }
+
+  Future<void> updateTransactionCategory(TransactionCategory transactionCategory) async {
+    await state.updateTransactionCategoryUseCase.execute(userId: state.userId, transactionCategory: transactionCategory);
   }
 
   Future<void> deleteTransactionCategory(String categoryId) async {

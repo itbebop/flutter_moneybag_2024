@@ -69,10 +69,10 @@ class CategoryItemNew extends ConsumerWidget {
           Positioned(
               top: 25.h,
               right: 30.w,
-              child: Tap(
+              child: InkWell(
                 onTap: () => ref.read(categoryStateProvider.notifier).showCategorySelectButton(assetType),
                 child: HugeIcon(
-                  icon: assetType == AssetType.income ? categoryProvider.selectedIncomeIcon : categoryProvider.selectedExpenseIcon,
+                  icon: categoryProvider.selectedCreateIcon,
                   size: 25,
                   color: assetType == AssetType.income ? UiConfig.secondaryTextColor : UiConfig.primaryColorSurface,
                 ),

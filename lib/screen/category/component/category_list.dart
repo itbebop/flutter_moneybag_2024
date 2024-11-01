@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_moneybag_2024/common/widget/confirm_dialog_widget.dart';
 import 'package:flutter_moneybag_2024/domain/enums/asset_types.dart';
 import 'package:flutter_moneybag_2024/domain/model/transaction_category.dart';
 import 'package:flutter_moneybag_2024/screen/category/component/category_item.dart';
 import 'package:flutter_moneybag_2024/screen/category/component/category_item_button.dart';
 import 'package:flutter_moneybag_2024/screen/category/component/category_item_new.dart';
+import 'package:flutter_moneybag_2024/screen/category/component/category_item_update.dart';
 import 'package:flutter_moneybag_2024/screen/category/riverpod/category_state_notifier.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hugeicons/hugeicons.dart';
@@ -14,6 +16,7 @@ class CategoryList extends ConsumerWidget {
   final String title;
   final IconData icon;
   final AssetType assetType;
+  final TextEditingController categoryNameCreateController;
   final TextEditingController categoryNameEditController;
 
   const CategoryList({
@@ -21,6 +24,7 @@ class CategoryList extends ConsumerWidget {
     required this.title,
     required this.assetType,
     required this.icon,
+    required this.categoryNameCreateController,
     required this.categoryNameEditController,
   });
 
@@ -34,7 +38,10 @@ class CategoryList extends ConsumerWidget {
         onTap: () {
           ref.read(categoryStateProvider.notifier).showCategoryCardNew(false, assetType: assetType);
           ref.read(categoryStateProvider.notifier).cancelIconSelect(assetType);
-          ref.read(categoryStateProvider.notifier).cancelCategoryItemDelete();
+          if (categoryProvider.showCategoryCardUpdate) {
+            ConfirmDialogWidget.asyncInputDialog(context: context, message: '아이콘 변경을 취소하시겠습니까?', onConfirm: () => ref.read(categoryStateProvider.notifier).cancelCategoryItemUpdate());
+          }
+          categoryNameCreateController.clear();
         },
         child: Column(
           children: [
@@ -82,17 +89,35 @@ class CategoryList extends ConsumerWidget {
                             itemBuilder: (context, index) {
                               if (index < categories.length) {
                                 final category = categories[index];
-                                return CategoryItem(assetType: assetType, category: category);
+
+                                // showCategoryCardUpdate가 true이고, 선택한 index인 경우 CategoryItemUpdate 반환
+                                if (categoryProvider.showCategoryCardUpdate && category.categoryId == categoryProvider.selectedIconIdDelete) {
+                                  return CategoryItemUpdate(
+                                    assetType: assetType,
+                                    category: TransactionCategory(
+                                      categoryId: category.categoryId,
+                                      name: category.name,
+                                      iconKey: category.iconKey,
+                                      type: category.type,
+                                    ),
+                                    categoryNameEditController: categoryNameEditController,
+                                  );
+                                } else {
+                                  return CategoryItem(
+                                    assetType: assetType,
+                                    category: category,
+                                  );
+                                }
                               } else if (index == categories.length) {
                                 if (categoryProvider.showIncomeCategoryCardNew && assetType == AssetType.income) {
                                   return CategoryItemNew(
                                     assetType: assetType,
-                                    categoryNameEditController: categoryNameEditController,
+                                    categoryNameEditController: categoryNameCreateController,
                                   );
                                 } else if (categoryProvider.showExpenseCategoryCardNew && assetType != AssetType.income) {
                                   return CategoryItemNew(
                                     assetType: assetType,
-                                    categoryNameEditController: categoryNameEditController,
+                                    categoryNameEditController: categoryNameCreateController,
                                   );
                                 } else {
                                   return CategoryItemButton(

@@ -24,7 +24,7 @@ class _CategorySelectButtonState extends ConsumerState<CategorySelectButton> {
       children: [
         GestureDetector(
           onTap: () {
-            ref.read(categoryStateProvider.notifier).tapOutside();
+            ref.read(categoryStateProvider.notifier).tapSelectButtonOutside();
           },
           child: IgnorePointer(
             ignoring: !isExpanded,
@@ -73,10 +73,9 @@ class _CategorySelectButtonState extends ConsumerState<CategorySelectButton> {
                       return InkWell(
                         onTap: () {
                           ref.read(categoryStateProvider.notifier).tapIcon(
-                                assetType: categoryState.assetType,
                                 selectedIconName: iconKey,
                               );
-                          ref.read(categoryStateProvider.notifier).tapOutside();
+                          ref.read(categoryStateProvider.notifier).tapSelectButtonOutside();
                         },
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -91,6 +90,7 @@ class _CategorySelectButtonState extends ConsumerState<CategorySelectButton> {
                               iconKey,
                               textAlign: TextAlign.center,
                               style: const TextStyle(fontSize: 12),
+                              overflow: TextOverflow.ellipsis,
                             ),
                           ],
                         ),

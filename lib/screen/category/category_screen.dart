@@ -30,12 +30,19 @@ class _CategoryScreenState extends ConsumerState<CategoryScreen> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   SizedBox(height: 16.h),
-                  CategoryList(title: '수입', icon: HugeIcons.strokeRoundedMoneyBag02, assetType: AssetType.income, categoryNameEditController: categoryNameEditController),
+                  CategoryList(
+                    title: '수입',
+                    icon: HugeIcons.strokeRoundedMoneyBag02,
+                    assetType: AssetType.income,
+                    categoryNameCreateController: categoryNameEditController,
+                    categoryNameEditController: categoryNameEditController,
+                  ),
                   SizedBox(height: 16.h),
                   CategoryList(
                     title: '지출',
                     icon: HugeIcons.strokeRoundedWallet03,
                     assetType: AssetType.expense,
+                    categoryNameCreateController: categoryNameEditController,
                     categoryNameEditController: categoryNameEditController,
                   ),
                 ],
@@ -49,6 +56,11 @@ class _CategoryScreenState extends ConsumerState<CategoryScreen> {
                   child: CategorySelectButton(),
                 )
               : const SizedBox(),
+          // : Container(
+          //     width: 300.w,
+          //     height: 500.h,
+          //     color: Colors.red,
+          //   )
         ],
       ),
     );
