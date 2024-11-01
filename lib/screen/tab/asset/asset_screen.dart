@@ -68,6 +68,7 @@ class _ReportScreenState extends ConsumerState<AssetScreen> {
                                       confirmDismiss: (direction) async {
                                         await ConfirmDialogWidget.asyncInputDialog(
                                             context: context,
+                                            title: '',
                                             message: '자산에 속한 개별 기록들까지 모두 삭제됩니다. 삭제하시겠습니까?',
                                             onConfirm: () async {
                                               await ref.read(assetStateProvier.notifier).deleteAsset(assetProvider.assetList[index].assetId);

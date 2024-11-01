@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ConfirmDialogWidget {
-  static Future<void> asyncInputDialog({required BuildContext context, required String message, required Function onConfirm}) {
+  static Future<void> asyncInputDialog({required BuildContext context, required String message, required String title, required Function onConfirm}) {
     return showDialog<String>(
       context: context,
       barrierDismissible: false,
@@ -9,7 +9,7 @@ class ConfirmDialogWidget {
         return StatefulBuilder(
           builder: (BuildContext context, setState) {
             return AlertDialog(
-              title: const Text('Title'),
+              title: Text(title),
               content: Row(
                 children: <Widget>[
                   Expanded(
