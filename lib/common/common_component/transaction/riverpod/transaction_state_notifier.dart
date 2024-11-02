@@ -51,12 +51,12 @@ class TransactionStateNotifier extends StateNotifier<TransactionState> {
     state = state.copyWith(selectedDay: selectedDay, focusedDay: focusedDay);
   }
 
-  Future<void> createTransaction({required String memo, required String amount, required TransactionCategory category, required String assetId, userId}) async {
+  Future<void> createTransaction({required String memo, required String amount, required DateTime createAt, required TransactionCategory category, required String assetId, userId}) async {
     final transactionDetail = TransactionDetail(
       transactionId: '1',
       memo: memo,
-      createdAt: DateTime.now(),
-      updatedAt: DateTime.now(),
+      createdAt: createAt,
+      updatedAt: createAt,
       amount: onChangeAmount(amount),
       userId: userId,
       imgUrl: '',

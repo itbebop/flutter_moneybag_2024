@@ -19,6 +19,7 @@ class _FloatingAddButtonState extends ConsumerState<FloatingAddButton> {
   final memoEditController = TextEditingController();
   final amountEditController = TextEditingController();
   final assetAmountController = TextEditingController();
+  final dateEditController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -52,6 +53,7 @@ class _FloatingAddButtonState extends ConsumerState<FloatingAddButton> {
                 amountEditController: amountEditController,
                 assetAmountController: assetAmountController,
                 memoEditController: memoEditController,
+                dateEditController: dateEditController,
                 duration: duration,
                 isClassified: isClassified,
               ),

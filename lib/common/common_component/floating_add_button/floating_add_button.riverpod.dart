@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_moneybag_2024/common/common.dart';
 import 'package:flutter_moneybag_2024/common/common_component/floating_add_button/floating_daangn_button.state.dart';
 import 'package:flutter_moneybag_2024/domain/enums/asset_types.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final floatingButtonStateProvider = StateNotifierProvider<FloatingButtonStateNotifier, FloatingButtonState>(
   (ref) => FloatingButtonStateNotifier(
-    const FloatingButtonState(),
+    FloatingButtonState(
+      selectedDate: datePickerFormatKo.format(DateTime.now()),
+      createAt: DateTime.now(),
+    ),
   ),
 );
 
@@ -79,5 +83,13 @@ class FloatingButtonStateNotifier extends StateNotifier<FloatingButtonState> {
         expenseSelected: !state.expenseSelected,
       );
     }
+  }
+
+  void selectedDate(DateTime selectedDate) {
+    final formattedDate = datePickerFormatKo.format(selectedDate);
+    state = state.copyWith(
+      selectedDate: formattedDate,
+      createAt: selectedDate,
+    );
   }
 }
