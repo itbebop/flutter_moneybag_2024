@@ -36,56 +36,56 @@ class CategoryItemUpdate extends ConsumerWidget {
       child: Stack(
         children: [
           if (category.categoryId == categoryProvider.selectedIconIdDelete && categoryProvider.showCategoryCardUpdate) ...[
-            Positioned(
-              top: 5.h,
-              left: 5.w,
-              child: Tap(
-                onTap: () async {
-                  await ConfirmDialogWidget.asyncInputDialog(
-                    context: context,
-                    title: '',
-                    message: '아이콘을 삭제하시겠습니까?',
-                    onConfirm: () => ref.read(categoryStateProvider.notifier).deleteTransactionCategory(category.categoryId),
-                  );
-                  ref.read(categoryStateProvider.notifier).getTransactionCategory(category.type);
-                  return AlertDialogWidget.showCustomDialog(context: context, title: '', content: '삭제되었습니다');
-                },
-                child: const Icon(
-                  Icons.delete,
-                  size: 15,
-                ),
-              ),
-            ),
-            Positioned(
-              top: 5.h,
-              right: 5.w,
-              child: Tap(
-                onTap: () async {
-                  if (categoryProvider.showCategoryCardUpdate) {
-                    await ConfirmDialogWidget.asyncInputDialog(
-                      context: context,
-                      title: '',
-                      message: '아이콘을 변경하시겠습니까?',
-                      onConfirm: () => ref.read(categoryStateProvider.notifier).updateTransactionCategory(
-                            TransactionCategory(
-                              categoryId: category.categoryId,
-                              name: categoryNameEditController.text,
-                              iconKey: categoryProvider.selectedIconName == '' ? category.iconKey : categoryProvider.selectedIconName,
-                              type: category.type,
-                            ),
-                          ),
-                    );
-                  }
-                  AlertDialogWidget.showCustomDialog(context: context, title: ' ', content: '변경되었습니다');
-                  await ref.read(categoryStateProvider.notifier).getTransactionCategory(category.type);
-                  ref.read(categoryStateProvider.notifier).cancelCategoryItemUpdate();
-                },
-                child: const Icon(
-                  Icons.check,
-                  size: 15,
-                ),
-              ),
-            ),
+            // Positioned(
+            //   top: 5.h,
+            //   left: 5.w,
+            //   child: Tap(
+            //     onTap: () async {
+            //       await ConfirmDialogWidget.asyncInputDialog(
+            //         context: context,
+            //         title: '',
+            //         message: '아이콘을 삭제하시겠습니까?',
+            //         onConfirm: () => ref.read(categoryStateProvider.notifier).deleteTransactionCategory(category.categoryId),
+            //       );
+            //       ref.read(categoryStateProvider.notifier).getTransactionCategory(category.type);
+            //       return AlertDialogWidget.showCustomDialog(context: context, title: '', content: '삭제되었습니다');
+            //     },
+            //     child: const Icon(
+            //       Icons.delete_rounded,
+            //       size: 20,
+            //     ),
+            //   ),
+            // ),
+            // Positioned(
+            //   top: 5.h,
+            //   right: 5.w,
+            //   child: Tap(
+            //     onTap: () async {
+            //       if (categoryProvider.showCategoryCardUpdate) {
+            //         await ConfirmDialogWidget.asyncInputDialog(
+            //           context: context,
+            //           title: '',
+            //           message: '아이콘을 변경하시겠습니까?',
+            //           onConfirm: () => ref.read(categoryStateProvider.notifier).updateTransactionCategory(
+            //                 TransactionCategory(
+            //                   categoryId: category.categoryId,
+            //                   name: categoryNameEditController.text,
+            //                   iconKey: categoryProvider.selectedIconName == '' ? category.iconKey : categoryProvider.selectedIconName,
+            //                   type: category.type,
+            //                 ),
+            //               ),
+            //         );
+            //       }
+            //       AlertDialogWidget.showCustomDialog(context: context, title: ' ', content: '변경되었습니다');
+            //       await ref.read(categoryStateProvider.notifier).getTransactionCategory(category.type);
+            //       ref.read(categoryStateProvider.notifier).cancelCategoryItemUpdate();
+            //     },
+            //     child: const Icon(
+            //       Icons.check,
+            //       size: 15,
+            //     ),
+            //   ),
+            // ),
           ],
           Positioned(
             top: 18.h,

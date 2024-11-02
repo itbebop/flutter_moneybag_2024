@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_moneybag_2024/common/widget/alert_dialog_widget.dart';
 import 'package:flutter_moneybag_2024/common/widget/confirm_dialog_widget.dart';
 import 'package:flutter_moneybag_2024/domain/enums/asset_types.dart';
 import 'package:flutter_moneybag_2024/domain/model/transaction_category.dart';
@@ -92,15 +93,66 @@ class CategoryList extends ConsumerWidget {
 
                                 // showCategoryCardUpdate가 true이고, 선택한 index인 경우 CategoryItemUpdate 반환
                                 if (categoryProvider.showCategoryCardUpdate && category.categoryId == categoryProvider.selectedIconIdDelete) {
-                                  return CategoryItemUpdate(
-                                    assetType: assetType,
-                                    category: TransactionCategory(
-                                      categoryId: category.categoryId,
-                                      name: category.name,
-                                      iconKey: category.iconKey,
-                                      type: category.type,
-                                    ),
-                                    categoryNameEditController: categoryNameEditController,
+                                  return Row(
+                                    children: [
+                                      Expanded(
+                                        child: Stack(
+                                          children: [
+                                            CategoryItemUpdate(
+                                              assetType: assetType,
+                                              category: TransactionCategory(
+                                                categoryId: category.categoryId,
+                                                name: category.name,
+                                                iconKey: category.iconKey,
+                                                type: category.type,
+                                              ),
+                                              categoryNameEditController: categoryNameEditController,
+                                            ),
+                                            Tap(
+                                              onTap: () async {
+                                                await ConfirmDialogWidget.asyncInputDialog(
+                                                  context: context,
+                                                  title: '',
+                                                  message: '아이콘을 삭제하시겠습니까?',
+                                                  onConfirm: () => ref.read(categoryStateProvider.notifier).deleteTransactionCategory(category.categoryId),
+                                                );
+                                                ref.read(categoryStateProvider.notifier).getTransactionCategory(category.type);
+                                                return AlertDialogWidget.showCustomDialog(context: context, title: '', content: '삭제되었습니다');
+                                              },
+                                              child: SizedBox(
+                                                width: 20,
+                                                child: Image.asset('assets/icon/minus_icon.png'),
+                                              ),
+                                            ),
+                                            Positioned(
+                                              right: 0,
+                                              child: Tap(
+                                                  onTap: () async {
+                                                    if (categoryProvider.showCategoryCardUpdate) {
+                                                      await ConfirmDialogWidget.asyncInputDialog(
+                                                        context: context,
+                                                        title: '',
+                                                        message: '아이콘을 변경하시겠습니까?',
+                                                        onConfirm: () => ref.read(categoryStateProvider.notifier).updateTransactionCategory(
+                                                              TransactionCategory(
+                                                                categoryId: category.categoryId,
+                                                                name: categoryNameEditController.text,
+                                                                iconKey: categoryProvider.selectedIconName == '' ? category.iconKey : categoryProvider.selectedIconName,
+                                                                type: category.type,
+                                                              ),
+                                                            ),
+                                                      );
+                                                    }
+                                                    AlertDialogWidget.showCustomDialog(context: context, title: ' ', content: '변경되었습니다');
+                                                    await ref.read(categoryStateProvider.notifier).getTransactionCategory(category.type);
+                                                    ref.read(categoryStateProvider.notifier).cancelCategoryItemUpdate();
+                                                  },
+                                                  child: SizedBox(width: 20, child: Image.asset('assets/icon/check_icon.png'))),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
                                   );
                                 } else {
                                   return CategoryItem(
