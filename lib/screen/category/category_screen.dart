@@ -15,7 +15,7 @@ class CategoryScreen extends ConsumerStatefulWidget {
 }
 
 class _CategoryScreenState extends ConsumerState<CategoryScreen> {
-  final queryTextEditingController = TextEditingController();
+  final categoryNameCreateController = TextEditingController();
   final categoryNameEditController = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -34,7 +34,7 @@ class _CategoryScreenState extends ConsumerState<CategoryScreen> {
                     title: '수입',
                     icon: HugeIcons.strokeRoundedMoneyBag02,
                     assetType: AssetType.income,
-                    categoryNameCreateController: categoryNameEditController,
+                    categoryNameCreateController: categoryNameCreateController,
                     categoryNameEditController: categoryNameEditController,
                   ),
                   SizedBox(height: 16.h),
@@ -42,7 +42,7 @@ class _CategoryScreenState extends ConsumerState<CategoryScreen> {
                     title: '지출',
                     icon: HugeIcons.strokeRoundedWallet03,
                     assetType: AssetType.expense,
-                    categoryNameCreateController: categoryNameEditController,
+                    categoryNameCreateController: categoryNameCreateController,
                     categoryNameEditController: categoryNameEditController,
                   ),
                 ],
