@@ -37,12 +37,13 @@ class CategoryList extends ConsumerWidget {
     return Expanded(
       child: Tap(
         onTap: () {
-          ref.read(categoryStateProvider.notifier).showCategoryCardNew(false, assetType: assetType);
           ref.read(categoryStateProvider.notifier).cancelIconSelect(assetType);
+          ref.read(categoryStateProvider.notifier).showCategoryCardNew(false, assetType: assetType);
           if (categoryProvider.showCategoryCardUpdate) {
             ConfirmDialogWidget.asyncInputDialog(context: context, title: '', message: '아이콘 변경을 취소하시겠습니까?', onConfirm: () => ref.read(categoryStateProvider.notifier).cancelCategoryItemUpdate());
           }
           categoryNameCreateController.clear();
+          categoryNameEditController.clear();
         },
         child: Column(
           children: [
@@ -127,27 +128,31 @@ class CategoryList extends ConsumerWidget {
                                             Positioned(
                                               right: 0,
                                               child: Tap(
-                                                  onTap: () async {
-                                                    if (categoryProvider.showCategoryCardUpdate) {
-                                                      await ConfirmDialogWidget.asyncInputDialog(
-                                                        context: context,
-                                                        title: '',
-                                                        message: '아이콘을 변경하시겠습니까?',
-                                                        onConfirm: () => ref.read(categoryStateProvider.notifier).updateTransactionCategory(
-                                                              TransactionCategory(
-                                                                categoryId: category.categoryId,
-                                                                name: categoryNameEditController.text,
-                                                                iconKey: categoryProvider.selectedIconName == '' ? category.iconKey : categoryProvider.selectedIconName,
-                                                                type: category.type,
-                                                              ),
+                                                onTap: () async {
+                                                  if (categoryProvider.showCategoryCardUpdate) {
+                                                    await ConfirmDialogWidget.asyncInputDialog(
+                                                      context: context,
+                                                      title: '',
+                                                      message: '아이콘을 변경하시겠습니까?',
+                                                      onConfirm: () => ref.read(categoryStateProvider.notifier).updateTransactionCategory(
+                                                            TransactionCategory(
+                                                              categoryId: category.categoryId,
+                                                              name: categoryNameEditController.text,
+                                                              iconKey: categoryProvider.selectedIconName == '' ? category.iconKey : categoryProvider.selectedIconName,
+                                                              type: category.type,
                                                             ),
-                                                      );
-                                                    }
-                                                    AlertDialogWidget.showCustomDialog(context: context, title: ' ', content: '변경되었습니다');
-                                                    await ref.read(categoryStateProvider.notifier).getTransactionCategory(category.type);
-                                                    ref.read(categoryStateProvider.notifier).cancelCategoryItemUpdate();
-                                                  },
-                                                  child: SizedBox(width: 20, child: Image.asset('assets/icon/check_icon.png'))),
+                                                          ),
+                                                    );
+                                                  }
+                                                  AlertDialogWidget.showCustomDialog(context: context, title: ' ', content: '변경되었습니다');
+                                                  await ref.read(categoryStateProvider.notifier).getTransactionCategory(category.type);
+                                                  ref.read(categoryStateProvider.notifier).cancelCategoryItemUpdate();
+                                                },
+                                                child: SizedBox(
+                                                  width: 20,
+                                                  child: Image.asset('assets/icon/check_icon.png'),
+                                                ),
+                                              ),
                                             ),
                                           ],
                                         ),
@@ -162,14 +167,68 @@ class CategoryList extends ConsumerWidget {
                                 }
                               } else if (index == categories.length) {
                                 if (categoryProvider.showIncomeCategoryCardNew && assetType == AssetType.income) {
-                                  return CategoryItemNew(
-                                    assetType: assetType,
-                                    categoryNameEditController: categoryNameCreateController,
+                                  return Stack(
+                                    children: [
+                                      CategoryItemNew(
+                                        assetType: assetType,
+                                        categoryNameCreateController: categoryNameCreateController,
+                                      ),
+                                      Positioned(
+                                        right: 0,
+                                        child: Tap(
+                                          onTap: () {
+                                            ref.read(categoryStateProvider.notifier).createTransactionCategoryUseCase(
+                                                  transactionCategory: TransactionCategory(
+                                                    categoryId: '0',
+                                                    name: categoryNameCreateController.text,
+                                                    iconKey: categoryProvider.selectedIconName,
+                                                    type: assetType,
+                                                  ),
+                                                );
+                                            ref.read(categoryStateProvider.notifier).getTransactionCategory(assetType);
+                                            ref.read(categoryStateProvider.notifier).cancelIconSelect(assetType);
+                                            categoryNameCreateController.clear();
+                                            ref.read(categoryStateProvider.notifier).showCategoryCardNew(false);
+                                          },
+                                          child: SizedBox(
+                                            width: 20,
+                                            child: Image.asset('assets/icon/check_icon.png'),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   );
                                 } else if (categoryProvider.showExpenseCategoryCardNew && assetType != AssetType.income) {
-                                  return CategoryItemNew(
-                                    assetType: assetType,
-                                    categoryNameEditController: categoryNameCreateController,
+                                  return Stack(
+                                    children: [
+                                      CategoryItemNew(
+                                        assetType: assetType,
+                                        categoryNameCreateController: categoryNameCreateController,
+                                      ),
+                                      Positioned(
+                                        right: 0,
+                                        child: Tap(
+                                          onTap: () {
+                                            ref.read(categoryStateProvider.notifier).createTransactionCategoryUseCase(
+                                                  transactionCategory: TransactionCategory(
+                                                    categoryId: '0',
+                                                    name: categoryNameCreateController.text,
+                                                    iconKey: categoryProvider.selectedIconName,
+                                                    type: assetType,
+                                                  ),
+                                                );
+                                            ref.read(categoryStateProvider.notifier).getTransactionCategory(assetType);
+                                            ref.read(categoryStateProvider.notifier).cancelIconSelect(assetType);
+                                            categoryNameCreateController.clear();
+                                            ref.read(categoryStateProvider.notifier).showCategoryCardNew(false);
+                                          },
+                                          child: SizedBox(
+                                            width: 20,
+                                            child: Image.asset('assets/icon/check_icon.png'),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   );
                                 } else {
                                   return CategoryItemButton(

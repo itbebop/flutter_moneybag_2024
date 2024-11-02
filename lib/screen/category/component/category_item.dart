@@ -22,6 +22,7 @@ class CategoryItem extends ConsumerWidget {
     return GestureDetector(
       onLongPress: () {
         ref.read(categoryStateProvider.notifier).longPressCategoryItem(category: category);
+        ref.read(categoryStateProvider.notifier).showCategoryCardNew(false, assetType: assetType);
       },
       child: Card(
         color: UiConfig.whiteColor,

@@ -7,12 +7,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hugeicons/hugeicons.dart';
 
 class CategoryItemNew extends ConsumerWidget {
-  final TextEditingController categoryNameEditController;
+  final TextEditingController categoryNameCreateController;
   final AssetType assetType;
   const CategoryItemNew({
     super.key,
     required this.assetType,
-    required this.categoryNameEditController,
+    required this.categoryNameCreateController,
   });
 
   @override
@@ -29,43 +29,6 @@ class CategoryItemNew extends ConsumerWidget {
       ),
       child: Stack(
         children: [
-          Positioned(
-              top: 5.h,
-              right: 5.w,
-              child: Tap(
-                onTap: () {
-                  ref.read(categoryStateProvider.notifier).createTransactionCategoryUseCase(
-                        transactionCategory: TransactionCategory(
-                          categoryId: '0',
-                          name: categoryNameEditController.text,
-                          iconKey: categoryProvider.selectedIconName,
-                          type: assetType,
-                        ),
-                      );
-                  ref.read(categoryStateProvider.notifier).getTransactionCategory(assetType);
-                  ref.read(categoryStateProvider.notifier).cancelIconSelect(assetType);
-                  categoryNameEditController.clear();
-                  ref.read(categoryStateProvider.notifier).showCategoryCardNew(false);
-                },
-                child: const Icon(
-                  Icons.check,
-                  size: 15,
-                ),
-              )),
-          Positioned(
-            top: 5.h,
-            left: 5.w,
-            child: Tap(
-              onTap: () {
-                ref.read(categoryStateProvider.notifier).showCategoryCardNew(false, assetType: assetType);
-                ref.read(categoryStateProvider.notifier).cancelIconSelect(assetType);
-              },
-              child: const Icon(
-                Icons.close,
-                size: 15,
-              ),
-            ),
-          ),
           Positioned(
               top: 25.h,
               right: 30.w,
@@ -84,7 +47,7 @@ class CategoryItemNew extends ConsumerWidget {
               width: 50.w,
               height: 30.h,
               child: TextField(
-                controller: categoryNameEditController,
+                controller: categoryNameCreateController,
                 style: UiConfig.smallStyle,
                 textAlign: TextAlign.center,
                 decoration: InputDecoration(
