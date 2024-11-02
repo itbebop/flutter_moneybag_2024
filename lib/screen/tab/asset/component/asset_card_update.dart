@@ -21,7 +21,7 @@ class AssetCardUpdate extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final assetProvider = ref.watch(assetStateProvier);
 
-    titleEditController.text = assetProvider.assetName;
+    !assetProvider.showAssetCardUpdateName ? titleEditController.text = assetProvider.assetName : null;
 
     return SingleChildScrollView(
       child: Column(
@@ -51,7 +51,8 @@ class AssetCardUpdate extends ConsumerWidget {
                   child: TextField(
                     controller: titleEditController,
                     focusNode: focusNode,
-                    onChanged: (value) => ref.read(assetStateProvier.notifier).onChangeAssetName(value),
+                    // onChanged: (value) => ref.read(assetStateProvier.notifier).onChangeAssetName(value),
+                    onTap: () => ref.read(assetStateProvier.notifier).onTapUpdateTextField(),
                     decoration: InputDecoration(
                       hintStyle: UiConfig.h2Style.copyWith(color: UiConfig.whiteColor),
                       enabledBorder: const UnderlineInputBorder(

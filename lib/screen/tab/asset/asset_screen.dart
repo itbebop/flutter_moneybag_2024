@@ -118,7 +118,14 @@ class _ReportScreenState extends ConsumerState<AssetScreen> {
                                           mainAxisAlignment: MainAxisAlignment.center,
                                           children: [
                                             Tap(
-                                              onTap: () => ref.read(assetStateProvier.notifier).onTapAssetCardUpdate(false),
+                                              onTap: () {
+                                                ConfirmDialogWidget.asyncInputDialog(
+                                                  context: context,
+                                                  message: '수정을 취소하시겠습니까?',
+                                                  title: '',
+                                                  onConfirm: () => ref.read(assetStateProvier.notifier).onTapAssetCardUpdate(false),
+                                                );
+                                              },
                                               child: CustomButton(
                                                 name: '취 소',
                                                 buttonColor: UiConfig.buttonColor,
@@ -129,30 +136,35 @@ class _ReportScreenState extends ConsumerState<AssetScreen> {
                                             ),
                                             SizedBox(width: 16.w),
                                             Tap(
-                                              onTap: () {
-                                                ref.read(assetStateProvier.notifier).updateAsset(
-                                                      Asset(
-                                                        totalAmount: assetProvider.assetList[index].totalAmount,
-                                                        totalIncome: assetProvider.assetList[index].totalIncome,
-                                                        totalExpense: assetProvider.assetList[index].totalExpense,
-                                                        assetId: assetProvider.assetList[index].assetId,
-                                                        assetName: assetProvider.assetName,
-                                                        currency: assetProvider.currencyHints,
-                                                        userIdList: assetProvider.assetList[index].userIdList,
-                                                        createdAt: assetProvider.assetList[index].createdAt,
-                                                        updatedAt: DateTime.now(),
-                                                        assetColor: [
-                                                          assetProvider.firstColor.alpha,
-                                                          assetProvider.firstColor.red,
-                                                          assetProvider.firstColor.green,
-                                                          assetProvider.firstColor.blue,
-                                                          assetProvider.secondColor.alpha,
-                                                          assetProvider.secondColor.red,
-                                                          assetProvider.secondColor.green,
-                                                          assetProvider.secondColor.blue
-                                                        ],
+                                              onTap: () async {
+                                                await ConfirmDialogWidget.asyncInputDialog(
+                                                  context: context,
+                                                  message: '수정하시겠습니까?',
+                                                  title: '',
+                                                  onConfirm: () => ref.read(assetStateProvier.notifier).updateAsset(
+                                                        Asset(
+                                                          totalAmount: assetProvider.assetList[index].totalAmount,
+                                                          totalIncome: assetProvider.assetList[index].totalIncome,
+                                                          totalExpense: assetProvider.assetList[index].totalExpense,
+                                                          assetId: assetProvider.assetList[index].assetId,
+                                                          assetName: titleEditController.text,
+                                                          currency: assetProvider.currencyHints,
+                                                          userIdList: assetProvider.assetList[index].userIdList,
+                                                          createdAt: assetProvider.assetList[index].createdAt,
+                                                          updatedAt: DateTime.now(),
+                                                          assetColor: [
+                                                            assetProvider.firstColor.alpha,
+                                                            assetProvider.firstColor.red,
+                                                            assetProvider.firstColor.green,
+                                                            assetProvider.firstColor.blue,
+                                                            assetProvider.secondColor.alpha,
+                                                            assetProvider.secondColor.red,
+                                                            assetProvider.secondColor.green,
+                                                            assetProvider.secondColor.blue
+                                                          ],
+                                                        ),
                                                       ),
-                                                    );
+                                                );
                                                 ref.read(assetStateProvier.notifier).fetchAsset();
                                                 ref.read(assetStateProvier.notifier).onTapAssetCardUpdate(false);
                                                 ref.read(userStateProvider.notifier).modifyColorList(assetProvider.firstColorList, assetProvider.secondColorList);

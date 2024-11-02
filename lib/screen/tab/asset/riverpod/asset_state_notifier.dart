@@ -140,7 +140,6 @@ class AssetStateNotifier extends StateNotifier<AssetState> {
   }
 
   bool onEnterWithoutSelect(BuildContext context) {
-    print('state.selectedAssetId: ${state.selectedAssetId}');
     bool result = false;
     if (state.selectedAssetId == '') {
       AlertDialogWidget.showCustomDialog(context: context, title: '', content: '자산을 선택해주세요');
@@ -181,11 +180,18 @@ class AssetStateNotifier extends StateNotifier<AssetState> {
   void onTapAssetCardUpdate(bool showUpdate) {
     state = state.copyWith(
       showAssetCardUpdate: showUpdate,
+      showAssetCardUpdateName: false,
     );
   }
 
-  void onChangeAssetName(String assetName) {
-    state = state.copyWith(assetName: assetName);
+  // void onChangeAssetName(String assetName) {
+  //   state = state.copyWith(assetName: assetName);
+  // }
+
+  void onTapUpdateTextField() {
+    state = state.copyWith(
+      showAssetCardUpdateName: true,
+    );
   }
 
   void selectColor(Color color, bool isFirst) {

@@ -19,6 +19,7 @@ class AssetState with _$AssetState {
     @Default(0) double totalExpense,
     @Default(0) double assetAmount,
     @Default(false) bool showAssetCardUpdate,
+    @Default(false) bool showAssetCardUpdateName,
     @Default(false) bool isLoading,
     @Default(0) int selectedAssetCardIndex,
     required List<Color> firstColorList,

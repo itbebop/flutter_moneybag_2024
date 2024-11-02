@@ -123,6 +123,7 @@ class AssetCard extends ConsumerWidget {
             child: const HugeIcon(
               icon: HugeIcons.strokeRoundedEdit02,
               color: UiConfig.whiteColor,
+              size: 20,
             ),
           ),
         ),
