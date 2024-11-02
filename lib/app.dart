@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_moneybag_2024/common/common.dart';
 import 'package:flutter_moneybag_2024/router/router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -33,6 +34,15 @@ class _AppState extends State<App> {
                   backgroundColor: UiConfig.backgroundColor,
                 ),
               ),
+              // date localization
+              localizationsDelegates: const [
+                GlobalMaterialLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+              ],
+              supportedLocales: const [
+                Locale('en', ''), // English, no country code
+                Locale('ko', ''), // Korean, no country code
+              ],
             );
           },
         ),
