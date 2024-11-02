@@ -70,15 +70,15 @@ class CategoryItemUpdate extends ConsumerWidget {
                             TransactionCategory(
                               categoryId: category.categoryId,
                               name: categoryNameEditController.text,
-                              iconKey: categoryProvider.selectedIconName,
+                              iconKey: categoryProvider.selectedIconName == '' ? category.iconKey : categoryProvider.selectedIconName,
                               type: category.type,
                             ),
                           ),
                     );
                   }
                   AlertDialogWidget.showCustomDialog(context: context, title: ' ', content: '변경되었습니다');
+                  await ref.read(categoryStateProvider.notifier).getTransactionCategory(category.type);
                   ref.read(categoryStateProvider.notifier).cancelCategoryItemUpdate();
-                  ref.read(categoryStateProvider.notifier).getTransactionCategory(category.type);
                 },
                 child: const Icon(
                   Icons.check,
