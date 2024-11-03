@@ -16,7 +16,7 @@ class LineChartBase extends StatelessWidget {
   Widget build(BuildContext context) {
     return LineChart(
       // isShowingMainData ? sampleData1 : sampleData2,
-      sampleData2,
+      sampleData1,
       duration: const Duration(milliseconds: 250),
     );
   }
@@ -101,24 +101,24 @@ class LineChartBase extends StatelessWidget {
   Widget leftTitleWidgets(double value, TitleMeta meta) {
     const style = TextStyle(
       fontWeight: FontWeight.bold,
-      fontSize: 14,
+      fontSize: 12,
     );
     String text;
     switch (value.toInt()) {
       case 1:
-        text = '1m';
+        text = '50만';
         break;
       case 2:
-        text = '2m';
+        text = '100만';
         break;
       case 3:
-        text = '3m';
+        text = '150만';
         break;
       case 4:
-        text = '5m';
+        text = '200만';
         break;
       case 5:
-        text = '6m';
+        text = '250만';
         break;
       default:
         return Container();
@@ -137,7 +137,7 @@ class LineChartBase extends StatelessWidget {
   Widget bottomTitleWidgets(double value, TitleMeta meta) {
     const style = TextStyle(
       fontWeight: FontWeight.bold,
-      fontSize: 16,
+      fontSize: 14,
     );
     Widget text;
 
@@ -163,39 +163,22 @@ class LineChartBase extends StatelessWidget {
           case 1:
             text = const Text('Jan', style: style);
             break;
-          case 2:
-            text = const Text('Feb', style: style);
-            break;
-          case 3:
-            text = const Text('Mar', style: style);
-            break;
+
           case 4:
             text = const Text('Apr', style: style);
             break;
-          case 5:
-            text = const Text('May', style: style);
-            break;
-          case 6:
-            text = const Text('Jun', style: style);
-            break;
+
           case 7:
             text = const Text('Jul', style: style);
             break;
-          case 8:
-            text = const Text('Aug', style: style);
-            break;
-          case 9:
-            text = const Text('Sep', style: style);
-            break;
+
           case 10:
             text = const Text('Oct', style: style);
             break;
-          case 11:
-            text = const Text('Nov', style: style);
-            break;
-          case 12:
+          case 13:
             text = const Text('Dec', style: style);
             break;
+
           default:
             text = const Text('');
             break;
@@ -230,7 +213,7 @@ class LineChartBase extends StatelessWidget {
   LineChartBarData get lineChartBarData1_1 => LineChartBarData(
         isCurved: true,
         color: AppColors.contentColorGreen,
-        barWidth: 8,
+        barWidth: 4,
         isStrokeCapRound: true,
         dotData: const FlDotData(show: false),
         belowBarData: BarAreaData(show: false),
@@ -248,7 +231,7 @@ class LineChartBase extends StatelessWidget {
   LineChartBarData get lineChartBarData1_2 => LineChartBarData(
         isCurved: true,
         color: AppColors.contentColorPink,
-        barWidth: 8,
+        barWidth: 4,
         isStrokeCapRound: true,
         dotData: const FlDotData(show: false),
         belowBarData: BarAreaData(
@@ -268,7 +251,7 @@ class LineChartBase extends StatelessWidget {
   LineChartBarData get lineChartBarData1_3 => LineChartBarData(
         isCurved: true,
         color: AppColors.contentColorCyan,
-        barWidth: 8,
+        barWidth: 4,
         isStrokeCapRound: true,
         dotData: const FlDotData(show: false),
         belowBarData: BarAreaData(show: false),
