@@ -17,9 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$ReportScreenState {
   bool get isLoading => throw _privateConstructorUsedError;
-  List<String> get assetIdList => throw _privateConstructorUsedError;
-  GetTransactionListUseCase get getTransactionListUseCase =>
-      throw _privateConstructorUsedError;
+  Period get period => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ReportScreenStateCopyWith<ReportScreenState> get copyWith =>
@@ -32,10 +30,7 @@ abstract class $ReportScreenStateCopyWith<$Res> {
           ReportScreenState value, $Res Function(ReportScreenState) then) =
       _$ReportScreenStateCopyWithImpl<$Res, ReportScreenState>;
   @useResult
-  $Res call(
-      {bool isLoading,
-      List<String> assetIdList,
-      GetTransactionListUseCase getTransactionListUseCase});
+  $Res call({bool isLoading, Period period});
 }
 
 /// @nodoc
@@ -52,22 +47,17 @@ class _$ReportScreenStateCopyWithImpl<$Res, $Val extends ReportScreenState>
   @override
   $Res call({
     Object? isLoading = null,
-    Object? assetIdList = null,
-    Object? getTransactionListUseCase = null,
+    Object? period = freezed,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      assetIdList: null == assetIdList
-          ? _value.assetIdList
-          : assetIdList // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      getTransactionListUseCase: null == getTransactionListUseCase
-          ? _value.getTransactionListUseCase
-          : getTransactionListUseCase // ignore: cast_nullable_to_non_nullable
-              as GetTransactionListUseCase,
+      period: freezed == period
+          ? _value.period
+          : period // ignore: cast_nullable_to_non_nullable
+              as Period,
     ) as $Val);
   }
 }
@@ -80,10 +70,7 @@ abstract class _$$ReportScreenStateImplCopyWith<$Res>
       __$$ReportScreenStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {bool isLoading,
-      List<String> assetIdList,
-      GetTransactionListUseCase getTransactionListUseCase});
+  $Res call({bool isLoading, Period period});
 }
 
 /// @nodoc
@@ -98,22 +85,17 @@ class __$$ReportScreenStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isLoading = null,
-    Object? assetIdList = null,
-    Object? getTransactionListUseCase = null,
+    Object? period = freezed,
   }) {
     return _then(_$ReportScreenStateImpl(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      assetIdList: null == assetIdList
-          ? _value._assetIdList
-          : assetIdList // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      getTransactionListUseCase: null == getTransactionListUseCase
-          ? _value.getTransactionListUseCase
-          : getTransactionListUseCase // ignore: cast_nullable_to_non_nullable
-              as GetTransactionListUseCase,
+      period: freezed == period
+          ? _value.period
+          : period // ignore: cast_nullable_to_non_nullable
+              as Period,
     ));
   }
 }
@@ -122,28 +104,18 @@ class __$$ReportScreenStateImplCopyWithImpl<$Res>
 
 class _$ReportScreenStateImpl implements _ReportScreenState {
   const _$ReportScreenStateImpl(
-      {this.isLoading = false,
-      required final List<String> assetIdList,
-      required this.getTransactionListUseCase})
-      : _assetIdList = assetIdList;
+      {this.isLoading = false, this.period = Period.year});
 
   @override
   @JsonKey()
   final bool isLoading;
-  final List<String> _assetIdList;
   @override
-  List<String> get assetIdList {
-    if (_assetIdList is EqualUnmodifiableListView) return _assetIdList;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_assetIdList);
-  }
-
-  @override
-  final GetTransactionListUseCase getTransactionListUseCase;
+  @JsonKey()
+  final Period period;
 
   @override
   String toString() {
-    return 'ReportScreenState(isLoading: $isLoading, assetIdList: $assetIdList, getTransactionListUseCase: $getTransactionListUseCase)';
+    return 'ReportScreenState(isLoading: $isLoading, period: $period)';
   }
 
   @override
@@ -153,19 +125,12 @@ class _$ReportScreenStateImpl implements _ReportScreenState {
             other is _$ReportScreenStateImpl &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
-            const DeepCollectionEquality()
-                .equals(other._assetIdList, _assetIdList) &&
-            (identical(other.getTransactionListUseCase,
-                    getTransactionListUseCase) ||
-                other.getTransactionListUseCase == getTransactionListUseCase));
+            const DeepCollectionEquality().equals(other.period, period));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      isLoading,
-      const DeepCollectionEquality().hash(_assetIdList),
-      getTransactionListUseCase);
+      runtimeType, isLoading, const DeepCollectionEquality().hash(period));
 
   @JsonKey(ignore: true)
   @override
@@ -177,17 +142,12 @@ class _$ReportScreenStateImpl implements _ReportScreenState {
 
 abstract class _ReportScreenState implements ReportScreenState {
   const factory _ReportScreenState(
-          {final bool isLoading,
-          required final List<String> assetIdList,
-          required final GetTransactionListUseCase getTransactionListUseCase}) =
-      _$ReportScreenStateImpl;
+      {final bool isLoading, final Period period}) = _$ReportScreenStateImpl;
 
   @override
   bool get isLoading;
   @override
-  List<String> get assetIdList;
-  @override
-  GetTransactionListUseCase get getTransactionListUseCase;
+  Period get period;
   @override
   @JsonKey(ignore: true)
   _$$ReportScreenStateImplCopyWith<_$ReportScreenStateImpl> get copyWith =>

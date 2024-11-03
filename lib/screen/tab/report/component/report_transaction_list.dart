@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_moneybag_2024/common/common.dart';
+import 'package:flutter_moneybag_2024/common/common_component/transaction/riverpod/transaction_state_notifier.dart';
 import 'package:flutter_moneybag_2024/common/common_component/transaction/widget/transaction_item.dart';
 import 'package:flutter_moneybag_2024/domain/model/transaction_detail.dart';
-import 'package:flutter_moneybag_2024/screen/tab/report/riverpod/report_screen_state_notifier.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ReportTransactionList extends ConsumerWidget {
@@ -14,7 +14,7 @@ class ReportTransactionList extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return StreamBuilder<List<TransactionDetail>>(
-      stream: ref.watch(reportScreenStateProvider.notifier).getTransactionList().asStream(),
+      stream: ref.watch(transactionStateProvider.notifier).getTransactions().asStream(),
       builder: (context, snapshot) {
         if (snapshot.hasError) {
           WidgetsBinding.instance.addPostFrameCallback((_) {

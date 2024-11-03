@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_moneybag_2024/screen/tab/report/chart/line_chart_base.dart';
-import 'package:flutter_moneybag_2024/screen/tab/report/chart/temporary_app_color.dart';
+import 'package:flutter_moneybag_2024/screen/tab/report/riverpod/report_screen_state_notifier.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class LineChartMultipleLines extends StatefulWidget {
+class LineChartMultipleLines extends ConsumerStatefulWidget {
   const LineChartMultipleLines({super.key});
 
   @override
-  State<StatefulWidget> createState() => LineChartMultipleLinesState();
+  ConsumerState<ConsumerStatefulWidget> createState() => LineChartMultipleLinesState();
 }
 
-class LineChartMultipleLinesState extends State<LineChartMultipleLines> {
+class LineChartMultipleLinesState extends ConsumerState<LineChartMultipleLines> {
   late bool isShowingMainData;
 
   @override
@@ -20,6 +21,7 @@ class LineChartMultipleLinesState extends State<LineChartMultipleLines> {
 
   @override
   Widget build(BuildContext context) {
+    final reportProvider = ref.read(reportScreenStateProvider);
     return AspectRatio(
       aspectRatio: 1.23,
       child: Stack(
@@ -36,7 +38,10 @@ class LineChartMultipleLinesState extends State<LineChartMultipleLines> {
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.only(right: 16, left: 6),
-                  child: LineChartBase(isShowingMainData: isShowingMainData),
+                  child: LineChartBase(
+                    isShowingMainData: isShowingMainData,
+                    period: reportProvider.period,
+                  ),
                 ),
               ),
               const SizedBox(
