@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_moneybag_2024/common/common.dart';
 import 'package:flutter_moneybag_2024/common/common_component/sort_button.dart';
+import 'package:flutter_moneybag_2024/screen/tab/report/chart/line_chart_multiple_lines.dart';
 import 'package:flutter_moneybag_2024/screen/tab/report/component/report_transaction_list.dart';
 import 'package:flutter_moneybag_2024/common/data/month_list.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 
-class ReportListFragment extends ConsumerStatefulWidget {
-  const ReportListFragment({super.key});
+class ReportFlowFragment extends ConsumerStatefulWidget {
+  const ReportFlowFragment({super.key});
   @override
-  ConsumerState<ReportListFragment> createState() => _ReportListFragmentState();
+  ConsumerState<ReportFlowFragment> createState() => _ReportListFragmentState();
 }
 
-class _ReportListFragmentState extends ConsumerState<ReportListFragment> {
+class _ReportListFragmentState extends ConsumerState<ReportFlowFragment> {
   DateTime now = DateTime.now();
   MonthList selectedMonth = MonthList.jan;
   String currentMonth = DateFormat('MMM').format(DateTime.now()).toLowerCase();
@@ -39,6 +40,7 @@ class _ReportListFragmentState extends ConsumerState<ReportListFragment> {
           ],
         ),
       ),
+      const LineChartMultipleLines(),
       SizedBox(
         height: 520.0.h,
         child: ReportTransactionList(
