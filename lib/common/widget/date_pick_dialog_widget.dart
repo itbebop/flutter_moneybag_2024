@@ -26,9 +26,9 @@ class DatePickDialogWidget {
                     height: 250.h,
                     child: CupertinoDatePicker(
                       initialDateTime: DateTime.now(),
-                      mode: CupertinoDatePickerMode.date,
+                      mode: CupertinoDatePickerMode.dateAndTime,
                       dateOrder: DatePickerDateOrder.ymd,
-                      // use24hFormat: true,
+                      use24hFormat: true,
                       // This shows day of week alongside day of month
                       // showDayOfWeek: true,
                       // This is called when the user changes the date.
