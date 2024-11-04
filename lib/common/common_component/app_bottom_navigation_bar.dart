@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_moneybag_2024/common/common.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hugeicons/hugeicons.dart';
 
 final bottomNavIndexProvider = StateProvider<int>((ref) => 0);
 
@@ -24,32 +25,44 @@ class AppBottomNavigationBar extends ConsumerWidget {
         onTap: (index) {
           ref.read(bottomNavIndexProvider.notifier).state = index;
         },
-        items: const [
+        items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home_outlined),
+            icon: HugeIcon(
+              icon: HugeIcons.strokeRoundedHome12,
+              color: selectedIndex == 0 ? UiConfig.whiteColor : UiConfig.primaryColor,
+            ),
             label: 'Home',
             backgroundColor: UiConfig.primaryColorSurface,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.leaderboard),
+            icon: HugeIcon(
+              icon: HugeIcons.strokeRoundedPresentationLineChart01,
+              color: selectedIndex == 1 ? UiConfig.whiteColor : UiConfig.primaryColor,
+            ),
             label: 'Report',
             backgroundColor: UiConfig.primaryColorSurface,
           ),
-          BottomNavigationBarItem(
+          const BottomNavigationBarItem(
             icon: Icon(
               Icons.account_balance_wallet_outlined,
-              color: Colors.transparent,
+              color: UiConfig.primaryColor,
             ),
             label: '',
             backgroundColor: UiConfig.primaryColorSurface,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.account_balance_wallet_outlined),
+            icon: HugeIcon(
+              icon: HugeIcons.strokeRoundedMoneyBag02,
+              color: selectedIndex == 3 ? UiConfig.whiteColor : UiConfig.primaryColor,
+            ),
             label: 'Asset',
             backgroundColor: UiConfig.primaryColorSurface,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person_2_outlined),
+            icon: HugeIcon(
+              icon: HugeIcons.strokeRoundedSettings01,
+              color: selectedIndex == 4 ? UiConfig.whiteColor : UiConfig.primaryColor,
+            ),
             label: 'My Menu',
           ),
         ],
