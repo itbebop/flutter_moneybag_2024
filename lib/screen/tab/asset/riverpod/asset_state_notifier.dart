@@ -74,14 +74,13 @@ class AssetStateNotifier extends StateNotifier<AssetState> {
       state = state.copyWith(isLoading: true);
       // 전체 assetList 가져옴
       final assetList = await state.getAssetListUseCase.execute(assetIdList: state.assetIdList);
-      // final assetList = await getAssetList();
       // assetList의 totalAmount, totalExpense, totalIncome 합산
       final double amount = assetList.fold(0, (sum, asset) => sum + asset.totalAmount);
       final double expense = assetList.fold(0, (sum, asset) => sum + asset.totalExpense);
       final double income = assetList.fold(0, (sum, asset) => sum + asset.totalIncome);
 
       state = state.copyWith(
-        assetList: assetList,
+        allAssetList: assetList,
         totalAmount: amount,
         totalExpense: expense,
         totalIncome: income,
@@ -91,9 +90,25 @@ class AssetStateNotifier extends StateNotifier<AssetState> {
       if (assetList.length == 1) {
         getAsset(assetList.first.assetId);
       }
+      getActivatedAssetList();
     } catch (error) {
       throw Exception("AssetList를 불러오지 못했습니다.");
     }
+  }
+
+  void getActivatedAssetList() {
+    final activatedAssetList = state.allAssetList.where((asset) => asset.isActiveAsset == true).toList();
+
+    final double activatedAmount = activatedAssetList.fold(0, (sum, asset) => sum + asset.totalAmount);
+    final double activatedExpense = activatedAssetList.fold(0, (sum, asset) => sum + asset.totalExpense);
+    final double activatedIncome = activatedAssetList.fold(0, (sum, asset) => sum + asset.totalIncome);
+
+    state = state.copyWith(
+      activatedAssetList: activatedAssetList,
+      activatedAmount: activatedAmount,
+      activatedExpense: activatedExpense,
+      activatedIncome: activatedIncome,
+    );
   }
 
   Future<void> getAsset(String assetId) async {
@@ -176,7 +191,7 @@ class AssetStateNotifier extends StateNotifier<AssetState> {
     state = state.copyWith(
       showAssetCardUpdate: true,
       selectedAssetCardIndex: selectedAssetCardIndex,
-      currencyHints: state.assetList[selectedAssetCardIndex].currency,
+      currencyHints: state.allAssetList[selectedAssetCardIndex].currency,
     );
   }
 

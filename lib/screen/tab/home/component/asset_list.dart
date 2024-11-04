@@ -14,11 +14,11 @@ class AssetList extends ConsumerWidget {
     final assetProvider = ref.watch(assetStateProvier);
     return Column(
       children: [
-        AssetItems(title: '수입', amounts: assetProvider.totalIncome),
+        AssetItems(title: '수입', amounts: assetProvider.activatedAmount),
         SizedBox(height: 16.h),
-        AssetItems(title: '지출', amounts: assetProvider.totalExpense),
+        AssetItems(title: '지출', amounts: assetProvider.activatedExpense),
         SizedBox(height: 16.h),
-        AssetItems(title: '잔액', amounts: assetProvider.totalAmount),
+        AssetItems(title: '잔액', amounts: assetProvider.activatedIncome),
       ],
     );
   }

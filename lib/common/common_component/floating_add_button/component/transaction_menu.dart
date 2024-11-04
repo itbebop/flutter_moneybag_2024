@@ -138,7 +138,7 @@ class TransactionMenu extends ConsumerWidget {
                             child: Row(
                               children: [
                                 CustomDropdownButton<Asset>(
-                                  items: assetProvider.assetList
+                                  items: assetProvider.allAssetList
                                       .map<DropdownMenuItem<Asset>>((asset) => DropdownMenuItem<Asset>(
                                             value: asset,
                                             child: FittedBox(

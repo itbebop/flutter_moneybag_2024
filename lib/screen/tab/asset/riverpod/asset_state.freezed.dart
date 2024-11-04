@@ -16,10 +16,14 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$AssetState {
-  List<Asset> get assetList => throw _privateConstructorUsedError;
+  List<Asset> get allAssetList => throw _privateConstructorUsedError;
+  List<Asset> get activatedAssetList => throw _privateConstructorUsedError;
   double get totalAmount => throw _privateConstructorUsedError;
   double get totalIncome => throw _privateConstructorUsedError;
   double get totalExpense => throw _privateConstructorUsedError;
+  double get activatedAmount => throw _privateConstructorUsedError;
+  double get activatedIncome => throw _privateConstructorUsedError;
+  double get activatedExpense => throw _privateConstructorUsedError;
   double get assetAmount => throw _privateConstructorUsedError;
   bool get showAssetCardUpdate => throw _privateConstructorUsedError;
   bool get showAssetCardUpdateName => throw _privateConstructorUsedError;
@@ -65,10 +69,14 @@ abstract class $AssetStateCopyWith<$Res> {
       _$AssetStateCopyWithImpl<$Res, AssetState>;
   @useResult
   $Res call(
-      {List<Asset> assetList,
+      {List<Asset> allAssetList,
+      List<Asset> activatedAssetList,
       double totalAmount,
       double totalIncome,
       double totalExpense,
+      double activatedAmount,
+      double activatedIncome,
+      double activatedExpense,
       double assetAmount,
       bool showAssetCardUpdate,
       bool showAssetCardUpdateName,
@@ -111,10 +119,14 @@ class _$AssetStateCopyWithImpl<$Res, $Val extends AssetState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? assetList = null,
+    Object? allAssetList = null,
+    Object? activatedAssetList = null,
     Object? totalAmount = null,
     Object? totalIncome = null,
     Object? totalExpense = null,
+    Object? activatedAmount = null,
+    Object? activatedIncome = null,
+    Object? activatedExpense = null,
     Object? assetAmount = null,
     Object? showAssetCardUpdate = null,
     Object? showAssetCardUpdateName = null,
@@ -144,9 +156,13 @@ class _$AssetStateCopyWithImpl<$Res, $Val extends AssetState>
     Object? deleteAssetUseCase = null,
   }) {
     return _then(_value.copyWith(
-      assetList: null == assetList
-          ? _value.assetList
-          : assetList // ignore: cast_nullable_to_non_nullable
+      allAssetList: null == allAssetList
+          ? _value.allAssetList
+          : allAssetList // ignore: cast_nullable_to_non_nullable
+              as List<Asset>,
+      activatedAssetList: null == activatedAssetList
+          ? _value.activatedAssetList
+          : activatedAssetList // ignore: cast_nullable_to_non_nullable
               as List<Asset>,
       totalAmount: null == totalAmount
           ? _value.totalAmount
@@ -159,6 +175,18 @@ class _$AssetStateCopyWithImpl<$Res, $Val extends AssetState>
       totalExpense: null == totalExpense
           ? _value.totalExpense
           : totalExpense // ignore: cast_nullable_to_non_nullable
+              as double,
+      activatedAmount: null == activatedAmount
+          ? _value.activatedAmount
+          : activatedAmount // ignore: cast_nullable_to_non_nullable
+              as double,
+      activatedIncome: null == activatedIncome
+          ? _value.activatedIncome
+          : activatedIncome // ignore: cast_nullable_to_non_nullable
+              as double,
+      activatedExpense: null == activatedExpense
+          ? _value.activatedExpense
+          : activatedExpense // ignore: cast_nullable_to_non_nullable
               as double,
       assetAmount: null == assetAmount
           ? _value.assetAmount
@@ -281,10 +309,14 @@ abstract class _$$AssetStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {List<Asset> assetList,
+      {List<Asset> allAssetList,
+      List<Asset> activatedAssetList,
       double totalAmount,
       double totalIncome,
       double totalExpense,
+      double activatedAmount,
+      double activatedIncome,
+      double activatedExpense,
       double assetAmount,
       bool showAssetCardUpdate,
       bool showAssetCardUpdateName,
@@ -325,10 +357,14 @@ class __$$AssetStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? assetList = null,
+    Object? allAssetList = null,
+    Object? activatedAssetList = null,
     Object? totalAmount = null,
     Object? totalIncome = null,
     Object? totalExpense = null,
+    Object? activatedAmount = null,
+    Object? activatedIncome = null,
+    Object? activatedExpense = null,
     Object? assetAmount = null,
     Object? showAssetCardUpdate = null,
     Object? showAssetCardUpdateName = null,
@@ -358,9 +394,13 @@ class __$$AssetStateImplCopyWithImpl<$Res>
     Object? deleteAssetUseCase = null,
   }) {
     return _then(_$AssetStateImpl(
-      assetList: null == assetList
-          ? _value._assetList
-          : assetList // ignore: cast_nullable_to_non_nullable
+      allAssetList: null == allAssetList
+          ? _value._allAssetList
+          : allAssetList // ignore: cast_nullable_to_non_nullable
+              as List<Asset>,
+      activatedAssetList: null == activatedAssetList
+          ? _value._activatedAssetList
+          : activatedAssetList // ignore: cast_nullable_to_non_nullable
               as List<Asset>,
       totalAmount: null == totalAmount
           ? _value.totalAmount
@@ -373,6 +413,18 @@ class __$$AssetStateImplCopyWithImpl<$Res>
       totalExpense: null == totalExpense
           ? _value.totalExpense
           : totalExpense // ignore: cast_nullable_to_non_nullable
+              as double,
+      activatedAmount: null == activatedAmount
+          ? _value.activatedAmount
+          : activatedAmount // ignore: cast_nullable_to_non_nullable
+              as double,
+      activatedIncome: null == activatedIncome
+          ? _value.activatedIncome
+          : activatedIncome // ignore: cast_nullable_to_non_nullable
+              as double,
+      activatedExpense: null == activatedExpense
+          ? _value.activatedExpense
+          : activatedExpense // ignore: cast_nullable_to_non_nullable
               as double,
       assetAmount: null == assetAmount
           ? _value.assetAmount
@@ -490,10 +542,14 @@ class __$$AssetStateImplCopyWithImpl<$Res>
 
 class _$AssetStateImpl implements _AssetState {
   const _$AssetStateImpl(
-      {final List<Asset> assetList = const [],
+      {final List<Asset> allAssetList = const [],
+      final List<Asset> activatedAssetList = const [],
       this.totalAmount = 0,
       this.totalIncome = 0,
       this.totalExpense = 0,
+      this.activatedAmount = 0,
+      this.activatedIncome = 0,
+      this.activatedExpense = 0,
       this.assetAmount = 0,
       this.showAssetCardUpdate = false,
       this.showAssetCardUpdateName = false,
@@ -521,7 +577,8 @@ class _$AssetStateImpl implements _AssetState {
       required this.updateAssetUserCase,
       required this.changeActivedAssetUseCase,
       required this.deleteAssetUseCase})
-      : _assetList = assetList,
+      : _allAssetList = allAssetList,
+        _activatedAssetList = activatedAssetList,
         _firstColorList = firstColorList,
         _secondColorList = secondColorList,
         _firstColorListSave = firstColorListSave,
@@ -529,13 +586,23 @@ class _$AssetStateImpl implements _AssetState {
         _assetColor = assetColor,
         _assetIdList = assetIdList;
 
-  final List<Asset> _assetList;
+  final List<Asset> _allAssetList;
   @override
   @JsonKey()
-  List<Asset> get assetList {
-    if (_assetList is EqualUnmodifiableListView) return _assetList;
+  List<Asset> get allAssetList {
+    if (_allAssetList is EqualUnmodifiableListView) return _allAssetList;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_assetList);
+    return EqualUnmodifiableListView(_allAssetList);
+  }
+
+  final List<Asset> _activatedAssetList;
+  @override
+  @JsonKey()
+  List<Asset> get activatedAssetList {
+    if (_activatedAssetList is EqualUnmodifiableListView)
+      return _activatedAssetList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_activatedAssetList);
   }
 
   @override
@@ -547,6 +614,15 @@ class _$AssetStateImpl implements _AssetState {
   @override
   @JsonKey()
   final double totalExpense;
+  @override
+  @JsonKey()
+  final double activatedAmount;
+  @override
+  @JsonKey()
+  final double activatedIncome;
+  @override
+  @JsonKey()
+  final double activatedExpense;
   @override
   @JsonKey()
   final double assetAmount;
@@ -647,7 +723,7 @@ class _$AssetStateImpl implements _AssetState {
 
   @override
   String toString() {
-    return 'AssetState(assetList: $assetList, totalAmount: $totalAmount, totalIncome: $totalIncome, totalExpense: $totalExpense, assetAmount: $assetAmount, showAssetCardUpdate: $showAssetCardUpdate, showAssetCardUpdateName: $showAssetCardUpdateName, isLoading: $isLoading, isCheckedAsset: $isCheckedAsset, selectedAssetCardIndex: $selectedAssetCardIndex, firstColorList: $firstColorList, secondColorList: $secondColorList, firstColorListSave: $firstColorListSave, secondColorListSave: $secondColorListSave, assetType: $assetType, firstColor: $firstColor, secondColor: $secondColor, userId: $userId, assetHints: $assetHints, assetName: $assetName, assetColor: $assetColor, assetCurrency: $assetCurrency, currencyHints: $currencyHints, selectedAssetId: $selectedAssetId, assetIdList: $assetIdList, getAssetListUseCase: $getAssetListUseCase, getAssetUseCase: $getAssetUseCase, createAssetUserCase: $createAssetUserCase, updateAssetUserCase: $updateAssetUserCase, changeActivedAssetUseCase: $changeActivedAssetUseCase, deleteAssetUseCase: $deleteAssetUseCase)';
+    return 'AssetState(allAssetList: $allAssetList, activatedAssetList: $activatedAssetList, totalAmount: $totalAmount, totalIncome: $totalIncome, totalExpense: $totalExpense, activatedAmount: $activatedAmount, activatedIncome: $activatedIncome, activatedExpense: $activatedExpense, assetAmount: $assetAmount, showAssetCardUpdate: $showAssetCardUpdate, showAssetCardUpdateName: $showAssetCardUpdateName, isLoading: $isLoading, isCheckedAsset: $isCheckedAsset, selectedAssetCardIndex: $selectedAssetCardIndex, firstColorList: $firstColorList, secondColorList: $secondColorList, firstColorListSave: $firstColorListSave, secondColorListSave: $secondColorListSave, assetType: $assetType, firstColor: $firstColor, secondColor: $secondColor, userId: $userId, assetHints: $assetHints, assetName: $assetName, assetColor: $assetColor, assetCurrency: $assetCurrency, currencyHints: $currencyHints, selectedAssetId: $selectedAssetId, assetIdList: $assetIdList, getAssetListUseCase: $getAssetListUseCase, getAssetUseCase: $getAssetUseCase, createAssetUserCase: $createAssetUserCase, updateAssetUserCase: $updateAssetUserCase, changeActivedAssetUseCase: $changeActivedAssetUseCase, deleteAssetUseCase: $deleteAssetUseCase)';
   }
 
   @override
@@ -656,13 +732,21 @@ class _$AssetStateImpl implements _AssetState {
         (other.runtimeType == runtimeType &&
             other is _$AssetStateImpl &&
             const DeepCollectionEquality()
-                .equals(other._assetList, _assetList) &&
+                .equals(other._allAssetList, _allAssetList) &&
+            const DeepCollectionEquality()
+                .equals(other._activatedAssetList, _activatedAssetList) &&
             (identical(other.totalAmount, totalAmount) ||
                 other.totalAmount == totalAmount) &&
             (identical(other.totalIncome, totalIncome) ||
                 other.totalIncome == totalIncome) &&
             (identical(other.totalExpense, totalExpense) ||
                 other.totalExpense == totalExpense) &&
+            (identical(other.activatedAmount, activatedAmount) ||
+                other.activatedAmount == activatedAmount) &&
+            (identical(other.activatedIncome, activatedIncome) ||
+                other.activatedIncome == activatedIncome) &&
+            (identical(other.activatedExpense, activatedExpense) ||
+                other.activatedExpense == activatedExpense) &&
             (identical(other.assetAmount, assetAmount) ||
                 other.assetAmount == assetAmount) &&
             (identical(other.showAssetCardUpdate, showAssetCardUpdate) ||
@@ -712,8 +796,7 @@ class _$AssetStateImpl implements _AssetState {
                 other.createAssetUserCase == createAssetUserCase) &&
             (identical(other.updateAssetUserCase, updateAssetUserCase) ||
                 other.updateAssetUserCase == updateAssetUserCase) &&
-            (identical(other.changeActivedAssetUseCase,
-                    changeActivedAssetUseCase) ||
+            (identical(other.changeActivedAssetUseCase, changeActivedAssetUseCase) ||
                 other.changeActivedAssetUseCase == changeActivedAssetUseCase) &&
             (identical(other.deleteAssetUseCase, deleteAssetUseCase) ||
                 other.deleteAssetUseCase == deleteAssetUseCase));
@@ -722,10 +805,14 @@ class _$AssetStateImpl implements _AssetState {
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
-        const DeepCollectionEquality().hash(_assetList),
+        const DeepCollectionEquality().hash(_allAssetList),
+        const DeepCollectionEquality().hash(_activatedAssetList),
         totalAmount,
         totalIncome,
         totalExpense,
+        activatedAmount,
+        activatedIncome,
+        activatedExpense,
         assetAmount,
         showAssetCardUpdate,
         showAssetCardUpdateName,
@@ -764,10 +851,14 @@ class _$AssetStateImpl implements _AssetState {
 
 abstract class _AssetState implements AssetState {
   const factory _AssetState(
-      {final List<Asset> assetList,
+      {final List<Asset> allAssetList,
+      final List<Asset> activatedAssetList,
       final double totalAmount,
       final double totalIncome,
       final double totalExpense,
+      final double activatedAmount,
+      final double activatedIncome,
+      final double activatedExpense,
       final double assetAmount,
       final bool showAssetCardUpdate,
       final bool showAssetCardUpdateName,
@@ -797,13 +888,21 @@ abstract class _AssetState implements AssetState {
       required final DeleteAssetUseCase deleteAssetUseCase}) = _$AssetStateImpl;
 
   @override
-  List<Asset> get assetList;
+  List<Asset> get allAssetList;
+  @override
+  List<Asset> get activatedAssetList;
   @override
   double get totalAmount;
   @override
   double get totalIncome;
   @override
   double get totalExpense;
+  @override
+  double get activatedAmount;
+  @override
+  double get activatedIncome;
+  @override
+  double get activatedExpense;
   @override
   double get assetAmount;
   @override

@@ -59,7 +59,7 @@ class _ReportScreenState extends ConsumerState<AssetScreen> {
                         : ListView.builder(
                             physics: const NeverScrollableScrollPhysics(),
                             shrinkWrap: true, // ListView의 크기를 제한
-                            itemCount: assetProvider.assetList.length,
+                            itemCount: assetProvider.allAssetList.length,
                             itemBuilder: (context, index) {
                               return Column(
                                 children: [
@@ -71,7 +71,7 @@ class _ReportScreenState extends ConsumerState<AssetScreen> {
                                             title: '',
                                             message: '자산에 속한 개별 기록들까지 모두 삭제됩니다. 삭제하시겠습니까?',
                                             onConfirm: () async {
-                                              await ref.read(assetStateProvier.notifier).deleteAsset(assetProvider.assetList[index].assetId);
+                                              await ref.read(assetStateProvier.notifier).deleteAsset(assetProvider.allAssetList[index].assetId);
                                               await ref.read(userStateProvider.notifier).fetchUser();
                                               await ref.read(assetStateProvier.notifier).fetchAsset();
                                             });
@@ -95,9 +95,9 @@ class _ReportScreenState extends ConsumerState<AssetScreen> {
                                           ],
                                         ),
                                       ),
-                                      key: ValueKey(assetProvider.assetList[index].assetId),
+                                      key: ValueKey(assetProvider.allAssetList[index].assetId),
                                       child: AssetCard(
-                                        asset: assetProvider.assetList[index],
+                                        asset: assetProvider.allAssetList[index],
                                         focusNode: focusNode,
                                         index: index,
                                       ),
@@ -106,7 +106,7 @@ class _ReportScreenState extends ConsumerState<AssetScreen> {
                                     Column(
                                       children: [
                                         AssetCardUpdate(
-                                          asset: assetProvider.assetList[index],
+                                          asset: assetProvider.allAssetList[index],
                                           focusNode: focusNode,
                                           titleEditController: titleEditController,
                                         ),
@@ -143,15 +143,15 @@ class _ReportScreenState extends ConsumerState<AssetScreen> {
                                                   title: '',
                                                   onConfirm: () => ref.read(assetStateProvier.notifier).updateAsset(
                                                         Asset(
-                                                          totalAmount: assetProvider.assetList[index].totalAmount,
-                                                          totalIncome: assetProvider.assetList[index].totalIncome,
-                                                          totalExpense: assetProvider.assetList[index].totalExpense,
-                                                          assetId: assetProvider.assetList[index].assetId,
+                                                          totalAmount: assetProvider.allAssetList[index].totalAmount,
+                                                          totalIncome: assetProvider.allAssetList[index].totalIncome,
+                                                          totalExpense: assetProvider.allAssetList[index].totalExpense,
+                                                          assetId: assetProvider.allAssetList[index].assetId,
                                                           assetName: titleEditController.text,
-                                                          isActiveAsset: assetProvider.assetList[index].isActiveAsset,
+                                                          isActiveAsset: assetProvider.allAssetList[index].isActiveAsset,
                                                           currency: assetProvider.currencyHints,
-                                                          userIdList: assetProvider.assetList[index].userIdList,
-                                                          createdAt: assetProvider.assetList[index].createdAt,
+                                                          userIdList: assetProvider.allAssetList[index].userIdList,
+                                                          createdAt: assetProvider.allAssetList[index].createdAt,
                                                           updatedAt: DateTime.now(),
                                                           assetColor: [
                                                             assetProvider.firstColor.alpha,

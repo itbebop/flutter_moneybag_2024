@@ -14,10 +14,14 @@ part 'asset_state.freezed.dart';
 @freezed
 class AssetState with _$AssetState {
   const factory AssetState({
-    @Default([]) List<Asset> assetList,
+    @Default([]) List<Asset> allAssetList,
+    @Default([]) List<Asset> activatedAssetList,
     @Default(0) double totalAmount,
     @Default(0) double totalIncome,
     @Default(0) double totalExpense,
+    @Default(0) double activatedAmount,
+    @Default(0) double activatedIncome,
+    @Default(0) double activatedExpense,
     @Default(0) double assetAmount,
     @Default(false) bool showAssetCardUpdate,
     @Default(false) bool showAssetCardUpdateName,

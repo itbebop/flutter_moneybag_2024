@@ -83,6 +83,17 @@ class _DrawerWidgetState extends ConsumerState<DrawerWidget> {
                 StreamBuilder<List<Asset>>(
                     stream: ref.watch(assetStateProvier.notifier).getAssetList(),
                     builder: (context, snapshot) {
+                      if (snapshot.hasError) {
+                        WidgetsBinding.instance.addPostFrameCallback((_) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text('잠시 후에 다시 시도해주세요')),
+                          );
+                        });
+                        return const Center(child: Text('데이터가 없습니다.'));
+                      }
+                      if (!snapshot.hasData) {
+                        return const Center(child: CircularProgressIndicator()); // 로딩 상태 처리 추가
+                      }
                       final assetList = snapshot.data!;
                       return SizedBox(
                         height: 200.h,
@@ -103,6 +114,7 @@ class _DrawerWidgetState extends ConsumerState<DrawerWidget> {
                                         value: assetList[index].isActiveAsset,
                                         onChanged: (value) async {
                                           await ref.read(assetStateProvier.notifier).tapCheckBox(assetList[index].assetId, value!);
+                                          // 1초 후에 다른 함수 실행
                                           await ref.read(userStateProvider.notifier).fetchUser();
                                           await ref.read(assetStateProvier.notifier).fetchAsset();
                                         }),
