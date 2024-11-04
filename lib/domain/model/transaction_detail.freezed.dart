@@ -25,7 +25,6 @@ mixin _$TransactionDetail {
   DateTime get createdAt => throw _privateConstructorUsedError;
   DateTime get updatedAt => throw _privateConstructorUsedError;
   double get amount => throw _privateConstructorUsedError;
-  String get userId => throw _privateConstructorUsedError;
   String get imgUrl => throw _privateConstructorUsedError;
   TransactionCategory get category => throw _privateConstructorUsedError;
 
@@ -47,7 +46,6 @@ abstract class $TransactionDetailCopyWith<$Res> {
       DateTime createdAt,
       DateTime updatedAt,
       double amount,
-      String userId,
       String imgUrl,
       TransactionCategory category});
 
@@ -72,7 +70,6 @@ class _$TransactionDetailCopyWithImpl<$Res, $Val extends TransactionDetail>
     Object? createdAt = null,
     Object? updatedAt = null,
     Object? amount = null,
-    Object? userId = null,
     Object? imgUrl = null,
     Object? category = null,
   }) {
@@ -97,10 +94,6 @@ class _$TransactionDetailCopyWithImpl<$Res, $Val extends TransactionDetail>
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
               as double,
-      userId: null == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
-              as String,
       imgUrl: null == imgUrl
           ? _value.imgUrl
           : imgUrl // ignore: cast_nullable_to_non_nullable
@@ -135,7 +128,6 @@ abstract class _$$TransactionDetailImplCopyWith<$Res>
       DateTime createdAt,
       DateTime updatedAt,
       double amount,
-      String userId,
       String imgUrl,
       TransactionCategory category});
 
@@ -159,7 +151,6 @@ class __$$TransactionDetailImplCopyWithImpl<$Res>
     Object? createdAt = null,
     Object? updatedAt = null,
     Object? amount = null,
-    Object? userId = null,
     Object? imgUrl = null,
     Object? category = null,
   }) {
@@ -184,10 +175,6 @@ class __$$TransactionDetailImplCopyWithImpl<$Res>
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
               as double,
-      userId: null == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
-              as String,
       imgUrl: null == imgUrl
           ? _value.imgUrl
           : imgUrl // ignore: cast_nullable_to_non_nullable
@@ -209,7 +196,6 @@ class _$TransactionDetailImpl implements _TransactionDetail {
       required this.createdAt,
       required this.updatedAt,
       required this.amount,
-      required this.userId,
       required this.imgUrl,
       required this.category});
 
@@ -227,15 +213,13 @@ class _$TransactionDetailImpl implements _TransactionDetail {
   @override
   final double amount;
   @override
-  final String userId;
-  @override
   final String imgUrl;
   @override
   final TransactionCategory category;
 
   @override
   String toString() {
-    return 'TransactionDetail(transactionId: $transactionId, memo: $memo, createdAt: $createdAt, updatedAt: $updatedAt, amount: $amount, userId: $userId, imgUrl: $imgUrl, category: $category)';
+    return 'TransactionDetail(transactionId: $transactionId, memo: $memo, createdAt: $createdAt, updatedAt: $updatedAt, amount: $amount, imgUrl: $imgUrl, category: $category)';
   }
 
   @override
@@ -251,7 +235,6 @@ class _$TransactionDetailImpl implements _TransactionDetail {
             (identical(other.updatedAt, updatedAt) ||
                 other.updatedAt == updatedAt) &&
             (identical(other.amount, amount) || other.amount == amount) &&
-            (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.imgUrl, imgUrl) || other.imgUrl == imgUrl) &&
             (identical(other.category, category) ||
                 other.category == category));
@@ -260,7 +243,7 @@ class _$TransactionDetailImpl implements _TransactionDetail {
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, transactionId, memo, createdAt,
-      updatedAt, amount, userId, imgUrl, category);
+      updatedAt, amount, imgUrl, category);
 
   @JsonKey(ignore: true)
   @override
@@ -284,7 +267,6 @@ abstract class _TransactionDetail implements TransactionDetail {
       required final DateTime createdAt,
       required final DateTime updatedAt,
       required final double amount,
-      required final String userId,
       required final String imgUrl,
       required final TransactionCategory category}) = _$TransactionDetailImpl;
 
@@ -301,8 +283,6 @@ abstract class _TransactionDetail implements TransactionDetail {
   DateTime get updatedAt;
   @override
   double get amount;
-  @override
-  String get userId;
   @override
   String get imgUrl;
   @override

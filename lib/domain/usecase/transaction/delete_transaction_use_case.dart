@@ -5,7 +5,7 @@ class DeleteTransactionUseCase {
 
   DeleteTransactionUseCase({required TransactionRepository transactionRepository}) : _transactionRepository = transactionRepository;
 
-  Future<void> execute({required String transactionId, required String assetId}) async {
-    await _transactionRepository.deleteTransaction(transactionId: transactionId, assetId: assetId);
+  Future<void> execute({required String transactionId, required String assetId, required String userId}) async {
+    await _transactionRepository.deleteTransaction(transactionId: transactionId, assetId: assetId, userId: userId);
   }
 }

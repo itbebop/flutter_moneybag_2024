@@ -14,6 +14,7 @@ class TransactionState with _$TransactionState {
   const factory TransactionState({
     @Default(false) final bool isLoading,
     @Default([]) List<TransactionDetail> events,
+    required String userId,
     required final DateTime selectedDay,
     required final DateTime focusedDay,
     required ValueNotifier<List<TransactionDetail>> selectedEvents,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_moneybag_2024/common/common_component/transaction/riverpod/transaction_state.dart';
+import 'package:flutter_moneybag_2024/core/provider/user_state_notifier.dart';
 import 'package:flutter_moneybag_2024/di/di_setup.dart';
 import 'package:flutter_moneybag_2024/domain/enums/asset_types.dart';
 import 'package:flutter_moneybag_2024/domain/model/transaction_category.dart';
@@ -9,8 +10,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final transactionStateProvider = StateNotifierProvider<TransactionStateNotifier, TransactionState>((ref) {
   final assetState = ref.watch(assetStateProvier);
+  final userState = ref.watch(userStateProvider);
   final List<String> assetIdList = assetState.assetIdList;
   final assetType = assetState.assetType;
+  String userId = '';
+  if (userState.user != null) {
+    userId = userState.user!.userId;
+  }
 
   return TransactionStateNotifier(
     TransactionState(
@@ -24,6 +30,7 @@ final transactionStateProvider = StateNotifierProvider<TransactionStateNotifier,
       selectedEvents: ValueNotifier([]),
       focusedDay: DateTime.now(),
       selectedDay: DateTime.now(),
+      userId: userId,
     ),
   );
 });
@@ -58,15 +65,14 @@ class TransactionStateNotifier extends StateNotifier<TransactionState> {
       createdAt: createAt,
       updatedAt: createAt,
       amount: onChangeAmount(amount),
-      userId: userId,
       imgUrl: '',
       category: category,
     );
-    await state.createTransactionUseCase.execute(transactionDetail: transactionDetail, assetId: assetId);
+    await state.createTransactionUseCase.execute(transactionDetail: transactionDetail, assetId: assetId, userId: userId);
   }
 
   Future<List<TransactionDetail>> getTransactions() async {
-    return await state.getTransactionListUseCase.execute(state.assetIdList);
+    return await state.getTransactionListUseCase.execute(assetIdList: state.assetIdList, userId: state.userId);
   }
 
   void clearTransactions() {

@@ -6,7 +6,7 @@ class UpdateTransactionUseCase {
 
   UpdateTransactionUseCase({required TransactionRepository transactionRepository}) : _transactionRepository = transactionRepository;
 
-  Future<void> execute({required TransactionDetail transaction, required String email, required String assetId}) async {
-    await _transactionRepository.updateTransaction(transaction: transaction, assetId: assetId);
+  Future<void> execute({required TransactionDetail transaction, required String email, required String assetId, required String userId}) async {
+    await _transactionRepository.updateTransaction(transaction: transaction, assetId: assetId, userId: userId);
   }
 }
