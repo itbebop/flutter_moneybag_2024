@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_moneybag_2024/common/common.dart';
 import 'package:flutter_moneybag_2024/common/common_component/transaction/riverpod/transaction_state_notifier.dart';
 import 'package:flutter_moneybag_2024/core/provider/user_state_notifier.dart';
+import 'package:flutter_moneybag_2024/domain/model/asset.dart';
 import 'package:flutter_moneybag_2024/screen/tab/asset/riverpod/asset_state_notifier.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -22,6 +23,7 @@ class _DrawerWidgetState extends ConsumerState<DrawerWidget> {
   @override
   Widget build(BuildContext context) {
     final userState = ref.watch(userStateProvider); // 상태를 watch하여 UI에 반영
+    // final assetProvider = ref.watch(assetStateProvier);
     return SafeArea(
       child: Material(
         color: const Color.fromARGB(0, 110, 42, 42),
@@ -64,7 +66,6 @@ class _DrawerWidgetState extends ConsumerState<DrawerWidget> {
                   onTap: () {
                     context.push('/category');
                   },
-                  trailing: const Icon(Icons.add),
                 ),
                 if (userState.user == null)
                   ListTile(
@@ -78,6 +79,40 @@ class _DrawerWidgetState extends ConsumerState<DrawerWidget> {
                     },
                     trailing: const Icon(Icons.add),
                   ),
+                const Divider(),
+                StreamBuilder<List<Asset>>(
+                    stream: ref.watch(assetStateProvier.notifier).getAssetList(),
+                    builder: (context, snapshot) {
+                      final assetList = snapshot.data!;
+                      return SizedBox(
+                        height: 200.h,
+                        child: ListView.builder(
+                            itemCount: assetList.length,
+                            itemBuilder: (context, index) {
+                              return Column(
+                                children: [
+                                  ListTile(
+                                    leading: const HugeIcon(
+                                      icon: HugeIcons.strokeRoundedMoneyBag02,
+                                      color: UiConfig.black,
+                                    ),
+                                    title: Text(
+                                      assetList[index].assetName,
+                                    ),
+                                    trailing: Checkbox(
+                                        value: assetList[index].isActiveAsset,
+                                        onChanged: (value) async {
+                                          await ref.read(assetStateProvier.notifier).tapCheckBox(assetList[index].assetId, value!);
+                                          await ref.read(userStateProvider.notifier).fetchUser();
+                                          await ref.read(assetStateProvier.notifier).fetchAsset();
+                                        }),
+                                  ),
+                                ],
+                              );
+                            }),
+                      );
+                    }),
+                const Divider(),
                 if (userState.user != null)
                   ListTile(
                     leading: const HugeIcon(
@@ -92,7 +127,6 @@ class _DrawerWidgetState extends ConsumerState<DrawerWidget> {
                       widget.scaffoldKey.currentState!.closeDrawer();
                       // if (mounted) ref.read(userStateProvider.notifier).showLogoutSnackbar(context);
                     },
-                    trailing: const Icon(Icons.add),
                   ),
               ],
             )

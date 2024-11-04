@@ -36,6 +36,7 @@ final assetStateProvier = StateNotifierProvider<AssetStateNotifier, AssetState>(
     createAssetUserCase: getIt(),
     getAssetListUseCase: getIt(),
     updateAssetUserCase: getIt(),
+    changeActivedAssetUseCase: getIt(),
     deleteAssetUseCase: getIt(),
     secondColorListSave: [],
     assetIdList: assetIdList,
@@ -53,6 +54,7 @@ final assetStateProvier = StateNotifierProvider<AssetStateNotifier, AssetState>(
     secondColorList: secondColorList,
     firstColorListSave: [],
     assetType: AssetType.expense,
+    isCheckedAsset: false,
   ));
 });
 
@@ -72,6 +74,7 @@ class AssetStateNotifier extends StateNotifier<AssetState> {
       state = state.copyWith(isLoading: true);
       // 전체 assetList 가져옴
       final assetList = await state.getAssetListUseCase.execute(assetIdList: state.assetIdList);
+      // final assetList = await getAssetList();
       // assetList의 totalAmount, totalExpense, totalIncome 합산
       final double amount = assetList.fold(0, (sum, asset) => sum + asset.totalAmount);
       final double expense = assetList.fold(0, (sum, asset) => sum + asset.totalExpense);
@@ -256,5 +259,13 @@ class AssetStateNotifier extends StateNotifier<AssetState> {
     } catch (e) {
       rethrow;
     }
+  }
+
+  Future<void> tapCheckBox(String assetId, bool checked) async {
+    await state.changeActivedAssetUseCase.execute(assetId: assetId, isActiveAsset: checked);
+  }
+
+  Stream<List<Asset>> getAssetList() {
+    return Stream.fromFuture(state.getAssetListUseCase.execute(assetIdList: state.assetIdList));
   }
 }

@@ -72,6 +72,7 @@ class _AssetCreateScreenState extends ConsumerState<AssetCreateScreen> {
                                   totalExpense: 0,
                                   assetId: '0',
                                   assetName: titleEditController.text,
+                                  isActiveAsset: true,
                                   currency: assetProvider.currencyHints,
                                   userIdList: [assetProvider.userId],
                                   createdAt: DateTime.now(),

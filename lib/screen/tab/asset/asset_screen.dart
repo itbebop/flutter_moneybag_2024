@@ -148,6 +148,7 @@ class _ReportScreenState extends ConsumerState<AssetScreen> {
                                                           totalExpense: assetProvider.assetList[index].totalExpense,
                                                           assetId: assetProvider.assetList[index].assetId,
                                                           assetName: titleEditController.text,
+                                                          isActiveAsset: assetProvider.assetList[index].isActiveAsset,
                                                           currency: assetProvider.currencyHints,
                                                           userIdList: assetProvider.assetList[index].userIdList,
                                                           createdAt: assetProvider.assetList[index].createdAt,

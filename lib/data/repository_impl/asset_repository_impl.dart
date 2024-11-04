@@ -8,7 +8,6 @@ class AssetRepositoryImpl implements AssetRepository {
   AssetRepositoryImpl({required AssetDataSource assetDetailDataSource}) : _assetDetailDataSource = assetDetailDataSource;
 
   @override
-  // Constructor
   Future<void> createAsset({Asset? asset, required String userId}) async {
     await _assetDetailDataSource.createAsset(asset: asset, userId: userId);
   }
@@ -26,6 +25,11 @@ class AssetRepositoryImpl implements AssetRepository {
   @override
   Future<void> updateAsset({required Asset asset}) async {
     await _assetDetailDataSource.updateAsset(asset: asset);
+  }
+
+  @override
+  Future<void> chageActivatedAsset({required String assetId, required bool isActiveAsset}) async {
+    await _assetDetailDataSource.chageActivatedAsset(assetId: assetId, isActiveAsset: isActiveAsset);
   }
 
   @override

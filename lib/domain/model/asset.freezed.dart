@@ -25,6 +25,7 @@ mixin _$Asset {
   double get totalExpense => throw _privateConstructorUsedError;
   String get assetId => throw _privateConstructorUsedError;
   String get assetName => throw _privateConstructorUsedError;
+  bool get isActiveAsset => throw _privateConstructorUsedError;
   String get currency => throw _privateConstructorUsedError;
   List<String> get userIdList => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
@@ -47,6 +48,7 @@ abstract class $AssetCopyWith<$Res> {
       double totalExpense,
       String assetId,
       String assetName,
+      bool isActiveAsset,
       String currency,
       List<String> userIdList,
       DateTime createdAt,
@@ -72,6 +74,7 @@ class _$AssetCopyWithImpl<$Res, $Val extends Asset>
     Object? totalExpense = null,
     Object? assetId = null,
     Object? assetName = null,
+    Object? isActiveAsset = null,
     Object? currency = null,
     Object? userIdList = null,
     Object? createdAt = null,
@@ -99,6 +102,10 @@ class _$AssetCopyWithImpl<$Res, $Val extends Asset>
           ? _value.assetName
           : assetName // ignore: cast_nullable_to_non_nullable
               as String,
+      isActiveAsset: null == isActiveAsset
+          ? _value.isActiveAsset
+          : isActiveAsset // ignore: cast_nullable_to_non_nullable
+              as bool,
       currency: null == currency
           ? _value.currency
           : currency // ignore: cast_nullable_to_non_nullable
@@ -136,6 +143,7 @@ abstract class _$$AssetImplCopyWith<$Res> implements $AssetCopyWith<$Res> {
       double totalExpense,
       String assetId,
       String assetName,
+      bool isActiveAsset,
       String currency,
       List<String> userIdList,
       DateTime createdAt,
@@ -159,6 +167,7 @@ class __$$AssetImplCopyWithImpl<$Res>
     Object? totalExpense = null,
     Object? assetId = null,
     Object? assetName = null,
+    Object? isActiveAsset = null,
     Object? currency = null,
     Object? userIdList = null,
     Object? createdAt = null,
@@ -186,6 +195,10 @@ class __$$AssetImplCopyWithImpl<$Res>
           ? _value.assetName
           : assetName // ignore: cast_nullable_to_non_nullable
               as String,
+      isActiveAsset: null == isActiveAsset
+          ? _value.isActiveAsset
+          : isActiveAsset // ignore: cast_nullable_to_non_nullable
+              as bool,
       currency: null == currency
           ? _value.currency
           : currency // ignore: cast_nullable_to_non_nullable
@@ -219,6 +232,7 @@ class _$AssetImpl implements _Asset {
       required this.totalExpense,
       required this.assetId,
       required this.assetName,
+      required this.isActiveAsset,
       required this.currency,
       required final List<String> userIdList,
       required this.createdAt,
@@ -240,6 +254,8 @@ class _$AssetImpl implements _Asset {
   final String assetId;
   @override
   final String assetName;
+  @override
+  final bool isActiveAsset;
   @override
   final String currency;
   final List<String> _userIdList;
@@ -264,7 +280,7 @@ class _$AssetImpl implements _Asset {
 
   @override
   String toString() {
-    return 'Asset(totalAmount: $totalAmount, totalIncome: $totalIncome, totalExpense: $totalExpense, assetId: $assetId, assetName: $assetName, currency: $currency, userIdList: $userIdList, createdAt: $createdAt, updatedAt: $updatedAt, assetColor: $assetColor)';
+    return 'Asset(totalAmount: $totalAmount, totalIncome: $totalIncome, totalExpense: $totalExpense, assetId: $assetId, assetName: $assetName, isActiveAsset: $isActiveAsset, currency: $currency, userIdList: $userIdList, createdAt: $createdAt, updatedAt: $updatedAt, assetColor: $assetColor)';
   }
 
   @override
@@ -281,6 +297,8 @@ class _$AssetImpl implements _Asset {
             (identical(other.assetId, assetId) || other.assetId == assetId) &&
             (identical(other.assetName, assetName) ||
                 other.assetName == assetName) &&
+            (identical(other.isActiveAsset, isActiveAsset) ||
+                other.isActiveAsset == isActiveAsset) &&
             (identical(other.currency, currency) ||
                 other.currency == currency) &&
             const DeepCollectionEquality()
@@ -302,6 +320,7 @@ class _$AssetImpl implements _Asset {
       totalExpense,
       assetId,
       assetName,
+      isActiveAsset,
       currency,
       const DeepCollectionEquality().hash(_userIdList),
       createdAt,
@@ -329,6 +348,7 @@ abstract class _Asset implements Asset {
       required final double totalExpense,
       required final String assetId,
       required final String assetName,
+      required final bool isActiveAsset,
       required final String currency,
       required final List<String> userIdList,
       required final DateTime createdAt,
@@ -347,6 +367,8 @@ abstract class _Asset implements Asset {
   String get assetId;
   @override
   String get assetName;
+  @override
+  bool get isActiveAsset;
   @override
   String get currency;
   @override

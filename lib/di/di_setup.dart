@@ -14,6 +14,7 @@ import 'package:flutter_moneybag_2024/domain/repository/asset_repository.dart';
 import 'package:flutter_moneybag_2024/domain/repository/transaction_category_repository.dart';
 import 'package:flutter_moneybag_2024/domain/repository/transaction_repository.dart';
 import 'package:flutter_moneybag_2024/domain/repository/user_repository.dart';
+import 'package:flutter_moneybag_2024/domain/usecase/asset/change_actived_asset_use_case.dart';
 import 'package:flutter_moneybag_2024/domain/usecase/asset/create_asset_use_case.dart';
 import 'package:flutter_moneybag_2024/domain/usecase/asset/delete_asset_use_case.dart';
 import 'package:flutter_moneybag_2024/domain/usecase/asset/get_asset_list_use_case.dart';
@@ -66,6 +67,7 @@ void diSetup() {
   getIt.registerSingleton<GetAssetListUseCase>(GetAssetListUseCase(assetRepository: getIt()));
   getIt.registerSingleton<GetAssetUseCase>(GetAssetUseCase(assetRepository: getIt()));
   getIt.registerSingleton<UpdateAssetUseCase>(UpdateAssetUseCase(assetRepository: getIt()));
+  getIt.registerSingleton<ChangeActivedAssetUseCase>(ChangeActivedAssetUseCase(assetRepository: getIt()));
   // transaction
   getIt.registerSingleton<CreateTransactionUseCase>(CreateTransactionUseCase(transactionRepository: getIt()));
   getIt.registerSingleton<DeleteTransactionUseCase>(DeleteTransactionUseCase(transactionRepository: getIt()));

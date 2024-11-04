@@ -11,6 +11,7 @@ class Asset with _$Asset {
     required double totalExpense,
     required String assetId,
     required String assetName,
+    required bool isActiveAsset,
     required String currency,
     required List<String> userIdList,
     required DateTime createdAt,

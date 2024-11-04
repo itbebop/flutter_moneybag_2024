@@ -5,5 +5,6 @@ abstract interface class AssetRepository {
   Future<List<Asset>> getAssetList({required List<String> assetIdList});
   Future<Asset> getAsset({required String assetId});
   Future<void> updateAsset({required Asset asset});
+  Future<void> chageActivatedAsset({required String assetId, required bool isActiveAsset});
   Future<void> deleteAsset({required String assetId, required String userId});
 }

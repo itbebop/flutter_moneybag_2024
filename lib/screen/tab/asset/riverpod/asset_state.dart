@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_moneybag_2024/domain/enums/asset_types.dart';
 import 'package:flutter_moneybag_2024/domain/model/asset.dart';
+import 'package:flutter_moneybag_2024/domain/usecase/asset/change_actived_asset_use_case.dart';
 import 'package:flutter_moneybag_2024/domain/usecase/asset/create_asset_use_case.dart';
 import 'package:flutter_moneybag_2024/domain/usecase/asset/delete_asset_use_case.dart';
 import 'package:flutter_moneybag_2024/domain/usecase/asset/get_asset_list_use_case.dart';
@@ -21,6 +22,7 @@ class AssetState with _$AssetState {
     @Default(false) bool showAssetCardUpdate,
     @Default(false) bool showAssetCardUpdateName,
     @Default(false) bool isLoading,
+    required bool isCheckedAsset,
     @Default(0) int selectedAssetCardIndex,
     required List<Color> firstColorList,
     required List<Color> secondColorList,
@@ -41,6 +43,7 @@ class AssetState with _$AssetState {
     required final GetAssetUseCase getAssetUseCase,
     required final CreateAssetUseCase createAssetUserCase,
     required final UpdateAssetUseCase updateAssetUserCase,
+    required final ChangeActivedAssetUseCase changeActivedAssetUseCase,
     required final DeleteAssetUseCase deleteAssetUseCase,
   }) = _AssetState;
 }

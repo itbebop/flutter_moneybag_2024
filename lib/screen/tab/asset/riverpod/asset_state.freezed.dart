@@ -24,6 +24,7 @@ mixin _$AssetState {
   bool get showAssetCardUpdate => throw _privateConstructorUsedError;
   bool get showAssetCardUpdateName => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
+  bool get isCheckedAsset => throw _privateConstructorUsedError;
   int get selectedAssetCardIndex => throw _privateConstructorUsedError;
   List<Color> get firstColorList => throw _privateConstructorUsedError;
   List<Color> get secondColorList => throw _privateConstructorUsedError;
@@ -46,6 +47,8 @@ mixin _$AssetState {
   CreateAssetUseCase get createAssetUserCase =>
       throw _privateConstructorUsedError;
   UpdateAssetUseCase get updateAssetUserCase =>
+      throw _privateConstructorUsedError;
+  ChangeActivedAssetUseCase get changeActivedAssetUseCase =>
       throw _privateConstructorUsedError;
   DeleteAssetUseCase get deleteAssetUseCase =>
       throw _privateConstructorUsedError;
@@ -70,6 +73,7 @@ abstract class $AssetStateCopyWith<$Res> {
       bool showAssetCardUpdate,
       bool showAssetCardUpdateName,
       bool isLoading,
+      bool isCheckedAsset,
       int selectedAssetCardIndex,
       List<Color> firstColorList,
       List<Color> secondColorList,
@@ -90,6 +94,7 @@ abstract class $AssetStateCopyWith<$Res> {
       GetAssetUseCase getAssetUseCase,
       CreateAssetUseCase createAssetUserCase,
       UpdateAssetUseCase updateAssetUserCase,
+      ChangeActivedAssetUseCase changeActivedAssetUseCase,
       DeleteAssetUseCase deleteAssetUseCase});
 }
 
@@ -114,6 +119,7 @@ class _$AssetStateCopyWithImpl<$Res, $Val extends AssetState>
     Object? showAssetCardUpdate = null,
     Object? showAssetCardUpdateName = null,
     Object? isLoading = null,
+    Object? isCheckedAsset = null,
     Object? selectedAssetCardIndex = null,
     Object? firstColorList = null,
     Object? secondColorList = null,
@@ -134,6 +140,7 @@ class _$AssetStateCopyWithImpl<$Res, $Val extends AssetState>
     Object? getAssetUseCase = null,
     Object? createAssetUserCase = null,
     Object? updateAssetUserCase = null,
+    Object? changeActivedAssetUseCase = null,
     Object? deleteAssetUseCase = null,
   }) {
     return _then(_value.copyWith(
@@ -168,6 +175,10 @@ class _$AssetStateCopyWithImpl<$Res, $Val extends AssetState>
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isCheckedAsset: null == isCheckedAsset
+          ? _value.isCheckedAsset
+          : isCheckedAsset // ignore: cast_nullable_to_non_nullable
               as bool,
       selectedAssetCardIndex: null == selectedAssetCardIndex
           ? _value.selectedAssetCardIndex
@@ -249,6 +260,10 @@ class _$AssetStateCopyWithImpl<$Res, $Val extends AssetState>
           ? _value.updateAssetUserCase
           : updateAssetUserCase // ignore: cast_nullable_to_non_nullable
               as UpdateAssetUseCase,
+      changeActivedAssetUseCase: null == changeActivedAssetUseCase
+          ? _value.changeActivedAssetUseCase
+          : changeActivedAssetUseCase // ignore: cast_nullable_to_non_nullable
+              as ChangeActivedAssetUseCase,
       deleteAssetUseCase: null == deleteAssetUseCase
           ? _value.deleteAssetUseCase
           : deleteAssetUseCase // ignore: cast_nullable_to_non_nullable
@@ -274,6 +289,7 @@ abstract class _$$AssetStateImplCopyWith<$Res>
       bool showAssetCardUpdate,
       bool showAssetCardUpdateName,
       bool isLoading,
+      bool isCheckedAsset,
       int selectedAssetCardIndex,
       List<Color> firstColorList,
       List<Color> secondColorList,
@@ -294,6 +310,7 @@ abstract class _$$AssetStateImplCopyWith<$Res>
       GetAssetUseCase getAssetUseCase,
       CreateAssetUseCase createAssetUserCase,
       UpdateAssetUseCase updateAssetUserCase,
+      ChangeActivedAssetUseCase changeActivedAssetUseCase,
       DeleteAssetUseCase deleteAssetUseCase});
 }
 
@@ -316,6 +333,7 @@ class __$$AssetStateImplCopyWithImpl<$Res>
     Object? showAssetCardUpdate = null,
     Object? showAssetCardUpdateName = null,
     Object? isLoading = null,
+    Object? isCheckedAsset = null,
     Object? selectedAssetCardIndex = null,
     Object? firstColorList = null,
     Object? secondColorList = null,
@@ -336,6 +354,7 @@ class __$$AssetStateImplCopyWithImpl<$Res>
     Object? getAssetUseCase = null,
     Object? createAssetUserCase = null,
     Object? updateAssetUserCase = null,
+    Object? changeActivedAssetUseCase = null,
     Object? deleteAssetUseCase = null,
   }) {
     return _then(_$AssetStateImpl(
@@ -370,6 +389,10 @@ class __$$AssetStateImplCopyWithImpl<$Res>
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isCheckedAsset: null == isCheckedAsset
+          ? _value.isCheckedAsset
+          : isCheckedAsset // ignore: cast_nullable_to_non_nullable
               as bool,
       selectedAssetCardIndex: null == selectedAssetCardIndex
           ? _value.selectedAssetCardIndex
@@ -451,6 +474,10 @@ class __$$AssetStateImplCopyWithImpl<$Res>
           ? _value.updateAssetUserCase
           : updateAssetUserCase // ignore: cast_nullable_to_non_nullable
               as UpdateAssetUseCase,
+      changeActivedAssetUseCase: null == changeActivedAssetUseCase
+          ? _value.changeActivedAssetUseCase
+          : changeActivedAssetUseCase // ignore: cast_nullable_to_non_nullable
+              as ChangeActivedAssetUseCase,
       deleteAssetUseCase: null == deleteAssetUseCase
           ? _value.deleteAssetUseCase
           : deleteAssetUseCase // ignore: cast_nullable_to_non_nullable
@@ -471,6 +498,7 @@ class _$AssetStateImpl implements _AssetState {
       this.showAssetCardUpdate = false,
       this.showAssetCardUpdateName = false,
       this.isLoading = false,
+      required this.isCheckedAsset,
       this.selectedAssetCardIndex = 0,
       required final List<Color> firstColorList,
       required final List<Color> secondColorList,
@@ -491,6 +519,7 @@ class _$AssetStateImpl implements _AssetState {
       required this.getAssetUseCase,
       required this.createAssetUserCase,
       required this.updateAssetUserCase,
+      required this.changeActivedAssetUseCase,
       required this.deleteAssetUseCase})
       : _assetList = assetList,
         _firstColorList = firstColorList,
@@ -530,6 +559,8 @@ class _$AssetStateImpl implements _AssetState {
   @override
   @JsonKey()
   final bool isLoading;
+  @override
+  final bool isCheckedAsset;
   @override
   @JsonKey()
   final int selectedAssetCardIndex;
@@ -610,11 +641,13 @@ class _$AssetStateImpl implements _AssetState {
   @override
   final UpdateAssetUseCase updateAssetUserCase;
   @override
+  final ChangeActivedAssetUseCase changeActivedAssetUseCase;
+  @override
   final DeleteAssetUseCase deleteAssetUseCase;
 
   @override
   String toString() {
-    return 'AssetState(assetList: $assetList, totalAmount: $totalAmount, totalIncome: $totalIncome, totalExpense: $totalExpense, assetAmount: $assetAmount, showAssetCardUpdate: $showAssetCardUpdate, showAssetCardUpdateName: $showAssetCardUpdateName, isLoading: $isLoading, selectedAssetCardIndex: $selectedAssetCardIndex, firstColorList: $firstColorList, secondColorList: $secondColorList, firstColorListSave: $firstColorListSave, secondColorListSave: $secondColorListSave, assetType: $assetType, firstColor: $firstColor, secondColor: $secondColor, userId: $userId, assetHints: $assetHints, assetName: $assetName, assetColor: $assetColor, assetCurrency: $assetCurrency, currencyHints: $currencyHints, selectedAssetId: $selectedAssetId, assetIdList: $assetIdList, getAssetListUseCase: $getAssetListUseCase, getAssetUseCase: $getAssetUseCase, createAssetUserCase: $createAssetUserCase, updateAssetUserCase: $updateAssetUserCase, deleteAssetUseCase: $deleteAssetUseCase)';
+    return 'AssetState(assetList: $assetList, totalAmount: $totalAmount, totalIncome: $totalIncome, totalExpense: $totalExpense, assetAmount: $assetAmount, showAssetCardUpdate: $showAssetCardUpdate, showAssetCardUpdateName: $showAssetCardUpdateName, isLoading: $isLoading, isCheckedAsset: $isCheckedAsset, selectedAssetCardIndex: $selectedAssetCardIndex, firstColorList: $firstColorList, secondColorList: $secondColorList, firstColorListSave: $firstColorListSave, secondColorListSave: $secondColorListSave, assetType: $assetType, firstColor: $firstColor, secondColor: $secondColor, userId: $userId, assetHints: $assetHints, assetName: $assetName, assetColor: $assetColor, assetCurrency: $assetCurrency, currencyHints: $currencyHints, selectedAssetId: $selectedAssetId, assetIdList: $assetIdList, getAssetListUseCase: $getAssetListUseCase, getAssetUseCase: $getAssetUseCase, createAssetUserCase: $createAssetUserCase, updateAssetUserCase: $updateAssetUserCase, changeActivedAssetUseCase: $changeActivedAssetUseCase, deleteAssetUseCase: $deleteAssetUseCase)';
   }
 
   @override
@@ -634,11 +667,12 @@ class _$AssetStateImpl implements _AssetState {
                 other.assetAmount == assetAmount) &&
             (identical(other.showAssetCardUpdate, showAssetCardUpdate) ||
                 other.showAssetCardUpdate == showAssetCardUpdate) &&
-            (identical(
-                    other.showAssetCardUpdateName, showAssetCardUpdateName) ||
+            (identical(other.showAssetCardUpdateName, showAssetCardUpdateName) ||
                 other.showAssetCardUpdateName == showAssetCardUpdateName) &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
+            (identical(other.isCheckedAsset, isCheckedAsset) ||
+                other.isCheckedAsset == isCheckedAsset) &&
             (identical(other.selectedAssetCardIndex, selectedAssetCardIndex) ||
                 other.selectedAssetCardIndex == selectedAssetCardIndex) &&
             const DeepCollectionEquality()
@@ -678,6 +712,9 @@ class _$AssetStateImpl implements _AssetState {
                 other.createAssetUserCase == createAssetUserCase) &&
             (identical(other.updateAssetUserCase, updateAssetUserCase) ||
                 other.updateAssetUserCase == updateAssetUserCase) &&
+            (identical(other.changeActivedAssetUseCase,
+                    changeActivedAssetUseCase) ||
+                other.changeActivedAssetUseCase == changeActivedAssetUseCase) &&
             (identical(other.deleteAssetUseCase, deleteAssetUseCase) ||
                 other.deleteAssetUseCase == deleteAssetUseCase));
   }
@@ -693,6 +730,7 @@ class _$AssetStateImpl implements _AssetState {
         showAssetCardUpdate,
         showAssetCardUpdateName,
         isLoading,
+        isCheckedAsset,
         selectedAssetCardIndex,
         const DeepCollectionEquality().hash(_firstColorList),
         const DeepCollectionEquality().hash(_secondColorList),
@@ -713,6 +751,7 @@ class _$AssetStateImpl implements _AssetState {
         getAssetUseCase,
         createAssetUserCase,
         updateAssetUserCase,
+        changeActivedAssetUseCase,
         deleteAssetUseCase
       ]);
 
@@ -733,6 +772,7 @@ abstract class _AssetState implements AssetState {
       final bool showAssetCardUpdate,
       final bool showAssetCardUpdateName,
       final bool isLoading,
+      required final bool isCheckedAsset,
       final int selectedAssetCardIndex,
       required final List<Color> firstColorList,
       required final List<Color> secondColorList,
@@ -753,6 +793,7 @@ abstract class _AssetState implements AssetState {
       required final GetAssetUseCase getAssetUseCase,
       required final CreateAssetUseCase createAssetUserCase,
       required final UpdateAssetUseCase updateAssetUserCase,
+      required final ChangeActivedAssetUseCase changeActivedAssetUseCase,
       required final DeleteAssetUseCase deleteAssetUseCase}) = _$AssetStateImpl;
 
   @override
@@ -771,6 +812,8 @@ abstract class _AssetState implements AssetState {
   bool get showAssetCardUpdateName;
   @override
   bool get isLoading;
+  @override
+  bool get isCheckedAsset;
   @override
   int get selectedAssetCardIndex;
   @override
@@ -811,6 +854,8 @@ abstract class _AssetState implements AssetState {
   CreateAssetUseCase get createAssetUserCase;
   @override
   UpdateAssetUseCase get updateAssetUserCase;
+  @override
+  ChangeActivedAssetUseCase get changeActivedAssetUseCase;
   @override
   DeleteAssetUseCase get deleteAssetUseCase;
   @override
