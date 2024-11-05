@@ -26,7 +26,7 @@ class LineChartBase extends StatelessWidget {
   }
 
   // 월별 데이터 그룹화 후 amount 합산
-  Map<int, double> mothlySum(List<TransactionDetail> transactionList) {
+  Map<int, double> monthlySum(List<TransactionDetail> transactionList) {
     print(transactionList);
     Map<int, double> monthlySums = {};
     for (var transaction in transactionList) {
@@ -36,8 +36,38 @@ class LineChartBase extends StatelessWidget {
     return monthlySums;
   }
 
+// TransactionDetail 리스트에서 amount가 양수와 음수인 데이터를 각각 분리합니다.
+  Map<String, List<TransactionDetail>> filterTransactionData(List<TransactionDetail> transactionList) {
+    print(transactionList);
+    final incomeData = transactionList.where((t) => t.amount > 0).toList();
+    final expenseData = transactionList.where((t) => t.amount < 0).map((t) => t.copyWith(amount: t.amount.abs())).toList();
+    return {'incomeData': incomeData, 'expenseData': expenseData};
+  }
+
+  // 날짜별 총합 계산 함수
+  Map<int, double> calculateMonthlySums(List<TransactionDetail> transactionList) {
+    print(transactionList);
+
+    final incomeData = transactionList.where((t) => t.amount > 0).toList();
+    final expenseData = transactionList.where((t) => t.amount < 0).toList();
+
+    Map<int, double> incomeMonthlySum = monthlySum(incomeData);
+    Map<int, double> expenseMonthlySum = monthlySum(expenseData);
+
+    // 합계 데이터를 날짜별로 구해서 추가
+    final totalMonthlySum = <int, double>{};
+    for (final date in incomeMonthlySum.keys) {
+      final incomeAmount = incomeMonthlySum[date] ?? 0;
+      final expenseAmount = expenseMonthlySum[date] ?? 0;
+      totalMonthlySum[date] = incomeAmount - expenseAmount; // 합계는 income에서 expense를 빼서 계산
+    }
+    return totalMonthlySum;
+  }
+
   // Method to filter transactions based on the selected period
   List<TransactionDetail> filterTransactionsByPeriod(List<TransactionDetail> transactions) {
+    print(transactionList);
+
     final now = DateTime.now();
     return transactions.where((transaction) {
       final date = transaction.createdAt;
@@ -68,29 +98,6 @@ class LineChartBase extends StatelessWidget {
 
   // Define the LineChartData methods with updated minX, maxX, and custom title configurations
   LineChartData yearlyData(List<TransactionDetail> transactionList) {
-    // amount 값이 양수인지 음수인지 확인
-    bool hasPositive = transactionList.any((transaction) => transaction.amount > 0);
-    bool hasNegative = transactionList.any((transaction) => transaction.amount < 0);
-
-    // minY와 maxY 설정
-    double minY;
-    double maxY;
-
-    if (hasPositive && hasNegative) {
-      minY = -3;
-      maxY = 3;
-    } else if (hasPositive) {
-      minY = 0;
-      maxY = 5;
-    } else if (hasNegative) {
-      minY = -5;
-      maxY = 0;
-    } else {
-      // 양수, 음수 모두 없을 때 기본 값 설정 (필요시 조정)
-      minY = 0;
-      maxY = 0;
-    }
-
     return LineChartData(
       lineTouchData: lineTouchData,
       gridData: gridData,
@@ -99,8 +106,8 @@ class LineChartBase extends StatelessWidget {
       lineBarsData: lineBarsData(transactionList),
       minX: 0,
       maxX: 13, // 원래 12인데 10~12 간격상, 보기에 13이 나아서 13으로 함
-      maxY: maxY,
-      minY: minY,
+      maxY: 5,
+      minY: 0,
     );
   }
 
@@ -170,100 +177,69 @@ class LineChartBase extends StatelessWidget {
 
     // 월별 합산 후 양수, 음수 최대값 구하기
     final monthlySums = monthlySum(transactionList);
-    // final positiveMax = monthlySums.values.where((amount) => amount > 0).reduce((a, b) => a > b ? a : b);
-    // final negativeMax = monthlySums.values.where((amount) => amount < 0).reduce((a, b) => a < b ? a : b).abs();
+    print('#######monthlySums: $monthlySums');
 // 양수 최대값 계산
     final positiveMax = monthlySums.values.where((amount) => amount > 0).isEmpty ? 0 : monthlySums.values.where((amount) => amount > 0).reduce((a, b) => a > b ? a : b);
-
+    print('#######positiveMax: $positiveMax');
 // 음수 최대값 계산
     final negativeMax = monthlySums.values.where((amount) => amount < 0).isEmpty ? 0 : monthlySums.values.where((amount) => amount < 0).reduce((a, b) => a < b ? a : b).abs();
+
+    print('#######negativeMax: $negativeMax');
 
     double maxPoint;
     double firstPoint;
 
     String formatAmount(double amount) {
-      return amount >= 1e4 ? '${(amount / 1e4).toInt()}만' : '${amount.toInt()}원';
+      return amount >= 1e4 ? '${(amount / 1e4).toInt()}만원' : '${amount.toInt()}원';
     }
 
-    if (positiveMax > 0 && negativeMax == 0) {
-      // 양수만 있는 경우
-      maxPoint = positiveMax.toDouble();
-      firstPoint = maxPoint / 5;
-      switch (value) {
-        case 1:
-          return Text(formatAmount(firstPoint));
-        case 2:
-          return Text(formatAmount(firstPoint * 2));
-        case 3:
-          return Text(formatAmount(firstPoint * 3));
-        case 4:
-          return Text(formatAmount(firstPoint * 4));
-        case 5:
-          return Text(formatAmount(maxPoint));
-        default:
-          return Container();
-      }
-    } else if (positiveMax == 0 && negativeMax > 0) {
-      // 음수만 있는 경우
-      maxPoint = negativeMax.toDouble();
-      firstPoint = maxPoint / 5;
-      switch (value) {
-        case -1:
-          return Text('-${formatAmount(firstPoint)}');
-        case -2:
-          return Text('-${formatAmount(firstPoint * 2)}');
-        case -3:
-          return Text('-${formatAmount(firstPoint * 3)}');
-        case -4:
-          return Text('-${formatAmount(firstPoint * 4)}');
-        case -5:
-          return Text('-${formatAmount(maxPoint)}');
-        default:
-          return Container();
-      }
-    } else if (positiveMax > 0 && negativeMax > 0) {
-      // 양수와 음수가 모두 있는 경우
-      maxPoint = positiveMax.toDouble();
-      firstPoint = maxPoint / 3;
-      double negativeFirstPoint = negativeMax / 3;
-      switch (value) {
-        case -3:
-          return Text('-${formatAmount(negativeFirstPoint * 3)}');
-        case -2:
-          return Text('-${formatAmount(negativeFirstPoint * 2)}');
-        case -1:
-          return Text('-${formatAmount(negativeFirstPoint * 1)}');
-        case 1:
-          return Text(formatAmount(firstPoint));
-        case 2:
-          return Text(formatAmount(firstPoint * 2));
-        case 3:
-          return Text(formatAmount(maxPoint));
-        default:
-          return Container();
-      }
+    maxPoint = negativeMax.toDouble().abs();
+    print('#######maxPoint: $maxPoint');
+
+    firstPoint = maxPoint / 5;
+    switch (value) {
+      case 1:
+        return Text(formatAmount(firstPoint));
+      case 2:
+        return Text(formatAmount(firstPoint * 2));
+      case 3:
+        return Text(formatAmount(firstPoint * 3));
+      case 4:
+        return Text(formatAmount(firstPoint * 4));
+      case 5:
+        return Text(formatAmount(maxPoint));
+      default:
+        return Container();
     }
-    return Container();
   }
 
 // 월별 데이터 그룹화 후 amount 합산 후, 각 월의 amount 합계로 FlSpot 리스트를 생성
   List<FlSpot> createYearlySpots(List<TransactionDetail> dataList) {
+    // 월별 데이터 그룹화 후 amount 합산
+    Map<int, double> monthlySum(List<TransactionDetail> transactionList) {
+      Map<int, double> monthlySums = {};
+      for (var transaction in transactionList) {
+        int month = transaction.createdAt.month;
+        monthlySums[month] = (monthlySums[month] ?? 0) + transaction.amount;
+      }
+      return monthlySums;
+    }
+
     // 월별 합산 금액 계산
-    Map<int, double> monthlySums = mothlySum(dataList);
+    Map<int, double> monthlySums = monthlySum(dataList);
 
     // 정의된 구간 값들 (이 값들은 leftTitleWidgets에서 설정된 구간과 동일하게 맞춰야 함)
-    final pointValues = [-5.0, -4.0, -3.0, -2.0, -1.0]; // 낮은 값부터 높은 값으로 변경
-    final thresholds = [-14.0, -11.0, -8.0, -5.0, -2.0]; // 작은 값에서 큰 값 순으로 설정
+    final pointValues = [1.0, 2.0, 3.0, 4.0, 5.0]; // 낮은 값부터 높은 값으로 변경
+    final thresholds = [2.0, 5.0, 8.0, 11.0, 14.0]; // 작은 값에서 큰 값 순으로 설정
 
     // FlSpot 생성, 없는 월은 제외
     return monthlySums.entries.map((entry) {
       double x = entry.key.toDouble();
-      double entryValue = entry.value / 1e4; // '만' 단위로 변환
+      double entryValue = entry.value.abs() / 1e4; // '만' 단위로 변환, 절대값 사용
       double y = 0; // 초기값 설정
+      bool matched = false;
 
       print("Processing month: $x with entryValue: $entryValue"); // 디버깅 로그
-
-      bool matched = false;
 
       // entryValue가 주어진 구간(thresholds)에 해당하는 y값(pointValues)을 계산
       for (int i = 0; i < thresholds.length - 1; i++) {
@@ -321,7 +297,7 @@ class LineChartBase extends StatelessWidget {
       getTitlesWidget: (value, meta) => leftTitleWidgets(value, meta, transactionList),
       showTitles: true,
       interval: 1,
-      reservedSize: 40,
+      reservedSize: 45, // 왼쪽 기준 간격
     );
   }
 
