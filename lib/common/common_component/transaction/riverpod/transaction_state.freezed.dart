@@ -17,7 +17,8 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$TransactionState {
   bool get isLoading => throw _privateConstructorUsedError;
-  List<TransactionDetail> get events => throw _privateConstructorUsedError;
+  List<TransactionDetail> get activatedTransactionList =>
+      throw _privateConstructorUsedError;
   String get userId => throw _privateConstructorUsedError;
   DateTime get selectedDay => throw _privateConstructorUsedError;
   DateTime get focusedDay => throw _privateConstructorUsedError;
@@ -26,6 +27,7 @@ mixin _$TransactionState {
   String get assetId => throw _privateConstructorUsedError;
   AssetType get assetType => throw _privateConstructorUsedError;
   List<String> get assetIdList => throw _privateConstructorUsedError;
+  List<String> get activatedAssetIdList => throw _privateConstructorUsedError;
   CreateTransactionUseCase get createTransactionUseCase =>
       throw _privateConstructorUsedError;
   DeleteTransactionUseCase get deleteTransactionUseCase =>
@@ -48,7 +50,7 @@ abstract class $TransactionStateCopyWith<$Res> {
   @useResult
   $Res call(
       {bool isLoading,
-      List<TransactionDetail> events,
+      List<TransactionDetail> activatedTransactionList,
       String userId,
       DateTime selectedDay,
       DateTime focusedDay,
@@ -56,6 +58,7 @@ abstract class $TransactionStateCopyWith<$Res> {
       String assetId,
       AssetType assetType,
       List<String> assetIdList,
+      List<String> activatedAssetIdList,
       CreateTransactionUseCase createTransactionUseCase,
       DeleteTransactionUseCase deleteTransactionUseCase,
       GetTransactionListUseCase getTransactionListUseCase,
@@ -76,7 +79,7 @@ class _$TransactionStateCopyWithImpl<$Res, $Val extends TransactionState>
   @override
   $Res call({
     Object? isLoading = null,
-    Object? events = null,
+    Object? activatedTransactionList = null,
     Object? userId = null,
     Object? selectedDay = null,
     Object? focusedDay = null,
@@ -84,6 +87,7 @@ class _$TransactionStateCopyWithImpl<$Res, $Val extends TransactionState>
     Object? assetId = null,
     Object? assetType = null,
     Object? assetIdList = null,
+    Object? activatedAssetIdList = null,
     Object? createTransactionUseCase = null,
     Object? deleteTransactionUseCase = null,
     Object? getTransactionListUseCase = null,
@@ -94,9 +98,9 @@ class _$TransactionStateCopyWithImpl<$Res, $Val extends TransactionState>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      events: null == events
-          ? _value.events
-          : events // ignore: cast_nullable_to_non_nullable
+      activatedTransactionList: null == activatedTransactionList
+          ? _value.activatedTransactionList
+          : activatedTransactionList // ignore: cast_nullable_to_non_nullable
               as List<TransactionDetail>,
       userId: null == userId
           ? _value.userId
@@ -125,6 +129,10 @@ class _$TransactionStateCopyWithImpl<$Res, $Val extends TransactionState>
       assetIdList: null == assetIdList
           ? _value.assetIdList
           : assetIdList // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      activatedAssetIdList: null == activatedAssetIdList
+          ? _value.activatedAssetIdList
+          : activatedAssetIdList // ignore: cast_nullable_to_non_nullable
               as List<String>,
       createTransactionUseCase: null == createTransactionUseCase
           ? _value.createTransactionUseCase
@@ -156,7 +164,7 @@ abstract class _$$TransactionStateImplCopyWith<$Res>
   @useResult
   $Res call(
       {bool isLoading,
-      List<TransactionDetail> events,
+      List<TransactionDetail> activatedTransactionList,
       String userId,
       DateTime selectedDay,
       DateTime focusedDay,
@@ -164,6 +172,7 @@ abstract class _$$TransactionStateImplCopyWith<$Res>
       String assetId,
       AssetType assetType,
       List<String> assetIdList,
+      List<String> activatedAssetIdList,
       CreateTransactionUseCase createTransactionUseCase,
       DeleteTransactionUseCase deleteTransactionUseCase,
       GetTransactionListUseCase getTransactionListUseCase,
@@ -182,7 +191,7 @@ class __$$TransactionStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isLoading = null,
-    Object? events = null,
+    Object? activatedTransactionList = null,
     Object? userId = null,
     Object? selectedDay = null,
     Object? focusedDay = null,
@@ -190,6 +199,7 @@ class __$$TransactionStateImplCopyWithImpl<$Res>
     Object? assetId = null,
     Object? assetType = null,
     Object? assetIdList = null,
+    Object? activatedAssetIdList = null,
     Object? createTransactionUseCase = null,
     Object? deleteTransactionUseCase = null,
     Object? getTransactionListUseCase = null,
@@ -200,9 +210,9 @@ class __$$TransactionStateImplCopyWithImpl<$Res>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      events: null == events
-          ? _value._events
-          : events // ignore: cast_nullable_to_non_nullable
+      activatedTransactionList: null == activatedTransactionList
+          ? _value._activatedTransactionList
+          : activatedTransactionList // ignore: cast_nullable_to_non_nullable
               as List<TransactionDetail>,
       userId: null == userId
           ? _value.userId
@@ -232,6 +242,10 @@ class __$$TransactionStateImplCopyWithImpl<$Res>
           ? _value._assetIdList
           : assetIdList // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      activatedAssetIdList: null == activatedAssetIdList
+          ? _value._activatedAssetIdList
+          : activatedAssetIdList // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       createTransactionUseCase: null == createTransactionUseCase
           ? _value.createTransactionUseCase
           : createTransactionUseCase // ignore: cast_nullable_to_non_nullable
@@ -257,7 +271,7 @@ class __$$TransactionStateImplCopyWithImpl<$Res>
 class _$TransactionStateImpl implements _TransactionState {
   const _$TransactionStateImpl(
       {this.isLoading = false,
-      final List<TransactionDetail> events = const [],
+      final List<TransactionDetail> activatedTransactionList = const [],
       required this.userId,
       required this.selectedDay,
       required this.focusedDay,
@@ -265,23 +279,26 @@ class _$TransactionStateImpl implements _TransactionState {
       required this.assetId,
       required this.assetType,
       required final List<String> assetIdList,
+      required final List<String> activatedAssetIdList,
       required this.createTransactionUseCase,
       required this.deleteTransactionUseCase,
       required this.getTransactionListUseCase,
       required this.updateTransactionUseCase})
-      : _events = events,
-        _assetIdList = assetIdList;
+      : _activatedTransactionList = activatedTransactionList,
+        _assetIdList = assetIdList,
+        _activatedAssetIdList = activatedAssetIdList;
 
   @override
   @JsonKey()
   final bool isLoading;
-  final List<TransactionDetail> _events;
+  final List<TransactionDetail> _activatedTransactionList;
   @override
   @JsonKey()
-  List<TransactionDetail> get events {
-    if (_events is EqualUnmodifiableListView) return _events;
+  List<TransactionDetail> get activatedTransactionList {
+    if (_activatedTransactionList is EqualUnmodifiableListView)
+      return _activatedTransactionList;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_events);
+    return EqualUnmodifiableListView(_activatedTransactionList);
   }
 
   @override
@@ -304,6 +321,15 @@ class _$TransactionStateImpl implements _TransactionState {
     return EqualUnmodifiableListView(_assetIdList);
   }
 
+  final List<String> _activatedAssetIdList;
+  @override
+  List<String> get activatedAssetIdList {
+    if (_activatedAssetIdList is EqualUnmodifiableListView)
+      return _activatedAssetIdList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_activatedAssetIdList);
+  }
+
   @override
   final CreateTransactionUseCase createTransactionUseCase;
   @override
@@ -315,7 +341,7 @@ class _$TransactionStateImpl implements _TransactionState {
 
   @override
   String toString() {
-    return 'TransactionState(isLoading: $isLoading, events: $events, userId: $userId, selectedDay: $selectedDay, focusedDay: $focusedDay, selectedEvents: $selectedEvents, assetId: $assetId, assetType: $assetType, assetIdList: $assetIdList, createTransactionUseCase: $createTransactionUseCase, deleteTransactionUseCase: $deleteTransactionUseCase, getTransactionListUseCase: $getTransactionListUseCase, updateTransactionUseCase: $updateTransactionUseCase)';
+    return 'TransactionState(isLoading: $isLoading, activatedTransactionList: $activatedTransactionList, userId: $userId, selectedDay: $selectedDay, focusedDay: $focusedDay, selectedEvents: $selectedEvents, assetId: $assetId, assetType: $assetType, assetIdList: $assetIdList, activatedAssetIdList: $activatedAssetIdList, createTransactionUseCase: $createTransactionUseCase, deleteTransactionUseCase: $deleteTransactionUseCase, getTransactionListUseCase: $getTransactionListUseCase, updateTransactionUseCase: $updateTransactionUseCase)';
   }
 
   @override
@@ -325,7 +351,8 @@ class _$TransactionStateImpl implements _TransactionState {
             other is _$TransactionStateImpl &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
-            const DeepCollectionEquality().equals(other._events, _events) &&
+            const DeepCollectionEquality().equals(
+                other._activatedTransactionList, _activatedTransactionList) &&
             (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.selectedDay, selectedDay) ||
                 other.selectedDay == selectedDay) &&
@@ -338,6 +365,8 @@ class _$TransactionStateImpl implements _TransactionState {
                 other.assetType == assetType) &&
             const DeepCollectionEquality()
                 .equals(other._assetIdList, _assetIdList) &&
+            const DeepCollectionEquality()
+                .equals(other._activatedAssetIdList, _activatedAssetIdList) &&
             (identical(
                     other.createTransactionUseCase, createTransactionUseCase) ||
                 other.createTransactionUseCase == createTransactionUseCase) &&
@@ -356,7 +385,7 @@ class _$TransactionStateImpl implements _TransactionState {
   int get hashCode => Object.hash(
       runtimeType,
       isLoading,
-      const DeepCollectionEquality().hash(_events),
+      const DeepCollectionEquality().hash(_activatedTransactionList),
       userId,
       selectedDay,
       focusedDay,
@@ -364,6 +393,7 @@ class _$TransactionStateImpl implements _TransactionState {
       assetId,
       assetType,
       const DeepCollectionEquality().hash(_assetIdList),
+      const DeepCollectionEquality().hash(_activatedAssetIdList),
       createTransactionUseCase,
       deleteTransactionUseCase,
       getTransactionListUseCase,
@@ -380,7 +410,7 @@ class _$TransactionStateImpl implements _TransactionState {
 abstract class _TransactionState implements TransactionState {
   const factory _TransactionState(
           {final bool isLoading,
-          final List<TransactionDetail> events,
+          final List<TransactionDetail> activatedTransactionList,
           required final String userId,
           required final DateTime selectedDay,
           required final DateTime focusedDay,
@@ -388,6 +418,7 @@ abstract class _TransactionState implements TransactionState {
           required final String assetId,
           required final AssetType assetType,
           required final List<String> assetIdList,
+          required final List<String> activatedAssetIdList,
           required final CreateTransactionUseCase createTransactionUseCase,
           required final DeleteTransactionUseCase deleteTransactionUseCase,
           required final GetTransactionListUseCase getTransactionListUseCase,
@@ -397,7 +428,7 @@ abstract class _TransactionState implements TransactionState {
   @override
   bool get isLoading;
   @override
-  List<TransactionDetail> get events;
+  List<TransactionDetail> get activatedTransactionList;
   @override
   String get userId;
   @override
@@ -412,6 +443,8 @@ abstract class _TransactionState implements TransactionState {
   AssetType get assetType;
   @override
   List<String> get assetIdList;
+  @override
+  List<String> get activatedAssetIdList;
   @override
   CreateTransactionUseCase get createTransactionUseCase;
   @override

@@ -13,6 +13,8 @@ final transactionStateProvider = StateNotifierProvider<TransactionStateNotifier,
   final userState = ref.watch(userStateProvider);
   final List<String> assetIdList = assetState.assetIdList;
   final assetType = assetState.assetType;
+  final activatedAssetList = assetState.activatedAssetList;
+  final activatedAssetIdList = activatedAssetList.map((asset) => asset.assetId).toList();
   String userId = '';
   if (userState.user != null) {
     userId = userState.user!.userId;
@@ -31,6 +33,7 @@ final transactionStateProvider = StateNotifierProvider<TransactionStateNotifier,
       focusedDay: DateTime.now(),
       selectedDay: DateTime.now(),
       userId: userId,
+      activatedAssetIdList: activatedAssetIdList,
     ),
   );
 });
@@ -72,7 +75,14 @@ class TransactionStateNotifier extends StateNotifier<TransactionState> {
   }
 
   Future<List<TransactionDetail>> getTransactions() async {
-    return await state.getTransactionListUseCase.execute(assetIdList: state.assetIdList, userId: state.userId);
+    final transactionList = await state.getTransactionListUseCase.execute(assetIdList: state.assetIdList, userId: state.userId);
+    return transactionList;
+  }
+
+  Future<void> selectActivatedTransactionList() async {
+    final activatedTransactionList = await state.getTransactionListUseCase.execute(assetIdList: state.activatedAssetIdList, userId: state.userId);
+    print('###activatedTransactionList: $activatedTransactionList');
+    state = state.copyWith(activatedTransactionList: activatedTransactionList);
   }
 
   void clearTransactions() {

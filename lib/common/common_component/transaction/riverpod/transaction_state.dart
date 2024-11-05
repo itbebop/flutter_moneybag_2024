@@ -13,7 +13,7 @@ part 'transaction_state.freezed.dart';
 class TransactionState with _$TransactionState {
   const factory TransactionState({
     @Default(false) final bool isLoading,
-    @Default([]) List<TransactionDetail> events,
+    @Default([]) List<TransactionDetail> activatedTransactionList,
     required String userId,
     required final DateTime selectedDay,
     required final DateTime focusedDay,
@@ -21,6 +21,7 @@ class TransactionState with _$TransactionState {
     required final String assetId,
     required final AssetType assetType,
     required final List<String> assetIdList,
+    required final List<String> activatedAssetIdList,
     required final CreateTransactionUseCase createTransactionUseCase,
     required final DeleteTransactionUseCase deleteTransactionUseCase,
     required final GetTransactionListUseCase getTransactionListUseCase,
