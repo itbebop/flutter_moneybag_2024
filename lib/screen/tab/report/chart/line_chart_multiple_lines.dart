@@ -1,10 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_moneybag_2024/screen/tab/report/chart/line_chart_base.dart';
+import 'package:flutter_moneybag_2024/common/common.dart';
+import 'package:flutter_moneybag_2024/common/common_component/transaction/riverpod/transaction_state_notifier.dart';
+import 'package:flutter_moneybag_2024/domain/enums/asset_types.dart';
+import 'package:flutter_moneybag_2024/domain/enums/period_types.dart';
+import 'package:flutter_moneybag_2024/screen/tab/report/chart/line_chart_monthly.dart';
+import 'package:flutter_moneybag_2024/screen/tab/report/chart/line_chart_weely.dart';
+import 'package:flutter_moneybag_2024/screen/tab/report/chart/line_chart_yearly.dart';
 import 'package:flutter_moneybag_2024/screen/tab/report/riverpod/report_screen_state_notifier.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class LineChartMultipleLines extends ConsumerStatefulWidget {
-  const LineChartMultipleLines({super.key});
+  final AssetType assetType;
+  const LineChartMultipleLines({
+    super.key,
+    required this.assetType,
+  });
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => LineChartMultipleLinesState();
@@ -17,11 +27,18 @@ class LineChartMultipleLinesState extends ConsumerState<LineChartMultipleLines> 
   void initState() {
     super.initState();
     isShowingMainData = true;
+    _fetchData();
+  }
+
+  Future<void> _fetchData() async {
+    await ref.read(transactionStateProvider.notifier).selectActivatedTransactionList();
   }
 
   @override
   Widget build(BuildContext context) {
-    final reportProvider = ref.read(reportScreenStateProvider);
+    final reportProvider = ref.watch(reportScreenStateProvider);
+    final transactionProvider = ref.read(transactionStateProvider);
+
     return AspectRatio(
       aspectRatio: 1.23,
       child: Stack(
@@ -29,37 +46,37 @@ class LineChartMultipleLinesState extends ConsumerState<LineChartMultipleLines> 
           Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              const SizedBox(
-                height: 37,
-              ),
-              const SizedBox(
-                height: 37,
-              ),
               Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.only(right: 16, left: 6),
-                  child: LineChartBase(
-                    isShowingMainData: isShowingMainData,
-                    period: reportProvider.period,
+                child: Container(
+                  decoration: const BoxDecoration(
+                    color: UiConfig.whiteColor,
+                    // borderRadius: BorderRadius.all(Radius.circular(15)),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 24.0, left: 16, right: 8),
+                    child: reportProvider.period == Period.year
+                        ? LineChartYearly(
+                            assetType: widget.assetType,
+                            period: reportProvider.period,
+                            transactionList: transactionProvider.activatedTransactionList,
+                          )
+                        : reportProvider.period == Period.month
+                            ? LineChartMonthly(
+                                assetType: widget.assetType,
+                                period: reportProvider.period,
+                                transactionList: transactionProvider.activatedTransactionList,
+                              )
+                            : LineChartWeekly(
+                                assetType: widget.assetType,
+                                period: reportProvider.period,
+                                transactionList: transactionProvider.activatedTransactionList,
+                              ),
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 10,
-              ),
+              SizedBox(height: 8.h), // Assuming 8.h is a defined height
             ],
           ),
-          IconButton(
-            icon: Icon(
-              Icons.refresh,
-              color: Colors.white.withOpacity(isShowingMainData ? 1.0 : 0.5),
-            ),
-            onPressed: () {
-              setState(() {
-                isShowingMainData = !isShowingMainData;
-              });
-            },
-          )
         ],
       ),
     );

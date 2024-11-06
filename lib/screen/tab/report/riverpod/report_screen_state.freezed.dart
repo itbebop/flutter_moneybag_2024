@@ -17,7 +17,10 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$ReportScreenState {
   bool get isLoading => throw _privateConstructorUsedError;
+  double get maxY => throw _privateConstructorUsedError;
+  double get minY => throw _privateConstructorUsedError;
   Period get period => throw _privateConstructorUsedError;
+  AssetType get assetType => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ReportScreenStateCopyWith<ReportScreenState> get copyWith =>
@@ -30,7 +33,12 @@ abstract class $ReportScreenStateCopyWith<$Res> {
           ReportScreenState value, $Res Function(ReportScreenState) then) =
       _$ReportScreenStateCopyWithImpl<$Res, ReportScreenState>;
   @useResult
-  $Res call({bool isLoading, Period period});
+  $Res call(
+      {bool isLoading,
+      double maxY,
+      double minY,
+      Period period,
+      AssetType assetType});
 }
 
 /// @nodoc
@@ -47,17 +55,32 @@ class _$ReportScreenStateCopyWithImpl<$Res, $Val extends ReportScreenState>
   @override
   $Res call({
     Object? isLoading = null,
-    Object? period = freezed,
+    Object? maxY = null,
+    Object? minY = null,
+    Object? period = null,
+    Object? assetType = null,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      period: freezed == period
+      maxY: null == maxY
+          ? _value.maxY
+          : maxY // ignore: cast_nullable_to_non_nullable
+              as double,
+      minY: null == minY
+          ? _value.minY
+          : minY // ignore: cast_nullable_to_non_nullable
+              as double,
+      period: null == period
           ? _value.period
           : period // ignore: cast_nullable_to_non_nullable
               as Period,
+      assetType: null == assetType
+          ? _value.assetType
+          : assetType // ignore: cast_nullable_to_non_nullable
+              as AssetType,
     ) as $Val);
   }
 }
@@ -70,7 +93,12 @@ abstract class _$$ReportScreenStateImplCopyWith<$Res>
       __$$ReportScreenStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool isLoading, Period period});
+  $Res call(
+      {bool isLoading,
+      double maxY,
+      double minY,
+      Period period,
+      AssetType assetType});
 }
 
 /// @nodoc
@@ -85,17 +113,32 @@ class __$$ReportScreenStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isLoading = null,
-    Object? period = freezed,
+    Object? maxY = null,
+    Object? minY = null,
+    Object? period = null,
+    Object? assetType = null,
   }) {
     return _then(_$ReportScreenStateImpl(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      period: freezed == period
+      maxY: null == maxY
+          ? _value.maxY
+          : maxY // ignore: cast_nullable_to_non_nullable
+              as double,
+      minY: null == minY
+          ? _value.minY
+          : minY // ignore: cast_nullable_to_non_nullable
+              as double,
+      period: null == period
           ? _value.period
           : period // ignore: cast_nullable_to_non_nullable
               as Period,
+      assetType: null == assetType
+          ? _value.assetType
+          : assetType // ignore: cast_nullable_to_non_nullable
+              as AssetType,
     ));
   }
 }
@@ -104,18 +147,31 @@ class __$$ReportScreenStateImplCopyWithImpl<$Res>
 
 class _$ReportScreenStateImpl implements _ReportScreenState {
   const _$ReportScreenStateImpl(
-      {this.isLoading = false, this.period = Period.year});
+      {this.isLoading = false,
+      this.maxY = 0,
+      this.minY = 0,
+      this.period = Period.year,
+      this.assetType = AssetType.total});
 
   @override
   @JsonKey()
   final bool isLoading;
   @override
   @JsonKey()
+  final double maxY;
+  @override
+  @JsonKey()
+  final double minY;
+  @override
+  @JsonKey()
   final Period period;
+  @override
+  @JsonKey()
+  final AssetType assetType;
 
   @override
   String toString() {
-    return 'ReportScreenState(isLoading: $isLoading, period: $period)';
+    return 'ReportScreenState(isLoading: $isLoading, maxY: $maxY, minY: $minY, period: $period, assetType: $assetType)';
   }
 
   @override
@@ -125,12 +181,16 @@ class _$ReportScreenStateImpl implements _ReportScreenState {
             other is _$ReportScreenStateImpl &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
-            const DeepCollectionEquality().equals(other.period, period));
+            (identical(other.maxY, maxY) || other.maxY == maxY) &&
+            (identical(other.minY, minY) || other.minY == minY) &&
+            (identical(other.period, period) || other.period == period) &&
+            (identical(other.assetType, assetType) ||
+                other.assetType == assetType));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, isLoading, const DeepCollectionEquality().hash(period));
+  int get hashCode =>
+      Object.hash(runtimeType, isLoading, maxY, minY, period, assetType);
 
   @JsonKey(ignore: true)
   @override
@@ -142,12 +202,22 @@ class _$ReportScreenStateImpl implements _ReportScreenState {
 
 abstract class _ReportScreenState implements ReportScreenState {
   const factory _ReportScreenState(
-      {final bool isLoading, final Period period}) = _$ReportScreenStateImpl;
+      {final bool isLoading,
+      final double maxY,
+      final double minY,
+      final Period period,
+      final AssetType assetType}) = _$ReportScreenStateImpl;
 
   @override
   bool get isLoading;
   @override
+  double get maxY;
+  @override
+  double get minY;
+  @override
   Period get period;
+  @override
+  AssetType get assetType;
   @override
   @JsonKey(ignore: true)
   _$$ReportScreenStateImplCopyWith<_$ReportScreenStateImpl> get copyWith =>

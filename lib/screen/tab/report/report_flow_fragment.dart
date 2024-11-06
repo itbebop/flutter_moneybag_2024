@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 // import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_moneybag_2024/common/common.dart';
+import 'package:flutter_moneybag_2024/common/common_component/transaction/riverpod/transaction_state_notifier.dart';
+import 'package:flutter_moneybag_2024/domain/enums/asset_types.dart';
+import 'package:flutter_moneybag_2024/domain/enums/period_types.dart';
 import 'package:flutter_moneybag_2024/screen/tab/report/chart/line_chart_multiple_lines.dart';
 import 'package:flutter_moneybag_2024/common/data/month_list.dart';
+import 'package:flutter_moneybag_2024/screen/tab/report/riverpod/report_screen_state_notifier.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -52,48 +56,78 @@ class _ReportListFragmentState extends ConsumerState<ReportFlowFragment> {
                     scrollDirection: Axis.horizontal,
                     children: [
                       SizedBox(width: 8.w),
-                      Container(
-                        height: 45.h,
-                        width: 60.w,
-                        decoration: const BoxDecoration(
-                          color: UiConfig.primaryColorSurface,
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(10),
+                      Tap(
+                        onTap: () async {
+                          ref.read(reportScreenStateProvider.notifier).tapPeriod(Period.year);
+                          await ref.read(transactionStateProvider.notifier).selectActivatedTransactionList();
+                        },
+                        child: Container(
+                          height: 45.h,
+                          width: 60.w,
+                          decoration: BoxDecoration(
+                            color: ref.watch(reportScreenStateProvider).period == Period.year ? UiConfig.primaryColorSurface : UiConfig.whiteColor,
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(10),
+                            ),
                           ),
-                        ),
-                        child: const Center(
-                          child: Text(
-                            '연간',
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ),
-                      ),
-                      SizedBox(width: 8.w),
-                      Container(
-                        height: 45.h,
-                        width: 70.w,
-                        decoration: const BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                        ),
-                        child: const Center(
-                          child: Text(
-                            '월간',
+                          child: Center(
+                            child: Text(
+                              '연간',
+                              style: TextStyle(
+                                color: ref.watch(reportScreenStateProvider).period == Period.year ? UiConfig.whiteColor : UiConfig.black,
+                              ),
+                            ),
                           ),
                         ),
                       ),
                       SizedBox(width: 8.w),
-                      Container(
-                        height: 45.h,
-                        width: 70.w,
-                        decoration: const BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                          // border: Border.all(
-                          //   width: 1,
-                          // ),
+                      Tap(
+                        onTap: () async {
+                          ref.read(reportScreenStateProvider.notifier).tapPeriod(Period.month);
+                          await ref.read(transactionStateProvider.notifier).selectActivatedTransactionList();
+                        },
+                        child: Container(
+                          height: 45.h,
+                          width: 70.w,
+                          decoration: BoxDecoration(
+                            color: ref.watch(reportScreenStateProvider).period == Period.month ? UiConfig.primaryColorSurface : UiConfig.whiteColor,
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(10),
+                            ),
+                          ),
+                          child: Center(
+                            child: Text(
+                              '월간',
+                              style: TextStyle(
+                                color: ref.watch(reportScreenStateProvider).period == Period.month ? UiConfig.whiteColor : UiConfig.black,
+                              ),
+                            ),
+                          ),
                         ),
-                        child: const Center(
-                          child: Text(
-                            '주간',
+                      ),
+                      SizedBox(width: 8.w),
+                      Tap(
+                        onTap: () async {
+                          ref.read(reportScreenStateProvider.notifier).tapPeriod(Period.week);
+                          await ref.read(transactionStateProvider.notifier).selectActivatedTransactionList();
+                        },
+                        child: Container(
+                          height: 45.h,
+                          width: 70.w,
+                          decoration: BoxDecoration(
+                            color: ref.watch(reportScreenStateProvider).period == Period.week ? UiConfig.primaryColorSurface : UiConfig.whiteColor,
+                            borderRadius: const BorderRadius.all(Radius.circular(10)),
+                            // border: Border.all(
+                            //   width: 1,
+                            // ),
+                          ),
+                          child: Center(
+                            child: Text(
+                              '주간',
+                              style: TextStyle(
+                                color: ref.watch(reportScreenStateProvider).period == Period.week ? UiConfig.whiteColor : UiConfig.black,
+                              ),
+                            ),
                           ),
                         ),
                       ),
@@ -115,7 +149,6 @@ class _ReportListFragmentState extends ConsumerState<ReportFlowFragment> {
 class _ImagePager extends StatelessWidget {
   const _ImagePager({
     required this.pageController,
-    // required this.simpleProductPost,
   });
 
   final PageController pageController;
@@ -130,9 +163,9 @@ class _ImagePager extends StatelessWidget {
           PageView(
             controller: pageController,
             children: const [
-              LineChartMultipleLines(),
-              LineChartMultipleLines(),
-              LineChartMultipleLines(),
+              LineChartMultipleLines(assetType: AssetType.total),
+              LineChartMultipleLines(assetType: AssetType.expense),
+              LineChartMultipleLines(assetType: AssetType.income),
             ],
           ),
           Align(
