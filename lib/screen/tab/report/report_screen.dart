@@ -3,6 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_moneybag_2024/common/common.dart';
 import 'package:flutter_moneybag_2024/core/provider/user_state_notifier.dart';
 import 'package:flutter_moneybag_2024/screen/tab/report/report_flow_fragment.dart';
+import 'package:flutter_moneybag_2024/screen/tab/report/report_proportion_fragment.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -20,30 +21,31 @@ class ReportScreen extends HookConsumerWidget {
         TabBar(
           controller: tabController,
           indicatorColor: UiConfig.primaryColor,
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(8),
           indicatorSize: TabBarIndicatorSize.tab,
-          labelPadding: const EdgeInsets.all(16),
+          // labelPadding: const EdgeInsets.all(16),
+          labelPadding: const EdgeInsets.only(bottom: 16, left: 8, right: 8),
           labelStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
 
           /// 탭바 클릭할 때 나오는 splash effect의 radius
           splashBorderRadius: BorderRadius.circular(10),
           tabs: [
             Text(
-              'List',
-              style: UiConfig.h3Style,
+              '자산흐름',
+              style: UiConfig.h4Style,
             ),
             Text(
-              'Chart',
-              style: UiConfig.h3Style,
+              '카테고리',
+              style: UiConfig.h4Style,
             ),
           ],
         ),
         Expanded(
           child: TabBarView(
             controller: tabController,
-            children: [
-              const ReportFlowFragment(),
-              Image.network(picSum(202)),
+            children: const [
+              ReportFlowFragment(),
+              ReportProportionFragment(),
             ],
           ),
         ),

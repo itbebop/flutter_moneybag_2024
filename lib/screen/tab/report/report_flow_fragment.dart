@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+// import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_moneybag_2024/common/common.dart';
-import 'package:flutter_moneybag_2024/common/common_component/sort_button.dart';
 import 'package:flutter_moneybag_2024/screen/tab/report/chart/line_chart_multiple_lines.dart';
-import 'package:flutter_moneybag_2024/screen/tab/report/component/report_transaction_list.dart';
 import 'package:flutter_moneybag_2024/common/data/month_list.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class ReportFlowFragment extends ConsumerStatefulWidget {
   const ReportFlowFragment({super.key});
@@ -17,7 +17,7 @@ class _ReportListFragmentState extends ConsumerState<ReportFlowFragment> {
   DateTime now = DateTime.now();
   MonthList selectedMonth = MonthList.jan;
   String currentMonth = DateFormat('MMM').format(DateTime.now()).toLowerCase();
-
+  final pageController = PageController();
   @override
   void initState() {
     super.initState();
@@ -30,23 +30,127 @@ class _ReportListFragmentState extends ConsumerState<ReportFlowFragment> {
   @override
   Widget build(BuildContext context) {
     return ListView(children: [
-      Padding(
-        padding: const EdgeInsets.only(left: 24, right: 16),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            MonthDropdownButton(selectedMonth: selectedMonth, onMonthChanged: (value) => setState(() => selectedMonth = value), fontSize: 20),
-            const SortButton(),
-          ],
-        ),
+      SizedBox(height: 8.h),
+      Row(
+        children: [
+          SizedBox(
+            width: MediaQuery.of(context).size.width,
+            height: 50.h,
+            child: Container(
+              decoration: const BoxDecoration(
+                color: UiConfig.whiteColor,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(15),
+                  topRight: Radius.circular(15),
+                ),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(8),
+                child: Center(
+                  child: ListView(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    children: [
+                      SizedBox(width: 8.w),
+                      Container(
+                        height: 45.h,
+                        width: 60.w,
+                        decoration: const BoxDecoration(
+                          color: UiConfig.primaryColorSurface,
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(10),
+                          ),
+                        ),
+                        child: const Center(
+                          child: Text(
+                            '연간',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: 8.w),
+                      Container(
+                        height: 45.h,
+                        width: 70.w,
+                        decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                        ),
+                        child: const Center(
+                          child: Text(
+                            '월간',
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: 8.w),
+                      Container(
+                        height: 45.h,
+                        width: 70.w,
+                        decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                          // border: Border.all(
+                          //   width: 1,
+                          // ),
+                        ),
+                        child: const Center(
+                          child: Text(
+                            '주간',
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: 8.w),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          )
+        ],
       ),
-      const LineChartMultipleLines(),
-      SizedBox(
-        height: 520.0.h,
-        child: ReportTransactionList(
-          selectedMonth: selectedMonth.month,
-        ),
-      ),
+      SizedBox(height: 350.h, child: _ImagePager(pageController: pageController)),
+      SizedBox(height: 16.h),
     ]);
+  }
+}
+
+class _ImagePager extends StatelessWidget {
+  const _ImagePager({
+    required this.pageController,
+    // required this.simpleProductPost,
+  });
+
+  final PageController pageController;
+  // final SimpleProductPost simpleProductPost;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: context.deviceWidth,
+      child: Stack(
+        children: [
+          PageView(
+            controller: pageController,
+            children: const [
+              LineChartMultipleLines(),
+              LineChartMultipleLines(),
+              LineChartMultipleLines(),
+            ],
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: SmoothPageIndicator(
+                controller: pageController, // PageController
+                count: 3,
+                effect: const JumpingDotEffect(
+                  verticalOffset: 10,
+                  dotColor: UiConfig.buttonColor,
+                  activeDotColor: UiConfig.primaryColorSurface,
+                  dotHeight: 12,
+                  dotWidth: 12,
+                ), // your preferred effect
+                onDotClicked: (index) {}),
+          )
+        ],
+      ),
+    );
   }
 }
