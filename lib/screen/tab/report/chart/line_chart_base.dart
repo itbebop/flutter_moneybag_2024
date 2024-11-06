@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_moneybag_2024/domain/enums/period_types.dart';
 import 'package:flutter_moneybag_2024/domain/model/transaction_detail.dart';
 
-class LineChartBase extends StatelessWidget {
+class LineChartBase extends StatefulWidget {
   final Period period;
   final double maxY;
   final List<TransactionDetail> transactionList;
@@ -16,15 +16,18 @@ class LineChartBase extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    return LineChart(yearlyData(transactionList, maxY));
-  }
+  _LineChartBaseState createState() => _LineChartBaseState();
+}
+
+class _LineChartBaseState extends State<LineChartBase> {
+  double maxY = 200; // 기본 maxY 값, 20만 단위
+  double minY = -30; // 기본 minY 값
 
   List<TransactionDetail> filterTransactionsByPeriod(List<TransactionDetail> transactions) {
     final now = DateTime.now();
     return transactions.where((transaction) {
       final date = transaction.createdAt;
-      switch (period) {
+      switch (widget.period) {
         case Period.year:
           // 현재 연도에 해당하는 거래만 필터링
           return date.year == now.year;
@@ -43,7 +46,6 @@ class LineChartBase extends StatelessWidget {
     }).toList();
   }
 
-// 월별 데이터 그룹화 후 amount 합산
   Map<int, double> monthlySum(List<TransactionDetail> transactionList) {
     Map<int, double> monthlySums = {};
     for (var transaction in transactionList) {
@@ -58,18 +60,20 @@ class LineChartBase extends StatelessWidget {
     String text;
 
     switch (value.toInt()) {
-      case 1:
+      case 0:
         text = '0';
         break;
-
-      case 2:
-        text = '만';
+      case 1:
+        text = '5만';
         break;
-      case 3:
+      case 2:
         text = '10만';
         break;
+      case 3:
+        text = '15만';
+        break;
       case 4:
-        text = '100만';
+        text = '20만';
         break;
       default:
         return Container();
@@ -82,25 +86,30 @@ class LineChartBase extends StatelessWidget {
     final sums = monthlySum(dataList);
     return List.generate(12, (index) {
       final month = index + 1;
-      return FlSpot(month.toDouble(), sums[month] ?? 0);
+      return FlSpot(month.toDouble(), (sums[month] ?? 0) / 10000); // 만 단위로 표시
     });
   }
 
   LineChartData yearlyData(dataList, maxPoints) {
     return LineChartData(
+      maxY: maxY,
+      minY: minY,
       lineBarsData: [
         LineChartBarData(
           spots: createYearlySpots(dataList, maxPoints),
           isCurved: true,
           // colors: [Colors.blue],
-          belowBarData: BarAreaData(show: true),
+          belowBarData: BarAreaData(
+            show: true,
+            // colors: [Colors.lightBlue.withOpacity(0.3)],
+          ),
         ),
       ],
       titlesData: FlTitlesData(
         leftTitles: AxisTitles(
           sideTitles: SideTitles(
             showTitles: true,
-            reservedSize: 30,
+            reservedSize: 42,
             getTitlesWidget: leftTitleWidgets,
           ),
         ),
@@ -117,6 +126,44 @@ class LineChartBase extends StatelessWidget {
       ),
       gridData: const FlGridData(show: true),
       borderData: FlBorderData(show: true, border: Border.all(color: Colors.black)),
+    );
+  }
+
+  void increaseScale() {
+    setState(() {
+      maxY += 1;
+      minY -= 1;
+    });
+  }
+
+  void decreaseScale() {
+    setState(() {
+      if (maxY > 1) maxY -= 1;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            IconButton(
+              icon: const Icon(Icons.remove),
+              onPressed: decreaseScale,
+            ),
+            const Text('Zoom'),
+            IconButton(
+              icon: const Icon(Icons.add),
+              onPressed: increaseScale,
+            ),
+          ],
+        ),
+        Expanded(
+          child: LineChart(yearlyData(widget.transactionList, widget.maxY)),
+        ),
+      ],
     );
   }
 }
