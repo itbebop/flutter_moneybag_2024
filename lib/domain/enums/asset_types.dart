@@ -1,4 +1,5 @@
 enum AssetType {
+  total('Total'),
   income('Income'),
   expense('Expense');
 

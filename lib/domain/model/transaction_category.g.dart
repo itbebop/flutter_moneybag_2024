@@ -25,6 +25,7 @@ Map<String, dynamic> _$$TransactionCategoryImplToJson(
     };
 
 const _$AssetTypeEnumMap = {
+  AssetType.total: 'total',
   AssetType.income: 'income',
   AssetType.expense: 'expense',
 };
