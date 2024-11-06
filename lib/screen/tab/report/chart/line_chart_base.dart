@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_moneybag_2024/domain/enums/period_types.dart';
@@ -25,65 +27,6 @@ class LineChartBase extends StatelessWidget {
     );
   }
 
-  // 월별 데이터 그룹화 후 amount 합산
-  Map<int, double> monthlySum(List<TransactionDetail> transactionList) {
-    print(transactionList);
-    Map<int, double> monthlySums = {};
-    for (var transaction in transactionList) {
-      int month = transaction.createdAt.month;
-      monthlySums[month] = (monthlySums[month] ?? 0) + transaction.amount;
-    }
-    return monthlySums;
-  }
-
-// TransactionDetail 리스트에서 amount가 양수와 음수인 데이터를 각각 분리합니다.
-  Map<String, List<TransactionDetail>> filterTransactionData(List<TransactionDetail> transactionList) {
-    print(transactionList);
-    final incomeData = transactionList.where((t) => t.amount > 0).toList();
-    final expenseData = transactionList.where((t) => t.amount < 0).map((t) => t.copyWith(amount: t.amount.abs())).toList();
-    return {'incomeData': incomeData, 'expenseData': expenseData};
-  }
-
-  // 날짜별 총합 계산 함수
-  Map<int, double> calculateMonthlySums(List<TransactionDetail> transactionList) {
-    print(transactionList);
-
-    final incomeData = transactionList.where((t) => t.amount > 0).toList();
-    final expenseData = transactionList.where((t) => t.amount < 0).toList();
-
-    Map<int, double> incomeMonthlySum = monthlySum(incomeData);
-    Map<int, double> expenseMonthlySum = monthlySum(expenseData);
-
-    // 합계 데이터를 날짜별로 구해서 추가
-    final totalMonthlySum = <int, double>{};
-    for (final date in incomeMonthlySum.keys) {
-      final incomeAmount = incomeMonthlySum[date] ?? 0;
-      final expenseAmount = expenseMonthlySum[date] ?? 0;
-      totalMonthlySum[date] = incomeAmount - expenseAmount; // 합계는 income에서 expense를 빼서 계산
-    }
-    return totalMonthlySum;
-  }
-
-  // Method to filter transactions based on the selected period
-  List<TransactionDetail> filterTransactionsByPeriod(List<TransactionDetail> transactions) {
-    print(transactionList);
-
-    final now = DateTime.now();
-    return transactions.where((transaction) {
-      final date = transaction.createdAt;
-      switch (period) {
-        case Period.year:
-          return date.year == now.year;
-        case Period.month:
-          return date.year == now.year && date.month == now.month;
-        case Period.week:
-        default:
-          final startOfWeek = now.subtract(Duration(days: now.weekday - 1)); // Monday as start of week
-          return date.isAfter(startOfWeek) && date.isBefore(startOfWeek.add(const Duration(days: 7)));
-      }
-    }).toList();
-  }
-
   LineChartData chartData(List<TransactionDetail> filteredTransactionList) {
     switch (period) {
       case Period.year:
@@ -92,8 +35,68 @@ class LineChartBase extends StatelessWidget {
         return monthlyData(filteredTransactionList);
       case Period.week:
       default:
-        return weeklyData(filteredTransactionList);
+        return yearlyData(filteredTransactionList);
     }
+  }
+
+// Method to filter transactions based on the selected period
+  List<TransactionDetail> filterTransactionsByPeriod(List<TransactionDetail> transactions) {
+    final now = DateTime.now();
+    return transactions.where((transaction) {
+      final date = transaction.createdAt;
+      switch (period) {
+        case Period.year:
+          // 현재 연도에 해당하는 거래만 필터링
+          return date.year == now.year;
+        case Period.month:
+          // 현재 연도와 월이 같은 거래만 필터링
+          return date.year == now.year && date.month == now.month;
+        case Period.week:
+          // 이번 주 (월요일~일요일)에 해당하는 거래만 필터링
+          final startOfWeek = now.subtract(Duration(days: now.weekday - 1)); // Monday as start of week
+          final endOfWeek = startOfWeek.add(const Duration(days: 6)); // Sunday as end of week
+          return date.isAfter(startOfWeek.subtract(const Duration(seconds: 1))) && date.isBefore(endOfWeek.add(const Duration(days: 1)));
+        default:
+          // 기본값으로 연도 단위 필터링 (Yearly)
+          return date.year == now.year;
+      }
+    }).toList();
+  }
+
+// 월별 데이터 그룹화 후 amount 합산
+  Map<int, double> monthlySum(List<TransactionDetail> transactionList) {
+    Map<int, double> monthlySums = {};
+    for (var transaction in transactionList) {
+      int month = transaction.createdAt.month;
+      monthlySums[month] = (monthlySums[month] ?? 0) + transaction.amount;
+    }
+    return monthlySums;
+  }
+
+// 날짜별 총합 계산 함수
+  Map<String, Map<int, double>> calculateMonthlySums(List<TransactionDetail> transactionList) {
+    // 양수와 음수로 분리된 데이터 리스트
+    final incomeData = transactionList.where((t) => t.amount > 0).toList();
+    final expenseData = transactionList.where((t) => t.amount < 0).toList();
+
+    // 각각 월별로 데이터 합산
+    Map<int, double> incomeMonthlySum = monthlySum(incomeData);
+    Map<int, double> expenseMonthlySum = monthlySum(expenseData);
+
+    // 양수+음수 합계 데이터를 월별로 계산
+    final totalMonthlySum = <int, double>{};
+    for (int month = 1; month <= 12; month++) {
+      final incomeAmount = incomeMonthlySum[month] ?? 0;
+      final expenseAmount = expenseMonthlySum[month] ?? 0;
+      totalMonthlySum[month] = incomeAmount + expenseAmount;
+    }
+
+    // 결과를 Map으로 반환하여 각각 income, expense, total로 구분된 데이터 제공
+    return {
+      'income': incomeMonthlySum,
+      'expense': expenseMonthlySum,
+      'total': totalMonthlySum,
+    };
   }
 
   // Define the LineChartData methods with updated minX, maxX, and custom title configurations
@@ -140,7 +143,7 @@ class LineChartBase extends StatelessWidget {
   LineTouchData get lineTouchData => LineTouchData(
         handleBuiltInTouches: true,
         touchTooltipData: LineTouchTooltipData(
-          getTooltipColor: (touchedSpot) => Colors.blueGrey.withOpacity(0.8),
+          getTooltipColor: (touchedSpot) => Colors.blueGrey.withOpacity(0.2),
         ),
       );
 
@@ -163,40 +166,43 @@ class LineChartBase extends StatelessWidget {
     );
   }
 
-// leftTitleWidgets 수정
+/*
+LeftTile 계산 시작
+*/
   Widget leftTitleWidgets(double value, TitleMeta meta, List<TransactionDetail> transactionList) {
-    // 월별 합산 금액 구하기
-    Map<int, double> monthlySum(List<TransactionDetail> transactionList) {
-      Map<int, double> monthlySums = {};
-      for (var transaction in transactionList) {
-        int month = transaction.createdAt.month;
-        monthlySums[month] = (monthlySums[month] ?? 0) + transaction.amount;
-      }
-      return monthlySums;
-    }
+    final monthlySums = calculateMonthlySums(transactionList);
+    // income, expense, total 데이터를 분리
+    final incomeData = monthlySums['income'] ?? {};
+    final expenseData = monthlySums['expense'] ?? {};
+    final totalData = monthlySums['total'] ?? {};
 
-    // 월별 합산 후 양수, 음수 최대값 구하기
-    final monthlySums = monthlySum(transactionList);
-    print('#######monthlySums: $monthlySums');
-// 양수 최대값 계산
-    final positiveMax = monthlySums.values.where((amount) => amount > 0).isEmpty ? 0 : monthlySums.values.where((amount) => amount > 0).reduce((a, b) => a > b ? a : b);
-    print('#######positiveMax: $positiveMax');
-// 음수 최대값 계산
-    final negativeMax = monthlySums.values.where((amount) => amount < 0).isEmpty ? 0 : monthlySums.values.where((amount) => amount < 0).reduce((a, b) => a < b ? a : b).abs();
+    // 양수 최대값 계산 (income에서)
+    final positiveMax = incomeData.values.isEmpty ? 0 : incomeData.values.where((amount) => amount > 0).reduce((a, b) => a > b ? a : b);
+    print('#######positiveMax (income max): $positiveMax');
 
-    print('#######negativeMax: $negativeMax');
+    // 음수 최대값 계산 (expense에서)
+    final negativeMax = expenseData.values.isEmpty ? 0 : expenseData.values.where((amount) => amount < 0).reduce((a, b) => a < b ? a : b).abs();
+    print('#######negativeMax (expense max): $negativeMax');
 
-    double maxPoint;
-    double firstPoint;
+    // 합계 최대값 계산 (total에서)
+    final totalMax = totalData.values.isEmpty ? 0 : totalData.values.reduce((a, b) => a > b ? a : b);
+    print('#######totalMax: $totalMax');
+
+    // 최종 최대 포인트 결정
+    double rawMaxPoint = negativeMax.toDouble(); // 양수 최대값과 합계 최대값 중 큰 값 선택
+
+    // 가장 큰 자리수를 기준으로 올림 처리
+    int magnitude = (rawMaxPoint / 10).ceil().toString().length - 1; // 자리수 계산
+    double roundUpFactor = pow(10, magnitude).toDouble(); // 올림할 기준 생성
+    double maxPoint = (rawMaxPoint / roundUpFactor).ceil() * roundUpFactor; // 올림하여 maxPoint 설정
+
+    print('#######maxPoint (rounded up): $maxPoint');
+    double firstPoint = maxPoint / 5;
 
     String formatAmount(double amount) {
       return amount >= 1e4 ? '${(amount / 1e4).toInt()}만원' : '${amount.toInt()}원';
     }
 
-    maxPoint = negativeMax.toDouble().abs();
-    print('#######maxPoint: $maxPoint');
-
-    firstPoint = maxPoint / 5;
     switch (value) {
       case 1:
         return Text(formatAmount(firstPoint));
