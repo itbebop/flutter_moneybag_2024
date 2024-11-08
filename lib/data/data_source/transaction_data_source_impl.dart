@@ -21,10 +21,10 @@ class TransactionDataSourceImpl implements TransactionDataSource {
   @override
   Future<void> createTransaction({required TransactionDetail transaction, required String assetId, required String userId}) async {
     // 고유 transactionId를 생성
-    final transactionId = '${transaction.category.categoryId}_${transaction.amount}_${transaction.createdAt}';
+    final transactionId = '${transaction.category.categoryId}_${transaction.createdAt}_${transaction.amount}';
 
     // transactionId를 사용하여 문서를 추가
-    await _transactionRef(assetId, userId).doc(transactionId).set(transaction);
+    await _transactionRef(assetId, userId).doc(transactionId).set(transaction).then((value) => _transactionRef(assetId, userId).doc(transactionId).update({'transactionId': transactionId}));
 
     final assetRef = FirebaseFirestore.instance.collection('assets');
 
