@@ -173,4 +173,14 @@ class CategoryStateNotifier extends StateNotifier<CategoryState> {
   Future<void> deleteTransactionCategory(String categoryId) async {
     await state.deleteTransactionCategoryUseCase.execute(categoryId: categoryId, userId: state.userId);
   }
+
+  /* Category list  */
+  void tapCategoryListButton(AssetType assetType) {
+    if (assetType == AssetType.income) {
+      state = state.copyWith(showIncomeCategoryListItemNew: true);
+    } else {
+      state = state.copyWith(showExpenseCategoryListItemNew: true);
+    }
+    print(state.showIncomeCategoryListItemNew);
+  }
 }

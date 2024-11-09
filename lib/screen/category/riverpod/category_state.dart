@@ -18,6 +18,8 @@ class CategoryState with _$CategoryState {
     @Default(false) bool showIncomeCategoryCardNew,
     @Default(false) bool showCategoryCardUpdate,
     @Default(false) bool showCategoryNameFromServer,
+    @Default(false) bool showExpenseCategoryListItemNew,
+    @Default(false) bool showIncomeCategoryListItemNew,
     @Default('') String selectedIconName,
     @Default('') String updatedIconName,
     @Default('') String selectedIconIdDelete,
