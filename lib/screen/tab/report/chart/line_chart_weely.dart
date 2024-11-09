@@ -42,7 +42,7 @@ class LineChartWeeklyState extends State<LineChartWeekly> {
     }).toList();
   }
 
-  Map<String, Map<int, double>> dailySum(List<TransactionDetail> transactionList) {
+  Map<String, Map<int, double>> weeklySum(List<TransactionDetail> transactionList) {
     Map<int, double> totalSums = {};
     Map<int, double> incomeSums = {};
     Map<int, double> expenseSums = {};
@@ -78,54 +78,54 @@ class LineChartWeeklyState extends State<LineChartWeekly> {
     };
   }
 
-  List<FlSpot> createDailyTotalSpots(List<TransactionDetail> dataList) {
-    final sums = dailySum(dataList)['total']!;
+  List<FlSpot> createWeeklyTotalSpots(List<TransactionDetail> dataList) {
+    final sums = weeklySum(dataList)['total']!;
     return List.generate(7, (index) {
       return FlSpot(index.toDouble(), (sums[index] ?? 0) / 10000); // 만 단위로 표시
     });
   }
 
-  List<FlSpot> createDailyIncomeSpots(List<TransactionDetail> dataList) {
-    final sums = dailySum(dataList)['income']!;
+  List<FlSpot> createWeeklyIncomeSpots(List<TransactionDetail> dataList) {
+    final sums = weeklySum(dataList)['income']!;
     return List.generate(7, (index) {
       return FlSpot(index.toDouble(), (sums[index] ?? 0) / 10000); // 만 단위로 표시
     });
   }
 
-  List<FlSpot> createDailyExpenseSpots(List<TransactionDetail> dataList) {
-    final sums = dailySum(dataList)['expense']!;
+  List<FlSpot> createWeeklyExpenseSpots(List<TransactionDetail> dataList) {
+    final sums = weeklySum(dataList)['expense']!;
     return List.generate(7, (index) {
       return FlSpot(index.toDouble(), (sums[index] ?? 0) / 10000); // 만 단위로 표시
     });
   }
 
-  LineChartData dailyData(dataList) {
+  LineChartData weeklyData(dataList) {
     return LineChartData(
       lineBarsData: [
         if (widget.assetType == AssetType.total)
           LineChartBarData(
-            spots: createDailyTotalSpots(dataList),
-            isCurved: true,
-            color: UiConfig.primaryColor,
+            spots: createWeeklyTotalSpots(dataList),
+            isCurved: false,
+            color: UiConfig.greyColor,
             belowBarData: BarAreaData(
               show: true,
-              color: UiConfig.buttonColor.withOpacity(.3),
+              color: UiConfig.greyColor.withOpacity(.1),
             ),
           ),
-        if (widget.assetType == AssetType.total || widget.assetType == AssetType.income)
+        if (widget.assetType == AssetType.income)
           LineChartBarData(
-            spots: createDailyIncomeSpots(dataList),
-            isCurved: true,
+            spots: createWeeklyIncomeSpots(dataList),
+            isCurved: false,
             color: UiConfig.primaryColorSurface, // 수입 라인 색상
             belowBarData: BarAreaData(
               show: true,
               color: UiConfig.buttonColor.withOpacity(.2),
             ),
           ),
-        if (widget.assetType == AssetType.total || widget.assetType == AssetType.expense)
+        if (widget.assetType == AssetType.expense)
           LineChartBarData(
-            spots: createDailyExpenseSpots(dataList),
-            isCurved: true,
+            spots: createWeeklyExpenseSpots(dataList),
+            isCurved: false,
             color: UiConfig.secondaryTextColor, // 지출 라인 색상
 
             belowBarData: BarAreaData(
@@ -135,6 +135,11 @@ class LineChartWeeklyState extends State<LineChartWeekly> {
           ),
       ],
       titlesData: FlTitlesData(
+        topTitles: const AxisTitles(
+          sideTitles: SideTitles(
+            showTitles: false,
+          ),
+        ),
         leftTitles: const AxisTitles(
           sideTitles: SideTitles(
             showTitles: false,
@@ -146,14 +151,18 @@ class LineChartWeeklyState extends State<LineChartWeekly> {
             showTitles: true,
             reservedSize: 36,
             getTitlesWidget: (value, meta) {
-              final dayLabels = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
-              return Text(dayLabels[value.toInt()], style: const TextStyle(color: Colors.black, fontSize: 10));
+              final dayLabels = ["월", "화", "수", "목", "금", "토", "일"];
+              return Text(dayLabels[value.toInt()], style: const TextStyle(color: Colors.black, fontSize: 15));
             },
+            interval: 1,
           ),
         ),
       ),
       gridData: const FlGridData(show: true),
-      borderData: FlBorderData(show: true, border: Border.all(color: Colors.black)),
+      borderData: FlBorderData(
+        show: false,
+        // border: Border.all(color: Colors.black),
+      ),
     );
   }
 
@@ -162,7 +171,7 @@ class LineChartWeeklyState extends State<LineChartWeekly> {
     return Column(
       children: [
         Expanded(
-          child: LineChart(dailyData(widget.transactionList)),
+          child: LineChart(weeklyData(widget.transactionList)),
         ),
       ],
     );

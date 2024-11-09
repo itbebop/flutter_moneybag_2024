@@ -101,27 +101,27 @@ class LineChartYearlyState extends State<LineChartYearly> {
         if (widget.assetType == AssetType.total)
           LineChartBarData(
             spots: createYearlyTotalSpots(dataList),
-            isCurved: true,
-            color: UiConfig.primaryColor,
+            isCurved: false,
+            color: UiConfig.greyColor,
             belowBarData: BarAreaData(
               show: true,
-              color: UiConfig.buttonColor.withOpacity(.3),
+              color: UiConfig.greyColor.withOpacity(.1),
             ),
           ),
-        if (widget.assetType == AssetType.total || widget.assetType == AssetType.income)
+        if (widget.assetType == AssetType.income)
           LineChartBarData(
             spots: createYearlyIncomeSpots(dataList),
-            isCurved: true,
+            isCurved: false,
             color: UiConfig.primaryColorSurface, // 수입 라인 색상
             belowBarData: BarAreaData(
               show: true,
               color: UiConfig.buttonColor.withOpacity(.2),
             ),
           ),
-        if (widget.assetType == AssetType.total || widget.assetType == AssetType.expense)
+        if (widget.assetType == AssetType.expense)
           LineChartBarData(
             spots: createYearlyExpenseSpots(dataList),
-            isCurved: true,
+            isCurved: false,
             color: UiConfig.secondaryTextColor, // 지출 라인 색상
             belowBarData: BarAreaData(
               show: true,
@@ -130,6 +130,11 @@ class LineChartYearlyState extends State<LineChartYearly> {
           ),
       ],
       titlesData: FlTitlesData(
+        topTitles: const AxisTitles(
+          sideTitles: SideTitles(
+            showTitles: false,
+          ),
+        ),
         leftTitles: const AxisTitles(
           sideTitles: SideTitles(
             showTitles: false,
@@ -141,14 +146,18 @@ class LineChartYearlyState extends State<LineChartYearly> {
             showTitles: true,
             reservedSize: 36,
             getTitlesWidget: (value, meta) {
-              final monthLabels = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-              return Text(monthLabels[value.toInt() - 1], style: const TextStyle(color: Colors.black, fontSize: 10));
+              final monthLabels = ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"];
+              return Text(monthLabels[value.toInt() - 1], style: const TextStyle(color: Colors.black, fontSize: 12));
             },
+            interval: 1,
           ),
         ),
       ),
       gridData: const FlGridData(show: true),
-      borderData: FlBorderData(show: true, border: Border.all(color: Colors.black)),
+      borderData: FlBorderData(
+        show: false,
+        // border: Border.all(color: Colors.black),
+      ),
     );
   }
 

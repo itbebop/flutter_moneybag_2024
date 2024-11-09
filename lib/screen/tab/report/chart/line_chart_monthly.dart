@@ -42,7 +42,7 @@ class LineChartMonthlyState extends State<LineChartMonthly> {
     }).toList();
   }
 
-  Map<String, Map<int, double>> weeklySum(List<TransactionDetail> transactionList) {
+  Map<String, Map<int, double>> monthlySum(List<TransactionDetail> transactionList) {
     Map<int, double> totalSums = {};
     Map<int, double> incomeSums = {};
     Map<int, double> expenseSums = {};
@@ -79,47 +79,47 @@ class LineChartMonthlyState extends State<LineChartMonthly> {
     };
   }
 
-  List<FlSpot> createWeeklyTotalSpots(List<TransactionDetail> dataList) {
-    final sums = weeklySum(dataList)['total']!;
+  List<FlSpot> createMonthlyTotalSpots(List<TransactionDetail> dataList) {
+    final sums = monthlySum(dataList)['total']!;
     return List.generate(5, (index) {
       final week = index + 1;
       return FlSpot(week.toDouble(), (sums[week] ?? 0) / 10000); // 만 단위로 표시
     });
   }
 
-  List<FlSpot> createWeeklyIncomeSpots(List<TransactionDetail> dataList) {
-    final sums = weeklySum(dataList)['income']!;
+  List<FlSpot> createMonthlyIncomeSpots(List<TransactionDetail> dataList) {
+    final sums = monthlySum(dataList)['income']!;
     return List.generate(5, (index) {
       final week = index + 1;
       return FlSpot(week.toDouble(), (sums[week] ?? 0) / 10000); // 만 단위로 표시
     });
   }
 
-  List<FlSpot> createWeeklyExpenseSpots(List<TransactionDetail> dataList) {
-    final sums = weeklySum(dataList)['expense']!;
+  List<FlSpot> createMonthlyExpenseSpots(List<TransactionDetail> dataList) {
+    final sums = monthlySum(dataList)['expense']!;
     return List.generate(5, (index) {
       final week = index + 1;
       return FlSpot(week.toDouble(), (sums[week] ?? 0) / 10000); // 만 단위로 표시
     });
   }
 
-  LineChartData weeklyData(dataList) {
+  LineChartData monthlyData(dataList) {
     return LineChartData(
       lineBarsData: [
         if (widget.assetType == AssetType.total)
           LineChartBarData(
-            spots: createWeeklyTotalSpots(dataList),
-            isCurved: true,
-            color: UiConfig.primaryColor,
+            spots: createMonthlyTotalSpots(dataList),
+            isCurved: false,
+            color: UiConfig.greyColor,
             belowBarData: BarAreaData(
               show: true,
-              color: UiConfig.buttonColor.withOpacity(.3),
+              color: UiConfig.greyColor.withOpacity(.1),
             ),
           ),
-        if (widget.assetType == AssetType.total || widget.assetType == AssetType.income)
+        if (widget.assetType == AssetType.income)
           LineChartBarData(
-            spots: createWeeklyIncomeSpots(dataList),
-            isCurved: true,
+            spots: createMonthlyIncomeSpots(dataList),
+            isCurved: false,
             color: UiConfig.primaryColorSurface, // 수입 라인 색상
 
             belowBarData: BarAreaData(
@@ -127,10 +127,10 @@ class LineChartMonthlyState extends State<LineChartMonthly> {
               color: UiConfig.buttonColor.withOpacity(.2),
             ),
           ),
-        if (widget.assetType == AssetType.total || widget.assetType == AssetType.expense)
+        if (widget.assetType == AssetType.expense)
           LineChartBarData(
-            spots: createWeeklyExpenseSpots(dataList),
-            isCurved: true,
+            spots: createMonthlyExpenseSpots(dataList),
+            isCurved: false,
             color: UiConfig.secondaryTextColor, // 지출 라인 색상
 
             belowBarData: BarAreaData(
@@ -140,6 +140,11 @@ class LineChartMonthlyState extends State<LineChartMonthly> {
           ),
       ],
       titlesData: FlTitlesData(
+        topTitles: const AxisTitles(
+          sideTitles: SideTitles(
+            showTitles: false,
+          ),
+        ),
         leftTitles: const AxisTitles(
           sideTitles: SideTitles(
             showTitles: false,
@@ -152,13 +157,17 @@ class LineChartMonthlyState extends State<LineChartMonthly> {
             reservedSize: 36,
             getTitlesWidget: (value, meta) {
               final weekLabels = ["1주", "2주", "3주", "4주", "5주"];
-              return Text(weekLabels[value.toInt() - 1], style: const TextStyle(color: Colors.black, fontSize: 10));
+              return Text(weekLabels[value.toInt() - 1], style: const TextStyle(color: Colors.black, fontSize: 15));
             },
+            interval: 1,
           ),
         ),
       ),
       gridData: const FlGridData(show: true),
-      borderData: FlBorderData(show: true, border: Border.all(color: Colors.black)),
+      borderData: FlBorderData(
+        show: false,
+        // border: Border.all(color: Colors.black),
+      ),
     );
   }
 
@@ -167,7 +176,7 @@ class LineChartMonthlyState extends State<LineChartMonthly> {
     return Column(
       children: [
         Expanded(
-          child: LineChart(weeklyData(widget.transactionList)),
+          child: LineChart(monthlyData(widget.transactionList)),
         ),
       ],
     );
