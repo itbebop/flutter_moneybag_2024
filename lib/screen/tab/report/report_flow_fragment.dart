@@ -44,8 +44,8 @@ class _ReportListFragmentState extends ConsumerState<ReportFlowFragment> {
               decoration: const BoxDecoration(
                 color: UiConfig.whiteColor,
                 borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(15),
-                  topRight: Radius.circular(15),
+                  topLeft: Radius.circular(20),
+                  topRight: Radius.circular(20),
                 ),
               ),
               child: Padding(

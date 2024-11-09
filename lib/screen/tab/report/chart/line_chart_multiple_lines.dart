@@ -50,7 +50,10 @@ class LineChartMultipleLinesState extends ConsumerState<LineChartMultipleLines> 
                 child: Container(
                   decoration: const BoxDecoration(
                     color: UiConfig.whiteColor,
-                    // borderRadius: BorderRadius.all(Radius.circular(15)),
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(20),
+                      bottomRight: Radius.circular(20),
+                    ),
                   ),
                   child: Padding(
                     padding: const EdgeInsets.only(top: 24.0, left: 16, right: 8),
