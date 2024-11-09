@@ -13,14 +13,14 @@ import 'package:hugeicons/hugeicons.dart';
 
 import '../../../common/common.dart';
 
-class CategoryList extends ConsumerWidget {
+class CategoryDetailList extends ConsumerWidget {
   final String title;
   final IconData icon;
   final AssetType assetType;
   final TextEditingController categoryNameCreateController;
   final TextEditingController categoryNameEditController;
 
-  const CategoryList({
+  const CategoryDetailList({
     super.key,
     required this.title,
     required this.assetType,
@@ -56,7 +56,7 @@ class CategoryList extends ConsumerWidget {
                 ),
                 SizedBox(width: 8.w),
                 Text(
-                  '$title 카테고리(20)',
+                  title,
                   style: UiConfig.h1Style.copyWith(
                     color: assetType == AssetType.income ? UiConfig.secondaryTextColor : UiConfig.primaryColorSurface,
                     fontWeight: UiConfig.semiBoldFont,

@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_moneybag_2024/common/common.dart';
 import 'package:flutter_moneybag_2024/domain/enums/asset_types.dart';
-import 'package:flutter_moneybag_2024/screen/category/component/category_list.dart';
+import 'package:flutter_moneybag_2024/screen/category/component/category_detail_list.dart';
 import 'package:flutter_moneybag_2024/screen/category/component/category_select_button.dart';
 import 'package:flutter_moneybag_2024/screen/category/riverpod/category_state_notifier.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hugeicons/hugeicons.dart';
 
-class CategoryScreen extends ConsumerStatefulWidget {
-  const CategoryScreen({super.key});
+class CategoryDetailScreen extends ConsumerStatefulWidget {
+  const CategoryDetailScreen({super.key});
 
   @override
-  ConsumerState<CategoryScreen> createState() => _CategoryScreenState();
+  ConsumerState<CategoryDetailScreen> createState() => _CategoryScreenState();
 }
 
-class _CategoryScreenState extends ConsumerState<CategoryScreen> {
+class _CategoryScreenState extends ConsumerState<CategoryDetailScreen> {
   final categoryNameCreateController = TextEditingController();
   final categoryNameEditController = TextEditingController();
   @override
@@ -30,16 +30,17 @@ class _CategoryScreenState extends ConsumerState<CategoryScreen> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   SizedBox(height: 16.h),
-                  CategoryList(
-                    title: '수입',
-                    icon: HugeIcons.strokeRoundedMoneyBag02,
-                    assetType: AssetType.income,
-                    categoryNameCreateController: categoryNameCreateController,
-                    categoryNameEditController: categoryNameEditController,
-                  ),
+                  // CategoryList(
+                  //   title: '수입',
+                  //   icon: HugeIcons.strokeRoundedMoneyBag02,
+                  //   assetType: AssetType.income,
+                  //   categoryNameCreateController: categoryNameCreateController,
+                  //   categoryNameEditController: categoryNameEditController,
+                  // ),
+
                   SizedBox(height: 16.h),
-                  CategoryList(
-                    title: '지출',
+                  CategoryDetailList(
+                    title: '식비',
                     icon: HugeIcons.strokeRoundedWallet03,
                     assetType: AssetType.expense,
                     categoryNameCreateController: categoryNameCreateController,
@@ -56,11 +57,6 @@ class _CategoryScreenState extends ConsumerState<CategoryScreen> {
                   child: CategorySelectButton(),
                 )
               : const SizedBox(),
-          // : Container(
-          //     width: 300.w,
-          //     height: 500.h,
-          //     color: Colors.red,
-          //   )
         ],
       ),
     );

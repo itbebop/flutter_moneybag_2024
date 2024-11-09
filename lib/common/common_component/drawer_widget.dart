@@ -63,9 +63,7 @@ class _DrawerWidgetState extends ConsumerState<DrawerWidget> {
                     color: UiConfig.black,
                   ),
                   title: const Text('카테고리 관리'),
-                  onTap: () {
-                    context.push('/category');
-                  },
+                  onTap: () => context.push('/category_list'),
                 ),
                 if (userState.user == null)
                   ListTile(

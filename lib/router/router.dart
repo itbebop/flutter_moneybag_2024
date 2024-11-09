@@ -1,4 +1,5 @@
-import 'package:flutter_moneybag_2024/screen/category/category_screen.dart';
+import 'package:flutter_moneybag_2024/screen/category/category_detail_screen.dart';
+import 'package:flutter_moneybag_2024/screen/category/category_list_screen.dart';
 import 'package:flutter_moneybag_2024/screen/login/login_screen.dart';
 import 'package:flutter_moneybag_2024/screen/main_screen.dart';
 import 'package:flutter_moneybag_2024/screen/splash/splash_screen.dart';
@@ -36,9 +37,14 @@ final routerProvider = Provider<GoRouter>((ref) {
         builder: (context, state) => const LoginScreen(),
       ),
       GoRoute(
-        path: '/category',
-        name: 'category',
-        builder: (context, state) => const CategoryScreen(),
+        path: '/category_list',
+        name: 'category_list',
+        builder: (context, state) => const CategoryListScreen(),
+      ),
+      GoRoute(
+        path: '/category_detail',
+        name: 'category_detail',
+        builder: (context, state) => const CategoryDetailScreen(),
       ),
       GoRoute(
         path: '/asset_create',
