@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_moneybag_2024/common/common.dart';
 import 'package:flutter_moneybag_2024/domain/enums/asset_types.dart';
-import 'package:flutter_moneybag_2024/screen/category/component/category_detail_list.dart';
+import 'package:flutter_moneybag_2024/screen/category/component/category_detail/category_detail_list.dart';
 import 'package:flutter_moneybag_2024/screen/category/component/category_select_button.dart';
 import 'package:flutter_moneybag_2024/screen/category/riverpod/category_state_notifier.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -11,10 +11,10 @@ class CategoryDetailScreen extends ConsumerStatefulWidget {
   const CategoryDetailScreen({super.key});
 
   @override
-  ConsumerState<CategoryDetailScreen> createState() => _CategoryScreenState();
+  ConsumerState<CategoryDetailScreen> createState() => _CategoryDetailScreenState();
 }
 
-class _CategoryScreenState extends ConsumerState<CategoryDetailScreen> {
+class _CategoryDetailScreenState extends ConsumerState<CategoryDetailScreen> {
   final categoryNameCreateController = TextEditingController();
   final categoryNameEditController = TextEditingController();
   @override

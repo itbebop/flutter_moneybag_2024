@@ -1,16 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_moneybag_2024/common/common.dart';
 import 'package:flutter_moneybag_2024/domain/enums/asset_types.dart';
-import 'package:flutter_moneybag_2024/screen/category/component/category_list_item.dart';
+import 'package:flutter_moneybag_2024/screen/category/component/category_list/category_list_button.dart';
+import 'package:flutter_moneybag_2024/screen/category/component/category_list/category_list_item.dart';
+import 'package:flutter_moneybag_2024/screen/category/component/category_list/category_list_item_new.dart';
+import 'package:flutter_moneybag_2024/screen/category/riverpod/category_state_notifier.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:hugeicons/hugeicons.dart';
 
-class CategoryListScreen extends ConsumerWidget {
+class CategoryListScreen extends ConsumerStatefulWidget {
   const CategoryListScreen({super.key});
-
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<CategoryListScreen> createState() => _CategoryListScreenState();
+}
+
+class _CategoryListScreenState extends ConsumerState<CategoryListScreen> {
+  final categorylistCreateController = TextEditingController();
+  @override
+  Widget build(BuildContext context) {
+    final categoryProvider = ref.watch(categoryStateProvider);
     return Scaffold(
       appBar: AppBar(),
       body: SingleChildScrollView(
@@ -83,6 +91,19 @@ class CategoryListScreen extends ConsumerWidget {
                       assetType: AssetType.income,
                       title: '기타 소득',
                     ),
+                    SizedBox(height: 8.h),
+                    InkWell(
+                      onTap: () => ref.read(categoryStateProvider.notifier).tapCategoryListButton(AssetType.income),
+                      child: const CategoryListButton(
+                        assetType: AssetType.income,
+                      ),
+                    ),
+                    SizedBox(height: 8.h),
+                    if (categoryProvider.showIncomeCategoryListItemNew)
+                      CategoryListItemNew(
+                        assetType: AssetType.income,
+                        categorylistCreateController: categorylistCreateController,
+                      ),
                   ],
                 ),
               ),

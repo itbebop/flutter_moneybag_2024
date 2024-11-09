@@ -3,15 +3,15 @@ import 'package:flutter_moneybag_2024/common/widget/alert_dialog_widget.dart';
 import 'package:flutter_moneybag_2024/common/widget/confirm_dialog_widget.dart';
 import 'package:flutter_moneybag_2024/domain/enums/asset_types.dart';
 import 'package:flutter_moneybag_2024/domain/model/transaction_category.dart';
-import 'package:flutter_moneybag_2024/screen/category/component/category_item.dart';
-import 'package:flutter_moneybag_2024/screen/category/component/category_item_button.dart';
-import 'package:flutter_moneybag_2024/screen/category/component/category_item_new.dart';
-import 'package:flutter_moneybag_2024/screen/category/component/category_item_update.dart';
+import 'package:flutter_moneybag_2024/screen/category/component/category_detail/category_item.dart';
+import 'package:flutter_moneybag_2024/screen/category/component/category_detail/category_item_button.dart';
+import 'package:flutter_moneybag_2024/screen/category/component/category_detail/category_item_new.dart';
+import 'package:flutter_moneybag_2024/screen/category/component/category_detail/category_item_update.dart';
 import 'package:flutter_moneybag_2024/screen/category/riverpod/category_state_notifier.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hugeicons/hugeicons.dart';
 
-import '../../../common/common.dart';
+import '../../../../common/common.dart';
 
 class CategoryDetailList extends ConsumerWidget {
   final String title;

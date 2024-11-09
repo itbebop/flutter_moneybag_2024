@@ -29,7 +29,7 @@ class CategoryItemNew extends ConsumerWidget {
       child: Stack(
         children: [
           Positioned(
-              top: 25.h,
+              top: 20.h,
               right: 30.w,
               child: InkWell(
                 onTap: () => ref.read(categoryStateProvider.notifier).showCategorySelectButton(assetType),
@@ -40,7 +40,7 @@ class CategoryItemNew extends ConsumerWidget {
                 ),
               )),
           Positioned(
-            bottom: 15.h,
+            bottom: 10.h,
             right: 17.w,
             child: SizedBox(
               width: 50.w,
@@ -50,6 +50,7 @@ class CategoryItemNew extends ConsumerWidget {
                 style: UiConfig.smallStyle,
                 textAlign: TextAlign.center,
                 decoration: InputDecoration(
+                  isDense: true,
                   hintText: '카테고리명',
                   hintStyle: UiConfig.extraSmallStyle.copyWith(
                     color: UiConfig.color[700],
