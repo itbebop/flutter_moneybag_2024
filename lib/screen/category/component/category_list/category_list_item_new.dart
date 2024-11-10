@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_moneybag_2024/common/common.dart';
 import 'package:flutter_moneybag_2024/domain/enums/asset_types.dart';
+import 'package:flutter_moneybag_2024/domain/model/transaction_category.dart';
+import 'package:flutter_moneybag_2024/screen/category/riverpod/category_state_notifier.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hugeicons/hugeicons.dart';
 
-class CategoryListItemNew extends StatelessWidget {
+class CategoryListItemNew extends ConsumerWidget {
   final TextEditingController categorylistCreateController;
   final AssetType assetType;
 
@@ -14,7 +17,8 @@ class CategoryListItemNew extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final categoryProvider = ref.watch(categoryStateProvider);
     return Container(
       decoration: BoxDecoration(
         border: Border.all(
@@ -31,7 +35,7 @@ class CategoryListItemNew extends StatelessWidget {
             Row(
               children: [
                 HugeIcon(
-                  icon: HugeIcons.strokeRoundedAddCircle,
+                  icon: categoryProvider.selectedCreateIcon,
                   color: assetType == AssetType.expense ? UiConfig.secondaryTextColor : UiConfig.primaryColorSurface,
                 ),
                 SizedBox(width: 8.w),
@@ -52,7 +56,16 @@ class CategoryListItemNew extends StatelessWidget {
               ],
             ),
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                ref.read(categoryStateProvider.notifier).createTransactionCategoryUseCase(
+                      transactionCategory: TransactionCategory(
+                        categoryId: '0',
+                        name: categorylistCreateController.text,
+                        iconKey: categoryProvider.selectedIconName,
+                        type: assetType,
+                      ),
+                    );
+              },
               icon: const Icon(Icons.check),
             )
           ],
