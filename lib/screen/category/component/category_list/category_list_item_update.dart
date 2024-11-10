@@ -6,11 +6,11 @@ import 'package:flutter_moneybag_2024/screen/category/riverpod/category_state_no
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hugeicons/hugeicons.dart';
 
-class CategoryListItemNew extends ConsumerWidget {
+class CategoryListItemUpdate extends ConsumerWidget {
   final TextEditingController categorylistCreateController;
   final AssetType assetType;
 
-  const CategoryListItemNew({
+  const CategoryListItemUpdate({
     super.key,
     required this.assetType,
     required this.categorylistCreateController,
@@ -34,12 +34,9 @@ class CategoryListItemNew extends ConsumerWidget {
           children: [
             Row(
               children: [
-                Tap(
-                  onTap: () => ref.read(categoryStateProvider.notifier).showCategorySelectButton(assetType),
-                  child: HugeIcon(
-                    icon: categoryProvider.selectedCreateIcon,
-                    color: assetType == AssetType.expense ? UiConfig.secondaryTextColor : UiConfig.primaryColorSurface,
-                  ),
+                HugeIcon(
+                  icon: categoryProvider.selectedCreateIcon,
+                  color: assetType == AssetType.expense ? UiConfig.secondaryTextColor : UiConfig.primaryColorSurface,
                 ),
                 SizedBox(width: 8.w),
                 SizedBox(
@@ -68,7 +65,6 @@ class CategoryListItemNew extends ConsumerWidget {
                         type: assetType,
                       ),
                     );
-                ref.read(categoryStateProvider.notifier).showCategoryCardNew(false);
               },
               icon: const Icon(Icons.check),
             )

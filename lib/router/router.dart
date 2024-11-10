@@ -1,3 +1,4 @@
+import 'package:flutter_moneybag_2024/domain/model/transaction_category.dart';
 import 'package:flutter_moneybag_2024/screen/category/category_detail_screen.dart';
 import 'package:flutter_moneybag_2024/screen/category/category_list_screen.dart';
 import 'package:flutter_moneybag_2024/screen/login/login_screen.dart';
@@ -44,7 +45,7 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: '/category_detail',
         name: 'category_detail',
-        builder: (context, state) => const CategoryDetailScreen(),
+        builder: (context, state) => CategoryDetailScreen(state.extra as TransactionCategory),
       ),
       GoRoute(
         path: '/asset_create',

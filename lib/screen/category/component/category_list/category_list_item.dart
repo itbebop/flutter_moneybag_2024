@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_moneybag_2024/common/common.dart';
 import 'package:flutter_moneybag_2024/domain/enums/asset_types.dart';
+import 'package:flutter_moneybag_2024/domain/model/transaction_category.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hugeicons/hugeicons.dart';
+import 'package:flutter_moneybag_2024/common/data/icon_map.dart';
 
 class CategoryListItem extends StatelessWidget {
-  final String title;
+  final TransactionCategory category;
   final AssetType assetType;
   const CategoryListItem({
     super.key,
-    required this.title,
+    required this.category,
     required this.assetType,
   });
 
@@ -29,16 +31,18 @@ class CategoryListItem extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Tap(
-              onTap: () => context.push('/category_detail'),
+              onTap: () {
+                context.push('/category_detail', extra: category);
+              },
               child: Row(
                 children: [
                   HugeIcon(
-                    icon: HugeIcons.strokeRoundedHome02,
+                    icon: iconMap[category.iconKey],
                     color: assetType == AssetType.expense ? UiConfig.secondaryTextColor : UiConfig.primaryColorSurface,
                   ),
                   SizedBox(width: 8.w),
                   Text(
-                    title,
+                    category.name,
                     style: UiConfig.h3Style.copyWith(
                       color: assetType == AssetType.expense ? UiConfig.secondaryTextColor : UiConfig.primaryColorSurface,
                     ),

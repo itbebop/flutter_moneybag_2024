@@ -25,6 +25,8 @@ final categoryStateProvider = StateNotifierProvider<CategoryStateNotifier, Categ
         getTransactionCategoryUseCase: getIt(),
         updateTransactionCategoryUseCase: getIt(),
         deleteTransactionCategoryUseCase: getIt(),
+        createSubTransactionCategoryUseCase: getIt(),
+        getSubTransactionCategoryUseCase: getIt(),
         categoryHints: '선택',
       ),
     );
@@ -34,6 +36,7 @@ final categoryStateProvider = StateNotifierProvider<CategoryStateNotifier, Categ
 class CategoryStateNotifier extends StateNotifier<CategoryState> {
   CategoryStateNotifier(super.state);
   void showCategoryCardNew(bool showNew, {AssetType? assetType}) {
+    print(assetType);
     if (assetType == AssetType.income) {
       if (showNew) {
         state = state.copyWith(
@@ -151,6 +154,25 @@ class CategoryStateNotifier extends StateNotifier<CategoryState> {
     return result;
   }
 
+  Future<void> createSubTransactionCategoryUseCase({required TransactionCategory transactionCategory, required String subCategoryId}) async {
+    await state.createSubTransactionCategoryUseCase.execute(transactionCategory: transactionCategory, userId: state.userId, subCategoryId: subCategoryId);
+  }
+
+  Future<List<TransactionCategory>> getSubTransactionCategoryList({required String categoryId}) async {
+    final List<TransactionCategory> categories = await state.getSubTransactionCategoryUseCase.execute(categoryId: categoryId, userId: state.userId);
+    return categories;
+  }
+
+  /* Category list  */
+  // void tapCategoryListButton(AssetType assetType) {
+  //   if (assetType == AssetType.income) {
+  //     state = state.copyWith(showIncomeCategoryListItemNew: true);
+  //   } else {
+  //     state = state.copyWith(showExpenseCategoryListItemNew: true);
+  //   }
+
+  // }
+
   Future<void> createTransactionCategoryUseCase({required TransactionCategory transactionCategory}) async {
     await state.createTransactionCategoryUseCase.execute(transactionCategory: transactionCategory, userId: state.userId);
   }
@@ -173,15 +195,5 @@ class CategoryStateNotifier extends StateNotifier<CategoryState> {
 
   Future<void> deleteTransactionCategory(String categoryId) async {
     await state.deleteTransactionCategoryUseCase.execute(categoryId: categoryId, userId: state.userId);
-  }
-
-  /* Category list  */
-  void tapCategoryListButton(AssetType assetType) {
-    if (assetType == AssetType.income) {
-      state = state.copyWith(showIncomeCategoryListItemNew: true);
-    } else {
-      state = state.copyWith(showExpenseCategoryListItemNew: true);
-    }
-    print(state.showIncomeCategoryListItemNew);
   }
 }
