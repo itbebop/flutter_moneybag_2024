@@ -5,4 +5,8 @@ abstract interface class TransactionCategoryRepository {
   Future<List<TransactionCategory>> getTransactionCategoryList({required String userId});
   Future<void> updateTransactionCategory({required TransactionCategory transactionCategory, required String userId});
   Future<void> deleteTransactionCategory({required String categoryId, required String userId});
+  Future<void> createSubTransactionCategory({required TransactionCategory transactionCategory, required String userId, required String subCategoryId});
+  Future<List<TransactionCategory>> getSubTransactionCategoryList({required String userId, required String categoryId});
+  Future<void> updateSubTransactionCategory({required TransactionCategory transactionCategory, required String userId, required String subCategoryId});
+  Future<void> deleteSubTransactionCategory({required String categoryId, required String userId, required String subCategoryId});
 }

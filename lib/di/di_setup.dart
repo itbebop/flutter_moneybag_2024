@@ -31,8 +31,10 @@ import 'package:flutter_moneybag_2024/domain/usecase/transaction/create_transact
 import 'package:flutter_moneybag_2024/domain/usecase/transaction/delete_transaction_use_case.dart';
 import 'package:flutter_moneybag_2024/domain/usecase/transaction/get_transaction_list_use_case.dart';
 import 'package:flutter_moneybag_2024/domain/usecase/transaction/update_transaction_use_case.dart';
+import 'package:flutter_moneybag_2024/domain/usecase/transaction_category/create_sub_transaction_category_use_case.dart';
 import 'package:flutter_moneybag_2024/domain/usecase/transaction_category/create_transaction_category_use_case.dart';
 import 'package:flutter_moneybag_2024/domain/usecase/transaction_category/delete_transaction_category_use_case.dart';
+import 'package:flutter_moneybag_2024/domain/usecase/transaction_category/get_sub_transaction_category_use_case%20copy.dart';
 import 'package:flutter_moneybag_2024/domain/usecase/transaction_category/get_transaction_category_use_case.dart';
 import 'package:flutter_moneybag_2024/domain/usecase/transaction_category/update_transaction_category_user_case.dart';
 import 'package:get_it/get_it.dart';
@@ -78,4 +80,6 @@ void diSetup() {
   getIt.registerSingleton<GetTransactionCategoryUseCase>(GetTransactionCategoryUseCase(transactionCategoryRepository: getIt()));
   getIt.registerSingleton<UpdateTransactionCategoryUseCase>(UpdateTransactionCategoryUseCase(transactionCategoryRepository: getIt()));
   getIt.registerSingleton<DeleteTransactionCategoryUseCase>(DeleteTransactionCategoryUseCase(transactionCategoryRepository: getIt()));
+  getIt.registerSingleton<CreateSubTransactionCategoryUseCase>(CreateSubTransactionCategoryUseCase(transactionCategoryRepository: getIt()));
+  getIt.registerSingleton<GetSubTransactionCategoryUseCase>(GetSubTransactionCategoryUseCase(transactionCategoryRepository: getIt()));
 }

@@ -26,4 +26,27 @@ class TransactionCategoryRepositoryImpl implements TransactionCategoryRepository
   Future<void> deleteTransactionCategory({required String categoryId, required String userId}) async {
     await _transactionCategoryDataSource.deleteTransactionCategory(categoryId: categoryId, userId: userId);
   }
+
+  @override
+  Future<void> createSubTransactionCategory({required TransactionCategory transactionCategory, required String userId, required String subCategoryId}) async {
+    await _transactionCategoryDataSource.createSubTransactionCategory(transactionCategory: transactionCategory, userId: userId, subCategoryId: subCategoryId);
+  }
+
+  @override
+  Future<List<TransactionCategory>> getSubTransactionCategoryList({required String userId, required String categoryId}) async {
+    final List<TransactionCategory> categories = await _transactionCategoryDataSource.getSubTransactionCategoryList(userId: userId, categoryId: categoryId);
+    return categories;
+  }
+
+  @override
+  Future<void> deleteSubTransactionCategory({required String categoryId, required String userId, required String subCategoryId}) {
+    // TODO: implement deleteSubTransactionCategory
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> updateSubTransactionCategory({required TransactionCategory transactionCategory, required String userId, required String subCategoryId}) {
+    // TODO: implement updateSubTransactionCategory
+    throw UnimplementedError();
+  }
 }

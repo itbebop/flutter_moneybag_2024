@@ -18,6 +18,23 @@ class TransactionCategoryDataSourceImpl implements TransactionCategoryDataSource
         );
   }
 
+  CollectionReference<TransactionCategory> _subTransactionCategoryRef(String userId, String categoryId) {
+    return _firestore.collection('users').doc(userId).collection('transactionCategory').doc(categoryId).collection('subCategory').withConverter<TransactionCategory>(
+      fromFirestore: (snapshot, _) {
+        final data = snapshot.data();
+        if (data == null) {
+          throw Exception('문서가 존재하지 않거나 비어있습니다.');
+        }
+        return TransactionCategory.fromJson(data);
+      },
+      toFirestore: (transactionCategory, _) {
+        final transactionCategoryMap = transactionCategory.toJson();
+        transactionCategoryMap['AssetType'] = transactionCategory.type.displayName;
+        return transactionCategoryMap;
+      },
+    );
+  }
+
   @override
   Future<void> createTransactionCategory({required TransactionCategory transactionCategory, required String userId}) async {
     await _transactionCategoryRef(userId).add(transactionCategory).then((value) => _transactionCategoryRef(userId).doc(value.id).update({'categoryId': value.id}));
@@ -37,5 +54,33 @@ class TransactionCategoryDataSourceImpl implements TransactionCategoryDataSource
   @override
   Future<void> deleteTransactionCategory({required String categoryId, required String userId}) async {
     await _transactionCategoryRef(userId).doc(categoryId).delete();
+  }
+
+  @override
+  Future<void> createSubTransactionCategory({required TransactionCategory transactionCategory, required String userId, required String subCategoryId}) async {
+    try {
+      await _subTransactionCategoryRef(userId, transactionCategory.categoryId).doc(subCategoryId).set(transactionCategory);
+    } catch (e) {
+      print('하위 트랜잭션 카테고리 생성 중 오류 발생: $e');
+      throw Exception('하위 트랜잭션 카테고리 생성에 실패했습니다.');
+    }
+  }
+
+  @override
+  Future<List<TransactionCategory>> getSubTransactionCategoryList({required String userId, required String categoryId}) async {
+    final List<TransactionCategory> categories = await _subTransactionCategoryRef(userId, categoryId).get().then((value) => value.docs.map((e) => e.data()).toList());
+    return categories;
+  }
+
+  @override
+  Future<void> deleteSubTransactionCategory({required String categoryId, required String userId, required String subCategoryId}) {
+    // TODO: implement deleteSubTransactionCategory
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> updateSubTransactionCategory({required TransactionCategory transactionCategory, required String userId, required String subCategoryId}) {
+    // TODO: implement updateSubTransactionCategory
+    throw UnimplementedError();
   }
 }
