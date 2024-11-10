@@ -65,7 +65,7 @@ class CategoryList extends ConsumerWidget {
                 return Column(
                   children: [
                     SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.25,
+                      height: MediaQuery.of(context).size.height * 0.35,
                       child: ListView.builder(
                         itemCount: categories.length + 1,
                         itemBuilder: (context, index) {
