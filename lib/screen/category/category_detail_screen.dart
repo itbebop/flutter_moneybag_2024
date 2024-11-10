@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_moneybag_2024/common/common.dart';
-import 'package:flutter_moneybag_2024/domain/enums/asset_types.dart';
+import 'package:flutter_moneybag_2024/domain/model/transaction_category.dart';
 import 'package:flutter_moneybag_2024/screen/category/component/category_detail/category_detail_list.dart';
 import 'package:flutter_moneybag_2024/screen/category/component/category_select_button.dart';
 import 'package:flutter_moneybag_2024/screen/category/riverpod/category_state_notifier.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hugeicons/hugeicons.dart';
 
 class CategoryDetailScreen extends ConsumerStatefulWidget {
-  const CategoryDetailScreen({super.key});
+  final TransactionCategory category;
+  const CategoryDetailScreen(
+    this.category, {
+    super.key,
+  });
 
   @override
   ConsumerState<CategoryDetailScreen> createState() => _CategoryDetailScreenState();
@@ -26,27 +28,10 @@ class _CategoryDetailScreenState extends ConsumerState<CategoryDetailScreen> {
             appBar: AppBar(),
             body: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  SizedBox(height: 16.h),
-                  // CategoryList(
-                  //   title: '수입',
-                  //   icon: HugeIcons.strokeRoundedMoneyBag02,
-                  //   assetType: AssetType.income,
-                  //   categoryNameCreateController: categoryNameCreateController,
-                  //   categoryNameEditController: categoryNameEditController,
-                  // ),
-
-                  SizedBox(height: 16.h),
-                  CategoryDetailList(
-                    title: '식비',
-                    icon: HugeIcons.strokeRoundedWallet03,
-                    assetType: AssetType.expense,
-                    categoryNameCreateController: categoryNameCreateController,
-                    categoryNameEditController: categoryNameEditController,
-                  ),
-                ],
+              child: CategoryDetailList(
+                subCategory: widget.category,
+                categoryNameCreateController: categoryNameCreateController,
+                categoryNameEditController: categoryNameEditController,
               ),
             ),
           ),

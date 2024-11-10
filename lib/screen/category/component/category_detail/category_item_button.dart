@@ -17,7 +17,7 @@ class CategoryItemButton extends ConsumerWidget {
       color: UiConfig.whiteColor,
       shape: RoundedRectangleBorder(
         side: BorderSide(
-          color: assetType == AssetType.income ? UiConfig.secondaryTextColor : UiConfig.primaryColorSurface,
+          color: assetType == AssetType.expense ? UiConfig.secondaryTextColor : UiConfig.primaryColorSurface,
           width: 1,
         ),
         borderRadius: BorderRadius.circular(15),
@@ -25,12 +25,12 @@ class CategoryItemButton extends ConsumerWidget {
       child: InkWell(
         onTap: () {
           ref.read(categoryStateProvider.notifier).cancelCategoryItemUpdate();
-          ref.read(categoryStateProvider.notifier).showCategoryCardNew(true, assetType: assetType);
+          ref.read(categoryStateProvider.notifier).showCategoryCardNew(true);
         },
         child: Center(
           child: Icon(
             Icons.add,
-            color: assetType == AssetType.income ? UiConfig.secondaryTextColor : UiConfig.primaryColorSurface,
+            color: assetType == AssetType.expense ? UiConfig.secondaryTextColor : UiConfig.primaryColorSurface,
           ),
         ),
       ),
