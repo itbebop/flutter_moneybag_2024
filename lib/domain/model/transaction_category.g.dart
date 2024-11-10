@@ -13,6 +13,10 @@ _$TransactionCategoryImpl _$$TransactionCategoryImplFromJson(
       name: json['name'] as String,
       iconKey: json['iconKey'] as String,
       type: $enumDecode(_$AssetTypeEnumMap, json['type']),
+      subCategory: json['subCategory'] == null
+          ? null
+          : TransactionCategory.fromJson(
+              json['subCategory'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$TransactionCategoryImplToJson(
@@ -22,6 +26,7 @@ Map<String, dynamic> _$$TransactionCategoryImplToJson(
       'name': instance.name,
       'iconKey': instance.iconKey,
       'type': _$AssetTypeEnumMap[instance.type]!,
+      'subCategory': instance.subCategory,
     };
 
 const _$AssetTypeEnumMap = {

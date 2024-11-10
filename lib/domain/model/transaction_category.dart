@@ -11,6 +11,7 @@ class TransactionCategory with _$TransactionCategory {
     required String name, // 유형 이름 (예: Salary, Rent 등)
     required String iconKey,
     required AssetType type,
+    TransactionCategory? subCategory,
   }) = _TransactionCategory;
 
   factory TransactionCategory.fromJson(Map<String, dynamic> json) => _$TransactionCategoryFromJson(json);
