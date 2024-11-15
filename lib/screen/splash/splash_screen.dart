@@ -26,7 +26,6 @@ class _SplashScreenState extends ConsumerState<SplashScreen> with SingleTickerPr
       try {
         await ref.read(userStateProvider.notifier).fetchUser();
         await ref.read(assetStateProvier.notifier).fetchAsset();
-        await ref.read(transactionStateProvider.notifier).selectActivatedTransactionList();
       } catch (e) {
         throw Exception(e);
       }
