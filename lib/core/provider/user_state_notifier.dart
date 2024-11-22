@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_moneybag_2024/common/common.dart';
 import 'package:flutter_moneybag_2024/core/provider/user_state.dart';
-import 'package:flutter_moneybag_2024/data/data_source/user_data_source_impl.dart';
 import 'package:flutter_moneybag_2024/di/di_setup.dart';
 import 'package:flutter_moneybag_2024/domain/model/user.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -29,11 +28,6 @@ class UserStateNotifier extends StateNotifier<UserState> {
     } catch (error) {
       throw Exception(error.toString());
     }
-  }
-
-  Future<void> getUser() async {
-    await UserDataSourceImpl().createUser1();
-    // return result;
   }
 
   Future<void> logout() async {

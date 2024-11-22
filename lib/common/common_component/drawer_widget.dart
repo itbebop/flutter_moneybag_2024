@@ -75,7 +75,6 @@ class _DrawerWidgetState extends ConsumerState<DrawerWidget> {
                     onTap: () async {
                       context.push('/login');
                     },
-                    trailing: const Icon(Icons.add),
                   ),
                 const Divider(),
                 StreamBuilder<List<Asset>>(

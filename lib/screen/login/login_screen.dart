@@ -82,23 +82,6 @@ class LoginScreen extends ConsumerWidget {
                         ),
                       ),
                     ),
-                    Card(
-                      margin: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(7),
-                      ),
-                      elevation: 2,
-                      child: InkWell(
-                        onTap: () async {
-                          await ref.read(userStateProvider.notifier).getUser();
-                          // print('${user1.userId}, ${user1.name}');
-                        },
-                        child: Image.asset(
-                          'assets/image/login/google_login_icon.png',
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
                   ],
                 ),
               ),

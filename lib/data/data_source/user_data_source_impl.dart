@@ -17,30 +17,21 @@ class UserDataSourceImpl implements UserDataSource {
       );
   final _picker = ImagePicker();
   final baseUrl = dotenv.get('Base_URL');
-  final Dio _dio = Dio(
-    BaseOptions(
-      baseUrl: dotenv.get('Base_URL'), // API 기본 URL 설정
-      connectTimeout: const Duration(seconds: 10),
-      receiveTimeout: const Duration(seconds: 10),
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-      },
-    ),
-  );
+  final Dio _dio;
+
+  UserDataSourceImpl({Dio? dio}) : _dio = dio ?? Dio();
 
   @override
   Future<void> createUser({required User user}) async {
-    await _userRef.doc(user.uid.toString()).set(user);
-  }
-
-  Future<void> createUser1() async {
     try {
-      final response = await _dio.post(
-        '/users', // 엔드포인트 설정
-        data: {},
-      );
+      if (user.imgUrl.isEmpty) {
+        user = user.copyWith(imgUrl: 'https://ui-avatars.com/api/?name=${Uri.encodeComponent(user.name)}&size=50');
+      }
 
+      final response = await _dio.post(
+        '$baseUrl/users', // 엔드포인트 설정
+        data: user.toJson(),
+      );
       if (response.statusCode == 201) {
         debugPrint("User created successfully: ${response.data}");
       } else {
@@ -63,8 +54,8 @@ class UserDataSourceImpl implements UserDataSource {
 
   @override
   Future<User> getUser({required String userId}) async {
-    Response response = await _dio.get('$baseUrl/users');
-    final userJson = response.data['data']['users'];
+    Response response = await _dio.get('$baseUrl/users/$userId');
+    final userJson = response.data['data'];
     return User.fromJson(userJson);
   }
 
