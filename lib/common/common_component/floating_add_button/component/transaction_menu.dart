@@ -289,7 +289,7 @@ class TransactionMenu extends ConsumerWidget {
                             iconKey: categoryProvider.category!.iconKey,
                           ),
                           assetId: assetProvider.selectedAssetId,
-                          userId: userStateValue.user!.userId);
+                          userId: userStateValue.user!.uid);
                     }
                     // 입력을 완료하면 키보드를 숨김
                     SystemChannels.textInput.invokeMethod('TextInput.hide');

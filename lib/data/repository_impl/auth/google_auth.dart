@@ -25,16 +25,13 @@ class GoogleAuth implements SocialAuth {
       final userCredential = await auth.FirebaseAuth.instance.signInWithCredential(credential);
 
       final user = User(
-        userId: userCredential.user!.uid,
-        name: userCredential.user!.displayName!,
-        email: userCredential.user!.email!,
-        imgUrl: userCredential.user!.photoURL ?? '',
-        language: 'ko',
-        userType: UserType.free,
-        assetIdList: [],
-        firstColorListSave: [],
-        secondColorListSave: [],
-      );
+          uid: userCredential.user!.uid,
+          name: userCredential.user!.displayName!,
+          email: userCredential.user!.email!,
+          imgUrl: userCredential.user!.photoURL ?? '',
+          language: 'ko',
+          userType: UserType.free,
+          createAt: DateTime.now());
       return user;
     } catch (error) {
       return null;

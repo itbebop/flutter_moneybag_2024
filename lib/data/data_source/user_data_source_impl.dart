@@ -1,7 +1,10 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dio/dio.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_moneybag_2024/data/data_source/user_data_source.dart';
 import 'package:flutter_moneybag_2024/domain/model/user.dart';
 import 'package:image_picker/image_picker.dart';
@@ -13,10 +16,44 @@ class UserDataSourceImpl implements UserDataSource {
         toFirestore: (snapshot, _) => snapshot.toJson(),
       );
   final _picker = ImagePicker();
+  final baseUrl = dotenv.get('Base_URL');
+  final Dio _dio = Dio(
+    BaseOptions(
+      baseUrl: dotenv.get('Base_URL'), // API 기본 URL 설정
+      connectTimeout: const Duration(seconds: 10),
+      receiveTimeout: const Duration(seconds: 10),
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+    ),
+  );
 
   @override
   Future<void> createUser({required User user}) async {
-    await _userRef.doc(user.userId.toString()).set(user);
+    await _userRef.doc(user.uid.toString()).set(user);
+  }
+
+  Future<void> createUser1() async {
+    try {
+      final response = await _dio.post(
+        '/users', // 엔드포인트 설정
+        data: {},
+      );
+
+      if (response.statusCode == 201) {
+        debugPrint("User created successfully: ${response.data}");
+      } else {
+        debugPrint("Failed to create user: ${response.statusCode}");
+      }
+    } on DioException catch (e) {
+      debugPrint("Dio error: ${e.message}");
+      if (e.response != null) {
+        debugPrint("Error details: ${e.response?.data}");
+      }
+    } catch (e) {
+      debugPrint("Unexpected error: $e");
+    }
   }
 
   @override
@@ -26,8 +63,9 @@ class UserDataSourceImpl implements UserDataSource {
 
   @override
   Future<User> getUser({required String userId}) async {
-    final user = await _userRef.doc(userId).get().then((s) => s.data()!);
-    return user;
+    Response response = await _dio.get('$baseUrl/users');
+    final userJson = response.data['data']['users'];
+    return User.fromJson(userJson);
   }
 
   @override
@@ -54,7 +92,7 @@ class UserDataSourceImpl implements UserDataSource {
 
   @override
   Future<void> updateColorList({required String userId, required User user}) async {
-    await _userRef.doc(userId).update({'firstColorListSave': user.firstColorListSave, 'secondColorListSave': user.secondColorListSave});
+    // await _userRef.doc(userId).update({'firstColorListSave': user.firstColorListSave, 'secondColorListSave': user.secondColorListSave}); // TODO: user_color
   }
 
   @override

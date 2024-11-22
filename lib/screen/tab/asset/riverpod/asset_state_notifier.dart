@@ -18,18 +18,18 @@ final assetStateProvier = StateNotifierProvider<AssetStateNotifier, AssetState>(
   List<Color> firstColorList = [];
   List<Color> secondColorList = [];
   if (userState.user != null) {
-    assetIdList = userState.user!.assetIdList;
-    userId = userState.user!.userId;
-    if (userState.user!.firstColorListSave.isEmpty) {
-      firstColorList = initColorList;
-    } else {
-      firstColorList = stringToColorList(userState.user!.firstColorListSave);
-    }
-    if (userState.user!.firstColorListSave.isEmpty) {
-      secondColorList = initColorList;
-    } else {
-      secondColorList = stringToColorList(userState.user!.secondColorListSave);
-    }
+    // assetIdList = userState.user!.assetIdList;
+    // userId = userState.user!.userId;
+    // if (userState.user!.firstColorListSave.isEmpty) {
+    //   firstColorList = initColorList;
+    // } else {
+    //   firstColorList = stringToColorList(userState.user!.firstColorListSave);
+    // }
+    // if (userState.user!.firstColorListSave.isEmpty) {
+    //   secondColorList = initColorList;
+    // } else {
+    //   secondColorList = stringToColorList(userState.user!.secondColorListSave);
+    // }
   }
 
   return AssetStateNotifier(AssetState(

@@ -14,7 +14,7 @@ final categoryStateProvider = StateNotifierProvider<CategoryStateNotifier, Categ
     final userState = ref.watch(userStateProvider);
     String userId = '';
     if (userState.user != null) {
-      userId = userState.user!.userId;
+      userId = userState.user!.uid;
     }
 
     return CategoryStateNotifier(

@@ -30,7 +30,7 @@ class LoginScreenStateNotifier extends StateNotifier<LoginScreenState> {
       if (isNewUser == true) {
         state = state.copyWith(isNewUser: true);
         await state.createUserUseCase.execute(user: state.user!);
-        await state.createAssetUseCase.execute(userId: state.user!.userId);
+        await state.createAssetUseCase.execute(userId: state.user!.uid);
       }
     } catch (e) {
       throw Exception(e);

@@ -7,34 +7,24 @@ part of 'user.dart';
 // **************************************************************************
 
 _$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
-      userId: json['userId'] as String,
+      uid: json['uid'] as String,
       name: json['name'] as String,
       email: json['email'] as String,
       imgUrl: json['imgUrl'] as String,
       language: json['language'] as String,
       userType: $enumDecode(_$UserTypeEnumMap, json['userType']),
-      assetIdList: (json['assetIdList'] as List<dynamic>)
-          .map((e) => e as String)
-          .toList(),
-      firstColorListSave: (json['firstColorListSave'] as List<dynamic>)
-          .map((e) => e as String)
-          .toList(),
-      secondColorListSave: (json['secondColorListSave'] as List<dynamic>)
-          .map((e) => e as String)
-          .toList(),
+      createAt: DateTime.parse(json['createAt'] as String),
     );
 
 Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
     <String, dynamic>{
-      'userId': instance.userId,
+      'uid': instance.uid,
       'name': instance.name,
       'email': instance.email,
       'imgUrl': instance.imgUrl,
       'language': instance.language,
       'userType': _$UserTypeEnumMap[instance.userType]!,
-      'assetIdList': instance.assetIdList,
-      'firstColorListSave': instance.firstColorListSave,
-      'secondColorListSave': instance.secondColorListSave,
+      'createAt': instance.createAt.toIso8601String(),
     };
 
 const _$UserTypeEnumMap = {

@@ -17,7 +17,7 @@ final transactionStateProvider = StateNotifierProvider<TransactionStateNotifier,
   final activatedAssetIdList = activatedAssetList.map((asset) => asset.assetId).toList();
   String userId = '';
   if (userState.user != null) {
-    userId = userState.user!.userId;
+    userId = userState.user!.uid;
   }
 
   return TransactionStateNotifier(

@@ -20,15 +20,13 @@ User _$UserFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$User {
-  String get userId => throw _privateConstructorUsedError;
+  String get uid => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
   String get imgUrl => throw _privateConstructorUsedError;
   String get language => throw _privateConstructorUsedError;
   UserType get userType => throw _privateConstructorUsedError;
-  List<String> get assetIdList => throw _privateConstructorUsedError;
-  List<String> get firstColorListSave => throw _privateConstructorUsedError;
-  List<String> get secondColorListSave => throw _privateConstructorUsedError;
+  DateTime get createAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -41,15 +39,13 @@ abstract class $UserCopyWith<$Res> {
       _$UserCopyWithImpl<$Res, User>;
   @useResult
   $Res call(
-      {String userId,
+      {String uid,
       String name,
       String email,
       String imgUrl,
       String language,
       UserType userType,
-      List<String> assetIdList,
-      List<String> firstColorListSave,
-      List<String> secondColorListSave});
+      DateTime createAt});
 }
 
 /// @nodoc
@@ -65,20 +61,18 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? userId = null,
+    Object? uid = null,
     Object? name = null,
     Object? email = null,
     Object? imgUrl = null,
     Object? language = null,
     Object? userType = null,
-    Object? assetIdList = null,
-    Object? firstColorListSave = null,
-    Object? secondColorListSave = null,
+    Object? createAt = null,
   }) {
     return _then(_value.copyWith(
-      userId: null == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
+      uid: null == uid
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
               as String,
       name: null == name
           ? _value.name
@@ -100,18 +94,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.userType
           : userType // ignore: cast_nullable_to_non_nullable
               as UserType,
-      assetIdList: null == assetIdList
-          ? _value.assetIdList
-          : assetIdList // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      firstColorListSave: null == firstColorListSave
-          ? _value.firstColorListSave
-          : firstColorListSave // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      secondColorListSave: null == secondColorListSave
-          ? _value.secondColorListSave
-          : secondColorListSave // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+      createAt: null == createAt
+          ? _value.createAt
+          : createAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ) as $Val);
   }
 }
@@ -124,15 +110,13 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String userId,
+      {String uid,
       String name,
       String email,
       String imgUrl,
       String language,
       UserType userType,
-      List<String> assetIdList,
-      List<String> firstColorListSave,
-      List<String> secondColorListSave});
+      DateTime createAt});
 }
 
 /// @nodoc
@@ -145,20 +129,18 @@ class __$$UserImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? userId = null,
+    Object? uid = null,
     Object? name = null,
     Object? email = null,
     Object? imgUrl = null,
     Object? language = null,
     Object? userType = null,
-    Object? assetIdList = null,
-    Object? firstColorListSave = null,
-    Object? secondColorListSave = null,
+    Object? createAt = null,
   }) {
     return _then(_$UserImpl(
-      userId: null == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
+      uid: null == uid
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
               as String,
       name: null == name
           ? _value.name
@@ -180,18 +162,10 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.userType
           : userType // ignore: cast_nullable_to_non_nullable
               as UserType,
-      assetIdList: null == assetIdList
-          ? _value._assetIdList
-          : assetIdList // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      firstColorListSave: null == firstColorListSave
-          ? _value._firstColorListSave
-          : firstColorListSave // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      secondColorListSave: null == secondColorListSave
-          ? _value._secondColorListSave
-          : secondColorListSave // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+      createAt: null == createAt
+          ? _value.createAt
+          : createAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ));
   }
 }
@@ -200,24 +174,19 @@ class __$$UserImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$UserImpl implements _User {
   const _$UserImpl(
-      {required this.userId,
+      {required this.uid,
       required this.name,
       required this.email,
       required this.imgUrl,
       required this.language,
       required this.userType,
-      required final List<String> assetIdList,
-      required final List<String> firstColorListSave,
-      required final List<String> secondColorListSave})
-      : _assetIdList = assetIdList,
-        _firstColorListSave = firstColorListSave,
-        _secondColorListSave = secondColorListSave;
+      required this.createAt});
 
   factory _$UserImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserImplFromJson(json);
 
   @override
-  final String userId;
+  final String uid;
   @override
   final String name;
   @override
@@ -228,35 +197,12 @@ class _$UserImpl implements _User {
   final String language;
   @override
   final UserType userType;
-  final List<String> _assetIdList;
   @override
-  List<String> get assetIdList {
-    if (_assetIdList is EqualUnmodifiableListView) return _assetIdList;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_assetIdList);
-  }
-
-  final List<String> _firstColorListSave;
-  @override
-  List<String> get firstColorListSave {
-    if (_firstColorListSave is EqualUnmodifiableListView)
-      return _firstColorListSave;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_firstColorListSave);
-  }
-
-  final List<String> _secondColorListSave;
-  @override
-  List<String> get secondColorListSave {
-    if (_secondColorListSave is EqualUnmodifiableListView)
-      return _secondColorListSave;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_secondColorListSave);
-  }
+  final DateTime createAt;
 
   @override
   String toString() {
-    return 'User(userId: $userId, name: $name, email: $email, imgUrl: $imgUrl, language: $language, userType: $userType, assetIdList: $assetIdList, firstColorListSave: $firstColorListSave, secondColorListSave: $secondColorListSave)';
+    return 'User(uid: $uid, name: $name, email: $email, imgUrl: $imgUrl, language: $language, userType: $userType, createAt: $createAt)';
   }
 
   @override
@@ -264,7 +210,7 @@ class _$UserImpl implements _User {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UserImpl &&
-            (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.uid, uid) || other.uid == uid) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.imgUrl, imgUrl) || other.imgUrl == imgUrl) &&
@@ -272,27 +218,14 @@ class _$UserImpl implements _User {
                 other.language == language) &&
             (identical(other.userType, userType) ||
                 other.userType == userType) &&
-            const DeepCollectionEquality()
-                .equals(other._assetIdList, _assetIdList) &&
-            const DeepCollectionEquality()
-                .equals(other._firstColorListSave, _firstColorListSave) &&
-            const DeepCollectionEquality()
-                .equals(other._secondColorListSave, _secondColorListSave));
+            (identical(other.createAt, createAt) ||
+                other.createAt == createAt));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      userId,
-      name,
-      email,
-      imgUrl,
-      language,
-      userType,
-      const DeepCollectionEquality().hash(_assetIdList),
-      const DeepCollectionEquality().hash(_firstColorListSave),
-      const DeepCollectionEquality().hash(_secondColorListSave));
+      runtimeType, uid, name, email, imgUrl, language, userType, createAt);
 
   @JsonKey(ignore: true)
   @override
@@ -310,20 +243,18 @@ class _$UserImpl implements _User {
 
 abstract class _User implements User {
   const factory _User(
-      {required final String userId,
+      {required final String uid,
       required final String name,
       required final String email,
       required final String imgUrl,
       required final String language,
       required final UserType userType,
-      required final List<String> assetIdList,
-      required final List<String> firstColorListSave,
-      required final List<String> secondColorListSave}) = _$UserImpl;
+      required final DateTime createAt}) = _$UserImpl;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
 
   @override
-  String get userId;
+  String get uid;
   @override
   String get name;
   @override
@@ -335,11 +266,7 @@ abstract class _User implements User {
   @override
   UserType get userType;
   @override
-  List<String> get assetIdList;
-  @override
-  List<String> get firstColorListSave;
-  @override
-  List<String> get secondColorListSave;
+  DateTime get createAt;
   @override
   @JsonKey(ignore: true)
   _$$UserImplCopyWith<_$UserImpl> get copyWith =>
