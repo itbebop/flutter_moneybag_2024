@@ -27,13 +27,18 @@ class UserDataSourceImpl implements UserDataSource {
       if (user.imgUrl.isEmpty) {
         user = user.copyWith(imgUrl: 'https://ui-avatars.com/api/?name=${Uri.encodeComponent(user.name)}&size=50');
       }
+      final userJson = user.toJson();
+      userJson['action'] = 'createUser';
 
       final response = await _dio.post(
         '$baseUrl/users', // 엔드포인트 설정
-        data: user.toJson(),
+        data: userJson,
       );
+
       if (response.statusCode == 201) {
         debugPrint("User created successfully: ${response.data}");
+        user = user.copyWith(userId: int.parse(response.data['data']));
+        await _userRef.doc(user.uid).set(user);
       } else {
         debugPrint("Failed to create user: ${response.statusCode}");
       }
@@ -54,7 +59,13 @@ class UserDataSourceImpl implements UserDataSource {
 
   @override
   Future<User> getUser({required String userId}) async {
-    Response response = await _dio.get('$baseUrl/users/$userId');
+    Response response = await _dio.post(
+      '$baseUrl/users/',
+      data: {
+        'uid': userId,
+        'action': getUser,
+      },
+    );
     final userJson = response.data['data'];
     return User.fromJson(userJson);
   }

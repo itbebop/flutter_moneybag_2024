@@ -25,6 +25,7 @@ class GoogleAuth implements SocialAuth {
       final userCredential = await auth.FirebaseAuth.instance.signInWithCredential(credential);
 
       final user = User(
+          userId: 0,
           uid: userCredential.user!.uid,
           name: userCredential.user!.displayName!,
           email: userCredential.user!.email!,

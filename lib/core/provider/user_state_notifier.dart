@@ -45,7 +45,16 @@ class UserStateNotifier extends StateNotifier<UserState> {
       User newUser;
       if (state.user != null) {
         final user = state.user;
-        newUser = User(uid: user!.uid, name: user.name, email: user.email, imgUrl: user.imgUrl, language: user.language, userType: user.userType, createAt: DateTime.now());
+        newUser = User(
+          userId: 0,
+          uid: user!.uid,
+          name: user.name,
+          email: user.email,
+          imgUrl: user.imgUrl,
+          language: user.language,
+          userType: user.userType,
+          createAt: DateTime.now(),
+        );
         await state.updateColorListUsecase.execute(userId: user.uid, user: newUser);
       }
     } catch (e) {

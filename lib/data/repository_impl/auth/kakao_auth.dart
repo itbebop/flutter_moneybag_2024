@@ -24,6 +24,7 @@ class KakaoAuth implements SocialAuth {
         final kakaoUser = await kakao.UserApi.instance.me();
 
         final user = User(
+            userId: 0,
             uid: userCredential.user!.uid,
             name: kakaoUser.kakaoAccount?.profile?.nickname ?? '',
             email: kakaoUser.kakaoAccount?.email ?? '',
@@ -51,6 +52,7 @@ class KakaoAuth implements SocialAuth {
           final kakaoUser = await kakao.UserApi.instance.me();
 
           final user = User(
+              userId: 0,
               uid: userCredential.user!.uid,
               name: kakaoUser.kakaoAccount?.profile?.nickname ?? '',
               email: kakaoUser.kakaoAccount?.email ?? '',
@@ -80,6 +82,7 @@ class KakaoAuth implements SocialAuth {
         final kakaoUser = await kakao.UserApi.instance.me();
 
         final user = User(
+            userId: 0,
             uid: userCredential.user!.uid,
             name: kakaoUser.kakaoAccount?.profile?.nickname ?? '',
             email: kakaoUser.kakaoAccount?.email ?? '',

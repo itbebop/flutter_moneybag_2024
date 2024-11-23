@@ -7,24 +7,26 @@ part of 'user.dart';
 // **************************************************************************
 
 _$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
-      uid: json['uid'] as String,
+      userId: (json['userId'] as num).toInt(),
       name: json['name'] as String,
       email: json['email'] as String,
       imgUrl: json['imgUrl'] as String,
       language: json['language'] as String,
       userType: $enumDecode(_$UserTypeEnumMap, json['userType']),
       createAt: DateTime.parse(json['createAt'] as String),
+      uid: json['uid'] as String,
     );
 
 Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
     <String, dynamic>{
-      'uid': instance.uid,
+      'userId': instance.userId,
       'name': instance.name,
       'email': instance.email,
       'imgUrl': instance.imgUrl,
       'language': instance.language,
       'userType': _$UserTypeEnumMap[instance.userType]!,
       'createAt': instance.createAt.toIso8601String(),
+      'uid': instance.uid,
     };
 
 const _$UserTypeEnumMap = {

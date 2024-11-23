@@ -20,13 +20,14 @@ User _$UserFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$User {
-  String get uid => throw _privateConstructorUsedError;
+  int get userId => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
   String get imgUrl => throw _privateConstructorUsedError;
   String get language => throw _privateConstructorUsedError;
   UserType get userType => throw _privateConstructorUsedError;
   DateTime get createAt => throw _privateConstructorUsedError;
+  String get uid => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -39,13 +40,14 @@ abstract class $UserCopyWith<$Res> {
       _$UserCopyWithImpl<$Res, User>;
   @useResult
   $Res call(
-      {String uid,
+      {int userId,
       String name,
       String email,
       String imgUrl,
       String language,
       UserType userType,
-      DateTime createAt});
+      DateTime createAt,
+      String uid});
 }
 
 /// @nodoc
@@ -61,19 +63,20 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? uid = null,
+    Object? userId = null,
     Object? name = null,
     Object? email = null,
     Object? imgUrl = null,
     Object? language = null,
     Object? userType = null,
     Object? createAt = null,
+    Object? uid = null,
   }) {
     return _then(_value.copyWith(
-      uid: null == uid
-          ? _value.uid
-          : uid // ignore: cast_nullable_to_non_nullable
-              as String,
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as int,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -98,6 +101,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.createAt
           : createAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      uid: null == uid
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -110,13 +117,14 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String uid,
+      {int userId,
       String name,
       String email,
       String imgUrl,
       String language,
       UserType userType,
-      DateTime createAt});
+      DateTime createAt,
+      String uid});
 }
 
 /// @nodoc
@@ -129,19 +137,20 @@ class __$$UserImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? uid = null,
+    Object? userId = null,
     Object? name = null,
     Object? email = null,
     Object? imgUrl = null,
     Object? language = null,
     Object? userType = null,
     Object? createAt = null,
+    Object? uid = null,
   }) {
     return _then(_$UserImpl(
-      uid: null == uid
-          ? _value.uid
-          : uid // ignore: cast_nullable_to_non_nullable
-              as String,
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as int,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -166,6 +175,10 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.createAt
           : createAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      uid: null == uid
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -174,19 +187,20 @@ class __$$UserImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$UserImpl implements _User {
   const _$UserImpl(
-      {required this.uid,
+      {required this.userId,
       required this.name,
       required this.email,
       required this.imgUrl,
       required this.language,
       required this.userType,
-      required this.createAt});
+      required this.createAt,
+      required this.uid});
 
   factory _$UserImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserImplFromJson(json);
 
   @override
-  final String uid;
+  final int userId;
   @override
   final String name;
   @override
@@ -199,10 +213,12 @@ class _$UserImpl implements _User {
   final UserType userType;
   @override
   final DateTime createAt;
+  @override
+  final String uid;
 
   @override
   String toString() {
-    return 'User(uid: $uid, name: $name, email: $email, imgUrl: $imgUrl, language: $language, userType: $userType, createAt: $createAt)';
+    return 'User(userId: $userId, name: $name, email: $email, imgUrl: $imgUrl, language: $language, userType: $userType, createAt: $createAt, uid: $uid)';
   }
 
   @override
@@ -210,7 +226,7 @@ class _$UserImpl implements _User {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UserImpl &&
-            (identical(other.uid, uid) || other.uid == uid) &&
+            (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.imgUrl, imgUrl) || other.imgUrl == imgUrl) &&
@@ -219,13 +235,14 @@ class _$UserImpl implements _User {
             (identical(other.userType, userType) ||
                 other.userType == userType) &&
             (identical(other.createAt, createAt) ||
-                other.createAt == createAt));
+                other.createAt == createAt) &&
+            (identical(other.uid, uid) || other.uid == uid));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, uid, name, email, imgUrl, language, userType, createAt);
+  int get hashCode => Object.hash(runtimeType, userId, name, email, imgUrl,
+      language, userType, createAt, uid);
 
   @JsonKey(ignore: true)
   @override
@@ -243,18 +260,19 @@ class _$UserImpl implements _User {
 
 abstract class _User implements User {
   const factory _User(
-      {required final String uid,
+      {required final int userId,
       required final String name,
       required final String email,
       required final String imgUrl,
       required final String language,
       required final UserType userType,
-      required final DateTime createAt}) = _$UserImpl;
+      required final DateTime createAt,
+      required final String uid}) = _$UserImpl;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
 
   @override
-  String get uid;
+  int get userId;
   @override
   String get name;
   @override
@@ -267,6 +285,8 @@ abstract class _User implements User {
   UserType get userType;
   @override
   DateTime get createAt;
+  @override
+  String get uid;
   @override
   @JsonKey(ignore: true)
   _$$UserImplCopyWith<_$UserImpl> get copyWith =>
