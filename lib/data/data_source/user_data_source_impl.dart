@@ -58,16 +58,20 @@ class UserDataSourceImpl implements UserDataSource {
   }
 
   @override
-  Future<User> getUser({required String userId}) async {
-    Response response = await _dio.post(
-      '$baseUrl/users/',
-      data: {
-        'uid': userId,
-        'action': getUser,
-      },
-    );
+  Future<int> getUserFromFirebase({required String uid}) async {
+    final user = await _userRef.doc(uid).get().then((s) => s.data()!);
+    return user.userId;
+  }
+
+  @override
+  Future<User> getUser({required String uid}) async {
+    final userId = await getUserFromFirebase(uid: uid);
+    Response response = await _dio.get('$baseUrl/users/$userId');
     final userJson = response.data['data'];
-    return User.fromJson(userJson);
+    print('###userJson: $userJson');
+    final user = User.fromJson(userJson);
+    print('###user: ${user.name}, ${user.email}');
+    return user;
   }
 
   @override

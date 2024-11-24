@@ -14,6 +14,10 @@ _$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
       language: json['language'] as String,
       userType: $enumDecode(_$UserTypeEnumMap, json['userType']),
       createAt: DateTime.parse(json['createAt'] as String),
+      isActivated: (json['isActivated'] as num).toInt(),
+      unActivatedAt: json['unActivatedAt'] == null
+          ? null
+          : DateTime.parse(json['unActivatedAt'] as String),
       uid: json['uid'] as String,
     );
 
@@ -26,6 +30,8 @@ Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
       'language': instance.language,
       'userType': _$UserTypeEnumMap[instance.userType]!,
       'createAt': instance.createAt.toIso8601String(),
+      'isActivated': instance.isActivated,
+      'unActivatedAt': instance.unActivatedAt?.toIso8601String(),
       'uid': instance.uid,
     };
 

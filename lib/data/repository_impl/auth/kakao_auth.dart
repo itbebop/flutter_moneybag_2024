@@ -24,14 +24,16 @@ class KakaoAuth implements SocialAuth {
         final kakaoUser = await kakao.UserApi.instance.me();
 
         final user = User(
-            userId: 0,
-            uid: userCredential.user!.uid,
-            name: kakaoUser.kakaoAccount?.profile?.nickname ?? '',
-            email: kakaoUser.kakaoAccount?.email ?? '',
-            imgUrl: kakaoUser.kakaoAccount?.profile?.profileImageUrl ?? '',
-            language: 'ko',
-            userType: UserType.free,
-            createAt: DateTime.now());
+          userId: 0,
+          uid: userCredential.user!.uid,
+          name: kakaoUser.kakaoAccount?.profile?.nickname ?? '',
+          email: kakaoUser.kakaoAccount?.email ?? '',
+          imgUrl: kakaoUser.kakaoAccount?.profile?.profileImageUrl ?? '',
+          language: 'ko',
+          userType: UserType.free,
+          createAt: DateTime.now(),
+          isActivated: 1,
+        );
         return user;
       } catch (error) {
         // 사용자가 카카오톡 설치 후 디바이스 권한 요청 화면에서 로그인을 취소한 경우,
@@ -52,14 +54,16 @@ class KakaoAuth implements SocialAuth {
           final kakaoUser = await kakao.UserApi.instance.me();
 
           final user = User(
-              userId: 0,
-              uid: userCredential.user!.uid,
-              name: kakaoUser.kakaoAccount?.profile?.nickname ?? '',
-              email: kakaoUser.kakaoAccount?.email ?? '',
-              imgUrl: kakaoUser.kakaoAccount?.profile?.profileImageUrl ?? '',
-              language: 'ko',
-              userType: UserType.free,
-              createAt: DateTime.now());
+            userId: 0,
+            uid: userCredential.user!.uid,
+            name: kakaoUser.kakaoAccount?.profile?.nickname ?? '',
+            email: kakaoUser.kakaoAccount?.email ?? '',
+            imgUrl: kakaoUser.kakaoAccount?.profile?.profileImageUrl ?? '',
+            language: 'ko',
+            userType: UserType.free,
+            createAt: DateTime.now(),
+            isActivated: 1,
+          );
           return user;
         } catch (error) {
           return null;
@@ -82,14 +86,16 @@ class KakaoAuth implements SocialAuth {
         final kakaoUser = await kakao.UserApi.instance.me();
 
         final user = User(
-            userId: 0,
-            uid: userCredential.user!.uid,
-            name: kakaoUser.kakaoAccount?.profile?.nickname ?? '',
-            email: kakaoUser.kakaoAccount?.email ?? '',
-            imgUrl: kakaoUser.kakaoAccount?.profile?.profileImageUrl ?? '',
-            language: 'ko',
-            userType: UserType.free,
-            createAt: DateTime.now());
+          userId: 0,
+          uid: userCredential.user!.uid,
+          name: kakaoUser.kakaoAccount?.profile?.nickname ?? '',
+          email: kakaoUser.kakaoAccount?.email ?? '',
+          imgUrl: kakaoUser.kakaoAccount?.profile?.profileImageUrl ?? '',
+          language: 'ko',
+          userType: UserType.free,
+          createAt: DateTime.now(),
+          isActivated: 1,
+        );
         return user;
       } catch (error) {
         return null;

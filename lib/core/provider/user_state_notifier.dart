@@ -23,7 +23,7 @@ class UserStateNotifier extends StateNotifier<UserState> {
       if (currentUser == null) {
         throw Exception("User is not logged in"); // 유저가 null인 경우 예외 처리
       }
-      final user = await state.getUserUseCase.execute(userId: currentUser.uid);
+      final user = await state.getUserUseCase.execute(uid: currentUser.uid);
       state = state.copyWith(user: user, isLoading: true);
     } catch (error) {
       throw Exception(error.toString());
@@ -45,16 +45,7 @@ class UserStateNotifier extends StateNotifier<UserState> {
       User newUser;
       if (state.user != null) {
         final user = state.user;
-        newUser = User(
-          userId: 0,
-          uid: user!.uid,
-          name: user.name,
-          email: user.email,
-          imgUrl: user.imgUrl,
-          language: user.language,
-          userType: user.userType,
-          createAt: DateTime.now(),
-        );
+        newUser = User(userId: 0, uid: user!.uid, name: user.name, email: user.email, imgUrl: user.imgUrl, language: user.language, userType: user.userType, createAt: DateTime.now(), isActivated: 0);
         await state.updateColorListUsecase.execute(userId: user.uid, user: newUser);
       }
     } catch (e) {

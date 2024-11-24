@@ -6,8 +6,8 @@ class GetUserUseCase {
 
   GetUserUseCase({required UserRepository userRepository}) : _userRepository = userRepository;
 
-  Future<User> execute({required String userId}) async {
-    final result = await _userRepository.getUser(userId: userId);
+  Future<User> execute({required String uid}) async {
+    final result = await _userRepository.getUser(uid: uid);
     return result;
   }
 }

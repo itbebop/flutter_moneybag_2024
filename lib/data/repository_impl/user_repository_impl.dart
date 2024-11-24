@@ -65,10 +65,10 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<User> getUser({required String userId}) async {
+  Future<User> getUser({required String uid}) async {
     User user;
     try {
-      user = await _userDataSource.getUser(userId: userId);
+      user = await _userDataSource.getUser(uid: uid);
     } catch (error) {
       rethrow;
     }
