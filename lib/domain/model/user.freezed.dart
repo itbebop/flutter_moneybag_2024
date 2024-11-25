@@ -27,8 +27,8 @@ mixin _$User {
   String get language => throw _privateConstructorUsedError;
   UserType get userType => throw _privateConstructorUsedError;
   DateTime get createAt => throw _privateConstructorUsedError;
-  int get isActivated => throw _privateConstructorUsedError;
-  DateTime? get unActivatedAt => throw _privateConstructorUsedError;
+  int get isDeleted => throw _privateConstructorUsedError;
+  DateTime? get deletedAt => throw _privateConstructorUsedError;
   String get uid => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -49,8 +49,8 @@ abstract class $UserCopyWith<$Res> {
       String language,
       UserType userType,
       DateTime createAt,
-      int isActivated,
-      DateTime? unActivatedAt,
+      int isDeleted,
+      DateTime? deletedAt,
       String uid});
 }
 
@@ -74,8 +74,8 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? language = null,
     Object? userType = null,
     Object? createAt = null,
-    Object? isActivated = null,
-    Object? unActivatedAt = freezed,
+    Object? isDeleted = null,
+    Object? deletedAt = freezed,
     Object? uid = null,
   }) {
     return _then(_value.copyWith(
@@ -107,13 +107,13 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.createAt
           : createAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      isActivated: null == isActivated
-          ? _value.isActivated
-          : isActivated // ignore: cast_nullable_to_non_nullable
+      isDeleted: null == isDeleted
+          ? _value.isDeleted
+          : isDeleted // ignore: cast_nullable_to_non_nullable
               as int,
-      unActivatedAt: freezed == unActivatedAt
-          ? _value.unActivatedAt
-          : unActivatedAt // ignore: cast_nullable_to_non_nullable
+      deletedAt: freezed == deletedAt
+          ? _value.deletedAt
+          : deletedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
       uid: null == uid
           ? _value.uid
@@ -138,8 +138,8 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       String language,
       UserType userType,
       DateTime createAt,
-      int isActivated,
-      DateTime? unActivatedAt,
+      int isDeleted,
+      DateTime? deletedAt,
       String uid});
 }
 
@@ -160,8 +160,8 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? language = null,
     Object? userType = null,
     Object? createAt = null,
-    Object? isActivated = null,
-    Object? unActivatedAt = freezed,
+    Object? isDeleted = null,
+    Object? deletedAt = freezed,
     Object? uid = null,
   }) {
     return _then(_$UserImpl(
@@ -193,13 +193,13 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.createAt
           : createAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      isActivated: null == isActivated
-          ? _value.isActivated
-          : isActivated // ignore: cast_nullable_to_non_nullable
+      isDeleted: null == isDeleted
+          ? _value.isDeleted
+          : isDeleted // ignore: cast_nullable_to_non_nullable
               as int,
-      unActivatedAt: freezed == unActivatedAt
-          ? _value.unActivatedAt
-          : unActivatedAt // ignore: cast_nullable_to_non_nullable
+      deletedAt: freezed == deletedAt
+          ? _value.deletedAt
+          : deletedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
       uid: null == uid
           ? _value.uid
@@ -220,8 +220,8 @@ class _$UserImpl implements _User {
       required this.language,
       required this.userType,
       required this.createAt,
-      required this.isActivated,
-      this.unActivatedAt,
+      required this.isDeleted,
+      this.deletedAt,
       required this.uid});
 
   factory _$UserImpl.fromJson(Map<String, dynamic> json) =>
@@ -242,15 +242,15 @@ class _$UserImpl implements _User {
   @override
   final DateTime createAt;
   @override
-  final int isActivated;
+  final int isDeleted;
   @override
-  final DateTime? unActivatedAt;
+  final DateTime? deletedAt;
   @override
   final String uid;
 
   @override
   String toString() {
-    return 'User(userId: $userId, name: $name, email: $email, imgUrl: $imgUrl, language: $language, userType: $userType, createAt: $createAt, isActivated: $isActivated, unActivatedAt: $unActivatedAt, uid: $uid)';
+    return 'User(userId: $userId, name: $name, email: $email, imgUrl: $imgUrl, language: $language, userType: $userType, createAt: $createAt, isDeleted: $isDeleted, deletedAt: $deletedAt, uid: $uid)';
   }
 
   @override
@@ -268,17 +268,17 @@ class _$UserImpl implements _User {
                 other.userType == userType) &&
             (identical(other.createAt, createAt) ||
                 other.createAt == createAt) &&
-            (identical(other.isActivated, isActivated) ||
-                other.isActivated == isActivated) &&
-            (identical(other.unActivatedAt, unActivatedAt) ||
-                other.unActivatedAt == unActivatedAt) &&
+            (identical(other.isDeleted, isDeleted) ||
+                other.isDeleted == isDeleted) &&
+            (identical(other.deletedAt, deletedAt) ||
+                other.deletedAt == deletedAt) &&
             (identical(other.uid, uid) || other.uid == uid));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, userId, name, email, imgUrl,
-      language, userType, createAt, isActivated, unActivatedAt, uid);
+      language, userType, createAt, isDeleted, deletedAt, uid);
 
   @JsonKey(ignore: true)
   @override
@@ -303,8 +303,8 @@ abstract class _User implements User {
       required final String language,
       required final UserType userType,
       required final DateTime createAt,
-      required final int isActivated,
-      final DateTime? unActivatedAt,
+      required final int isDeleted,
+      final DateTime? deletedAt,
       required final String uid}) = _$UserImpl;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
@@ -324,9 +324,9 @@ abstract class _User implements User {
   @override
   DateTime get createAt;
   @override
-  int get isActivated;
+  int get isDeleted;
   @override
-  DateTime? get unActivatedAt;
+  DateTime? get deletedAt;
   @override
   String get uid;
   @override

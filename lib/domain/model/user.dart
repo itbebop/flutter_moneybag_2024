@@ -14,8 +14,8 @@ class User with _$User {
     required String language,
     required UserType userType,
     required DateTime createAt,
-    required int isActivated,
-    DateTime? unActivatedAt,
+    required int isDeleted,
+    DateTime? deletedAt,
     required String uid,
   }) = _User;
 

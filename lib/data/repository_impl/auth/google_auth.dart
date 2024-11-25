@@ -33,7 +33,7 @@ class GoogleAuth implements SocialAuth {
         language: 'ko',
         userType: UserType.free,
         createAt: DateTime.now(),
-        isActivated: 1,
+        isDeleted: 1,
       );
 
       return user;
