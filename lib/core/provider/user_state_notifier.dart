@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_moneybag_2024/common/common.dart';
 import 'package:flutter_moneybag_2024/core/provider/user_state.dart';
 import 'package:flutter_moneybag_2024/di/di_setup.dart';
 import 'package:flutter_moneybag_2024/domain/model/user.dart';
@@ -39,13 +38,23 @@ class UserStateNotifier extends StateNotifier<UserState> {
     List<Color> firstColorList,
     List<Color> secondColorList,
   ) async {
-    final firstColorListSave = colorToStringList(firstColorList);
-    final secondColorListSave = colorToStringList(secondColorList); // TODO: user_color테이블에 insert
+    // final firstColorListSave = colorToStringList(firstColorList);
+    // final secondColorListSave = colorToStringList(secondColorList); // TODO: user_color테이블에 insert
     try {
       User newUser;
       if (state.user != null) {
         final user = state.user;
-        newUser = User(userId: 0, uid: user!.uid, name: user.name, email: user.email, imgUrl: user.imgUrl, language: user.language, userType: user.userType, createAt: DateTime.now(), isActivated: 0);
+        newUser = User(
+          userId: 0,
+          uid: user!.uid,
+          name: user.name,
+          email: user.email,
+          imgUrl: user.imgUrl,
+          language: user.language,
+          userType: user.userType,
+          createAt: DateTime.now(),
+          isDeleted: 0,
+        );
         await state.updateColorListUsecase.execute(userId: user.uid, user: newUser);
       }
     } catch (e) {

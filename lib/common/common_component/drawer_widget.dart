@@ -108,7 +108,7 @@ class _DrawerWidgetState extends ConsumerState<DrawerWidget> {
                                       assetList[index].assetName,
                                     ),
                                     trailing: Checkbox(
-                                        value: assetList[index].isActiveAsset,
+                                        value: assetList[index].isActiveAsset == 1 ? true : false,
                                         onChanged: (value) async {
                                           await ref.read(assetStateProvier.notifier).tapCheckBox(assetList[index].assetId, value!);
                                           // 1초 후에 다른 함수 실행

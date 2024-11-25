@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
-import 'package:flutter_moneybag_2024/common/common.dart';
-import 'package:flutter_moneybag_2024/common/data/color_list.dart';
 import 'package:flutter_moneybag_2024/common/widget/alert_dialog_widget.dart';
 import 'package:flutter_moneybag_2024/core/provider/user_state_notifier.dart';
 import 'package:flutter_moneybag_2024/di/di_setup.dart';
@@ -74,10 +72,10 @@ class AssetStateNotifier extends StateNotifier<AssetState> {
       state = state.copyWith(isLoading: true);
       // 전체 assetList 가져옴
       final assetList = await state.getAssetListUseCase.execute(assetIdList: state.assetIdList);
-      // assetList의 totalAmount, totalExpense, totalIncome 합산
-      final double amount = assetList.fold(0, (sum, asset) => sum + asset.totalAmount);
-      final double expense = assetList.fold(0, (sum, asset) => sum + asset.totalExpense);
-      final double income = assetList.fold(0, (sum, asset) => sum + asset.totalIncome);
+
+      final double amount = state.totalAmount; // TODO: totalAmount 로직 추가해야
+      final double expense = state.totalExpense;
+      final double income = state.totalIncome;
 
       state = state.copyWith(
         allAssetList: assetList,
@@ -97,11 +95,11 @@ class AssetStateNotifier extends StateNotifier<AssetState> {
   }
 
   void getActivatedAssetList() {
-    final activatedAssetList = state.allAssetList.where((asset) => asset.isActiveAsset == true).toList();
+    final activatedAssetList = state.allAssetList.where((asset) => asset.isActiveAsset == 1).toList();
 
-    final double activatedAmount = activatedAssetList.fold(0, (sum, asset) => sum + asset.totalAmount);
-    final double activatedExpense = activatedAssetList.fold(0, (sum, asset) => sum + asset.totalExpense);
-    final double activatedIncome = activatedAssetList.fold(0, (sum, asset) => sum + asset.totalIncome);
+    final double activatedAmount = state.totalAmount; // TODO: activatedAsset total로직 추가해야
+    final double activatedExpense = state.totalExpense;
+    final double activatedIncome = state.totalIncome;
 
     state = state.copyWith(
       activatedAssetList: activatedAssetList,
@@ -114,10 +112,10 @@ class AssetStateNotifier extends StateNotifier<AssetState> {
   Future<void> getAsset(String assetId) async {
     final asset = await state.getAssetUseCase.execute(assetId: assetId);
     final String assetHints = asset.assetName;
-    final double assetAmount = asset.totalAmount; // 조회한 asset하나의 amount
+    final double assetAmount = state.totalAmount; // 조회한 asset하나의 amount // TODO: state에서 변수 다시 만들어야.
     final String assetName = asset.assetName;
     final String assetCurrency = asset.currency;
-    final List<int> assetColor = asset.assetColor;
+    final List<int> assetColor = state.assetColor; // TODO: 색 확인. asset.assetColor;에서 바꿈
     final firstColor = Color.fromARGB(assetColor[0], assetColor[1], assetColor[2], assetColor[3]);
     final secondColor = Color.fromARGB(assetColor[4], assetColor[5], assetColor[6], assetColor[7]);
     state = state.copyWith(

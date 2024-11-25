@@ -21,10 +21,21 @@ mixin _$AssetState {
   double get totalAmount => throw _privateConstructorUsedError;
   double get totalIncome => throw _privateConstructorUsedError;
   double get totalExpense => throw _privateConstructorUsedError;
+  double get monthlyAmount => throw _privateConstructorUsedError;
+  double get monthlyIncome => throw _privateConstructorUsedError;
+  double get monthlyExpense => throw _privateConstructorUsedError;
   double get activatedAmount => throw _privateConstructorUsedError;
   double get activatedIncome => throw _privateConstructorUsedError;
   double get activatedExpense => throw _privateConstructorUsedError;
-  double get assetAmount => throw _privateConstructorUsedError;
+  double get assetAmount => throw _privateConstructorUsedError; // 다시
+  double get totalAssetsSum => throw _privateConstructorUsedError;
+  double get totalAssetsYearly => throw _privateConstructorUsedError;
+  double get totalAssetsMonthly => throw _privateConstructorUsedError;
+  double get totalAssetsWeekly => throw _privateConstructorUsedError;
+  double get assetTotalSum => throw _privateConstructorUsedError;
+  double get assetYearly => throw _privateConstructorUsedError;
+  double get assetMonthly => throw _privateConstructorUsedError;
+  double get assetWeekly => throw _privateConstructorUsedError; //
   bool get showAssetCardUpdate => throw _privateConstructorUsedError;
   bool get showAssetCardUpdateName => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
@@ -74,10 +85,21 @@ abstract class $AssetStateCopyWith<$Res> {
       double totalAmount,
       double totalIncome,
       double totalExpense,
+      double monthlyAmount,
+      double monthlyIncome,
+      double monthlyExpense,
       double activatedAmount,
       double activatedIncome,
       double activatedExpense,
       double assetAmount,
+      double totalAssetsSum,
+      double totalAssetsYearly,
+      double totalAssetsMonthly,
+      double totalAssetsWeekly,
+      double assetTotalSum,
+      double assetYearly,
+      double assetMonthly,
+      double assetWeekly,
       bool showAssetCardUpdate,
       bool showAssetCardUpdateName,
       bool isLoading,
@@ -124,10 +146,21 @@ class _$AssetStateCopyWithImpl<$Res, $Val extends AssetState>
     Object? totalAmount = null,
     Object? totalIncome = null,
     Object? totalExpense = null,
+    Object? monthlyAmount = null,
+    Object? monthlyIncome = null,
+    Object? monthlyExpense = null,
     Object? activatedAmount = null,
     Object? activatedIncome = null,
     Object? activatedExpense = null,
     Object? assetAmount = null,
+    Object? totalAssetsSum = null,
+    Object? totalAssetsYearly = null,
+    Object? totalAssetsMonthly = null,
+    Object? totalAssetsWeekly = null,
+    Object? assetTotalSum = null,
+    Object? assetYearly = null,
+    Object? assetMonthly = null,
+    Object? assetWeekly = null,
     Object? showAssetCardUpdate = null,
     Object? showAssetCardUpdateName = null,
     Object? isLoading = null,
@@ -176,6 +209,18 @@ class _$AssetStateCopyWithImpl<$Res, $Val extends AssetState>
           ? _value.totalExpense
           : totalExpense // ignore: cast_nullable_to_non_nullable
               as double,
+      monthlyAmount: null == monthlyAmount
+          ? _value.monthlyAmount
+          : monthlyAmount // ignore: cast_nullable_to_non_nullable
+              as double,
+      monthlyIncome: null == monthlyIncome
+          ? _value.monthlyIncome
+          : monthlyIncome // ignore: cast_nullable_to_non_nullable
+              as double,
+      monthlyExpense: null == monthlyExpense
+          ? _value.monthlyExpense
+          : monthlyExpense // ignore: cast_nullable_to_non_nullable
+              as double,
       activatedAmount: null == activatedAmount
           ? _value.activatedAmount
           : activatedAmount // ignore: cast_nullable_to_non_nullable
@@ -191,6 +236,38 @@ class _$AssetStateCopyWithImpl<$Res, $Val extends AssetState>
       assetAmount: null == assetAmount
           ? _value.assetAmount
           : assetAmount // ignore: cast_nullable_to_non_nullable
+              as double,
+      totalAssetsSum: null == totalAssetsSum
+          ? _value.totalAssetsSum
+          : totalAssetsSum // ignore: cast_nullable_to_non_nullable
+              as double,
+      totalAssetsYearly: null == totalAssetsYearly
+          ? _value.totalAssetsYearly
+          : totalAssetsYearly // ignore: cast_nullable_to_non_nullable
+              as double,
+      totalAssetsMonthly: null == totalAssetsMonthly
+          ? _value.totalAssetsMonthly
+          : totalAssetsMonthly // ignore: cast_nullable_to_non_nullable
+              as double,
+      totalAssetsWeekly: null == totalAssetsWeekly
+          ? _value.totalAssetsWeekly
+          : totalAssetsWeekly // ignore: cast_nullable_to_non_nullable
+              as double,
+      assetTotalSum: null == assetTotalSum
+          ? _value.assetTotalSum
+          : assetTotalSum // ignore: cast_nullable_to_non_nullable
+              as double,
+      assetYearly: null == assetYearly
+          ? _value.assetYearly
+          : assetYearly // ignore: cast_nullable_to_non_nullable
+              as double,
+      assetMonthly: null == assetMonthly
+          ? _value.assetMonthly
+          : assetMonthly // ignore: cast_nullable_to_non_nullable
+              as double,
+      assetWeekly: null == assetWeekly
+          ? _value.assetWeekly
+          : assetWeekly // ignore: cast_nullable_to_non_nullable
               as double,
       showAssetCardUpdate: null == showAssetCardUpdate
           ? _value.showAssetCardUpdate
@@ -314,10 +391,21 @@ abstract class _$$AssetStateImplCopyWith<$Res>
       double totalAmount,
       double totalIncome,
       double totalExpense,
+      double monthlyAmount,
+      double monthlyIncome,
+      double monthlyExpense,
       double activatedAmount,
       double activatedIncome,
       double activatedExpense,
       double assetAmount,
+      double totalAssetsSum,
+      double totalAssetsYearly,
+      double totalAssetsMonthly,
+      double totalAssetsWeekly,
+      double assetTotalSum,
+      double assetYearly,
+      double assetMonthly,
+      double assetWeekly,
       bool showAssetCardUpdate,
       bool showAssetCardUpdateName,
       bool isLoading,
@@ -362,10 +450,21 @@ class __$$AssetStateImplCopyWithImpl<$Res>
     Object? totalAmount = null,
     Object? totalIncome = null,
     Object? totalExpense = null,
+    Object? monthlyAmount = null,
+    Object? monthlyIncome = null,
+    Object? monthlyExpense = null,
     Object? activatedAmount = null,
     Object? activatedIncome = null,
     Object? activatedExpense = null,
     Object? assetAmount = null,
+    Object? totalAssetsSum = null,
+    Object? totalAssetsYearly = null,
+    Object? totalAssetsMonthly = null,
+    Object? totalAssetsWeekly = null,
+    Object? assetTotalSum = null,
+    Object? assetYearly = null,
+    Object? assetMonthly = null,
+    Object? assetWeekly = null,
     Object? showAssetCardUpdate = null,
     Object? showAssetCardUpdateName = null,
     Object? isLoading = null,
@@ -414,6 +513,18 @@ class __$$AssetStateImplCopyWithImpl<$Res>
           ? _value.totalExpense
           : totalExpense // ignore: cast_nullable_to_non_nullable
               as double,
+      monthlyAmount: null == monthlyAmount
+          ? _value.monthlyAmount
+          : monthlyAmount // ignore: cast_nullable_to_non_nullable
+              as double,
+      monthlyIncome: null == monthlyIncome
+          ? _value.monthlyIncome
+          : monthlyIncome // ignore: cast_nullable_to_non_nullable
+              as double,
+      monthlyExpense: null == monthlyExpense
+          ? _value.monthlyExpense
+          : monthlyExpense // ignore: cast_nullable_to_non_nullable
+              as double,
       activatedAmount: null == activatedAmount
           ? _value.activatedAmount
           : activatedAmount // ignore: cast_nullable_to_non_nullable
@@ -429,6 +540,38 @@ class __$$AssetStateImplCopyWithImpl<$Res>
       assetAmount: null == assetAmount
           ? _value.assetAmount
           : assetAmount // ignore: cast_nullable_to_non_nullable
+              as double,
+      totalAssetsSum: null == totalAssetsSum
+          ? _value.totalAssetsSum
+          : totalAssetsSum // ignore: cast_nullable_to_non_nullable
+              as double,
+      totalAssetsYearly: null == totalAssetsYearly
+          ? _value.totalAssetsYearly
+          : totalAssetsYearly // ignore: cast_nullable_to_non_nullable
+              as double,
+      totalAssetsMonthly: null == totalAssetsMonthly
+          ? _value.totalAssetsMonthly
+          : totalAssetsMonthly // ignore: cast_nullable_to_non_nullable
+              as double,
+      totalAssetsWeekly: null == totalAssetsWeekly
+          ? _value.totalAssetsWeekly
+          : totalAssetsWeekly // ignore: cast_nullable_to_non_nullable
+              as double,
+      assetTotalSum: null == assetTotalSum
+          ? _value.assetTotalSum
+          : assetTotalSum // ignore: cast_nullable_to_non_nullable
+              as double,
+      assetYearly: null == assetYearly
+          ? _value.assetYearly
+          : assetYearly // ignore: cast_nullable_to_non_nullable
+              as double,
+      assetMonthly: null == assetMonthly
+          ? _value.assetMonthly
+          : assetMonthly // ignore: cast_nullable_to_non_nullable
+              as double,
+      assetWeekly: null == assetWeekly
+          ? _value.assetWeekly
+          : assetWeekly // ignore: cast_nullable_to_non_nullable
               as double,
       showAssetCardUpdate: null == showAssetCardUpdate
           ? _value.showAssetCardUpdate
@@ -547,10 +690,21 @@ class _$AssetStateImpl implements _AssetState {
       this.totalAmount = 0,
       this.totalIncome = 0,
       this.totalExpense = 0,
+      this.monthlyAmount = 0,
+      this.monthlyIncome = 0,
+      this.monthlyExpense = 0,
       this.activatedAmount = 0,
       this.activatedIncome = 0,
       this.activatedExpense = 0,
       this.assetAmount = 0,
+      this.totalAssetsSum = 0,
+      this.totalAssetsYearly = 0,
+      this.totalAssetsMonthly = 0,
+      this.totalAssetsWeekly = 0,
+      this.assetTotalSum = 0,
+      this.assetYearly = 0,
+      this.assetMonthly = 0,
+      this.assetWeekly = 0,
       this.showAssetCardUpdate = false,
       this.showAssetCardUpdateName = false,
       this.isLoading = false,
@@ -616,6 +770,15 @@ class _$AssetStateImpl implements _AssetState {
   final double totalExpense;
   @override
   @JsonKey()
+  final double monthlyAmount;
+  @override
+  @JsonKey()
+  final double monthlyIncome;
+  @override
+  @JsonKey()
+  final double monthlyExpense;
+  @override
+  @JsonKey()
   final double activatedAmount;
   @override
   @JsonKey()
@@ -626,6 +789,32 @@ class _$AssetStateImpl implements _AssetState {
   @override
   @JsonKey()
   final double assetAmount;
+// 다시
+  @override
+  @JsonKey()
+  final double totalAssetsSum;
+  @override
+  @JsonKey()
+  final double totalAssetsYearly;
+  @override
+  @JsonKey()
+  final double totalAssetsMonthly;
+  @override
+  @JsonKey()
+  final double totalAssetsWeekly;
+  @override
+  @JsonKey()
+  final double assetTotalSum;
+  @override
+  @JsonKey()
+  final double assetYearly;
+  @override
+  @JsonKey()
+  final double assetMonthly;
+  @override
+  @JsonKey()
+  final double assetWeekly;
+//
   @override
   @JsonKey()
   final bool showAssetCardUpdate;
@@ -723,7 +912,7 @@ class _$AssetStateImpl implements _AssetState {
 
   @override
   String toString() {
-    return 'AssetState(allAssetList: $allAssetList, activatedAssetList: $activatedAssetList, totalAmount: $totalAmount, totalIncome: $totalIncome, totalExpense: $totalExpense, activatedAmount: $activatedAmount, activatedIncome: $activatedIncome, activatedExpense: $activatedExpense, assetAmount: $assetAmount, showAssetCardUpdate: $showAssetCardUpdate, showAssetCardUpdateName: $showAssetCardUpdateName, isLoading: $isLoading, isCheckedAsset: $isCheckedAsset, selectedAssetCardIndex: $selectedAssetCardIndex, firstColorList: $firstColorList, secondColorList: $secondColorList, firstColorListSave: $firstColorListSave, secondColorListSave: $secondColorListSave, assetType: $assetType, firstColor: $firstColor, secondColor: $secondColor, userId: $userId, assetHints: $assetHints, assetName: $assetName, assetColor: $assetColor, assetCurrency: $assetCurrency, currencyHints: $currencyHints, selectedAssetId: $selectedAssetId, assetIdList: $assetIdList, getAssetListUseCase: $getAssetListUseCase, getAssetUseCase: $getAssetUseCase, createAssetUserCase: $createAssetUserCase, updateAssetUserCase: $updateAssetUserCase, changeActivedAssetUseCase: $changeActivedAssetUseCase, deleteAssetUseCase: $deleteAssetUseCase)';
+    return 'AssetState(allAssetList: $allAssetList, activatedAssetList: $activatedAssetList, totalAmount: $totalAmount, totalIncome: $totalIncome, totalExpense: $totalExpense, monthlyAmount: $monthlyAmount, monthlyIncome: $monthlyIncome, monthlyExpense: $monthlyExpense, activatedAmount: $activatedAmount, activatedIncome: $activatedIncome, activatedExpense: $activatedExpense, assetAmount: $assetAmount, totalAssetsSum: $totalAssetsSum, totalAssetsYearly: $totalAssetsYearly, totalAssetsMonthly: $totalAssetsMonthly, totalAssetsWeekly: $totalAssetsWeekly, assetTotalSum: $assetTotalSum, assetYearly: $assetYearly, assetMonthly: $assetMonthly, assetWeekly: $assetWeekly, showAssetCardUpdate: $showAssetCardUpdate, showAssetCardUpdateName: $showAssetCardUpdateName, isLoading: $isLoading, isCheckedAsset: $isCheckedAsset, selectedAssetCardIndex: $selectedAssetCardIndex, firstColorList: $firstColorList, secondColorList: $secondColorList, firstColorListSave: $firstColorListSave, secondColorListSave: $secondColorListSave, assetType: $assetType, firstColor: $firstColor, secondColor: $secondColor, userId: $userId, assetHints: $assetHints, assetName: $assetName, assetColor: $assetColor, assetCurrency: $assetCurrency, currencyHints: $currencyHints, selectedAssetId: $selectedAssetId, assetIdList: $assetIdList, getAssetListUseCase: $getAssetListUseCase, getAssetUseCase: $getAssetUseCase, createAssetUserCase: $createAssetUserCase, updateAssetUserCase: $updateAssetUserCase, changeActivedAssetUseCase: $changeActivedAssetUseCase, deleteAssetUseCase: $deleteAssetUseCase)';
   }
 
   @override
@@ -741,6 +930,12 @@ class _$AssetStateImpl implements _AssetState {
                 other.totalIncome == totalIncome) &&
             (identical(other.totalExpense, totalExpense) ||
                 other.totalExpense == totalExpense) &&
+            (identical(other.monthlyAmount, monthlyAmount) ||
+                other.monthlyAmount == monthlyAmount) &&
+            (identical(other.monthlyIncome, monthlyIncome) ||
+                other.monthlyIncome == monthlyIncome) &&
+            (identical(other.monthlyExpense, monthlyExpense) ||
+                other.monthlyExpense == monthlyExpense) &&
             (identical(other.activatedAmount, activatedAmount) ||
                 other.activatedAmount == activatedAmount) &&
             (identical(other.activatedIncome, activatedIncome) ||
@@ -749,6 +944,22 @@ class _$AssetStateImpl implements _AssetState {
                 other.activatedExpense == activatedExpense) &&
             (identical(other.assetAmount, assetAmount) ||
                 other.assetAmount == assetAmount) &&
+            (identical(other.totalAssetsSum, totalAssetsSum) ||
+                other.totalAssetsSum == totalAssetsSum) &&
+            (identical(other.totalAssetsYearly, totalAssetsYearly) ||
+                other.totalAssetsYearly == totalAssetsYearly) &&
+            (identical(other.totalAssetsMonthly, totalAssetsMonthly) ||
+                other.totalAssetsMonthly == totalAssetsMonthly) &&
+            (identical(other.totalAssetsWeekly, totalAssetsWeekly) ||
+                other.totalAssetsWeekly == totalAssetsWeekly) &&
+            (identical(other.assetTotalSum, assetTotalSum) ||
+                other.assetTotalSum == assetTotalSum) &&
+            (identical(other.assetYearly, assetYearly) ||
+                other.assetYearly == assetYearly) &&
+            (identical(other.assetMonthly, assetMonthly) ||
+                other.assetMonthly == assetMonthly) &&
+            (identical(other.assetWeekly, assetWeekly) ||
+                other.assetWeekly == assetWeekly) &&
             (identical(other.showAssetCardUpdate, showAssetCardUpdate) ||
                 other.showAssetCardUpdate == showAssetCardUpdate) &&
             (identical(other.showAssetCardUpdateName, showAssetCardUpdateName) ||
@@ -788,18 +999,12 @@ class _$AssetStateImpl implements _AssetState {
                 other.selectedAssetId == selectedAssetId) &&
             const DeepCollectionEquality()
                 .equals(other._assetIdList, _assetIdList) &&
-            (identical(other.getAssetListUseCase, getAssetListUseCase) ||
-                other.getAssetListUseCase == getAssetListUseCase) &&
-            (identical(other.getAssetUseCase, getAssetUseCase) ||
-                other.getAssetUseCase == getAssetUseCase) &&
-            (identical(other.createAssetUserCase, createAssetUserCase) ||
-                other.createAssetUserCase == createAssetUserCase) &&
-            (identical(other.updateAssetUserCase, updateAssetUserCase) ||
-                other.updateAssetUserCase == updateAssetUserCase) &&
-            (identical(other.changeActivedAssetUseCase, changeActivedAssetUseCase) ||
-                other.changeActivedAssetUseCase == changeActivedAssetUseCase) &&
-            (identical(other.deleteAssetUseCase, deleteAssetUseCase) ||
-                other.deleteAssetUseCase == deleteAssetUseCase));
+            (identical(other.getAssetListUseCase, getAssetListUseCase) || other.getAssetListUseCase == getAssetListUseCase) &&
+            (identical(other.getAssetUseCase, getAssetUseCase) || other.getAssetUseCase == getAssetUseCase) &&
+            (identical(other.createAssetUserCase, createAssetUserCase) || other.createAssetUserCase == createAssetUserCase) &&
+            (identical(other.updateAssetUserCase, updateAssetUserCase) || other.updateAssetUserCase == updateAssetUserCase) &&
+            (identical(other.changeActivedAssetUseCase, changeActivedAssetUseCase) || other.changeActivedAssetUseCase == changeActivedAssetUseCase) &&
+            (identical(other.deleteAssetUseCase, deleteAssetUseCase) || other.deleteAssetUseCase == deleteAssetUseCase));
   }
 
   @override
@@ -810,10 +1015,21 @@ class _$AssetStateImpl implements _AssetState {
         totalAmount,
         totalIncome,
         totalExpense,
+        monthlyAmount,
+        monthlyIncome,
+        monthlyExpense,
         activatedAmount,
         activatedIncome,
         activatedExpense,
         assetAmount,
+        totalAssetsSum,
+        totalAssetsYearly,
+        totalAssetsMonthly,
+        totalAssetsWeekly,
+        assetTotalSum,
+        assetYearly,
+        assetMonthly,
+        assetWeekly,
         showAssetCardUpdate,
         showAssetCardUpdateName,
         isLoading,
@@ -856,10 +1072,21 @@ abstract class _AssetState implements AssetState {
       final double totalAmount,
       final double totalIncome,
       final double totalExpense,
+      final double monthlyAmount,
+      final double monthlyIncome,
+      final double monthlyExpense,
       final double activatedAmount,
       final double activatedIncome,
       final double activatedExpense,
       final double assetAmount,
+      final double totalAssetsSum,
+      final double totalAssetsYearly,
+      final double totalAssetsMonthly,
+      final double totalAssetsWeekly,
+      final double assetTotalSum,
+      final double assetYearly,
+      final double assetMonthly,
+      final double assetWeekly,
       final bool showAssetCardUpdate,
       final bool showAssetCardUpdateName,
       final bool isLoading,
@@ -898,6 +1125,12 @@ abstract class _AssetState implements AssetState {
   @override
   double get totalExpense;
   @override
+  double get monthlyAmount;
+  @override
+  double get monthlyIncome;
+  @override
+  double get monthlyExpense;
+  @override
   double get activatedAmount;
   @override
   double get activatedIncome;
@@ -905,7 +1138,23 @@ abstract class _AssetState implements AssetState {
   double get activatedExpense;
   @override
   double get assetAmount;
+  @override // 다시
+  double get totalAssetsSum;
   @override
+  double get totalAssetsYearly;
+  @override
+  double get totalAssetsMonthly;
+  @override
+  double get totalAssetsWeekly;
+  @override
+  double get assetTotalSum;
+  @override
+  double get assetYearly;
+  @override
+  double get assetMonthly;
+  @override
+  double get assetWeekly;
+  @override //
   bool get showAssetCardUpdate;
   @override
   bool get showAssetCardUpdateName;

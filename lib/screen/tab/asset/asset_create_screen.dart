@@ -67,26 +67,14 @@ class _AssetCreateScreenState extends ConsumerState<AssetCreateScreen> {
                           }
                           ref.read(assetStateProvier.notifier).createAsset(
                                 Asset(
-                                  totalAmount: 0,
-                                  totalIncome: 0,
-                                  totalExpense: 0,
                                   assetId: '0',
                                   assetName: titleEditController.text,
-                                  isActiveAsset: true,
+                                  isActiveAsset: 1,
                                   currency: assetProvider.currencyHints,
-                                  userIdList: [assetProvider.userId],
                                   createdAt: DateTime.now(),
                                   updatedAt: DateTime.now(),
-                                  assetColor: [
-                                    assetProvider.firstColor.alpha,
-                                    assetProvider.firstColor.red,
-                                    assetProvider.firstColor.green,
-                                    assetProvider.firstColor.blue,
-                                    assetProvider.secondColor.alpha,
-                                    assetProvider.secondColor.red,
-                                    assetProvider.secondColor.green,
-                                    assetProvider.secondColor.blue,
-                                  ],
+                                  firstColor: 0,
+                                  secondColor: 0,
                                 ),
                               );
                           // 이 로직이 create보다 앞으로 가면 fetchUser, Asset이 안됨..

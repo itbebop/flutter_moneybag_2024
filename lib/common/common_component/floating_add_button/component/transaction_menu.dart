@@ -155,7 +155,7 @@ class TransactionMenu extends ConsumerWidget {
                                   hints: assetProvider.assetHints, // 힌트 텍스트
                                   action: (asset) {
                                     ref.read(assetStateProvier.notifier).getAsset(asset.assetId);
-                                    assetAmountController.text = asset.totalAmount.toWon().toString();
+                                    assetAmountController.text = assetProvider.totalAmount.toWon().toString();
                                   }, // Asset 선택 시 호출되는 액션
                                 ),
                               ],

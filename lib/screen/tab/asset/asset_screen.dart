@@ -143,26 +143,14 @@ class _ReportScreenState extends ConsumerState<AssetScreen> {
                                                   title: '',
                                                   onConfirm: () => ref.read(assetStateProvier.notifier).updateAsset(
                                                         Asset(
-                                                          totalAmount: assetProvider.allAssetList[index].totalAmount,
-                                                          totalIncome: assetProvider.allAssetList[index].totalIncome,
-                                                          totalExpense: assetProvider.allAssetList[index].totalExpense,
                                                           assetId: assetProvider.allAssetList[index].assetId,
                                                           assetName: titleEditController.text,
                                                           isActiveAsset: assetProvider.allAssetList[index].isActiveAsset,
                                                           currency: assetProvider.currencyHints,
-                                                          userIdList: assetProvider.allAssetList[index].userIdList,
                                                           createdAt: assetProvider.allAssetList[index].createdAt,
                                                           updatedAt: DateTime.now(),
-                                                          assetColor: [
-                                                            assetProvider.firstColor.alpha,
-                                                            assetProvider.firstColor.red,
-                                                            assetProvider.firstColor.green,
-                                                            assetProvider.firstColor.blue,
-                                                            assetProvider.secondColor.alpha,
-                                                            assetProvider.secondColor.red,
-                                                            assetProvider.secondColor.green,
-                                                            assetProvider.secondColor.blue
-                                                          ],
+                                                          firstColor: 0,
+                                                          secondColor: 0,
                                                         ),
                                                       ),
                                                 );

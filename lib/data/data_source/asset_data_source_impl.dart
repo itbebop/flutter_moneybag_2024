@@ -26,15 +26,12 @@ class AssetDataSourceImpl implements AssetDataSource {
           Asset(
             assetId: '0',
             assetName: '첫 자산',
-            isActiveAsset: true,
-            totalAmount: 0,
-            totalExpense: 0,
-            totalIncome: 0,
+            isActiveAsset: 1,
             currency: 'KRW',
             createdAt: DateTime.now(),
             updatedAt: DateTime.now(),
-            assetColor: [236, 177, 89, 1, 255, 197, 39, 1],
-            userIdList: [userId],
+            firstColor: 0,
+            secondColor: 0,
           ),
         );
         // assetId 업데이트

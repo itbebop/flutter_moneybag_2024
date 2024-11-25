@@ -19,10 +19,11 @@ class AssetCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final assetColor = asset.assetColor;
+    final assetProvider = ref.watch(assetStateProvier);
+    final assetColor = assetProvider.assetColor; // TODO: assetColor확인
     final title = asset.assetName;
     final currency = asset.currency;
-    final amount = asset.totalAmount;
+    final amount = assetProvider.totalAmount;
     return Stack(
       children: [
         Align(
