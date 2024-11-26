@@ -75,7 +75,13 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<bool> updateUserName({required String userId, required String name}) async {
+  Future<List<String>> getUserPallete({required int userId}) async {
+    List<String> colorList = await _userDataSource.getUserPallete(userId: userId);
+    return colorList;
+  }
+
+  @override
+  Future<bool> updateUserName({required int userId, required String name}) async {
     bool result = false;
     try {
       await _userDataSource.updateUserName(userId: userId, name: name);
@@ -87,17 +93,17 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<void> updateColorList({required String userId, required User user}) async {
+  Future<void> updateColorList({required int userId, required User user}) async {
     await _userDataSource.updateColorList(userId: userId, user: user);
   }
 
   @override
-  Future<void> updatePhoto({required String userId}) async {
+  Future<void> updatePhoto({required int userId}) async {
     await _userDataSource.updatePhoto(userId: userId);
   }
 
   @override
-  Future<void> updateLanguage({required String lang, required String userId}) async {
+  Future<void> updateLanguage({required String lang, required int userId}) async {
     await _userDataSource.updateLanguage(lang: lang, userId: userId);
   }
 }

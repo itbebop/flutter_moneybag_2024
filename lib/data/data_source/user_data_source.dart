@@ -5,9 +5,10 @@ abstract interface class UserDataSource {
   Future<void> signOut();
   Future<int> getUserFromFirebase({required String uid});
   Future<User> getUser({required String uid});
+  Future<List<String>> getUserPallete({required int userId});
   Future<bool> isNewUser({required User user});
-  Future<void> updateColorList({required String userId, required User user});
-  Future<void> updateUserName({required String userId, required String name});
-  Future<void> updateLanguage({required String lang, required String userId});
-  Future<void> updatePhoto({required String userId});
+  Future<void> updateColorList({required int userId, required User user});
+  Future<void> updateUserName({required int userId, required String name});
+  Future<void> updateLanguage({required String lang, required int userId});
+  Future<void> updatePhoto({required int userId});
 }

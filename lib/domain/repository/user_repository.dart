@@ -9,8 +9,9 @@ abstract interface class UserRepository {
   Future<int> createUser({required User user});
   Future<bool> isNewUser({required User user});
   Future<User> getUser({required String uid});
-  Future<bool> updateUserName({required String userId, required String name});
-  Future<void> updateColorList({required String userId, required User user});
-  Future<void> updatePhoto({required String userId});
-  Future<void> updateLanguage({required String lang, required String userId});
+  Future<List<String>> getUserPallete({required int userId});
+  Future<bool> updateUserName({required int userId, required String name});
+  Future<void> updateColorList({required int userId, required User user});
+  Future<void> updatePhoto({required int userId});
+  Future<void> updateLanguage({required String lang, required int userId});
 }

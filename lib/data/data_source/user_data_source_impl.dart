@@ -65,10 +65,35 @@ class UserDataSourceImpl implements UserDataSource {
   @override
   Future<User> getUser({required String uid}) async {
     final userId = await getUserFromFirebase(uid: uid);
-    Response response = await _dio.get('$baseUrl/users/$userId');
+    final Options options = Options(
+      headers: {
+        'action': 'getUser',
+      },
+    );
+
+    Response response = await _dio.get(
+      '$baseUrl/users/$userId',
+      options: options,
+    );
     final userJson = response.data['data'];
     final user = User.fromJson(userJson);
     return user;
+  }
+
+  @override
+  Future<List<String>> getUserPallete({required int userId}) async {
+    final Options options = Options(
+      headers: {
+        'action': 'getUser',
+      },
+    );
+
+    Response response = await _dio.get(
+      '$baseUrl/users/$userId',
+      options: options,
+    );
+    final List<String> colorList = response.data['data'];
+    return colorList;
   }
 
   @override
@@ -89,22 +114,22 @@ class UserDataSourceImpl implements UserDataSource {
   }
 
   @override
-  Future<void> updateUserName({required String userId, required String name}) async {
-    await _userRef.doc(userId).update({'name': name});
+  Future<void> updateUserName({required int userId, required String name}) async {
+    await _userRef.doc('userId').update({'name': name});
   }
 
   @override
-  Future<void> updateColorList({required String userId, required User user}) async {
+  Future<void> updateColorList({required int userId, required User user}) async {
     // await _userRef.doc(userId).update({'firstColorListSave': user.firstColorListSave, 'secondColorListSave': user.secondColorListSave}); // TODO: user_color
   }
 
   @override
-  Future<void> updateLanguage({required String lang, required String userId}) async {
-    await _userRef.doc(userId).update({'language': lang});
+  Future<void> updateLanguage({required String lang, required int userId}) async {
+    await _userRef.doc('userId').update({'language': lang});
   }
 
   @override
-  Future<void> updatePhoto({required String userId}) async {
+  Future<void> updatePhoto({required int userId}) async {
     XFile? xFile = await _picker.pickImage(source: ImageSource.gallery);
     if (xFile != null) {
       //이미지 업로드
@@ -116,7 +141,7 @@ class UserDataSourceImpl implements UserDataSource {
       final downloadUrl = await imageRef.getDownloadURL();
 
       //업데이트 (이후 currentUser로 바꾸기)
-      await _userRef.doc(userId).update({'imageUrl': downloadUrl});
+      await _userRef.doc('userId').update({'imageUrl': downloadUrl});
     }
   }
 }
