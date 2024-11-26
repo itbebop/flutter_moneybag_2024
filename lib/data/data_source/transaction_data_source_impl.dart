@@ -19,17 +19,17 @@ class TransactionDataSourceImpl implements TransactionDataSource {
   }
 
   @override
-  Future<void> createTransaction({required TransactionDetail transaction, required String assetId, required String userId}) async {
+  Future<void> createTransaction({required TransactionDetail transaction, required int assetId, required int userId}) async {
     // 고유 transactionId를 생성
     final transactionId = '${transaction.category.categoryId}_${transaction.createdAt}_${transaction.amount}';
 
     // transactionId를 사용하여 문서를 추가
-    await _transactionRef(assetId, userId).doc(transactionId).set(transaction).then((value) => _transactionRef(assetId, userId).doc(transactionId).update({'transactionId': transactionId}));
+    await _transactionRef('assetId', 'userId').doc(transactionId).set(transaction).then((value) => _transactionRef('assetId', 'userId').doc(transactionId).update({'transactionId': transactionId}));
 
     final assetRef = FirebaseFirestore.instance.collection('assets');
 
     // totalAmount에 transaction.amount를 더하는 로직
-    await assetRef.doc(assetId).update({
+    await assetRef.doc('assetId').update({
       'totalAmount': FieldValue.increment(transaction.amount),
       // transaction.amount가 양수이면 totalIncome에 더하고, 음수이면 totalExpense에 더하는 로직 추가
       'totalIncome': FieldValue.increment(transaction.amount > 0 ? transaction.amount : 0),
@@ -38,11 +38,11 @@ class TransactionDataSourceImpl implements TransactionDataSource {
   }
 
   @override
-  Future<List<TransactionDetail>> getTransactionList({required List<String> assetIdList, required String userId}) async {
+  Future<List<TransactionDetail>> getTransactionList({required List<int> assetIdList, required int userId}) async {
     List<TransactionDetail> allTransactions = [];
 
-    for (String assetId in assetIdList) {
-      final transactions = await _transactionRef(assetId, userId).orderBy('updatedAt', descending: true).get();
+    for (int assetId in assetIdList) {
+      final transactions = await _transactionRef('assetId', 'userId').orderBy('updatedAt', descending: true).get();
       allTransactions.addAll(transactions.docs.map((e) => e.data()));
     }
 
@@ -50,12 +50,12 @@ class TransactionDataSourceImpl implements TransactionDataSource {
   }
 
   @override
-  Future<void> updateTransaction({required TransactionDetail transaction, required String assetId, required String userId}) async {
-    await _transactionRef(assetId, userId).doc(transaction.transactionId).set(transaction);
+  Future<void> updateTransaction({required TransactionDetail transaction, required int assetId, required int userId}) async {
+    await _transactionRef('assetId', 'userId').doc(transaction.transactionId).set(transaction);
   }
 
   @override
-  Future<void> deleteTransaction({required String transactionId, required String assetId, required String userId}) async {
-    await _transactionRef(assetId, userId).doc(transactionId).delete();
+  Future<void> deleteTransaction({required int transactionId, required int assetId, required int userId}) async {
+    await _transactionRef('assetId', 'userId').doc('transactionId').delete();
   }
 }

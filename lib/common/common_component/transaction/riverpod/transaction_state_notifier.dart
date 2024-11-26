@@ -11,13 +11,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 final transactionStateProvider = StateNotifierProvider<TransactionStateNotifier, TransactionState>((ref) {
   final assetState = ref.watch(assetStateProvier);
   final userState = ref.watch(userStateProvider);
-  final List<String> assetIdList = assetState.assetIdList;
+  final List<int> assetIdList = assetState.assetIdList;
   final assetType = assetState.assetType;
   final activatedAssetList = assetState.activatedAssetList;
   final activatedAssetIdList = activatedAssetList.map((asset) => asset.assetId).toList();
-  String userId = '';
+  int userId = 0;
   if (userState.user != null) {
-    userId = userState.user!.uid;
+    // userId = userState.user!.uid;
   }
 
   return TransactionStateNotifier(
@@ -26,7 +26,7 @@ final transactionStateProvider = StateNotifierProvider<TransactionStateNotifier,
       deleteTransactionUseCase: getIt(),
       getTransactionListUseCase: getIt(),
       updateTransactionUseCase: getIt(),
-      assetId: '',
+      assetId: 0,
       assetIdList: assetIdList,
       assetType: assetType,
       selectedEvents: ValueNotifier([]),
@@ -41,11 +41,11 @@ final transactionStateProvider = StateNotifierProvider<TransactionStateNotifier,
 class TransactionStateNotifier extends StateNotifier<TransactionState> {
   TransactionStateNotifier(super.state);
 
-  void selectAsset(String assetId) {
+  void selectAsset(int assetId) {
     state = state.copyWith(assetId: assetId);
   }
 
-  void setAssetId(String assetId) {
+  void setAssetId(int assetId) {
     state = state.copyWith(assetId: assetId);
   }
 
@@ -61,7 +61,7 @@ class TransactionStateNotifier extends StateNotifier<TransactionState> {
     state = state.copyWith(selectedDay: selectedDay, focusedDay: focusedDay);
   }
 
-  Future<void> createTransaction({required String memo, required String amount, required DateTime createAt, required TransactionCategory category, required String assetId, userId}) async {
+  Future<void> createTransaction({required String memo, required String amount, required DateTime createAt, required TransactionCategory category, required int assetId, userId}) async {
     final transactionDetail = TransactionDetail(
       transactionId: '1',
       memo: memo,

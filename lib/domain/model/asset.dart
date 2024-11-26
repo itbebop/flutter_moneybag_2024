@@ -6,7 +6,7 @@ part 'asset.g.dart';
 @freezed
 class Asset with _$Asset {
   const factory Asset({
-    required String assetId,
+    required int assetId,
     required String assetName,
     required String currency,
     required int isActiveAsset,

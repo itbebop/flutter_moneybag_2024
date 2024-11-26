@@ -19,15 +19,15 @@ mixin _$TransactionState {
   bool get isLoading => throw _privateConstructorUsedError;
   List<TransactionDetail> get activatedTransactionList =>
       throw _privateConstructorUsedError;
-  String get userId => throw _privateConstructorUsedError;
+  int get userId => throw _privateConstructorUsedError;
+  int get assetId => throw _privateConstructorUsedError;
   DateTime get selectedDay => throw _privateConstructorUsedError;
   DateTime get focusedDay => throw _privateConstructorUsedError;
   ValueNotifier<List<TransactionDetail>> get selectedEvents =>
       throw _privateConstructorUsedError;
-  String get assetId => throw _privateConstructorUsedError;
   AssetType get assetType => throw _privateConstructorUsedError;
-  List<String> get assetIdList => throw _privateConstructorUsedError;
-  List<String> get activatedAssetIdList => throw _privateConstructorUsedError;
+  List<int> get assetIdList => throw _privateConstructorUsedError;
+  List<int> get activatedAssetIdList => throw _privateConstructorUsedError;
   CreateTransactionUseCase get createTransactionUseCase =>
       throw _privateConstructorUsedError;
   DeleteTransactionUseCase get deleteTransactionUseCase =>
@@ -51,14 +51,14 @@ abstract class $TransactionStateCopyWith<$Res> {
   $Res call(
       {bool isLoading,
       List<TransactionDetail> activatedTransactionList,
-      String userId,
+      int userId,
+      int assetId,
       DateTime selectedDay,
       DateTime focusedDay,
       ValueNotifier<List<TransactionDetail>> selectedEvents,
-      String assetId,
       AssetType assetType,
-      List<String> assetIdList,
-      List<String> activatedAssetIdList,
+      List<int> assetIdList,
+      List<int> activatedAssetIdList,
       CreateTransactionUseCase createTransactionUseCase,
       DeleteTransactionUseCase deleteTransactionUseCase,
       GetTransactionListUseCase getTransactionListUseCase,
@@ -81,10 +81,10 @@ class _$TransactionStateCopyWithImpl<$Res, $Val extends TransactionState>
     Object? isLoading = null,
     Object? activatedTransactionList = null,
     Object? userId = null,
+    Object? assetId = null,
     Object? selectedDay = null,
     Object? focusedDay = null,
     Object? selectedEvents = null,
-    Object? assetId = null,
     Object? assetType = null,
     Object? assetIdList = null,
     Object? activatedAssetIdList = null,
@@ -105,7 +105,11 @@ class _$TransactionStateCopyWithImpl<$Res, $Val extends TransactionState>
       userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
+      assetId: null == assetId
+          ? _value.assetId
+          : assetId // ignore: cast_nullable_to_non_nullable
+              as int,
       selectedDay: null == selectedDay
           ? _value.selectedDay
           : selectedDay // ignore: cast_nullable_to_non_nullable
@@ -118,10 +122,6 @@ class _$TransactionStateCopyWithImpl<$Res, $Val extends TransactionState>
           ? _value.selectedEvents
           : selectedEvents // ignore: cast_nullable_to_non_nullable
               as ValueNotifier<List<TransactionDetail>>,
-      assetId: null == assetId
-          ? _value.assetId
-          : assetId // ignore: cast_nullable_to_non_nullable
-              as String,
       assetType: null == assetType
           ? _value.assetType
           : assetType // ignore: cast_nullable_to_non_nullable
@@ -129,11 +129,11 @@ class _$TransactionStateCopyWithImpl<$Res, $Val extends TransactionState>
       assetIdList: null == assetIdList
           ? _value.assetIdList
           : assetIdList // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<int>,
       activatedAssetIdList: null == activatedAssetIdList
           ? _value.activatedAssetIdList
           : activatedAssetIdList // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<int>,
       createTransactionUseCase: null == createTransactionUseCase
           ? _value.createTransactionUseCase
           : createTransactionUseCase // ignore: cast_nullable_to_non_nullable
@@ -165,14 +165,14 @@ abstract class _$$TransactionStateImplCopyWith<$Res>
   $Res call(
       {bool isLoading,
       List<TransactionDetail> activatedTransactionList,
-      String userId,
+      int userId,
+      int assetId,
       DateTime selectedDay,
       DateTime focusedDay,
       ValueNotifier<List<TransactionDetail>> selectedEvents,
-      String assetId,
       AssetType assetType,
-      List<String> assetIdList,
-      List<String> activatedAssetIdList,
+      List<int> assetIdList,
+      List<int> activatedAssetIdList,
       CreateTransactionUseCase createTransactionUseCase,
       DeleteTransactionUseCase deleteTransactionUseCase,
       GetTransactionListUseCase getTransactionListUseCase,
@@ -193,10 +193,10 @@ class __$$TransactionStateImplCopyWithImpl<$Res>
     Object? isLoading = null,
     Object? activatedTransactionList = null,
     Object? userId = null,
+    Object? assetId = null,
     Object? selectedDay = null,
     Object? focusedDay = null,
     Object? selectedEvents = null,
-    Object? assetId = null,
     Object? assetType = null,
     Object? assetIdList = null,
     Object? activatedAssetIdList = null,
@@ -217,7 +217,11 @@ class __$$TransactionStateImplCopyWithImpl<$Res>
       userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
+      assetId: null == assetId
+          ? _value.assetId
+          : assetId // ignore: cast_nullable_to_non_nullable
+              as int,
       selectedDay: null == selectedDay
           ? _value.selectedDay
           : selectedDay // ignore: cast_nullable_to_non_nullable
@@ -230,10 +234,6 @@ class __$$TransactionStateImplCopyWithImpl<$Res>
           ? _value.selectedEvents
           : selectedEvents // ignore: cast_nullable_to_non_nullable
               as ValueNotifier<List<TransactionDetail>>,
-      assetId: null == assetId
-          ? _value.assetId
-          : assetId // ignore: cast_nullable_to_non_nullable
-              as String,
       assetType: null == assetType
           ? _value.assetType
           : assetType // ignore: cast_nullable_to_non_nullable
@@ -241,11 +241,11 @@ class __$$TransactionStateImplCopyWithImpl<$Res>
       assetIdList: null == assetIdList
           ? _value._assetIdList
           : assetIdList // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<int>,
       activatedAssetIdList: null == activatedAssetIdList
           ? _value._activatedAssetIdList
           : activatedAssetIdList // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<int>,
       createTransactionUseCase: null == createTransactionUseCase
           ? _value.createTransactionUseCase
           : createTransactionUseCase // ignore: cast_nullable_to_non_nullable
@@ -273,13 +273,13 @@ class _$TransactionStateImpl implements _TransactionState {
       {this.isLoading = false,
       final List<TransactionDetail> activatedTransactionList = const [],
       required this.userId,
+      required this.assetId,
       required this.selectedDay,
       required this.focusedDay,
       required this.selectedEvents,
-      required this.assetId,
       required this.assetType,
-      required final List<String> assetIdList,
-      required final List<String> activatedAssetIdList,
+      required final List<int> assetIdList,
+      required final List<int> activatedAssetIdList,
       required this.createTransactionUseCase,
       required this.deleteTransactionUseCase,
       required this.getTransactionListUseCase,
@@ -302,7 +302,9 @@ class _$TransactionStateImpl implements _TransactionState {
   }
 
   @override
-  final String userId;
+  final int userId;
+  @override
+  final int assetId;
   @override
   final DateTime selectedDay;
   @override
@@ -310,20 +312,18 @@ class _$TransactionStateImpl implements _TransactionState {
   @override
   final ValueNotifier<List<TransactionDetail>> selectedEvents;
   @override
-  final String assetId;
-  @override
   final AssetType assetType;
-  final List<String> _assetIdList;
+  final List<int> _assetIdList;
   @override
-  List<String> get assetIdList {
+  List<int> get assetIdList {
     if (_assetIdList is EqualUnmodifiableListView) return _assetIdList;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_assetIdList);
   }
 
-  final List<String> _activatedAssetIdList;
+  final List<int> _activatedAssetIdList;
   @override
-  List<String> get activatedAssetIdList {
+  List<int> get activatedAssetIdList {
     if (_activatedAssetIdList is EqualUnmodifiableListView)
       return _activatedAssetIdList;
     // ignore: implicit_dynamic_type
@@ -341,7 +341,7 @@ class _$TransactionStateImpl implements _TransactionState {
 
   @override
   String toString() {
-    return 'TransactionState(isLoading: $isLoading, activatedTransactionList: $activatedTransactionList, userId: $userId, selectedDay: $selectedDay, focusedDay: $focusedDay, selectedEvents: $selectedEvents, assetId: $assetId, assetType: $assetType, assetIdList: $assetIdList, activatedAssetIdList: $activatedAssetIdList, createTransactionUseCase: $createTransactionUseCase, deleteTransactionUseCase: $deleteTransactionUseCase, getTransactionListUseCase: $getTransactionListUseCase, updateTransactionUseCase: $updateTransactionUseCase)';
+    return 'TransactionState(isLoading: $isLoading, activatedTransactionList: $activatedTransactionList, userId: $userId, assetId: $assetId, selectedDay: $selectedDay, focusedDay: $focusedDay, selectedEvents: $selectedEvents, assetType: $assetType, assetIdList: $assetIdList, activatedAssetIdList: $activatedAssetIdList, createTransactionUseCase: $createTransactionUseCase, deleteTransactionUseCase: $deleteTransactionUseCase, getTransactionListUseCase: $getTransactionListUseCase, updateTransactionUseCase: $updateTransactionUseCase)';
   }
 
   @override
@@ -354,13 +354,13 @@ class _$TransactionStateImpl implements _TransactionState {
             const DeepCollectionEquality().equals(
                 other._activatedTransactionList, _activatedTransactionList) &&
             (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.assetId, assetId) || other.assetId == assetId) &&
             (identical(other.selectedDay, selectedDay) ||
                 other.selectedDay == selectedDay) &&
             (identical(other.focusedDay, focusedDay) ||
                 other.focusedDay == focusedDay) &&
             (identical(other.selectedEvents, selectedEvents) ||
                 other.selectedEvents == selectedEvents) &&
-            (identical(other.assetId, assetId) || other.assetId == assetId) &&
             (identical(other.assetType, assetType) ||
                 other.assetType == assetType) &&
             const DeepCollectionEquality()
@@ -387,10 +387,10 @@ class _$TransactionStateImpl implements _TransactionState {
       isLoading,
       const DeepCollectionEquality().hash(_activatedTransactionList),
       userId,
+      assetId,
       selectedDay,
       focusedDay,
       selectedEvents,
-      assetId,
       assetType,
       const DeepCollectionEquality().hash(_assetIdList),
       const DeepCollectionEquality().hash(_activatedAssetIdList),
@@ -411,14 +411,14 @@ abstract class _TransactionState implements TransactionState {
   const factory _TransactionState(
           {final bool isLoading,
           final List<TransactionDetail> activatedTransactionList,
-          required final String userId,
+          required final int userId,
+          required final int assetId,
           required final DateTime selectedDay,
           required final DateTime focusedDay,
           required final ValueNotifier<List<TransactionDetail>> selectedEvents,
-          required final String assetId,
           required final AssetType assetType,
-          required final List<String> assetIdList,
-          required final List<String> activatedAssetIdList,
+          required final List<int> assetIdList,
+          required final List<int> activatedAssetIdList,
           required final CreateTransactionUseCase createTransactionUseCase,
           required final DeleteTransactionUseCase deleteTransactionUseCase,
           required final GetTransactionListUseCase getTransactionListUseCase,
@@ -430,7 +430,9 @@ abstract class _TransactionState implements TransactionState {
   @override
   List<TransactionDetail> get activatedTransactionList;
   @override
-  String get userId;
+  int get userId;
+  @override
+  int get assetId;
   @override
   DateTime get selectedDay;
   @override
@@ -438,13 +440,11 @@ abstract class _TransactionState implements TransactionState {
   @override
   ValueNotifier<List<TransactionDetail>> get selectedEvents;
   @override
-  String get assetId;
-  @override
   AssetType get assetType;
   @override
-  List<String> get assetIdList;
+  List<int> get assetIdList;
   @override
-  List<String> get activatedAssetIdList;
+  List<int> get activatedAssetIdList;
   @override
   CreateTransactionUseCase get createTransactionUseCase;
   @override

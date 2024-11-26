@@ -20,7 +20,7 @@ Asset _$AssetFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Asset {
-  String get assetId => throw _privateConstructorUsedError;
+  int get assetId => throw _privateConstructorUsedError;
   String get assetName => throw _privateConstructorUsedError;
   String get currency => throw _privateConstructorUsedError;
   int get isActiveAsset => throw _privateConstructorUsedError;
@@ -40,7 +40,7 @@ abstract class $AssetCopyWith<$Res> {
       _$AssetCopyWithImpl<$Res, Asset>;
   @useResult
   $Res call(
-      {String assetId,
+      {int assetId,
       String assetName,
       String currency,
       int isActiveAsset,
@@ -76,7 +76,7 @@ class _$AssetCopyWithImpl<$Res, $Val extends Asset>
       assetId: null == assetId
           ? _value.assetId
           : assetId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       assetName: null == assetName
           ? _value.assetName
           : assetName // ignore: cast_nullable_to_non_nullable
@@ -117,7 +117,7 @@ abstract class _$$AssetImplCopyWith<$Res> implements $AssetCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String assetId,
+      {int assetId,
       String assetName,
       String currency,
       int isActiveAsset,
@@ -151,7 +151,7 @@ class __$$AssetImplCopyWithImpl<$Res>
       assetId: null == assetId
           ? _value.assetId
           : assetId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       assetName: null == assetName
           ? _value.assetName
           : assetName // ignore: cast_nullable_to_non_nullable
@@ -201,7 +201,7 @@ class _$AssetImpl implements _Asset {
       _$$AssetImplFromJson(json);
 
   @override
-  final String assetId;
+  final int assetId;
   @override
   final String assetName;
   @override
@@ -265,7 +265,7 @@ class _$AssetImpl implements _Asset {
 
 abstract class _Asset implements Asset {
   const factory _Asset(
-      {required final String assetId,
+      {required final int assetId,
       required final String assetName,
       required final String currency,
       required final int isActiveAsset,
@@ -277,7 +277,7 @@ abstract class _Asset implements Asset {
   factory _Asset.fromJson(Map<String, dynamic> json) = _$AssetImpl.fromJson;
 
   @override
-  String get assetId;
+  int get assetId;
   @override
   String get assetName;
   @override

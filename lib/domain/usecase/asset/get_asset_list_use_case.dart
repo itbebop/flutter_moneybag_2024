@@ -6,7 +6,7 @@ class GetAssetListUseCase {
 
   GetAssetListUseCase({required AssetRepository assetRepository}) : _assetRepository = assetRepository;
 
-  Future<List<Asset>> execute({required List<String> assetIdList}) async {
-    return await _assetRepository.getAssetList(assetIdList: assetIdList);
+  Future<List<Asset>> execute({required int userId}) async {
+    return await _assetRepository.getAssetList(userId: userId);
   }
 }

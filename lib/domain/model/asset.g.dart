@@ -7,7 +7,7 @@ part of 'asset.dart';
 // **************************************************************************
 
 _$AssetImpl _$$AssetImplFromJson(Map<String, dynamic> json) => _$AssetImpl(
-      assetId: json['assetId'] as String,
+      assetId: (json['assetId'] as num).toInt(),
       assetName: json['assetName'] as String,
       currency: json['currency'] as String,
       isActiveAsset: (json['isActiveAsset'] as num).toInt(),

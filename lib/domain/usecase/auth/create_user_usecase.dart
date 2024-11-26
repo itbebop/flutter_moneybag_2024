@@ -6,7 +6,7 @@ class CreateUserUseCase {
 
   CreateUserUseCase({required UserRepository userRepository}) : _userRepository = userRepository;
 
-  Future<void> execute({required User user}) async {
-    await _userRepository.createUser(user: user);
+  Future<int> execute({required User user}) async {
+    return await _userRepository.createUser(user: user);
   }
 }

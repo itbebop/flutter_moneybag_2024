@@ -5,7 +5,7 @@ class DeleteAssetUseCase {
 
   DeleteAssetUseCase({required AssetRepository assetRepository}) : _assetRepository = assetRepository;
 
-  Future<void> execute({required String assetId, required String userId}) async {
+  Future<void> execute({required int assetId, required int userId}) async {
     await _assetRepository.deleteAsset(assetId: assetId, userId: userId);
   }
 }

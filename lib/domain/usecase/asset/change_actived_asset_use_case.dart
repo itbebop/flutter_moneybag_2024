@@ -5,7 +5,7 @@ class ChangeActivedAssetUseCase {
 
   ChangeActivedAssetUseCase({required AssetRepository assetRepository}) : _assetRepository = assetRepository;
 
-  Future<void> execute({required String assetId, required bool isActiveAsset}) async {
+  Future<void> execute({required int assetId, required bool isActiveAsset}) async {
     await _assetRepository.chageActivatedAsset(assetId: assetId, isActiveAsset: isActiveAsset);
   }
 }
