@@ -50,12 +50,11 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<bool> createUser({required User user}) async {
+  Future<int> createUser({required User user}) async {
     try {
-      await _userDataSource.createUser(user: user);
-      return true;
+      return await _userDataSource.createUser(user: user);
     } catch (e) {
-      return false;
+      rethrow;
     }
   }
 

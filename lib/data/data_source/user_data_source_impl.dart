@@ -22,18 +22,16 @@ class UserDataSourceImpl implements UserDataSource {
   UserDataSourceImpl({Dio? dio}) : _dio = dio ?? Dio();
 
   @override
-  Future<void> createUser({required User user}) async {
+  Future<int> createUser({required User user}) async {
+    final userJson = user.toJson();
+    final response = await _dio.post(
+      '$baseUrl/users', // 엔드포인트 설정
+      data: userJson,
+    );
     try {
       if (user.imgUrl.isEmpty) {
         user = user.copyWith(imgUrl: 'https://ui-avatars.com/api/?name=${Uri.encodeComponent(user.name)}&size=50');
       }
-      final userJson = user.toJson();
-      userJson['action'] = 'createUser';
-
-      final response = await _dio.post(
-        '$baseUrl/users', // 엔드포인트 설정
-        data: userJson,
-      );
 
       if (response.statusCode == 201) {
         debugPrint("User created successfully: ${response.data}");
@@ -50,6 +48,7 @@ class UserDataSourceImpl implements UserDataSource {
     } catch (e) {
       debugPrint("Unexpected error: $e");
     }
+    return int.parse(response.data['data']);
   }
 
   @override
@@ -68,9 +67,7 @@ class UserDataSourceImpl implements UserDataSource {
     final userId = await getUserFromFirebase(uid: uid);
     Response response = await _dio.get('$baseUrl/users/$userId');
     final userJson = response.data['data'];
-    print('###userJson: $userJson');
     final user = User.fromJson(userJson);
-    print('###user: ${user.name}, ${user.email}');
     return user;
   }
 

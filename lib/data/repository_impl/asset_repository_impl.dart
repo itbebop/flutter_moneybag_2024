@@ -8,17 +8,17 @@ class AssetRepositoryImpl implements AssetRepository {
   AssetRepositoryImpl({required AssetDataSource assetDetailDataSource}) : _assetDetailDataSource = assetDetailDataSource;
 
   @override
-  Future<void> createAsset({Asset? asset, required String userId}) async {
+  Future<void> createAsset({Asset? asset, required int userId}) async {
     await _assetDetailDataSource.createAsset(asset: asset, userId: userId);
   }
 
   @override
-  Future<List<Asset>> getAssetList({required List<String> assetIdList}) async {
-    return await _assetDetailDataSource.getAssetList(assetIdList: assetIdList);
+  Future<List<Asset>> getAssetList({required int userId}) async {
+    return await _assetDetailDataSource.getAssetList(userId: userId);
   }
 
   @override
-  Future<Asset> getAsset({required String assetId}) async {
+  Future<Asset> getAsset({required int assetId}) async {
     return await _assetDetailDataSource.getAsset(assetId: assetId);
   }
 
@@ -28,12 +28,12 @@ class AssetRepositoryImpl implements AssetRepository {
   }
 
   @override
-  Future<void> chageActivatedAsset({required String assetId, required bool isActiveAsset}) async {
+  Future<void> chageActivatedAsset({required int assetId, required bool isActiveAsset}) async {
     await _assetDetailDataSource.chageActivatedAsset(assetId: assetId, isActiveAsset: isActiveAsset);
   }
 
   @override
-  Future<void> deleteAsset({required String assetId, required String userId}) async {
+  Future<void> deleteAsset({required int assetId, required int userId}) async {
     await _assetDetailDataSource.deleteAsset(assetId: assetId, userId: userId);
   }
 }

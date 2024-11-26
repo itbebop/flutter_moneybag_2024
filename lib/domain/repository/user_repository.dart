@@ -6,7 +6,7 @@ abstract interface class UserRepository {
   Future<bool> logout({required LoginPlatform platform});
   Future<void> signOut();
 
-  Future<bool> createUser({required User user});
+  Future<int> createUser({required User user});
   Future<bool> isNewUser({required User user});
   Future<User> getUser({required String uid});
   Future<bool> updateUserName({required String userId, required String name});

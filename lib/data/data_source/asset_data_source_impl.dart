@@ -1,10 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_moneybag_2024/data/data_source/asset_data_source.dart';
 import 'package:flutter_moneybag_2024/domain/model/asset.dart';
 
 class AssetDataSourceImpl implements AssetDataSource {
   // Firestore 인스턴스 생성
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final baseUrl = dotenv.get('Base_URL');
+  final Dio _dio;
+
+  AssetDataSourceImpl({Dio? dio}) : _dio = dio ?? Dio();
 
   // TransactionRef 초기화
   final _assetRef = FirebaseFirestore.instance.collection('assets').withConverter<Asset>(
@@ -13,66 +20,88 @@ class AssetDataSourceImpl implements AssetDataSource {
       );
 
   @override
-  Future<void> createAsset({Asset? asset, required String userId}) async {
-    final userDoc = await _firestore.collection('users').doc(userId).get();
+  Future<void> createAsset({Asset? asset, required int userId}) async {
+    print('#### createAsset 시작');
+    // 요청 헤더에 userId 추가
+    final Options options = Options(
+      headers: {
+        'userId': userId,
+      },
+    );
+    print('#### userId in asset data: $userId');
 
-    if (userDoc.exists) {
-      // activatedAssetId가 비어있는지 확인
-      final List<String> assetIdList = (userDoc.data()?['assetIdList'] as List<dynamic>).map((item) => item as String).toList();
+    final List<Asset> assetList = await getAssetList(userId: userId);
+    print('#### assetList in asset data: $assetList');
 
-      if (assetIdList == []) {
-        // activatedAssetId가 비어있으면 기본 asset 생성
-        final newAssetRef = await _assetRef.add(
-          Asset(
-            assetId: '0',
-            assetName: '첫 자산',
-            isActiveAsset: 1,
-            currency: 'KRW',
-            createdAt: DateTime.now(),
-            updatedAt: DateTime.now(),
-            firstColor: 0,
-            secondColor: 0,
-          ),
-        );
-        // assetId 업데이트
-        await _assetRef.doc(newAssetRef.id).update({'assetId': newAssetRef.id});
+    Response? response;
+    if (assetList.isEmpty) {
+      print('asset이 없음');
+      // activatedAssetId가 비어있으면 기본 asset 생성
+      response = await _dio.post(
+        '$baseUrl/assets',
+        data: Asset(
+          assetId: 0,
+          assetName: '첫 자산',
+          isActiveAsset: 1,
+          currency: 'KRW',
+          createdAt: DateTime.now(),
+          updatedAt: DateTime.now(),
+          firstColor: 1,
+          secondColor: 2,
+        ).toJson(),
+        options: options,
+      );
+    } else if (asset != null) {
+      // asset이 이미 존재하는 경우 새로운 asset 추가 (asset이 주어졌을 때)
+      response = await _dio.post(
+        '$baseUrl/assets',
+        data: asset.toJson(),
+        options: options,
+      );
+    }
 
-        // user 문서의 assetIdList에 새 asset 추가
-        await _firestore.collection('users').doc(userId).update({
-          'assetIdList': FieldValue.arrayUnion([newAssetRef.id])
-        });
-      } else {
-        // asset이 이미 존재하는 경우 새로운 asset 추가 (asset이 주어졌을 때)
-        if (asset != null) {
-          final newAssetRef = await _assetRef.add(asset);
-          await _assetRef.doc(newAssetRef.id).update({'assetId': newAssetRef.id});
-
-          // user 문서의 assetIdList에 새 asset 추가
-          await _firestore.collection('users').doc(userId).update({
-            'assetIdList': FieldValue.arrayUnion([newAssetRef.id])
-          });
-        }
-      }
+    if (response != null && response.statusCode == 201) {
+      debugPrint("Asset created successfully: ${response.data}");
+    } else {
+      debugPrint("Failed to create asset: ${response?.statusCode}");
     }
   }
 
   @override
-  Future<List<Asset>> getAssetList({required List<String> assetIdList}) async {
-    // assetIdList에 있는 assetId로 자산 선택
-    final assets = await Future.wait(assetIdList.map((assetId) async {
-      final doc = await _assetRef.doc(assetId).get();
-      return doc.data();
-    }));
+  Future<List<Asset>> getAssetList({required int userId}) async {
+    print('#### getAssetList 시작');
+    // 요청 헤더에 userId 추가
+    print('userId in getAssetList: $userId');
+    final Options options = Options(
+      headers: {
+        'userId': userId,
+      },
+    );
 
-    // assets를 updatedAt 기준으로 정렬
-    final sortedAssets = assets.whereType<Asset>().toList()..sort((a, b) => a.createdAt.compareTo(b.createdAt)); // updatedAt 기준 내림차순 정렬
+    Response response = await _dio.get(
+      '$baseUrl/assets',
+      options: options,
+    );
 
-    return sortedAssets; // 정렬된 Asset 반환
+    final jsonList = response.data['data'];
+    print('### jsonList: $jsonList');
+
+    // jsonList가 빈 리스트이거나 null일 경우 바로 빈 리스트 반환
+    if (jsonList == null || jsonList.isEmpty) {
+      return [];
+    }
+
+    // jsonList를 Asset 객체 리스트로 변환
+    final List<Asset> assetList = jsonList.map<Asset>((json) => Asset.fromJson(json)).toList();
+
+    // 정렬된 자산 리스트 반환
+    final sortedAssets = assetList..sort((a, b) => a.createdAt.compareTo(b.createdAt));
+    return sortedAssets;
   }
 
   @override
-  Future<Asset> getAsset({required String assetId}) async {
-    final doc = await _assetRef.doc(assetId).get();
+  Future<Asset> getAsset({required int assetId}) async {
+    final doc = await _assetRef.doc('assetId').get();
     if (doc.exists) {
       return doc.data()!;
     } else {
@@ -82,21 +111,21 @@ class AssetDataSourceImpl implements AssetDataSource {
 
   @override
   Future<void> updateAsset({required Asset asset}) async {
-    await _assetRef.doc(asset.assetId).set(asset);
+    await _assetRef.doc('asset.assetId').set(asset);
   }
 
   @override
-  Future<void> chageActivatedAsset({required String assetId, required bool isActiveAsset}) async {
-    await _assetRef.doc(assetId).update({'isActiveAsset': isActiveAsset});
+  Future<void> chageActivatedAsset({required int assetId, required bool isActiveAsset}) async {
+    await _assetRef.doc('assetId').update({'isActiveAsset': isActiveAsset});
   }
 
   @override
-  Future<void> deleteAsset({required String assetId, required String userId}) async {
-    await _firestore.collection('users').doc(userId).update({
+  Future<void> deleteAsset({required int assetId, required int userId}) async {
+    await _firestore.collection('users').doc('userId').update({
       'assetIdList': FieldValue.arrayRemove([assetId]) // 특정 assetId 제거);
     });
     // 최상위 asset 문서 참조
-    final DocumentReference assetDocRef = _firestore.collection('assets').doc(assetId);
+    final DocumentReference assetDocRef = _firestore.collection('assets').doc('assetId');
 
     // asset과 그 하위 컬렉션들까지 모두 삭제하는 재귀 함수
     await _deleteDocumentWithSubcollections(assetDocRef);

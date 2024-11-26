@@ -66,8 +66,8 @@ class _AssetCreateScreenState extends ConsumerState<AssetCreateScreen> {
                             return;
                           }
                           ref.read(assetStateProvier.notifier).createAsset(
-                                Asset(
-                                  assetId: '0',
+                                asset: Asset(
+                                  assetId: 0,
                                   assetName: titleEditController.text,
                                   isActiveAsset: 1,
                                   currency: assetProvider.currencyHints,
@@ -76,6 +76,7 @@ class _AssetCreateScreenState extends ConsumerState<AssetCreateScreen> {
                                   firstColor: 0,
                                   secondColor: 0,
                                 ),
+                                userId: ref.read(userStateProvider).user!.userId,
                               );
                           // 이 로직이 create보다 앞으로 가면 fetchUser, Asset이 안됨..
                           await AlertDialogWidget.showCustomDialog(

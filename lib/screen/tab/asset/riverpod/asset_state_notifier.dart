@@ -11,8 +11,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final assetStateProvier = StateNotifierProvider<AssetStateNotifier, AssetState>((ref) {
   final userState = ref.watch(userStateProvider);
-  List<String> assetIdList = [];
-  String userId = '';
+  List<int> assetIdList = [];
+  int userId = 0;
   List<Color> firstColorList = [];
   List<Color> secondColorList = [];
   if (userState.user != null) {
@@ -41,7 +41,7 @@ final assetStateProvier = StateNotifierProvider<AssetStateNotifier, AssetState>(
     getAssetUseCase: getIt(),
     assetHints: '선택',
     currencyHints: '선택',
-    selectedAssetId: '',
+    selectedAssetId: 0,
     assetName: '',
     assetColor: [],
     assetCurrency: '',
@@ -71,7 +71,7 @@ class AssetStateNotifier extends StateNotifier<AssetState> {
     try {
       state = state.copyWith(isLoading: true);
       // 전체 assetList 가져옴
-      final assetList = await state.getAssetListUseCase.execute(assetIdList: state.assetIdList);
+      final assetList = await state.getAssetListUseCase.execute(userId: state.userId); // TODO: userId맞는지 체크
 
       final double amount = state.totalAmount; // TODO: totalAmount 로직 추가해야
       final double expense = state.totalExpense;
@@ -109,7 +109,7 @@ class AssetStateNotifier extends StateNotifier<AssetState> {
     );
   }
 
-  Future<void> getAsset(String assetId) async {
+  Future<void> getAsset(int assetId) async {
     final asset = await state.getAssetUseCase.execute(assetId: assetId);
     final String assetHints = asset.assetName;
     final double assetAmount = state.totalAmount; // 조회한 asset하나의 amount // TODO: state에서 변수 다시 만들어야.
@@ -151,7 +151,7 @@ class AssetStateNotifier extends StateNotifier<AssetState> {
   void quitWrite() {
     state = state.copyWith(
       assetHints: '선택',
-      selectedAssetId: '',
+      selectedAssetId: 0,
     );
   }
 
@@ -173,8 +173,8 @@ class AssetStateNotifier extends StateNotifier<AssetState> {
     );
   }
 
-  Future<void> createAsset(Asset asset) async {
-    await state.createAssetUserCase.execute(asset: asset, userId: state.userId);
+  Future<void> createAsset({Asset? asset, required int userId}) async {
+    await state.createAssetUserCase.execute(asset: asset, userId: userId);
     state = state.copyWith(
       firstColor: const Color.fromARGB(255, 236, 177, 89),
       secondColor: const Color.fromARGB(255, 255, 197, 39),
@@ -264,7 +264,7 @@ class AssetStateNotifier extends StateNotifier<AssetState> {
     }
   }
 
-  Future<void> deleteAsset(String assetId) async {
+  Future<void> deleteAsset(int assetId) async {
     try {
       state = state.copyWith(isLoading: true);
       await state.deleteAssetUseCase.execute(assetId: assetId, userId: state.userId);
@@ -274,11 +274,11 @@ class AssetStateNotifier extends StateNotifier<AssetState> {
     }
   }
 
-  Future<void> tapCheckBox(String assetId, bool checked) async {
+  Future<void> tapCheckBox(int assetId, bool checked) async {
     await state.changeActivedAssetUseCase.execute(assetId: assetId, isActiveAsset: checked);
   }
 
   Stream<List<Asset>> getAssetList() {
-    return Stream.fromFuture(state.getAssetListUseCase.execute(assetIdList: state.assetIdList));
+    return Stream.fromFuture(state.getAssetListUseCase.execute(userId: state.userId)); // TODO: 여기도 userID 체크
   }
 }

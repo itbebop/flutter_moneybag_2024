@@ -48,14 +48,14 @@ mixin _$AssetState {
   AssetType get assetType => throw _privateConstructorUsedError;
   Color get firstColor => throw _privateConstructorUsedError;
   Color get secondColor => throw _privateConstructorUsedError;
-  String get userId => throw _privateConstructorUsedError;
+  int get userId => throw _privateConstructorUsedError;
   String get assetHints => throw _privateConstructorUsedError;
   String get assetName => throw _privateConstructorUsedError;
   List<int> get assetColor => throw _privateConstructorUsedError;
   String get assetCurrency => throw _privateConstructorUsedError;
   String get currencyHints => throw _privateConstructorUsedError;
-  String get selectedAssetId => throw _privateConstructorUsedError;
-  List<String> get assetIdList => throw _privateConstructorUsedError;
+  int get selectedAssetId => throw _privateConstructorUsedError;
+  List<int> get assetIdList => throw _privateConstructorUsedError;
   GetAssetListUseCase get getAssetListUseCase =>
       throw _privateConstructorUsedError;
   GetAssetUseCase get getAssetUseCase => throw _privateConstructorUsedError;
@@ -112,14 +112,14 @@ abstract class $AssetStateCopyWith<$Res> {
       AssetType assetType,
       Color firstColor,
       Color secondColor,
-      String userId,
+      int userId,
       String assetHints,
       String assetName,
       List<int> assetColor,
       String assetCurrency,
       String currencyHints,
-      String selectedAssetId,
-      List<String> assetIdList,
+      int selectedAssetId,
+      List<int> assetIdList,
       GetAssetListUseCase getAssetListUseCase,
       GetAssetUseCase getAssetUseCase,
       CreateAssetUseCase createAssetUserCase,
@@ -320,7 +320,7 @@ class _$AssetStateCopyWithImpl<$Res, $Val extends AssetState>
       userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       assetHints: null == assetHints
           ? _value.assetHints
           : assetHints // ignore: cast_nullable_to_non_nullable
@@ -344,11 +344,11 @@ class _$AssetStateCopyWithImpl<$Res, $Val extends AssetState>
       selectedAssetId: null == selectedAssetId
           ? _value.selectedAssetId
           : selectedAssetId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       assetIdList: null == assetIdList
           ? _value.assetIdList
           : assetIdList // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<int>,
       getAssetListUseCase: null == getAssetListUseCase
           ? _value.getAssetListUseCase
           : getAssetListUseCase // ignore: cast_nullable_to_non_nullable
@@ -418,14 +418,14 @@ abstract class _$$AssetStateImplCopyWith<$Res>
       AssetType assetType,
       Color firstColor,
       Color secondColor,
-      String userId,
+      int userId,
       String assetHints,
       String assetName,
       List<int> assetColor,
       String assetCurrency,
       String currencyHints,
-      String selectedAssetId,
-      List<String> assetIdList,
+      int selectedAssetId,
+      List<int> assetIdList,
       GetAssetListUseCase getAssetListUseCase,
       GetAssetUseCase getAssetUseCase,
       CreateAssetUseCase createAssetUserCase,
@@ -624,7 +624,7 @@ class __$$AssetStateImplCopyWithImpl<$Res>
       userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       assetHints: null == assetHints
           ? _value.assetHints
           : assetHints // ignore: cast_nullable_to_non_nullable
@@ -648,11 +648,11 @@ class __$$AssetStateImplCopyWithImpl<$Res>
       selectedAssetId: null == selectedAssetId
           ? _value.selectedAssetId
           : selectedAssetId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       assetIdList: null == assetIdList
           ? _value._assetIdList
           : assetIdList // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<int>,
       getAssetListUseCase: null == getAssetListUseCase
           ? _value.getAssetListUseCase
           : getAssetListUseCase // ignore: cast_nullable_to_non_nullable
@@ -724,7 +724,7 @@ class _$AssetStateImpl implements _AssetState {
       required this.assetCurrency,
       required this.currencyHints,
       required this.selectedAssetId,
-      required final List<String> assetIdList,
+      required final List<int> assetIdList,
       required this.getAssetListUseCase,
       required this.getAssetUseCase,
       required this.createAssetUserCase,
@@ -870,7 +870,7 @@ class _$AssetStateImpl implements _AssetState {
   @override
   final Color secondColor;
   @override
-  final String userId;
+  final int userId;
   @override
   final String assetHints;
   @override
@@ -888,10 +888,10 @@ class _$AssetStateImpl implements _AssetState {
   @override
   final String currencyHints;
   @override
-  final String selectedAssetId;
-  final List<String> _assetIdList;
+  final int selectedAssetId;
+  final List<int> _assetIdList;
   @override
-  List<String> get assetIdList {
+  List<int> get assetIdList {
     if (_assetIdList is EqualUnmodifiableListView) return _assetIdList;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_assetIdList);
@@ -1099,14 +1099,14 @@ abstract class _AssetState implements AssetState {
       required final AssetType assetType,
       required final Color firstColor,
       required final Color secondColor,
-      required final String userId,
+      required final int userId,
       required final String assetHints,
       required final String assetName,
       required final List<int> assetColor,
       required final String assetCurrency,
       required final String currencyHints,
-      required final String selectedAssetId,
-      required final List<String> assetIdList,
+      required final int selectedAssetId,
+      required final List<int> assetIdList,
       required final GetAssetListUseCase getAssetListUseCase,
       required final GetAssetUseCase getAssetUseCase,
       required final CreateAssetUseCase createAssetUserCase,
@@ -1179,7 +1179,7 @@ abstract class _AssetState implements AssetState {
   @override
   Color get secondColor;
   @override
-  String get userId;
+  int get userId;
   @override
   String get assetHints;
   @override
@@ -1191,9 +1191,9 @@ abstract class _AssetState implements AssetState {
   @override
   String get currencyHints;
   @override
-  String get selectedAssetId;
+  int get selectedAssetId;
   @override
-  List<String> get assetIdList;
+  List<int> get assetIdList;
   @override
   GetAssetListUseCase get getAssetListUseCase;
   @override
