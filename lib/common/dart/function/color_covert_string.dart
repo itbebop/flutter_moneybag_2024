@@ -1,11 +1,20 @@
 // Convert List<String> back to List<Color>
 import 'package:flutter/material.dart';
 
-List<Color> stringToColorList(List<String> stringList) {
-  return stringList.map((colorString) => Color(int.parse(colorString.substring(1), radix: 16))).toList();
+// Color -> String
+String colorToHexString(Color color) {
+  return '#${color.value.toRadixString(16).padLeft(8, '0')}';
 }
 
-// Convert List<Color> to List<String>
-List<String> colorToStringList(List<Color> colorList) {
-  return colorList.map((color) => '#${color.value.toRadixString(16).padLeft(8, '0')}').toList();
+// String -> Color
+Color hexStringToColor(String hex) {
+  final buffer = StringBuffer();
+  if (hex.startsWith('#')) {
+    hex = hex.substring(1);
+  }
+  if (hex.length == 6) {
+    buffer.write('FF');
+  }
+  buffer.write(hex);
+  return Color(int.parse(buffer.toString(), radix: 16));
 }

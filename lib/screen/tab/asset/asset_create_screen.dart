@@ -73,8 +73,8 @@ class _AssetCreateScreenState extends ConsumerState<AssetCreateScreen> {
                                   currency: assetProvider.currencyHints,
                                   createdAt: DateTime.now(),
                                   updatedAt: DateTime.now(),
-                                  firstColor: 0,
-                                  secondColor: 0,
+                                  firstColor: colorToHexString(assetProvider.firstColor),
+                                  secondColor: colorToHexString(assetProvider.secondColor),
                                 ),
                                 userId: ref.read(userStateProvider).user!.userId,
                               );

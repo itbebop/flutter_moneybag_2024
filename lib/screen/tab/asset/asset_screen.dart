@@ -149,8 +149,8 @@ class _ReportScreenState extends ConsumerState<AssetScreen> {
                                                           currency: assetProvider.currencyHints,
                                                           createdAt: assetProvider.allAssetList[index].createdAt,
                                                           updatedAt: DateTime.now(),
-                                                          firstColor: 0,
-                                                          secondColor: 0,
+                                                          firstColor: colorToHexString(assetProvider.firstColor),
+                                                          secondColor: colorToHexString(assetProvider.secondColor),
                                                         ),
                                                       ),
                                                 );
