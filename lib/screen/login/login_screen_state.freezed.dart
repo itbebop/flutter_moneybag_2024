@@ -23,6 +23,8 @@ mixin _$LoginScreenState {
   CheckUserDuplicatedUseCase get checkUserDuplicatedUseCase =>
       throw _privateConstructorUsedError;
   CreateUserUseCase get createUserUseCase => throw _privateConstructorUsedError;
+  CreateUserPalleteUseCase get createUserPalleteUseCase =>
+      throw _privateConstructorUsedError;
   InitAssetUseCase get initAssetUseCase => throw _privateConstructorUsedError;
   CreateAssetUseCase get createAssetUseCase =>
       throw _privateConstructorUsedError;
@@ -46,6 +48,7 @@ abstract class $LoginScreenStateCopyWith<$Res> {
       LogoutUseCase logoutUseCase,
       CheckUserDuplicatedUseCase checkUserDuplicatedUseCase,
       CreateUserUseCase createUserUseCase,
+      CreateUserPalleteUseCase createUserPalleteUseCase,
       InitAssetUseCase initAssetUseCase,
       CreateAssetUseCase createAssetUseCase,
       User? user});
@@ -72,6 +75,7 @@ class _$LoginScreenStateCopyWithImpl<$Res, $Val extends LoginScreenState>
     Object? logoutUseCase = null,
     Object? checkUserDuplicatedUseCase = null,
     Object? createUserUseCase = null,
+    Object? createUserPalleteUseCase = null,
     Object? initAssetUseCase = null,
     Object? createAssetUseCase = null,
     Object? user = freezed,
@@ -101,6 +105,10 @@ class _$LoginScreenStateCopyWithImpl<$Res, $Val extends LoginScreenState>
           ? _value.createUserUseCase
           : createUserUseCase // ignore: cast_nullable_to_non_nullable
               as CreateUserUseCase,
+      createUserPalleteUseCase: null == createUserPalleteUseCase
+          ? _value.createUserPalleteUseCase
+          : createUserPalleteUseCase // ignore: cast_nullable_to_non_nullable
+              as CreateUserPalleteUseCase,
       initAssetUseCase: null == initAssetUseCase
           ? _value.initAssetUseCase
           : initAssetUseCase // ignore: cast_nullable_to_non_nullable
@@ -144,6 +152,7 @@ abstract class _$$LoginScreenStateImplCopyWith<$Res>
       LogoutUseCase logoutUseCase,
       CheckUserDuplicatedUseCase checkUserDuplicatedUseCase,
       CreateUserUseCase createUserUseCase,
+      CreateUserPalleteUseCase createUserPalleteUseCase,
       InitAssetUseCase initAssetUseCase,
       CreateAssetUseCase createAssetUseCase,
       User? user});
@@ -169,6 +178,7 @@ class __$$LoginScreenStateImplCopyWithImpl<$Res>
     Object? logoutUseCase = null,
     Object? checkUserDuplicatedUseCase = null,
     Object? createUserUseCase = null,
+    Object? createUserPalleteUseCase = null,
     Object? initAssetUseCase = null,
     Object? createAssetUseCase = null,
     Object? user = freezed,
@@ -198,6 +208,10 @@ class __$$LoginScreenStateImplCopyWithImpl<$Res>
           ? _value.createUserUseCase
           : createUserUseCase // ignore: cast_nullable_to_non_nullable
               as CreateUserUseCase,
+      createUserPalleteUseCase: null == createUserPalleteUseCase
+          ? _value.createUserPalleteUseCase
+          : createUserPalleteUseCase // ignore: cast_nullable_to_non_nullable
+              as CreateUserPalleteUseCase,
       initAssetUseCase: null == initAssetUseCase
           ? _value.initAssetUseCase
           : initAssetUseCase // ignore: cast_nullable_to_non_nullable
@@ -224,6 +238,7 @@ class _$LoginScreenStateImpl implements _LoginScreenState {
       required this.logoutUseCase,
       required this.checkUserDuplicatedUseCase,
       required this.createUserUseCase,
+      required this.createUserPalleteUseCase,
       required this.initAssetUseCase,
       required this.createAssetUseCase,
       this.user});
@@ -243,6 +258,8 @@ class _$LoginScreenStateImpl implements _LoginScreenState {
   @override
   final CreateUserUseCase createUserUseCase;
   @override
+  final CreateUserPalleteUseCase createUserPalleteUseCase;
+  @override
   final InitAssetUseCase initAssetUseCase;
   @override
   final CreateAssetUseCase createAssetUseCase;
@@ -251,7 +268,7 @@ class _$LoginScreenStateImpl implements _LoginScreenState {
 
   @override
   String toString() {
-    return 'LoginScreenState(isLoading: $isLoading, isNewUser: $isNewUser, loginUseCase: $loginUseCase, logoutUseCase: $logoutUseCase, checkUserDuplicatedUseCase: $checkUserDuplicatedUseCase, createUserUseCase: $createUserUseCase, initAssetUseCase: $initAssetUseCase, createAssetUseCase: $createAssetUseCase, user: $user)';
+    return 'LoginScreenState(isLoading: $isLoading, isNewUser: $isNewUser, loginUseCase: $loginUseCase, logoutUseCase: $logoutUseCase, checkUserDuplicatedUseCase: $checkUserDuplicatedUseCase, createUserUseCase: $createUserUseCase, createUserPalleteUseCase: $createUserPalleteUseCase, initAssetUseCase: $initAssetUseCase, createAssetUseCase: $createAssetUseCase, user: $user)';
   }
 
   @override
@@ -273,6 +290,9 @@ class _$LoginScreenStateImpl implements _LoginScreenState {
                     checkUserDuplicatedUseCase) &&
             (identical(other.createUserUseCase, createUserUseCase) ||
                 other.createUserUseCase == createUserUseCase) &&
+            (identical(
+                    other.createUserPalleteUseCase, createUserPalleteUseCase) ||
+                other.createUserPalleteUseCase == createUserPalleteUseCase) &&
             (identical(other.initAssetUseCase, initAssetUseCase) ||
                 other.initAssetUseCase == initAssetUseCase) &&
             (identical(other.createAssetUseCase, createAssetUseCase) ||
@@ -289,6 +309,7 @@ class _$LoginScreenStateImpl implements _LoginScreenState {
       logoutUseCase,
       checkUserDuplicatedUseCase,
       createUserUseCase,
+      createUserPalleteUseCase,
       initAssetUseCase,
       createAssetUseCase,
       user);
@@ -309,6 +330,7 @@ abstract class _LoginScreenState implements LoginScreenState {
       required final LogoutUseCase logoutUseCase,
       required final CheckUserDuplicatedUseCase checkUserDuplicatedUseCase,
       required final CreateUserUseCase createUserUseCase,
+      required final CreateUserPalleteUseCase createUserPalleteUseCase,
       required final InitAssetUseCase initAssetUseCase,
       required final CreateAssetUseCase createAssetUseCase,
       final User? user}) = _$LoginScreenStateImpl;
@@ -325,6 +347,8 @@ abstract class _LoginScreenState implements LoginScreenState {
   CheckUserDuplicatedUseCase get checkUserDuplicatedUseCase;
   @override
   CreateUserUseCase get createUserUseCase;
+  @override
+  CreateUserPalleteUseCase get createUserPalleteUseCase;
   @override
   InitAssetUseCase get initAssetUseCase;
   @override

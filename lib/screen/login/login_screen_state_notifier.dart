@@ -10,6 +10,7 @@ final loginScreenStateProvider = StateNotifierProvider<LoginScreenStateNotifier,
       initAssetUseCase: getIt(),
       createUserUseCase: getIt(),
       createAssetUseCase: getIt(),
+      createUserPalleteUseCase: getIt(),
     )));
 
 class LoginScreenStateNotifier extends StateNotifier<LoginScreenState> {
@@ -31,7 +32,8 @@ class LoginScreenStateNotifier extends StateNotifier<LoginScreenState> {
       if (isNewUser == true) {
         state = state.copyWith(isNewUser: true);
         final int userId = await state.createUserUseCase.execute(user: state.user!);
-        final int assetId = await state.initAssetUseCase.execute(userId: userId);
+        await state.createUserPalleteUseCase.execute(userId: userId);
+        await state.initAssetUseCase.execute(userId: userId);
       }
     } catch (e) {
       throw Exception(e);

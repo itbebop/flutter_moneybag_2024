@@ -5,7 +5,7 @@ class UpdateUserNameUsecase {
 
   UpdateUserNameUsecase({required UserRepository userRepository}) : _userRepository = userRepository;
 
-  Future<void> execute({required String userId, required String name}) async {
+  Future<void> execute({required int userId, required String name}) async {
     await _userRepository.updateUserName(userId: userId, name: name);
   }
 }

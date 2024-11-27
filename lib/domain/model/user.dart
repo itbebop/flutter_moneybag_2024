@@ -13,7 +13,7 @@ class User with _$User {
     required String imgUrl,
     required String language,
     required UserType userType,
-    required DateTime createAt,
+    required DateTime createdAt,
     required int isDeleted,
     DateTime? deletedAt,
     required String uid,

@@ -32,7 +32,7 @@ class UserDataSourceImpl implements UserDataSource {
         'action': 'createUser',
       },
     );
-    final response = await _dio.post(
+    final Response response = await _dio.post(
       '$baseUrl/users', // 엔드포인트 설정
       data: userJson,
       options: options,
@@ -54,6 +54,32 @@ class UserDataSourceImpl implements UserDataSource {
       debugPrint("Unexpected error: $e");
     }
     return int.parse(response.data['data']);
+  }
+
+  @override
+  Future<void> createUserPallete({required int userId}) async {
+    final Options options = Options(
+      headers: {
+        'userId': userId,
+        'action': 'createUserPallete',
+      },
+    );
+    final Response response = await _dio.post(
+      '$baseUrl/users', // 엔드포인트 설정
+      options: options,
+    );
+    try {
+      if (response.statusCode == 201) {
+        debugPrint("Pallete created successfully: ${response.data}");
+      } else {
+        debugPrint("Failed to create Pallete: ${response.statusCode}");
+      }
+    } on DioException catch (e) {
+      debugPrint("Dio error: ${e.message}");
+      if (e.response != null) {
+        debugPrint("Error details: ${e.response?.data}");
+      }
+    }
   }
 
   @override

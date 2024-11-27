@@ -26,8 +26,8 @@ mixin _$Asset {
   int get isActiveAsset => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
   DateTime get updatedAt => throw _privateConstructorUsedError;
-  int get firstColor => throw _privateConstructorUsedError;
-  int get secondColor => throw _privateConstructorUsedError;
+  String get firstColor => throw _privateConstructorUsedError;
+  String get secondColor => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -46,8 +46,8 @@ abstract class $AssetCopyWith<$Res> {
       int isActiveAsset,
       DateTime createdAt,
       DateTime updatedAt,
-      int firstColor,
-      int secondColor});
+      String firstColor,
+      String secondColor});
 }
 
 /// @nodoc
@@ -100,11 +100,11 @@ class _$AssetCopyWithImpl<$Res, $Val extends Asset>
       firstColor: null == firstColor
           ? _value.firstColor
           : firstColor // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       secondColor: null == secondColor
           ? _value.secondColor
           : secondColor // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
     ) as $Val);
   }
 }
@@ -123,8 +123,8 @@ abstract class _$$AssetImplCopyWith<$Res> implements $AssetCopyWith<$Res> {
       int isActiveAsset,
       DateTime createdAt,
       DateTime updatedAt,
-      int firstColor,
-      int secondColor});
+      String firstColor,
+      String secondColor});
 }
 
 /// @nodoc
@@ -175,11 +175,11 @@ class __$$AssetImplCopyWithImpl<$Res>
       firstColor: null == firstColor
           ? _value.firstColor
           : firstColor // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       secondColor: null == secondColor
           ? _value.secondColor
           : secondColor // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
     ));
   }
 }
@@ -213,9 +213,9 @@ class _$AssetImpl implements _Asset {
   @override
   final DateTime updatedAt;
   @override
-  final int firstColor;
+  final String firstColor;
   @override
-  final int secondColor;
+  final String secondColor;
 
   @override
   String toString() {
@@ -271,8 +271,8 @@ abstract class _Asset implements Asset {
       required final int isActiveAsset,
       required final DateTime createdAt,
       required final DateTime updatedAt,
-      required final int firstColor,
-      required final int secondColor}) = _$AssetImpl;
+      required final String firstColor,
+      required final String secondColor}) = _$AssetImpl;
 
   factory _Asset.fromJson(Map<String, dynamic> json) = _$AssetImpl.fromJson;
 
@@ -289,9 +289,9 @@ abstract class _Asset implements Asset {
   @override
   DateTime get updatedAt;
   @override
-  int get firstColor;
+  String get firstColor;
   @override
-  int get secondColor;
+  String get secondColor;
   @override
   @JsonKey(ignore: true)
   _$$AssetImplCopyWith<_$AssetImpl> get copyWith =>

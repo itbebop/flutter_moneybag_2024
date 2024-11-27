@@ -13,8 +13,8 @@ _$AssetImpl _$$AssetImplFromJson(Map<String, dynamic> json) => _$AssetImpl(
       isActiveAsset: (json['isActiveAsset'] as num).toInt(),
       createdAt: DateTime.parse(json['createdAt'] as String),
       updatedAt: DateTime.parse(json['updatedAt'] as String),
-      firstColor: (json['firstColor'] as num).toInt(),
-      secondColor: (json['secondColor'] as num).toInt(),
+      firstColor: json['firstColor'] as String,
+      secondColor: json['secondColor'] as String,
     );
 
 Map<String, dynamic> _$$AssetImplToJson(_$AssetImpl instance) =>

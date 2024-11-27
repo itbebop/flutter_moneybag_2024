@@ -12,8 +12,8 @@ class Asset with _$Asset {
     required int isActiveAsset,
     required DateTime createdAt,
     required DateTime updatedAt,
-    required int firstColor,
-    required int secondColor,
+    required String firstColor,
+    required String secondColor,
   }) = _Asset;
 
   factory Asset.fromJson(Map<String, dynamic> json) => _$AssetFromJson(json);

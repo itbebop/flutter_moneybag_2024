@@ -32,8 +32,8 @@ class AssetDataSourceImpl implements AssetDataSource {
         currency: 'KRW',
         createdAt: DateTime.now(),
         updatedAt: DateTime.now(),
-        firstColor: 1,
-        secondColor: 2,
+        firstColor: '#FFECB159',
+        secondColor: '#FFFFC527',
       ).toJson(),
       options: options,
     );

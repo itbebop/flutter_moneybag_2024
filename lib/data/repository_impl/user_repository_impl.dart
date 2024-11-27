@@ -59,6 +59,15 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
+  Future<void> createUserPallete({required int userId}) async {
+    try {
+      return await _userDataSource.createUserPallete(userId: userId);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
   Future<bool> isNewUser({required User user}) async {
     return await _userDataSource.isNewUser(user: user);
   }

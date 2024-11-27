@@ -32,7 +32,7 @@ class GoogleAuth implements SocialAuth {
         imgUrl: userCredential.user!.photoURL ?? '',
         language: 'ko',
         userType: UserType.free,
-        createAt: DateTime.now(),
+        createdAt: DateTime.now(),
         isDeleted: 1,
       );
 

@@ -26,7 +26,7 @@ mixin _$User {
   String get imgUrl => throw _privateConstructorUsedError;
   String get language => throw _privateConstructorUsedError;
   UserType get userType => throw _privateConstructorUsedError;
-  DateTime get createAt => throw _privateConstructorUsedError;
+  DateTime get createdAt => throw _privateConstructorUsedError;
   int get isDeleted => throw _privateConstructorUsedError;
   DateTime? get deletedAt => throw _privateConstructorUsedError;
   String get uid => throw _privateConstructorUsedError;
@@ -48,7 +48,7 @@ abstract class $UserCopyWith<$Res> {
       String imgUrl,
       String language,
       UserType userType,
-      DateTime createAt,
+      DateTime createdAt,
       int isDeleted,
       DateTime? deletedAt,
       String uid});
@@ -73,7 +73,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? imgUrl = null,
     Object? language = null,
     Object? userType = null,
-    Object? createAt = null,
+    Object? createdAt = null,
     Object? isDeleted = null,
     Object? deletedAt = freezed,
     Object? uid = null,
@@ -103,9 +103,9 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.userType
           : userType // ignore: cast_nullable_to_non_nullable
               as UserType,
-      createAt: null == createAt
-          ? _value.createAt
-          : createAt // ignore: cast_nullable_to_non_nullable
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
       isDeleted: null == isDeleted
           ? _value.isDeleted
@@ -137,7 +137,7 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       String imgUrl,
       String language,
       UserType userType,
-      DateTime createAt,
+      DateTime createdAt,
       int isDeleted,
       DateTime? deletedAt,
       String uid});
@@ -159,7 +159,7 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? imgUrl = null,
     Object? language = null,
     Object? userType = null,
-    Object? createAt = null,
+    Object? createdAt = null,
     Object? isDeleted = null,
     Object? deletedAt = freezed,
     Object? uid = null,
@@ -189,9 +189,9 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.userType
           : userType // ignore: cast_nullable_to_non_nullable
               as UserType,
-      createAt: null == createAt
-          ? _value.createAt
-          : createAt // ignore: cast_nullable_to_non_nullable
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
       isDeleted: null == isDeleted
           ? _value.isDeleted
@@ -219,7 +219,7 @@ class _$UserImpl implements _User {
       required this.imgUrl,
       required this.language,
       required this.userType,
-      required this.createAt,
+      required this.createdAt,
       required this.isDeleted,
       this.deletedAt,
       required this.uid});
@@ -240,7 +240,7 @@ class _$UserImpl implements _User {
   @override
   final UserType userType;
   @override
-  final DateTime createAt;
+  final DateTime createdAt;
   @override
   final int isDeleted;
   @override
@@ -250,7 +250,7 @@ class _$UserImpl implements _User {
 
   @override
   String toString() {
-    return 'User(userId: $userId, name: $name, email: $email, imgUrl: $imgUrl, language: $language, userType: $userType, createAt: $createAt, isDeleted: $isDeleted, deletedAt: $deletedAt, uid: $uid)';
+    return 'User(userId: $userId, name: $name, email: $email, imgUrl: $imgUrl, language: $language, userType: $userType, createdAt: $createdAt, isDeleted: $isDeleted, deletedAt: $deletedAt, uid: $uid)';
   }
 
   @override
@@ -266,8 +266,8 @@ class _$UserImpl implements _User {
                 other.language == language) &&
             (identical(other.userType, userType) ||
                 other.userType == userType) &&
-            (identical(other.createAt, createAt) ||
-                other.createAt == createAt) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
             (identical(other.isDeleted, isDeleted) ||
                 other.isDeleted == isDeleted) &&
             (identical(other.deletedAt, deletedAt) ||
@@ -278,7 +278,7 @@ class _$UserImpl implements _User {
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, userId, name, email, imgUrl,
-      language, userType, createAt, isDeleted, deletedAt, uid);
+      language, userType, createdAt, isDeleted, deletedAt, uid);
 
   @JsonKey(ignore: true)
   @override
@@ -302,7 +302,7 @@ abstract class _User implements User {
       required final String imgUrl,
       required final String language,
       required final UserType userType,
-      required final DateTime createAt,
+      required final DateTime createdAt,
       required final int isDeleted,
       final DateTime? deletedAt,
       required final String uid}) = _$UserImpl;
@@ -322,7 +322,7 @@ abstract class _User implements User {
   @override
   UserType get userType;
   @override
-  DateTime get createAt;
+  DateTime get createdAt;
   @override
   int get isDeleted;
   @override

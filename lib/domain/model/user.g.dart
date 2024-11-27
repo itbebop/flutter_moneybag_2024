@@ -13,7 +13,7 @@ _$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
       imgUrl: json['imgUrl'] as String,
       language: json['language'] as String,
       userType: $enumDecode(_$UserTypeEnumMap, json['userType']),
-      createAt: DateTime.parse(json['createAt'] as String),
+      createdAt: DateTime.parse(json['createdAt'] as String),
       isDeleted: (json['isDeleted'] as num).toInt(),
       deletedAt: json['deletedAt'] == null
           ? null
@@ -29,7 +29,7 @@ Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
       'imgUrl': instance.imgUrl,
       'language': instance.language,
       'userType': _$UserTypeEnumMap[instance.userType]!,
-      'createAt': instance.createAt.toIso8601String(),
+      'createdAt': instance.createdAt.toIso8601String(),
       'isDeleted': instance.isDeleted,
       'deletedAt': instance.deletedAt?.toIso8601String(),
       'uid': instance.uid,

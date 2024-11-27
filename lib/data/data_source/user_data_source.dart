@@ -2,6 +2,7 @@ import 'package:flutter_moneybag_2024/domain/model/user.dart';
 
 abstract interface class UserDataSource {
   Future<int> createUser({required User user});
+  Future<void> createUserPallete({required int userId});
   Future<void> signOut();
   Future<int> getUserFromFirebase({required String uid});
   Future<User> getUser({required String uid});

@@ -53,7 +53,7 @@ class UserStateNotifier extends StateNotifier<UserState> {
           imgUrl: user.imgUrl,
           language: user.language,
           userType: user.userType,
-          createAt: DateTime.now(),
+          createdAt: DateTime.now(),
           isDeleted: 0,
         );
         await state.updateColorListUsecase.execute(userId: 0, user: newUser);

@@ -31,7 +31,7 @@ class KakaoAuth implements SocialAuth {
           imgUrl: kakaoUser.kakaoAccount?.profile?.profileImageUrl ?? '',
           language: 'ko',
           userType: UserType.free,
-          createAt: DateTime.now(),
+          createdAt: DateTime.now(),
           isDeleted: 1,
         );
         return user;
@@ -61,7 +61,7 @@ class KakaoAuth implements SocialAuth {
             imgUrl: kakaoUser.kakaoAccount?.profile?.profileImageUrl ?? '',
             language: 'ko',
             userType: UserType.free,
-            createAt: DateTime.now(),
+            createdAt: DateTime.now(),
             isDeleted: 1,
           );
           return user;
@@ -93,7 +93,7 @@ class KakaoAuth implements SocialAuth {
           imgUrl: kakaoUser.kakaoAccount?.profile?.profileImageUrl ?? '',
           language: 'ko',
           userType: UserType.free,
-          createAt: DateTime.now(),
+          createdAt: DateTime.now(),
           isDeleted: 1,
         );
         return user;

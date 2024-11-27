@@ -6,7 +6,7 @@ class UpdateColorListUsecase {
 
   UpdateColorListUsecase({required UserRepository userRepository}) : _userRepository = userRepository;
 
-  Future<void> execute({required String userId, required User user}) async {
+  Future<void> execute({required int userId, required User user}) async {
     await _userRepository.updateColorList(userId: userId, user: user);
   }
 }
