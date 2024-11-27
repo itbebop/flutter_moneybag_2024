@@ -18,52 +18,59 @@ class AssetDataSourceImpl implements AssetDataSource {
         fromFirestore: (snapshot, _) => Asset.fromJson(snapshot.data()!),
         toFirestore: (snapshot, _) => snapshot.toJson(),
       );
+  @override
+  Future<int> initAsset({required int userId}) async {
+    final Options options = Options(
+      headers: {'userId': userId, 'action': 'createAsset'},
+    );
+    Response response = await _dio.post(
+      '$baseUrl/assets',
+      data: Asset(
+        assetId: 0,
+        assetName: '첫 자산',
+        isActiveAsset: 1,
+        currency: 'KRW',
+        createdAt: DateTime.now(),
+        updatedAt: DateTime.now(),
+        firstColor: 1,
+        secondColor: 2,
+      ).toJson(),
+      options: options,
+    );
+    if (response.statusCode == 201) {
+      debugPrint("Asset created successfully: ${response.data}");
+      return int.parse(response.data['data']);
+    } else {
+      debugPrint("Failed to create asset: ${response.statusCode}");
+      return 0;
+    }
+  }
 
   @override
-  Future<void> createAsset({Asset? asset, required int userId}) async {
-    print('#### createAsset 시작');
+  Future<int> createAsset({required Asset asset, required int userId}) async {
     // 요청 헤더에 userId 추가
     final Options options = Options(
-      headers: {
-        'userId': userId,
-      },
+      headers: {'userId': userId, 'action': 'createAsset'},
     );
-    print('#### userId in asset data: $userId');
 
-    final List<Asset> assetList = await getAssetList(userId: userId);
-    print('#### assetList in asset data: $assetList');
+    Response response;
+    // activatedAssetId가 비어있으면 기본 asset 생성
+    response = await _dio.post(
+      '$baseUrl/assets',
+      data: asset,
+    );
+    response = await _dio.post(
+      '$baseUrl/assets',
+      data: asset.toJson(),
+      options: options,
+    );
 
-    Response? response;
-    if (assetList.isEmpty) {
-      print('asset이 없음');
-      // activatedAssetId가 비어있으면 기본 asset 생성
-      response = await _dio.post(
-        '$baseUrl/assets',
-        data: Asset(
-          assetId: 0,
-          assetName: '첫 자산',
-          isActiveAsset: 1,
-          currency: 'KRW',
-          createdAt: DateTime.now(),
-          updatedAt: DateTime.now(),
-          firstColor: 1,
-          secondColor: 2,
-        ).toJson(),
-        options: options,
-      );
-    } else if (asset != null) {
-      // asset이 이미 존재하는 경우 새로운 asset 추가 (asset이 주어졌을 때)
-      response = await _dio.post(
-        '$baseUrl/assets',
-        data: asset.toJson(),
-        options: options,
-      );
-    }
-
-    if (response != null && response.statusCode == 201) {
+    if (response.statusCode == 201) {
       debugPrint("Asset created successfully: ${response.data}");
+      return int.parse(response.data['data']);
     } else {
-      debugPrint("Failed to create asset: ${response?.statusCode}");
+      debugPrint("Failed to create asset: ${response.statusCode}");
+      return 0;
     }
   }
 

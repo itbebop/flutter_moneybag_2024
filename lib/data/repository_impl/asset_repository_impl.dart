@@ -6,10 +6,14 @@ class AssetRepositoryImpl implements AssetRepository {
   final AssetDataSource _assetDetailDataSource;
 
   AssetRepositoryImpl({required AssetDataSource assetDetailDataSource}) : _assetDetailDataSource = assetDetailDataSource;
+  @override
+  Future<int> initAsset({required int userId}) async {
+    return await _assetDetailDataSource.initAsset(userId: userId);
+  }
 
   @override
-  Future<void> createAsset({Asset? asset, required int userId}) async {
-    await _assetDetailDataSource.createAsset(asset: asset, userId: userId);
+  Future<int> createAsset({required Asset asset, required int userId}) async {
+    return await _assetDetailDataSource.createAsset(asset: asset, userId: userId);
   }
 
   @override

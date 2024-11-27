@@ -173,7 +173,7 @@ class AssetStateNotifier extends StateNotifier<AssetState> {
     );
   }
 
-  Future<void> createAsset({Asset? asset, required int userId}) async {
+  Future<void> createAsset({required Asset asset, required int userId}) async {
     await state.createAssetUserCase.execute(asset: asset, userId: userId);
     state = state.copyWith(
       firstColor: const Color.fromARGB(255, 236, 177, 89),

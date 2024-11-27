@@ -19,6 +19,7 @@ import 'package:flutter_moneybag_2024/domain/usecase/asset/create_asset_use_case
 import 'package:flutter_moneybag_2024/domain/usecase/asset/delete_asset_use_case.dart';
 import 'package:flutter_moneybag_2024/domain/usecase/asset/get_asset_list_use_case.dart';
 import 'package:flutter_moneybag_2024/domain/usecase/asset/get_asset_use_case.dart';
+import 'package:flutter_moneybag_2024/domain/usecase/asset/init_asset_use_case.dart';
 import 'package:flutter_moneybag_2024/domain/usecase/asset/update_asset_use_case.dart';
 import 'package:flutter_moneybag_2024/domain/usecase/auth/check_user_duplicated_usecase.dart';
 import 'package:flutter_moneybag_2024/domain/usecase/auth/create_user_usecase.dart';
@@ -66,6 +67,7 @@ void diSetup() {
   getIt.registerSingleton<UpdateUserNameUsecase>(UpdateUserNameUsecase(userRepository: getIt()));
   getIt.registerSingleton<UpdateColorListUsecase>(UpdateColorListUsecase(userRepository: getIt()));
   // asset
+  getIt.registerSingleton<InitAssetUseCase>(InitAssetUseCase(assetRepository: getIt()));
   getIt.registerSingleton<CreateAssetUseCase>(CreateAssetUseCase(assetRepository: getIt()));
   getIt.registerSingleton<DeleteAssetUseCase>(DeleteAssetUseCase(assetRepository: getIt()));
   getIt.registerSingleton<GetAssetListUseCase>(GetAssetListUseCase(assetRepository: getIt()));

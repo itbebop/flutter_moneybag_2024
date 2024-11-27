@@ -8,6 +8,7 @@ import 'package:firebase_auth/firebase_auth.dart' as auth;
 final userStateProvider = StateNotifierProvider<UserStateNotifier, UserState>((ref) => UserStateNotifier(
       UserState(
         getUserUseCase: getIt(),
+        getUserPalleteUseCase: getIt(),
         updateColorListUsecase: getIt(),
         logoutUseCase: getIt(),
       ),
@@ -55,7 +56,7 @@ class UserStateNotifier extends StateNotifier<UserState> {
           createAt: DateTime.now(),
           isDeleted: 0,
         );
-        await state.updateColorListUsecase.execute(userId: user.uid, user: newUser);
+        await state.updateColorListUsecase.execute(userId: 0, user: newUser);
       }
     } catch (e) {
       rethrow;

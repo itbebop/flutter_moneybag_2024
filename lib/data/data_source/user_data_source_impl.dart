@@ -23,16 +23,21 @@ class UserDataSourceImpl implements UserDataSource {
 
   @override
   Future<int> createUser({required User user}) async {
+    if (user.imgUrl.isEmpty) {
+      user = user.copyWith(imgUrl: 'https://ui-avatars.com/api/?name=${Uri.encodeComponent(user.name)}&size=50');
+    }
     final userJson = user.toJson();
+    final Options options = Options(
+      headers: {
+        'action': 'createUser',
+      },
+    );
     final response = await _dio.post(
       '$baseUrl/users', // 엔드포인트 설정
       data: userJson,
+      options: options,
     );
     try {
-      if (user.imgUrl.isEmpty) {
-        user = user.copyWith(imgUrl: 'https://ui-avatars.com/api/?name=${Uri.encodeComponent(user.name)}&size=50');
-      }
-
       if (response.statusCode == 201) {
         debugPrint("User created successfully: ${response.data}");
         user = user.copyWith(userId: int.parse(response.data['data']));
@@ -84,7 +89,7 @@ class UserDataSourceImpl implements UserDataSource {
   Future<List<String>> getUserPallete({required int userId}) async {
     final Options options = Options(
       headers: {
-        'action': 'getUser',
+        'action': 'getUserPallete',
       },
     );
 
