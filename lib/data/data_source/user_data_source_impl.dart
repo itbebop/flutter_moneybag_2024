@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_moneybag_2024/data/data_source/user_data_source.dart';
 import 'package:flutter_moneybag_2024/domain/model/user.dart';
+import 'package:flutter_moneybag_2024/domain/model/user_pallete.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 
@@ -95,36 +96,63 @@ class UserDataSourceImpl implements UserDataSource {
 
   @override
   Future<User> getUser({required String uid}) async {
-    final userId = await getUserId(uid: uid);
-    final Options options = Options(
-      headers: {
-        'action': 'getUser',
-      },
-    );
+    print('#### uid in user data: $uid');
+    try {
+      final userId = await getUserId(uid: uid);
+      print('#### userId in user data: $userId');
 
-    Response response = await _dio.get(
-      '$baseUrl/users/$userId',
-      options: options,
-    );
-    final userJson = response.data['data'];
-    final user = User.fromJson(userJson);
-    return user;
+      final Options options = Options(
+        headers: {
+          'action': 'getUser',
+        },
+      );
+
+      Response response = await _dio.get(
+        '$baseUrl/users/$userId',
+        options: options,
+      );
+      final userJson = response.data['data'];
+      print('### userJson:$userJson');
+
+      if (userJson == null) {
+        throw Exception('User data is null');
+      }
+
+      final User user = User.fromJson(userJson);
+      return user;
+    } on DioException catch (e) {
+      debugPrint("getUser error: ${e.message}");
+      rethrow;
+    } catch (e) {
+      debugPrint("Unexpected error: $e");
+      rethrow;
+    }
   }
 
   @override
-  Future<List<String>> getUserPallete({required int userId}) async {
-    final Options options = Options(
-      headers: {
-        'action': 'getUserPallete',
-      },
-    );
+  Future<List<UserPallete>> getUserPallete({required int userId}) async {
+    try {
+      final Options options = Options(
+        headers: {
+          'action': 'getUserPallete',
+        },
+      );
 
-    Response response = await _dio.get(
-      '$baseUrl/users/$userId',
-      options: options,
-    );
-    final List<String> colorList = response.data['data'];
-    return colorList;
+      Response response = await _dio.get(
+        '$baseUrl/users/$userId',
+        options: options,
+      );
+
+      final Map<String, dynamic> responseData = response.data['data'];
+      final List<dynamic> colorList = responseData['rows'];
+      print('#### colorList in user data: $colorList');
+      final List<UserPallete> userPallete = colorList.map((data) => UserPallete.fromJson(data)).toList();
+
+      return userPallete;
+    } on DioException catch (e) {
+      debugPrint("getUserPallete error: ${e.message}");
+      rethrow;
+    }
   }
 
   @override

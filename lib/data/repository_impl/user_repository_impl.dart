@@ -4,6 +4,7 @@ import 'package:flutter_moneybag_2024/data/data_source/user_data_source.dart';
 import 'package:flutter_moneybag_2024/data/repository_impl/auth/google_auth.dart';
 import 'package:flutter_moneybag_2024/data/repository_impl/auth/kakao_auth.dart';
 import 'package:flutter_moneybag_2024/domain/model/user.dart';
+import 'package:flutter_moneybag_2024/domain/model/user_pallete.dart';
 import 'package:flutter_moneybag_2024/domain/repository/user_repository.dart';
 
 class UserRepositoryImpl implements UserRepository {
@@ -84,8 +85,8 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<List<String>> getUserPallete({required int userId}) async {
-    List<String> colorList = await _userDataSource.getUserPallete(userId: userId);
+  Future<List<UserPallete>> getUserPallete({required int userId}) async {
+    List<UserPallete> colorList = await _userDataSource.getUserPallete(userId: userId);
     return colorList;
   }
 

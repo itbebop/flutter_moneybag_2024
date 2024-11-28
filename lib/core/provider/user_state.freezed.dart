@@ -23,6 +23,7 @@ mixin _$UserState {
   UpdateColorListUsecase get updateColorListUsecase =>
       throw _privateConstructorUsedError;
   LogoutUseCase get logoutUseCase => throw _privateConstructorUsedError;
+  List<UserPallete> get userColorList => throw _privateConstructorUsedError;
   User? get user => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -41,6 +42,7 @@ abstract class $UserStateCopyWith<$Res> {
       GetUserPalleteUseCase getUserPalleteUseCase,
       UpdateColorListUsecase updateColorListUsecase,
       LogoutUseCase logoutUseCase,
+      List<UserPallete> userColorList,
       User? user});
 
   $UserCopyWith<$Res>? get user;
@@ -64,6 +66,7 @@ class _$UserStateCopyWithImpl<$Res, $Val extends UserState>
     Object? getUserPalleteUseCase = null,
     Object? updateColorListUsecase = null,
     Object? logoutUseCase = null,
+    Object? userColorList = null,
     Object? user = freezed,
   }) {
     return _then(_value.copyWith(
@@ -87,6 +90,10 @@ class _$UserStateCopyWithImpl<$Res, $Val extends UserState>
           ? _value.logoutUseCase
           : logoutUseCase // ignore: cast_nullable_to_non_nullable
               as LogoutUseCase,
+      userColorList: null == userColorList
+          ? _value.userColorList
+          : userColorList // ignore: cast_nullable_to_non_nullable
+              as List<UserPallete>,
       user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -121,6 +128,7 @@ abstract class _$$UserStateImplCopyWith<$Res>
       GetUserPalleteUseCase getUserPalleteUseCase,
       UpdateColorListUsecase updateColorListUsecase,
       LogoutUseCase logoutUseCase,
+      List<UserPallete> userColorList,
       User? user});
 
   @override
@@ -143,6 +151,7 @@ class __$$UserStateImplCopyWithImpl<$Res>
     Object? getUserPalleteUseCase = null,
     Object? updateColorListUsecase = null,
     Object? logoutUseCase = null,
+    Object? userColorList = null,
     Object? user = freezed,
   }) {
     return _then(_$UserStateImpl(
@@ -166,6 +175,10 @@ class __$$UserStateImplCopyWithImpl<$Res>
           ? _value.logoutUseCase
           : logoutUseCase // ignore: cast_nullable_to_non_nullable
               as LogoutUseCase,
+      userColorList: null == userColorList
+          ? _value._userColorList
+          : userColorList // ignore: cast_nullable_to_non_nullable
+              as List<UserPallete>,
       user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -183,7 +196,9 @@ class _$UserStateImpl implements _UserState {
       required this.getUserPalleteUseCase,
       required this.updateColorListUsecase,
       required this.logoutUseCase,
-      this.user});
+      required final List<UserPallete> userColorList,
+      this.user})
+      : _userColorList = userColorList;
 
   @override
   @JsonKey()
@@ -196,12 +211,20 @@ class _$UserStateImpl implements _UserState {
   final UpdateColorListUsecase updateColorListUsecase;
   @override
   final LogoutUseCase logoutUseCase;
+  final List<UserPallete> _userColorList;
+  @override
+  List<UserPallete> get userColorList {
+    if (_userColorList is EqualUnmodifiableListView) return _userColorList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_userColorList);
+  }
+
   @override
   final User? user;
 
   @override
   String toString() {
-    return 'UserState(isLoading: $isLoading, getUserUseCase: $getUserUseCase, getUserPalleteUseCase: $getUserPalleteUseCase, updateColorListUsecase: $updateColorListUsecase, logoutUseCase: $logoutUseCase, user: $user)';
+    return 'UserState(isLoading: $isLoading, getUserUseCase: $getUserUseCase, getUserPalleteUseCase: $getUserPalleteUseCase, updateColorListUsecase: $updateColorListUsecase, logoutUseCase: $logoutUseCase, userColorList: $userColorList, user: $user)';
   }
 
   @override
@@ -219,12 +242,21 @@ class _$UserStateImpl implements _UserState {
                 other.updateColorListUsecase == updateColorListUsecase) &&
             (identical(other.logoutUseCase, logoutUseCase) ||
                 other.logoutUseCase == logoutUseCase) &&
+            const DeepCollectionEquality()
+                .equals(other._userColorList, _userColorList) &&
             (identical(other.user, user) || other.user == user));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isLoading, getUserUseCase,
-      getUserPalleteUseCase, updateColorListUsecase, logoutUseCase, user);
+  int get hashCode => Object.hash(
+      runtimeType,
+      isLoading,
+      getUserUseCase,
+      getUserPalleteUseCase,
+      updateColorListUsecase,
+      logoutUseCase,
+      const DeepCollectionEquality().hash(_userColorList),
+      user);
 
   @JsonKey(ignore: true)
   @override
@@ -240,6 +272,7 @@ abstract class _UserState implements UserState {
       required final GetUserPalleteUseCase getUserPalleteUseCase,
       required final UpdateColorListUsecase updateColorListUsecase,
       required final LogoutUseCase logoutUseCase,
+      required final List<UserPallete> userColorList,
       final User? user}) = _$UserStateImpl;
 
   @override
@@ -252,6 +285,8 @@ abstract class _UserState implements UserState {
   UpdateColorListUsecase get updateColorListUsecase;
   @override
   LogoutUseCase get logoutUseCase;
+  @override
+  List<UserPallete> get userColorList;
   @override
   User? get user;
   @override

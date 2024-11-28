@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
+import 'package:flutter_moneybag_2024/common/common.dart';
+
 import 'package:flutter_moneybag_2024/common/widget/alert_dialog_widget.dart';
 import 'package:flutter_moneybag_2024/core/provider/user_state_notifier.dart';
 import 'package:flutter_moneybag_2024/di/di_setup.dart';
@@ -16,8 +18,10 @@ final assetStateProvier = StateNotifierProvider<AssetStateNotifier, AssetState>(
   List<Color> firstColorList = [];
   List<Color> secondColorList = [];
   if (userState.user != null) {
-    // assetIdList = userState.user!.assetIdList;
     userId = userState.user!.userId;
+    print('#### userId in asset notifier init: $userId');
+    firstColorList = userState.userColorList.map((userColor) => hexStringToColor(userColor.hexaCode)).toList();
+    secondColorList = userState.userColorList.map((userColor) => hexStringToColor(userColor.hexaCode)).toList();
     // if (userState.user!.firstColorListSave.isEmpty) {
     //   firstColorList = initColorList;
     // } else {
@@ -48,8 +52,10 @@ final assetStateProvier = StateNotifierProvider<AssetStateNotifier, AssetState>(
     userId: userId,
     firstColor: const Color.fromARGB(255, 236, 177, 89),
     secondColor: const Color.fromARGB(255, 255, 197, 39),
+    // userState에서 받은 colorList 초기화
     firstColorList: firstColorList,
     secondColorList: secondColorList,
+
     firstColorListSave: [],
     assetType: AssetType.expense,
     isCheckedAsset: false,

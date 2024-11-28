@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_moneybag_2024/core/provider/user_state.dart';
 import 'package:flutter_moneybag_2024/di/di_setup.dart';
 import 'package:flutter_moneybag_2024/domain/model/user.dart';
+import 'package:flutter_moneybag_2024/domain/model/user_pallete.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 
@@ -11,6 +12,7 @@ final userStateProvider = StateNotifierProvider<UserStateNotifier, UserState>((r
         getUserPalleteUseCase: getIt(),
         updateColorListUsecase: getIt(),
         logoutUseCase: getIt(),
+        userColorList: [],
       ),
     ));
 
@@ -25,6 +27,8 @@ class UserStateNotifier extends StateNotifier<UserState> {
       }
       final User user = await state.getUserUseCase.execute(uid: currentUser.uid);
       state = state.copyWith(user: user, isLoading: true);
+      // fetch user하면서 pallete도 가져옴
+      await getColorList(user.userId);
     } catch (error) {
       throw Exception(error.toString());
     }
@@ -33,6 +37,15 @@ class UserStateNotifier extends StateNotifier<UserState> {
   Future<void> logout() async {
     state = state.copyWith(user: null);
     await state.logoutUseCase.execute();
+  }
+
+  Future<void> getColorList(int userId) async {
+    try {
+      final List<UserPallete> colorList = await state.getUserPalleteUseCase.execute(userId: userId);
+      state = state.copyWith(userColorList: colorList);
+    } catch (e) {
+      rethrow;
+    }
   }
 
   Future<void> modifyColorList(
