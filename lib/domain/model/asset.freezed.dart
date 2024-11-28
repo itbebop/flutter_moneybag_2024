@@ -23,7 +23,7 @@ mixin _$Asset {
   int get assetId => throw _privateConstructorUsedError;
   String get assetName => throw _privateConstructorUsedError;
   String get currency => throw _privateConstructorUsedError;
-  int get isActiveAsset => throw _privateConstructorUsedError;
+  int get isActivated => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
   DateTime get updatedAt => throw _privateConstructorUsedError;
   String get firstColor => throw _privateConstructorUsedError;
@@ -43,7 +43,7 @@ abstract class $AssetCopyWith<$Res> {
       {int assetId,
       String assetName,
       String currency,
-      int isActiveAsset,
+      int isActivated,
       DateTime createdAt,
       DateTime updatedAt,
       String firstColor,
@@ -66,7 +66,7 @@ class _$AssetCopyWithImpl<$Res, $Val extends Asset>
     Object? assetId = null,
     Object? assetName = null,
     Object? currency = null,
-    Object? isActiveAsset = null,
+    Object? isActivated = null,
     Object? createdAt = null,
     Object? updatedAt = null,
     Object? firstColor = null,
@@ -85,9 +85,9 @@ class _$AssetCopyWithImpl<$Res, $Val extends Asset>
           ? _value.currency
           : currency // ignore: cast_nullable_to_non_nullable
               as String,
-      isActiveAsset: null == isActiveAsset
-          ? _value.isActiveAsset
-          : isActiveAsset // ignore: cast_nullable_to_non_nullable
+      isActivated: null == isActivated
+          ? _value.isActivated
+          : isActivated // ignore: cast_nullable_to_non_nullable
               as int,
       createdAt: null == createdAt
           ? _value.createdAt
@@ -120,7 +120,7 @@ abstract class _$$AssetImplCopyWith<$Res> implements $AssetCopyWith<$Res> {
       {int assetId,
       String assetName,
       String currency,
-      int isActiveAsset,
+      int isActivated,
       DateTime createdAt,
       DateTime updatedAt,
       String firstColor,
@@ -141,7 +141,7 @@ class __$$AssetImplCopyWithImpl<$Res>
     Object? assetId = null,
     Object? assetName = null,
     Object? currency = null,
-    Object? isActiveAsset = null,
+    Object? isActivated = null,
     Object? createdAt = null,
     Object? updatedAt = null,
     Object? firstColor = null,
@@ -160,9 +160,9 @@ class __$$AssetImplCopyWithImpl<$Res>
           ? _value.currency
           : currency // ignore: cast_nullable_to_non_nullable
               as String,
-      isActiveAsset: null == isActiveAsset
-          ? _value.isActiveAsset
-          : isActiveAsset // ignore: cast_nullable_to_non_nullable
+      isActivated: null == isActivated
+          ? _value.isActivated
+          : isActivated // ignore: cast_nullable_to_non_nullable
               as int,
       createdAt: null == createdAt
           ? _value.createdAt
@@ -191,7 +191,7 @@ class _$AssetImpl implements _Asset {
       {required this.assetId,
       required this.assetName,
       required this.currency,
-      required this.isActiveAsset,
+      required this.isActivated,
       required this.createdAt,
       required this.updatedAt,
       required this.firstColor,
@@ -207,7 +207,7 @@ class _$AssetImpl implements _Asset {
   @override
   final String currency;
   @override
-  final int isActiveAsset;
+  final int isActivated;
   @override
   final DateTime createdAt;
   @override
@@ -219,7 +219,7 @@ class _$AssetImpl implements _Asset {
 
   @override
   String toString() {
-    return 'Asset(assetId: $assetId, assetName: $assetName, currency: $currency, isActiveAsset: $isActiveAsset, createdAt: $createdAt, updatedAt: $updatedAt, firstColor: $firstColor, secondColor: $secondColor)';
+    return 'Asset(assetId: $assetId, assetName: $assetName, currency: $currency, isActivated: $isActivated, createdAt: $createdAt, updatedAt: $updatedAt, firstColor: $firstColor, secondColor: $secondColor)';
   }
 
   @override
@@ -232,8 +232,8 @@ class _$AssetImpl implements _Asset {
                 other.assetName == assetName) &&
             (identical(other.currency, currency) ||
                 other.currency == currency) &&
-            (identical(other.isActiveAsset, isActiveAsset) ||
-                other.isActiveAsset == isActiveAsset) &&
+            (identical(other.isActivated, isActivated) ||
+                other.isActivated == isActivated) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
@@ -247,7 +247,7 @@ class _$AssetImpl implements _Asset {
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, assetId, assetName, currency,
-      isActiveAsset, createdAt, updatedAt, firstColor, secondColor);
+      isActivated, createdAt, updatedAt, firstColor, secondColor);
 
   @JsonKey(ignore: true)
   @override
@@ -268,7 +268,7 @@ abstract class _Asset implements Asset {
       {required final int assetId,
       required final String assetName,
       required final String currency,
-      required final int isActiveAsset,
+      required final int isActivated,
       required final DateTime createdAt,
       required final DateTime updatedAt,
       required final String firstColor,
@@ -283,7 +283,7 @@ abstract class _Asset implements Asset {
   @override
   String get currency;
   @override
-  int get isActiveAsset;
+  int get isActivated;
   @override
   DateTime get createdAt;
   @override

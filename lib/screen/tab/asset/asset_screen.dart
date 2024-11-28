@@ -145,7 +145,7 @@ class _ReportScreenState extends ConsumerState<AssetScreen> {
                                                         Asset(
                                                           assetId: assetProvider.allAssetList[index].assetId,
                                                           assetName: titleEditController.text,
-                                                          isActiveAsset: assetProvider.allAssetList[index].isActiveAsset,
+                                                          isActivated: assetProvider.allAssetList[index].isActivated,
                                                           currency: assetProvider.currencyHints,
                                                           createdAt: assetProvider.allAssetList[index].createdAt,
                                                           updatedAt: DateTime.now(),

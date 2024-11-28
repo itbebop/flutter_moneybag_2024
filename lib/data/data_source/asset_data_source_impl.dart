@@ -21,14 +21,17 @@ class AssetDataSourceImpl implements AssetDataSource {
   @override
   Future<int> initAsset({required int userId}) async {
     final Options options = Options(
-      headers: {'userId': userId, 'action': 'createAsset'},
+      headers: {
+        'userId': userId,
+        'action': 'createAsset',
+      },
     );
     Response response = await _dio.post(
       '$baseUrl/assets',
       data: Asset(
         assetId: 0,
         assetName: '첫 자산',
-        isActiveAsset: 1,
+        isActivated: 1,
         currency: 'KRW',
         createdAt: DateTime.now(),
         updatedAt: DateTime.now(),
@@ -50,7 +53,10 @@ class AssetDataSourceImpl implements AssetDataSource {
   Future<int> createAsset({required Asset asset, required int userId}) async {
     // 요청 헤더에 userId 추가
     final Options options = Options(
-      headers: {'userId': userId, 'action': 'createAsset'},
+      headers: {
+        'userId': userId,
+        'action': 'createAsset',
+      },
     );
 
     Response response;
@@ -76,42 +82,66 @@ class AssetDataSourceImpl implements AssetDataSource {
 
   @override
   Future<List<Asset>> getAssetList({required int userId}) async {
-    print('#### getAssetList 시작');
     // 요청 헤더에 userId 추가
-    print('userId in getAssetList: $userId');
     final Options options = Options(
       headers: {
         'userId': userId,
       },
     );
 
-    Response response = await _dio.get(
-      '$baseUrl/assets',
-      options: options,
-    );
+    try {
+      Response response = await _dio.get(
+        '$baseUrl/assets',
+        options: options,
+      );
 
-    final jsonList = response.data['data'];
-    print('### jsonList: $jsonList');
+      final jsonData = response.data['data'];
+      print('### jsonData in asset data: $jsonData');
+      // jsonData가 null일 경우 빈 리스트 반환
+      if (jsonData == null) {
+        return [];
+      }
 
-    // jsonList가 빈 리스트이거나 null일 경우 바로 빈 리스트 반환
-    if (jsonList == null || jsonList.isEmpty) {
+      // jsonData가 맵(Map)인지 리스트(List)인지 확인 후 처리
+      if (jsonData is List) {
+        // jsonData가 리스트라면 Asset 객체 리스트로 변환
+        final List<Asset> assetList = jsonData.map<Asset>((json) => Asset.fromJson(json)).toList();
+
+        // 정렬된 자산 리스트 반환
+        final sortedAssets = assetList..sort((a, b) => a.createdAt.compareTo(b.createdAt));
+        return sortedAssets;
+      } else if (jsonData is Map<String, dynamic>) {
+        // jsonData가 맵이라면 단일 Asset 객체를 리스트로 감싸서 반환
+        final asset = Asset.fromJson(jsonData);
+        return [asset];
+      } else {
+        // 예상치 못한 데이터 형식일 경우 빈 리스트 반환
+        return [];
+      }
+    } catch (e) {
+      debugPrint('Error in getAssetList: $e');
       return [];
     }
-
-    // jsonList를 Asset 객체 리스트로 변환
-    final List<Asset> assetList = jsonList.map<Asset>((json) => Asset.fromJson(json)).toList();
-
-    // 정렬된 자산 리스트 반환
-    final sortedAssets = assetList..sort((a, b) => a.createdAt.compareTo(b.createdAt));
-    return sortedAssets;
   }
 
   @override
   Future<Asset> getAsset({required int assetId}) async {
-    final doc = await _assetRef.doc('assetId').get();
-    if (doc.exists) {
-      return doc.data()!;
-    } else {
+    try {
+      final Options options = Options(
+        headers: {
+          'action': 'getAsset',
+        },
+      );
+      Response response = await _dio.get(
+        '$baseUrl/assets/$assetId',
+        options: options,
+      );
+
+      final assetJson = response.data['data'];
+      print('#### assetJson in asset data: $assetJson');
+      final Asset asset = Asset.fromJson(assetJson);
+      return asset;
+    } catch (error) {
       throw Exception('Asset not found');
     }
   }
@@ -122,8 +152,8 @@ class AssetDataSourceImpl implements AssetDataSource {
   }
 
   @override
-  Future<void> chageActivatedAsset({required int assetId, required bool isActiveAsset}) async {
-    await _assetRef.doc('assetId').update({'isActiveAsset': isActiveAsset});
+  Future<void> chageActivatedAsset({required int assetId, required bool isActivated}) async {
+    await _assetRef.doc('assetId').update({'isActivated': isActivated});
   }
 
   @override

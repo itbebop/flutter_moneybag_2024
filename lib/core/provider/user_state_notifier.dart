@@ -23,7 +23,7 @@ class UserStateNotifier extends StateNotifier<UserState> {
       if (currentUser == null) {
         throw Exception("User is not logged in"); // 유저가 null인 경우 예외 처리
       }
-      final user = await state.getUserUseCase.execute(uid: currentUser.uid);
+      final User user = await state.getUserUseCase.execute(uid: currentUser.uid);
       state = state.copyWith(user: user, isLoading: true);
     } catch (error) {
       throw Exception(error.toString());

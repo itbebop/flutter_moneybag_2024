@@ -4,7 +4,7 @@ abstract interface class UserDataSource {
   Future<int> createUser({required User user});
   Future<void> createUserPallete({required int userId});
   Future<void> signOut();
-  Future<int> getUserFromFirebase({required String uid});
+  Future<int> getUserId({required String uid});
   Future<User> getUser({required String uid});
   Future<List<String>> getUserPallete({required int userId});
   Future<bool> isNewUser({required User user});

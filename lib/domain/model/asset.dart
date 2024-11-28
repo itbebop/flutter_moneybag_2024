@@ -9,7 +9,7 @@ class Asset with _$Asset {
     required int assetId,
     required String assetName,
     required String currency,
-    required int isActiveAsset,
+    required int isActivated,
     required DateTime createdAt,
     required DateTime updatedAt,
     required String firstColor,

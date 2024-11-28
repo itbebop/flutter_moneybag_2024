@@ -88,14 +88,14 @@ class UserDataSourceImpl implements UserDataSource {
   }
 
   @override
-  Future<int> getUserFromFirebase({required String uid}) async {
+  Future<int> getUserId({required String uid}) async {
     final user = await _userRef.doc(uid).get().then((s) => s.data()!);
     return user.userId;
   }
 
   @override
   Future<User> getUser({required String uid}) async {
-    final userId = await getUserFromFirebase(uid: uid);
+    final userId = await getUserId(uid: uid);
     final Options options = Options(
       headers: {
         'action': 'getUser',

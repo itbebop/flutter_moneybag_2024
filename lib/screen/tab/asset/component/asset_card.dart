@@ -39,8 +39,8 @@ class AssetCard extends ConsumerWidget {
               height: 180.h,
               decoration: BoxDecoration(
                 gradient: LinearGradient(colors: [
-                  Color.fromARGB(assetColor[0], assetColor[1], assetColor[2], assetColor[3]),
-                  Color.fromARGB(assetColor[4], assetColor[5], assetColor[6], assetColor[7]),
+                  assetProvider.firstColor,
+                  assetProvider.secondColor,
                 ]),
                 borderRadius: BorderRadius.circular(20),
               ),

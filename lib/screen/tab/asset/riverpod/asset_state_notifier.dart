@@ -17,7 +17,7 @@ final assetStateProvier = StateNotifierProvider<AssetStateNotifier, AssetState>(
   List<Color> secondColorList = [];
   if (userState.user != null) {
     // assetIdList = userState.user!.assetIdList;
-    // userId = userState.user!.userId;
+    userId = userState.user!.userId;
     // if (userState.user!.firstColorListSave.isEmpty) {
     //   firstColorList = initColorList;
     // } else {
@@ -46,8 +46,8 @@ final assetStateProvier = StateNotifierProvider<AssetStateNotifier, AssetState>(
     assetColor: [],
     assetCurrency: '',
     userId: userId,
-    firstColor: const Color(0xFFECB159),
-    secondColor: const Color(0xFFFFC527),
+    firstColor: const Color.fromARGB(255, 236, 177, 89),
+    secondColor: const Color.fromARGB(255, 255, 197, 39),
     firstColorList: firstColorList,
     secondColorList: secondColorList,
     firstColorListSave: [],
@@ -95,7 +95,7 @@ class AssetStateNotifier extends StateNotifier<AssetState> {
   }
 
   void getActivatedAssetList() {
-    final activatedAssetList = state.allAssetList.where((asset) => asset.isActiveAsset == 1).toList();
+    final activatedAssetList = state.allAssetList.where((asset) => asset.isActivated == 1).toList();
 
     final double activatedAmount = state.totalAmount; // TODO: activatedAsset total로직 추가해야
     final double activatedExpense = state.totalExpense;
@@ -115,19 +115,14 @@ class AssetStateNotifier extends StateNotifier<AssetState> {
     final double assetAmount = state.totalAmount; // 조회한 asset하나의 amount // TODO: state에서 변수 다시 만들어야.
     final String assetName = asset.assetName;
     final String assetCurrency = asset.currency;
-    final List<int> assetColor = state.assetColor; // TODO: 색 확인. asset.assetColor;에서 바꿈
-    final firstColor = Color.fromARGB(assetColor[0], assetColor[1], assetColor[2], assetColor[3]);
-    final secondColor = Color.fromARGB(assetColor[4], assetColor[5], assetColor[6], assetColor[7]);
     state = state.copyWith(
       assetHints: assetHints,
       assetAmount: assetAmount,
       selectedAssetId: assetId,
       assetName: assetName,
-      assetColor: assetColor,
+      assetColor: [],
       assetCurrency: assetCurrency,
       currencyHints: assetCurrency,
-      firstColor: firstColor,
-      secondColor: secondColor,
     );
   }
 
@@ -275,7 +270,7 @@ class AssetStateNotifier extends StateNotifier<AssetState> {
   }
 
   Future<void> tapCheckBox(int assetId, bool checked) async {
-    await state.changeActivedAssetUseCase.execute(assetId: assetId, isActiveAsset: checked);
+    await state.changeActivedAssetUseCase.execute(assetId: assetId, isActivated: checked);
   }
 
   Stream<List<Asset>> getAssetList() {

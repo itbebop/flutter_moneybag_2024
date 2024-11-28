@@ -32,8 +32,8 @@ class AssetRepositoryImpl implements AssetRepository {
   }
 
   @override
-  Future<void> chageActivatedAsset({required int assetId, required bool isActiveAsset}) async {
-    await _assetDetailDataSource.chageActivatedAsset(assetId: assetId, isActiveAsset: isActiveAsset);
+  Future<void> chageActivatedAsset({required int assetId, required bool isActivated}) async {
+    await _assetDetailDataSource.chageActivatedAsset(assetId: assetId, isActivated: isActivated);
   }
 
   @override
