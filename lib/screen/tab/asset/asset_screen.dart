@@ -111,26 +111,87 @@ class _ReportScreenState extends ConsumerState<AssetScreen> {
                                           titleEditController: titleEditController,
                                         ),
                                         SizedBox(height: 16.h),
-                                        SizedBox(
-                                          height: 80,
-                                          child: Container(
-                                            padding: const EdgeInsets.symmetric(horizontal: 16),
-                                            decoration: const BoxDecoration(
-                                              borderRadius: BorderRadius.all(Radius.circular(25)),
-                                              color: UiConfig.whiteColor,
-                                              // color: Colors.red,
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                          children: [
+                                            Flexible(
+                                              flex: 1,
+                                              child: ExpansionTile(
+                                                  title: Padding(
+                                                    padding: const EdgeInsets.symmetric(horizontal: 36.0),
+                                                    child: Container(
+                                                      width: 40,
+                                                      height: 40,
+                                                      decoration: BoxDecoration(
+                                                        color: assetProvider.firstColor,
+                                                        // border: Border.all(
+                                                        //   color: Colors.white,
+                                                        //   width: 3,
+                                                        // ),
+                                                        borderRadius: BorderRadius.circular(10),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  children: [
+                                                    SizedBox(
+                                                      height: 200.h,
+                                                      child: Container(
+                                                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                                                        decoration: const BoxDecoration(
+                                                          borderRadius: BorderRadius.all(Radius.circular(25)),
+                                                          color: UiConfig.whiteColor,
+                                                        ),
+                                                        alignment: Alignment.center,
+                                                        child: ListView(
+                                                          // scrollDirection: Axis.horizontal,
+                                                          children: const [
+                                                            ColorPickerWidget(isFirst: true),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    )
+                                                  ]),
                                             ),
-                                            alignment: Alignment.center,
-                                            child: ListView(
-                                              scrollDirection: Axis.horizontal,
-                                              children: const [
-                                                ColorPickerWidget(isFirst: true),
-                                              ],
-                                            ),
-                                          ),
+                                            Flexible(
+                                              flex: 1,
+                                              child: ExpansionTile(
+                                                  title: Padding(
+                                                    padding: const EdgeInsets.symmetric(horizontal: 36.0),
+                                                    child: Container(
+                                                      width: 40,
+                                                      height: 40,
+                                                      decoration: BoxDecoration(
+                                                        color: assetProvider.secondColor,
+                                                        // border: Border.all(
+                                                        //   color: Colors.white,
+                                                        //   width: 3,
+                                                        // ),
+                                                        borderRadius: BorderRadius.circular(10),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  children: [
+                                                    SizedBox(
+                                                      height: 200.h,
+                                                      child: Container(
+                                                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                                                        decoration: const BoxDecoration(
+                                                          borderRadius: BorderRadius.all(Radius.circular(25)),
+                                                          color: UiConfig.whiteColor,
+                                                        ),
+                                                        alignment: Alignment.center,
+                                                        child: ListView(
+                                                          // scrollDirection: Axis.horizontal,
+                                                          children: const [
+                                                            ColorPickerWidget(isFirst: false),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    )
+                                                  ]),
+                                            )
+                                          ],
                                         ),
-                                        const ColorPickerWidget(isFirst: true),
-                                        const ColorPickerWidget(isFirst: false),
                                         SizedBox(height: 16.h),
                                         Row(
                                           mainAxisAlignment: MainAxisAlignment.center,
