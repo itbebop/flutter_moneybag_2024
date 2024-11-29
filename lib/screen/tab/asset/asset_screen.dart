@@ -111,6 +111,24 @@ class _ReportScreenState extends ConsumerState<AssetScreen> {
                                           titleEditController: titleEditController,
                                         ),
                                         SizedBox(height: 16.h),
+                                        SizedBox(
+                                          height: 80,
+                                          child: Container(
+                                            padding: const EdgeInsets.symmetric(horizontal: 16),
+                                            decoration: const BoxDecoration(
+                                              borderRadius: BorderRadius.all(Radius.circular(25)),
+                                              color: UiConfig.whiteColor,
+                                              // color: Colors.red,
+                                            ),
+                                            alignment: Alignment.center,
+                                            child: ListView(
+                                              scrollDirection: Axis.horizontal,
+                                              children: const [
+                                                ColorPickerWidget(isFirst: true),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
                                         const ColorPickerWidget(isFirst: true),
                                         const ColorPickerWidget(isFirst: false),
                                         SizedBox(height: 16.h),
