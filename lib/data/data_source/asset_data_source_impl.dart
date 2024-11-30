@@ -96,7 +96,6 @@ class AssetDataSourceImpl implements AssetDataSource {
       );
 
       final jsonData = response.data['data'];
-      print('### jsonData in asset data: $jsonData');
       // jsonData가 null일 경우 빈 리스트 반환
       if (jsonData == null) {
         return [];
@@ -138,7 +137,6 @@ class AssetDataSourceImpl implements AssetDataSource {
       );
 
       final assetJson = response.data['data'];
-      print('#### assetJson in asset data: $assetJson');
       final Asset asset = Asset.fromJson(assetJson);
       return asset;
     } catch (error) {
@@ -148,7 +146,15 @@ class AssetDataSourceImpl implements AssetDataSource {
 
   @override
   Future<void> updateAsset({required Asset asset}) async {
-    await _assetRef.doc('asset.assetId').set(asset);
+    final Response response = await _dio.put(
+      '$baseUrl/assets/${asset.assetId}',
+      data: asset.toJson(),
+    );
+    if (response.statusCode == 201) {
+      debugPrint("Asset updated successfully: ${response.data}");
+    } else {
+      debugPrint("Failed to update asset: ${response.statusCode}");
+    }
   }
 
   @override

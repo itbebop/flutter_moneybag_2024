@@ -233,9 +233,9 @@ class _ReportScreenState extends ConsumerState<AssetScreen> {
                                                         ),
                                                       ),
                                                 );
-                                                ref.read(assetStateProvier.notifier).fetchAsset();
                                                 ref.read(assetStateProvier.notifier).onTapAssetCardUpdate(false);
                                                 ref.read(userStateProvider.notifier).modifyColorList(assetProvider.firstColorList, assetProvider.secondColorList);
+                                                await ref.read(assetStateProvier.notifier).fetchAsset();
                                               },
                                               child: CustomButton(
                                                 name: '확 인',

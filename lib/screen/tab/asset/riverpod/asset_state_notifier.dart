@@ -19,7 +19,6 @@ final assetStateProvier = StateNotifierProvider<AssetStateNotifier, AssetState>(
   List<Color> secondColorList = [];
   if (userState.user != null) {
     userId = userState.user!.userId;
-    print('#### userId in asset notifier init: $userId');
     firstColorList = userState.userColorList.map((userColor) => hexStringToColor(userColor.hexaCode)).toList();
     secondColorList = userState.userColorList.map((userColor) => hexStringToColor(userColor.hexaCode)).toList();
     // if (userState.user!.firstColorListSave.isEmpty) {
