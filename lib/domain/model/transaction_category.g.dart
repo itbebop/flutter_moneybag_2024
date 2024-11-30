@@ -9,19 +9,23 @@ part of 'transaction_category.dart';
 _$TransactionCategoryImpl _$$TransactionCategoryImplFromJson(
         Map<String, dynamic> json) =>
     _$TransactionCategoryImpl(
-      categoryId: json['categoryId'] as String,
-      name: json['name'] as String,
+      categoryId: (json['categoryId'] as num).toInt(),
+      categoryName: json['categoryName'] as String,
       iconKey: json['iconKey'] as String,
-      type: $enumDecode(_$AssetTypeEnumMap, json['type']),
+      assetType: $enumDecode(_$AssetTypeEnumMap, json['assetType']),
+      level: (json['level'] as num).toInt(),
+      userId: (json['userId'] as num).toInt(),
     );
 
 Map<String, dynamic> _$$TransactionCategoryImplToJson(
         _$TransactionCategoryImpl instance) =>
     <String, dynamic>{
       'categoryId': instance.categoryId,
-      'name': instance.name,
+      'categoryName': instance.categoryName,
       'iconKey': instance.iconKey,
-      'type': _$AssetTypeEnumMap[instance.type]!,
+      'assetType': _$AssetTypeEnumMap[instance.assetType]!,
+      'level': instance.level,
+      'userId': instance.userId,
     };
 
 const _$AssetTypeEnumMap = {

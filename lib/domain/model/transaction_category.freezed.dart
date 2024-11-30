@@ -20,11 +20,13 @@ TransactionCategory _$TransactionCategoryFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$TransactionCategory {
-  String get categoryId => throw _privateConstructorUsedError; // 고유 ID
-  String get name =>
+  int get categoryId => throw _privateConstructorUsedError; // 고유 ID
+  String get categoryName =>
       throw _privateConstructorUsedError; // 유형 이름 (예: Salary, Rent 등)
   String get iconKey => throw _privateConstructorUsedError;
-  AssetType get type => throw _privateConstructorUsedError;
+  AssetType get assetType => throw _privateConstructorUsedError;
+  int get level => throw _privateConstructorUsedError;
+  int get userId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -38,7 +40,13 @@ abstract class $TransactionCategoryCopyWith<$Res> {
           TransactionCategory value, $Res Function(TransactionCategory) then) =
       _$TransactionCategoryCopyWithImpl<$Res, TransactionCategory>;
   @useResult
-  $Res call({String categoryId, String name, String iconKey, AssetType type});
+  $Res call(
+      {int categoryId,
+      String categoryName,
+      String iconKey,
+      AssetType assetType,
+      int level,
+      int userId});
 }
 
 /// @nodoc
@@ -55,27 +63,37 @@ class _$TransactionCategoryCopyWithImpl<$Res, $Val extends TransactionCategory>
   @override
   $Res call({
     Object? categoryId = null,
-    Object? name = null,
+    Object? categoryName = null,
     Object? iconKey = null,
-    Object? type = null,
+    Object? assetType = null,
+    Object? level = null,
+    Object? userId = null,
   }) {
     return _then(_value.copyWith(
       categoryId: null == categoryId
           ? _value.categoryId
           : categoryId // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+              as int,
+      categoryName: null == categoryName
+          ? _value.categoryName
+          : categoryName // ignore: cast_nullable_to_non_nullable
               as String,
       iconKey: null == iconKey
           ? _value.iconKey
           : iconKey // ignore: cast_nullable_to_non_nullable
               as String,
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
+      assetType: null == assetType
+          ? _value.assetType
+          : assetType // ignore: cast_nullable_to_non_nullable
               as AssetType,
+      level: null == level
+          ? _value.level
+          : level // ignore: cast_nullable_to_non_nullable
+              as int,
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 }
@@ -88,7 +106,13 @@ abstract class _$$TransactionCategoryImplCopyWith<$Res>
       __$$TransactionCategoryImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String categoryId, String name, String iconKey, AssetType type});
+  $Res call(
+      {int categoryId,
+      String categoryName,
+      String iconKey,
+      AssetType assetType,
+      int level,
+      int userId});
 }
 
 /// @nodoc
@@ -103,27 +127,37 @@ class __$$TransactionCategoryImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? categoryId = null,
-    Object? name = null,
+    Object? categoryName = null,
     Object? iconKey = null,
-    Object? type = null,
+    Object? assetType = null,
+    Object? level = null,
+    Object? userId = null,
   }) {
     return _then(_$TransactionCategoryImpl(
       categoryId: null == categoryId
           ? _value.categoryId
           : categoryId // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+              as int,
+      categoryName: null == categoryName
+          ? _value.categoryName
+          : categoryName // ignore: cast_nullable_to_non_nullable
               as String,
       iconKey: null == iconKey
           ? _value.iconKey
           : iconKey // ignore: cast_nullable_to_non_nullable
               as String,
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
+      assetType: null == assetType
+          ? _value.assetType
+          : assetType // ignore: cast_nullable_to_non_nullable
               as AssetType,
+      level: null == level
+          ? _value.level
+          : level // ignore: cast_nullable_to_non_nullable
+              as int,
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -133,27 +167,33 @@ class __$$TransactionCategoryImplCopyWithImpl<$Res>
 class _$TransactionCategoryImpl implements _TransactionCategory {
   const _$TransactionCategoryImpl(
       {required this.categoryId,
-      required this.name,
+      required this.categoryName,
       required this.iconKey,
-      required this.type});
+      required this.assetType,
+      required this.level,
+      required this.userId});
 
   factory _$TransactionCategoryImpl.fromJson(Map<String, dynamic> json) =>
       _$$TransactionCategoryImplFromJson(json);
 
   @override
-  final String categoryId;
+  final int categoryId;
 // 고유 ID
   @override
-  final String name;
+  final String categoryName;
 // 유형 이름 (예: Salary, Rent 등)
   @override
   final String iconKey;
   @override
-  final AssetType type;
+  final AssetType assetType;
+  @override
+  final int level;
+  @override
+  final int userId;
 
   @override
   String toString() {
-    return 'TransactionCategory(categoryId: $categoryId, name: $name, iconKey: $iconKey, type: $type)';
+    return 'TransactionCategory(categoryId: $categoryId, categoryName: $categoryName, iconKey: $iconKey, assetType: $assetType, level: $level, userId: $userId)';
   }
 
   @override
@@ -163,14 +203,19 @@ class _$TransactionCategoryImpl implements _TransactionCategory {
             other is _$TransactionCategoryImpl &&
             (identical(other.categoryId, categoryId) ||
                 other.categoryId == categoryId) &&
-            (identical(other.name, name) || other.name == name) &&
+            (identical(other.categoryName, categoryName) ||
+                other.categoryName == categoryName) &&
             (identical(other.iconKey, iconKey) || other.iconKey == iconKey) &&
-            (identical(other.type, type) || other.type == type));
+            (identical(other.assetType, assetType) ||
+                other.assetType == assetType) &&
+            (identical(other.level, level) || other.level == level) &&
+            (identical(other.userId, userId) || other.userId == userId));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, categoryId, name, iconKey, type);
+  int get hashCode => Object.hash(
+      runtimeType, categoryId, categoryName, iconKey, assetType, level, userId);
 
   @JsonKey(ignore: true)
   @override
@@ -189,22 +234,28 @@ class _$TransactionCategoryImpl implements _TransactionCategory {
 
 abstract class _TransactionCategory implements TransactionCategory {
   const factory _TransactionCategory(
-      {required final String categoryId,
-      required final String name,
+      {required final int categoryId,
+      required final String categoryName,
       required final String iconKey,
-      required final AssetType type}) = _$TransactionCategoryImpl;
+      required final AssetType assetType,
+      required final int level,
+      required final int userId}) = _$TransactionCategoryImpl;
 
   factory _TransactionCategory.fromJson(Map<String, dynamic> json) =
       _$TransactionCategoryImpl.fromJson;
 
   @override
-  String get categoryId;
+  int get categoryId;
   @override // 고유 ID
-  String get name;
+  String get categoryName;
   @override // 유형 이름 (예: Salary, Rent 등)
   String get iconKey;
   @override
-  AssetType get type;
+  AssetType get assetType;
+  @override
+  int get level;
+  @override
+  int get userId;
   @override
   @JsonKey(ignore: true)
   _$$TransactionCategoryImplCopyWith<_$TransactionCategoryImpl> get copyWith =>

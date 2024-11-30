@@ -42,7 +42,7 @@ class CategoryListItem extends StatelessWidget {
                   ),
                   SizedBox(width: 8.w),
                   Text(
-                    category.name,
+                    category.categoryName,
                     style: UiConfig.h3Style.copyWith(
                       color: assetType == AssetType.expense ? UiConfig.secondaryTextColor : UiConfig.primaryColorSurface,
                     ),

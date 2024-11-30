@@ -62,10 +62,12 @@ class CategoryListItemNew extends ConsumerWidget {
               onPressed: () {
                 ref.read(categoryStateProvider.notifier).createTransactionCategoryUseCase(
                       transactionCategory: TransactionCategory(
-                        categoryId: '0',
-                        name: categorylistCreateController.text,
+                        categoryId: 0,
+                        categoryName: categorylistCreateController.text,
                         iconKey: categoryProvider.selectedIconName,
-                        type: assetType,
+                        assetType: assetType,
+                        level: 1,
+                        userId: categoryProvider.userId,
                       ),
                     );
                 ref.read(categoryStateProvider.notifier).showCategoryCardNew(false);

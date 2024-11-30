@@ -21,14 +21,14 @@ class TransactionItem extends StatelessWidget {
         children: [
           Container(
             decoration: BoxDecoration(
-              color: transaction.category.type == AssetType.expense ? UiConfig.secondaryColor : UiConfig.incomeTagColor,
+              color: transaction.category.assetType == AssetType.expense ? UiConfig.secondaryColor : UiConfig.incomeTagColor,
               borderRadius: const BorderRadius.only(topLeft: Radius.circular(5.0), topRight: Radius.circular(5.0)),
             ),
             height: 16,
             width: 70,
             child: Center(
                 child: Text(
-              transaction.category.name,
+              transaction.category.categoryName,
               style: UiConfig.extraSmallStyle.copyWith(color: UiConfig.whiteColor),
             )),
           ),
@@ -58,7 +58,8 @@ class TransactionItem extends StatelessWidget {
                         child: ClipRRect(
                             borderRadius: BorderRadius.circular(10),
                             child: transaction.imgUrl == ''
-                                ? HugeIcon(icon: iconMap[transaction.category.iconKey], color: transaction.category.type == AssetType.expense ? UiConfig.secondaryTextColor : UiConfig.primaryColor)
+                                ? HugeIcon(
+                                    icon: iconMap[transaction.category.iconKey], color: transaction.category.assetType == AssetType.expense ? UiConfig.secondaryTextColor : UiConfig.primaryColor)
                                 : Image.asset(transaction.imgUrl)),
                       ),
                       const SizedBox(

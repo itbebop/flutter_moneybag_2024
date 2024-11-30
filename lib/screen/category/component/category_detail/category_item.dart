@@ -46,7 +46,7 @@ class CategoryItem extends ConsumerWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 4.0),
               child: Text(
-                category.name,
+                category.categoryName,
                 style: UiConfig.smallStyle.copyWith(
                   color: UiConfig.color[800],
                 ),

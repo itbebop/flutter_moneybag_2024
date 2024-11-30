@@ -12,9 +12,9 @@ import 'package:hugeicons/hugeicons.dart';
 final categoryStateProvider = StateNotifierProvider<CategoryStateNotifier, CategoryState>(
   (ref) {
     final userState = ref.watch(userStateProvider);
-    String userId = '';
+    int userId = 0;
     if (userState.user != null) {
-      userId = userState.user!.uid;
+      userId = userId = userState.user!.userId;
     }
 
     return CategoryStateNotifier(
@@ -25,8 +25,6 @@ final categoryStateProvider = StateNotifierProvider<CategoryStateNotifier, Categ
         getTransactionCategoryUseCase: getIt(),
         updateTransactionCategoryUseCase: getIt(),
         deleteTransactionCategoryUseCase: getIt(),
-        createSubTransactionCategoryUseCase: getIt(),
-        getSubTransactionCategoryUseCase: getIt(),
         categoryHints: '선택',
       ),
     );
@@ -36,7 +34,6 @@ final categoryStateProvider = StateNotifierProvider<CategoryStateNotifier, Categ
 class CategoryStateNotifier extends StateNotifier<CategoryState> {
   CategoryStateNotifier(super.state);
   void showCategoryCardNew(bool showNew, {AssetType? assetType}) {
-    print(assetType);
     if (assetType == AssetType.income) {
       if (showNew) {
         state = state.copyWith(
@@ -114,7 +111,7 @@ class CategoryStateNotifier extends StateNotifier<CategoryState> {
       selectedIconIdDelete: category.categoryId,
       showCategoryCardUpdate: true,
       // update card 열 때 server에서 받은 name을 넣음
-      updatedIconName: category.name,
+      updatedIconName: category.categoryName,
     );
   }
 
@@ -133,7 +130,7 @@ class CategoryStateNotifier extends StateNotifier<CategoryState> {
 
   void selectCategory({required TransactionCategory selectCategory}) {
     state = state.copyWith(
-      categoryHints: selectCategory.name,
+      categoryHints: selectCategory.categoryName,
       category: selectCategory,
     );
   }
@@ -155,11 +152,12 @@ class CategoryStateNotifier extends StateNotifier<CategoryState> {
   }
 
   Future<void> createSubTransactionCategoryUseCase({required TransactionCategory transactionCategory, required String subCategoryId}) async {
-    await state.createSubTransactionCategoryUseCase.execute(transactionCategory: transactionCategory, userId: state.userId, subCategoryId: subCategoryId);
+    // await state.createSubTransactionCategoryUseCase.execute(transactionCategory: transactionCategory, userId: state.userId, subCategoryId: subCategoryId);
   }
 
-  Future<List<TransactionCategory>> getSubTransactionCategoryList({required String categoryId}) async {
-    final List<TransactionCategory> categories = await state.getSubTransactionCategoryUseCase.execute(categoryId: categoryId, userId: state.userId);
+  Future<List<TransactionCategory>> getSubTransactionCategoryList({required int categoryId}) async {
+    // final List<TransactionCategory> categories = await state.getSubTransactionCategoryUseCase.execute(categoryId: categoryId, userId: state.userId);
+    final List<TransactionCategory> categories = [];
     return categories;
   }
 
@@ -174,26 +172,26 @@ class CategoryStateNotifier extends StateNotifier<CategoryState> {
   // }
 
   Future<void> createTransactionCategoryUseCase({required TransactionCategory transactionCategory}) async {
-    await state.createTransactionCategoryUseCase.execute(transactionCategory: transactionCategory, userId: state.userId);
+    await state.createTransactionCategoryUseCase.execute(transactionCategory: transactionCategory);
   }
 
   Future<List<TransactionCategory>> getTransactionCategory(AssetType assetType) async {
     List<TransactionCategory> categories = await state.getTransactionCategoryUseCase.execute(userId: state.userId);
     if (assetType == AssetType.income) {
-      categories = categories.where((category) => category.type == AssetType.income).toList();
+      categories = categories.where((category) => category.assetType == AssetType.income).toList();
       state = state.copyWith(categoryList: categories);
     } else {
-      categories = categories.where((category) => category.type == AssetType.expense).toList();
+      categories = categories.where((category) => category.assetType == AssetType.expense).toList();
       state = state.copyWith(categoryList: categories);
     }
     return categories;
   }
 
   Future<void> updateTransactionCategory(TransactionCategory transactionCategory) async {
-    await state.updateTransactionCategoryUseCase.execute(userId: state.userId, transactionCategory: transactionCategory);
+    await state.updateTransactionCategoryUseCase.execute(transactionCategory: transactionCategory);
   }
 
-  Future<void> deleteTransactionCategory(String categoryId) async {
-    await state.deleteTransactionCategoryUseCase.execute(categoryId: categoryId, userId: state.userId);
+  Future<void> deleteTransactionCategory(int categoryId) async {
+    await state.deleteTransactionCategoryUseCase.execute(categoryId: categoryId);
   }
 }

@@ -7,10 +7,12 @@ part 'transaction_category.g.dart';
 @freezed
 class TransactionCategory with _$TransactionCategory {
   const factory TransactionCategory({
-    required String categoryId, // 고유 ID
-    required String name, // 유형 이름 (예: Salary, Rent 등)
+    required int categoryId, // 고유 ID
+    required String categoryName, // 유형 이름 (예: Salary, Rent 등)
     required String iconKey,
-    required AssetType type,
+    required AssetType assetType,
+    required int level,
+    required int userId,
   }) = _TransactionCategory;
 
   factory TransactionCategory.fromJson(Map<String, dynamic> json) => _$TransactionCategoryFromJson(json);

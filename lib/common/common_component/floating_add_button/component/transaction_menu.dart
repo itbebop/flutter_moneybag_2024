@@ -210,7 +210,7 @@ class TransactionMenu extends ConsumerWidget {
                                           child: FittedBox(
                                             fit: BoxFit.contain,
                                             child: Text(
-                                              category.name,
+                                              category.categoryName,
                                               style: const TextStyle(
                                                 overflow: TextOverflow.ellipsis,
                                               ),
@@ -284,9 +284,11 @@ class TransactionMenu extends ConsumerWidget {
                           createAt: floatingAddProvider.createAt,
                           category: TransactionCategory(
                             categoryId: categoryProvider.category!.categoryId,
-                            name: categoryProvider.category!.name,
-                            type: transacProvider.assetType,
+                            categoryName: categoryProvider.category!.categoryName,
+                            assetType: transacProvider.assetType,
                             iconKey: categoryProvider.category!.iconKey,
+                            level: 1,
+                            userId: 0,
                           ),
                           assetId: assetProvider.selectedAssetId,
                           userId: userStateValue.user!.uid);
