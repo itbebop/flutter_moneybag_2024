@@ -1,12 +1,12 @@
 import 'package:flutter_moneybag_2024/domain/model/transaction_category.dart';
 import 'package:flutter_moneybag_2024/domain/repository/transaction_category_repository.dart';
 
-class GetTransactionCategoryUseCase {
+class GetTransactionCategoryListUseCase {
   final TransactionCategoryRepository _transactionCategoryRepository;
 
-  GetTransactionCategoryUseCase({required TransactionCategoryRepository transactionCategoryRepository}) : _transactionCategoryRepository = transactionCategoryRepository;
+  GetTransactionCategoryListUseCase({required TransactionCategoryRepository transactionCategoryRepository}) : _transactionCategoryRepository = transactionCategoryRepository;
 
-  Future<List<TransactionCategory>> execute({required String userId}) async {
+  Future<List<TransactionCategory>> execute({required int userId}) async {
     return await _transactionCategoryRepository.getTransactionCategoryList(userId: userId);
   }
 }

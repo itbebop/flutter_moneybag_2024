@@ -6,7 +6,7 @@ class CreateTransactionCategoryUseCase {
 
   CreateTransactionCategoryUseCase({required TransactionCategoryRepository transactionCategoryRepository}) : _transactionCategoryRepository = transactionCategoryRepository;
 
-  Future<void> execute({required TransactionCategory transactionCategory, required String userId}) async {
-    await _transactionCategoryRepository.createTransactionCategory(transactionCategory: transactionCategory, userId: userId);
+  Future<void> execute({required TransactionCategory transactionCategory}) async {
+    await _transactionCategoryRepository.createTransactionCategory(transactionCategory: transactionCategory);
   }
 }
