@@ -51,24 +51,11 @@ class AssetDataSourceImpl implements AssetDataSource {
 
   @override
   Future<int> createAsset({required Asset asset, required int userId}) async {
-    // 요청 헤더에 userId 추가
-    final Options options = Options(
-      headers: {
-        'userId': userId,
-        'action': 'createAsset',
-      },
-    );
-
     Response response;
     // activatedAssetId가 비어있으면 기본 asset 생성
     response = await _dio.post(
-      '$baseUrl/assets',
-      data: asset,
-    );
-    response = await _dio.post(
-      '$baseUrl/assets',
+      '$baseUrl/assets/$userId',
       data: asset.toJson(),
-      options: options,
     );
 
     if (response.statusCode == 201) {
@@ -96,27 +83,16 @@ class AssetDataSourceImpl implements AssetDataSource {
       );
 
       final jsonData = response.data['data'];
+      print('=== jsonList:$jsonData');
       // jsonData가 null일 경우 빈 리스트 반환
       if (jsonData == null) {
         return [];
       }
 
-      // jsonData가 맵(Map)인지 리스트(List)인지 확인 후 처리
-      if (jsonData is List) {
-        // jsonData가 리스트라면 Asset 객체 리스트로 변환
-        final List<Asset> assetList = jsonData.map<Asset>((json) => Asset.fromJson(json)).toList();
-
-        // 정렬된 자산 리스트 반환
-        final sortedAssets = assetList..sort((a, b) => a.createdAt.compareTo(b.createdAt));
-        return sortedAssets;
-      } else if (jsonData is Map<String, dynamic>) {
-        // jsonData가 맵이라면 단일 Asset 객체를 리스트로 감싸서 반환
-        final asset = Asset.fromJson(jsonData);
-        return [asset];
-      } else {
-        // 예상치 못한 데이터 형식일 경우 빈 리스트 반환
-        return [];
-      }
+      final Map<String, dynamic> responseData = response.data['data'];
+      final List<dynamic> assetJson = responseData['rows'];
+      final List<Asset> assetList = assetJson.map((data) => Asset.fromJson(data)).toList();
+      return assetList;
     } catch (e) {
       debugPrint('Error in getAssetList: $e');
       return [];
