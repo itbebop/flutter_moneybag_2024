@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_moneybag_2024/data/data_source/user_data_source.dart';
 import 'package:flutter_moneybag_2024/domain/model/user.dart';
-import 'package:flutter_moneybag_2024/domain/model/user_pallete.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 
@@ -58,31 +57,6 @@ class UserDataSourceImpl implements UserDataSource {
   }
 
   @override
-  Future<void> createUserPallete({required int userId}) async {
-    final Options options = Options(
-      headers: {
-        'userId': userId,
-        'action': 'createUserPallete',
-      },
-    );
-    final Response response = await _dio.post(
-      '$baseUrl/users', // 엔드포인트 설정
-      options: options,
-    );
-    try {
-      if (response.statusCode == 201) {
-        debugPrint("Pallete created successfully: ${response.data}");
-      } else {
-        debugPrint("Failed to create Pallete: ${response.statusCode}");
-      }
-    } on DioException catch (e) {
-      debugPrint("Dio error: ${e.message}");
-      if (e.response != null) {
-        debugPrint("Error details: ${e.response?.data}");
-      }
-    }
-  }
-
   @override
   Future<void> signOut() async {
     await auth.FirebaseAuth.instance.signOut();
@@ -130,32 +104,6 @@ class UserDataSourceImpl implements UserDataSource {
   }
 
   @override
-  Future<List<UserPallete>> getUserPallete({required int userId}) async {
-    try {
-      final Options options = Options(
-        headers: {
-          'action': 'getUserPallete',
-        },
-      );
-
-      Response response = await _dio.get(
-        '$baseUrl/users/$userId',
-        options: options,
-      );
-
-      final Map<String, dynamic> responseData = response.data['data'];
-      final List<dynamic> colorList = responseData['rows'];
-      print('#### colorList in user data: $colorList');
-      final List<UserPallete> userPallete = colorList.map((data) => UserPallete.fromJson(data)).toList();
-
-      return userPallete;
-    } on DioException catch (e) {
-      debugPrint("getUserPallete error: ${e.message}");
-      rethrow;
-    }
-  }
-
-  @override
   Future<bool> isNewUser({required User user}) async {
     try {
       // 이메일로 User 컬렉션을 조회하여 중복된 이메일이 있는지 확인
@@ -175,11 +123,6 @@ class UserDataSourceImpl implements UserDataSource {
   @override
   Future<void> updateUserName({required int userId, required String name}) async {
     await _userRef.doc('userId').update({'name': name});
-  }
-
-  @override
-  Future<void> updateColorList({required int userId, required User user}) async {
-    // await _userRef.doc(userId).update({'firstColorListSave': user.firstColorListSave, 'secondColorListSave': user.secondColorListSave}); // TODO: user_color
   }
 
   @override

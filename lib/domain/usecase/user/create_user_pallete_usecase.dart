@@ -1,11 +1,11 @@
-import 'package:flutter_moneybag_2024/domain/repository/user_repository.dart';
+import 'package:flutter_moneybag_2024/domain/repository/pallete_repository.dart';
 
 class CreateUserPalleteUseCase {
-  final UserRepository _userRepository;
+  final PalleteRepository _palleteRepository;
 
-  CreateUserPalleteUseCase({required UserRepository userRepository}) : _userRepository = userRepository;
+  CreateUserPalleteUseCase({required PalleteRepository palleteRepository}) : _palleteRepository = palleteRepository;
 
   Future<void> execute({required int userId}) async {
-    await _userRepository.createUserPallete(userId: userId);
+    await _palleteRepository.createUserPallete(userId: userId);
   }
 }

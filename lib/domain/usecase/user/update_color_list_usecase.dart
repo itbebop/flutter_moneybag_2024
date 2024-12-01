@@ -1,12 +1,12 @@
-import 'package:flutter_moneybag_2024/domain/model/user.dart';
-import 'package:flutter_moneybag_2024/domain/repository/user_repository.dart';
+import 'package:flutter_moneybag_2024/domain/model/user_pallete.dart';
+import 'package:flutter_moneybag_2024/domain/repository/pallete_repository.dart';
 
 class UpdateColorListUsecase {
-  final UserRepository _userRepository;
+  final PalleteRepository _palleteRepository;
 
-  UpdateColorListUsecase({required UserRepository userRepository}) : _userRepository = userRepository;
+  UpdateColorListUsecase({required PalleteRepository palleteRepository}) : _palleteRepository = palleteRepository;
 
-  Future<void> execute({required int userId, required User user}) async {
-    await _userRepository.updateColorList(userId: userId, user: user);
+  Future<void> execute({required int userId, required UserPallete pallete}) async {
+    await _palleteRepository.updatePallete(userId: userId, pallete: pallete);
   }
 }

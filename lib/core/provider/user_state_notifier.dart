@@ -44,7 +44,7 @@ class UserStateNotifier extends StateNotifier<UserState> {
       final List<UserPallete> colorList = await state.getUserPalleteUseCase.execute(userId: userId);
       state = state.copyWith(userColorList: colorList);
     } catch (e) {
-      rethrow;
+      debugPrint('Error in user notifier getColorList: $e');
     }
   }
 
@@ -69,7 +69,7 @@ class UserStateNotifier extends StateNotifier<UserState> {
           createdAt: DateTime.now(),
           isDeleted: 0,
         );
-        await state.updateColorListUsecase.execute(userId: 0, user: newUser);
+        // await state.updateColorListUsecase.execute(userId: 0, pallete: newUser);
       }
     } catch (e) {
       rethrow;

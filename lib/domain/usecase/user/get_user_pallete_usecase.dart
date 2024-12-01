@@ -1,13 +1,17 @@
 import 'package:flutter_moneybag_2024/domain/model/user_pallete.dart';
-import 'package:flutter_moneybag_2024/domain/repository/user_repository.dart';
+import 'package:flutter_moneybag_2024/domain/repository/pallete_repository.dart';
 
 class GetUserPalleteUseCase {
-  final UserRepository _userRepository;
+  final PalleteRepository _palleteRepository;
 
-  GetUserPalleteUseCase({required UserRepository userRepository}) : _userRepository = userRepository;
+  GetUserPalleteUseCase({required PalleteRepository palleteRepository}) : _palleteRepository = palleteRepository;
 
   Future<List<UserPallete>> execute({required int userId}) async {
-    final result = await _userRepository.getUserPallete(userId: userId);
-    return result;
+    try {
+      final result = await _palleteRepository.getUserPallete(userId: userId);
+      return result;
+    } catch (e) {
+      rethrow;
+    }
   }
 }

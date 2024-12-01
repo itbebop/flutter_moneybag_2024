@@ -4,7 +4,6 @@ import 'package:flutter_moneybag_2024/data/data_source/user_data_source.dart';
 import 'package:flutter_moneybag_2024/data/repository_impl/auth/google_auth.dart';
 import 'package:flutter_moneybag_2024/data/repository_impl/auth/kakao_auth.dart';
 import 'package:flutter_moneybag_2024/domain/model/user.dart';
-import 'package:flutter_moneybag_2024/domain/model/user_pallete.dart';
 import 'package:flutter_moneybag_2024/domain/repository/user_repository.dart';
 
 class UserRepositoryImpl implements UserRepository {
@@ -60,15 +59,6 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<void> createUserPallete({required int userId}) async {
-    try {
-      return await _userDataSource.createUserPallete(userId: userId);
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  @override
   Future<bool> isNewUser({required User user}) async {
     return await _userDataSource.isNewUser(user: user);
   }
@@ -85,12 +75,6 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<List<UserPallete>> getUserPallete({required int userId}) async {
-    List<UserPallete> colorList = await _userDataSource.getUserPallete(userId: userId);
-    return colorList;
-  }
-
-  @override
   Future<bool> updateUserName({required int userId, required String name}) async {
     bool result = false;
     try {
@@ -100,11 +84,6 @@ class UserRepositoryImpl implements UserRepository {
       result = false;
     }
     return result;
-  }
-
-  @override
-  Future<void> updateColorList({required int userId, required User user}) async {
-    await _userDataSource.updateColorList(userId: userId, user: user);
   }
 
   @override
