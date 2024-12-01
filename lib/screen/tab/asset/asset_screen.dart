@@ -25,6 +25,8 @@ class _ReportScreenState extends ConsumerState<AssetScreen> {
   FocusNode focusNode = FocusNode();
   final titleNewController = TextEditingController();
   final titleEditController = TextEditingController();
+  final ExpansionTileController firstExpansionTileController = ExpansionTileController();
+  final ExpansionTileController secondExpansionTileController = ExpansionTileController();
 
   @override
   void initState() {
@@ -117,6 +119,7 @@ class _ReportScreenState extends ConsumerState<AssetScreen> {
                                             Flexible(
                                               flex: 1,
                                               child: ExpansionTile(
+                                                  controller: firstExpansionTileController,
                                                   title: Padding(
                                                     padding: const EdgeInsets.symmetric(horizontal: 36.0),
                                                     child: Container(
@@ -144,8 +147,8 @@ class _ReportScreenState extends ConsumerState<AssetScreen> {
                                                         alignment: Alignment.center,
                                                         child: ListView(
                                                           // scrollDirection: Axis.horizontal,
-                                                          children: const [
-                                                            ColorPickerWidget(isFirst: true),
+                                                          children: [
+                                                            ColorPickerWidget(isFirst: true, expansionTileController: firstExpansionTileController),
                                                           ],
                                                         ),
                                                       ),
@@ -155,6 +158,7 @@ class _ReportScreenState extends ConsumerState<AssetScreen> {
                                             Flexible(
                                               flex: 1,
                                               child: ExpansionTile(
+                                                  controller: secondExpansionTileController,
                                                   title: Padding(
                                                     padding: const EdgeInsets.symmetric(horizontal: 36.0),
                                                     child: Container(
@@ -182,8 +186,8 @@ class _ReportScreenState extends ConsumerState<AssetScreen> {
                                                         alignment: Alignment.center,
                                                         child: ListView(
                                                           // scrollDirection: Axis.horizontal,
-                                                          children: const [
-                                                            ColorPickerWidget(isFirst: false),
+                                                          children: [
+                                                            ColorPickerWidget(isFirst: false, expansionTileController: secondExpansionTileController),
                                                           ],
                                                         ),
                                                       ),
@@ -223,22 +227,25 @@ class _ReportScreenState extends ConsumerState<AssetScreen> {
                                                   context: context,
                                                   message: '수정하시겠습니까?',
                                                   title: '',
-                                                  onConfirm: () => ref.read(assetStateProvier.notifier).updateAsset(
-                                                        Asset(
-                                                          assetId: assetProvider.allAssetList[index].assetId,
-                                                          assetName: titleEditController.text,
-                                                          isActivated: assetProvider.allAssetList[index].isActivated,
-                                                          currency: assetProvider.currencyHints,
-                                                          createdAt: assetProvider.allAssetList[index].createdAt,
-                                                          updatedAt: DateTime.now(),
-                                                          firstColor: colorToHexString(assetProvider.firstColor),
-                                                          secondColor: colorToHexString(assetProvider.secondColor),
-                                                        ),
-                                                      ),
+                                                  onConfirm: () async {
+                                                    await ref.read(assetStateProvier.notifier).updateAsset(
+                                                          Asset(
+                                                            assetId: assetProvider.allAssetList[index].assetId,
+                                                            assetName: titleEditController.text,
+                                                            isActivated: assetProvider.allAssetList[index].isActivated,
+                                                            currency: assetProvider.currencyHints,
+                                                            createdAt: assetProvider.allAssetList[index].createdAt,
+                                                            updatedAt: DateTime.now(),
+                                                            firstColor: colorToHexString(assetProvider.firstColor),
+                                                            secondColor: colorToHexString(assetProvider.secondColor),
+                                                          ),
+                                                        );
+                                                    await ref.read(assetStateProvier.notifier).fetchAsset();
+                                                  },
                                                 );
                                                 ref.read(assetStateProvier.notifier).onTapAssetCardUpdate(false);
                                                 ref.read(userStateProvider.notifier).modifyColorList(assetProvider.firstColorList, assetProvider.secondColorList);
-                                                await ref.read(assetStateProvier.notifier).fetchAsset();
+                                                // await ref.read(assetStateProvier.notifier).fetchAsset();
                                               },
                                               child: CustomButton(
                                                 name: '확 인',

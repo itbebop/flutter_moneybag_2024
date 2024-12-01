@@ -6,9 +6,12 @@ import 'package:hugeicons/hugeicons.dart';
 
 class ColorPickerWidget extends ConsumerWidget {
   final bool isFirst;
+  final ExpansionTileController expansionTileController;
+
   const ColorPickerWidget({
     super.key,
     required this.isFirst,
+    required this.expansionTileController,
   });
 
   @override
@@ -32,6 +35,8 @@ class ColorPickerWidget extends ConsumerWidget {
                   ...firstColorList.map((color) => GestureDetector(
                         onTap: () {
                           ref.read(assetStateProvier.notifier).selectColor(color, isFirst);
+                          print('first collapse 안될래?');
+                          expansionTileController.collapse();
                         },
                         child: Container(
                           width: 40,
@@ -51,6 +56,7 @@ class ColorPickerWidget extends ConsumerWidget {
                   ...secondColorList.map((color) => GestureDetector(
                         onTap: () {
                           ref.read(assetStateProvier.notifier).selectColor(color, isFirst);
+                          expansionTileController.collapse();
                         },
                         child: Container(
                           width: 40,

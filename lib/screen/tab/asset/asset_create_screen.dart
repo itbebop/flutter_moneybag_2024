@@ -18,6 +18,9 @@ class AssetCreateScreen extends ConsumerStatefulWidget {
 
 class _AssetCreateScreenState extends ConsumerState<AssetCreateScreen> {
   final titleEditController = TextEditingController();
+  final ExpansionTileController firstExpansionTileController = ExpansionTileController();
+  final ExpansionTileController secondExpansionTileController = ExpansionTileController();
+
   @override
   Widget build(BuildContext context) {
     final assetProvider = ref.watch(assetStateProvier);
@@ -33,8 +36,11 @@ class _AssetCreateScreenState extends ConsumerState<AssetCreateScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 24.0),
               child: Column(
                 children: [
-                  const ColorPickerWidget(isFirst: true),
-                  const ColorPickerWidget(isFirst: false),
+                  ColorPickerWidget(isFirst: true, expansionTileController: firstExpansionTileController),
+                  ColorPickerWidget(
+                    isFirst: false,
+                    expansionTileController: secondExpansionTileController,
+                  ),
                   SizedBox(height: 16.h),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
