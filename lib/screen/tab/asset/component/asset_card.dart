@@ -20,7 +20,8 @@ class AssetCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final assetProvider = ref.watch(assetStateProvier);
-    final assetColor = assetProvider.assetColor; // TODO: assetColor확인
+    final firstColor = asset.firstColor; // TODO: assetColor확인
+    final secondColor = asset.secondColor; // TODO: assetColor확인
     final title = asset.assetName;
     final currency = asset.currency;
     final amount = assetProvider.totalAmount;
@@ -39,8 +40,8 @@ class AssetCard extends ConsumerWidget {
               height: 180.h,
               decoration: BoxDecoration(
                 gradient: LinearGradient(colors: [
-                  assetProvider.firstColor,
-                  assetProvider.secondColor,
+                  hexStringToColor(firstColor),
+                  hexStringToColor(secondColor),
                 ]),
                 borderRadius: BorderRadius.circular(20),
               ),

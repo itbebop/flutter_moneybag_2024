@@ -202,7 +202,10 @@ class _ReportScreenState extends ConsumerState<AssetScreen> {
                                                   context: context,
                                                   message: '수정을 취소하시겠습니까?',
                                                   title: '',
-                                                  onConfirm: () => ref.read(assetStateProvier.notifier).onTapAssetCardUpdate(false),
+                                                  onConfirm: () {
+                                                    ref.read(assetStateProvier.notifier).onTapAssetCardUpdate(false);
+                                                    ref.read(assetStateProvier.notifier).fetchAsset();
+                                                  },
                                                 );
                                               },
                                               child: CustomButton(

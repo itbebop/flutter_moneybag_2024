@@ -128,6 +128,8 @@ class AssetStateNotifier extends StateNotifier<AssetState> {
       assetColor: [],
       assetCurrency: assetCurrency,
       currencyHints: assetCurrency,
+      firstColor: hexStringToColor(asset.firstColor),
+      secondColor: hexStringToColor(asset.secondColor),
     );
   }
 
