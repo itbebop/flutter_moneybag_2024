@@ -28,6 +28,8 @@ class _ReportListFragmentState extends ConsumerState<ReportFlowFragment> {
     // 현재 월에 해당하는 MonthList 항목으로 selectedMonth 초기화
     selectedMonth = MonthList.values.firstWhere(
       (e) => e.toString().split('.')[1] == currentMonth,
+      orElse: () => MonthList.jan,
+      // TODO: Bad state: No element 오류
     );
   }
 
