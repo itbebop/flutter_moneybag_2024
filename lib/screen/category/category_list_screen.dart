@@ -15,6 +15,12 @@ class CategoryListScreen extends ConsumerStatefulWidget {
 class _CategoryListScreenState extends ConsumerState<CategoryListScreen> {
   final categorylistCreateController = TextEditingController();
   @override
+  void initState() {
+    ref.read(categoryStateProvider.notifier).getTransactionAllCategory();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Material(
       child: Stack(

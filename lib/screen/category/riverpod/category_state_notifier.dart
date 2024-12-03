@@ -154,6 +154,24 @@ class CategoryStateNotifier extends StateNotifier<CategoryState> {
   Future<void> createSubTransactionCategoryUseCase({required TransactionCategory transactionCategory, required String subCategoryId}) async {
     // await state.createSubTransactionCategoryUseCase.execute(transactionCategory: transactionCategory, userId: state.userId, subCategoryId: subCategoryId);
   }
+  Future<List<TransactionCategory>> getTransactionAllCategory() async {
+    final cachedCategories = state.categoryList;
+
+    // 이미 데이터가 캐시에 존재하는 경우 API 호출 생략
+    if (cachedCategories.isNotEmpty) {
+      return cachedCategories;
+    }
+
+    // 새 데이터를 가져옵니다.
+    List<TransactionCategory> categories = await state.getTransactionCategoryUseCase.execute(userId: state.userId);
+
+    // 상태 업데이트: 변경된 경우에만 상태를 갱신
+    if (state.categoryList != categories) {
+      state = state.copyWith(categoryList: categories);
+    }
+
+    return categories;
+  }
 
   Future<List<TransactionCategory>> getSubTransactionCategoryList({required int categoryId}) async {
     // final List<TransactionCategory> categories = await state.getSubTransactionCategoryUseCase.execute(categoryId: categoryId, userId: state.userId);
@@ -175,15 +193,14 @@ class CategoryStateNotifier extends StateNotifier<CategoryState> {
     await state.createTransactionCategoryUseCase.execute(transactionCategory: transactionCategory);
   }
 
-  Future<List<TransactionCategory>> getTransactionCategory(AssetType assetType) async {
+  Future<List<TransactionCategory>> getTransactionCategoryByAssetType(AssetType assetType) async {
+    state = state.copyWith(categoryList: []);
+    // 새 데이터를 가져옵니다.
     List<TransactionCategory> categories = await state.getTransactionCategoryUseCase.execute(userId: state.userId);
-    if (assetType == AssetType.income) {
-      categories = categories.where((category) => category.assetType == AssetType.income).toList();
-      state = state.copyWith(categoryList: categories);
-    } else {
-      categories = categories.where((category) => category.assetType == AssetType.expense).toList();
-      state = state.copyWith(categoryList: categories);
-    }
+    categories = categories.where((category) => category.assetType == assetType).toList();
+
+    state = state.copyWith(categoryList: categories);
+
     return categories;
   }
 

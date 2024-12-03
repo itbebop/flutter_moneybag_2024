@@ -40,7 +40,7 @@ class CategoryMenu extends ConsumerWidget {
               onSelect: (AssetType assetType) async {
                 ref.read(assetStateProvier.notifier).selectAssetType(assetType);
                 ref.read(floatingButtonStateProvider.notifier).toggleTransactionMenu(assetType);
-                await ref.read(categoryStateProvider.notifier).getTransactionCategory(assetType);
+                await ref.read(categoryStateProvider.notifier).getTransactionCategoryByAssetType(assetType);
                 ref.read(floatingButtonStateProvider.notifier).tapCategory(assetType);
               },
               isSelected: ref.read(floatingButtonStateProvider).incomeSelected,
@@ -54,7 +54,7 @@ class CategoryMenu extends ConsumerWidget {
               onSelect: (AssetType assetType) async {
                 ref.read(assetStateProvier.notifier).selectAssetType(assetType);
                 ref.read(floatingButtonStateProvider.notifier).toggleTransactionMenu(assetType);
-                await ref.read(categoryStateProvider.notifier).getTransactionCategory(assetType);
+                await ref.read(categoryStateProvider.notifier).getTransactionCategoryByAssetType(assetType);
                 ref.read(floatingButtonStateProvider.notifier).tapCategory(assetType);
               },
               isSelected: ref.read(floatingButtonStateProvider).expenseSelected,

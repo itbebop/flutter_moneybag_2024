@@ -44,8 +44,31 @@ class TransactionCategoryDataSourceImpl implements TransactionCategoryDataSource
 
   @override
   Future<List<TransactionCategory>> getTransactionCategoryList({required int userId}) async {
-    final List<TransactionCategory> categories = await _transactionCategoryRef('userId').get().then((value) => value.docs.map((e) => e.data()).toList());
-    return categories;
+    final Options options = Options(
+      headers: {
+        'userId': userId,
+      },
+    );
+    try {
+      Response response = await _dio.get(
+        '$baseUrl/categories',
+        options: options,
+      );
+
+      final jsonData = response.data['data'];
+      // jsonData가 null일 경우 빈 리스트 반환
+      if (jsonData == null) {
+        return [];
+      }
+      final Map<String, dynamic> responseData = response.data['data'];
+      final List<dynamic> categoryJson = responseData['results'];
+      final List<TransactionCategory> categoryList = categoryJson.map((data) => TransactionCategory.fromJson(data)).toList();
+
+      return categoryList;
+    } catch (e) {
+      debugPrint('Error in getAssetList: $e');
+      return [];
+    }
   }
 
   @override

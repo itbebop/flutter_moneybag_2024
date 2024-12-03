@@ -82,6 +82,7 @@ class TransactionStateNotifier extends StateNotifier<TransactionState> {
   Future<void> selectActivatedTransactionList() async {
     final activatedTransactionList = await state.getTransactionListUseCase.execute(assetIdList: state.activatedAssetIdList, userId: state.userId);
     state = state.copyWith(activatedTransactionList: activatedTransactionList);
+    // TODO: Bad Status
   }
 
   void clearTransactions() {

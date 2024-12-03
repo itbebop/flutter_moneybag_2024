@@ -113,7 +113,7 @@ class CategoryDetailList extends ConsumerWidget {
                                                 message: '아이콘을 삭제하시겠습니까?',
                                                 onConfirm: () => ref.read(categoryStateProvider.notifier).deleteTransactionCategory(category.categoryId),
                                               );
-                                              ref.read(categoryStateProvider.notifier).getTransactionCategory(category.assetType);
+                                              ref.read(categoryStateProvider.notifier).getTransactionCategoryByAssetType(category.assetType);
                                               return AlertDialogWidget.showCustomDialog(context: context, title: '', content: '삭제되었습니다');
                                             },
                                             child: SizedBox(
@@ -143,7 +143,7 @@ class CategoryDetailList extends ConsumerWidget {
                                                   );
                                                 }
                                                 AlertDialogWidget.showCustomDialog(context: context, title: ' ', content: '변경되었습니다');
-                                                await ref.read(categoryStateProvider.notifier).getTransactionCategory(category.assetType);
+                                                await ref.read(categoryStateProvider.notifier).getTransactionCategoryByAssetType(category.assetType);
                                                 ref.read(categoryStateProvider.notifier).cancelCategoryItemUpdate();
                                               },
                                               child: SizedBox(
@@ -186,7 +186,7 @@ class CategoryDetailList extends ConsumerWidget {
                                                 ),
                                                 subCategoryId: '${subCategory.categoryId}_00${categories.length + 1}',
                                               );
-                                          ref.read(categoryStateProvider.notifier).getTransactionCategory(subCategory.assetType);
+                                          ref.read(categoryStateProvider.notifier).getTransactionCategoryByAssetType(subCategory.assetType);
                                           ref.read(categoryStateProvider.notifier).cancelIconSelect(subCategory.assetType);
                                           categoryNameCreateController.clear();
                                           ref.read(categoryStateProvider.notifier).showCategoryCardNew(false);
