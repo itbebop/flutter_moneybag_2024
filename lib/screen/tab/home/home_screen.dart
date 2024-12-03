@@ -34,6 +34,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       final currentMonth = DateFormat('MMM').format(DateTime.now()).toLowerCase();
       final initialMonth = MonthList.values.firstWhere(
         (e) => e.toString().split('.')[1] == currentMonth,
+        orElse: () => MonthList.jan,
       );
       // TODO: Bad state: No element 오류
       ref.read(monthStateProvider.notifier).setMonth(initialMonth);
