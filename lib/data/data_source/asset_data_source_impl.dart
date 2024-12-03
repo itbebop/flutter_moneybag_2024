@@ -83,7 +83,6 @@ class AssetDataSourceImpl implements AssetDataSource {
       );
 
       final jsonData = response.data['data'];
-      print('=== jsonList:$jsonData');
       // jsonData가 null일 경우 빈 리스트 반환
       if (jsonData == null) {
         return [];
