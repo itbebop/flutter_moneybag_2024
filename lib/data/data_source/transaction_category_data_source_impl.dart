@@ -61,8 +61,16 @@ class TransactionCategoryDataSourceImpl implements TransactionCategoryDataSource
         return [];
       }
       final Map<String, dynamic> responseData = response.data['data'];
-      final List<dynamic> categoryJson = responseData['results'];
-      final List<TransactionCategory> categoryList = categoryJson.map((data) => TransactionCategory.fromJson(data)).toList();
+      final results = responseData['results'];
+
+      final List<TransactionCategory> categoryList;
+      if (results is List) {
+        categoryList = results.map((data) => TransactionCategory.fromJson(data)).toList();
+      } else if (results is Map<String, dynamic>) {
+        categoryList = [TransactionCategory.fromJson(results)];
+      } else {
+        throw Exception("Unexpected data format");
+      }
 
       return categoryList;
     } catch (e) {
