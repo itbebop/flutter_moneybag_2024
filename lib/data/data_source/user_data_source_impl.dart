@@ -70,10 +70,8 @@ class UserDataSourceImpl implements UserDataSource {
 
   @override
   Future<User> getUser({required String uid}) async {
-    print('#### uid in user data: $uid');
     try {
       final userId = await getUserId(uid: uid);
-      print('#### userId in user data: $userId');
 
       final Options options = Options(
         headers: {
@@ -86,7 +84,6 @@ class UserDataSourceImpl implements UserDataSource {
         options: options,
       );
       final userJson = response.data['data'];
-      print('### userJson:$userJson');
 
       if (userJson == null) {
         throw Exception('User data is null');
