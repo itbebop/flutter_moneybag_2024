@@ -1,55 +1,76 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_moneybag_2024/common/common.dart';
 import 'package:flutter_moneybag_2024/domain/enums/asset_types.dart';
-import 'package:flutter_moneybag_2024/screen/category/component/category_list/category_list.dart';
+import 'package:flutter_moneybag_2024/screen/category/component/category_list/category_list_fragment.dart';
 import 'package:flutter_moneybag_2024/screen/category/component/category_select_button.dart';
 import 'package:flutter_moneybag_2024/screen/category/riverpod/category_state_notifier.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class CategoryListScreen extends ConsumerStatefulWidget {
+class CategoryListScreen extends HookConsumerWidget {
   const CategoryListScreen({super.key});
-  @override
-  ConsumerState<CategoryListScreen> createState() => _CategoryListScreenState();
-}
-
-class _CategoryListScreenState extends ConsumerState<CategoryListScreen> {
-  final categorylistCreateController = TextEditingController();
-  @override
-  void initState() {
-    ref.read(categoryStateProvider.notifier).getTransactionAllCategory();
-    super.initState();
-  }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final categorylistCreateController = TextEditingController();
+    final tabController = useTabController(initialLength: 2);
+
     return Material(
       child: Stack(
         children: [
           Scaffold(
             appBar: AppBar(),
             body: SingleChildScrollView(
+                child: SizedBox(
+              height: MediaQuery.of(context).size.height * .8,
               child: Column(
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: CategoryList(
-                      title: '지출',
-                      assetType: AssetType.expense,
-                      categorylistCreateController: categorylistCreateController,
-                    ),
+                  TabBar(
+                    controller: tabController,
+                    indicatorColor: UiConfig.primaryColor,
+                    padding: const EdgeInsets.all(8),
+                    indicatorSize: TabBarIndicatorSize.tab,
+                    labelPadding: const EdgeInsets.only(bottom: 16, left: 8, right: 8),
+                    labelStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    splashBorderRadius: BorderRadius.circular(10),
+                    onTap: (value) {
+                      if (value == 0) {
+                        ref.read(categoryStateProvider.notifier).getTransactionCategoryByAssetType(AssetType.expense);
+                      } else {
+                        ref.read(categoryStateProvider.notifier).getTransactionCategoryByAssetType(AssetType.income);
+                      }
+                    },
+                    tabs: [
+                      Text(
+                        '지출',
+                        style: UiConfig.h4Style,
+                      ),
+                      Text(
+                        '수입',
+                        style: UiConfig.h4Style,
+                      ),
+                    ],
                   ),
-                  SizedBox(height: 16.h),
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: CategoryList(
-                      title: '소득',
-                      assetType: AssetType.income,
-                      categorylistCreateController: categorylistCreateController,
+                  Expanded(
+                    child: TabBarView(
+                      controller: tabController,
+                      children: [
+                        CategoryListFragment(
+                          title: '지출',
+                          assetType: AssetType.expense,
+                          categorylistCreateController: categorylistCreateController,
+                        ),
+                        CategoryListFragment(
+                          title: '수입',
+                          assetType: AssetType.income,
+                          categorylistCreateController: categorylistCreateController,
+                        ),
+                      ],
                     ),
                   ),
                 ],
               ),
-            ),
+            )),
           ),
           ref.watch(categoryStateProvider).isVisibleButton
               ? const AnimatedOpacity(
