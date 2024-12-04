@@ -20,7 +20,7 @@ class ReportScreen extends HookConsumerWidget {
       children: [
         TabBar(
           controller: tabController,
-          indicatorColor: UiConfig.primaryColor,
+          indicatorColor: UiConfig.primaryColorSurface,
           padding: const EdgeInsets.all(8),
           indicatorSize: TabBarIndicatorSize.tab,
           // labelPadding: const EdgeInsets.all(16),
