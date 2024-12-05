@@ -190,7 +190,10 @@ class CategoryStateNotifier extends StateNotifier<CategoryState> {
     List<TransactionCategory> categories = await state.getTransactionCategoryUseCase.execute(userId: state.userId);
     categories = categories.where((category) => category.assetType == assetType).toList();
 
-    state = state.copyWith(categoryList: categories);
+    state = state.copyWith(
+      categoryList: categories,
+      assetType: assetType,
+    );
   }
 
   Future<void> updateTransactionCategory(TransactionCategory transactionCategory) async {

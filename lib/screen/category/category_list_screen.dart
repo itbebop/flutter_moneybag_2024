@@ -27,7 +27,7 @@ class CategoryListScreen extends HookConsumerWidget {
                 children: [
                   TabBar(
                     controller: tabController,
-                    indicatorColor: UiConfig.primaryColor,
+                    indicatorColor: ref.watch(categoryStateProvider).assetType == AssetType.income ? UiConfig.primaryColorSurface : UiConfig.secondaryTextColor,
                     padding: const EdgeInsets.all(8),
                     indicatorSize: TabBarIndicatorSize.tab,
                     labelPadding: const EdgeInsets.only(bottom: 16, left: 8, right: 8),
