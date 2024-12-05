@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_moneybag_2024/common/common.dart';
 import 'package:flutter_moneybag_2024/common/common_component/transaction/riverpod/transaction_state_notifier.dart';
 import 'package:flutter_moneybag_2024/core/provider/user_state_notifier.dart';
+import 'package:flutter_moneybag_2024/domain/enums/asset_types.dart';
 import 'package:flutter_moneybag_2024/domain/model/asset.dart';
+import 'package:flutter_moneybag_2024/screen/category/riverpod/category_state_notifier.dart';
 import 'package:flutter_moneybag_2024/screen/tab/asset/riverpod/asset_state_notifier.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -63,7 +65,10 @@ class _DrawerWidgetState extends ConsumerState<DrawerWidget> {
                     color: UiConfig.black,
                   ),
                   title: const Text('카테고리 관리'),
-                  onTap: () => context.push('/category_list'),
+                  onTap: () async {
+                    await ref.read(categoryStateProvider.notifier).getTransactionCategoryByAssetType(AssetType.expense);
+                    context.push('/category_list');
+                  },
                 ),
                 if (userState.user == null)
                   ListTile(
