@@ -34,7 +34,6 @@ final categoryStateProvider = StateNotifierProvider<CategoryStateNotifier, Categ
 class CategoryStateNotifier extends StateNotifier<CategoryState> {
   CategoryStateNotifier(super.state);
   void showCategoryCardNew(bool showNew, {AssetType? assetType}) {
-    print(assetType);
     if (assetType == AssetType.income) {
       if (showNew) {
         state = state.copyWith(
@@ -64,6 +63,8 @@ class CategoryStateNotifier extends StateNotifier<CategoryState> {
           showExpenseCategoryCardNew: showNew,
         );
       }
+      print(state.showIncomeCategoryCardNew);
+      print(state.showExpenseCategoryCardNew);
     }
   }
 
@@ -116,6 +117,12 @@ class CategoryStateNotifier extends StateNotifier<CategoryState> {
     );
   }
 
+  void tabListEditIcon() {
+    state = state.copyWith(
+      showCategoryCardUpdate: !state.showCategoryCardUpdate,
+    );
+  }
+
   void onTapUpdateTextfield() {
     state = state.copyWith(
       showCategoryNameFromServer: true,
@@ -154,25 +161,6 @@ class CategoryStateNotifier extends StateNotifier<CategoryState> {
 
   Future<void> createSubTransactionCategoryUseCase({required TransactionCategory transactionCategory, required String subCategoryId}) async {
     // await state.createSubTransactionCategoryUseCase.execute(transactionCategory: transactionCategory, userId: state.userId, subCategoryId: subCategoryId);
-  }
-
-  Future<List<TransactionCategory>> getTransactionAllCategory() async {
-    final cachedCategories = state.categoryList;
-
-    // 이미 데이터가 캐시에 존재하는 경우 API 호출 생략
-    if (cachedCategories.isNotEmpty) {
-      return cachedCategories;
-    }
-
-    // 새 데이터를 가져옵니다.
-    List<TransactionCategory> categories = await state.getTransactionCategoryUseCase.execute(userId: state.userId);
-
-    // 상태 업데이트: 변경된 경우에만 상태를 갱신
-    if (state.categoryList != categories) {
-      state = state.copyWith(categoryList: categories);
-    }
-
-    return categories;
   }
 
   Future<List<TransactionCategory>> getSubTransactionCategoryList({required int categoryId}) async {

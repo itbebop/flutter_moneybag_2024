@@ -13,6 +13,7 @@ class CategoryListScreen extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final categorylistCreateController = TextEditingController();
+    final categorylistEditController = TextEditingController();
     final tabController = useTabController(initialLength: 2);
 
     return Material(
@@ -59,11 +60,13 @@ class CategoryListScreen extends HookConsumerWidget {
                           title: '지출',
                           assetType: AssetType.expense,
                           categorylistCreateController: categorylistCreateController,
+                          categorylistEditController: categorylistEditController,
                         ),
                         CategoryListFragment(
                           title: '수입',
                           assetType: AssetType.income,
                           categorylistCreateController: categorylistCreateController,
+                          categorylistEditController: categorylistEditController,
                         ),
                       ],
                     ),

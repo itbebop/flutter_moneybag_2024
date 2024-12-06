@@ -74,14 +74,41 @@ class TransactionCategoryDataSourceImpl implements TransactionCategoryDataSource
 
       return categoryList;
     } catch (e) {
-      debugPrint('Error in getAssetList: $e');
+      debugPrint('Error in getTransactionCategoryList: $e');
       return [];
     }
   }
 
   @override
+  Future<TransactionCategory> getTransactionCategory({required int categoryId}) async {
+    try {
+      Response response = await _dio.get(
+        '$baseUrl/categories/$categoryId',
+      );
+      final categoryJson = response.data['data'];
+      final category = TransactionCategory.fromJson(categoryJson);
+      return category;
+    } catch (e) {
+      debugPrint('Error in get Category: $e');
+      throw Exception('Category not found');
+    }
+  }
+
+  @override
   Future<void> updateTransactionCategory({required TransactionCategory transactionCategory}) async {
-    await _transactionCategoryRef('userId').doc('transactionCategory.categoryId').set(transactionCategory);
+    final userId = transactionCategory.userId;
+    try {
+      Response response = await _dio.get(
+        '$baseUrl/categories',
+      );
+      if (response.statusCode == 201) {
+        debugPrint("Category updated successfully: ${response.data}");
+      } else {
+        debugPrint("Failed to update Category: ${response.statusCode}");
+      }
+    } catch (e) {
+      debugPrint('Error in update Category: $e');
+    }
   }
 
   @override

@@ -5,6 +5,7 @@ import 'package:flutter_moneybag_2024/domain/enums/asset_types.dart';
 import 'package:flutter_moneybag_2024/screen/category/component/category_list/category_list_button.dart';
 import 'package:flutter_moneybag_2024/screen/category/component/category_list/category_list_item.dart';
 import 'package:flutter_moneybag_2024/screen/category/component/category_list/category_list_item_new.dart';
+import 'package:flutter_moneybag_2024/screen/category/component/category_list/category_list_item_update.dart';
 import 'package:flutter_moneybag_2024/screen/category/riverpod/category_state_notifier.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hugeicons/hugeicons.dart';
@@ -13,12 +14,14 @@ class CategoryListFragment extends ConsumerWidget {
   final String title;
   final AssetType assetType;
   final TextEditingController categorylistCreateController;
+  final TextEditingController categorylistEditController;
 
   const CategoryListFragment({
     super.key,
     required this.title,
     required this.assetType,
     required this.categorylistCreateController,
+    required this.categorylistEditController,
   });
 
   @override
@@ -38,7 +41,7 @@ class CategoryListFragment extends ConsumerWidget {
             Row(
               children: [
                 HugeIcon(
-                  icon: HugeIcons.strokeRoundedHome02,
+                  icon: HugeIcons.strokeRoundedMoneyBag02,
                   color: assetType == AssetType.expense ? UiConfig.secondaryTextColor : UiConfig.primaryColorSurface,
                 ),
                 SizedBox(width: 8.w),
@@ -97,6 +100,11 @@ class CategoryListFragment extends ConsumerWidget {
                             ),
                           ),
                           SizedBox(height: 8.h),
+                          if (categoryProvider.showCategoryCardUpdate)
+                            CategoryListItemUpdate(
+                              assetType: assetType,
+                              categorylistCreateController: categorylistEditController,
+                            )
                         ],
                       );
                     } else {
