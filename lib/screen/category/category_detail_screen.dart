@@ -24,14 +24,20 @@ class _CategoryDetailScreenState extends ConsumerState<CategoryDetailScreen> {
     return Material(
       child: Stack(
         children: [
-          Scaffold(
-            appBar: AppBar(),
-            body: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: CategoryDetailList(
-                parentCategory: widget.category,
-                categoryNameCreateController: categoryNameCreateController,
-                categoryNameEditController: categoryNameEditController,
+          PopScope(
+            onPopInvokedWithResult: (didPop, result) {
+              ref.read(categoryStateProvider.notifier).cancelCategoryItemUpdate();
+              ref.read(categoryStateProvider.notifier).showCategoryCardNew(false);
+            },
+            child: Scaffold(
+              appBar: AppBar(),
+              body: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: CategoryDetailList(
+                  parentCategory: widget.category,
+                  categoryNameCreateController: categoryNameCreateController,
+                  categoryNameEditController: categoryNameEditController,
+                ),
               ),
             ),
           ),
