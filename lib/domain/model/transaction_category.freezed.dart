@@ -27,6 +27,7 @@ mixin _$TransactionCategory {
   AssetType get assetType => throw _privateConstructorUsedError;
   int get level => throw _privateConstructorUsedError;
   int get userId => throw _privateConstructorUsedError;
+  int? get parentCategoryId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -46,7 +47,8 @@ abstract class $TransactionCategoryCopyWith<$Res> {
       String iconKey,
       AssetType assetType,
       int level,
-      int userId});
+      int userId,
+      int? parentCategoryId});
 }
 
 /// @nodoc
@@ -68,6 +70,7 @@ class _$TransactionCategoryCopyWithImpl<$Res, $Val extends TransactionCategory>
     Object? assetType = null,
     Object? level = null,
     Object? userId = null,
+    Object? parentCategoryId = freezed,
   }) {
     return _then(_value.copyWith(
       categoryId: null == categoryId
@@ -94,6 +97,10 @@ class _$TransactionCategoryCopyWithImpl<$Res, $Val extends TransactionCategory>
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as int,
+      parentCategoryId: freezed == parentCategoryId
+          ? _value.parentCategoryId
+          : parentCategoryId // ignore: cast_nullable_to_non_nullable
+              as int?,
     ) as $Val);
   }
 }
@@ -112,7 +119,8 @@ abstract class _$$TransactionCategoryImplCopyWith<$Res>
       String iconKey,
       AssetType assetType,
       int level,
-      int userId});
+      int userId,
+      int? parentCategoryId});
 }
 
 /// @nodoc
@@ -132,6 +140,7 @@ class __$$TransactionCategoryImplCopyWithImpl<$Res>
     Object? assetType = null,
     Object? level = null,
     Object? userId = null,
+    Object? parentCategoryId = freezed,
   }) {
     return _then(_$TransactionCategoryImpl(
       categoryId: null == categoryId
@@ -158,6 +167,10 @@ class __$$TransactionCategoryImplCopyWithImpl<$Res>
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as int,
+      parentCategoryId: freezed == parentCategoryId
+          ? _value.parentCategoryId
+          : parentCategoryId // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -171,7 +184,8 @@ class _$TransactionCategoryImpl implements _TransactionCategory {
       required this.iconKey,
       required this.assetType,
       required this.level,
-      required this.userId});
+      required this.userId,
+      this.parentCategoryId});
 
   factory _$TransactionCategoryImpl.fromJson(Map<String, dynamic> json) =>
       _$$TransactionCategoryImplFromJson(json);
@@ -190,10 +204,12 @@ class _$TransactionCategoryImpl implements _TransactionCategory {
   final int level;
   @override
   final int userId;
+  @override
+  final int? parentCategoryId;
 
   @override
   String toString() {
-    return 'TransactionCategory(categoryId: $categoryId, categoryName: $categoryName, iconKey: $iconKey, assetType: $assetType, level: $level, userId: $userId)';
+    return 'TransactionCategory(categoryId: $categoryId, categoryName: $categoryName, iconKey: $iconKey, assetType: $assetType, level: $level, userId: $userId, parentCategoryId: $parentCategoryId)';
   }
 
   @override
@@ -209,13 +225,15 @@ class _$TransactionCategoryImpl implements _TransactionCategory {
             (identical(other.assetType, assetType) ||
                 other.assetType == assetType) &&
             (identical(other.level, level) || other.level == level) &&
-            (identical(other.userId, userId) || other.userId == userId));
+            (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.parentCategoryId, parentCategoryId) ||
+                other.parentCategoryId == parentCategoryId));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, categoryId, categoryName, iconKey, assetType, level, userId);
+  int get hashCode => Object.hash(runtimeType, categoryId, categoryName,
+      iconKey, assetType, level, userId, parentCategoryId);
 
   @JsonKey(ignore: true)
   @override
@@ -239,7 +257,8 @@ abstract class _TransactionCategory implements TransactionCategory {
       required final String iconKey,
       required final AssetType assetType,
       required final int level,
-      required final int userId}) = _$TransactionCategoryImpl;
+      required final int userId,
+      final int? parentCategoryId}) = _$TransactionCategoryImpl;
 
   factory _TransactionCategory.fromJson(Map<String, dynamic> json) =
       _$TransactionCategoryImpl.fromJson;
@@ -256,6 +275,8 @@ abstract class _TransactionCategory implements TransactionCategory {
   int get level;
   @override
   int get userId;
+  @override
+  int? get parentCategoryId;
   @override
   @JsonKey(ignore: true)
   _$$TransactionCategoryImplCopyWith<_$TransactionCategoryImpl> get copyWith =>

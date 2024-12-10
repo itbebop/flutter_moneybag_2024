@@ -13,6 +13,7 @@ class TransactionCategory with _$TransactionCategory {
     required AssetType assetType,
     required int level,
     required int userId,
+    int? parentCategoryId,
   }) = _TransactionCategory;
 
   factory TransactionCategory.fromJson(Map<String, dynamic> json) => _$TransactionCategoryFromJson(json);

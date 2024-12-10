@@ -15,6 +15,7 @@ _$TransactionCategoryImpl _$$TransactionCategoryImplFromJson(
       assetType: $enumDecode(_$AssetTypeEnumMap, json['assetType']),
       level: (json['level'] as num).toInt(),
       userId: (json['userId'] as num).toInt(),
+      parentCategoryId: (json['parentCategoryId'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$$TransactionCategoryImplToJson(
@@ -26,6 +27,7 @@ Map<String, dynamic> _$$TransactionCategoryImplToJson(
       'assetType': _$AssetTypeEnumMap[instance.assetType]!,
       'level': instance.level,
       'userId': instance.userId,
+      'parentCategoryId': instance.parentCategoryId,
     };
 
 const _$AssetTypeEnumMap = {
