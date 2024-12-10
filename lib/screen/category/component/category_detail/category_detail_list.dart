@@ -31,11 +31,12 @@ class CategoryDetailList extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final categoryProvider = ref.watch(categoryStateProvider);
-    categoryProvider.showSubCategoryCardUpdate ? categoryNameEditController.text = parentCategory.categoryName : null;
+    categoryProvider.showCategoryCardUpdate ? categoryNameEditController.text = categoryProvider.category!.categoryName : null;
+    // categoryProvider.showSubCategoryCardUpdate ? subCategoryNameEditController.text = parentCategory.categoryName : null;
 
     return Tap(
       onTap: () {
-        ref.read(categoryStateProvider.notifier).cancelIconSelect(parentCategory.assetType);
+        ref.read(categoryStateProvider.notifier).cancelIconSelect(categoryProvider.category!.assetType);
         ref.read(categoryStateProvider.notifier).showCategoryCardNew(false);
         if (categoryProvider.showSubCategoryCardUpdate) {
           ConfirmDialogWidget.asyncInputDialog(context: context, title: '', message: '아이콘 변경을 취소하시겠습니까?', onConfirm: () => ref.read(categoryStateProvider.notifier).cancelCategoryItemUpdate());
@@ -52,15 +53,15 @@ class CategoryDetailList extends ConsumerWidget {
                 Row(
                   children: [
                     HugeIcon(
-                      icon: iconMap[parentCategory.iconKey],
-                      color: parentCategory.assetType == AssetType.expense ? UiConfig.secondaryTextColor : UiConfig.primaryColorSurface,
+                      icon: iconMap[categoryProvider.category!.iconKey],
+                      color: categoryProvider.category!.assetType == AssetType.expense ? UiConfig.secondaryTextColor : UiConfig.primaryColorSurface,
                       size: 30,
                     ),
                     SizedBox(width: 8.w),
                     Text(
-                      parentCategory.categoryName,
+                      categoryProvider.category!.categoryName,
                       style: UiConfig.h1Style.copyWith(
-                        color: parentCategory.assetType == AssetType.expense ? UiConfig.secondaryTextColor : UiConfig.primaryColorSurface,
+                        color: categoryProvider.category!.assetType == AssetType.expense ? UiConfig.secondaryTextColor : UiConfig.primaryColorSurface,
                         fontWeight: UiConfig.semiBoldFont,
                       ),
                     ),
@@ -69,20 +70,10 @@ class CategoryDetailList extends ConsumerWidget {
                 IconButton(
                   onPressed: () {
                     ref.read(categoryStateProvider.notifier).tabListEditIcon();
-                    // ref.read(categoryStateProvider.notifier).updateTransactionCategory(
-                    //       TransactionCategory(
-                    //         categoryId: parentCategory.categoryId,
-                    //         categoryName: subCategoryNameEditController.text,
-                    //         iconKey: categoryProvider.selectedIconName == '' ? parentCategory.iconKey : categoryProvider.selectedIconName,
-                    //         assetType: parentCategory.assetType,
-                    //         level: 2,
-                    //         userId: categoryProvider.userId,
-                    //       ),
-                    //     );
                   },
                   icon: HugeIcon(
                     icon: HugeIcons.strokeRoundedPencilEdit02,
-                    color: parentCategory.assetType == AssetType.expense ? UiConfig.secondaryTextColor : UiConfig.primaryColorSurface,
+                    color: categoryProvider.category!.assetType == AssetType.expense ? UiConfig.secondaryTextColor : UiConfig.primaryColorSurface,
                   ),
                 ),
               ],
@@ -94,7 +85,7 @@ class CategoryDetailList extends ConsumerWidget {
                 Row(
                   children: [
                     HugeIcon(
-                      icon: iconMap[parentCategory.iconKey],
+                      icon: iconMap[categoryProvider.category!.iconKey],
                       color: UiConfig.greyColor,
                       size: 30,
                     ),
@@ -122,12 +113,23 @@ class CategoryDetailList extends ConsumerWidget {
                   ],
                 ),
                 IconButton(
-                  onPressed: () {
+                  onPressed: () async {
                     ref.read(categoryStateProvider.notifier).tabListEditIcon();
+                    await ref.read(categoryStateProvider.notifier).updateTransactionCategory(
+                          TransactionCategory(
+                            categoryId: categoryProvider.category!.categoryId,
+                            categoryName: categoryNameEditController.text,
+                            iconKey: categoryProvider.selectedIconName == '' ? categoryProvider.category!.iconKey : categoryProvider.selectedIconName,
+                            assetType: categoryProvider.category!.assetType,
+                            level: 1,
+                            userId: categoryProvider.userId,
+                          ),
+                        );
+                    await ref.read(categoryStateProvider.notifier).getTransactionCategoryById(categoryProvider.category!.categoryId);
                   },
                   icon: HugeIcon(
                     icon: HugeIcons.strokeRoundedCheckmarkCircle01,
-                    color: parentCategory.assetType == AssetType.expense ? UiConfig.secondaryTextColor : UiConfig.primaryColorSurface,
+                    color: categoryProvider.category!.assetType == AssetType.expense ? UiConfig.secondaryTextColor : UiConfig.primaryColorSurface,
                   ),
                 ),
               ],
@@ -136,7 +138,7 @@ class CategoryDetailList extends ConsumerWidget {
           Expanded(
             child: Column(
               children: [
-                Text(categoryProvider.showCategoryNameFromServer.toString()),
+                Text(categoryProvider.showCategoryCardUpdate.toString()),
                 Expanded(
                   child: GridView.builder(
                     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -156,7 +158,7 @@ class CategoryDetailList extends ConsumerWidget {
                                 child: Stack(
                                   children: [
                                     CategoryItemUpdate(
-                                      assetType: parentCategory.assetType,
+                                      assetType: categoryProvider.category!.assetType,
                                       category: TransactionCategory(
                                         categoryId: subCategory.categoryId,
                                         categoryName: subCategory.categoryName,
@@ -176,7 +178,7 @@ class CategoryDetailList extends ConsumerWidget {
                                           message: '아이콘을 삭제하시겠습니까?',
                                           onConfirm: () => ref.read(categoryStateProvider.notifier).deleteTransactionCategory(subCategory.categoryId),
                                         );
-                                        ref.read(categoryStateProvider.notifier).getTransactionCategoryByAssetType(subCategory.assetType);
+                                        ref.read(categoryStateProvider.notifier).getTransactionCategoriesByAssetType(subCategory.assetType);
                                         return AlertDialogWidget.showCustomDialog(context: context, title: '', content: '삭제되었습니다');
                                       },
                                       child: SizedBox(
@@ -210,7 +212,7 @@ class CategoryDetailList extends ConsumerWidget {
                                             );
                                           }
                                           AlertDialogWidget.showCustomDialog(context: context, title: ' ', content: '변경되었습니다');
-                                          await ref.read(categoryStateProvider.notifier).getTransactionCategoryByAssetType(subCategory.assetType);
+                                          await ref.read(categoryStateProvider.notifier).getTransactionCategoriesByAssetType(subCategory.assetType);
                                           ref.read(categoryStateProvider.notifier).cancelCategoryItemUpdate();
                                         },
                                         child: SizedBox(
@@ -226,36 +228,36 @@ class CategoryDetailList extends ConsumerWidget {
                           );
                         } else {
                           return CategoryItem(
-                            assetType: parentCategory.assetType,
+                            assetType: categoryProvider.category!.assetType,
                             subCategory: subCategory,
                           );
                         }
                       } else if (index == categoryProvider.subCategoryList.length) {
-                        if (parentCategory.assetType == AssetType.expense ? categoryProvider.showExpenseCategoryCardNew : categoryProvider.showIncomeCategoryCardNew) {
+                        if (categoryProvider.category!.assetType == AssetType.expense ? categoryProvider.showExpenseCategoryCardNew : categoryProvider.showIncomeCategoryCardNew) {
                           return Stack(
                             children: [
                               CategoryItemNew(
-                                assetType: parentCategory.assetType,
+                                assetType: categoryProvider.category!.assetType,
                                 categoryNameCreateController: categoryNameCreateController,
                               ),
                               Positioned(
                                 right: 0,
                                 child: Tap(
                                   onTap: () async {
-                                    // subCategory update
+                                    // subCategory
                                     await ref.read(categoryStateProvider.notifier).createTransactionCategoryUseCase(
                                           transactionCategory: TransactionCategory(
-                                            categoryId: parentCategory.categoryId,
+                                            categoryId: categoryProvider.category!.categoryId,
                                             categoryName: categoryNameCreateController.text,
                                             iconKey: categoryProvider.selectedIconName,
-                                            assetType: parentCategory.assetType,
+                                            assetType: categoryProvider.category!.assetType,
                                             level: 2,
                                             userId: categoryProvider.userId,
-                                            parentCategoryId: parentCategory.categoryId,
+                                            parentCategoryId: categoryProvider.category!.categoryId,
                                           ),
                                         );
-                                    await ref.read(categoryStateProvider.notifier).getSubTransactionCategories(parentCategory.categoryId);
-                                    ref.read(categoryStateProvider.notifier).cancelIconSelect(parentCategory.assetType);
+                                    await ref.read(categoryStateProvider.notifier).getSubTransactionCategories(categoryProvider.category!.categoryId);
+                                    ref.read(categoryStateProvider.notifier).cancelIconSelect(categoryProvider.category!.assetType);
                                     categoryNameCreateController.clear();
                                     ref.read(categoryStateProvider.notifier).showCategoryCardNew(false);
                                   },
@@ -269,7 +271,7 @@ class CategoryDetailList extends ConsumerWidget {
                           );
                         } else {
                           return CategoryItemButton(
-                            assetType: parentCategory.assetType,
+                            assetType: categoryProvider.category!.assetType,
                           );
                         }
                       }

@@ -70,7 +70,7 @@ class CategoryListItemNew extends ConsumerWidget {
                         userId: categoryProvider.userId,
                       ),
                     );
-                ref.read(categoryStateProvider.notifier).getTransactionCategoryByAssetType(assetType);
+                ref.read(categoryStateProvider.notifier).getTransactionCategoriesByAssetType(assetType);
                 ref.read(categoryStateProvider.notifier).showCategoryCardNew(false);
               },
               icon: const Icon(Icons.check),

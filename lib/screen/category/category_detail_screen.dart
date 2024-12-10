@@ -26,9 +26,10 @@ class _CategoryDetailScreenState extends ConsumerState<CategoryDetailScreen> {
       child: Stack(
         children: [
           PopScope(
-            onPopInvokedWithResult: (didPop, result) {
+            onPopInvokedWithResult: (didPop, result) async {
               ref.read(categoryStateProvider.notifier).cancelCategoryItemUpdate();
               ref.read(categoryStateProvider.notifier).showCategoryCardNew(false);
+              await ref.read(categoryStateProvider.notifier).getTransactionCategoriesByAssetType(widget.category.assetType);
             },
             child: Scaffold(
               appBar: AppBar(),
