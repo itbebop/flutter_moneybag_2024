@@ -43,10 +43,14 @@ class TransactionCategoryDataSourceImpl implements TransactionCategoryDataSource
   }
 
   @override
-  Future<List<TransactionCategory>> getTransactionCategoryList({required int userId}) async {
+  Future<List<TransactionCategory>> getTransactionCategoryList({required int userId, required int level, int? parentCategoryId}) async {
+    print('#### parentCategoryId: $parentCategoryId');
+
     final Options options = Options(
       headers: {
         'userId': userId,
+        'level': level,
+        'parentCategoryId': parentCategoryId ?? 0,
       },
     );
     try {
@@ -62,14 +66,13 @@ class TransactionCategoryDataSourceImpl implements TransactionCategoryDataSource
       }
       final Map<String, dynamic> responseData = response.data['data'];
       final results = responseData['results'];
-
       final List<TransactionCategory> categoryList;
       if (results is List) {
         categoryList = results.map((data) => TransactionCategory.fromJson(data)).toList();
       } else if (results is Map<String, dynamic>) {
         categoryList = [TransactionCategory.fromJson(results)];
       } else {
-        throw Exception("Unexpected data format");
+        return [];
       }
 
       return categoryList;

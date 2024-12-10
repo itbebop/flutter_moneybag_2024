@@ -6,7 +6,7 @@ class GetTransactionCategoryListUseCase {
 
   GetTransactionCategoryListUseCase({required TransactionCategoryRepository transactionCategoryRepository}) : _transactionCategoryRepository = transactionCategoryRepository;
 
-  Future<List<TransactionCategory>> execute({required int userId}) async {
-    return await _transactionCategoryRepository.getTransactionCategoryList(userId: userId);
+  Future<List<TransactionCategory>> execute({required int userId, required int level, int? parentCategoryId}) async {
+    return await _transactionCategoryRepository.getTransactionCategoryList(userId: userId, level: level, parentCategoryId: parentCategoryId);
   }
 }

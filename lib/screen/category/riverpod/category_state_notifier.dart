@@ -63,8 +63,6 @@ class CategoryStateNotifier extends StateNotifier<CategoryState> {
           showExpenseCategoryCardNew: showNew,
         );
       }
-      print(state.showIncomeCategoryCardNew);
-      print(state.showExpenseCategoryCardNew);
     }
   }
 
@@ -159,23 +157,13 @@ class CategoryStateNotifier extends StateNotifier<CategoryState> {
     return result;
   }
 
-  Future<void> createSubTransactionCategoryUseCase({required TransactionCategory transactionCategory, required String subCategoryId}) async {
-    // await state.createSubTransactionCategoryUseCase.execute(transactionCategory: transactionCategory, userId: state.userId, subCategoryId: subCategoryId);
-  }
-
-  Future<List<TransactionCategory>> getSubTransactionCategoryList({required int categoryId}) async {
-    // final List<TransactionCategory> categories = await state.getSubTransactionCategoryUseCase.execute(categoryId: categoryId, userId: state.userId);
-    final List<TransactionCategory> categories = [];
-    return categories;
-  }
-
   Future<void> createTransactionCategoryUseCase({required TransactionCategory transactionCategory}) async {
     await state.createTransactionCategoryUseCase.execute(transactionCategory: transactionCategory);
   }
 
   Future<void> getTransactionCategoryByAssetType(AssetType assetType) async {
     // TODO: cache 처리 방법
-    List<TransactionCategory> categories = await state.getTransactionCategoryUseCase.execute(userId: state.userId);
+    List<TransactionCategory> categories = await state.getTransactionCategoryUseCase.execute(userId: state.userId, level: 1);
     categories = categories.where((category) => category.assetType == assetType).toList();
 
     state = state.copyWith(
@@ -190,5 +178,13 @@ class CategoryStateNotifier extends StateNotifier<CategoryState> {
 
   Future<void> deleteTransactionCategory(int categoryId) async {
     await state.deleteTransactionCategoryUseCase.execute(categoryId: categoryId);
+  }
+
+  Future<void> getSubTransactionCategories(int parentCategoryId) async {
+    List<TransactionCategory> subCategories = await state.getTransactionCategoryUseCase.execute(userId: state.userId, level: 2, parentCategoryId: parentCategoryId);
+
+    state = state.copyWith(
+      subCategoryList: subCategories,
+    );
   }
 }

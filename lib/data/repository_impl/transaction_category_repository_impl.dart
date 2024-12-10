@@ -13,8 +13,12 @@ class TransactionCategoryRepositoryImpl implements TransactionCategoryRepository
   }
 
   @override
-  Future<List<TransactionCategory>> getTransactionCategoryList({required int userId}) async {
-    return await _transactionCategoryDataSource.getTransactionCategoryList(userId: userId);
+  Future<List<TransactionCategory>> getTransactionCategoryList({required int userId, required int level, int? parentCategoryId}) async {
+    return await _transactionCategoryDataSource.getTransactionCategoryList(
+      userId: userId,
+      level: level,
+      parentCategoryId: parentCategoryId,
+    );
   }
 
   @override
