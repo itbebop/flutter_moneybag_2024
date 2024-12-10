@@ -9,19 +9,19 @@ import 'package:hugeicons/hugeicons.dart';
 
 class CategoryItem extends ConsumerWidget {
   final AssetType assetType;
-  final TransactionCategory category;
+  final TransactionCategory subCategory;
 
   const CategoryItem({
     super.key,
     required this.assetType,
-    required this.category,
+    required this.subCategory,
   });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return GestureDetector(
       onLongPress: () {
-        ref.read(categoryStateProvider.notifier).longPressCategoryItem(category: category);
+        ref.read(categoryStateProvider.notifier).longPressCategoryItem(category: subCategory);
         ref.read(categoryStateProvider.notifier).showCategoryCardNew(false);
       },
       child: Card(
@@ -39,14 +39,14 @@ class CategoryItem extends ConsumerWidget {
           children: [
             HugeIcon(
               color: assetType == AssetType.expense ? UiConfig.secondaryTextColor : UiConfig.primaryColorSurface,
-              icon: iconMap[category.iconKey],
+              icon: iconMap[subCategory.iconKey],
               size: 25,
             ),
             SizedBox(height: 8.h),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 4.0),
               child: Text(
-                category.categoryName,
+                subCategory.categoryName,
                 style: UiConfig.smallStyle.copyWith(
                   color: UiConfig.color[800],
                 ),

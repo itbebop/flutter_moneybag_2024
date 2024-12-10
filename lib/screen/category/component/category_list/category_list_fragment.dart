@@ -36,7 +36,7 @@ class CategoryListFragment extends ConsumerWidget {
       },
       child: Padding(
         padding: const EdgeInsets.all(16),
-        child: Column(
+        child: ListView(
           children: [
             Row(
               children: [
@@ -56,7 +56,7 @@ class CategoryListFragment extends ConsumerWidget {
             SizedBox(height: 16.h),
             if (categories.isNotEmpty)
               SizedBox(
-                height: MediaQuery.of(context).size.height * 0.35,
+                height: MediaQuery.of(context).size.height * 0.55,
                 child: ListView.builder(
                   itemCount: categories.length + 1, // Add one for the button
                   itemBuilder: (context, index) {

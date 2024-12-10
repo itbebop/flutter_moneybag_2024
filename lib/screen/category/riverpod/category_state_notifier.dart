@@ -83,7 +83,7 @@ class CategoryStateNotifier extends StateNotifier<CategoryState> {
 
   void tapIcon({required String selectedIconName}) {
     // update면
-    if (state.showCategoryCardUpdate) {
+    if (state.showSubCategoryCardUpdate) {
       state = state.copyWith(
         selectedUpdateIcon: iconMap[selectedIconName],
         selectedIconName: selectedIconName,
@@ -109,7 +109,7 @@ class CategoryStateNotifier extends StateNotifier<CategoryState> {
   void longPressCategoryItem({required TransactionCategory category}) {
     state = state.copyWith(
       selectedIconIdDelete: category.categoryId,
-      showCategoryCardUpdate: true,
+      showSubCategoryCardUpdate: true,
       // update card 열 때 server에서 받은 name을 넣음
       updatedIconName: category.categoryName,
     );
@@ -129,8 +129,10 @@ class CategoryStateNotifier extends StateNotifier<CategoryState> {
 
   void cancelCategoryItemUpdate() {
     state = state.copyWith(
-      showCategoryCardUpdate: false,
+      showSubCategoryCardUpdate: false,
       showCategoryNameFromServer: false,
+      selectedIconName: '',
+      selectedUpdateIcon: null,
     );
   }
 

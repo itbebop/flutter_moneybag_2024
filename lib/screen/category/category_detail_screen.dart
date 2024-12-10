@@ -19,6 +19,7 @@ class CategoryDetailScreen extends ConsumerStatefulWidget {
 class _CategoryDetailScreenState extends ConsumerState<CategoryDetailScreen> {
   final categoryNameCreateController = TextEditingController();
   final categoryNameEditController = TextEditingController();
+  final subCategoryNameEditController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -37,6 +38,7 @@ class _CategoryDetailScreenState extends ConsumerState<CategoryDetailScreen> {
                   parentCategory: widget.category,
                   categoryNameCreateController: categoryNameCreateController,
                   categoryNameEditController: categoryNameEditController,
+                  subCategoryNameEditController: subCategoryNameEditController,
                 ),
               ),
             ),

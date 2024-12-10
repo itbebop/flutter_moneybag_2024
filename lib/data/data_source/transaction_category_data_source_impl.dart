@@ -44,8 +44,6 @@ class TransactionCategoryDataSourceImpl implements TransactionCategoryDataSource
 
   @override
   Future<List<TransactionCategory>> getTransactionCategoryList({required int userId, required int level, int? parentCategoryId}) async {
-    print('#### parentCategoryId: $parentCategoryId');
-
     final Options options = Options(
       headers: {
         'userId': userId,
@@ -99,10 +97,10 @@ class TransactionCategoryDataSourceImpl implements TransactionCategoryDataSource
 
   @override
   Future<void> updateTransactionCategory({required TransactionCategory transactionCategory}) async {
-    final userId = transactionCategory.userId;
     try {
-      Response response = await _dio.get(
-        '$baseUrl/categories',
+      Response response = await _dio.patch(
+        '$baseUrl/categories/${transactionCategory.categoryId}',
+        data: transactionCategory.toJson(),
       );
       if (response.statusCode == 201) {
         debugPrint("Category updated successfully: ${response.data}");

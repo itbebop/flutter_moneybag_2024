@@ -18,24 +18,26 @@ class CategoryDetailList extends ConsumerWidget {
   final TransactionCategory parentCategory;
   final TextEditingController categoryNameCreateController;
   final TextEditingController categoryNameEditController;
+  final TextEditingController subCategoryNameEditController;
 
   const CategoryDetailList({
     super.key,
     required this.parentCategory,
     required this.categoryNameCreateController,
     required this.categoryNameEditController,
+    required this.subCategoryNameEditController,
   });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final categoryProvider = ref.watch(categoryStateProvider);
-    categoryProvider.showCategoryCardUpdate ? categoryNameEditController.text = parentCategory.categoryName : null;
+    categoryProvider.showSubCategoryCardUpdate ? categoryNameEditController.text = parentCategory.categoryName : null;
 
     return Tap(
       onTap: () {
         ref.read(categoryStateProvider.notifier).cancelIconSelect(parentCategory.assetType);
         ref.read(categoryStateProvider.notifier).showCategoryCardNew(false);
-        if (categoryProvider.showCategoryCardUpdate) {
+        if (categoryProvider.showSubCategoryCardUpdate) {
           ConfirmDialogWidget.asyncInputDialog(context: context, title: '', message: '아이콘 변경을 취소하시겠습니까?', onConfirm: () => ref.read(categoryStateProvider.notifier).cancelCategoryItemUpdate());
         }
         categoryNameCreateController.clear();
@@ -67,6 +69,16 @@ class CategoryDetailList extends ConsumerWidget {
                 IconButton(
                   onPressed: () {
                     ref.read(categoryStateProvider.notifier).tabListEditIcon();
+                    // ref.read(categoryStateProvider.notifier).updateTransactionCategory(
+                    //       TransactionCategory(
+                    //         categoryId: parentCategory.categoryId,
+                    //         categoryName: subCategoryNameEditController.text,
+                    //         iconKey: categoryProvider.selectedIconName == '' ? parentCategory.iconKey : categoryProvider.selectedIconName,
+                    //         assetType: parentCategory.assetType,
+                    //         level: 2,
+                    //         userId: categoryProvider.userId,
+                    //       ),
+                    //     );
                   },
                   icon: HugeIcon(
                     icon: HugeIcons.strokeRoundedPencilEdit02,
@@ -124,6 +136,7 @@ class CategoryDetailList extends ConsumerWidget {
           Expanded(
             child: Column(
               children: [
+                Text(categoryProvider.showCategoryNameFromServer.toString()),
                 Expanded(
                   child: GridView.builder(
                     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -133,10 +146,10 @@ class CategoryDetailList extends ConsumerWidget {
                     itemCount: categoryProvider.subCategoryList.length + 2, // 추가 버튼을 위한 2개의 item 추가
                     itemBuilder: (context, index) {
                       if (index < categoryProvider.subCategoryList.length) {
-                        final category = categoryProvider.subCategoryList[index];
+                        final subCategory = categoryProvider.subCategoryList[index];
 
                         // showCategoryCardUpdate가 true이고, 선택한 index인 경우 CategoryItemUpdate 반환
-                        if (categoryProvider.showCategoryCardUpdate && category.categoryId == categoryProvider.selectedIconIdDelete) {
+                        if (categoryProvider.showSubCategoryCardUpdate && subCategory.categoryId == categoryProvider.selectedIconIdDelete) {
                           return Row(
                             children: [
                               Expanded(
@@ -145,14 +158,15 @@ class CategoryDetailList extends ConsumerWidget {
                                     CategoryItemUpdate(
                                       assetType: parentCategory.assetType,
                                       category: TransactionCategory(
-                                        categoryId: category.categoryId,
-                                        categoryName: category.categoryName,
-                                        iconKey: category.iconKey,
-                                        assetType: category.assetType,
+                                        categoryId: subCategory.categoryId,
+                                        categoryName: subCategory.categoryName,
+                                        iconKey: subCategory.iconKey,
+                                        assetType: subCategory.assetType,
                                         level: 1,
                                         userId: categoryProvider.userId,
+                                        parentCategoryId: subCategory.parentCategoryId,
                                       ),
-                                      categoryNameEditController: categoryNameEditController,
+                                      subCategoryNameEditController: subCategoryNameEditController,
                                     ),
                                     Tap(
                                       onTap: () async {
@@ -160,9 +174,9 @@ class CategoryDetailList extends ConsumerWidget {
                                           context: context,
                                           title: '',
                                           message: '아이콘을 삭제하시겠습니까?',
-                                          onConfirm: () => ref.read(categoryStateProvider.notifier).deleteTransactionCategory(category.categoryId),
+                                          onConfirm: () => ref.read(categoryStateProvider.notifier).deleteTransactionCategory(subCategory.categoryId),
                                         );
-                                        ref.read(categoryStateProvider.notifier).getTransactionCategoryByAssetType(category.assetType);
+                                        ref.read(categoryStateProvider.notifier).getTransactionCategoryByAssetType(subCategory.assetType);
                                         return AlertDialogWidget.showCustomDialog(context: context, title: '', content: '삭제되었습니다');
                                       },
                                       child: SizedBox(
@@ -174,25 +188,29 @@ class CategoryDetailList extends ConsumerWidget {
                                       right: 0,
                                       child: Tap(
                                         onTap: () async {
-                                          if (categoryProvider.showCategoryCardUpdate) {
+                                          if (categoryProvider.showSubCategoryCardUpdate) {
                                             await ConfirmDialogWidget.asyncInputDialog(
                                               context: context,
                                               title: '',
                                               message: '아이콘을 변경하시겠습니까?',
-                                              onConfirm: () => ref.read(categoryStateProvider.notifier).updateTransactionCategory(
-                                                    TransactionCategory(
-                                                      categoryId: category.categoryId,
-                                                      categoryName: categoryNameEditController.text,
-                                                      iconKey: categoryProvider.selectedIconName == '' ? category.iconKey : categoryProvider.selectedIconName,
-                                                      assetType: category.assetType,
-                                                      level: 1,
-                                                      userId: categoryProvider.userId,
-                                                    ),
-                                                  ),
+                                              onConfirm: () async {
+                                                await ref.read(categoryStateProvider.notifier).updateTransactionCategory(
+                                                      TransactionCategory(
+                                                        categoryId: subCategory.categoryId,
+                                                        categoryName: subCategoryNameEditController.text,
+                                                        iconKey: categoryProvider.selectedIconName == '' ? subCategory.iconKey : categoryProvider.selectedIconName,
+                                                        assetType: subCategory.assetType,
+                                                        level: 2,
+                                                        userId: categoryProvider.userId,
+                                                        parentCategoryId: subCategory.parentCategoryId,
+                                                      ),
+                                                    );
+                                                await ref.read(categoryStateProvider.notifier).getSubTransactionCategories(subCategory.parentCategoryId!);
+                                              },
                                             );
                                           }
                                           AlertDialogWidget.showCustomDialog(context: context, title: ' ', content: '변경되었습니다');
-                                          await ref.read(categoryStateProvider.notifier).getTransactionCategoryByAssetType(category.assetType);
+                                          await ref.read(categoryStateProvider.notifier).getTransactionCategoryByAssetType(subCategory.assetType);
                                           ref.read(categoryStateProvider.notifier).cancelCategoryItemUpdate();
                                         },
                                         child: SizedBox(
@@ -209,7 +227,7 @@ class CategoryDetailList extends ConsumerWidget {
                         } else {
                           return CategoryItem(
                             assetType: parentCategory.assetType,
-                            category: category,
+                            subCategory: subCategory,
                           );
                         }
                       } else if (index == categoryProvider.subCategoryList.length) {
@@ -224,6 +242,7 @@ class CategoryDetailList extends ConsumerWidget {
                                 right: 0,
                                 child: Tap(
                                   onTap: () async {
+                                    // subCategory update
                                     await ref.read(categoryStateProvider.notifier).createTransactionCategoryUseCase(
                                           transactionCategory: TransactionCategory(
                                             categoryId: parentCategory.categoryId,

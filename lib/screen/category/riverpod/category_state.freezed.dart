@@ -21,6 +21,7 @@ mixin _$CategoryState {
   bool get showExpenseCategoryCardNew => throw _privateConstructorUsedError;
   bool get showIncomeCategoryCardNew => throw _privateConstructorUsedError;
   bool get showCategoryCardUpdate => throw _privateConstructorUsedError;
+  bool get showSubCategoryCardUpdate => throw _privateConstructorUsedError;
   bool get showCategoryNameFromServer => throw _privateConstructorUsedError;
   bool get showExpenseCategoryListItemNew => throw _privateConstructorUsedError;
   bool get showIncomeCategoryListItemNew => throw _privateConstructorUsedError;
@@ -64,6 +65,7 @@ abstract class $CategoryStateCopyWith<$Res> {
       bool showExpenseCategoryCardNew,
       bool showIncomeCategoryCardNew,
       bool showCategoryCardUpdate,
+      bool showSubCategoryCardUpdate,
       bool showCategoryNameFromServer,
       bool showExpenseCategoryListItemNew,
       bool showIncomeCategoryListItemNew,
@@ -105,6 +107,7 @@ class _$CategoryStateCopyWithImpl<$Res, $Val extends CategoryState>
     Object? showExpenseCategoryCardNew = null,
     Object? showIncomeCategoryCardNew = null,
     Object? showCategoryCardUpdate = null,
+    Object? showSubCategoryCardUpdate = null,
     Object? showCategoryNameFromServer = null,
     Object? showExpenseCategoryListItemNew = null,
     Object? showIncomeCategoryListItemNew = null,
@@ -145,6 +148,10 @@ class _$CategoryStateCopyWithImpl<$Res, $Val extends CategoryState>
       showCategoryCardUpdate: null == showCategoryCardUpdate
           ? _value.showCategoryCardUpdate
           : showCategoryCardUpdate // ignore: cast_nullable_to_non_nullable
+              as bool,
+      showSubCategoryCardUpdate: null == showSubCategoryCardUpdate
+          ? _value.showSubCategoryCardUpdate
+          : showSubCategoryCardUpdate // ignore: cast_nullable_to_non_nullable
               as bool,
       showCategoryNameFromServer: null == showCategoryNameFromServer
           ? _value.showCategoryNameFromServer
@@ -252,6 +259,7 @@ abstract class _$$CategoryStateImplCopyWith<$Res>
       bool showExpenseCategoryCardNew,
       bool showIncomeCategoryCardNew,
       bool showCategoryCardUpdate,
+      bool showSubCategoryCardUpdate,
       bool showCategoryNameFromServer,
       bool showExpenseCategoryListItemNew,
       bool showIncomeCategoryListItemNew,
@@ -292,6 +300,7 @@ class __$$CategoryStateImplCopyWithImpl<$Res>
     Object? showExpenseCategoryCardNew = null,
     Object? showIncomeCategoryCardNew = null,
     Object? showCategoryCardUpdate = null,
+    Object? showSubCategoryCardUpdate = null,
     Object? showCategoryNameFromServer = null,
     Object? showExpenseCategoryListItemNew = null,
     Object? showIncomeCategoryListItemNew = null,
@@ -332,6 +341,10 @@ class __$$CategoryStateImplCopyWithImpl<$Res>
       showCategoryCardUpdate: null == showCategoryCardUpdate
           ? _value.showCategoryCardUpdate
           : showCategoryCardUpdate // ignore: cast_nullable_to_non_nullable
+              as bool,
+      showSubCategoryCardUpdate: null == showSubCategoryCardUpdate
+          ? _value.showSubCategoryCardUpdate
+          : showSubCategoryCardUpdate // ignore: cast_nullable_to_non_nullable
               as bool,
       showCategoryNameFromServer: null == showCategoryNameFromServer
           ? _value.showCategoryNameFromServer
@@ -422,6 +435,7 @@ class _$CategoryStateImpl implements _CategoryState {
       this.showExpenseCategoryCardNew = false,
       this.showIncomeCategoryCardNew = false,
       this.showCategoryCardUpdate = false,
+      this.showSubCategoryCardUpdate = false,
       this.showCategoryNameFromServer = false,
       this.showExpenseCategoryListItemNew = false,
       this.showIncomeCategoryListItemNew = false,
@@ -459,6 +473,9 @@ class _$CategoryStateImpl implements _CategoryState {
   @override
   @JsonKey()
   final bool showCategoryCardUpdate;
+  @override
+  @JsonKey()
+  final bool showSubCategoryCardUpdate;
   @override
   @JsonKey()
   final bool showCategoryNameFromServer;
@@ -522,7 +539,7 @@ class _$CategoryStateImpl implements _CategoryState {
 
   @override
   String toString() {
-    return 'CategoryState(isVisibleButton: $isVisibleButton, isExpanded: $isExpanded, showExpenseCategoryCardNew: $showExpenseCategoryCardNew, showIncomeCategoryCardNew: $showIncomeCategoryCardNew, showCategoryCardUpdate: $showCategoryCardUpdate, showCategoryNameFromServer: $showCategoryNameFromServer, showExpenseCategoryListItemNew: $showExpenseCategoryListItemNew, showIncomeCategoryListItemNew: $showIncomeCategoryListItemNew, selectedIconName: $selectedIconName, updatedIconName: $updatedIconName, categoryName: $categoryName, selectedIconIdDelete: $selectedIconIdDelete, assetType: $assetType, categoryList: $categoryList, subCategoryList: $subCategoryList, category: $category, categoryHints: $categoryHints, userId: $userId, selectedCreateIcon: $selectedCreateIcon, selectedUpdateIcon: $selectedUpdateIcon, createTransactionCategoryUseCase: $createTransactionCategoryUseCase, getTransactionCategoryUseCase: $getTransactionCategoryUseCase, updateTransactionCategoryUseCase: $updateTransactionCategoryUseCase, deleteTransactionCategoryUseCase: $deleteTransactionCategoryUseCase)';
+    return 'CategoryState(isVisibleButton: $isVisibleButton, isExpanded: $isExpanded, showExpenseCategoryCardNew: $showExpenseCategoryCardNew, showIncomeCategoryCardNew: $showIncomeCategoryCardNew, showCategoryCardUpdate: $showCategoryCardUpdate, showSubCategoryCardUpdate: $showSubCategoryCardUpdate, showCategoryNameFromServer: $showCategoryNameFromServer, showExpenseCategoryListItemNew: $showExpenseCategoryListItemNew, showIncomeCategoryListItemNew: $showIncomeCategoryListItemNew, selectedIconName: $selectedIconName, updatedIconName: $updatedIconName, categoryName: $categoryName, selectedIconIdDelete: $selectedIconIdDelete, assetType: $assetType, categoryList: $categoryList, subCategoryList: $subCategoryList, category: $category, categoryHints: $categoryHints, userId: $userId, selectedCreateIcon: $selectedCreateIcon, selectedUpdateIcon: $selectedUpdateIcon, createTransactionCategoryUseCase: $createTransactionCategoryUseCase, getTransactionCategoryUseCase: $getTransactionCategoryUseCase, updateTransactionCategoryUseCase: $updateTransactionCategoryUseCase, deleteTransactionCategoryUseCase: $deleteTransactionCategoryUseCase)';
   }
 
   @override
@@ -541,6 +558,8 @@ class _$CategoryStateImpl implements _CategoryState {
                 other.showIncomeCategoryCardNew == showIncomeCategoryCardNew) &&
             (identical(other.showCategoryCardUpdate, showCategoryCardUpdate) ||
                 other.showCategoryCardUpdate == showCategoryCardUpdate) &&
+            (identical(other.showSubCategoryCardUpdate, showSubCategoryCardUpdate) ||
+                other.showSubCategoryCardUpdate == showSubCategoryCardUpdate) &&
             (identical(other.showCategoryNameFromServer, showCategoryNameFromServer) ||
                 other.showCategoryNameFromServer ==
                     showCategoryNameFromServer) &&
@@ -573,8 +592,7 @@ class _$CategoryStateImpl implements _CategoryState {
                 other.selectedCreateIcon == selectedCreateIcon) &&
             (identical(other.selectedUpdateIcon, selectedUpdateIcon) ||
                 other.selectedUpdateIcon == selectedUpdateIcon) &&
-            (identical(other.createTransactionCategoryUseCase, createTransactionCategoryUseCase) ||
-                other.createTransactionCategoryUseCase == createTransactionCategoryUseCase) &&
+            (identical(other.createTransactionCategoryUseCase, createTransactionCategoryUseCase) || other.createTransactionCategoryUseCase == createTransactionCategoryUseCase) &&
             (identical(other.getTransactionCategoryUseCase, getTransactionCategoryUseCase) || other.getTransactionCategoryUseCase == getTransactionCategoryUseCase) &&
             (identical(other.updateTransactionCategoryUseCase, updateTransactionCategoryUseCase) || other.updateTransactionCategoryUseCase == updateTransactionCategoryUseCase) &&
             (identical(other.deleteTransactionCategoryUseCase, deleteTransactionCategoryUseCase) || other.deleteTransactionCategoryUseCase == deleteTransactionCategoryUseCase));
@@ -588,6 +606,7 @@ class _$CategoryStateImpl implements _CategoryState {
         showExpenseCategoryCardNew,
         showIncomeCategoryCardNew,
         showCategoryCardUpdate,
+        showSubCategoryCardUpdate,
         showCategoryNameFromServer,
         showExpenseCategoryListItemNew,
         showIncomeCategoryListItemNew,
@@ -623,6 +642,7 @@ abstract class _CategoryState implements CategoryState {
       final bool showExpenseCategoryCardNew,
       final bool showIncomeCategoryCardNew,
       final bool showCategoryCardUpdate,
+      final bool showSubCategoryCardUpdate,
       final bool showCategoryNameFromServer,
       final bool showExpenseCategoryListItemNew,
       final bool showIncomeCategoryListItemNew,
@@ -657,6 +677,8 @@ abstract class _CategoryState implements CategoryState {
   bool get showIncomeCategoryCardNew;
   @override
   bool get showCategoryCardUpdate;
+  @override
+  bool get showSubCategoryCardUpdate;
   @override
   bool get showCategoryNameFromServer;
   @override

@@ -17,6 +17,7 @@ class CategoryState with _$CategoryState {
     @Default(false) bool showExpenseCategoryCardNew,
     @Default(false) bool showIncomeCategoryCardNew,
     @Default(false) bool showCategoryCardUpdate,
+    @Default(false) bool showSubCategoryCardUpdate,
     @Default(false) bool showCategoryNameFromServer,
     @Default(false) bool showExpenseCategoryListItemNew,
     @Default(false) bool showIncomeCategoryListItemNew,
