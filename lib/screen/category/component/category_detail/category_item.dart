@@ -28,7 +28,7 @@ class CategoryItem extends ConsumerWidget {
         color: UiConfig.whiteColor,
         shape: RoundedRectangleBorder(
           side: BorderSide(
-            color: assetType == AssetType.income ? UiConfig.secondaryTextColor : UiConfig.primaryColorSurface,
+            color: assetType == AssetType.expense ? UiConfig.secondaryTextColor : UiConfig.primaryColorSurface,
             width: 1,
           ),
           borderRadius: BorderRadius.circular(15),
@@ -38,7 +38,7 @@ class CategoryItem extends ConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             HugeIcon(
-              color: assetType == AssetType.income ? UiConfig.secondaryTextColor : UiConfig.primaryColorSurface,
+              color: assetType == AssetType.expense ? UiConfig.secondaryTextColor : UiConfig.primaryColorSurface,
               icon: iconMap[category.iconKey],
               size: 25,
             ),

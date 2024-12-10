@@ -29,7 +29,7 @@ class _CategoryDetailScreenState extends ConsumerState<CategoryDetailScreen> {
             body: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: CategoryDetailList(
-                subCategory: widget.category,
+                parentCategory: widget.category,
                 categoryNameCreateController: categoryNameCreateController,
                 categoryNameEditController: categoryNameEditController,
               ),

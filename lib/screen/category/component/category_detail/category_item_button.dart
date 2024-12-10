@@ -25,7 +25,7 @@ class CategoryItemButton extends ConsumerWidget {
       child: InkWell(
         onTap: () {
           ref.read(categoryStateProvider.notifier).cancelCategoryItemUpdate();
-          ref.read(categoryStateProvider.notifier).showCategoryCardNew(true);
+          ref.read(categoryStateProvider.notifier).showCategoryCardNew(assetType: assetType, true);
         },
         child: Center(
           child: Icon(

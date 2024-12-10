@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_moneybag_2024/common/common.dart';
 import 'package:flutter_moneybag_2024/domain/enums/asset_types.dart';
 import 'package:flutter_moneybag_2024/domain/model/transaction_category.dart';
+import 'package:flutter_moneybag_2024/screen/category/riverpod/category_state_notifier.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:flutter_moneybag_2024/common/data/icon_map.dart';
 
-class CategoryListItem extends StatelessWidget {
+class CategoryListItem extends ConsumerWidget {
   final TransactionCategory category;
   final AssetType assetType;
   const CategoryListItem({
@@ -16,7 +18,7 @@ class CategoryListItem extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Container(
       decoration: BoxDecoration(
         border: Border.all(
@@ -31,7 +33,8 @@ class CategoryListItem extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Tap(
-              onTap: () {
+              onTap: () async {
+                await ref.read(categoryStateProvider.notifier).getSubTransactionCategories(category.categoryId);
                 context.push('/category_detail', extra: category);
               },
               child: Row(
