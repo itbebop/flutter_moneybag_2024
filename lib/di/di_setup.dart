@@ -25,6 +25,7 @@ import 'package:flutter_moneybag_2024/domain/usecase/asset/get_asset_list_use_ca
 import 'package:flutter_moneybag_2024/domain/usecase/asset/get_asset_use_case.dart';
 import 'package:flutter_moneybag_2024/domain/usecase/asset/init_asset_use_case.dart';
 import 'package:flutter_moneybag_2024/domain/usecase/asset/update_asset_use_case.dart';
+import 'package:flutter_moneybag_2024/domain/usecase/transaction_category/get_transaction_category_use_case.dart';
 import 'package:flutter_moneybag_2024/domain/usecase/user/check_user_duplicated_usecase.dart';
 import 'package:flutter_moneybag_2024/domain/usecase/user/create_user_pallete_usecase.dart';
 import 'package:flutter_moneybag_2024/domain/usecase/user/create_user_usecase.dart';
@@ -89,6 +90,7 @@ void diSetup() {
   // transaction category
   getIt.registerSingleton<CreateTransactionCategoryUseCase>(CreateTransactionCategoryUseCase(transactionCategoryRepository: getIt()));
   getIt.registerSingleton<GetTransactionCategoryListUseCase>(GetTransactionCategoryListUseCase(transactionCategoryRepository: getIt()));
+  getIt.registerSingleton<GetTransactionCategoryUseCase>(GetTransactionCategoryUseCase(transactionCategoryRepository: getIt()));
   getIt.registerSingleton<UpdateTransactionCategoryUseCase>(UpdateTransactionCategoryUseCase(transactionCategoryRepository: getIt()));
   getIt.registerSingleton<DeleteTransactionCategoryUseCase>(DeleteTransactionCategoryUseCase(transactionCategoryRepository: getIt()));
 }

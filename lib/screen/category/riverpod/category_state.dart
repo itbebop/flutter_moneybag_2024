@@ -4,6 +4,7 @@ import 'package:flutter_moneybag_2024/domain/model/transaction_category.dart';
 import 'package:flutter_moneybag_2024/domain/usecase/transaction_category/create_transaction_category_use_case.dart';
 import 'package:flutter_moneybag_2024/domain/usecase/transaction_category/delete_transaction_category_use_case.dart';
 import 'package:flutter_moneybag_2024/domain/usecase/transaction_category/get_transaction_category_list_use_case.dart';
+import 'package:flutter_moneybag_2024/domain/usecase/transaction_category/get_transaction_category_use_case.dart';
 import 'package:flutter_moneybag_2024/domain/usecase/transaction_category/update_transaction_category_user_case.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -34,7 +35,8 @@ class CategoryState with _$CategoryState {
     required IconData selectedCreateIcon,
     IconData? selectedUpdateIcon,
     required CreateTransactionCategoryUseCase createTransactionCategoryUseCase,
-    required GetTransactionCategoryListUseCase getTransactionCategoryUseCase,
+    required GetTransactionCategoryListUseCase getTransactionCategoryListUseCase,
+    required GetTransactionCategoryUseCase getTransactionCategoryUseCase,
     required UpdateTransactionCategoryUseCase updateTransactionCategoryUseCase,
     required final DeleteTransactionCategoryUseCase deleteTransactionCategoryUseCase,
   }) = _CategoryState;

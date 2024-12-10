@@ -22,6 +22,7 @@ final categoryStateProvider = StateNotifierProvider<CategoryStateNotifier, Categ
         userId: userId,
         selectedCreateIcon: HugeIcons.strokeRoundedAddCircle,
         createTransactionCategoryUseCase: getIt(),
+        getTransactionCategoryListUseCase: getIt(),
         getTransactionCategoryUseCase: getIt(),
         updateTransactionCategoryUseCase: getIt(),
         deleteTransactionCategoryUseCase: getIt(),
@@ -163,15 +164,20 @@ class CategoryStateNotifier extends StateNotifier<CategoryState> {
     await state.createTransactionCategoryUseCase.execute(transactionCategory: transactionCategory);
   }
 
-  Future<void> getTransactionCategoryByAssetType(AssetType assetType) async {
+  Future<void> getTransactionCategoriesByAssetType(AssetType assetType) async {
     // TODO: cache 처리 방법
-    List<TransactionCategory> categories = await state.getTransactionCategoryUseCase.execute(userId: state.userId, level: 1);
+    List<TransactionCategory> categories = await state.getTransactionCategoryListUseCase.execute(userId: state.userId, level: 1);
     categories = categories.where((category) => category.assetType == assetType).toList();
 
     state = state.copyWith(
       categoryList: categories,
       assetType: assetType,
     );
+  }
+
+  Future<void> getTransactionCategoryById(int categoryId) async {
+    final TransactionCategory category = await state.getTransactionCategoryUseCase.execute(categoryId: categoryId);
+    state = state.copyWith(category: category);
   }
 
   Future<void> updateTransactionCategory(TransactionCategory transactionCategory) async {
@@ -183,7 +189,7 @@ class CategoryStateNotifier extends StateNotifier<CategoryState> {
   }
 
   Future<void> getSubTransactionCategories(int parentCategoryId) async {
-    List<TransactionCategory> subCategories = await state.getTransactionCategoryUseCase.execute(userId: state.userId, level: 2, parentCategoryId: parentCategoryId);
+    List<TransactionCategory> subCategories = await state.getTransactionCategoryListUseCase.execute(userId: state.userId, level: 2, parentCategoryId: parentCategoryId);
 
     state = state.copyWith(
       subCategoryList: subCategories,

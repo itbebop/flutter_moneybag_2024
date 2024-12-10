@@ -36,9 +36,9 @@ class CategoryListScreen extends HookConsumerWidget {
                     splashBorderRadius: BorderRadius.circular(10),
                     onTap: (value) {
                       if (value == 0) {
-                        ref.read(categoryStateProvider.notifier).getTransactionCategoryByAssetType(AssetType.expense);
+                        ref.read(categoryStateProvider.notifier).getTransactionCategoriesByAssetType(AssetType.expense);
                       } else {
-                        ref.read(categoryStateProvider.notifier).getTransactionCategoryByAssetType(AssetType.income);
+                        ref.read(categoryStateProvider.notifier).getTransactionCategoriesByAssetType(AssetType.income);
                       }
                     },
                     tabs: [

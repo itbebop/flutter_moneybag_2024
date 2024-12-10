@@ -20,6 +20,7 @@ final routeInformationProvider = ChangeNotifierProvider<GoRouteInformationProvid
 
 final routerProvider = Provider<GoRouter>((ref) {
   return GoRouter(
+    debugLogDiagnostics: true,
     initialLocation: '/splash',
     routes: [
       GoRoute(

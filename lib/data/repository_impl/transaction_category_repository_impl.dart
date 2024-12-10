@@ -22,6 +22,11 @@ class TransactionCategoryRepositoryImpl implements TransactionCategoryRepository
   }
 
   @override
+  Future<TransactionCategory> getTransactionCategory({required int categoryId}) async {
+    return await _transactionCategoryDataSource.getTransactionCategory(categoryId: categoryId);
+  }
+
+  @override
   Future<void> updateTransactionCategory({required TransactionCategory transactionCategory}) async {
     await _transactionCategoryDataSource.updateTransactionCategory(transactionCategory: transactionCategory);
   }
