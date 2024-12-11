@@ -5,7 +5,6 @@ import 'package:flutter_moneybag_2024/domain/enums/asset_types.dart';
 import 'package:flutter_moneybag_2024/screen/category/component/category_list/category_list_button.dart';
 import 'package:flutter_moneybag_2024/screen/category/component/category_list/category_list_item.dart';
 import 'package:flutter_moneybag_2024/screen/category/component/category_list/category_list_item_new.dart';
-import 'package:flutter_moneybag_2024/screen/category/component/category_list/category_list_item_update.dart';
 import 'package:flutter_moneybag_2024/screen/category/riverpod/category_state_notifier.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hugeicons/hugeicons.dart';
