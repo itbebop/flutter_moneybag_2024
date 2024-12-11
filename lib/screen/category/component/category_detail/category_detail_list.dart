@@ -84,10 +84,13 @@ class CategoryDetailList extends ConsumerWidget {
               children: [
                 Row(
                   children: [
-                    HugeIcon(
-                      icon: iconMap[categoryProvider.category!.iconKey],
-                      color: UiConfig.greyColor,
-                      size: 30,
+                    Tap(
+                      onTap: () => ref.read(categoryStateProvider.notifier).showCategorySelectButton(parentCategory.assetType),
+                      child: HugeIcon(
+                        icon: categoryProvider.selectedUpdateIcon ?? iconMap[categoryProvider.category!.iconKey],
+                        color: UiConfig.greyColor,
+                        size: 30,
+                      ),
                     ),
                     SizedBox(width: 8.w),
                     SizedBox(
@@ -138,7 +141,6 @@ class CategoryDetailList extends ConsumerWidget {
           Expanded(
             child: Column(
               children: [
-                Text(categoryProvider.showCategoryCardUpdate.toString()),
                 Expanded(
                   child: GridView.builder(
                     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

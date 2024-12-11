@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_moneybag_2024/common/common.dart';
 import 'package:flutter_moneybag_2024/common/data/icon_map.dart';
-import 'package:flutter_moneybag_2024/common/widget/alert_dialog_widget.dart';
 import 'package:flutter_moneybag_2024/screen/category/riverpod/category_state_notifier.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hugeicons/hugeicons.dart';
@@ -26,12 +25,7 @@ class _CategorySelectButtonState extends ConsumerState<CategorySelectButton> {
         GestureDetector(
           onTap: () {
             if (categoryState.selectedIconName == '') {
-              AlertDialogWidget.showCustomDialog(
-                context: context,
-                title: '',
-                content: '아이콘을 선택해주세요',
-              );
-              return;
+              ref.read(categoryStateProvider.notifier).showCategoryCardNew(false);
             }
             ref.read(categoryStateProvider.notifier).tapSelectButtonOutside();
           },

@@ -100,11 +100,6 @@ class CategoryListFragment extends ConsumerWidget {
                             ),
                           ),
                           SizedBox(height: 8.h),
-                          if (categoryProvider.showCategoryCardUpdate)
-                            CategoryListItemUpdate(
-                              assetType: assetType,
-                              categorylistCreateController: categorylistEditController,
-                            )
                         ],
                       );
                     } else {

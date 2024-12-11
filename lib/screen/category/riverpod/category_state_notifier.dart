@@ -84,7 +84,7 @@ class CategoryStateNotifier extends StateNotifier<CategoryState> {
 
   void tapIcon({required String selectedIconName}) {
     // update면
-    if (state.showSubCategoryCardUpdate) {
+    if (state.showCategoryCardUpdate || state.showSubCategoryCardUpdate) {
       state = state.copyWith(
         selectedUpdateIcon: iconMap[selectedIconName],
         selectedIconName: selectedIconName,
