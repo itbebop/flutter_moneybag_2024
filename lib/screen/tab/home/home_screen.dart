@@ -36,7 +36,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         (e) => e.toString().split('.')[1] == currentMonth,
         orElse: () => MonthList.jan,
       );
-      // TODO: Bad state: No element 오류
       ref.read(monthStateProvider.notifier).setMonth(initialMonth);
     });
   }

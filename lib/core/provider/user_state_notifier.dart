@@ -52,8 +52,6 @@ class UserStateNotifier extends StateNotifier<UserState> {
     List<Color> firstColorList,
     List<Color> secondColorList,
   ) async {
-    // final firstColorListSave = colorToStringList(firstColorList);
-    // final secondColorListSave = colorToStringList(secondColorList); // TODO: user_color테이블에 insert
     try {
       User newUser;
       if (state.user != null) {

@@ -36,7 +36,9 @@ class CategoryListItem extends ConsumerWidget {
               onTap: () async {
                 await ref.read(categoryStateProvider.notifier).getSubTransactionCategories(category.categoryId);
                 await ref.read(categoryStateProvider.notifier).getTransactionCategoryById(category.categoryId);
-                context.push('/category_detail', extra: category);
+                if (context.mounted) {
+                  context.push('/category_detail', extra: category);
+                }
               },
               child: Row(
                 children: [

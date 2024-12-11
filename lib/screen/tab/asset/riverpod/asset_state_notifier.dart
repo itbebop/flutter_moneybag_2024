@@ -159,7 +159,7 @@ class AssetStateNotifier extends StateNotifier<AssetState> {
 
   bool onEnterWithoutSelect(BuildContext context) {
     bool result = false;
-    if (state.selectedAssetId == '') {
+    if (state.selectedAssetId == 0) {
       AlertDialogWidget.showCustomDialog(context: context, title: '', content: '자산을 선택해주세요');
       result = true;
     } else {

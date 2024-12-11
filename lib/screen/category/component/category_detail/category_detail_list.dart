@@ -181,7 +181,9 @@ class CategoryDetailList extends ConsumerWidget {
                                           onConfirm: () => ref.read(categoryStateProvider.notifier).deleteTransactionCategory(subCategory.categoryId),
                                         );
                                         ref.read(categoryStateProvider.notifier).getTransactionCategoriesByAssetType(subCategory.assetType);
-                                        return AlertDialogWidget.showCustomDialog(context: context, title: '', content: '삭제되었습니다');
+                                        if (context.mounted) {
+                                          AlertDialogWidget.showCustomDialog(context: context, title: '', content: '삭제되었습니다');
+                                        }
                                       },
                                       child: SizedBox(
                                         width: 20,
@@ -213,7 +215,9 @@ class CategoryDetailList extends ConsumerWidget {
                                               },
                                             );
                                           }
-                                          AlertDialogWidget.showCustomDialog(context: context, title: ' ', content: '변경되었습니다');
+                                          if (context.mounted) {
+                                            AlertDialogWidget.showCustomDialog(context: context, title: ' ', content: '변경되었습니다');
+                                          }
                                           await ref.read(categoryStateProvider.notifier).getTransactionCategoriesByAssetType(subCategory.assetType);
                                           ref.read(categoryStateProvider.notifier).cancelCategoryItemUpdate();
                                         },

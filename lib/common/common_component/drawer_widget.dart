@@ -67,7 +67,9 @@ class _DrawerWidgetState extends ConsumerState<DrawerWidget> {
                   title: const Text('카테고리 관리'),
                   onTap: () async {
                     await ref.read(categoryStateProvider.notifier).getTransactionCategoriesByAssetType(AssetType.expense);
-                    context.push('/category_list');
+                    if (context.mounted) {
+                      context.push('/category_list');
+                    }
                   },
                 ),
                 if (userState.user == null)

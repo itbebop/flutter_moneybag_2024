@@ -93,7 +93,9 @@ class _AssetCreateScreenState extends ConsumerState<AssetCreateScreen> {
                                 await ref.read(userStateProvider.notifier).fetchUser();
                                 await ref.read(assetStateProvier.notifier).fetchAsset();
                               });
-                          Navigator.pop(context);
+                          if (context.mounted) {
+                            Navigator.pop(context);
+                          }
                         },
                         child: CustomButton(
                           name: '확 인',

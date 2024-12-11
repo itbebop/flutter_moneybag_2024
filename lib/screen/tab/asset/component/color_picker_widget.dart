@@ -35,7 +35,6 @@ class ColorPickerWidget extends ConsumerWidget {
                   ...firstColorList.map((color) => GestureDetector(
                         onTap: () {
                           ref.read(assetStateProvier.notifier).selectColor(color, isFirst);
-                          print('first collapse 안될래?');
                           expansionTileController.collapse();
                         },
                         child: Container(
