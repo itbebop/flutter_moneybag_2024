@@ -7,12 +7,16 @@ part 'transaction_detail.g.dart';
 @freezed
 class TransactionDetail with _$TransactionDetail {
   const factory TransactionDetail({
-    required String transactionId,
+    required int transactionId,
     required String memo,
+    required double amount,
     required DateTime createdAt,
     required DateTime updatedAt,
-    required double amount,
     required String imgUrl,
+    required int categoryId,
+    required int subCategoryId,
+    required int userId,
+    required int assetId,
     required TransactionCategory category,
   }) = _TransactionDetail;
 

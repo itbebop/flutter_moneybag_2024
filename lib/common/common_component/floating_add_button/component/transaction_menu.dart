@@ -40,6 +40,8 @@ class TransactionMenu extends ConsumerWidget {
     final transacProvider = ref.read(transactionStateProvider);
     final categoryProvider = ref.watch(categoryStateProvider);
     final floatingAddProvider = ref.watch(floatingButtonStateProvider);
+    final leftSideWidth = 150.w;
+    const double rightSideRightPadding = 50.0;
     dateEditController.text = floatingAddProvider.selectedDate;
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -60,7 +62,7 @@ class TransactionMenu extends ConsumerWidget {
               children: [
                 Container(
                   width: MediaQuery.of(context).size.width,
-                  padding: const EdgeInsets.only(right: 50.0),
+                  padding: const EdgeInsets.only(right: rightSideRightPadding),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
                     color: UiConfig.whiteColor,
@@ -81,7 +83,7 @@ class TransactionMenu extends ConsumerWidget {
                             border: Border(right: BorderSide(color: Colors.black38)),
                           ),
                           child: SizedBox(
-                            width: 140.w,
+                            width: leftSideWidth,
                             child: Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 16),
                               child: Row(
@@ -113,7 +115,7 @@ class TransactionMenu extends ConsumerWidget {
                 const SizedBox(height: 8),
                 Container(
                   width: MediaQuery.of(context).size.width,
-                  padding: const EdgeInsets.only(right: 50.0),
+                  padding: const EdgeInsets.only(right: rightSideRightPadding),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
                     color: UiConfig.whiteColor,
@@ -134,7 +136,7 @@ class TransactionMenu extends ConsumerWidget {
                             border: Border(right: BorderSide(color: Colors.black38)),
                           ),
                           child: SizedBox(
-                            width: 140.w,
+                            width: leftSideWidth,
                             child: Row(
                               children: [
                                 CustomDropdownButton<Asset>(
@@ -155,7 +157,7 @@ class TransactionMenu extends ConsumerWidget {
                                   hints: assetProvider.assetHints, // 힌트 텍스트
                                   action: (asset) {
                                     ref.read(assetStateProvier.notifier).getAsset(asset.assetId);
-                                    assetAmountController.text = assetProvider.totalAmount.toWon().toString();
+                                    assetAmountController.text = '잔액  ${assetProvider.totalAmount.toWon().toString()}';
                                   }, // Asset 선택 시 호출되는 액션
                                 ),
                               ],
@@ -173,94 +175,131 @@ class TransactionMenu extends ConsumerWidget {
                 const SizedBox(height: 8),
                 Container(
                   width: MediaQuery.of(context).size.width,
-                  padding: const EdgeInsets.only(right: 50.0),
+                  padding: const EdgeInsets.only(right: 30.0),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
                     color: UiConfig.whiteColor,
                   ),
-                  child: TextField(
-                    controller: amountEditController,
-                    keyboardType: TextInputType.number,
-                    textAlign: TextAlign.right,
-                    inputFormatters: <TextInputFormatter>[
-                      ThousandCommaInputFormatter(),
-                    ],
-                    onChanged: (value) {
-                      if (value.isNotEmpty) {
-                        // 키보드를 다시 보여줌
-                        SystemChannels.textInput.invokeMethod('TextInput.show');
-                      }
-                    },
-                    textAlignVertical: TextAlignVertical.bottom,
-                    style: const TextStyle(color: Colors.black),
-                    decoration: InputDecoration(
-                      contentPadding: const EdgeInsets.only(bottom: 13.0),
-                      prefixIcon: Container(
+                  child: Row(
+                    children: [
+                      Container(
                         decoration: const BoxDecoration(
                           border: Border(right: BorderSide(color: Colors.black38)),
                         ),
                         child: SizedBox(
-                          width: 140.w,
-                          child: Row(
-                            children: [
-                              CustomDropdownButton<TransactionCategory>(
-                                items: categoryProvider.categoryList
-                                    .map<DropdownMenuItem<TransactionCategory>>((category) => DropdownMenuItem<TransactionCategory>(
-                                          value: category,
-                                          child: FittedBox(
-                                            fit: BoxFit.contain,
-                                            child: Text(
-                                              category.categoryName,
-                                              style: const TextStyle(
-                                                overflow: TextOverflow.ellipsis,
-                                              ),
-                                            ),
+                          width: leftSideWidth,
+                          child: CustomDropdownButton<TransactionCategory>(
+                            items: categoryProvider.categoryList
+                                .map<DropdownMenuItem<TransactionCategory>>((category) => DropdownMenuItem<TransactionCategory>(
+                                      value: category,
+                                      child: FittedBox(
+                                        fit: BoxFit.contain,
+                                        child: Text(
+                                          category.categoryName,
+                                          style: const TextStyle(
+                                            overflow: TextOverflow.ellipsis,
                                           ),
-                                        ))
-                                    .toList(),
-                                hints: categoryProvider.categoryHints, // 힌트 텍스트
-                                action: (category) {
-                                  ref.read(categoryStateProvider.notifier).selectCategory(selectCategory: category);
-                                }, // Asset 선택 시 호출되는 액션
-                              ),
-                            ],
+                                        ),
+                                      ),
+                                    ))
+                                .toList(),
+                            hints: categoryProvider.categoryHints, // 힌트 텍스트
+                            action: (category) {
+                              ref.read(categoryStateProvider.notifier).selectCategory(selectCategory: category);
+                            }, // Asset 선택 시 호출되는 액션
                           ),
                         ),
                       ),
-                      border: InputBorder.none,
-                      hintText: '금액을 입력하세요.',
-                      hintStyle: TextStyle(
-                        color: Colors.grey[400],
-                        fontSize: MediaQuery.of(context).size.width * 0.038,
-                      ),
-                    ),
+                      CustomDropdownButton<TransactionCategory>(
+                        items: categoryProvider.categoryList
+                            .map<DropdownMenuItem<TransactionCategory>>((category) => DropdownMenuItem<TransactionCategory>(
+                                  value: category,
+                                  child: FittedBox(
+                                    fit: BoxFit.contain,
+                                    child: Text(
+                                      category.categoryName,
+                                      style: const TextStyle(
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ),
+                                  ),
+                                ))
+                            .toList(),
+                        hints: categoryProvider.categoryHints, // 힌트 텍스트
+                        action: (category) {
+                          ref.read(categoryStateProvider.notifier).selectCategory(selectCategory: category);
+                        }, // Asset 선택 시 호출되는 액션
+                      )
+                    ],
                   ),
                 ),
                 const SizedBox(height: 8),
                 Container(
                   width: MediaQuery.of(context).size.width,
-                  padding: const EdgeInsets.only(left: 5.0, right: 50.0),
+                  // padding: const EdgeInsets.only(left: 5.0, right: rightSideRightPadding),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
                     color: UiConfig.whiteColor,
                   ),
-                  child: TextFormField(
-                    controller: memoEditController,
-                    textAlignVertical: TextAlignVertical.bottom,
-                    style: const TextStyle(color: Colors.black),
-                    decoration: InputDecoration(
-                      contentPadding: const EdgeInsets.only(bottom: 13.0),
-                      prefixIcon: const Icon(
-                        Icons.note_alt_outlined,
-                        color: UiConfig.primaryColorSurface,
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        width: 150.w,
+                        child: Container(
+                          decoration: const BoxDecoration(
+                            border: Border(right: BorderSide(color: Colors.black38)),
+                          ),
+                          child: TextFormField(
+                            controller: memoEditController,
+                            textAlignVertical: TextAlignVertical.bottom,
+                            style: const TextStyle(color: Colors.black),
+                            decoration: InputDecoration(
+                              contentPadding: const EdgeInsets.only(bottom: 13.0),
+                              prefixIcon: const Icon(
+                                Icons.note_alt_outlined,
+                                color: UiConfig.primaryColorSurface,
+                              ),
+                              border: InputBorder.none,
+                              hintText: '메모',
+                              hintStyle: TextStyle(
+                                color: Colors.grey[400],
+                                fontSize: MediaQuery.of(context).size.width * 0.038,
+                              ),
+                            ),
+                          ),
+                        ),
                       ),
-                      border: InputBorder.none,
-                      hintText: '메모',
-                      hintStyle: TextStyle(
-                        color: Colors.grey[400],
-                        fontSize: MediaQuery.of(context).size.width * 0.038,
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          child: TextField(
+                            controller: amountEditController,
+                            keyboardType: TextInputType.number,
+                            // textAlign: TextAlign.right,
+                            inputFormatters: <TextInputFormatter>[
+                              ThousandCommaInputFormatter(),
+                            ],
+                            onChanged: (value) {
+                              if (value.isNotEmpty) {
+                                // 키보드를 다시 보여줌
+                                SystemChannels.textInput.invokeMethod('TextInput.show');
+                              }
+                            },
+                            textAlignVertical: TextAlignVertical.bottom,
+                            style: const TextStyle(color: Colors.black),
+                            decoration: InputDecoration(
+                              contentPadding: const EdgeInsets.only(bottom: 13.0),
+                              border: InputBorder.none,
+                              hintText: '금액을 입력하세요.',
+                              hintStyle: TextStyle(
+                                color: Colors.grey[400],
+                                fontSize: MediaQuery.of(context).size.width * 0.038,
+                              ),
+                            ),
+                          ),
+                        ),
                       ),
-                    ),
+                    ],
                   ),
                 ),
                 const SizedBox(height: 8),

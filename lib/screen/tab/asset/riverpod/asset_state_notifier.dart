@@ -42,7 +42,7 @@ final assetStateProvier = StateNotifierProvider<AssetStateNotifier, AssetState>(
     secondColorListSave: [],
     assetIdList: assetIdList,
     getAssetUseCase: getIt(),
-    assetHints: '선택',
+    assetHints: '자산 선택',
     currencyHints: '선택',
     selectedAssetId: 0,
     assetName: '',
@@ -152,7 +152,7 @@ class AssetStateNotifier extends StateNotifier<AssetState> {
 
   void quitWrite() {
     state = state.copyWith(
-      assetHints: '선택',
+      assetHints: '자산 선택',
       selectedAssetId: 0,
     );
   }

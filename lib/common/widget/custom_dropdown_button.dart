@@ -13,7 +13,7 @@ class CustomDropdownButton<T> extends ConsumerWidget {
     super.key,
     required this.action,
     required this.items,
-    this.hints = '선택',
+    required this.hints,
     this.hintsStyle,
     this.expanded,
   });
@@ -34,7 +34,7 @@ class CustomDropdownButton<T> extends ConsumerWidget {
             }
           },
           hint: SizedBox(
-            width: 80.w,
+            width: 95.w,
             child: Text(
               hints,
               style: hintsStyle ?? UiConfig.bodyStyle,

@@ -63,13 +63,17 @@ class TransactionStateNotifier extends StateNotifier<TransactionState> {
 
   Future<void> createTransaction({required String memo, required String amount, required DateTime createAt, required TransactionCategory category, required int assetId, userId}) async {
     final transactionDetail = TransactionDetail(
-      transactionId: '1',
+      transactionId: 1,
       memo: memo,
       createdAt: createAt,
       updatedAt: createAt,
       amount: onChangeAmount(amount),
       imgUrl: '',
       category: category,
+      assetId: assetId,
+      categoryId: category.categoryId,
+      subCategoryId: category.categoryId,
+      userId: userId,
     );
     await state.createTransactionUseCase.execute(transactionDetail: transactionDetail, assetId: assetId, userId: userId);
   }

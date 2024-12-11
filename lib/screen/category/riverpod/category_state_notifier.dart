@@ -26,7 +26,7 @@ final categoryStateProvider = StateNotifierProvider<CategoryStateNotifier, Categ
         getTransactionCategoryUseCase: getIt(),
         updateTransactionCategoryUseCase: getIt(),
         deleteTransactionCategoryUseCase: getIt(),
-        categoryHints: '선택',
+        categoryHints: '카테고리',
       ),
     );
   },
@@ -146,7 +146,7 @@ class CategoryStateNotifier extends StateNotifier<CategoryState> {
 
   void quitWrite() {
     state = state.copyWith(
-      categoryHints: '선택',
+      categoryHints: '카테고리',
       category: null,
     );
   }

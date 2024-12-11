@@ -51,7 +51,7 @@ class TransactionDataSourceImpl implements TransactionDataSource {
 
   @override
   Future<void> updateTransaction({required TransactionDetail transaction, required int assetId, required int userId}) async {
-    await _transactionRef('assetId', 'userId').doc(transaction.transactionId).set(transaction);
+    await _transactionRef('assetId', 'userId').doc(transaction.transactionId.toString()).set(transaction);
   }
 
   @override
