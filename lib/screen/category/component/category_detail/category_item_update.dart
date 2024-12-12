@@ -53,6 +53,15 @@ class CategoryItemUpdate extends ConsumerWidget {
                 controller: subCategoryNameEditController,
                 style: UiConfig.smallStyle,
                 textAlign: TextAlign.center,
+                decoration: InputDecoration(
+                  hintStyle: UiConfig.h2Style.copyWith(color: UiConfig.whiteColor),
+                  enabledBorder: const UnderlineInputBorder(
+                    borderSide: BorderSide(color: UiConfig.whiteColor),
+                  ),
+                  focusedBorder: const UnderlineInputBorder(
+                    borderSide: BorderSide(color: UiConfig.whiteColor),
+                  ),
+                ),
                 onTap: () => ref.read(categoryStateProvider.notifier).onTapUpdateTextfield(),
               ),
             ),
