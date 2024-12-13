@@ -12,6 +12,7 @@ class FloatingButtonState with _$FloatingButtonState {
     @Default(false) final bool expenseSelected,
     @Default(false) final bool incomeSelected,
     required final String selectedDate,
+    required final String selectedTime,
     required final DateTime createAt,
     final AssetType? assetType,
   }) = _FloatingButtonState;

@@ -39,6 +39,7 @@ class AssetState with _$AssetState {
     @Default(false) bool showAssetCardUpdate,
     @Default(false) bool showAssetCardUpdateName,
     @Default(false) bool isLoading,
+    @Default(false) bool isSelected,
     required bool isCheckedAsset,
     @Default(0) int selectedAssetCardIndex,
     required List<Color> firstColorList,

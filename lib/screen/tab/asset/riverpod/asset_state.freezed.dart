@@ -39,6 +39,7 @@ mixin _$AssetState {
   bool get showAssetCardUpdate => throw _privateConstructorUsedError;
   bool get showAssetCardUpdateName => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
+  bool get isSelected => throw _privateConstructorUsedError;
   bool get isCheckedAsset => throw _privateConstructorUsedError;
   int get selectedAssetCardIndex => throw _privateConstructorUsedError;
   List<Color> get firstColorList => throw _privateConstructorUsedError;
@@ -103,6 +104,7 @@ abstract class $AssetStateCopyWith<$Res> {
       bool showAssetCardUpdate,
       bool showAssetCardUpdateName,
       bool isLoading,
+      bool isSelected,
       bool isCheckedAsset,
       int selectedAssetCardIndex,
       List<Color> firstColorList,
@@ -164,6 +166,7 @@ class _$AssetStateCopyWithImpl<$Res, $Val extends AssetState>
     Object? showAssetCardUpdate = null,
     Object? showAssetCardUpdateName = null,
     Object? isLoading = null,
+    Object? isSelected = null,
     Object? isCheckedAsset = null,
     Object? selectedAssetCardIndex = null,
     Object? firstColorList = null,
@@ -280,6 +283,10 @@ class _$AssetStateCopyWithImpl<$Res, $Val extends AssetState>
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isSelected: null == isSelected
+          ? _value.isSelected
+          : isSelected // ignore: cast_nullable_to_non_nullable
               as bool,
       isCheckedAsset: null == isCheckedAsset
           ? _value.isCheckedAsset
@@ -409,6 +416,7 @@ abstract class _$$AssetStateImplCopyWith<$Res>
       bool showAssetCardUpdate,
       bool showAssetCardUpdateName,
       bool isLoading,
+      bool isSelected,
       bool isCheckedAsset,
       int selectedAssetCardIndex,
       List<Color> firstColorList,
@@ -468,6 +476,7 @@ class __$$AssetStateImplCopyWithImpl<$Res>
     Object? showAssetCardUpdate = null,
     Object? showAssetCardUpdateName = null,
     Object? isLoading = null,
+    Object? isSelected = null,
     Object? isCheckedAsset = null,
     Object? selectedAssetCardIndex = null,
     Object? firstColorList = null,
@@ -584,6 +593,10 @@ class __$$AssetStateImplCopyWithImpl<$Res>
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isSelected: null == isSelected
+          ? _value.isSelected
+          : isSelected // ignore: cast_nullable_to_non_nullable
               as bool,
       isCheckedAsset: null == isCheckedAsset
           ? _value.isCheckedAsset
@@ -708,6 +721,7 @@ class _$AssetStateImpl implements _AssetState {
       this.showAssetCardUpdate = false,
       this.showAssetCardUpdateName = false,
       this.isLoading = false,
+      this.isSelected = false,
       required this.isCheckedAsset,
       this.selectedAssetCardIndex = 0,
       required final List<Color> firstColorList,
@@ -825,6 +839,9 @@ class _$AssetStateImpl implements _AssetState {
   @JsonKey()
   final bool isLoading;
   @override
+  @JsonKey()
+  final bool isSelected;
+  @override
   final bool isCheckedAsset;
   @override
   @JsonKey()
@@ -912,7 +929,7 @@ class _$AssetStateImpl implements _AssetState {
 
   @override
   String toString() {
-    return 'AssetState(allAssetList: $allAssetList, activatedAssetList: $activatedAssetList, totalAmount: $totalAmount, totalIncome: $totalIncome, totalExpense: $totalExpense, monthlyAmount: $monthlyAmount, monthlyIncome: $monthlyIncome, monthlyExpense: $monthlyExpense, activatedAmount: $activatedAmount, activatedIncome: $activatedIncome, activatedExpense: $activatedExpense, assetAmount: $assetAmount, totalAssetsSum: $totalAssetsSum, totalAssetsYearly: $totalAssetsYearly, totalAssetsMonthly: $totalAssetsMonthly, totalAssetsWeekly: $totalAssetsWeekly, assetTotalSum: $assetTotalSum, assetYearly: $assetYearly, assetMonthly: $assetMonthly, assetWeekly: $assetWeekly, showAssetCardUpdate: $showAssetCardUpdate, showAssetCardUpdateName: $showAssetCardUpdateName, isLoading: $isLoading, isCheckedAsset: $isCheckedAsset, selectedAssetCardIndex: $selectedAssetCardIndex, firstColorList: $firstColorList, secondColorList: $secondColorList, firstColorListSave: $firstColorListSave, secondColorListSave: $secondColorListSave, assetType: $assetType, firstColor: $firstColor, secondColor: $secondColor, userId: $userId, assetHints: $assetHints, assetName: $assetName, assetColor: $assetColor, assetCurrency: $assetCurrency, currencyHints: $currencyHints, selectedAssetId: $selectedAssetId, assetIdList: $assetIdList, getAssetListUseCase: $getAssetListUseCase, getAssetUseCase: $getAssetUseCase, createAssetUserCase: $createAssetUserCase, updateAssetUserCase: $updateAssetUserCase, changeActivedAssetUseCase: $changeActivedAssetUseCase, deleteAssetUseCase: $deleteAssetUseCase)';
+    return 'AssetState(allAssetList: $allAssetList, activatedAssetList: $activatedAssetList, totalAmount: $totalAmount, totalIncome: $totalIncome, totalExpense: $totalExpense, monthlyAmount: $monthlyAmount, monthlyIncome: $monthlyIncome, monthlyExpense: $monthlyExpense, activatedAmount: $activatedAmount, activatedIncome: $activatedIncome, activatedExpense: $activatedExpense, assetAmount: $assetAmount, totalAssetsSum: $totalAssetsSum, totalAssetsYearly: $totalAssetsYearly, totalAssetsMonthly: $totalAssetsMonthly, totalAssetsWeekly: $totalAssetsWeekly, assetTotalSum: $assetTotalSum, assetYearly: $assetYearly, assetMonthly: $assetMonthly, assetWeekly: $assetWeekly, showAssetCardUpdate: $showAssetCardUpdate, showAssetCardUpdateName: $showAssetCardUpdateName, isLoading: $isLoading, isSelected: $isSelected, isCheckedAsset: $isCheckedAsset, selectedAssetCardIndex: $selectedAssetCardIndex, firstColorList: $firstColorList, secondColorList: $secondColorList, firstColorListSave: $firstColorListSave, secondColorListSave: $secondColorListSave, assetType: $assetType, firstColor: $firstColor, secondColor: $secondColor, userId: $userId, assetHints: $assetHints, assetName: $assetName, assetColor: $assetColor, assetCurrency: $assetCurrency, currencyHints: $currencyHints, selectedAssetId: $selectedAssetId, assetIdList: $assetIdList, getAssetListUseCase: $getAssetListUseCase, getAssetUseCase: $getAssetUseCase, createAssetUserCase: $createAssetUserCase, updateAssetUserCase: $updateAssetUserCase, changeActivedAssetUseCase: $changeActivedAssetUseCase, deleteAssetUseCase: $deleteAssetUseCase)';
   }
 
   @override
@@ -966,6 +983,8 @@ class _$AssetStateImpl implements _AssetState {
                 other.showAssetCardUpdateName == showAssetCardUpdateName) &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
+            (identical(other.isSelected, isSelected) ||
+                other.isSelected == isSelected) &&
             (identical(other.isCheckedAsset, isCheckedAsset) ||
                 other.isCheckedAsset == isCheckedAsset) &&
             (identical(other.selectedAssetCardIndex, selectedAssetCardIndex) ||
@@ -997,8 +1016,7 @@ class _$AssetStateImpl implements _AssetState {
                 other.currencyHints == currencyHints) &&
             (identical(other.selectedAssetId, selectedAssetId) ||
                 other.selectedAssetId == selectedAssetId) &&
-            const DeepCollectionEquality()
-                .equals(other._assetIdList, _assetIdList) &&
+            const DeepCollectionEquality().equals(other._assetIdList, _assetIdList) &&
             (identical(other.getAssetListUseCase, getAssetListUseCase) || other.getAssetListUseCase == getAssetListUseCase) &&
             (identical(other.getAssetUseCase, getAssetUseCase) || other.getAssetUseCase == getAssetUseCase) &&
             (identical(other.createAssetUserCase, createAssetUserCase) || other.createAssetUserCase == createAssetUserCase) &&
@@ -1033,6 +1051,7 @@ class _$AssetStateImpl implements _AssetState {
         showAssetCardUpdate,
         showAssetCardUpdateName,
         isLoading,
+        isSelected,
         isCheckedAsset,
         selectedAssetCardIndex,
         const DeepCollectionEquality().hash(_firstColorList),
@@ -1090,6 +1109,7 @@ abstract class _AssetState implements AssetState {
       final bool showAssetCardUpdate,
       final bool showAssetCardUpdateName,
       final bool isLoading,
+      final bool isSelected,
       required final bool isCheckedAsset,
       final int selectedAssetCardIndex,
       required final List<Color> firstColorList,
@@ -1160,6 +1180,8 @@ abstract class _AssetState implements AssetState {
   bool get showAssetCardUpdateName;
   @override
   bool get isLoading;
+  @override
+  bool get isSelected;
   @override
   bool get isCheckedAsset;
   @override

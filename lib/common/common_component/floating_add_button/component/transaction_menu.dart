@@ -20,6 +20,7 @@ class TransactionMenu extends ConsumerWidget {
   final TextEditingController amountEditController;
   final TextEditingController assetAmountController;
   final TextEditingController dateEditController;
+  final TextEditingController timeEditController;
 
   const TransactionMenu({
     super.key,
@@ -27,6 +28,7 @@ class TransactionMenu extends ConsumerWidget {
     required this.amountEditController,
     required this.assetAmountController,
     required this.dateEditController,
+    required this.timeEditController,
     required this.duration,
     required this.isClassified,
   });
@@ -40,9 +42,10 @@ class TransactionMenu extends ConsumerWidget {
     final transacProvider = ref.read(transactionStateProvider);
     final categoryProvider = ref.watch(categoryStateProvider);
     final floatingAddProvider = ref.watch(floatingButtonStateProvider);
-    final leftSideWidth = 150.w;
-    const double rightSideRightPadding = 50.0;
+    final leftSideWidth = MediaQuery.of(context).size.width * .40;
+    const double rightSideRightPadding = 40.0;
     dateEditController.text = floatingAddProvider.selectedDate;
+    timeEditController.text = floatingAddProvider.selectedTime;
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.end,
@@ -67,109 +70,111 @@ class TransactionMenu extends ConsumerWidget {
                     borderRadius: BorderRadius.circular(15),
                     color: UiConfig.whiteColor,
                   ),
-                  child: TextField(
-                    readOnly: true,
-                    controller: dateEditController,
-                    textAlign: TextAlign.right,
-                    inputFormatters: <TextInputFormatter>[
-                      ThousandCommaInputFormatter(),
-                    ],
-                    textAlignVertical: TextAlignVertical.bottom,
-                    style: const TextStyle(color: Colors.black),
-                    decoration: InputDecoration(
-                      contentPadding: const EdgeInsets.only(bottom: 13.0),
-                      prefixIcon: Container(
-                          decoration: const BoxDecoration(
-                            border: Border(right: BorderSide(color: Colors.black38)),
-                          ),
-                          child: SizedBox(
-                            width: leftSideWidth,
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 16),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  const Text('날짜'),
-                                  SizedBox(width: 8.w),
-                                  InkWell(
-                                    onTap: () => DatePickDialogWidget.showCustomDialog(
-                                        context: context, title: '', action: (DateTime selectedDate) => ref.read(floatingButtonStateProvider.notifier).selectedDate(selectedDate)),
-                                    child: const HugeIcon(
-                                      icon: HugeIcons.strokeRoundedCalendar01,
-                                      color: UiConfig.black,
-                                    ),
-                                  ),
-                                ],
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      SizedBox(
+                        width: leftSideWidth,
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 16),
+                          child: Container(
+                            decoration: const BoxDecoration(
+                              border: Border(right: BorderSide(color: Colors.black38)),
+                            ),
+                            child: TextField(
+                              readOnly: true,
+                              controller: dateEditController,
+                              // textAlign: TextAlign.right,
+                              inputFormatters: <TextInputFormatter>[
+                                ThousandCommaInputFormatter(),
+                              ],
+                              textAlignVertical: TextAlignVertical.bottom,
+                              style: const TextStyle(color: Colors.black),
+                              decoration: InputDecoration(
+                                contentPadding: const EdgeInsets.only(bottom: 13.0),
+                                border: InputBorder.none,
+                                hintText: '날짜를 선택하세요.',
+                                hintStyle: TextStyle(
+                                  color: Colors.grey[400],
+                                  fontSize: MediaQuery.of(context).size.width * 0.038,
+                                ),
                               ),
                             ),
-                          )),
-                      border: InputBorder.none,
-                      hintText: '날짜를 선택하세요.',
-                      hintStyle: TextStyle(
-                        color: Colors.grey[400],
-                        fontSize: MediaQuery.of(context).size.width * 0.038,
+                          ),
+                        ),
                       ),
-                    ),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          child: TextField(
+                            readOnly: true,
+                            controller: timeEditController,
+                            // textAlign: TextAlign.right,
+                            inputFormatters: <TextInputFormatter>[
+                              ThousandCommaInputFormatter(),
+                            ],
+                            textAlignVertical: TextAlignVertical.bottom,
+                            style: const TextStyle(color: Colors.black),
+                            decoration: InputDecoration(
+                              contentPadding: const EdgeInsets.only(bottom: 13.0),
+                              border: InputBorder.none,
+                              hintText: '시간을 선택하세요.',
+                              hintStyle: TextStyle(
+                                color: Colors.grey[400],
+                                fontSize: MediaQuery.of(context).size.width * 0.038,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () => DatePickDialogWidget.showCustomDialog(
+                            context: context, title: '', action: (DateTime selectedDate) => ref.read(floatingButtonStateProvider.notifier).selectedDate(selectedDate)),
+                        child: const HugeIcon(
+                          icon: HugeIcons.strokeRoundedCalendar01,
+                          color: UiConfig.black,
+                        ),
+                      )
+                    ],
                   ),
                 ),
                 const SizedBox(height: 8),
                 Container(
                   width: MediaQuery.of(context).size.width,
-                  padding: const EdgeInsets.only(right: rightSideRightPadding),
+                  // padding: const EdgeInsets.only(right: rightSideRightPadding),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
                     color: UiConfig.whiteColor,
                   ),
-                  child: TextField(
-                    readOnly: true,
-                    controller: assetAmountController,
-                    textAlign: TextAlign.right,
-                    inputFormatters: <TextInputFormatter>[
-                      ThousandCommaInputFormatter(),
-                    ],
-                    textAlignVertical: TextAlignVertical.bottom,
-                    style: const TextStyle(color: Colors.black),
-                    decoration: InputDecoration(
-                      contentPadding: const EdgeInsets.only(bottom: 13.0),
-                      prefixIcon: Container(
-                          decoration: const BoxDecoration(
-                            border: Border(right: BorderSide(color: Colors.black38)),
-                          ),
-                          child: SizedBox(
-                            width: leftSideWidth,
-                            child: Row(
-                              children: [
-                                CustomDropdownButton<Asset>(
-                                  items: assetProvider.allAssetList
-                                      .map<DropdownMenuItem<Asset>>((asset) => DropdownMenuItem<Asset>(
-                                            value: asset,
-                                            child: FittedBox(
-                                              fit: BoxFit.contain,
-                                              child: Text(
-                                                asset.assetName,
-                                                style: const TextStyle(
-                                                  overflow: TextOverflow.ellipsis,
-                                                ),
-                                              ),
-                                            ),
-                                          ))
-                                      .toList(),
-                                  hints: assetProvider.assetHints, // 힌트 텍스트
-                                  action: (asset) {
-                                    ref.read(assetStateProvier.notifier).getAsset(asset.assetId);
-                                    assetAmountController.text = '잔액  ${assetProvider.totalAmount.toWon().toString()}';
-                                  }, // Asset 선택 시 호출되는 액션
+                  child: CustomDropdownButton<Asset>(
+                    items: assetProvider.allAssetList
+                        .map<DropdownMenuItem<Asset>>((asset) => DropdownMenuItem<Asset>(
+                              value: asset,
+                              child: Center(
+                                child: FittedBox(
+                                  fit: BoxFit.contain,
+                                  child: Text(
+                                    asset.assetName,
+                                    style: const TextStyle(
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
                                 ),
-                              ],
-                            ),
-                          )),
-                      border: InputBorder.none,
-                      hintText: '자산을 선택하세요.',
-                      hintStyle: TextStyle(
-                        color: Colors.grey[400],
-                        fontSize: MediaQuery.of(context).size.width * 0.038,
-                      ),
+                              ),
+                            ))
+                        .toList(),
+                    hints: assetProvider.assetHints, // 힌트 텍스트
+                    hintsStyle: TextStyle(
+                      color: assetProvider.isSelected ? Colors.black : Colors.grey[400],
+                      fontSize: MediaQuery.of(context).size.width * 0.038,
                     ),
+                    action: (asset) {
+                      ref.read(assetStateProvier.notifier).getAsset(asset.assetId);
+                      assetAmountController.text = '잔액  ${assetProvider.totalAmount.toWon().toString()}';
+                    }, // Asset 선택 시 호출되는 액션
+                    width: 280,
+                    textWidth: 252,
+                    textAlign: TextAlign.center,
                   ),
                 ),
                 const SizedBox(height: 8),
@@ -204,20 +209,25 @@ class TransactionMenu extends ConsumerWidget {
                                     ))
                                 .toList(),
                             hints: categoryProvider.categoryHints, // 힌트 텍스트
+                            hintsStyle: TextStyle(
+                              fontSize: MediaQuery.of(context).size.width * 0.038,
+                              color: categoryProvider.categoryIsSelected ? Colors.black : Colors.grey[400],
+                            ),
                             action: (category) {
                               ref.read(categoryStateProvider.notifier).selectCategory(selectCategory: category);
+                              ref.read(categoryStateProvider.notifier).getSubTransactionCategories(category.categoryId);
                             }, // Asset 선택 시 호출되는 액션
                           ),
                         ),
                       ),
                       CustomDropdownButton<TransactionCategory>(
-                        items: categoryProvider.categoryList
-                            .map<DropdownMenuItem<TransactionCategory>>((category) => DropdownMenuItem<TransactionCategory>(
-                                  value: category,
+                        items: categoryProvider.subCategoryList
+                            .map<DropdownMenuItem<TransactionCategory>>((subCategory) => DropdownMenuItem<TransactionCategory>(
+                                  value: subCategory,
                                   child: FittedBox(
                                     fit: BoxFit.contain,
                                     child: Text(
-                                      category.categoryName,
+                                      subCategory.categoryName,
                                       style: const TextStyle(
                                         overflow: TextOverflow.ellipsis,
                                       ),
@@ -225,9 +235,13 @@ class TransactionMenu extends ConsumerWidget {
                                   ),
                                 ))
                             .toList(),
-                        hints: categoryProvider.categoryHints, // 힌트 텍스트
-                        action: (category) {
-                          ref.read(categoryStateProvider.notifier).selectCategory(selectCategory: category);
+                        hints: categoryProvider.subCategoryHints, // 힌트 텍스트
+                        hintsStyle: TextStyle(
+                          color: categoryProvider.subCategoryIsSelected ? Colors.black : Colors.grey[400],
+                          fontSize: MediaQuery.of(context).size.width * 0.038,
+                        ),
+                        action: (subCategory) {
+                          ref.read(categoryStateProvider.notifier).selectSubCategory(selectCategory: subCategory);
                         }, // Asset 선택 시 호출되는 액션
                       )
                     ],
@@ -244,7 +258,7 @@ class TransactionMenu extends ConsumerWidget {
                   child: Row(
                     children: [
                       SizedBox(
-                        width: 150.w,
+                        width: leftSideWidth,
                         child: Container(
                           decoration: const BoxDecoration(
                             border: Border(right: BorderSide(color: Colors.black38)),
@@ -330,7 +344,7 @@ class TransactionMenu extends ConsumerWidget {
                             userId: 0,
                           ),
                           assetId: assetProvider.selectedAssetId,
-                          userId: userStateValue.user!.uid);
+                          userId: userStateValue.user!.userId);
                     }
                     // 입력을 완료하면 키보드를 숨김
                     SystemChannels.textInput.invokeMethod('TextInput.hide');

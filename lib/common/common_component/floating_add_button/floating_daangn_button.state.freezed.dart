@@ -22,6 +22,7 @@ mixin _$FloatingButtonState {
   bool get expenseSelected => throw _privateConstructorUsedError;
   bool get incomeSelected => throw _privateConstructorUsedError;
   String get selectedDate => throw _privateConstructorUsedError;
+  String get selectedTime => throw _privateConstructorUsedError;
   DateTime get createAt => throw _privateConstructorUsedError;
   AssetType? get assetType => throw _privateConstructorUsedError;
 
@@ -43,6 +44,7 @@ abstract class $FloatingButtonStateCopyWith<$Res> {
       bool expenseSelected,
       bool incomeSelected,
       String selectedDate,
+      String selectedTime,
       DateTime createAt,
       AssetType? assetType});
 }
@@ -66,6 +68,7 @@ class _$FloatingButtonStateCopyWithImpl<$Res, $Val extends FloatingButtonState>
     Object? expenseSelected = null,
     Object? incomeSelected = null,
     Object? selectedDate = null,
+    Object? selectedTime = null,
     Object? createAt = null,
     Object? assetType = freezed,
   }) {
@@ -94,6 +97,10 @@ class _$FloatingButtonStateCopyWithImpl<$Res, $Val extends FloatingButtonState>
           ? _value.selectedDate
           : selectedDate // ignore: cast_nullable_to_non_nullable
               as String,
+      selectedTime: null == selectedTime
+          ? _value.selectedTime
+          : selectedTime // ignore: cast_nullable_to_non_nullable
+              as String,
       createAt: null == createAt
           ? _value.createAt
           : createAt // ignore: cast_nullable_to_non_nullable
@@ -121,6 +128,7 @@ abstract class _$$FloatingButtonStateImplCopyWith<$Res>
       bool expenseSelected,
       bool incomeSelected,
       String selectedDate,
+      String selectedTime,
       DateTime createAt,
       AssetType? assetType});
 }
@@ -142,6 +150,7 @@ class __$$FloatingButtonStateImplCopyWithImpl<$Res>
     Object? expenseSelected = null,
     Object? incomeSelected = null,
     Object? selectedDate = null,
+    Object? selectedTime = null,
     Object? createAt = null,
     Object? assetType = freezed,
   }) {
@@ -170,6 +179,10 @@ class __$$FloatingButtonStateImplCopyWithImpl<$Res>
           ? _value.selectedDate
           : selectedDate // ignore: cast_nullable_to_non_nullable
               as String,
+      selectedTime: null == selectedTime
+          ? _value.selectedTime
+          : selectedTime // ignore: cast_nullable_to_non_nullable
+              as String,
       createAt: null == createAt
           ? _value.createAt
           : createAt // ignore: cast_nullable_to_non_nullable
@@ -192,6 +205,7 @@ class _$FloatingButtonStateImpl implements _FloatingButtonState {
       this.expenseSelected = false,
       this.incomeSelected = false,
       required this.selectedDate,
+      required this.selectedTime,
       required this.createAt,
       this.assetType});
 
@@ -213,13 +227,15 @@ class _$FloatingButtonStateImpl implements _FloatingButtonState {
   @override
   final String selectedDate;
   @override
+  final String selectedTime;
+  @override
   final DateTime createAt;
   @override
   final AssetType? assetType;
 
   @override
   String toString() {
-    return 'FloatingButtonState(isExpanded: $isExpanded, isSmall: $isSmall, isClassified: $isClassified, expenseSelected: $expenseSelected, incomeSelected: $incomeSelected, selectedDate: $selectedDate, createAt: $createAt, assetType: $assetType)';
+    return 'FloatingButtonState(isExpanded: $isExpanded, isSmall: $isSmall, isClassified: $isClassified, expenseSelected: $expenseSelected, incomeSelected: $incomeSelected, selectedDate: $selectedDate, selectedTime: $selectedTime, createAt: $createAt, assetType: $assetType)';
   }
 
   @override
@@ -238,6 +254,8 @@ class _$FloatingButtonStateImpl implements _FloatingButtonState {
                 other.incomeSelected == incomeSelected) &&
             (identical(other.selectedDate, selectedDate) ||
                 other.selectedDate == selectedDate) &&
+            (identical(other.selectedTime, selectedTime) ||
+                other.selectedTime == selectedTime) &&
             (identical(other.createAt, createAt) ||
                 other.createAt == createAt) &&
             (identical(other.assetType, assetType) ||
@@ -253,6 +271,7 @@ class _$FloatingButtonStateImpl implements _FloatingButtonState {
       expenseSelected,
       incomeSelected,
       selectedDate,
+      selectedTime,
       createAt,
       assetType);
 
@@ -272,6 +291,7 @@ abstract class _FloatingButtonState implements FloatingButtonState {
       final bool expenseSelected,
       final bool incomeSelected,
       required final String selectedDate,
+      required final String selectedTime,
       required final DateTime createAt,
       final AssetType? assetType}) = _$FloatingButtonStateImpl;
 
@@ -287,6 +307,8 @@ abstract class _FloatingButtonState implements FloatingButtonState {
   bool get incomeSelected;
   @override
   String get selectedDate;
+  @override
+  String get selectedTime;
   @override
   DateTime get createAt;
   @override

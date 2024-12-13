@@ -25,6 +25,8 @@ mixin _$CategoryState {
   bool get showCategoryNameFromServer => throw _privateConstructorUsedError;
   bool get showExpenseCategoryListItemNew => throw _privateConstructorUsedError;
   bool get showIncomeCategoryListItemNew => throw _privateConstructorUsedError;
+  bool get categoryIsSelected => throw _privateConstructorUsedError;
+  bool get subCategoryIsSelected => throw _privateConstructorUsedError;
   String get selectedIconName => throw _privateConstructorUsedError;
   String get updatedIconName => throw _privateConstructorUsedError;
   String get categoryName => throw _privateConstructorUsedError;
@@ -36,6 +38,7 @@ mixin _$CategoryState {
       throw _privateConstructorUsedError;
   TransactionCategory? get category => throw _privateConstructorUsedError;
   String get categoryHints => throw _privateConstructorUsedError;
+  String get subCategoryHints => throw _privateConstructorUsedError;
   int get userId => throw _privateConstructorUsedError;
   IconData get selectedCreateIcon => throw _privateConstructorUsedError;
   IconData? get selectedUpdateIcon => throw _privateConstructorUsedError;
@@ -71,6 +74,8 @@ abstract class $CategoryStateCopyWith<$Res> {
       bool showCategoryNameFromServer,
       bool showExpenseCategoryListItemNew,
       bool showIncomeCategoryListItemNew,
+      bool categoryIsSelected,
+      bool subCategoryIsSelected,
       String selectedIconName,
       String updatedIconName,
       String categoryName,
@@ -80,6 +85,7 @@ abstract class $CategoryStateCopyWith<$Res> {
       List<TransactionCategory> subCategoryList,
       TransactionCategory? category,
       String categoryHints,
+      String subCategoryHints,
       int userId,
       IconData selectedCreateIcon,
       IconData? selectedUpdateIcon,
@@ -114,6 +120,8 @@ class _$CategoryStateCopyWithImpl<$Res, $Val extends CategoryState>
     Object? showCategoryNameFromServer = null,
     Object? showExpenseCategoryListItemNew = null,
     Object? showIncomeCategoryListItemNew = null,
+    Object? categoryIsSelected = null,
+    Object? subCategoryIsSelected = null,
     Object? selectedIconName = null,
     Object? updatedIconName = null,
     Object? categoryName = null,
@@ -123,6 +131,7 @@ class _$CategoryStateCopyWithImpl<$Res, $Val extends CategoryState>
     Object? subCategoryList = null,
     Object? category = freezed,
     Object? categoryHints = null,
+    Object? subCategoryHints = null,
     Object? userId = null,
     Object? selectedCreateIcon = null,
     Object? selectedUpdateIcon = freezed,
@@ -169,6 +178,14 @@ class _$CategoryStateCopyWithImpl<$Res, $Val extends CategoryState>
           ? _value.showIncomeCategoryListItemNew
           : showIncomeCategoryListItemNew // ignore: cast_nullable_to_non_nullable
               as bool,
+      categoryIsSelected: null == categoryIsSelected
+          ? _value.categoryIsSelected
+          : categoryIsSelected // ignore: cast_nullable_to_non_nullable
+              as bool,
+      subCategoryIsSelected: null == subCategoryIsSelected
+          ? _value.subCategoryIsSelected
+          : subCategoryIsSelected // ignore: cast_nullable_to_non_nullable
+              as bool,
       selectedIconName: null == selectedIconName
           ? _value.selectedIconName
           : selectedIconName // ignore: cast_nullable_to_non_nullable
@@ -204,6 +221,10 @@ class _$CategoryStateCopyWithImpl<$Res, $Val extends CategoryState>
       categoryHints: null == categoryHints
           ? _value.categoryHints
           : categoryHints // ignore: cast_nullable_to_non_nullable
+              as String,
+      subCategoryHints: null == subCategoryHints
+          ? _value.subCategoryHints
+          : subCategoryHints // ignore: cast_nullable_to_non_nullable
               as String,
       userId: null == userId
           ? _value.userId
@@ -272,6 +293,8 @@ abstract class _$$CategoryStateImplCopyWith<$Res>
       bool showCategoryNameFromServer,
       bool showExpenseCategoryListItemNew,
       bool showIncomeCategoryListItemNew,
+      bool categoryIsSelected,
+      bool subCategoryIsSelected,
       String selectedIconName,
       String updatedIconName,
       String categoryName,
@@ -281,6 +304,7 @@ abstract class _$$CategoryStateImplCopyWith<$Res>
       List<TransactionCategory> subCategoryList,
       TransactionCategory? category,
       String categoryHints,
+      String subCategoryHints,
       int userId,
       IconData selectedCreateIcon,
       IconData? selectedUpdateIcon,
@@ -314,6 +338,8 @@ class __$$CategoryStateImplCopyWithImpl<$Res>
     Object? showCategoryNameFromServer = null,
     Object? showExpenseCategoryListItemNew = null,
     Object? showIncomeCategoryListItemNew = null,
+    Object? categoryIsSelected = null,
+    Object? subCategoryIsSelected = null,
     Object? selectedIconName = null,
     Object? updatedIconName = null,
     Object? categoryName = null,
@@ -323,6 +349,7 @@ class __$$CategoryStateImplCopyWithImpl<$Res>
     Object? subCategoryList = null,
     Object? category = freezed,
     Object? categoryHints = null,
+    Object? subCategoryHints = null,
     Object? userId = null,
     Object? selectedCreateIcon = null,
     Object? selectedUpdateIcon = freezed,
@@ -369,6 +396,14 @@ class __$$CategoryStateImplCopyWithImpl<$Res>
           ? _value.showIncomeCategoryListItemNew
           : showIncomeCategoryListItemNew // ignore: cast_nullable_to_non_nullable
               as bool,
+      categoryIsSelected: null == categoryIsSelected
+          ? _value.categoryIsSelected
+          : categoryIsSelected // ignore: cast_nullable_to_non_nullable
+              as bool,
+      subCategoryIsSelected: null == subCategoryIsSelected
+          ? _value.subCategoryIsSelected
+          : subCategoryIsSelected // ignore: cast_nullable_to_non_nullable
+              as bool,
       selectedIconName: null == selectedIconName
           ? _value.selectedIconName
           : selectedIconName // ignore: cast_nullable_to_non_nullable
@@ -404,6 +439,10 @@ class __$$CategoryStateImplCopyWithImpl<$Res>
       categoryHints: null == categoryHints
           ? _value.categoryHints
           : categoryHints // ignore: cast_nullable_to_non_nullable
+              as String,
+      subCategoryHints: null == subCategoryHints
+          ? _value.subCategoryHints
+          : subCategoryHints // ignore: cast_nullable_to_non_nullable
               as String,
       userId: null == userId
           ? _value.userId
@@ -455,6 +494,8 @@ class _$CategoryStateImpl implements _CategoryState {
       this.showCategoryNameFromServer = false,
       this.showExpenseCategoryListItemNew = false,
       this.showIncomeCategoryListItemNew = false,
+      this.categoryIsSelected = false,
+      this.subCategoryIsSelected = false,
       this.selectedIconName = '',
       this.updatedIconName = '',
       this.categoryName = '',
@@ -464,6 +505,7 @@ class _$CategoryStateImpl implements _CategoryState {
       final List<TransactionCategory> subCategoryList = const [],
       this.category,
       required this.categoryHints,
+      required this.subCategoryHints,
       required this.userId,
       required this.selectedCreateIcon,
       this.selectedUpdateIcon,
@@ -504,6 +546,12 @@ class _$CategoryStateImpl implements _CategoryState {
   final bool showIncomeCategoryListItemNew;
   @override
   @JsonKey()
+  final bool categoryIsSelected;
+  @override
+  @JsonKey()
+  final bool subCategoryIsSelected;
+  @override
+  @JsonKey()
   final String selectedIconName;
   @override
   @JsonKey()
@@ -540,6 +588,8 @@ class _$CategoryStateImpl implements _CategoryState {
   @override
   final String categoryHints;
   @override
+  final String subCategoryHints;
+  @override
   final int userId;
   @override
   final IconData selectedCreateIcon;
@@ -558,7 +608,7 @@ class _$CategoryStateImpl implements _CategoryState {
 
   @override
   String toString() {
-    return 'CategoryState(isVisibleButton: $isVisibleButton, isExpanded: $isExpanded, showExpenseCategoryCardNew: $showExpenseCategoryCardNew, showIncomeCategoryCardNew: $showIncomeCategoryCardNew, showCategoryCardUpdate: $showCategoryCardUpdate, showSubCategoryCardUpdate: $showSubCategoryCardUpdate, showCategoryNameFromServer: $showCategoryNameFromServer, showExpenseCategoryListItemNew: $showExpenseCategoryListItemNew, showIncomeCategoryListItemNew: $showIncomeCategoryListItemNew, selectedIconName: $selectedIconName, updatedIconName: $updatedIconName, categoryName: $categoryName, selectedIconIdDelete: $selectedIconIdDelete, assetType: $assetType, categoryList: $categoryList, subCategoryList: $subCategoryList, category: $category, categoryHints: $categoryHints, userId: $userId, selectedCreateIcon: $selectedCreateIcon, selectedUpdateIcon: $selectedUpdateIcon, createTransactionCategoryUseCase: $createTransactionCategoryUseCase, getTransactionCategoryListUseCase: $getTransactionCategoryListUseCase, getTransactionCategoryUseCase: $getTransactionCategoryUseCase, updateTransactionCategoryUseCase: $updateTransactionCategoryUseCase, deleteTransactionCategoryUseCase: $deleteTransactionCategoryUseCase)';
+    return 'CategoryState(isVisibleButton: $isVisibleButton, isExpanded: $isExpanded, showExpenseCategoryCardNew: $showExpenseCategoryCardNew, showIncomeCategoryCardNew: $showIncomeCategoryCardNew, showCategoryCardUpdate: $showCategoryCardUpdate, showSubCategoryCardUpdate: $showSubCategoryCardUpdate, showCategoryNameFromServer: $showCategoryNameFromServer, showExpenseCategoryListItemNew: $showExpenseCategoryListItemNew, showIncomeCategoryListItemNew: $showIncomeCategoryListItemNew, categoryIsSelected: $categoryIsSelected, subCategoryIsSelected: $subCategoryIsSelected, selectedIconName: $selectedIconName, updatedIconName: $updatedIconName, categoryName: $categoryName, selectedIconIdDelete: $selectedIconIdDelete, assetType: $assetType, categoryList: $categoryList, subCategoryList: $subCategoryList, category: $category, categoryHints: $categoryHints, subCategoryHints: $subCategoryHints, userId: $userId, selectedCreateIcon: $selectedCreateIcon, selectedUpdateIcon: $selectedUpdateIcon, createTransactionCategoryUseCase: $createTransactionCategoryUseCase, getTransactionCategoryListUseCase: $getTransactionCategoryListUseCase, getTransactionCategoryUseCase: $getTransactionCategoryUseCase, updateTransactionCategoryUseCase: $updateTransactionCategoryUseCase, deleteTransactionCategoryUseCase: $deleteTransactionCategoryUseCase)';
   }
 
   @override
@@ -588,6 +638,10 @@ class _$CategoryStateImpl implements _CategoryState {
             (identical(other.showIncomeCategoryListItemNew, showIncomeCategoryListItemNew) ||
                 other.showIncomeCategoryListItemNew ==
                     showIncomeCategoryListItemNew) &&
+            (identical(other.categoryIsSelected, categoryIsSelected) ||
+                other.categoryIsSelected == categoryIsSelected) &&
+            (identical(other.subCategoryIsSelected, subCategoryIsSelected) ||
+                other.subCategoryIsSelected == subCategoryIsSelected) &&
             (identical(other.selectedIconName, selectedIconName) ||
                 other.selectedIconName == selectedIconName) &&
             (identical(other.updatedIconName, updatedIconName) ||
@@ -606,11 +660,10 @@ class _$CategoryStateImpl implements _CategoryState {
                 other.category == category) &&
             (identical(other.categoryHints, categoryHints) ||
                 other.categoryHints == categoryHints) &&
+            (identical(other.subCategoryHints, subCategoryHints) || other.subCategoryHints == subCategoryHints) &&
             (identical(other.userId, userId) || other.userId == userId) &&
-            (identical(other.selectedCreateIcon, selectedCreateIcon) ||
-                other.selectedCreateIcon == selectedCreateIcon) &&
-            (identical(other.selectedUpdateIcon, selectedUpdateIcon) ||
-                other.selectedUpdateIcon == selectedUpdateIcon) &&
+            (identical(other.selectedCreateIcon, selectedCreateIcon) || other.selectedCreateIcon == selectedCreateIcon) &&
+            (identical(other.selectedUpdateIcon, selectedUpdateIcon) || other.selectedUpdateIcon == selectedUpdateIcon) &&
             (identical(other.createTransactionCategoryUseCase, createTransactionCategoryUseCase) || other.createTransactionCategoryUseCase == createTransactionCategoryUseCase) &&
             (identical(other.getTransactionCategoryListUseCase, getTransactionCategoryListUseCase) || other.getTransactionCategoryListUseCase == getTransactionCategoryListUseCase) &&
             (identical(other.getTransactionCategoryUseCase, getTransactionCategoryUseCase) || other.getTransactionCategoryUseCase == getTransactionCategoryUseCase) &&
@@ -630,6 +683,8 @@ class _$CategoryStateImpl implements _CategoryState {
         showCategoryNameFromServer,
         showExpenseCategoryListItemNew,
         showIncomeCategoryListItemNew,
+        categoryIsSelected,
+        subCategoryIsSelected,
         selectedIconName,
         updatedIconName,
         categoryName,
@@ -639,6 +694,7 @@ class _$CategoryStateImpl implements _CategoryState {
         const DeepCollectionEquality().hash(_subCategoryList),
         category,
         categoryHints,
+        subCategoryHints,
         userId,
         selectedCreateIcon,
         selectedUpdateIcon,
@@ -667,6 +723,8 @@ abstract class _CategoryState implements CategoryState {
       final bool showCategoryNameFromServer,
       final bool showExpenseCategoryListItemNew,
       final bool showIncomeCategoryListItemNew,
+      final bool categoryIsSelected,
+      final bool subCategoryIsSelected,
       final String selectedIconName,
       final String updatedIconName,
       final String categoryName,
@@ -676,6 +734,7 @@ abstract class _CategoryState implements CategoryState {
       final List<TransactionCategory> subCategoryList,
       final TransactionCategory? category,
       required final String categoryHints,
+      required final String subCategoryHints,
       required final int userId,
       required final IconData selectedCreateIcon,
       final IconData? selectedUpdateIcon,
@@ -709,6 +768,10 @@ abstract class _CategoryState implements CategoryState {
   @override
   bool get showIncomeCategoryListItemNew;
   @override
+  bool get categoryIsSelected;
+  @override
+  bool get subCategoryIsSelected;
+  @override
   String get selectedIconName;
   @override
   String get updatedIconName;
@@ -726,6 +789,8 @@ abstract class _CategoryState implements CategoryState {
   TransactionCategory? get category;
   @override
   String get categoryHints;
+  @override
+  String get subCategoryHints;
   @override
   int get userId;
   @override

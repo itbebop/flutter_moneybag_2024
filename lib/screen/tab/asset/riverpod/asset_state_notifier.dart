@@ -21,16 +21,6 @@ final assetStateProvier = StateNotifierProvider<AssetStateNotifier, AssetState>(
     userId = userState.user!.userId;
     firstColorList = userState.userColorList.map((userColor) => hexStringToColor(userColor.hexaCode)).toList();
     secondColorList = userState.userColorList.map((userColor) => hexStringToColor(userColor.hexaCode)).toList();
-    // if (userState.user!.firstColorListSave.isEmpty) {
-    //   firstColorList = initColorList;
-    // } else {
-    //   firstColorList = stringToColorList(userState.user!.firstColorListSave);
-    // }
-    // if (userState.user!.firstColorListSave.isEmpty) {
-    //   secondColorList = initColorList;
-    // } else {
-    //   secondColorList = stringToColorList(userState.user!.secondColorListSave);
-    // }
   }
 
   return AssetStateNotifier(AssetState(
@@ -42,7 +32,7 @@ final assetStateProvier = StateNotifierProvider<AssetStateNotifier, AssetState>(
     secondColorListSave: [],
     assetIdList: assetIdList,
     getAssetUseCase: getIt(),
-    assetHints: '자산 선택',
+    assetHints: '자산을 선택하세요.',
     currencyHints: '선택',
     selectedAssetId: 0,
     assetName: '',
@@ -130,6 +120,7 @@ class AssetStateNotifier extends StateNotifier<AssetState> {
       currencyHints: assetCurrency,
       firstColor: hexStringToColor(asset.firstColor),
       secondColor: hexStringToColor(asset.secondColor),
+      isSelected: true,
     );
   }
 
@@ -152,8 +143,9 @@ class AssetStateNotifier extends StateNotifier<AssetState> {
 
   void quitWrite() {
     state = state.copyWith(
-      assetHints: '자산 선택',
+      assetHints: '자산을 선택하세요',
       selectedAssetId: 0,
+      isSelected: false,
     );
   }
 

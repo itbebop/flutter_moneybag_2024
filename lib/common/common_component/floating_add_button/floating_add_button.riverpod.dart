@@ -8,6 +8,7 @@ final floatingButtonStateProvider = StateNotifierProvider<FloatingButtonStateNot
   (ref) => FloatingButtonStateNotifier(
     FloatingButtonState(
       selectedDate: datePickerFormatKo.format(DateTime.now()),
+      selectedTime: detailDateFormat.format(DateTime.now()),
       createAt: DateTime.now(),
     ),
   ),
@@ -38,6 +39,7 @@ class FloatingButtonStateNotifier extends StateNotifier<FloatingButtonState> {
     if (state.expenseSelected || state.incomeSelected) {
       state = state.copyWith(expenseSelected: false, incomeSelected: false);
     }
+    getCurrentTime();
   }
 
   void changeButtonSize(bool isSmall) {
@@ -87,9 +89,18 @@ class FloatingButtonStateNotifier extends StateNotifier<FloatingButtonState> {
 
   void selectedDate(DateTime selectedDate) {
     final formattedDate = datePickerFormatKo.format(selectedDate);
+    final formattedTime = detailDateFormat.format(selectedDate);
     state = state.copyWith(
       selectedDate: formattedDate,
       createAt: selectedDate,
+      selectedTime: formattedTime,
+    );
+  }
+
+  void getCurrentTime() {
+    state = state.copyWith(
+      selectedDate: datePickerFormatKo.format(DateTime.now()),
+      selectedTime: detailDateFormat.format(DateTime.now()),
     );
   }
 }

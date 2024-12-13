@@ -82,12 +82,6 @@ class AssetDataSourceImpl implements AssetDataSource {
         options: options,
       );
 
-      final jsonData = response.data['data'];
-      // jsonData가 null일 경우 빈 리스트 반환
-      if (jsonData == null) {
-        return [];
-      }
-
       final Map<String, dynamic> responseData = response.data['data'];
       final List<dynamic> assetJson = responseData['rows'];
       final List<Asset> assetList = assetJson.map((data) => Asset.fromJson(data)).toList();

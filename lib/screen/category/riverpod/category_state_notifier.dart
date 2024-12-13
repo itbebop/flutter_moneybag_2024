@@ -27,6 +27,7 @@ final categoryStateProvider = StateNotifierProvider<CategoryStateNotifier, Categ
         updateTransactionCategoryUseCase: getIt(),
         deleteTransactionCategoryUseCase: getIt(),
         categoryHints: '카테고리',
+        subCategoryHints: '카테고리',
       ),
     );
   },
@@ -141,6 +142,16 @@ class CategoryStateNotifier extends StateNotifier<CategoryState> {
     state = state.copyWith(
       categoryHints: selectCategory.categoryName,
       category: selectCategory,
+      categoryIsSelected: true,
+      subCategoryHints: '카테고리',
+      subCategoryIsSelected: false,
+    );
+  }
+
+  void selectSubCategory({required TransactionCategory selectCategory}) {
+    state = state.copyWith(
+      subCategoryHints: selectCategory.categoryName,
+      subCategoryIsSelected: true,
     );
   }
 
@@ -148,6 +159,9 @@ class CategoryStateNotifier extends StateNotifier<CategoryState> {
     state = state.copyWith(
       categoryHints: '카테고리',
       category: null,
+      categoryIsSelected: false,
+      subCategoryIsSelected: false,
+      subCategoryHints: '카테고리',
     );
   }
 

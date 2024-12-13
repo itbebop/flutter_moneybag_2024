@@ -42,6 +42,7 @@ class CategoryMenu extends ConsumerWidget {
                 ref.read(floatingButtonStateProvider.notifier).toggleTransactionMenu(assetType);
                 await ref.read(categoryStateProvider.notifier).getTransactionCategoriesByAssetType(assetType);
                 ref.read(floatingButtonStateProvider.notifier).tapCategory(assetType);
+                ref.read(categoryStateProvider.notifier).quitWrite();
               },
               isSelected: ref.read(floatingButtonStateProvider).incomeSelected,
             ),
@@ -56,6 +57,7 @@ class CategoryMenu extends ConsumerWidget {
                 ref.read(floatingButtonStateProvider.notifier).toggleTransactionMenu(assetType);
                 await ref.read(categoryStateProvider.notifier).getTransactionCategoriesByAssetType(assetType);
                 ref.read(floatingButtonStateProvider.notifier).tapCategory(assetType);
+                ref.read(categoryStateProvider.notifier).quitWrite();
               },
               isSelected: ref.read(floatingButtonStateProvider).expenseSelected,
             ),
