@@ -6,7 +6,7 @@ class CreateTransactionUseCase {
 
   CreateTransactionUseCase({required TransactionRepository transactionRepository}) : _transactionRepository = transactionRepository;
 
-  Future<void> execute({required TransactionDetail transactionDetail, required int assetId, required int userId}) async {
-    await _transactionRepository.createTransaction(transaction: transactionDetail, assetId: assetId, userId: userId);
+  Future<void> execute({required TransactionDetail transactionDetail}) async {
+    await _transactionRepository.createTransaction(transaction: transactionDetail);
   }
 }

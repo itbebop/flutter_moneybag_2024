@@ -6,7 +6,7 @@ class GetTransactionListUseCase {
 
   GetTransactionListUseCase({required TransactionRepository transactionRepository}) : _transactionRepository = transactionRepository;
 
-  Future<List<TransactionDetail>> execute({required List<int> assetIdList, required int userId}) async {
-    return await _transactionRepository.getTransactionList(assetIdList: assetIdList, userId: userId);
+  Future<List<TransactionDetail>> execute({required int userId}) async {
+    return await _transactionRepository.getTransactionList(userId: userId);
   }
 }

@@ -9,13 +9,13 @@ class TransactionRepositoryImpl implements TransactionRepository {
 
   @override
   // Constructor
-  Future<void> createTransaction({required TransactionDetail transaction, required int assetId, required int userId}) async {
-    await _transactionDataSource.createTransaction(transaction: transaction, assetId: assetId, userId: userId);
+  Future<void> createTransaction({required TransactionDetail transaction}) async {
+    await _transactionDataSource.createTransaction(transaction: transaction);
   }
 
   @override
-  Future<List<TransactionDetail>> getTransactionList({required List<int> assetIdList, required int userId}) async {
-    return await _transactionDataSource.getTransactionList(assetIdList: assetIdList, userId: userId);
+  Future<List<TransactionDetail>> getTransactionList({required int userId}) async {
+    return await _transactionDataSource.getTransactionList(userId: userId);
   }
 
   @override
