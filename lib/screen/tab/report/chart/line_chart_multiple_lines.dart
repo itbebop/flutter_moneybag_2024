@@ -31,7 +31,7 @@ class LineChartMultipleLinesState extends ConsumerState<LineChartMultipleLines> 
   }
 
   Future<void> _fetchData() async {
-    await ref.read(transactionStateProvider.notifier).selectActivatedTransactionList();
+    await ref.read(transactionStateProvider.notifier).getTransactions();
   }
 
   @override

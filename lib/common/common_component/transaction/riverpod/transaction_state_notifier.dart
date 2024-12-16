@@ -80,6 +80,7 @@ class TransactionStateNotifier extends StateNotifier<TransactionState> {
 
   Future<List<TransactionDetail>> getTransactions() async {
     final transactionList = await state.getTransactionListUseCase.execute(userId: state.userId);
+    state = state.copyWith(activatedTransactionList: transactionList);
     return transactionList;
   }
 
