@@ -12,12 +12,12 @@ class TransactionDetail with _$TransactionDetail {
     required double amount,
     required DateTime createdAt,
     required DateTime updatedAt,
-    required String imgUrl,
+    String? imgUrl,
     required int categoryId,
     required int subCategoryId,
     required int userId,
     required int assetId,
-    required TransactionCategory category,
+    TransactionCategory? category,
   }) = _TransactionDetail;
 
   factory TransactionDetail.fromJson(Map<String, dynamic> json) => _$TransactionDetailFromJson(json);

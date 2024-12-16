@@ -14,13 +14,15 @@ _$TransactionDetailImpl _$$TransactionDetailImplFromJson(
       amount: (json['amount'] as num).toDouble(),
       createdAt: DateTime.parse(json['createdAt'] as String),
       updatedAt: DateTime.parse(json['updatedAt'] as String),
-      imgUrl: json['imgUrl'] as String,
+      imgUrl: json['imgUrl'] as String?,
       categoryId: (json['categoryId'] as num).toInt(),
       subCategoryId: (json['subCategoryId'] as num).toInt(),
       userId: (json['userId'] as num).toInt(),
       assetId: (json['assetId'] as num).toInt(),
-      category: TransactionCategory.fromJson(
-          json['category'] as Map<String, dynamic>),
+      category: json['category'] == null
+          ? null
+          : TransactionCategory.fromJson(
+              json['category'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$TransactionDetailImplToJson(

@@ -25,12 +25,12 @@ mixin _$TransactionDetail {
   double get amount => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
   DateTime get updatedAt => throw _privateConstructorUsedError;
-  String get imgUrl => throw _privateConstructorUsedError;
+  String? get imgUrl => throw _privateConstructorUsedError;
   int get categoryId => throw _privateConstructorUsedError;
   int get subCategoryId => throw _privateConstructorUsedError;
   int get userId => throw _privateConstructorUsedError;
   int get assetId => throw _privateConstructorUsedError;
-  TransactionCategory get category => throw _privateConstructorUsedError;
+  TransactionCategory? get category => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -50,14 +50,14 @@ abstract class $TransactionDetailCopyWith<$Res> {
       double amount,
       DateTime createdAt,
       DateTime updatedAt,
-      String imgUrl,
+      String? imgUrl,
       int categoryId,
       int subCategoryId,
       int userId,
       int assetId,
-      TransactionCategory category});
+      TransactionCategory? category});
 
-  $TransactionCategoryCopyWith<$Res> get category;
+  $TransactionCategoryCopyWith<$Res>? get category;
 }
 
 /// @nodoc
@@ -78,12 +78,12 @@ class _$TransactionDetailCopyWithImpl<$Res, $Val extends TransactionDetail>
     Object? amount = null,
     Object? createdAt = null,
     Object? updatedAt = null,
-    Object? imgUrl = null,
+    Object? imgUrl = freezed,
     Object? categoryId = null,
     Object? subCategoryId = null,
     Object? userId = null,
     Object? assetId = null,
-    Object? category = null,
+    Object? category = freezed,
   }) {
     return _then(_value.copyWith(
       transactionId: null == transactionId
@@ -106,10 +106,10 @@ class _$TransactionDetailCopyWithImpl<$Res, $Val extends TransactionDetail>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      imgUrl: null == imgUrl
+      imgUrl: freezed == imgUrl
           ? _value.imgUrl
           : imgUrl // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       categoryId: null == categoryId
           ? _value.categoryId
           : categoryId // ignore: cast_nullable_to_non_nullable
@@ -126,17 +126,21 @@ class _$TransactionDetailCopyWithImpl<$Res, $Val extends TransactionDetail>
           ? _value.assetId
           : assetId // ignore: cast_nullable_to_non_nullable
               as int,
-      category: null == category
+      category: freezed == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
-              as TransactionCategory,
+              as TransactionCategory?,
     ) as $Val);
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $TransactionCategoryCopyWith<$Res> get category {
-    return $TransactionCategoryCopyWith<$Res>(_value.category, (value) {
+  $TransactionCategoryCopyWith<$Res>? get category {
+    if (_value.category == null) {
+      return null;
+    }
+
+    return $TransactionCategoryCopyWith<$Res>(_value.category!, (value) {
       return _then(_value.copyWith(category: value) as $Val);
     });
   }
@@ -156,15 +160,15 @@ abstract class _$$TransactionDetailImplCopyWith<$Res>
       double amount,
       DateTime createdAt,
       DateTime updatedAt,
-      String imgUrl,
+      String? imgUrl,
       int categoryId,
       int subCategoryId,
       int userId,
       int assetId,
-      TransactionCategory category});
+      TransactionCategory? category});
 
   @override
-  $TransactionCategoryCopyWith<$Res> get category;
+  $TransactionCategoryCopyWith<$Res>? get category;
 }
 
 /// @nodoc
@@ -183,12 +187,12 @@ class __$$TransactionDetailImplCopyWithImpl<$Res>
     Object? amount = null,
     Object? createdAt = null,
     Object? updatedAt = null,
-    Object? imgUrl = null,
+    Object? imgUrl = freezed,
     Object? categoryId = null,
     Object? subCategoryId = null,
     Object? userId = null,
     Object? assetId = null,
-    Object? category = null,
+    Object? category = freezed,
   }) {
     return _then(_$TransactionDetailImpl(
       transactionId: null == transactionId
@@ -211,10 +215,10 @@ class __$$TransactionDetailImplCopyWithImpl<$Res>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      imgUrl: null == imgUrl
+      imgUrl: freezed == imgUrl
           ? _value.imgUrl
           : imgUrl // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       categoryId: null == categoryId
           ? _value.categoryId
           : categoryId // ignore: cast_nullable_to_non_nullable
@@ -231,10 +235,10 @@ class __$$TransactionDetailImplCopyWithImpl<$Res>
           ? _value.assetId
           : assetId // ignore: cast_nullable_to_non_nullable
               as int,
-      category: null == category
+      category: freezed == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
-              as TransactionCategory,
+              as TransactionCategory?,
     ));
   }
 }
@@ -248,12 +252,12 @@ class _$TransactionDetailImpl implements _TransactionDetail {
       required this.amount,
       required this.createdAt,
       required this.updatedAt,
-      required this.imgUrl,
+      this.imgUrl,
       required this.categoryId,
       required this.subCategoryId,
       required this.userId,
       required this.assetId,
-      required this.category});
+      this.category});
 
   factory _$TransactionDetailImpl.fromJson(Map<String, dynamic> json) =>
       _$$TransactionDetailImplFromJson(json);
@@ -269,7 +273,7 @@ class _$TransactionDetailImpl implements _TransactionDetail {
   @override
   final DateTime updatedAt;
   @override
-  final String imgUrl;
+  final String? imgUrl;
   @override
   final int categoryId;
   @override
@@ -279,7 +283,7 @@ class _$TransactionDetailImpl implements _TransactionDetail {
   @override
   final int assetId;
   @override
-  final TransactionCategory category;
+  final TransactionCategory? category;
 
   @override
   String toString() {
@@ -348,12 +352,12 @@ abstract class _TransactionDetail implements TransactionDetail {
       required final double amount,
       required final DateTime createdAt,
       required final DateTime updatedAt,
-      required final String imgUrl,
+      final String? imgUrl,
       required final int categoryId,
       required final int subCategoryId,
       required final int userId,
       required final int assetId,
-      required final TransactionCategory category}) = _$TransactionDetailImpl;
+      final TransactionCategory? category}) = _$TransactionDetailImpl;
 
   factory _TransactionDetail.fromJson(Map<String, dynamic> json) =
       _$TransactionDetailImpl.fromJson;
@@ -369,7 +373,7 @@ abstract class _TransactionDetail implements TransactionDetail {
   @override
   DateTime get updatedAt;
   @override
-  String get imgUrl;
+  String? get imgUrl;
   @override
   int get categoryId;
   @override
@@ -379,7 +383,7 @@ abstract class _TransactionDetail implements TransactionDetail {
   @override
   int get assetId;
   @override
-  TransactionCategory get category;
+  TransactionCategory? get category;
   @override
   @JsonKey(ignore: true)
   _$$TransactionDetailImplCopyWith<_$TransactionDetailImpl> get copyWith =>
