@@ -12,7 +12,7 @@ enum MonthList {
   sep(9, '9월', 'September'),
   oct(10, '10월', 'October'),
   nov(11, '11월', 'November'),
-  dev(12, '12월', 'December');
+  dec(12, '12월', 'December');
 
   final int month;
   final String kr;
