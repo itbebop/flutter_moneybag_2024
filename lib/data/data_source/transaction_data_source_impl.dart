@@ -68,7 +68,6 @@ class TransactionDataSourceImpl implements TransactionDataSource {
       } else {
         return [];
       }
-      transactionList.forEach(print);
       return transactionList;
     } catch (e) {
       debugPrint('Error in create Transaction: $e');

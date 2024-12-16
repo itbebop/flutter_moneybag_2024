@@ -17,7 +17,7 @@ final transactionStateProvider = StateNotifierProvider<TransactionStateNotifier,
   final activatedAssetIdList = activatedAssetList.map((asset) => asset.assetId).toList();
   int userId = 0;
   if (userState.user != null) {
-    // userId = userState.user!.uid;
+    userId = userState.user!.userId;
   }
 
   return TransactionStateNotifier(
@@ -75,18 +75,18 @@ class TransactionStateNotifier extends StateNotifier<TransactionState> {
       subCategoryId: category.categoryId,
       userId: userId,
     );
-    await state.createTransactionUseCase.execute(transactionDetail: transactionDetail, assetId: assetId, userId: userId);
+    await state.createTransactionUseCase.execute(transactionDetail: transactionDetail);
   }
 
   Future<List<TransactionDetail>> getTransactions() async {
-    final transactionList = await state.getTransactionListUseCase.execute(assetIdList: state.assetIdList, userId: state.userId);
+    final transactionList = await state.getTransactionListUseCase.execute(userId: state.userId);
     return transactionList;
   }
 
-  Future<void> selectActivatedTransactionList() async {
-    final activatedTransactionList = await state.getTransactionListUseCase.execute(assetIdList: state.activatedAssetIdList, userId: state.userId);
-    state = state.copyWith(activatedTransactionList: activatedTransactionList);
-  }
+  // Future<void> selectActivatedTransactionList() async {
+  //   final activatedTransactionList = await state.getTransactionListUseCase.execute(userId: state.userId);
+  //   state = state.copyWith(activatedTransactionList: activatedTransactionList);
+  // }
 
   void clearTransactions() {
     state = state.copyWith(

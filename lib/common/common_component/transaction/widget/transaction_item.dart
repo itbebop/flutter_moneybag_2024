@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_moneybag_2024/common/common.dart';
 import 'package:flutter_moneybag_2024/common/data/icon_map.dart';
-import 'package:flutter_moneybag_2024/domain/enums/asset_types.dart';
 import 'package:flutter_moneybag_2024/domain/model/transaction_detail.dart';
 import 'package:hugeicons/hugeicons.dart';
 
@@ -21,14 +20,14 @@ class TransactionItem extends StatelessWidget {
         children: [
           Container(
             decoration: BoxDecoration(
-              color: transaction.category.assetType == AssetType.expense ? UiConfig.secondaryColor : UiConfig.incomeTagColor,
+              color: transaction.amount < 0 ? UiConfig.secondaryColor : UiConfig.incomeTagColor,
               borderRadius: const BorderRadius.only(topLeft: Radius.circular(5.0), topRight: Radius.circular(5.0)),
             ),
             height: 16,
             width: 70,
             child: Center(
                 child: Text(
-              transaction.category.categoryName,
+              transaction.category!.categoryName,
               style: UiConfig.extraSmallStyle.copyWith(color: UiConfig.whiteColor),
             )),
           ),
@@ -57,10 +56,7 @@ class TransactionItem extends StatelessWidget {
                         height: 50,
                         child: ClipRRect(
                             borderRadius: BorderRadius.circular(10),
-                            child: transaction.imgUrl == ''
-                                ? HugeIcon(
-                                    icon: iconMap[transaction.category.iconKey], color: transaction.category.assetType == AssetType.expense ? UiConfig.secondaryTextColor : UiConfig.primaryColor)
-                                : Image.asset(transaction.imgUrl)),
+                            child: HugeIcon(icon: iconMap[transaction.category?.iconKey], color: transaction.amount < 0 ? UiConfig.secondaryTextColor : UiConfig.primaryColor)),
                       ),
                       const SizedBox(
                         width: 16,

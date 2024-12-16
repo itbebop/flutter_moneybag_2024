@@ -58,7 +58,7 @@ void diSetup() {
   // Repository
   getIt.registerSingleton<UserRepository>(UserRepositoryImpl(userDataSource: getIt()));
   getIt.registerSingleton<AssetRepository>(AssetRepositoryImpl(assetDetailDataSource: getIt()));
-  getIt.registerSingleton<TransactionRepository>(TransactionRepositoryImpl(transactionDataSource: getIt()));
+  getIt.registerSingleton<TransactionRepository>(TransactionRepositoryImpl(transactionDataSource: getIt(), transactionCategoryDatasource: getIt()));
   getIt.registerSingleton<TransactionCategoryRepository>(TransactionCategoryRepositoryImpl(transactionCategoryDataSource: getIt()));
   getIt.registerSingleton<PalleteRepository>(PalleteRepositoryImpl(palleteDataSource: getIt()));
 
