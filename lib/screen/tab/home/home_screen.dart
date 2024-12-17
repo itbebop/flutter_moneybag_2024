@@ -28,7 +28,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   void initState() {
     super.initState();
     Future.microtask(() async {
-      await ref.read(transactionStateProvider.notifier).getTransactions();
+      ref.read(transactionStateProvider.notifier).getTransactions();
       // build하면서 오늘 transaction을 불러옴
       // 자동으로 현재 달을 설정
       final currentMonth = DateFormat('MMM').format(DateTime.now()).toLowerCase();
@@ -94,7 +94,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     ),
                     SizedBox(height: 15.h),
                     StreamBuilder<List<TransactionDetail>>(
-                        stream: ref.watch(transactionStateProvider.notifier).getTransactions().asStream(),
+                        stream: ref.watch(transactionStateProvider.notifier).getTransactions(),
                         builder: (context, snapshot) {
                           if (snapshot.hasError) {
                             WidgetsBinding.instance.addPostFrameCallback((_) {

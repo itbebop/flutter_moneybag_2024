@@ -78,14 +78,14 @@ class TransactionStateNotifier extends StateNotifier<TransactionState> {
     await state.createTransactionUseCase.execute(transactionDetail: transactionDetail);
   }
 
-  Future<List<TransactionDetail>> getTransactions() async {
-    final transactionList = await state.getTransactionListUseCase.execute(userId: state.userId);
-    if (mounted) {
-      state = state.copyWith(activatedTransactionList: transactionList);
-    }
+  Stream<List<TransactionDetail>> getTransactions() {
+    final transactionList = Stream.fromFuture(state.getTransactionListUseCase.execute(userId: state.userId));
     return transactionList;
   }
 
+  Stream<List<TransactionDetail>> getStreamTransactions() {
+    return Stream.fromFuture(state.getTransactionListUseCase.execute(userId: state.userId));
+  }
   // Future<void> selectActivatedTransactionList() async {
   //   final activatedTransactionList = await state.getTransactionListUseCase.execute(userId: state.userId);
   //   state = state.copyWith(activatedTransactionList: activatedTransactionList);

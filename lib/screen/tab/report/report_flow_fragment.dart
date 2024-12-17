@@ -60,7 +60,7 @@ class _ReportListFragmentState extends ConsumerState<ReportFlowFragment> {
                       Tap(
                         onTap: () async {
                           ref.read(reportScreenStateProvider.notifier).tapPeriod(Period.year);
-                          await ref.read(transactionStateProvider.notifier).getTransactions();
+                          ref.read(transactionStateProvider.notifier).getTransactions();
                         },
                         child: Container(
                           height: 45.h,
@@ -85,7 +85,7 @@ class _ReportListFragmentState extends ConsumerState<ReportFlowFragment> {
                       Tap(
                         onTap: () async {
                           ref.read(reportScreenStateProvider.notifier).tapPeriod(Period.month);
-                          await ref.read(transactionStateProvider.notifier).getTransactions();
+                          ref.read(transactionStateProvider.notifier).getTransactions();
                         },
                         child: Container(
                           height: 45.h,
@@ -110,7 +110,7 @@ class _ReportListFragmentState extends ConsumerState<ReportFlowFragment> {
                       Tap(
                         onTap: () async {
                           ref.read(reportScreenStateProvider.notifier).tapPeriod(Period.week);
-                          await ref.read(transactionStateProvider.notifier).getTransactions();
+                          ref.read(transactionStateProvider.notifier).getTransactions();
                         },
                         child: Container(
                           height: 45.h,

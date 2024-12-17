@@ -21,7 +21,7 @@ class Calendar extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return StreamBuilder<List<TransactionDetail>>(
-      stream: ref.watch(transactionStateProvider.notifier).getTransactions().asStream(),
+      stream: ref.watch(transactionStateProvider.notifier).getTransactions(),
       builder: (context, snapshot) {
         if (snapshot.hasError) {
           // 에러 발생 시 Snackbar로 메시지 표시
